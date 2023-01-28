@@ -74,6 +74,7 @@ class LoginPage extends StatelessWidget {
                           IconButtonAuthWidget(
                             onPressed: () {
                               FocusScope.of(context).unfocus();
+                              Navigator.pushNamed(context, 'face_id');
                             },
                             label: 'Face ID',
                             url: 'assets/img/auth/faceid.png',
