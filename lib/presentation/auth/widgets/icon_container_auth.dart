@@ -9,35 +9,31 @@ class IconContainerAuthWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const size = 30.0;
+    const size = 40.0;
     const colorB = Color.fromRGBO(13, 29, 47, 1);
-    const widthHeight = 150.0;
+    const widthHeight = 180.0;
     return Padding(
-      padding: EdgeInsets.all(size),
+      padding: const EdgeInsets.symmetric(horizontal: size,vertical: size*1.5),
       child: Container(
-            height:widthHeight,
-            width:widthHeight,
-            decoration:BoxDecoration(
-             
-              //color:Colors.red,
-              //borderRadius:BorderRadius.circular(50),
-              shape: BoxShape.circle,
-              border:Border.all(
-              color:Color.fromRGBO(204, 204, 204, 1),
-              width:5
-              ),
-             
-            ),
-            child:
-            Center(child:
-              Image.asset(
-                url,
-                width: size,
-                height: size,
-                fit: BoxFit.cover,
-                color: colorB,
-              ),
-            )),
-      );
+        height: widthHeight,
+        width: widthHeight,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: const Color.fromRGBO(204, 204, 204, 1),
+            width: 5,
+          ),
+        ),
+        child: Center(
+          child: Image.asset(
+            url,
+            width: size,
+            height: size,
+            fit: BoxFit.cover,
+            color: colorB,
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -42,7 +42,12 @@ class ElevatedButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: onPressed == null
+          ? null
+          : () {
+              FocusScope.of(context).unfocus();
+              onPressed!.call();
+            },
       style: DecorationClass.botonEstilo(
         backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
         disabledBackgroundColor: disabledBackgroundColor,

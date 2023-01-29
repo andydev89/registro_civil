@@ -5,7 +5,7 @@ class TextoWidget extends StatelessWidget {
   const TextoWidget(
     this.titulo, {
     this.icono,
-    this.color,
+    this.color = Colors.white,
     this.colorIcono,
     this.fontSize = fontSizeDefault,
     this.iconSize = 20,
