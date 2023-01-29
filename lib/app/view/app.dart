@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/data/enum/routes_enum.dart';
+import 'package:registro_civil_apk/data/extension/routes_extension.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/routes/routes.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
@@ -13,7 +15,7 @@ class App extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routes: routes,
-      initialRoute: 'login_cedula',
+      initialRoute: RoutesEnum.loginCedula.route,
     );
   }
 }

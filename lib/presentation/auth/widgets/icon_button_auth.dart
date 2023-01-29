@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
 import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_extension.dart';
+import 'package:registro_civil_apk/data/methods/auth_methods/auth_methods.dart';
+import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class IconButtonAuthWidget extends StatelessWidget {
@@ -26,7 +28,7 @@ class IconButtonAuthWidget extends StatelessWidget {
       ),
       onPressed: () {
         FocusScope.of(context).unfocus();
-        Navigator.pushNamed(context, tipoIcono.ruta);
+        irA(context, ruta: iconoBotonEnumARoutesEnum(tipoIcono));
       },
       child: SizedBox(
         width: widthHeight,
