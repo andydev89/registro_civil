@@ -25,17 +25,26 @@ class FaceIDScanPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     TextoWidget(
-                        l10n.loggin,
-                        //'text',
+                        l10n.scanning1,
                         mainAxisAlignment: MainAxisAlignment.center,
                         color: Colors.white,
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
                       ),
+
+                      TextoWidget(
+                        l10n.scanning2,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal,
+                      ),
                     
                     const IconContainerAuthWidget(
                       url: 'assets/img/auth/usuario.png'
                     ),
+
+
                     
                     Column(
                       children: [

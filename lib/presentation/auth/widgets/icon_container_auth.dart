@@ -32,10 +32,9 @@ class IconContainerAuthWidget extends StatelessWidget {
             Center(child:
               Image.asset(
                 url,
-                width: size,
-                height: size,
+                width: widthHeight,
+                height: widthHeight,
                 fit: BoxFit.cover,
-                color: colorB,
               ),
             )),
       );

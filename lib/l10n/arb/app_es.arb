@@ -4,5 +4,6 @@
     "description": "Texto mostrado en el auth"
   },
   "loggin": "Iniciar sesión",
-  "scanning1": "Escanendo..."
+  "scanning1": "Escaneando...",
+  "scanning2": "Gire su cabeza hasta completar el círculo"
 }
