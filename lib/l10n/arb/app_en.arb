@@ -1,7 +1,8 @@
 {
-    "@@locale": "en",
-    "loggin": "Loggin",
-    "@loggin": {
-        "description": "Texto mostrado en el auth"
-    }
+  "@@locale": "en",
+  "@loggin": {
+    "description": "Texto mostrado en el auth"
+  },
+  "loggin": "Loggin",
+  "scanning1": "Scanning..."
 }

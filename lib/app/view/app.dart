@@ -13,7 +13,8 @@ class App extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routes: routes,
-      initialRoute: 'login',
+      //initialRoute: 'login',
+      initialRoute: 'face_id_scan',
     );
   }
 }
