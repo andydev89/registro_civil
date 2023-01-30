@@ -14,6 +14,7 @@ class StepperAuthWidget extends StatefulWidget {
 class _StepperAuthWidgetState extends State<StepperAuthWidget> {
   int posActual = 0;
 
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
