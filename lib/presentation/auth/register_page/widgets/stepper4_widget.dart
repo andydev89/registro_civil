@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:registro_civil_apk/data/enum/routes_enum.dart';
+import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/auth/success_page.dart';
 import 'package:registro_civil_apk/presentation/auth/widgets/text_form_field_auth.dart';
@@ -41,18 +43,24 @@ class Stepper4 extends ConsumerWidget {
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute<Widget>(
-                builder: (context) => SuccessPage(
-                  children: [
-                    TextoWidget(
-                      l10n.regSatisfactorio,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    TextoWidget(
-                      l10n.envCorreo,
-                      fontSize: 16,
-                    ),
-                  ],
+                builder: (context) => GestureDetector(
+                  onTap: () => irAYBorrarAnterior(
+                    context,
+                    ruta: RoutesEnum.loginCedula,
+                  ),
+                  child: SuccessPage(
+                    children: [
+                      TextoWidget(
+                        l10n.regSatisfactorio,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      TextoWidget(
+                        l10n.envCorreo,
+                        fontSize: 16,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

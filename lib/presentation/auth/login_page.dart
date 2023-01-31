@@ -67,7 +67,10 @@ class LoginPage extends StatelessWidget {
                   Expanded(
                     child: ElevatedButtonWidget(
                       title: l10n.loggin,
-                      onPressed: () {},
+                      onPressed: () => irAYBorrarAnterior(
+                        context,
+                        ruta: RoutesEnum.nuestrosServicios,
+                      ),
                     ),
                   ),
                 ],
