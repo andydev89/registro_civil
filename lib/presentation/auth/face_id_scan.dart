@@ -5,8 +5,8 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/auth/widgets/scaffold_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
-class ScanAuthWidget extends StatelessWidget {
-  const ScanAuthWidget({super.key});
+class FaceIDScanPage extends StatelessWidget {
+  const FaceIDScanPage({super.key});
 
   @override
   Widget build(BuildContext context) {

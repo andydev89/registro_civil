@@ -19,5 +19,6 @@
     "rosCedula": "Rostro y \ncédula",
     "advCedula": "Adverso de \ncédula",
     "revCedula": "Reverso de \ncédula",
-    "escaneando": "Escaneando..."
+    "escaneando": "Escaneando...",
+    "girCabeza": "Gire su cabeza hasta \ncompletar el círculo"
 }

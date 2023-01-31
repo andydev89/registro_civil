@@ -19,5 +19,6 @@
     "rosCedula": "Face on ID",
     "advCedula": "Adverse of ID",
     "revCedula": "Reverse of ID",
-    "escaneando": "Scanning..."
+    "escaneando": "Scanning...",
+    "girCabeza": "Turn your head until \nthe circle is completed"
 }

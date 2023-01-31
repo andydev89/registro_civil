@@ -4,18 +4,19 @@ class IconContainerAuthWidget extends StatelessWidget {
   const IconContainerAuthWidget({
     super.key,
     required this.url,
-    this.size = 40.0,
-    this.widthHeight = 180.0,
+    required this.height,
+    required this.width,
   });
   final String url;
-  final double size;
-  final double widthHeight;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
-    const colorB = Color.fromRGBO(13, 29, 47, 1);
+    //const size = width;
+    const widthHeight = 180.0;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size, vertical: size * 1.2),
+      padding: EdgeInsets.symmetric(horizontal: width, vertical: height * 1.1),
       child: Container(
         height: widthHeight,
         width: widthHeight,
@@ -29,10 +30,10 @@ class IconContainerAuthWidget extends StatelessWidget {
         child: Center(
           child: Image.asset(
             url,
-            // width: size,
-            // height: size,
+            width: width,
+            height: height,
             fit: BoxFit.cover,
-            color: colorB,
+            //color: colorB,
           ),
         ),
       ),
