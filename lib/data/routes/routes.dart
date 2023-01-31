@@ -6,7 +6,7 @@ import 'package:registro_civil_apk/presentation/auth/face_id_page.dart';
 import 'package:registro_civil_apk/presentation/auth/face_id_scan.dart';
 import 'package:registro_civil_apk/presentation/auth/fingerpoint_page.dart';
 import 'package:registro_civil_apk/presentation/auth/login_page.dart';
-import 'package:registro_civil_apk/presentation/auth/olvido_contrasena.dart';
+import 'package:registro_civil_apk/presentation/auth/olvido_contrasena_page.dart';
 import 'package:registro_civil_apk/presentation/auth/register_page/register_page.dart';
 
 final routes = <String, Widget Function(BuildContext)>{

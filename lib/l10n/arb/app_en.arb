@@ -33,5 +33,14 @@
   "ingreseCorreo": "Enter your email",
   "ingreseDatos": "Enter your details",
   "nuevaContrasena": "New Password",
-  "siguiente": "Next"
+  "siguiente": "Next",
+  "responda": "Answer...",
+  "resSigPreguntas": "Answer the following questions",
+  "ciuConPadres": "In which city were you born with \nyour parents?",
+  "cuaSegNomPrimo": "What is the second name of your \nfirst cousin?",
+  "ingDatos": "Enter your data",
+  "registrar": "Register",
+  "regSatisfactorio": "Your registration has been \ncompleted nsuccessfully!",
+  "envCorreo": "We have sent you a confirmation \nmessage to your email",
+  "iniSesion": "A logged in nsuccessfully!"
 }

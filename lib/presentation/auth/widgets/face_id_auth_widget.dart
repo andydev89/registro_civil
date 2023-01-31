@@ -32,7 +32,6 @@ class FaceIDScanWidget extends StatelessWidget {
           if (titulo != null)
             TextoWidget(
               titulo!,
-              textAlign: TextAlign.center,
             ),
           Container(
             width: MediaQuery.of(context).size.width * 0.6,

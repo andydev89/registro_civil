@@ -44,7 +44,8 @@ class LoginPage extends StatelessWidget {
               child: TextButtonWidget(
                 title: l10n.olvPassword,
                 alignment: Alignment.centerRight,
-                onPressed: () => irA(context, ruta: RoutesEnum.olvidoContrasena),
+                onPressed: () =>
+                    irA(context, ruta: RoutesEnum.olvidoContrasena),
               ),
             ),
           ],

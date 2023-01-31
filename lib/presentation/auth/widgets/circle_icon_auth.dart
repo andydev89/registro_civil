@@ -48,7 +48,6 @@ class CircleIconAuth extends StatelessWidget {
         ),
         TextoWidget(
           titulo,
-          textAlign: TextAlign.center,
         ),
       ],
     );

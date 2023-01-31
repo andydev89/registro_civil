@@ -13,7 +13,7 @@ class TextoWidget extends StatelessWidget {
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.isToUpperCase = false,
     this.maxlines,
-    this.textAlign,
+    this.textAlign = TextAlign.center,
     super.key,
   });
   final String titulo;

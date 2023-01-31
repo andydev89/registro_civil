@@ -33,5 +33,14 @@
   "correoE": "Correo electrónico",
   "ingreseCorreo": "Ingrese su correo electrónico ",
   "ingreseDatos": "Ingrese sus datos",
-  "nuevaContrasena": "Nueva contraseña"
+  "nuevaContrasena": "Nueva contraseña",
+  "responda": "Responda...",
+  "resSigPreguntas": "Responda las siguientes preguntas \nde seguridad",
+  "ciuConPadres": "¿En que ciudad se conocieron tus \npadres?",
+  "cuaSegNomPrimo": "¿Cuál es el segundo nombre de tu \nprimo mayor?",
+  "ingDatos": "Ingrese sus datos",
+  "registrar": "Registrar",
+  "regSatisfactorio": "¡Su registro se ha realizado \nsatisfactoriamente!",
+  "envCorreo": "Le hemos enviado un mensaje \nde confirmación a su correo electrónico",
+  "iniSesion": "¡A iniciado sesión \nsatisfactoriamente!"
 }
