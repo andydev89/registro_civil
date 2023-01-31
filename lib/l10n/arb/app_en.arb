@@ -11,6 +11,13 @@
     "cedula": "ID",
     "escRostro": "Face recognition",
     "facID": "Face ID",
-    "regCuenta": "Registrar cuenta",
-    "ingNumCedula": "Ingrese se número de cedula"
+    "regCuenta": "Register account",
+    "ingNumCedula": "Enter ID number",
+    "validar": "Validate",
+    "capIdenDigBiometrica": "Capture your biometric digital\n identity",
+    "rostro": "Face",
+    "rosCedula": "Face on ID",
+    "advCedula": "Adverse of ID",
+    "revCedula": "Reverse of ID",
+    "escaneando": "Scanning..."
 }

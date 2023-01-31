@@ -13,7 +13,7 @@ class ElevatedButtonWidget extends StatelessWidget {
     this.width = double.minPositive,
     this.onPressed,
     required this.title,
-    this.padding,
+    this.padding = const EdgeInsets.symmetric(vertical: 17),
     this.elevation,
     this.height = 40,
     this.radius = 25,

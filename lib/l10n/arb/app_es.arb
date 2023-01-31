@@ -12,5 +12,12 @@
     "escRostro": "Escanear rostro",
     "facID": "Face ID",
     "regCuenta": "Registrar cuenta",
-    "ingNumCedula": "Ingrese se número de cedula"
+    "ingNumCedula": "Ingrese se número de cedula",
+    "validar": "Validar",
+    "capIdenDigBiometrica": "Capturar identidad digital\n biométrica",
+    "rostro": "Rostro",
+    "rosCedula": "Rostro y \ncédula",
+    "advCedula": "Adverso de \ncédula",
+    "revCedula": "Reverso de \ncédula",
+    "escaneando": "Escaneando..."
 }

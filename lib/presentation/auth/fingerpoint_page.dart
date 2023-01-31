@@ -16,7 +16,7 @@ class HuellaPage extends StatelessWidget {
       children: [
         TextoWidget(l10n.colDedSensor),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 70),
+          padding: const EdgeInsets.symmetric(vertical: 60),
           child: Icon(
             Icons.fingerprint,
             size: 200,

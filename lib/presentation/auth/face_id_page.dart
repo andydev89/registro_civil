@@ -28,7 +28,6 @@ class FaceIDPage extends StatelessWidget {
                 child: ElevatedButtonWidget(
                   title: l10n.escRostro,
                   onPressed: () {},
-                  padding: const EdgeInsets.symmetric(vertical: 17),
                 ),
               ),
             ],

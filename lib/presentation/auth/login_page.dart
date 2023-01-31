@@ -67,7 +67,6 @@ class LoginPage extends StatelessWidget {
                     child: ElevatedButtonWidget(
                       title: l10n.loggin,
                       onPressed: () {},
-                      padding: const EdgeInsets.symmetric(vertical: 17),
                     ),
                   ),
                 ],
@@ -87,7 +86,7 @@ class LoginPage extends StatelessWidget {
               ),
               child: TextButtonWidget(
                 title: l10n.regAqui,
-                onPressed: () => irA(context, ruta: RoutesEnum.loginStepper),
+                onPressed: () => irA(context, ruta: RoutesEnum.loginRegister),
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -28,9 +28,12 @@ class ScaffoldAuthWidget extends StatelessWidget {
                   vertical: 25,
                   horizontal: 30,
                 ),
-                child: Column(
-                  mainAxisAlignment: columnAlignment,
-                  children: children,
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.55,
+                  child: Column(
+                    mainAxisAlignment: columnAlignment,
+                    children: children,
+                  ),
                 ),
               ),
             ],
