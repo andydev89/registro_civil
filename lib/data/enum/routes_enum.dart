@@ -3,5 +3,4 @@ enum RoutesEnum {
   loginFaceId,
   loginHuella,
   loginRegister,
-  loginFaceIdScan,
 }

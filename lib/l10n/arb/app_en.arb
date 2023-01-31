@@ -20,5 +20,12 @@
     "advCedula": "Adverse of ID",
     "revCedula": "Reverse of ID",
     "escaneando": "Scanning...",
-    "girCabeza": "Turn your head until \nthe circle is completed"
+    "girCabeza": "Turn your head until \nthe circle is completed",
+    "perfecto": "Perfect",
+    "muesRosCedula": "Show your face on your ID \nuntil the circle is completed",
+    "muesAnvCedula": "Show the adverse of your ID \nuntil the circle is completed",
+    "muesRevCedula": "Show the reverse of your ID \nuntil the circle is completed",
+    "salPaso": "Exit step",
+    "escanear": "Scan",
+    "siguiente": "Next"
 }

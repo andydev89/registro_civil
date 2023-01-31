@@ -20,5 +20,12 @@
     "advCedula": "Adverso de \ncédula",
     "revCedula": "Reverso de \ncédula",
     "escaneando": "Escaneando...",
-    "girCabeza": "Gire su cabeza hasta \ncompletar el círculo"
+    "girCabeza": "Gire su cabeza hasta \ncompletar el círculo",
+    "perfecto": "Perfecto",
+    "muesRosCedula": "Muestre su rostro y cédula \nhasta completar el círculo",
+    "muesAnvCedula": "Muestre el anverso de su cédula \nhasta completar el círculo",
+    "muesRevCedula": "Muestre el reverso de su cédula \nhasta completar el círculo",
+    "salPaso": "Saltar paso",
+    "escanear": "Escanear",
+    "siguiente": "Siguiente"
 }

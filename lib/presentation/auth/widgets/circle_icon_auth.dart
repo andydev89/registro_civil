@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
-import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_extension.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class CircleIconAuth extends StatelessWidget {
   const CircleIconAuth({
     super.key,
-    required this.iconos,
+    required this.rutas,
     required this.titulo,
   });
-  final List<IconoBotonEnum> iconos;
+  final List<String> rutas;
   final String titulo;
 
   @override
@@ -34,10 +32,10 @@ class CircleIconAuth extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: iconos
+                children: rutas
                     .map(
-                      (icono) => Image.asset(
-                        icono.url,
+                      (ruta) => Image.asset(
+                        ruta,
                         width: 20,
                         height: 20,
                         fit: BoxFit.cover,
