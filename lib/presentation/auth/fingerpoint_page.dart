@@ -5,6 +5,9 @@ import 'package:registro_civil_apk/presentation/auth/widgets/row_icon_button_aut
 import 'package:registro_civil_apk/presentation/auth/widgets/scaffold_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
+import '../../data/enum/routes_enum.dart';
+import '../../data/methods/methods.dart';
+
 class HuellaPage extends StatelessWidget {
   const HuellaPage({super.key});
 
@@ -17,11 +20,16 @@ class HuellaPage extends StatelessWidget {
         TextoWidget(l10n.colDedSensor),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 60),
-          child: Icon(
-            Icons.fingerprint,
-            size: 200,
-            color: Colors.grey.shade700,
-          ),
+          child: GestureDetector(
+            onTap: () => irA(context, ruta: RoutesEnum.loginHuella2),
+            
+            child: Icon(
+              Icons.fingerprint,
+              size: 200,
+              color: Colors.grey.shade700,
+            ),
+          )
+
         ),
         RowIconButtonAuthWidget(
           iconos: const [

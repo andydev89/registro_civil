@@ -5,7 +5,9 @@ import 'package:registro_civil_apk/presentation/auth/cambiar_contrasena.dart';
 import 'package:registro_civil_apk/presentation/auth/face_id_page.dart';
 import 'package:registro_civil_apk/presentation/auth/face_id_scan.dart';
 import 'package:registro_civil_apk/presentation/auth/fingerpoint_page.dart';
+import 'package:registro_civil_apk/presentation/auth/fingerprint_page2.dart';
 import 'package:registro_civil_apk/presentation/auth/login_page.dart';
+import 'package:registro_civil_apk/presentation/auth/nuestros_servicios.dart';
 import 'package:registro_civil_apk/presentation/auth/olvido_contrasena_page.dart';
 import 'package:registro_civil_apk/presentation/auth/register_page/register_page.dart';
 
@@ -22,5 +24,10 @@ final routes = <String, Widget Function(BuildContext)>{
       const OlvidoContrasenaPage(),
   RoutesEnum.cambiarContrasena.route: (BuildContext context) =>
       const CambiarContrasenaPage(),
+  RoutesEnum.loginHuella2.route: (BuildContext context) =>
+      const Huella2Page(),
+  RoutesEnum.nuestrosServicios.route: (BuildContext context) =>
+      const ServiciosPage(),
+      
       
 };
