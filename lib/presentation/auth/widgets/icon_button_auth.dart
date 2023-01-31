@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
+import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_extension.dart';
+import 'package:registro_civil_apk/data/methods/auth_methods/auth_methods.dart';
+import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class IconButtonAuthWidget extends StatelessWidget {
   const IconButtonAuthWidget({
     super.key,
-    required this.onPressed,
-    required this.label,
-    required this.url,
+    required this.tipoIcono,
   });
-  final void Function() onPressed;
-  final String label;
-  final String url;
+  final IconoBotonEnum tipoIcono;
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +26,17 @@ class IconButtonAuthWidget extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(198, 204, 210, 1),
         elevation: 5,
       ),
-      onPressed: onPressed,
+      onPressed: () {
+        FocusScope.of(context).unfocus();
+        irA(context, ruta: iconoBotonEnumARoutesEnum(tipoIcono));
+      },
       child: SizedBox(
         width: widthHeight,
         height: widthHeight,
         child: Column(
           children: [
             Image.asset(
-              url,
+              tipoIcono.url,
               width: size,
               height: size,
               fit: BoxFit.cover,
@@ -43,7 +46,7 @@ class IconButtonAuthWidget extends StatelessWidget {
               height: 10,
             ),
             TextoWidget(
-              label,
+              tipoIcono.label(context),
               color: color,
               fontSize: 16,
             )

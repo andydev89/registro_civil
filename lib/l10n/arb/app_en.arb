@@ -1,9 +1,16 @@
 {
-  "@@locale": "en",
-  "@loggin": {
-    "description": "Texto mostrado en el auth"
-  },
-  "loggin": "Loggin",
-  "scanning1": "Scanning...",
-  "scanning2": "Turn your head until the circle is complted"
+    "@@locale": "en",
+    "loggin": "Loggin",
+    "numCedula": "ID number",
+    "password": "Password",
+    "olvPassword": "Forgot password?",
+    "huella": "Fingerprint",
+    "noCuenta": "Don't have an account?",
+    "regAqui": "Register here",
+    "colDedSensor": "Place your finger on the sensor",
+    "cedula": "ID",
+    "escRostro": "Face recognition",
+    "facID": "Face ID",
+    "regCuenta": "Registrar cuenta",
+    "ingNumCedula": "Ingrese se número de cedula"
 }

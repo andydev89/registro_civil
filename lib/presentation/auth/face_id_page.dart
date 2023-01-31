@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
+import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_extension.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/background_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/icon_button_auth.dart';
 import 'package:registro_civil_apk/presentation/auth/widgets/icon_container_auth.dart';
+import 'package:registro_civil_apk/presentation/auth/widgets/row_icon_button_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/auth/widgets/scaffold_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/elevated_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class FaceIDPage extends StatelessWidget {
   const FaceIDPage({super.key});
@@ -13,87 +14,33 @@ class FaceIDPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     const padding = 0.5;
-    return Scaffold(
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: BackgroundAuth(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 25, horizontal: 30),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextoWidget(
-                        l10n.loggin,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        color: Colors.white,
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    
-                    const IconContainerAuthWidget(
-                      url: 'assets/img/auth/faceid.png'
-                    ),
-                    
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: padding,
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: ElevatedButtonWidget(
-                                  title: 'Escanear rostro',
-                                  onPressed: () {
-                                    FocusScope.of(context).unfocus();
-                                  },
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 17),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButtonAuthWidget(
-                                onPressed: () {
-                                  FocusScope.of(context).unfocus();
-                                },
-                                label: 'Cédula',
-                                url: 'assets/img/auth/cedula.png',
-                              ),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              IconButtonAuthWidget(
-                                onPressed: () {
-                                  FocusScope.of(context).unfocus();
-                                },
-                                label: 'Huella',
-                                url: 'assets/img/auth/fingerpoint.png',
-                              ),
-                            ],
-                          ),
-                        ),
-
-
-                      ],
-                    )
-                  ],
+    return ScaffoldAuthWidget(
+      enunciado: l10n.loggin,
+      children: [
+        IconContainerAuthWidget(url: IconoBotonEnum.faceID.url),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: padding,
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: ElevatedButtonWidget(
+                  title: l10n.escRostro,
+                  onPressed: () {},
+                  padding: const EdgeInsets.symmetric(vertical: 17),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+        RowIconButtonAuthWidget(
+          iconos: const [
+            IconoBotonEnum.cedula,
+            IconoBotonEnum.huella,
+          ],
+        ),
+      ],
     );
   }
 }

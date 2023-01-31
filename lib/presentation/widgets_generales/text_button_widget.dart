@@ -54,7 +54,10 @@ class TextButtonWidget extends StatelessWidget {
           widthBorde: widthBorde,
         ),
       ),
-      onPressed: onPressed,
+      onPressed: onPressed == null ? null : () {
+        FocusScope.of(context).unfocus();
+        onPressed!.call();
+      },
       child: TextoWidget(
         isToUpperCase ? title.toUpperCase() : title,
         fontSize: fontSize,
