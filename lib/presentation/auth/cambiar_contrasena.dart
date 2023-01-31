@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:registro_civil_apk/data/enum/routes_enum.dart';
+import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/auth/widgets/scaffold_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/auth/widgets/text_form_field_auth.dart';
@@ -48,7 +50,10 @@ class CambiarContrasenaPage extends StatelessWidget {
                   Expanded(
                     child: ElevatedButtonWidget(
                       title: l10n.cambiarContrasena,
-                      onPressed: () {},
+                      onPressed: () => irAYBorrarAnterior(
+                        context,
+                        ruta: RoutesEnum.loginCedula,
+                      ),
                     ),
                   ),
                 ],
