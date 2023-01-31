@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
+import 'package:registro_civil_apk/data/enum/routes_enum.dart';
+import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/auth_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/auth/face_id_scan.dart';
@@ -53,12 +55,7 @@ class Stepper2 extends ConsumerWidget {
           children: [
             ElevatedButtonWidget(
               title: 'Escanear',
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute<Widget>(
-                  builder: (_) => const FaceIDScanPage(),
-                ),
-              ),
+              onPressed: () => irA(context, ruta: RoutesEnum.loginFaceIdScan),
               width: double.maxFinite,
             ),
             TextButtonWidget(
