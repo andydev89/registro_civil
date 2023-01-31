@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       routes: routes,
       //initialRoute: RoutesEnum.loginCedula.route,
-      initialRoute: RoutesEnum.nuestrosServicios.route,
+      initialRoute: RoutesEnum.loginCedula.route,
     );
   }
 }

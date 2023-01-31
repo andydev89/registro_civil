@@ -15,6 +15,7 @@ class TextoWidget extends StatelessWidget {
     this.maxlines,
     this.textAlign = TextAlign.center,
     super.key,
+    this.shadows,
   });
   final String titulo;
   final IconData? icono;
@@ -27,6 +28,7 @@ class TextoWidget extends StatelessWidget {
   final bool isToUpperCase;
   final int? maxlines;
   final TextAlign? textAlign;
+  final List<Shadow>? shadows;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ class TextoWidget extends StatelessWidget {
               fontWeight: fontWeight,
               fontSize: fontSize,
               color: color,
+              shadows: shadows,
             ),
             overflow: TextOverflow.ellipsis,
             maxLines: maxlines,

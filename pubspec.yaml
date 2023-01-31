@@ -9,7 +9,9 @@ environment:
 
 dependencies:
   another_stepper: ^1.1.6
+  badges: ^3.0.2
   bloc: ^8.1.0
+  fluentui_icons: ^1.0.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1

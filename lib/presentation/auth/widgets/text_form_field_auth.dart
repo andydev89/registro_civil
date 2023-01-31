@@ -31,6 +31,7 @@ class TextFormFieldAuth extends StatelessWidget {
     this.inputFormatters,
     this.fontWeight = FontWeight.normal,
     this.fontSize = fontSizeDefault,
+    this.padding,
   });
 
   final bool readOnly;
@@ -58,6 +59,7 @@ class TextFormFieldAuth extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final FontWeight fontWeight;
   final double fontSize;
+  final double? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +73,12 @@ class TextFormFieldAuth extends StatelessWidget {
       onTap: onTap,
       inputFormatters: inputFormatters,
       style: TextStyle(
-        color: colorLabel ??Colors.white,
+        color: colorLabel ?? Colors.white,
         fontSize: fontSize,
         fontWeight: fontWeight,
       ),
       decoration: DecorationClass.decoracionAuth(
+        padding: padding,
         colorSuffixIcon: colorSuffixIcon,
         iconoSuffix: suffixIcon,
         onPressedSuffix: onPressedSuffix,

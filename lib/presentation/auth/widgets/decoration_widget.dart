@@ -13,7 +13,7 @@ class DecorationClass {
     Color? colorLabel,
     double fontSize = fontSizeDefault,
     double? radius,
-    double padding = 25,
+    double? padding = 25,
     FontWeight fontWeight = FontWeight.bold,
     String? helperText,
     Widget? label,

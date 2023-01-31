@@ -44,5 +44,13 @@
   "registrar": "Registrar",
   "regSatisfactorio": "¡Su registro se ha realizado \nsatisfactoriamente!",
   "envCorreo": "Le hemos enviado un mensaje \nde confirmación a su correo electrónico",
-  "iniSesion": "¡A iniciado sesión \nsatisfactoriamente!"
+  "iniSesion": "¡A iniciado sesión \nsatisfactoriamente!",
+  "cerSimples": "Certifdicados \nsimples",
+  "pasaporte": "Pasaporte",
+  "cedIdentidad": "Cédula de \nidentidad",
+  "cerFirElectronica": "Certificado \nde firma \nelectrónica",
+  "segLinea": "Seguimineto \nen linea",
+  "ageTurnos": "Agendar \n turnos",
+  "buscar": "Buscar...",
+  "nueServicios": "Nuestros servicios"
 }

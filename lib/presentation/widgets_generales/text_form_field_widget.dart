@@ -26,6 +26,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.helpertext,
     this.underline = true,
     this.onPressedSuffix,
+    this.decoration,
   });
 
   final bool readOnly;
@@ -49,6 +50,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final int? minLines;
   final bool underline;
   final String? helpertext;
+  final InputDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -64,17 +66,18 @@ class TextFormFieldWidget extends StatelessWidget {
         if (textInputType == TextInputType.number)
           FilteringTextInputFormatter.digitsOnly
       ],
-      decoration: DecorationClass.decoracionAuth(
-        colorSuffixIcon: colorSuffixIcon,
-        iconoSuffix: suffixIcon,
-        onPressedSuffix: onPressedSuffix,
-        texto: label,
-        hint: hint,
-        iconoPrefix: prefixIcon,
-        colorPrefixIcon: colorPrefixIcon,
-        colorLabel: colorLabel,
-        helperText: helpertext,
-      ),
+      decoration: decoration ??
+          DecorationClass.decoracionAuth(
+            colorSuffixIcon: colorSuffixIcon,
+            iconoSuffix: suffixIcon,
+            onPressedSuffix: onPressedSuffix,
+            texto: label,
+            hint: hint,
+            iconoPrefix: prefixIcon,
+            colorPrefixIcon: colorPrefixIcon,
+            colorLabel: colorLabel,
+            helperText: helpertext,
+          ),
       validator: validator,
       onChanged: (String value) {
         onChanged?.call(value);

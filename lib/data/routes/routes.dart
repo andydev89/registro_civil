@@ -5,8 +5,8 @@ import 'package:registro_civil_apk/presentation/auth/cambiar_contrasena.dart';
 import 'package:registro_civil_apk/presentation/auth/face_id_page.dart';
 import 'package:registro_civil_apk/presentation/auth/fingerpoint_page.dart';
 import 'package:registro_civil_apk/presentation/auth/fingerprint_page2.dart';
+import 'package:registro_civil_apk/presentation/auth/home_page/nuestros_servicios.dart';
 import 'package:registro_civil_apk/presentation/auth/login_page.dart';
-import 'package:registro_civil_apk/presentation/auth/nuestros_servicios.dart';
 import 'package:registro_civil_apk/presentation/auth/olvido_contrasena_page.dart';
 import 'package:registro_civil_apk/presentation/auth/register_page/register_page.dart';
 

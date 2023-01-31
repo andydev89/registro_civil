@@ -44,5 +44,13 @@
   "registrar": "Register",
   "regSatisfactorio": "Your registration has been \ncompleted nsuccessfully!",
   "envCorreo": "We have sent you a confirmation \nmessage to your email",
-  "iniSesion": "A logged in nsuccessfully!"
+  "iniSesion": "A logged in nsuccessfully!",
+  "cerSimples": "Simple \ncertificates",
+  "pasaporte": "Passport",
+  "cedIdentidad": "ID",
+  "cerFirElectronica": "Electronic \nsignature \ncertificates",
+  "segLinea": "Second line",
+  "ageTurnos": "Appointment \nmanagement",
+  "buscar": "Search...",
+  "nueServicios": "New services"
 }
