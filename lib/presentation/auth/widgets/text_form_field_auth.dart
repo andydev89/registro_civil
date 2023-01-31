@@ -31,7 +31,7 @@ class TextFormFieldAuth extends StatelessWidget {
     this.inputFormatters,
     this.fontWeight = FontWeight.normal,
     this.fontSize = fontSizeDefault,
-    this.padding,
+    this.padding = 25,
   });
 
   final bool readOnly;

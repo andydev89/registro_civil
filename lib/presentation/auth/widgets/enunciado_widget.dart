@@ -15,7 +15,7 @@ class EnunciadoWidget extends StatelessWidget {
       child: TextoWidget(
         enunciado ?? '',
         mainAxisAlignment: MainAxisAlignment.center,
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: FontWeight.bold,
       ),
     );

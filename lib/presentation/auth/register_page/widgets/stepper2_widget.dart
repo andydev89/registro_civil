@@ -26,7 +26,6 @@ class Stepper2 extends ConsumerWidget {
           padding: const EdgeInsets.only(top: 20),
           child: TextoWidget(
             l10n.capIdenDigBiometrica,
-            maxlines: 2,
           ),
         ),
         fila(
@@ -73,18 +72,22 @@ class Stepper2 extends ConsumerWidget {
                 cambiarPagina(
                   context: context,
                   l10n: l10n.girCabeza,
+                  perfect: l10n.perfecto,
                   onTap: () => cambiarPagina(
                     context: context,
                     urlImage: 'assets/img/auth/rostro_cedula.png',
                     l10n: l10n.muesRosCedula,
+                    perfect: l10n.perfecto,
                     onTap: () => cambiarPagina(
                       context: context,
                       urlImage: 'assets/img/auth/anverso.png',
                       l10n: l10n.muesAnvCedula,
+                      perfect: l10n.perfecto,
                       onTap: () => cambiarPagina(
                         context: context,
                         urlImage: 'assets/img/auth/reverso.png',
                         l10n: l10n.muesRevCedula,
+                        perfect: l10n.perfecto,
                         onTap: () {
                           ref.read(authStepper2Data.notifier).state = true;
                           Navigator.restorablePopAndPushNamed(
@@ -115,6 +118,7 @@ class Stepper2 extends ConsumerWidget {
     required BuildContext context,
     required String l10n,
     required void Function() onTap,
+    required String perfect,
     String? urlImage,
   }) {
     return Navigator.push(
@@ -127,7 +131,7 @@ class Stepper2 extends ConsumerWidget {
           child: Column(
             children: [
               Icon(Icons.check_circle, color: Colors.blue.shade900, size: 40),
-              const TextoWidget('Perfecto'),
+              TextoWidget(perfect),
             ],
           ),
         ),

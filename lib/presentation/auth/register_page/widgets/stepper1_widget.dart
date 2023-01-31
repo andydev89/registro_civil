@@ -26,7 +26,7 @@ class Stepper1 extends ConsumerWidget {
           ],
         ),
         ElevatedButtonWidget(
-          title: 'Validar',
+          title: l10n.validar,
           onPressed: () => ref.read(authStepperRiv.notifier).state++,
           width: double.maxFinite,
         ),

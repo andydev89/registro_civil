@@ -16,7 +16,7 @@ class IconButtonAuthWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const size = 30.0;
     const color = Color.fromRGBO(13, 29, 47, 1);
-    const widthHeight = 61.0;
+    const widthHeight = 62.0;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 17.5),
@@ -48,7 +48,7 @@ class IconButtonAuthWidget extends StatelessWidget {
             TextoWidget(
               tipoIcono.label(context),
               color: color,
-              fontSize: 16,
+              fontSize: 12.5,
             )
           ],
         ),

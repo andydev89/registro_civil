@@ -12,7 +12,7 @@ class TextoWidget extends StatelessWidget {
     this.fontWeight = FontWeight.normal,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.isToUpperCase = false,
-    this.maxlines,
+    this.maxlines = 2,
     this.textAlign = TextAlign.center,
     super.key,
     this.shadows,
