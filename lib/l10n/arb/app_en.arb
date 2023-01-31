@@ -12,6 +12,7 @@
   "facID": "Face ID",
   "girCabeza": "Turn your head until \nthe circle is completed",
   "huella": "Fingerprint",
+  "huellaDetectada": "Fingerprint detected correctly!",
   "ingNumCedula": "Enter ID number",
   "ingreseCorreo": "Enter your email",
   "ingreseDatos": "Enter your details",

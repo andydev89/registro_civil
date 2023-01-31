@@ -6,4 +6,6 @@ enum RoutesEnum {
   loginFaceIdScan,
   olvidoContrasena,
   cambiarContrasena,
+  loginHuella2,
+  nuestrosServicios,
 }
