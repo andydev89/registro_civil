@@ -96,6 +96,68 @@ class ServiciosPage extends StatelessWidget {
                     titulo: l10n.cerSimples,
                     icono: FluentSystemIcons.ic_fluent_document_filled,
                   ),
+                  element(
+                    context,
+                    titulo: l10n.ageTurnos,
+                    icono: Icons.calendar_month,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.segLinea,
+                    icono: FluentSystemIcons
+                        .ic_fluent_font_space_tracking_in_filled,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.cerFirElectronica,
+                    icono: FluentSystemIcons.ic_fluent_signature_filled,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.cedIdentidad,
+                    icono: Ionicons.card,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.pasaporte,
+                    icono: Icons.airplanemode_active,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.cerSimples,
+                    icono: FluentSystemIcons.ic_fluent_document_filled,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.ageTurnos,
+                    icono: Icons.calendar_month,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.segLinea,
+                    icono: FluentSystemIcons
+                        .ic_fluent_font_space_tracking_in_filled,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.cerFirElectronica,
+                    icono: FluentSystemIcons.ic_fluent_signature_filled,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.cedIdentidad,
+                    icono: Ionicons.card,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.pasaporte,
+                    icono: Icons.airplanemode_active,
+                  ),
+                  element(
+                    context,
+                    titulo: l10n.cerSimples,
+                    icono: FluentSystemIcons.ic_fluent_document_filled,
+                  ),
                 ],
               ),
             ],
@@ -200,47 +262,50 @@ class ServiciosPage extends StatelessWidget {
       ),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(50),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                IconButton(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.menu,
+                      color: Colors.white,
+                    ),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              ),
+              Image.asset(
+                'assets/img/general/logo.png',
+                width: MediaQuery.of(context).size.width * 0.6,
+                height: 100,
+              ),
+              badges.Badge(
+                position: badges.BadgePosition.topEnd(top: 4, end: 8),
+                badgeContent: const TextoWidget(
+                  '2',
+                  fontSize: 10,
+                ),
+                child: IconButton(
                   icon: const Icon(
-                    Icons.menu,
+                    Icons.notifications_outlined,
                     color: Colors.white,
                   ),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
-              ],
-            ),
-            Image.asset(
-              'assets/img/general/logo.png',
-              width: MediaQuery.of(context).size.width * 0.6,
-              height: 100,
-            ),
-            badges.Badge(
-              position: badges.BadgePosition.topEnd(top: 4, end: 8),
-              badgeContent: const TextoWidget(
-                '2',
-                fontSize: 10,
               ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.notifications_outlined,
-                  color: Colors.white,
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(100),
+          bottom: Radius.circular(30),
         ),
       ),
     );
