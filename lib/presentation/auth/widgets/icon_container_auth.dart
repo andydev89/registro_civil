@@ -1,19 +1,25 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class IconContainerAuthWidget extends StatelessWidget {
   const IconContainerAuthWidget({
     super.key,
     required this.url,
+    required this.height,
+    required this.width,
   });
   final String url;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
-    const size = 40.0;
+    //const size = width;
     const colorB = Color.fromRGBO(13, 29, 47, 1);
     const widthHeight = 180.0;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: size,vertical: size*1.5),
+      padding: EdgeInsets.symmetric(horizontal: width, vertical: height*1.5),
       child: Container(
         height: widthHeight,
         width: widthHeight,
@@ -27,10 +33,10 @@ class IconContainerAuthWidget extends StatelessWidget {
         child: Center(
           child: Image.asset(
             url,
-            width: size,
-            height: size,
+            width: width,
+            height: height,
             fit: BoxFit.cover,
-            color: colorB,
+            //color: colorB,
           ),
         ),
       ),

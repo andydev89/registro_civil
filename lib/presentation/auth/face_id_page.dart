@@ -7,6 +7,9 @@ import 'package:registro_civil_apk/presentation/auth/widgets/row_icon_button_aut
 import 'package:registro_civil_apk/presentation/auth/widgets/scaffold_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/elevated_button_widget.dart';
 
+import '../../data/enum/routes_enum.dart';
+import '../../data/methods/methods.dart';
+
 class FaceIDPage extends StatelessWidget {
   const FaceIDPage({super.key});
 
@@ -17,7 +20,11 @@ class FaceIDPage extends StatelessWidget {
     return ScaffoldAuthWidget(
       enunciado: l10n.loggin,
       children: [
-        IconContainerAuthWidget(url: IconoBotonEnum.faceID.url),
+        IconContainerAuthWidget(
+          url: IconoBotonEnum.faceID.url,
+          width: 180.0,
+          height: 180.0,
+          ),
         Padding(
           padding: const EdgeInsets.symmetric(
             vertical: padding,
@@ -27,7 +34,7 @@ class FaceIDPage extends StatelessWidget {
               Expanded(
                 child: ElevatedButtonWidget(
                   title: l10n.escRostro,
-                  onPressed: () {},
+                  onPressed: () => irA(context, ruta: RoutesEnum.loginFaceIdScan),
                   padding: const EdgeInsets.symmetric(vertical: 17),
                 ),
               ),

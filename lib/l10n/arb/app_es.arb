@@ -12,5 +12,7 @@
     "escRostro": "Escanear rostro",
     "facID": "Face ID",
     "regCuenta": "Registrar cuenta",
-    "ingNumCedula": "Ingrese se número de cedula"
+    "ingNumCedula": "Ingrese se número de cedula",
+    "scanning1": "Escanenado...",
+    "scanning2": "Gire su cabeza hasta completar el círculo"
 }
