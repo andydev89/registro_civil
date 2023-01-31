@@ -2,6 +2,8 @@ enum RoutesEnum {
   loginCedula,
   loginFaceId,
   loginHuella,
-  loginStepper,
+  loginRegister,
   loginFaceIdScan,
+  olvidoContrasena,
+  cambiarContrasena,
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
+import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_extension.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/background_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/icon_button_auth.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/icon_container_auth.dart';
-import 'package:registro_civil_apk/presentation/widgets_generales/elevated_button_widget.dart';
+import 'package:registro_civil_apk/presentation/auth/widgets/scaffold_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class FaceIDScanPage extends StatelessWidget {
@@ -12,61 +11,36 @@ class FaceIDScanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    const padding = 0.5;
-    return Scaffold(
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: BackgroundAuth(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 25, horizontal: 30),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextoWidget(
-                        l10n.scanning1,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        color: Colors.white,
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
-                      ),
-
-                      TextoWidget(
-                        l10n.scanning2,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    
-                    const IconContainerAuthWidget(
-                      url: 'assets/img/auth/usuario.png',
-                      width: 180.0,
-                      height: 180.0,
-                    ),
-
-
-                    
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: padding,
-                          ),
-                          
-                        ),
-
-
-                      ],
-                    )
-                  ],
-                ),
-              ),
+    return ScaffoldAuthWidget(
+      enunciado: l10n.escaneando,
+      children: [
+        const TextoWidget('Gire su cabeza hasta \ncompletar el circulo'),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.6,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(150),
+            border: Border.all(
+              color: Colors.blue.shade900,
+              width: 10,
             ),
           ),
-        ],
-      ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(150),
+            child: Image.asset(
+              IconoBotonEnum.scanFace.url,
+              width: MediaQuery.of(context).size.width * 0.5,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Column(
+          children: [
+            Icon(Icons.check_circle, color: Colors.blue.shade900, size: 40),
+            const TextoWidget('Perfecto'),
+          ],
+        ),
+      ],
     );
   }
 }

@@ -13,6 +13,9 @@ extension IconoBotonExtension on IconoBotonEnum {
     if (this == IconoBotonEnum.huella) {
       return 'assets/img/auth/fingerpoint.png';
     }
+    if (this == IconoBotonEnum.scanFace) {
+      return 'assets/img/auth/usuario.jpg';
+    }
     return '';
   }
 

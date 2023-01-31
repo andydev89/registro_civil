@@ -1,5 +1,6 @@
-enum IconoBotonEnum{
-faceID,
-huella,
-cedula, url,  
+enum IconoBotonEnum {
+  faceID,
+  huella,
+  cedula,
+  scanFace,
 }
