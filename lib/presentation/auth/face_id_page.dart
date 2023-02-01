@@ -16,7 +16,6 @@ class FaceIDPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    const padding = 0.5;
     return ScaffoldAuthWidget(
       enunciado: l10n.loggin,
       children: [
@@ -25,33 +24,23 @@ class FaceIDPage extends StatelessWidget {
           height: 50,
           width: 50,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: padding,
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: ElevatedButtonWidget(
-                  title: l10n.escRostro,
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute<Widget>(
-                      builder: (_) => FaceIDScanWidget(
-                        titulo: l10n.girCabeza,
-                        child: const SizedBox(
-                          height: 80,
-                        ),
-                        onTap: () => irAYBorrarAnterior(
-                          context,
-                          ruta: RoutesEnum.nuestrosServicios,
-                        ),
-                      ),
-                    ),
-                  ),
+        ElevatedButtonWidget(
+          title: l10n.escRostro,
+          width: double.maxFinite,
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute<Widget>(
+              builder: (_) => FaceIDScanWidget(
+                titulo: l10n.girCabeza,
+                child: const SizedBox(
+                  height: 80,
+                ),
+                onTap: () => irAYBorrarAnterior(
+                  context,
+                  ruta: RoutesEnum.nuestrosServicios,
                 ),
               ),
-            ],
+            ),
           ),
         ),
         RowIconButtonAuthWidget(

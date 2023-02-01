@@ -17,15 +17,12 @@ class HuellaPage extends StatelessWidget {
       enunciado: l10n.loggin,
       children: [
         TextoWidget(l10n.colDedSensor),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 60),
-          child: GestureDetector(
-            onTap: () => irA(context, ruta: RoutesEnum.loginHuella2),
-            child: Icon(
-              Icons.fingerprint,
-              size: 200,
-              color: Colors.grey.shade700,
-            ),
+        GestureDetector(
+          onTap: () => irA(context, ruta: RoutesEnum.loginHuella2),
+          child: Icon(
+            Icons.fingerprint,
+            size: 200,
+            color: Colors.grey.shade700,
           ),
         ),
         RowIconButtonAuthWidget(

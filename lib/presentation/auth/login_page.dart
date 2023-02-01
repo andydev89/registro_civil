@@ -17,7 +17,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    const padding = 0.5;
     return ScaffoldAuthWidget(
       enunciado: l10n.loggin,
       children: [
@@ -58,23 +57,18 @@ class LoginPage extends StatelessWidget {
         ),
         Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: padding,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButtonWidget(
-                      title: l10n.loggin,
-                      onPressed: () => irAYBorrarAnterior(
-                        context,
-                        ruta: RoutesEnum.nuestrosServicios,
-                      ),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButtonWidget(
+                    title: l10n.loggin,
+                    onPressed: () => irAYBorrarAnterior(
+                      context,
+                      ruta: RoutesEnum.nuestrosServicios,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -84,15 +78,10 @@ class LoginPage extends StatelessWidget {
                 l10n.noCuenta,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: padding,
-              ),
-              child: TextButtonWidget(
-                title: l10n.regAqui,
-                onPressed: () => irA(context, ruta: RoutesEnum.loginRegister),
-                fontWeight: FontWeight.bold,
-              ),
+            TextButtonWidget(
+              title: l10n.regAqui,
+              onPressed: () => irA(context, ruta: RoutesEnum.loginRegister),
+              fontWeight: FontWeight.bold,
             ),
           ],
         )
