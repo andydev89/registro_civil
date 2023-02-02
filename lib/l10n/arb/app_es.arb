@@ -52,5 +52,13 @@
   "segLinea": "Seguimiento \nen linea",
   "ageTurnos": "Agendar \n turnos",
   "buscar": "Buscar...",
-  "nueServicios": "Nuestros servicios"
+  "nueServicios": "Nuestros servicios",
+  "hola": "Hola",
+  "miPerfil": "Mi perfil",
+  "misTramites": "Mis trámites",
+  "misTurnos": "Mis turnos",
+  "inicio": "Inicio",
+  "configuracion": "Configuración",
+  "ayuda": "Ayuda",
+  "cerrSesion": "Cerrar sesión"
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/background_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/enunciado_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/background_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/enunciado_widget.dart';
 
-class ScaffoldAuthWidget extends StatelessWidget {
-  const ScaffoldAuthWidget({
+class ScaffoldServWidget extends StatelessWidget {
+  const ScaffoldServWidget({
     super.key,
     this.enunciado,
     this.columnAlignment = MainAxisAlignment.spaceAround,
@@ -29,7 +29,7 @@ class ScaffoldAuthWidget extends StatelessWidget {
                   horizontal: 30,
                 ),
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.56,
+                  height: MediaQuery.of(context).size.height * 0.55,
                   child: Column(
                     mainAxisAlignment: columnAlignment,
                     children: children,

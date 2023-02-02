@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/decoration_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class TextButtonWidget extends StatelessWidget {

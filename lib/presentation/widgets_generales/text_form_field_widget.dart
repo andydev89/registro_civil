@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/decoration_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/decoration_widget.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget({

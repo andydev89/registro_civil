@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "loggin": "Loggin",
+  "loggin": "Login",
   "numCedula": "ID number",
   "password": "Password",
   "olvPassword": "Forgot password?",
@@ -52,5 +52,13 @@
   "segLinea": "Second line",
   "ageTurnos": "Appointment \nmanagement",
   "buscar": "Search...",
-  "nueServicios": "New services"
+  "nueServicios": "New services",
+  "hola": "Hello",
+  "miPerfil": "My profile",
+  "misTramites": "My procedures",
+  "misTurnos": "My appointments",
+  "inicio": "Home",
+  "configuracion": "Settings",
+  "ayuda": "Help",
+  "cerrSesion": "Log out"
 }

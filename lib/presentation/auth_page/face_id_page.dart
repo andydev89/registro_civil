@@ -4,10 +4,10 @@ import 'package:registro_civil_apk/data/enum/routes_enum.dart';
 import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_extension.dart';
 import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/face_id_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/icon_container_auth.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/row_icon_button_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/scaffold_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/face_id_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/icon_container_auth.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/row_icon_button_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/scaffold_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/elevated_button_widget.dart';
 
 class FaceIDPage extends StatelessWidget {

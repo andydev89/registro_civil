@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/auth_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/text_form_field_auth.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/text_form_field_auth.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/elevated_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 

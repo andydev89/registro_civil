@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/scaffold_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/scaffold_auth_widget.dart';
 
 class SuccessPage extends StatelessWidget {
   const SuccessPage({

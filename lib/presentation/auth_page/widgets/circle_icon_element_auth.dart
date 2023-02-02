@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/circle_icon_auth.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/circle_icon_auth.dart';
 
 class CircleIconElementAuth extends StatelessWidget {
   const CircleIconElementAuth({

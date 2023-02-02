@@ -48,7 +48,7 @@ class IconButtonAuthWidget extends StatelessWidget {
             TextoWidget(
               tipoIcono.label(context),
               color: color,
-              fontSize: 12.5,
+              fontSize: 11.5,
             )
           ],
         ),

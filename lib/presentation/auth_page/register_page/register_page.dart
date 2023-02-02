@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/auth_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/auth/register_page/widgets/stepper1_widget.dart';
-import 'package:registro_civil_apk/presentation/auth/register_page/widgets/stepper2_widget.dart';
-import 'package:registro_civil_apk/presentation/auth/register_page/widgets/stepper3_widget.dart';
-import 'package:registro_civil_apk/presentation/auth/register_page/widgets/stepper4_widget.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/scaffold_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/register_page/widgets/stepper1_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/register_page/widgets/stepper2_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/register_page/widgets/stepper3_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/register_page/widgets/stepper4_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/scaffold_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class RegisterPage extends ConsumerWidget {

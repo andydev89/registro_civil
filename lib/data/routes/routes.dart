@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/routes_enum.dart';
 import 'package:registro_civil_apk/data/extension/routes_extension.dart';
-import 'package:registro_civil_apk/presentation/auth/cambiar_contrasena.dart';
-import 'package:registro_civil_apk/presentation/auth/face_id_page.dart';
-import 'package:registro_civil_apk/presentation/auth/fingerpoint_page.dart';
-import 'package:registro_civil_apk/presentation/auth/fingerprint_page2.dart';
-import 'package:registro_civil_apk/presentation/auth/home_page/nuestros_servicios.dart';
-import 'package:registro_civil_apk/presentation/auth/login_page.dart';
-import 'package:registro_civil_apk/presentation/auth/olvido_contrasena_page.dart';
-import 'package:registro_civil_apk/presentation/auth/register_page/register_page.dart';
+import 'package:registro_civil_apk/presentation/auth_page/cambiar_contrasena.dart';
+import 'package:registro_civil_apk/presentation/auth_page/face_id_page.dart';
+import 'package:registro_civil_apk/presentation/auth_page/fingerpoint_page.dart';
+import 'package:registro_civil_apk/presentation/auth_page/fingerprint_page2.dart';
+import 'package:registro_civil_apk/presentation/auth_page/login_page.dart';
+import 'package:registro_civil_apk/presentation/auth_page/olvido_contrasena_page.dart';
+import 'package:registro_civil_apk/presentation/auth_page/register_page/register_page.dart';
+import 'package:registro_civil_apk/presentation/home_page/home_page.dart';
 
 final routes = <String, Widget Function(BuildContext)>{
   // '/': (BuildContext context) => new HomePage(),

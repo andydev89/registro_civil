@@ -6,8 +6,8 @@ import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_ext
 import 'package:registro_civil_apk/data/extension/routes_extension.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/auth_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/circle_icon_auth.dart';
-import 'package:registro_civil_apk/presentation/auth/widgets/face_id_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/circle_icon_auth.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/face_id_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/elevated_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/text_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
