@@ -1,0 +1,1 @@
+enum DetallesTrunoEnum { detalles, confirmado }

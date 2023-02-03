@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/home_page/widgets/button_drawer_home_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/bakcgroud_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets_generales/bottom_sheet_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/logo_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
@@ -32,64 +33,70 @@ class DrawerWidget extends StatelessWidget {
         children: [
           const Background(),
           Positioned.fill(
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: content ??
-                      [
-                        const LogoWidget(),
-                        userData(),
-                        const Divider(
-                          color: Colors.white,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ButtonDrawerHomeWidget(
-                                icono: Icons.home_outlined,
-                                titulo: l10n.inicio,
-                                onPressed: () {},
-                              ),
-                              ButtonDrawerHomeWidget(
-                                icono: Icons.person_outline,
-                                titulo: l10n.miPerfil,
-                                onPressed: () {},
-                              ),
-                              ButtonDrawerHomeWidget(
-                                icono: Icons.description_outlined,
-                                titulo: l10n.misTramites,
-                                onPressed: () {},
-                              ),
-                              ButtonDrawerHomeWidget(
-                                icono: Icons.calendar_month_outlined,
-                                titulo: l10n.misTurnos,
-                                onPressed: () {},
-                              ),
-                              ButtonDrawerHomeWidget(
-                                icono: Icons.settings_outlined,
-                                titulo: l10n.configuracion,
-                                onPressed: () {},
-                              ),
-                              ButtonDrawerHomeWidget(
-                                icono: Icons.help_outline_outlined,
-                                titulo: l10n.ayuda,
-                                onPressed: () {},
-                              ),
-                              ButtonDrawerHomeWidget(
-                                icono: Icons.logout_outlined,
-                                titulo: l10n.cerrSesion,
-                                onPressed: () {},
-                              ),
-                            ],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: content ??
+                  [
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const LogoWidget(),
+                          userData(),
+                          const Divider(
+                            color: Colors.white,
                           ),
-                        ),
-                      ],
-                ),
-              ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 30),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ButtonDrawerHomeWidget(
+                                  icono: Icons.home_outlined,
+                                  titulo: l10n.inicio,
+                                  onPressed: () {},
+                                ),
+                                ButtonDrawerHomeWidget(
+                                  icono: Icons.person_outline,
+                                  titulo: l10n.miPerfil,
+                                  onPressed: () {},
+                                ),
+                                ButtonDrawerHomeWidget(
+                                  icono: Icons.description_outlined,
+                                  titulo: l10n.misTramites,
+                                  onPressed: () {},
+                                ),
+                                ButtonDrawerHomeWidget(
+                                  icono: Icons.calendar_month_outlined,
+                                  titulo: l10n.misTurnos,
+                                  onPressed: () {},
+                                ),
+                                ButtonDrawerHomeWidget(
+                                  icono: Icons.settings_outlined,
+                                  titulo: l10n.configuracion,
+                                  onPressed: () {},
+                                ),
+                                ButtonDrawerHomeWidget(
+                                  icono: Icons.help_outline_outlined,
+                                  titulo: l10n.ayuda,
+                                  onPressed: () {},
+                                ),
+                                ButtonDrawerHomeWidget(
+                                  icono: Icons.logout_outlined,
+                                  titulo: l10n.cerrSesion,
+                                  onPressed: () {},
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const BottomSheetWidget(
+                      backgroundColor: Colors.transparent,
+                    ),
+                  ],
             ),
           ),
         ],

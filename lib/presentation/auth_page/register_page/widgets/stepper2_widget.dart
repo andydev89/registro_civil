@@ -44,22 +44,6 @@ class Stepper2 extends ConsumerWidget {
             ),
           ],
         ),
-        fila(
-          lista: [
-            CircleIconAuth(
-              titulo: l10n.advCedula,
-              rutas: cargoData
-                  ? ['assets/img/auth/anverso.png']
-                  : [IconoBotonEnum.cedula.url],
-            ),
-            CircleIconAuth(
-              titulo: l10n.revCedula,
-              rutas: cargoData
-                  ? ['assets/img/auth/reverso.png']
-                  : [IconoBotonEnum.cedula.url],
-            ),
-          ],
-        ),
         Column(
           children: [
             ElevatedButtonWidget(
@@ -78,25 +62,13 @@ class Stepper2 extends ConsumerWidget {
                     urlImage: 'assets/img/auth/rostro_cedula.png',
                     l10n: l10n.muesRosCedula,
                     perfect: l10n.perfecto,
-                    onTap: () => cambiarPagina(
-                      context: context,
-                      urlImage: 'assets/img/auth/anverso.png',
-                      l10n: l10n.muesAnvCedula,
-                      perfect: l10n.perfecto,
-                      onTap: () => cambiarPagina(
-                        context: context,
-                        urlImage: 'assets/img/auth/reverso.png',
-                        l10n: l10n.muesRevCedula,
-                        perfect: l10n.perfecto,
-                        onTap: () {
-                          ref.read(authStepper2Data.notifier).state = true;
-                          Navigator.restorablePopAndPushNamed(
-                            context,
-                            RoutesEnum.loginRegister.route,
-                          );
-                        },
-                      ),
-                    ),
+                    onTap: () {
+                      ref.read(authStepper2Data.notifier).state = true;
+                      Navigator.restorablePopAndPushNamed(
+                        context,
+                        RoutesEnum.loginRegister.route,
+                      );
+                    },
                   ),
                 );
               },

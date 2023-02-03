@@ -7,4 +7,5 @@ enum RoutesEnum {
   cambiarContrasena,
   loginHuella2,
   nuestrosServicios,
+  homeAgendarTurnos,
 }

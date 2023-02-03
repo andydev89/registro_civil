@@ -13,7 +13,7 @@ class SuccessPage extends StatelessWidget {
     return ScaffoldAuthWidget(
       children: [
         Image.asset(
-          'assets/img/auth/checkmark.png',
+          'assets/img/general/checkmark.png',
           color: Theme.of(context).primaryColor,
           width: MediaQuery.of(context).size.width * 0.6,
         ),

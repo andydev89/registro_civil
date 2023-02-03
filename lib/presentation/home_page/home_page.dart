@@ -1,11 +1,13 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:registro_civil_apk/data/enum/routes_enum.dart';
+import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/auth_page/widgets/text_form_field_auth.dart';
 import 'package:registro_civil_apk/presentation/home_page/widgets/element_widget_home.dart';
 import 'package:registro_civil_apk/presentation/home_page/widgets/scaffold_home_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget_sliver.dart';
 
 class ServiciosPage extends StatelessWidget {
   const ServiciosPage({super.key});
@@ -15,22 +17,7 @@ class ServiciosPage extends StatelessWidget {
     final l10n = context.l10n;
     return ScaffoldHomeWidget(
       slivers: [
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 20, top: 50),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextoWidget(
-                  l10n.nueServicios,
-                  color: Colors.black,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ],
-            ),
-          ),
-        ),
+        TextoWidgetSliver(titulo: l10n.nueServicios),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           sliver: SliverToBoxAdapter(
@@ -49,7 +36,7 @@ class ServiciosPage extends StatelessWidget {
           mainAxisSpacing: 8,
           children: [
             ElementWidget(
-              onTap: () {},
+              onTap: () => irA(context, ruta: RoutesEnum.homeAgendarTurnos),
               titulo: l10n.ageTurnos,
               icono: Icons.calendar_month,
             ),
@@ -74,7 +61,6 @@ class ServiciosPage extends StatelessWidget {
               icono: Icons.airplanemode_active,
             ),
             ElementWidget(
-              onTap: () {},
               titulo: l10n.cerSimples,
               icono: FluentSystemIcons.ic_fluent_document_filled,
             ),

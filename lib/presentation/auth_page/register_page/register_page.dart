@@ -1,4 +1,3 @@
-import 'package:another_stepper/another_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/auth_riverpod.dart';
@@ -8,7 +7,7 @@ import 'package:registro_civil_apk/presentation/auth_page/register_page/widgets/
 import 'package:registro_civil_apk/presentation/auth_page/register_page/widgets/stepper3_widget.dart';
 import 'package:registro_civil_apk/presentation/auth_page/register_page/widgets/stepper4_widget.dart';
 import 'package:registro_civil_apk/presentation/auth_page/widgets/scaffold_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets_generales/another_stepper_widget.dart';
 
 class RegisterPage extends ConsumerWidget {
   const RegisterPage({super.key});
@@ -29,34 +28,9 @@ class RegisterPage extends ConsumerWidget {
         enunciado: l10n.regCuenta,
         columnAlignment: MainAxisAlignment.start,
         children: [
-          AnotherStepper(
-            activeBarColor: Theme.of(context).primaryColor,
-            inActiveBarColor: Colors.grey.shade400,
+          AnotherStepperWidget(
             activeIndex: stteperPos,
-            barThickness: 18,
-            stepperList: List<StepperData>.generate(
-              4,
-              (index) => StepperData(
-                iconWidget: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: stteperPos >= index
-                        ? Theme.of(context).primaryColor
-                        : Colors.grey.shade400,
-                    borderRadius: const BorderRadius.all(Radius.circular(30)),
-                  ),
-                  child: Center(
-                    child: TextoWidget(
-                      '${index + 1}',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            stepperDirection: Axis.horizontal,
-            iconWidth: 40,
-            iconHeight: 40,
+            totalElement: 4,
           ),
           Expanded(child: stepperActual(stteperPos)),
         ],

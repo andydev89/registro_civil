@@ -21,7 +21,7 @@ class ScaffoldHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: Container(),
+      backgroundColor: Colors.white,
       drawer: drawer ?? DrawerWidget(content: contentDrawer),
       body: Stack(
         children: [

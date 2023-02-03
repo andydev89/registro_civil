@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class BottomSheetWidget extends StatelessWidget {
-  const BottomSheetWidget({super.key});
+  const BottomSheetWidget({
+    super.key,
+    this.backgroundColor,
+  });
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60,
       width: double.maxFinite,
-      color: Theme.of(context).primaryColor.withOpacity(0.99),
+      color:
+          backgroundColor ?? Theme.of(context).primaryColor.withOpacity(0.99),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

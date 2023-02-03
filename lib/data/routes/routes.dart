@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/routes_enum.dart';
 import 'package:registro_civil_apk/data/extension/routes_extension.dart';
+import 'package:registro_civil_apk/presentation/agendar_turnos_page/agendar_turnos_page.dart';
 import 'package:registro_civil_apk/presentation/auth_page/cambiar_contrasena.dart';
 import 'package:registro_civil_apk/presentation/auth_page/face_id_page.dart';
 import 'package:registro_civil_apk/presentation/auth_page/fingerpoint_page.dart';
@@ -21,10 +22,9 @@ final routes = <String, Widget Function(BuildContext)>{
       const OlvidoContrasenaPage(),
   RoutesEnum.cambiarContrasena.route: (BuildContext context) =>
       const CambiarContrasenaPage(),
-  RoutesEnum.loginHuella2.route: (BuildContext context) =>
-      const Huella2Page(),
+  RoutesEnum.loginHuella2.route: (BuildContext context) => const Huella2Page(),
   RoutesEnum.nuestrosServicios.route: (BuildContext context) =>
       const ServiciosPage(),
-      
-      
+  RoutesEnum.homeAgendarTurnos.route: (BuildContext context) =>
+      const AgendarTurnosPage(),
 };
