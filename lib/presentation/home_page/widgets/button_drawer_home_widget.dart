@@ -26,7 +26,7 @@ class ButtonDrawerHomeWidget extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10),
         child: TextoWidget(
           titulo,
-          fontSize: 30,
+          fontSize: 28,
           fontWeight: FontWeight.bold,
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/data/enum/routes_enum.dart';
+import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/home_page/widgets/button_drawer_home_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/bakcgroud_widget.dart';
@@ -43,7 +45,7 @@ class DrawerWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const LogoWidget(),
-                          userData(),
+                          userData(l10n),
                           const Divider(
                             color: Colors.white,
                           ),
@@ -55,7 +57,10 @@ class DrawerWidget extends StatelessWidget {
                                 ButtonDrawerHomeWidget(
                                   icono: Icons.home_outlined,
                                   titulo: l10n.inicio,
-                                  onPressed: () {},
+                                  onPressed: () => irAYBorrarAnterior(
+                                    context,
+                                    ruta: RoutesEnum.nuestrosServicios,
+                                  ),
                                 ),
                                 ButtonDrawerHomeWidget(
                                   icono: Icons.person_outline,
@@ -85,7 +90,8 @@ class DrawerWidget extends StatelessWidget {
                                 ButtonDrawerHomeWidget(
                                   icono: Icons.logout_outlined,
                                   titulo: l10n.cerrSesion,
-                                  onPressed: () {},
+                                  onPressed: () => irAYBorrarAnterior(context,
+                                      ruta: RoutesEnum.loginCedula,),
                                 ),
                               ],
                             ),
@@ -104,7 +110,7 @@ class DrawerWidget extends StatelessWidget {
     );
   }
 
-  Row userData() {
+  Row userData(AppLocalizations l10n) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -114,10 +120,14 @@ class DrawerWidget extends StatelessWidget {
             child: Image.asset('assets/img/general/sin_logo.png'),
           ),
         ),
-        const TextoWidget(
-          'Hola, Luis Pérez Pérez',
-          fontSize: 28,
-          fontWeight: FontWeight.bold,
+        Expanded(
+          child: TextoWidget(
+            '${l10n.hola}, Luis Pérez Pérez',
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            maxlines: 1,
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
         ),
         badges.Badge(
           position: badges.BadgePosition.topEnd(top: 4, end: 8),

@@ -27,13 +27,7 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
     final stepperModel = ref.watch(agendarTurnosStepperRiv);
     final stepper3 = ref.watch(agendarTurnosStepper3Riv);
     final stepper4 = ref.watch(agendarTurnosStepper4Riv);
-    const color = Color.fromRGBO(13, 29, 47, 1);
-    final padding = EdgeInsets.symmetric(
-      horizontal:
-          stepperModel.currentIndex == 1 || stepperModel.currentIndex == 3
-              ? 0
-              : 40,
-    );
+    final color = Theme.of(context).primaryColor;
     return WillPopScope(
       onWillPop: () async {
         if (stepperModel.currentIndex != 0) {
@@ -46,7 +40,7 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
         slivers: [
           TextoWidgetSliver(
             titulo: l10n.obtTurno,
-            paddingTop: 30,
+            paddingTop: 20,
             prevoius: stepperModel.currentIndex != 0
                 ? Positioned(
                     left: 40,
@@ -54,7 +48,7 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
                     child: IconButton(
                       onPressed: () =>
                           ref.read(agendarTurnosStepperRiv.notifier).previous(),
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.arrow_back_outlined,
                         color: color,
                         size: 30,
@@ -81,9 +75,9 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 20),
+                          padding: const EdgeInsets.only(top: 10),
                           child: Padding(
-                            padding: padding,
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
                             child: TextoWidget(
                               stepperModel.title(
                                 l10n: context.l10n,
@@ -95,21 +89,17 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: padding,
-                            child: stepper(
-                              stepperModel.currentIndex,
-                              color,
-                            ),
-                          ),
+                        stepper(
+                          stepperModel.currentIndex,
+                          color,
                         ),
                         if (stepperModel.showButton(stepper3))
                           Padding(
                             padding: const EdgeInsets.only(
                               left: 40,
                               right: 40,
-                              top: 30,
+                              top: 15,
+                              bottom: 20,
                             ),
                             child: ElevatedButtonWidget(
                               width: double.maxFinite,

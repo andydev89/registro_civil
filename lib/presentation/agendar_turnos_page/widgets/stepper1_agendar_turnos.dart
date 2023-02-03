@@ -14,26 +14,30 @@ class Stepper1AgendarTurnos extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        element(
-          context,
-          titulo: l10n.ciudad,
-          placeholder: l10n.selCiudad,
-        ),
-        element(
-          context,
-          titulo: l10n.agencia,
-          placeholder: l10n.selAgencia,
-        ),
-        element(
-          context,
-          titulo: l10n.mesTurno,
-          placeholder: l10n.selMes,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          element(
+            context,
+            titulo: l10n.ciudad,
+            placeholder: l10n.selCiudad,
+          ),
+          element(
+            context,
+            titulo: l10n.agencia,
+            placeholder: l10n.selAgencia,
+          ),
+          element(
+            context,
+            titulo: l10n.mesTurno,
+            placeholder: l10n.selMes,
+          ),
+        ],
+      ),
     );
   }
 
@@ -44,7 +48,7 @@ class Stepper1AgendarTurnos extends ConsumerWidget {
     required String placeholder,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,7 +58,7 @@ class Stepper1AgendarTurnos extends ConsumerWidget {
             fontSize: fontSize,
           ),
           const SizedBox(
-            height: 10,
+            height: 5,
           ),
           DropdownButtonFormField(
             decoration: InputDecoration(
@@ -71,7 +75,7 @@ class Stepper1AgendarTurnos extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             ),
             items: const [
               DropdownMenuItem(
