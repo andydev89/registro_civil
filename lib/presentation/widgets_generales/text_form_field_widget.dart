@@ -67,7 +67,7 @@ class TextFormFieldWidget extends StatelessWidget {
           FilteringTextInputFormatter.digitsOnly
       ],
       decoration: decoration ??
-          DecorationClass.decoracionAuth(
+          decoracionAuth(
             colorSuffixIcon: colorSuffixIcon,
             iconoSuffix: suffixIcon,
             onPressedSuffix: onPressedSuffix,

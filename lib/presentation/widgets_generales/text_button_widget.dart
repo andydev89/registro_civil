@@ -48,16 +48,18 @@ class TextButtonWidget extends StatelessWidget {
         backgroundColor: backgroundColor,
         alignment: alignment,
         padding: padding,
-        shape: DecorationClass.shape(
+        shape: shape(
           radius: radius,
           colorBorder: colorBorder,
           widthBorde: widthBorde,
         ),
       ),
-      onPressed: onPressed == null ? null : () {
-        FocusScope.of(context).unfocus();
-        onPressed!.call();
-      },
+      onPressed: onPressed == null
+          ? null
+          : () {
+              FocusScope.of(context).unfocus();
+              onPressed!.call();
+            },
       child: TextoWidget(
         isToUpperCase ? title.toUpperCase() : title,
         fontSize: fontSize,

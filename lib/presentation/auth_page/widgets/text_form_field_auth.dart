@@ -77,7 +77,7 @@ class TextFormFieldAuth extends StatelessWidget {
         fontSize: fontSize,
         fontWeight: fontWeight,
       ),
-      decoration: DecorationClass.decoracionAuth(
+      decoration: decoracionAuth(
         padding: padding,
         colorSuffixIcon: colorSuffixIcon,
         iconoSuffix: suffixIcon,

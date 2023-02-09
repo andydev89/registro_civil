@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class BottomSheetWidget extends StatelessWidget {
@@ -13,8 +14,10 @@ class BottomSheetWidget extends StatelessWidget {
     return Container(
       height: 60,
       width: double.maxFinite,
-      color:
-          backgroundColor ?? Theme.of(context).primaryColor.withOpacity(0.99),
+      decoration: BoxDecoration(
+        gradient: backgroundColor == null ? gradientePrincipal() : null,
+        color: backgroundColor,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

@@ -17,40 +17,56 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    const padding = EdgeInsets.zero;
+    const padding = EdgeInsets.symmetric(horizontal: 20);
     return Expanded(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              button(
-                padding: padding,
-                title: l10n.todos,
-                onPressed: () {},
-              ),
-              button(
-                padding: padding,
-                title: l10n.fecha,
-              ),
-              button(
-                padding: padding,
-                title: l10n.servicios,
-              ),
-              IconButton(
-                icon: const Icon(Icons.filter_list),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              itemCount: 3,
-              itemBuilder: element,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          button(
+                            padding: padding,
+                            title: l10n.todos,
+                            onPressed: () {},
+                          ),
+                          button(
+                            padding: padding,
+                            title: l10n.fecha,
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        right: 10,
+                        bottom: -7,
+                        child: IconButton(
+                          icon: const Icon(Icons.filter_list),
+                          onPressed: () {},
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                itemCount: 3,
+                itemBuilder: element,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -64,11 +80,10 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ElevatedButtonWidget(
-          height: 30,
+          height: 20,
           fontWeight: FontWeight.normal,
           fontSize: 14,
           title: title,
-          width: double.maxFinite,
           padding: padding,
           onPressed: onPressed,
         ),

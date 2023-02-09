@@ -41,31 +41,40 @@ class ElevatedButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed == null
-          ? null
-          : () {
-              FocusScope.of(context).unfocus();
-              onPressed!.call();
-            },
-      style: DecorationClass.botonEstilo(
-        backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
-        disabledBackgroundColor: disabledBackgroundColor,
-        colorText: colorText,
-        disabledForegroundColor: disabledForegroundColor,
-        width: width,
-        height: height,
-        radius: radius,
-        padding: padding,
-        elevation: elevation,
-      ),
-      child: TextoWidget(
-        fontWeight: fontWeight,
-        fontSize: fontSize,
-        title,
-        color: onPressed == null ? disabledForegroundColor : colorText,
-        mainAxisAlignment: mainAxisAlignment,
-        isToUpperCase: isToUpperCase,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: gradientePrincipal(),
+        ),
+        height: height+10,
+        child: ElevatedButton(
+          onPressed: onPressed == null
+              ? null
+              : () {
+                  FocusScope.of(context).unfocus();
+                  onPressed!.call();
+                },
+          style: botonEstilo(
+            backgroundColor: backgroundColor ?? Colors.transparent,
+            disabledBackgroundColor: disabledBackgroundColor,
+            colorText: colorText,
+            disabledForegroundColor: disabledForegroundColor,
+            width: width,
+            height: height,
+            radius: radius,
+            padding: padding,
+            elevation: elevation,
+          ),
+          child: TextoWidget(
+            fontWeight: fontWeight,
+            fontSize: fontSize,
+            title,
+            color: onPressed == null ? disabledForegroundColor : colorText,
+            mainAxisAlignment: mainAxisAlignment,
+            isToUpperCase: isToUpperCase,
+          ),
+        ),
       ),
     );
   }

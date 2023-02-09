@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
 import 'package:registro_civil_apk/data/enum/routes_enum.dart';
 import 'package:registro_civil_apk/data/methods/methods.dart';
@@ -32,6 +33,7 @@ class LoginPage extends StatelessWidget {
           label: l10n.password,
           prefixIcon: Icons.key,
           obscureText: true,
+          suffixIcon: Ionicons.eye_off_outline,
         ),
         TextButtonWidget(
           title: l10n.olvPassword,
