@@ -107,10 +107,11 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
                             child: ElevatedButtonWidget(
                               width: double.maxFinite,
                               title: stepperModel.buttonText(
-                                  l10n: l10n,
-                                  det: stepper4,
-                                  age: stepper3,
-                                  stepper2SelTurno: stepper2SelTurno),
+                                l10n: l10n,
+                                det: stepper4,
+                                age: stepper3,
+                                stepper2SelTurno: stepper2SelTurno,
+                              ),
                               onPressed: !stepperModel.disabledButton(
                                 stepper2YaSelTurno: stepper2YaSelTurno,
                                 stepper2SelTurno: stepper2SelTurno,
@@ -118,15 +119,18 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
                                   ? () => stepperModel.actionButton(
                                         context,
                                         stepper: ref.read(
-                                            agendarTurnosStepperRiv.notifier),
+                                          agendarTurnosStepperRiv.notifier,
+                                        ),
                                         stepper4: ref.read(
-                                            agendarTurnosStepper4Riv.notifier),
+                                          agendarTurnosStepper4Riv.notifier,
+                                        ),
                                         det: stepper4,
                                         age: stepper3,
                                         stepper2SelTurno: stepper2SelTurno,
                                         stepper2actSelturno: ref.read(
-                                            agendarTurnosStepper2SelecTurnoRiv
-                                                .notifier),
+                                          agendarTurnosStepper2SelecTurnoRiv
+                                              .notifier,
+                                        ),
                                         stepper2actYaSelturno: ref.read(
                                           agendarTurnosStepper2Riv.notifier,
                                         ),

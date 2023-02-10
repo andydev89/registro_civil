@@ -32,7 +32,6 @@ class StepperAgendarTurnos {
       final date = DateTime.now();
       return '${l10n.horDisponibles} ${date.day}-${date.month}-${date.year}';
     }
-    ;
     if (currentIndex == 2) return '';
     if (det == DetallesTrunoEnum.detalles) return l10n.detTurno;
     return '';
@@ -83,7 +82,6 @@ class StepperAgendarTurnos {
       stepper2actYaSelturno.state = true;
       return;
     }
-    ;
     if (currentIndex == 2 && age == AgendarTurnosEnum.pagoIncorrecto) {
       irAYBorrarAnterior(context, ruta: RoutesEnum.nuestrosServicios);
       return;
