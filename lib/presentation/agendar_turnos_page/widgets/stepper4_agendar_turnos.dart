@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/home_enum/detalles_turno_enum.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/home_page_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/widgets_generales/success_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/title_subtitle_text_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/title_subtitle_widget.dart';
@@ -55,8 +56,7 @@ class Stepper4AgendarTurnos extends ConsumerWidget {
   }) {
     return Column(
       children: [
-        Image.asset(
-          'assets/img/general/checkmark.png',
+        SuccessWidget(
           color: color,
           width: size.width * 0.5,
         ),

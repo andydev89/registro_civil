@@ -85,5 +85,9 @@
   "verhayReaPagServicio": "Verifique que haya realizado el pago del servicio para poder agendar su turno.",
   "confirmar" : "Confirmar",
   "turResSatisfactoriamente" : "¡Su turno se ha reservado \nsatisfactoriamente!",
-  "envNotCorElectronico" : "Le hemos enviado una notificación a su correo electrónico con los detalles de su turno."
+  "envNotCorElectronico" : "Le hemos enviado una notificación a su correo electrónico con los detalles de su turno.",
+  "tipservicios" : "Tipos de servicios",
+  "selServicio" : "Seleccione un servicio",
+  "horDisponibles" : "Horarios disponibles",
+  "aceptar" : "Aceptar"
 }

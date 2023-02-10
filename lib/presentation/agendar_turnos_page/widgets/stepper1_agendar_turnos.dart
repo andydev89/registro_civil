@@ -33,6 +33,11 @@ class Stepper1AgendarTurnos extends ConsumerWidget {
           ),
           element(
             context,
+            titulo: l10n.tipservicios,
+            placeholder: l10n.selServicio,
+          ),
+          element(
+            context,
             titulo: l10n.mesTurno,
             placeholder: l10n.selMes,
           ),

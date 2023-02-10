@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/home_page_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/elevated_button_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets_generales/icon_gradiente_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class Stepper2AgendarTurnos extends ConsumerWidget {
@@ -18,6 +20,23 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     const padding = EdgeInsets.symmetric(horizontal: 20);
+    return <bool, Widget Function()>{
+      false: () => principal(padding: padding, l10n: l10n),
+      true: () => seleccionarTurno(
+            l10n: l10n,
+            context: context,
+            ref: ref,
+            pos: ref.watch(posHoraStepper2Riv),
+            actPos: ref.read(posHoraStepper2Riv.notifier),
+          ),
+    }[ref.watch(agendarTurnosStepper2SelecTurnoRiv)]!
+        .call();
+  }
+
+  Expanded principal({
+    required EdgeInsets padding,
+    required AppLocalizations l10n,
+  }) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -68,6 +87,40 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget seleccionarTurno({
+    required BuildContext context,
+    required AppLocalizations l10n,
+    required WidgetRef ref,
+    required int pos,
+    required StateController<int> actPos,
+  }) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextoWidget(
+          l10n.selTurno,
+          color: Theme.of(context).primaryColor,
+        ),
+        ...List.generate(
+          5,
+          (index) => SizedBox(
+            width: 150,
+            child: RadioListTile(
+              value: index,
+              groupValue: pos,
+              onChanged: (value) => actPos.state = value!,
+              title: TextoWidget(
+                '${index + 8}:00',
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -143,25 +196,28 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
           ),
         ),
       ),
-      trailing: Container(
-        width: 50,
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: color,
-        ),
-        child: Consumer(
-          builder: (_, ref, __) {
-            return IconButton(
-              icon: const Icon(
-                Icons.fact_check_outlined,
-                color: Colors.white,
+      trailing: Consumer(
+        builder: (_, ref, __) {
+          return Container(
+            decoration: BoxDecoration(
+              gradient: gradientePrincipal(),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            height: 40,
+            width: 40,
+            child: Center(
+              child: IconButton(
+                icon: const IconGradientWidget(
+                  icono: Icons.watch_later_outlined,
+                  size: 22.5,
+                ),
+                onPressed: () => ref
+                    .read(agendarTurnosStepper2SelecTurnoRiv.notifier)
+                    .state = true,
               ),
-              onPressed: () =>
-                  ref.read(agendarTurnosStepperRiv.notifier).next(),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

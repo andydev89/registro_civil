@@ -25,6 +25,8 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final stepperModel = ref.watch(agendarTurnosStepperRiv);
+    final stepper2YaSelTurno = ref.watch(agendarTurnosStepper2Riv);
+    final stepper2SelTurno = ref.watch(agendarTurnosStepper2SelecTurnoRiv);
     final stepper3 = ref.watch(agendarTurnosStepper3Riv);
     final stepper4 = ref.watch(agendarTurnosStepper4Riv);
     final color = Theme.of(context).primaryColor;
@@ -82,8 +84,9 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
                               stepperModel.title(
                                 l10n: context.l10n,
                                 det: stepper4,
+                                stepper2SelTurno: stepper2SelTurno,
                               ),
-                              color: Colors.black,
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
@@ -104,19 +107,31 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
                             child: ElevatedButtonWidget(
                               width: double.maxFinite,
                               title: stepperModel.buttonText(
-                                l10n: l10n,
-                                det: stepper4,
-                                age: stepper3,
-                              ),
-                              onPressed: () => stepperModel.actionButton(
-                                context,
-                                stepper:
-                                    ref.read(agendarTurnosStepperRiv.notifier),
-                                stepper4:
-                                    ref.read(agendarTurnosStepper4Riv.notifier),
-                                det: stepper4,
-                                age: stepper3,
-                              ),
+                                  l10n: l10n,
+                                  det: stepper4,
+                                  age: stepper3,
+                                  stepper2SelTurno: stepper2SelTurno),
+                              onPressed: !stepperModel.disabledButton(
+                                stepper2YaSelTurno: stepper2YaSelTurno,
+                                stepper2SelTurno: stepper2SelTurno,
+                              )
+                                  ? () => stepperModel.actionButton(
+                                        context,
+                                        stepper: ref.read(
+                                            agendarTurnosStepperRiv.notifier),
+                                        stepper4: ref.read(
+                                            agendarTurnosStepper4Riv.notifier),
+                                        det: stepper4,
+                                        age: stepper3,
+                                        stepper2SelTurno: stepper2SelTurno,
+                                        stepper2actSelturno: ref.read(
+                                            agendarTurnosStepper2SelecTurnoRiv
+                                                .notifier),
+                                        stepper2actYaSelturno: ref.read(
+                                          agendarTurnosStepper2Riv.notifier,
+                                        ),
+                                      )
+                                  : null,
                             ),
                           )
                       ],

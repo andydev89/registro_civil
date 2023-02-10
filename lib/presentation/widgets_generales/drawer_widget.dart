@@ -4,7 +4,7 @@ import 'package:registro_civil_apk/data/enum/routes_enum.dart';
 import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/home_page/widgets/button_drawer_home_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets_generales/bakcgroud_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets_generales/background_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/bottom_sheet_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/logo_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';

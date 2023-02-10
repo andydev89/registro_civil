@@ -19,7 +19,7 @@ class ServiciosPage extends StatelessWidget {
       slivers: [
         TextoWidgetSliver(titulo: l10n.nueServicios),
         SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 40),
           sliver: SliverToBoxAdapter(
             child: TextFormFieldAuth(
               label: l10n.buscar,

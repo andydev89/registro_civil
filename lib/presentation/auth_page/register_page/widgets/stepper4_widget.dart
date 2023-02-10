@@ -55,6 +55,7 @@ class Stepper4 extends ConsumerWidget {
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
+                      const SizedBox(height: 20),
                       TextoWidget(
                         l10n.envCorreo,
                         fontSize: 16,

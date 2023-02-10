@@ -85,5 +85,9 @@
   "verhayReaPagServicio": "Verify that you have made the payment of the service in order to schedule your appointment.",
   "confirmar": "Confirm",
   "turResSatisfactoriamente": "Your turn has been successfully booked!",
-  "envNotCorElectronico": "We have sent you a notification to your email with the details of your shift."
+  "envNotCorElectronico": "We have sent you a notification to your email with the details of your shift.",
+  "tipservicios": "Types of services",
+  "selServicio": "Select a service",
+  "horDisponibles": "Available hours",
+  "aceptar": "Accept"
 }

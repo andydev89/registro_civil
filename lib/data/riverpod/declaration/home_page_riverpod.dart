@@ -8,6 +8,16 @@ final agendarTurnosStepperRiv = StateNotifierProvider.autoDispose<
     AgendarTurnoStepperRiverpod,
     StepperAgendarTurnos>((ref) => AgendarTurnoStepperRiverpod());
 
+final agendarTurnosStepper2Riv = StateProvider.autoDispose<bool>(
+  (ref) => false,
+);
+
+final agendarTurnosStepper2SelecTurnoRiv = StateProvider.autoDispose<bool>(
+  (ref) => false,
+);
+
+final posHoraStepper2Riv = StateProvider.autoDispose<int>((ref) => 0);
+
 final agendarTurnosStepper3Riv = StateProvider.autoDispose<AgendarTurnosEnum>(
   (ref) => AgendarTurnosEnum.verificando,
 );

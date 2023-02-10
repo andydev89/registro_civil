@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/presentation/widgets_generales/bakcgroud_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets_generales/background_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/logo_widget.dart';
 
 class BackgroundAuth extends StatelessWidget {

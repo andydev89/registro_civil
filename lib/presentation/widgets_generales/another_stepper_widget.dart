@@ -1,6 +1,7 @@
 import 'package:another_stepper/another_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/presentation/auth_page/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
 class AnotherStepperWidget extends StatelessWidget {
@@ -31,9 +32,8 @@ class AnotherStepperWidget extends StatelessWidget {
           iconWidget: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: activeIndex >= index
-                  ? Theme.of(context).primaryColor
-                  : Colors.grey.shade400,
+              color: activeIndex >= index ? null : Colors.grey.shade400,
+              gradient: activeIndex < index ? null : gradientePrincipal(),
               borderRadius: const BorderRadius.all(Radius.circular(30)),
             ),
             child: Center(

@@ -9,6 +9,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/auth_page/widgets/circle_icon_auth.dart';
 import 'package:registro_civil_apk/presentation/auth_page/widgets/face_id_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/elevated_button_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets_generales/icon_gradiente_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/text_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets_generales/texto_widget.dart';
 
@@ -102,7 +103,7 @@ class Stepper2 extends ConsumerWidget {
           onTap: onTap,
           child: Column(
             children: [
-              Icon(Icons.check_circle, color: Colors.blue.shade900, size: 40),
+              const IconGradientWidget(),
               TextoWidget(perfect),
             ],
           ),

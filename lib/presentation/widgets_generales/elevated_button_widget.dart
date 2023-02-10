@@ -47,7 +47,7 @@ class ElevatedButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: gradientePrincipal(),
         ),
-        height: height+10,
+        height: height+15,
         child: ElevatedButton(
           onPressed: onPressed == null
               ? null

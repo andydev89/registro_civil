@@ -34,6 +34,7 @@ class LoginPage extends StatelessWidget {
           prefixIcon: Icons.key,
           obscureText: true,
           suffixIcon: Ionicons.eye_off_outline,
+          colorSuffixIcon: Colors.white,          
         ),
         TextButtonWidget(
           title: l10n.olvPassword,

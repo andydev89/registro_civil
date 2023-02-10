@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/presentation/auth_page/widgets/scaffold_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets_generales/success_widget.dart';
 
 class SuccessPage extends StatelessWidget {
   const SuccessPage({
@@ -11,12 +12,9 @@ class SuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldAuthWidget(
+      columnAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          'assets/img/general/checkmark.png',
-          color: Theme.of(context).primaryColor,
-          width: MediaQuery.of(context).size.width * 0.6,
-        ),
+        const SuccessWidget(),
         ...children,
       ],
     );
