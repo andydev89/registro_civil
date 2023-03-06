@@ -8,16 +8,22 @@ environment:
   flutter: 3.3.10
 
 dependencies:
+  another_stepper: ^1.1.6
+  badges: ^3.0.2
   bloc: ^8.1.0
+  fluentui_icons: ^1.0.0
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.1
+  flutter_bloc: ^8.1.2
   flutter_localizations:
     sdk: flutter
+  flutter_native_splash: ^2.2.17  
+  flutter_riverpod: ^2.1.3
   intl: ^0.17.0
+  ionicons: ^0.2.2
 
 dev_dependencies:
-  bloc_test: ^9.1.0
+  bloc_test: ^9.1.1
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0
@@ -26,3 +32,15 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+      - assets/img/auth/
+      - assets/img/general/
+      # - assets/ca/
+      # - assets/change_log/
+
+flutter_native_splash:
+  background_image: "assets/img/general/splash.png"
+  android: true
+  android_12:
+    image: "assets/img/general/logo.png"
+    color: "#FFFFFF"
