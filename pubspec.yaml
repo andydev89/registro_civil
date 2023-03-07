@@ -10,18 +10,23 @@ environment:
 dependencies:
   another_stepper: ^1.2.2
   badges: ^3.0.2
+  dio: ^5.0.1
   fluentui_icons: ^1.0.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
   flutter_native_splash: ^2.2.19  
+  flutter_pretty_dio_logger: ^3.0.0
   flutter_svg: ^2.0.2
+  # fresh_dio: ^0.3.2
   hooks_riverpod: ^2.3.0
   intl: ^0.17.0
   ionicons: ^0.2.2
+  json_annotation: ^4.8.0
   oxidized: ^5.3.0
   power_ups: ^0.0.3
+  retrofit: ^4.0.1
   riverpod_annotation: ^2.0.0
 
 dev_dependencies:
@@ -31,7 +36,10 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
+  json_serializable: ^6.6.1
+  logger: ^1.2.2
   mocktail: ^0.3.0
+  retrofit_generator: ^5.0.0
   riverpod_generator: ^2.0.0
   riverpod_lint: ^1.1.2
   very_good_analysis: ^4.0.0+1
