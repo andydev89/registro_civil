@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class ButtonDrawerHomeWidget extends StatelessWidget {
   const ButtonDrawerHomeWidget({
@@ -24,7 +24,7 @@ class ButtonDrawerHomeWidget extends StatelessWidget {
       ),
       label: Padding(
         padding: const EdgeInsets.only(left: 10),
-        child: TextoWidget(
+        child: PrimaryLabel(
           titulo,
           fontSize: 28,
           fontWeight: FontWeight.bold,

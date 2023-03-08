@@ -7,7 +7,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/icon_gradiente_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Stepper2AgendarTurnos extends ConsumerWidget {
   const Stepper2AgendarTurnos({
@@ -101,7 +101,7 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextoWidget(
+        PrimaryLabel(
           l10n.selTurno,
           color: Theme.of(context).primaryColor,
         ),
@@ -113,7 +113,7 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
               value: index,
               groupValue: pos,
               onChanged: (value) => actPos.state = value!,
-              title: TextoWidget(
+              title: PrimaryLabel(
                 '${index + 8}:00',
                 color: Theme.of(context).primaryColor,
               ),
@@ -160,7 +160,7 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
           ),
         ),
       ),
-      title: TextoWidget(
+      title: PrimaryLabel(
         titulo(context, index),
         fontWeight: FontWeight.bold,
         color: color,
@@ -176,7 +176,7 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
                 color: colorSubtitle,
                 size: size,
               ),
-              TextoWidget(
+              PrimaryLabel(
                 ' 12/12/2021',
                 color: colorSubtitle,
                 fontSize: fontSize,
@@ -187,7 +187,7 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
                 color: colorSubtitle,
                 size: size,
               ),
-              TextoWidget(
+              PrimaryLabel(
                 ' 12:00',
                 color: colorSubtitle,
                 fontSize: fontSize,

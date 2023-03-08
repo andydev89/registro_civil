@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/presentation/widgets/background_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/enunciado_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
 class ScaffoldAuthWidget extends StatelessWidget {
   const ScaffoldAuthWidget({
@@ -20,8 +20,8 @@ class ScaffoldAuthWidget extends StatelessWidget {
         child: BackgroundAuth(
           child: Column(
             children: [
-              EnunciadoWidget(
-                enunciado: enunciado,
+              PrimaryTitle(
+                title: enunciado,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(

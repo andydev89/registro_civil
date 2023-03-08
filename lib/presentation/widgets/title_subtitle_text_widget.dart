@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/title_subtitle_widget.dart';
 
 class TitleSubtitleTextoWidget extends StatelessWidget {
@@ -21,13 +21,13 @@ class TitleSubtitleTextoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TitleSubtitleWidget(
-      title: TextoWidget(
+      title: PrimaryLabel(
         title,
         fontWeight: FontWeight.bold,
         color: color,
         fontSize: fontSize ?? fontSizeDefault,
       ),
-      subtitle: TextoWidget(
+      subtitle: PrimaryLabel(
         title,
         color: color,
         fontSize: fontSize ?? fontSizeDefault,

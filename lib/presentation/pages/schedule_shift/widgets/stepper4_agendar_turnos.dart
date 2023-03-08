@@ -4,7 +4,7 @@ import 'package:registro_civil_apk/data/enum/home_enum/detalles_turno_enum.dart'
 import 'package:registro_civil_apk/data/riverpod/declaration/home_page_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/success_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/title_subtitle_text_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/title_subtitle_widget.dart';
 
@@ -60,14 +60,14 @@ class Stepper4AgendarTurnos extends ConsumerWidget {
           color: color,
           width: size.width * 0.5,
         ),
-        TextoWidget(
+        PrimaryLabel(
           l10n.turResSatisfactoriamente,
           color: color,
           fontWeight: FontWeight.bold,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: TextoWidget(
+          child: PrimaryLabel(
             l10n.envNotCorElectronico,
             color: color,
           ),
@@ -117,7 +117,7 @@ class Stepper4AgendarTurnos extends ConsumerWidget {
                         Icons.calendar_month,
                         color: colorTexto,
                       ),
-                      subtitle: TextoWidget(
+                      subtitle: PrimaryLabel(
                         '05-02-2023',
                         color: colorTexto,
                       ),
@@ -127,7 +127,7 @@ class Stepper4AgendarTurnos extends ConsumerWidget {
                         Icons.watch_later_outlined,
                         color: colorTexto,
                       ),
-                      subtitle: TextoWidget(
+                      subtitle: PrimaryLabel(
                         '08:30',
                         color: colorTexto,
                       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class TextButtonWidget extends StatelessWidget {
   const TextButtonWidget({
@@ -18,7 +18,7 @@ class TextButtonWidget extends StatelessWidget {
     this.fontSize = fontSizeDefault,
     this.padding = const EdgeInsets.all(10),
     this.fontWeight = FontWeight.normal,
-    this.alignment = Alignment.center,
+    this.mainAxisAlignment = MainAxisAlignment.center,
     this.colorBorder = Colors.transparent,
     this.widthBorde = 1,
   });
@@ -35,7 +35,7 @@ class TextButtonWidget extends StatelessWidget {
   final double? elevation;
   final FontWeight fontWeight;
   final bool isToUpperCase;
-  final AlignmentGeometry alignment;
+  final MainAxisAlignment mainAxisAlignment;
   final Color colorBorder;
   final double widthBorde;
 
@@ -46,7 +46,6 @@ class TextButtonWidget extends StatelessWidget {
         minimumSize: Size(width, height),
         foregroundColor: foregroundColor ?? Colors.white,
         backgroundColor: backgroundColor,
-        alignment: alignment,
         padding: padding,
         shape: shape(
           radius: radius,
@@ -60,10 +59,11 @@ class TextButtonWidget extends StatelessWidget {
               FocusScope.of(context).unfocus();
               onPressed!.call();
             },
-      child: TextoWidget(
+      child: PrimaryLabel(
         isToUpperCase ? title.toUpperCase() : title,
         fontSize: fontSize,
         fontWeight: fontWeight,
+        mainAxisAlignment: mainAxisAlignment,
       ),
     );
   }

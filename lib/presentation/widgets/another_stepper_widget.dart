@@ -2,7 +2,7 @@ import 'package:another_stepper/another_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class AnotherStepperWidget extends StatelessWidget {
   const AnotherStepperWidget({
@@ -37,7 +37,7 @@ class AnotherStepperWidget extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(30)),
             ),
             child: Center(
-              child: TextoWidget(
+              child: PrimaryLabel(
                 '${index + 1}',
                 fontWeight: FontWeight.bold,
                 fontSize: fontSize,

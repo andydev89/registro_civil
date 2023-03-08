@@ -11,7 +11,7 @@ import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.d
 import 'package:registro_civil_apk/presentation/widgets/face_id_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/icon_gradiente_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/text_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Stepper2 extends ConsumerWidget {
   const Stepper2({super.key});
@@ -25,7 +25,7 @@ class Stepper2 extends ConsumerWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 20),
-          child: TextoWidget(
+          child: PrimaryLabel(
             l10n.capIdenDigBiometrica,
           ),
         ),
@@ -104,7 +104,7 @@ class Stepper2 extends ConsumerWidget {
           child: Column(
             children: [
               const IconGradientWidget(),
-              TextoWidget(perfect),
+              PrimaryLabel(perfect),
             ],
           ),
         ),

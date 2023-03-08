@@ -5,31 +5,24 @@ import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/row_icon_button_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffold_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
-class Huella2Page extends StatelessWidget {
-  const Huella2Page({super.key});
+class HuellaPage extends StatelessWidget {
+  const HuellaPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return ScaffoldAuthWidget(
+      enunciado: l10n.loggin,
       children: [
-        Center(
-          child: TextoWidget(l10n.huellaDetectada),
-        ),
+        PrimaryLabel(l10n.colDedSensor),
         GestureDetector(
-          onTap: () => irAYBorrarAnterior(
-            context,
-            ruta: RoutesEnum.nuestrosServicios,
-          ),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 50),
-            child: Icon(
-              Icons.fingerprint,
-              size: 200,
-              color: Color.fromRGBO(13, 29, 47, 1),
-            ),
+          onTap: () => irA(context, ruta: RoutesEnum.loginHuella2),
+          child: Icon(
+            Icons.fingerprint,
+            size: 200,
+            color: Colors.grey.shade700,
           ),
         ),
         RowIconButtonAuthWidget(

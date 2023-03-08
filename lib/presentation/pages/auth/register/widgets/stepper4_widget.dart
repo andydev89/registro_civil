@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/routes_enum.dart';
 import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/success_page.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/text_form_field_auth.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Stepper4 extends ConsumerWidget {
   const Stepper4({super.key});
@@ -20,7 +20,7 @@ class Stepper4 extends ConsumerWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 20),
-            child: TextoWidget(
+            child: PrimaryLabel(
               l10n.ingDatos,
             ),
           ),
@@ -50,13 +50,13 @@ class Stepper4 extends ConsumerWidget {
                   ),
                   child: SuccessPage(
                     children: [
-                      TextoWidget(
+                      PrimaryLabel(
                         l10n.regSatisfactorio,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                       const SizedBox(height: 20),
-                      TextoWidget(
+                      PrimaryLabel(
                         l10n.envCorreo,
                         fontSize: 16,
                       ),

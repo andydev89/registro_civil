@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 
-class TextoWidget extends StatelessWidget {
-  const TextoWidget(
+class PrimaryLabel extends StatelessWidget {
+  const PrimaryLabel(
     this.titulo, {
     this.icono,
     this.color = Colors.white,
@@ -10,7 +10,7 @@ class TextoWidget extends StatelessWidget {
     this.fontSize = fontSizeDefault,
     this.iconSize = 20,
     this.fontWeight = FontWeight.normal,
-    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.mainAxisAlignment = MainAxisAlignment.center,
     this.isToUpperCase = false,
     this.maxlines = 2,
     this.textAlign = TextAlign.center,
@@ -34,7 +34,6 @@ class TextoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: mainAxisAlignment,
-      mainAxisSize: MainAxisSize.min,
       children: [
         Visibility(
           visible: icono != null,

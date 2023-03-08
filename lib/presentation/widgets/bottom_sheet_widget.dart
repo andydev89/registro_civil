@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class BottomSheetWidget extends StatelessWidget {
   const BottomSheetWidget({
@@ -24,7 +24,7 @@ class BottomSheetWidget extends StatelessWidget {
           Image.asset('assets/img/general/footer.png'),
           const Padding(
             padding: EdgeInsets.only(right: 15),
-            child: TextoWidget(
+            child: PrimaryLabel(
               'apps.registrocivil.gob.ec',
               color: Colors.blue,
               fontSize: 15,

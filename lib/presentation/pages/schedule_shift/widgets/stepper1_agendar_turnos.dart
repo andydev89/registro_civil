@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Stepper1AgendarTurnos extends ConsumerWidget {
   const Stepper1AgendarTurnos({
@@ -57,7 +57,7 @@ class Stepper1AgendarTurnos extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextoWidget(
+          PrimaryLabel(
             titulo,
             color: color,
             fontSize: fontSize,
@@ -85,7 +85,7 @@ class Stepper1AgendarTurnos extends ConsumerWidget {
             items: const [
               DropdownMenuItem(
                 value: 'Hola',
-                child: TextoWidget(
+                child: PrimaryLabel(
                   'Hola',
                   color: Colors.grey,
                 ),

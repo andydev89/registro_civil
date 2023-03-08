@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class CircleIconAuth extends StatelessWidget {
   const CircleIconAuth({
@@ -46,7 +46,7 @@ class CircleIconAuth extends StatelessWidget {
             ),
           ),
         ),
-        TextoWidget(
+        PrimaryLabel(
           titulo,
         ),
       ],

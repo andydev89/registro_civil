@@ -6,8 +6,8 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/background_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/bottom_sheet_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/button_drawer_home_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/logo_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({
@@ -44,7 +44,7 @@ class DrawerWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const LogoWidget(),
+                          const RegistroCivilLogo(),
                           userData(l10n),
                           const Divider(
                             color: Colors.white,
@@ -123,7 +123,7 @@ class DrawerWidget extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: TextoWidget(
+          child: PrimaryLabel(
             '${l10n.hola}, Luis Pérez Pérez',
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -133,7 +133,7 @@ class DrawerWidget extends StatelessWidget {
         ),
         badges.Badge(
           position: badges.BadgePosition.topEnd(top: 4, end: 8),
-          badgeContent: const TextoWidget(
+          badgeContent: const PrimaryLabel(
             '2',
             fontSize: 10,
           ),

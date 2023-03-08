@@ -4,7 +4,7 @@ import 'package:registro_civil_apk/data/enum/home_enum/agendar_turnos_enum.dart'
 import 'package:registro_civil_apk/data/riverpod/declaration/home_page_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/success_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Stepper3AgendarTurnos extends ConsumerWidget {
   const Stepper3AgendarTurnos({
@@ -72,7 +72,7 @@ class Stepper3AgendarTurnos extends ConsumerWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 15),
-            child: TextoWidget(
+            child: PrimaryLabel(
               l10n.verPago1,
               color: color,
             ),
@@ -96,7 +96,7 @@ class Stepper3AgendarTurnos extends ConsumerWidget {
         SuccessWidget(
           width: size.width * 0.5,
         ),
-        TextoWidget(
+        PrimaryLabel(
           l10n.verPagoSatisfactoriamente,
           color: color,
           fontWeight: FontWeight.bold,
@@ -113,12 +113,12 @@ class Stepper3AgendarTurnos extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Icon(Icons.warning_amber_outlined, color: Colors.red, size: 200),
-        TextoWidget(
+        PrimaryLabel(
           l10n.noPudVerPagServicio,
           color: color,
           fontWeight: FontWeight.bold,
         ),
-        TextoWidget(
+        PrimaryLabel(
           l10n.verhayReaPagServicio,
           color: color,
           fontSize: 15,
