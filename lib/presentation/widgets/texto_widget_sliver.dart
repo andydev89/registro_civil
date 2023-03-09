@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class TextoWidgetSliver extends StatelessWidget {
   const TextoWidgetSliver({
@@ -25,7 +25,7 @@ class TextoWidgetSliver extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextoWidget(
+                PrimaryLabel(
                   titulo,
                   color: Colors.black,
                   fontSize: 30,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/presentation/widgets/background_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/logo_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
 
 class BackgroundAuth extends StatelessWidget {
   const BackgroundAuth({
@@ -30,7 +30,7 @@ class BackgroundAuth extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const LogoWidget(),
+              const RegistroCivilLogo(),
               const SizedBox(
                 height: 10,
               ),

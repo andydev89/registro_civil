@@ -3,7 +3,7 @@ import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
 import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_extension.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffold_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class FaceIDScanWidget extends StatelessWidget {
   const FaceIDScanWidget({
@@ -30,7 +30,7 @@ class FaceIDScanWidget extends StatelessWidget {
         enunciado: l10n.escaneando,
         children: [
           if (titulo != null)
-            TextoWidget(
+            PrimaryLabel(
               titulo!,
             ),
           Container(

@@ -9,7 +9,7 @@ import 'package:registro_civil_apk/presentation/pages/schedule_shift/widgets/ste
 import 'package:registro_civil_apk/presentation/widgets/another_stepper_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffold_home_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/texto_widget_sliver.dart';
 
 class AgendarTurnosPage extends ConsumerStatefulWidget {
@@ -80,7 +80,7 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
                           padding: const EdgeInsets.only(top: 10),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 40),
-                            child: TextoWidget(
+                            child: PrimaryLabel(
                               stepperModel.title(
                                 l10n: context.l10n,
                                 det: stepper4,

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/auth_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/register/widgets/stepper1_widget.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/register/widgets/stepper2_widget.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/register/widgets/stepper3_widget.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/register/widgets/stepper4_widget.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/another_stepper_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffold_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
 class RegisterPage extends ConsumerWidget {
   const RegisterPage({super.key});
@@ -24,16 +26,20 @@ class RegisterPage extends ConsumerWidget {
         }
         return Future.value(true);
       },
-      child: ScaffoldAuthWidget(
-        enunciado: l10n.regCuenta,
-        columnAlignment: MainAxisAlignment.start,
-        children: [
-          AnotherStepperWidget(
-            activeIndex: stteperPos,
-            totalElement: 4,
-          ),
-          Expanded(child: stepperActual(stteperPos)),
-        ],
+      child: AuthCard(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            PrimaryTitle(
+              title: l10n.regCuenta,
+            ),
+            AnotherStepperWidget(
+              activeIndex: stteperPos,
+              totalElement: 4,
+            ).verticalPadding(20),
+            Expanded(child: stepperActual(stteperPos)),
+          ],
+        ),
       ),
     );
   }

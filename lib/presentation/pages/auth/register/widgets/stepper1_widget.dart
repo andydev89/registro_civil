@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/auth_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/text_form_field_auth.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Stepper1 extends ConsumerWidget {
   const Stepper1({super.key});
@@ -16,7 +16,7 @@ class Stepper1 extends ConsumerWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        TextoWidget(l10n.ingNumCedula),
+        PrimaryLabel(l10n.ingNumCedula),
         TextFormFieldAuth(
           label: l10n.numCedula,
           prefixIcon: Icons.payment,

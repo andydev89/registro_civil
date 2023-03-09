@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/presentation/widgets/shadows_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class ElementWidget extends StatelessWidget {
   const ElementWidget({
@@ -30,7 +30,7 @@ class ElementWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            TextoWidget(
+            PrimaryLabel(
               titulo,
               color: Theme.of(context).primaryColor,
               fontSize: 15,

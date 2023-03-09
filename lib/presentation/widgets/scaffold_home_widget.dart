@@ -2,8 +2,8 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/presentation/widgets/bottom_sheet_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/drawer_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/logo_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class ScaffoldHomeWidget extends StatelessWidget {
   const ScaffoldHomeWidget({
@@ -114,13 +114,10 @@ class ScaffoldHomeWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              LogoWidget(
-                width: MediaQuery.of(context).size.width * 0.6,
-                height: 100,
-              ),
+              const RegistroCivilLogo(),
               badges.Badge(
                 position: badges.BadgePosition.topEnd(top: 4, end: 8),
-                badgeContent: const TextoWidget(
+                badgeContent: const PrimaryLabel(
                   '2',
                   fontSize: 10,
                 ),

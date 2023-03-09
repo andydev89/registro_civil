@@ -3,7 +3,7 @@ import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
 import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_extension.dart';
 import 'package:registro_civil_apk/data/methods/auth_methods/auth_methods.dart';
 import 'package:registro_civil_apk/data/methods/methods.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class IconButtonAuthWidget extends StatelessWidget {
   const IconButtonAuthWidget({
@@ -45,7 +45,7 @@ class IconButtonAuthWidget extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            TextoWidget(
+            PrimaryLabel(
               tipoIcono.label(context),
               color: color,
               fontSize: 11.5,
