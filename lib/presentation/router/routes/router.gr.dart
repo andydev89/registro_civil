@@ -43,10 +43,10 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    RegisterRoute.name: (routeData) {
+    RegisterRouterRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const RegisterPage(),
+        child: const RegisterRouterPage(),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -79,6 +79,55 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    SuccessRoute.name: (routeData) {
+      final args = routeData.argsAs<SuccessRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: SuccessPage(
+          key: args.key,
+          child: args.child,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    Step1Route.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const Step1Page(),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    Step2Route.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const Step2Page(),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    Step3Route.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const Step3Page(),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    Step4Route.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const Step4Page(),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ForgotPasswordRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -92,6 +141,42 @@ class _$AppRouter extends RootStackRouter {
       return CustomPage<dynamic>(
         routeData: routeData,
         child: const ChangePasswordPage(),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ScanFaceRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const ScanFacePage(),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ScanDniRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const ScanDniPage(),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    FingerPrintRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const FingerPrintPage(),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    FingerPrint2Route.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const FingerPrint2Page(),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -116,9 +201,35 @@ class _$AppRouter extends RootStackRouter {
                   parent: AuthRouterRoute.name,
                 ),
                 RouteConfig(
-                  RegisterRoute.name,
-                  path: 'register-page',
+                  RegisterRouterRoute.name,
+                  path: 'register-router-page',
                   parent: AuthRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      Step1Route.name,
+                      path: '',
+                      parent: RegisterRouterRoute.name,
+                      meta: <String, dynamic>{'index': 0},
+                    ),
+                    RouteConfig(
+                      Step2Route.name,
+                      path: 'step2-page',
+                      parent: RegisterRouterRoute.name,
+                      meta: <String, dynamic>{'index': 1},
+                    ),
+                    RouteConfig(
+                      Step3Route.name,
+                      path: 'step3-page',
+                      parent: RegisterRouterRoute.name,
+                      meta: <String, dynamic>{'index': 2},
+                    ),
+                    RouteConfig(
+                      Step4Route.name,
+                      path: 'step4-page',
+                      parent: RegisterRouterRoute.name,
+                      meta: <String, dynamic>{'index': 3},
+                    ),
+                  ],
                 ),
                 RouteConfig(
                   ForgotPasswordRouterRoute.name,
@@ -141,10 +252,39 @@ class _$AppRouter extends RootStackRouter {
                   ScanRouterRoute.name,
                   path: 'scan-router-page',
                   parent: AuthRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      ScanFaceRoute.name,
+                      path: '',
+                      parent: ScanRouterRoute.name,
+                    ),
+                    RouteConfig(
+                      ScanDniRoute.name,
+                      path: 'scan-dni-page',
+                      parent: ScanRouterRoute.name,
+                    ),
+                  ],
                 ),
                 RouteConfig(
                   FingerPrintRouterRoute.name,
                   path: 'finger-print-router-page',
+                  parent: AuthRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      FingerPrintRoute.name,
+                      path: '',
+                      parent: FingerPrintRouterRoute.name,
+                    ),
+                    RouteConfig(
+                      FingerPrint2Route.name,
+                      path: 'finger-print2-page',
+                      parent: FingerPrintRouterRoute.name,
+                    ),
+                  ],
+                ),
+                RouteConfig(
+                  SuccessRoute.name,
+                  path: 'success-page',
                   parent: AuthRouterRoute.name,
                 ),
               ],
@@ -193,15 +333,16 @@ class LoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [RegisterPage]
-class RegisterRoute extends PageRouteInfo<void> {
-  const RegisterRoute()
+/// [RegisterRouterPage]
+class RegisterRouterRoute extends PageRouteInfo<void> {
+  const RegisterRouterRoute({List<PageRouteInfo>? children})
       : super(
-          RegisterRoute.name,
-          path: 'register-page',
+          RegisterRouterRoute.name,
+          path: 'register-router-page',
+          initialChildren: children,
         );
 
-  static const String name = 'RegisterRoute';
+  static const String name = 'RegisterRouterRoute';
 }
 
 /// generated route for
@@ -220,10 +361,11 @@ class ForgotPasswordRouterRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ScanRouterPage]
 class ScanRouterRoute extends PageRouteInfo<void> {
-  const ScanRouterRoute()
+  const ScanRouterRoute({List<PageRouteInfo>? children})
       : super(
           ScanRouterRoute.name,
           path: 'scan-router-page',
+          initialChildren: children,
         );
 
   static const String name = 'ScanRouterRoute';
@@ -232,13 +374,96 @@ class ScanRouterRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [FingerPrintRouterPage]
 class FingerPrintRouterRoute extends PageRouteInfo<void> {
-  const FingerPrintRouterRoute()
+  const FingerPrintRouterRoute({List<PageRouteInfo>? children})
       : super(
           FingerPrintRouterRoute.name,
           path: 'finger-print-router-page',
+          initialChildren: children,
         );
 
   static const String name = 'FingerPrintRouterRoute';
+}
+
+/// generated route for
+/// [SuccessPage]
+class SuccessRoute extends PageRouteInfo<SuccessRouteArgs> {
+  SuccessRoute({
+    Key? key,
+    required Widget child,
+  }) : super(
+          SuccessRoute.name,
+          path: 'success-page',
+          args: SuccessRouteArgs(
+            key: key,
+            child: child,
+          ),
+        );
+
+  static const String name = 'SuccessRoute';
+}
+
+class SuccessRouteArgs {
+  const SuccessRouteArgs({
+    this.key,
+    required this.child,
+  });
+
+  final Key? key;
+
+  final Widget child;
+
+  @override
+  String toString() {
+    return 'SuccessRouteArgs{key: $key, child: $child}';
+  }
+}
+
+/// generated route for
+/// [Step1Page]
+class Step1Route extends PageRouteInfo<void> {
+  const Step1Route()
+      : super(
+          Step1Route.name,
+          path: '',
+        );
+
+  static const String name = 'Step1Route';
+}
+
+/// generated route for
+/// [Step2Page]
+class Step2Route extends PageRouteInfo<void> {
+  const Step2Route()
+      : super(
+          Step2Route.name,
+          path: 'step2-page',
+        );
+
+  static const String name = 'Step2Route';
+}
+
+/// generated route for
+/// [Step3Page]
+class Step3Route extends PageRouteInfo<void> {
+  const Step3Route()
+      : super(
+          Step3Route.name,
+          path: 'step3-page',
+        );
+
+  static const String name = 'Step3Route';
+}
+
+/// generated route for
+/// [Step4Page]
+class Step4Route extends PageRouteInfo<void> {
+  const Step4Route()
+      : super(
+          Step4Route.name,
+          path: 'step4-page',
+        );
+
+  static const String name = 'Step4Route';
 }
 
 /// generated route for
@@ -263,4 +488,52 @@ class ChangePasswordRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ChangePasswordRoute';
+}
+
+/// generated route for
+/// [ScanFacePage]
+class ScanFaceRoute extends PageRouteInfo<void> {
+  const ScanFaceRoute()
+      : super(
+          ScanFaceRoute.name,
+          path: '',
+        );
+
+  static const String name = 'ScanFaceRoute';
+}
+
+/// generated route for
+/// [ScanDniPage]
+class ScanDniRoute extends PageRouteInfo<void> {
+  const ScanDniRoute()
+      : super(
+          ScanDniRoute.name,
+          path: 'scan-dni-page',
+        );
+
+  static const String name = 'ScanDniRoute';
+}
+
+/// generated route for
+/// [FingerPrintPage]
+class FingerPrintRoute extends PageRouteInfo<void> {
+  const FingerPrintRoute()
+      : super(
+          FingerPrintRoute.name,
+          path: '',
+        );
+
+  static const String name = 'FingerPrintRoute';
+}
+
+/// generated route for
+/// [FingerPrint2Page]
+class FingerPrint2Route extends PageRouteInfo<void> {
+  const FingerPrint2Route()
+      : super(
+          FingerPrint2Route.name,
+          path: 'finger-print2-page',
+        );
+
+  static const String name = 'FingerPrint2Route';
 }

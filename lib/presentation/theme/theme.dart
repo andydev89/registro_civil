@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 
-const primaryColor = Color.fromRGBO(36, 72, 122, 1);
+const primaryColor = Color(0xff0D1D2F);
+const yellow = Color(0xffFFC926);
+const grey = Color(0xffCCCCCC);
+const blue = Color(0xff24487A);
+const ligthBlue = Color(0xff2983F4);
+const gradient = LinearGradient(
+  colors: [
+    primaryColor,
+    blue,
+  ],
+);
 // const secondaryColor = Color(0x1f1f1f1f);
 
 final lightTheme = ThemeData(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/home_enum/agendar_turnos_enum.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/home_page_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -93,9 +93,7 @@ class Stepper3AgendarTurnos extends ConsumerWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SuccessWidget(
-          width: size.width * 0.5,
-        ),
+        const SuccessWidget(),
         PrimaryLabel(
           l10n.verPagoSatisfactoriamente,
           color: color,

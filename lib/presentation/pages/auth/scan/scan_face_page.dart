@@ -1,16 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
-import 'package:registro_civil_apk/data/enum/routes_enum.dart';
-import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_extension.dart';
-import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/widgets/circular_icon_auth.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/widgets/icon_button_auth.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/face_id_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/icon_container_auth.dart';
-import 'package:registro_civil_apk/presentation/widgets/row_icon_button_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffold_auth_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
 class ScanFacePage extends StatelessWidget {
   const ScanFacePage({super.key});
@@ -18,52 +17,42 @@ class ScanFacePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return ScaffoldAuthWidget(
-      enunciado: l10n.loggin,
-      children: [
-        IconContainerAuthWidget(
-          url: IconoBotonEnum.faceID.url,
-          height: 50,
-          width: 50,
-        ),
-        ElevatedButtonWidget(
-          title: l10n.escRostro,
-          width: double.maxFinite,
-          onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute<Widget>(
-              builder: (_) => FaceIDScanWidget(
-                titulo: l10n.girCabeza,
-                child: const SizedBox(
-                  height: 80,
-                ),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute<Widget>(
-                    builder: (_) => GestureDetector(
-                      onTap: () => irAYBorrarAnterior(
-                        context,
-                        ruta: RoutesEnum.nuestrosServicios,
-                      ),
-                      child: SuccessPage(
-                        children: [
-                          PrimaryLabel(l10n.iniSesion),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+    return AuthCard(
+      child: Column(
+        children: [
+          PrimaryTitle(
+            title: l10n.loggin,
           ),
-        ),
-        RowIconButtonAuthWidget(
-          iconos: const [
-            IconoBotonEnum.cedula,
-            IconoBotonEnum.huella,
-          ],
-        ),
-      ],
+          CircularIconAuth(
+            child: Assets.img.auth.faceid.image(
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover,
+            ),
+          ).verticalPadding(30),
+          ElevatedButtonWidget(
+            title: l10n.escRostro,
+            width: double.maxFinite,
+            onPressed: () {
+              //TODO escanear rostro
+            },
+          ).verticalPadding(20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButtonAuth(
+                icon: IconoBotonEnum.cedula,
+                onPressed: () => context.popRoute(),
+              ),
+              IconButtonAuth(
+                icon: IconoBotonEnum.huella,
+                onPressed: () =>
+                    context.replaceRoute(const FingerPrintRouterRoute()),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

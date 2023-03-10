@@ -6,8 +6,6 @@ class ScanRouterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoRouter(
-      builder: (context, content) => content,
-    );
+    return const AutoRouter();
   }
 }

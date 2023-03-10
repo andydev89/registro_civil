@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffold_auth_widget.dart';
+import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/success_widget.dart';
 
 class SuccessPage extends StatelessWidget {
   const SuccessPage({
     super.key,
-    required this.children,
+    required this.child,
   });
-  final List<Widget> children;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldAuthWidget(
-      columnAlignment: MainAxisAlignment.center,
-      children: [
-        const SuccessWidget(),
-        ...children,
-      ],
+    return AuthCard(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SuccessWidget().symmetricPadding(20, 50),
+          child,
+        ],
+      ),
     );
   }
 }
