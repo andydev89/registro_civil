@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
-import 'package:registro_civil_apk/data/extension/auth_extension/icono_boton_extension.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffold_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
@@ -45,11 +44,7 @@ class FaceIDScanWidget extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(150),
-              child: Image.asset(
-                urlImage ?? IconoBotonEnum.scanFace.url,
-                width: MediaQuery.of(context).size.width * 0.5,
-                fit: BoxFit.cover,
-              ),
+              child: IconoBotonEnum.scanFace.image(),
             ),
           ),
           if (child != null) child!,

@@ -3,7 +3,7 @@ import 'package:registro_civil_apk/data/const/const.dart';
 
 class PrimaryLabel extends StatelessWidget {
   const PrimaryLabel(
-    this.titulo, {
+    this.title, {
     this.icono,
     this.color = Colors.white,
     this.colorIcono,
@@ -17,7 +17,7 @@ class PrimaryLabel extends StatelessWidget {
     super.key,
     this.shadows,
   });
-  final String titulo;
+  final String title;
   final IconData? icono;
   final Color? color;
   final Color? colorIcono;
@@ -50,16 +50,14 @@ class PrimaryLabel extends StatelessWidget {
         ),
         Flexible(
           child: Text(
-            isToUpperCase ? titulo.toUpperCase() : titulo,
+            isToUpperCase ? title.toUpperCase() : title,
             style: TextStyle(
               fontWeight: fontWeight,
               fontSize: fontSize,
               color: color,
               shadows: shadows,
             ),
-            overflow: TextOverflow.ellipsis,
             maxLines: maxlines,
-            key: UniqueKey(),
             textAlign: textAlign,
           ),
         ),

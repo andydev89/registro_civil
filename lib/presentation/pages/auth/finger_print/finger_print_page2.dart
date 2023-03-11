@@ -3,12 +3,12 @@ import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
 import 'package:registro_civil_apk/data/enum/routes_enum.dart';
 import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/widgets/row_icon_button_auth_widget.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/widgets/icon_button_auth.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffold_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
-class Huella2Page extends StatelessWidget {
-  const Huella2Page({super.key});
+class FingerPrint2Page extends StatelessWidget {
+  const FingerPrint2Page({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +32,17 @@ class Huella2Page extends StatelessWidget {
             ),
           ),
         ),
-        RowIconButtonAuthWidget(
-          iconos: const [
-            IconoBotonEnum.cedula,
-            IconoBotonEnum.faceID,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButtonAuth(
+              icon: IconoBotonEnum.cedula,
+              onPressed: () {},
+            ),
+            IconButtonAuth(
+              icon: IconoBotonEnum.huella,
+              onPressed: () {},
+            ),
           ],
         ),
       ],

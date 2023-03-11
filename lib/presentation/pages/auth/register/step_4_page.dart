@@ -1,20 +1,24 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:registro_civil_apk/data/enum/routes_enum.dart';
-import 'package:registro_civil_apk/data/methods/methods.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.dart';
+import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/text_form_field_auth.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
-class Stepper4 extends ConsumerWidget {
-  const Stepper4({super.key});
+class Step4Page extends ConsumerWidget {
+  const Step4Page({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    return GestureDetector(
+    return WillPopScope(
+      onWillPop: () {
+        ref.read(stepperIndexProvider.notifier).index--;
+        return Future(() => true);
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -40,28 +44,19 @@ class Stepper4 extends ConsumerWidget {
           ElevatedButtonWidget(
             title: l10n.registrar,
             width: double.maxFinite,
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute<Widget>(
-                builder: (context) => GestureDetector(
-                  onTap: () => irAYBorrarAnterior(
-                    context,
-                    ruta: RoutesEnum.loginCedula,
-                  ),
-                  child: SuccessPage(
-                    children: [
-                      PrimaryLabel(
-                        l10n.regSatisfactorio,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      const SizedBox(height: 20),
-                      PrimaryLabel(
-                        l10n.envCorreo,
-                        fontSize: 16,
-                      ),
-                    ],
-                  ),
+            onPressed: () => context.replaceRoute(
+              SuccessRoute(
+                child: Column(
+                  children: [
+                    PrimaryLabel(
+                      l10n.regSatisfactorio,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    PrimaryLabel(l10n.envCorreo),
+                  ],
                 ),
               ),
             ),

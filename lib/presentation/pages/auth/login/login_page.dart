@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
-import 'package:registro_civil_apk/data/enum/routes_enum.dart';
-import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/widgets/icon_button_auth.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/row_icon_button_auth_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/text_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/text_form_field_auth.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
@@ -50,10 +48,18 @@ class LoginPage extends StatelessWidget {
             onPressed: () =>
                 context.navigateTo(const ForgotPasswordRouterRoute()),
           ),
-          RowIconButtonAuthWidget(
-            iconos: const [
-              IconoBotonEnum.faceID,
-              IconoBotonEnum.huella,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButtonAuth(
+                icon: IconoBotonEnum.faceID,
+                onPressed: () => context.navigateTo(const ScanRouterRoute()),
+              ),
+              IconButtonAuth(
+                icon: IconoBotonEnum.huella,
+                onPressed: () =>
+                    context.navigateTo(const FingerPrintRouterRoute()),
+              ),
             ],
           ),
           Padding(
@@ -74,7 +80,7 @@ class LoginPage extends StatelessWidget {
           ),
           TextButtonWidget(
             title: l10n.regAqui,
-            onPressed: () => context.navigateTo(const RegisterRoute()),
+            onPressed: () => context.navigateTo(const RegisterRouterRoute()),
             fontWeight: FontWeight.bold,
           )
         ],
