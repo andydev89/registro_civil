@@ -17,6 +17,7 @@ class RegisterRouterPage extends StatelessWidget {
     return AuthCard(
       child: AutoRouter(
         builder: (context, content) => Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             PrimaryTitle(
               title: l10n.regCuenta,
@@ -30,7 +31,7 @@ class RegisterRouterPage extends StatelessWidget {
                 ).verticalPadding(20);
               },
             ),
-            Expanded(child: content),
+            Flexible(child: content),
           ],
         ),
       ),
