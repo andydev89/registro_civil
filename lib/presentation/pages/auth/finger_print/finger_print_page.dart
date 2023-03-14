@@ -19,6 +19,7 @@ class FingerPrintPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AuthCard(
+      scrollContentOnResized: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
