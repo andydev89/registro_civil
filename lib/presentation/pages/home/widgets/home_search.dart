@@ -14,7 +14,7 @@ class HopmeSearch extends StatelessWidget {
       children: [
         const Spacer(),
         Flexible(
-          flex: 8,
+          flex: 10,
           child: PrimaryTextFormField(
             suffixIcon: Icons.search,
             colorLabel: blue,
@@ -22,10 +22,13 @@ class HopmeSearch extends StatelessWidget {
             colorSuffixIcon: Colors.grey,
             borderColor: blue,
             padding: 15,
-          ).horizontalPadding(10),
+          ),
+        ),
+        const SizedBox(
+          width: 5,
         ),
         Container(
-          width: 40,
+          width: 30,
           height: 40,
           decoration: const ShapeDecoration(
             gradient: gradient,
@@ -50,6 +53,6 @@ class HopmeSearch extends StatelessWidget {
           ),
         ),
       ],
-    ).verticalPadding(20);
+    );
   }
 }

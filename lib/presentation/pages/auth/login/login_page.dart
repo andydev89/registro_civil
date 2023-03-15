@@ -8,8 +8,8 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dar
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/icon_button_auth.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/text_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
+import 'package:registro_civil_apk/presentation/widgets/text_button_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 

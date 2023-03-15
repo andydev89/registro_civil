@@ -11,11 +11,11 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
-      preferredSize: const Size.fromHeight(150),
+      preferredSize: const Size.fromHeight(100),
       child: DecoratedBox(
         decoration: ShapeDecoration(
           image: DecorationImage(
-            image: Assets.img.general.backgroundAuth.image().image,
+            image: Assets.png.backgroundAuth.image().image,
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               blue.withOpacity(0.7),
@@ -29,38 +29,32 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         child: SafeArea(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              IconButton(
-                onPressed: () => Scaffold.of(context).openDrawer(),
-                icon: const Icon(
-                  Icons.menu,
-                  color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  onTap: () => Scaffold.of(context).openDrawer(),
+                  child: Assets.svg.menu.svg(),
                 ),
-              ),
-              Flexible(child: const RegistroCivilLogo().horizontalPadding(15)),
-              Badge(
-                alignment: AlignmentDirectional.topEnd,
-                label: const PrimaryLabel(
-                  '2',
-                  fontSize: 10,
-                ),
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.notifications_outlined,
-                    color: Colors.white,
+                const Flexible(child: RegistroCivilLogo()),
+                Badge(
+                  label: const PrimaryLabel(
+                    '2',
+                    fontSize: 10,
                   ),
-                  onPressed: () {},
+                  child: Assets.svg.bell.svg(),
                 ),
-              ),
-            ],
-          ).symmetricPadding(10, 10),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(150);
+  Size get preferredSize => const Size.fromHeight(100);
 }

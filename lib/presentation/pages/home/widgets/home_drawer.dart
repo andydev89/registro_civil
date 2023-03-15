@@ -8,7 +8,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/background_widget.dart';
 import 'package:registro_civil_apk/presentation/pages/home/widgets/logo_bottom_sheet.dart';
-import 'package:registro_civil_apk/presentation/widgets/button_drawer_home_widget.dart';
+import 'package:registro_civil_apk/presentation/pages/home/widgets/button_drawer_home_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
@@ -35,7 +35,7 @@ class HomeDrawer extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: Assets.img.general.backgroundAuth.image().image,
+            image: Assets.png.backgroundAuth.image().image,
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               blue.withOpacity(0.7),
@@ -56,51 +56,57 @@ class HomeDrawer extends StatelessWidget {
                     thickness: 1,
                     color: Colors.white,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ButtonDrawerHomeWidget(
-                        icono: Icons.home_outlined,
-                        titulo: l10n.inicio,
-                        onPressed: () => irAYBorrarAnterior(
-                          context,
-                          ruta: RoutesEnum.nuestrosServicios,
+                  SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ButtonDrawerHomeWidget(
+                          icon: Assets.svg.home.svg(),
+                          titulo: l10n.inicio,
+                          onPressed: () => irAYBorrarAnterior(
+                            context,
+                            ruta: RoutesEnum.nuestrosServicios,
+                          ),
                         ),
-                      ),
-                      ButtonDrawerHomeWidget(
-                        icono: Icons.person_outline,
-                        titulo: l10n.miPerfil,
-                        onPressed: () {},
-                      ),
-                      ButtonDrawerHomeWidget(
-                        icono: Icons.description_outlined,
-                        titulo: l10n.misTramites,
-                        onPressed: () {},
-                      ),
-                      ButtonDrawerHomeWidget(
-                        icono: Icons.calendar_month_outlined,
-                        titulo: l10n.misTurnos,
-                        onPressed: () {},
-                      ),
-                      ButtonDrawerHomeWidget(
-                        icono: Icons.settings_outlined,
-                        titulo: l10n.configuracion,
-                        onPressed: () {},
-                      ),
-                      ButtonDrawerHomeWidget(
-                        icono: Icons.help_outline_outlined,
-                        titulo: l10n.ayuda,
-                        onPressed: () {},
-                      ),
-                      ButtonDrawerHomeWidget(
-                        icono: Icons.logout_outlined,
-                        titulo: l10n.cerrSesion,
-                        onPressed: () => irAYBorrarAnterior(
-                          context,
-                          ruta: RoutesEnum.loginCedula,
+                        ButtonDrawerHomeWidget(
+                          icon: Assets.svg.user.svg(),
+                          titulo: l10n.miPerfil,
+                          onPressed: () {},
                         ),
-                      ),
-                    ],
+                        ButtonDrawerHomeWidget(
+                          icon: Assets.svg.businessService.svg(),
+                          titulo: l10n.misTramites,
+                          onPressed: () {},
+                        ),
+                        ButtonDrawerHomeWidget(
+                          icon: Assets.svg.calendar2.svg(),
+                          titulo: l10n.misTurnos,
+                          onPressed: () {},
+                        ),
+                        ButtonDrawerHomeWidget(
+                          icon: Assets.svg.settings.svg(),
+                          titulo: l10n.configuracion,
+                          onPressed: () {},
+                        ),
+                        ButtonDrawerHomeWidget(
+                          icon: const Icon(
+                            Icons.help_outline_outlined,
+                            size: 40,
+                            color: Colors.white,
+                          ),
+                          titulo: l10n.ayuda,
+                          onPressed: () {},
+                        ),
+                        ButtonDrawerHomeWidget(
+                          icon: Assets.svg.exit.svg(),
+                          titulo: l10n.cerrSesion,
+                          onPressed: () => irAYBorrarAnterior(
+                            context,
+                            ruta: RoutesEnum.loginCedula,
+                          ),
+                        ),
+                      ],
+                    ).verticalPadding(20),
                   ),
                 ],
               ),
@@ -124,9 +130,7 @@ class DrawerUserData extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const CircleAvatar(
-          child: Icon(Icons.person),
-        ),
+        Assets.svg.avatar.svg(),
         Expanded(
           child: PrimaryLabel(
             '${l10n.hola}, Luis Pérez Pérez',
@@ -140,14 +144,7 @@ class DrawerUserData extends StatelessWidget {
             '2',
             fontSize: 10,
           ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.notifications_outlined,
-              color: Colors.white,
-              size: 35,
-            ),
-            onPressed: () {},
-          ),
+          child: Assets.svg.bell.svg(),
         ),
       ],
     );

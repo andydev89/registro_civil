@@ -22,7 +22,7 @@ class LogoBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Assets.img.general.footer.image(),
+          Assets.png.footer.image(),
           const Flexible(
             child: PrimaryLabel(
               'apps.registrocivil.gob.ec',

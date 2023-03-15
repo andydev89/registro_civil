@@ -8,155 +8,216 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 
-class $AssetsImgGen {
-  const $AssetsImgGen();
+class $AssetsPngGen {
+  const $AssetsPngGen();
 
-  $AssetsImgAuthGen get auth => const $AssetsImgAuthGen();
-  $AssetsImgGeneralGen get general => const $AssetsImgGeneralGen();
-}
+  /// File path: assets/png/agendar_turno1.png
+  AssetGenImage get agendarTurno1 =>
+      const AssetGenImage('assets/png/agendar_turno1.png');
 
-class $AssetsImgAuthGen {
-  const $AssetsImgAuthGen();
+  /// File path: assets/png/agendar_turno2.png
+  AssetGenImage get agendarTurno2 =>
+      const AssetGenImage('assets/png/agendar_turno2.png');
 
-  /// File path: assets/img/auth/anverso.png
-  AssetGenImage get anverso =>
-      const AssetGenImage('assets/img/auth/anverso.png');
+  /// File path: assets/png/agendar_turno3.png
+  AssetGenImage get agendarTurno3 =>
+      const AssetGenImage('assets/png/agendar_turno3.png');
 
-  /// File path: assets/img/auth/background_auth.png
+  /// File path: assets/png/anverso.png
+  AssetGenImage get anverso => const AssetGenImage('assets/png/anverso.png');
+
+  /// File path: assets/png/background_auth.png
   AssetGenImage get backgroundAuth =>
-      const AssetGenImage('assets/img/auth/background_auth.png');
+      const AssetGenImage('assets/png/background_auth.png');
 
-  /// File path: assets/img/auth/cedula.png
-  AssetGenImage get cedula => const AssetGenImage('assets/img/auth/cedula.png');
+  /// File path: assets/png/finger_print.png
+  AssetGenImage get fingerPrint =>
+      const AssetGenImage('assets/png/finger_print.png');
 
-  /// File path: assets/img/auth/faceid.png
-  AssetGenImage get faceid => const AssetGenImage('assets/img/auth/faceid.png');
+  /// File path: assets/png/footer.png
+  AssetGenImage get footer => const AssetGenImage('assets/png/footer.png');
 
-  /// File path: assets/img/auth/fingerpoint.png
-  AssetGenImage get fingerpoint =>
-      const AssetGenImage('assets/img/auth/fingerpoint.png');
+  /// File path: assets/png/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/png/logo.png');
 
-  /// File path: assets/img/auth/reverso.png
-  AssetGenImage get reverso =>
-      const AssetGenImage('assets/img/auth/reverso.png');
+  /// File path: assets/png/qr.png
+  AssetGenImage get qr => const AssetGenImage('assets/png/qr.png');
 
-  /// File path: assets/img/auth/rostro_cedula.png
+  /// File path: assets/png/reverso.png
+  AssetGenImage get reverso => const AssetGenImage('assets/png/reverso.png');
+
+  /// File path: assets/png/rostro_cedula.png
   AssetGenImage get rostroCedula =>
-      const AssetGenImage('assets/img/auth/rostro_cedula.png');
+      const AssetGenImage('assets/png/rostro_cedula.png');
 
-  /// File path: assets/img/auth/usuario.jpg
-  AssetGenImage get usuario =>
-      const AssetGenImage('assets/img/auth/usuario.jpg');
+  /// File path: assets/png/splash.png
+  AssetGenImage get splash => const AssetGenImage('assets/png/splash.png');
+
+  /// File path: assets/png/usuario.jpg
+  AssetGenImage get usuario => const AssetGenImage('assets/png/usuario.jpg');
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        agendarTurno1,
+        agendarTurno2,
+        agendarTurno3,
         anverso,
         backgroundAuth,
-        cedula,
-        faceid,
-        fingerpoint,
+        fingerPrint,
+        footer,
+        logo,
+        qr,
         reverso,
         rostroCedula,
+        splash,
         usuario
       ];
 }
 
-class $AssetsImgGeneralGen {
-  const $AssetsImgGeneralGen();
+class $AssetsSvgGen {
+  const $AssetsSvgGen();
 
-  /// File path: assets/img/general/agenda.png
-  AssetGenImage get agenda =>
-      const AssetGenImage('assets/img/general/agenda.png');
+  /// File path: assets/svg/avatar.svg
+  SvgGenImage get avatar => const SvgGenImage('assets/svg/avatar.svg');
 
-  /// File path: assets/img/general/agendar_turno1.png
-  AssetGenImage get agendarTurno1 =>
-      const AssetGenImage('assets/img/general/agendar_turno1.png');
+  /// File path: assets/svg/bell.svg
+  SvgGenImage get bell => const SvgGenImage('assets/svg/bell.svg');
 
-  /// File path: assets/img/general/agendar_turno2.png
-  AssetGenImage get agendarTurno2 =>
-      const AssetGenImage('assets/img/general/agendar_turno2.png');
+  /// File path: assets/svg/business_service.svg
+  SvgGenImage get businessService =>
+      const SvgGenImage('assets/svg/business_service.svg');
 
-  /// File path: assets/img/general/agendar_turno3.png
-  AssetGenImage get agendarTurno3 =>
-      const AssetGenImage('assets/img/general/agendar_turno3.png');
+  /// File path: assets/svg/calendar.svg
+  SvgGenImage get calendar => const SvgGenImage('assets/svg/calendar.svg');
 
-  /// File path: assets/img/general/background_auth.png
-  AssetGenImage get backgroundAuth =>
-      const AssetGenImage('assets/img/general/background_auth.png');
+  /// File path: assets/svg/calendar_2.svg
+  SvgGenImage get calendar2 => const SvgGenImage('assets/svg/calendar_2.svg');
 
-  /// File path: assets/img/general/cedula.png
-  AssetGenImage get cedula =>
-      const AssetGenImage('assets/img/general/cedula.png');
+  /// File path: assets/svg/card_account.svg
+  SvgGenImage get cardAccount =>
+      const SvgGenImage('assets/svg/card_account.svg');
 
-  /// File path: assets/img/general/certificado.png
-  AssetGenImage get certificado =>
-      const AssetGenImage('assets/img/general/certificado.png');
+  /// File path: assets/svg/cedula.svg
+  SvgGenImage get cedula => const SvgGenImage('assets/svg/cedula.svg');
 
-  /// File path: assets/img/general/certificados.png
-  AssetGenImage get certificados =>
-      const AssetGenImage('assets/img/general/certificados.png');
+  /// File path: assets/svg/cedula_2.svg
+  SvgGenImage get cedula2 => const SvgGenImage('assets/svg/cedula_2.svg');
 
-  /// File path: assets/img/general/checkmark.png
-  AssetGenImage get checkmark =>
-      const AssetGenImage('assets/img/general/checkmark.png');
+  /// File path: assets/svg/check_document.svg
+  SvgGenImage get checkDocument =>
+      const SvgGenImage('assets/svg/check_document.svg');
 
-  /// File path: assets/img/general/en_linea.png
-  AssetGenImage get enLinea =>
-      const AssetGenImage('assets/img/general/en_linea.png');
+  /// File path: assets/svg/check_online.svg
+  SvgGenImage get checkOnline =>
+      const SvgGenImage('assets/svg/check_online.svg');
 
-  /// File path: assets/img/general/footer.png
-  AssetGenImage get footer =>
-      const AssetGenImage('assets/img/general/footer.png');
+  /// File path: assets/svg/civil_record.svg
+  SvgGenImage get civilRecord =>
+      const SvgGenImage('assets/svg/civil_record.svg');
 
-  /// File path: assets/img/general/huella.png
-  AssetGenImage get huella =>
-      const AssetGenImage('assets/img/general/huella.png');
+  /// File path: assets/svg/completed_checkmark.svg
+  SvgGenImage get completedCheckmark =>
+      const SvgGenImage('assets/svg/completed_checkmark.svg');
 
-  /// File path: assets/img/general/logo.png
-  AssetGenImage get logo => const AssetGenImage('assets/img/general/logo.png');
+  /// File path: assets/svg/completed_checkmark_dark.svg
+  SvgGenImage get completedCheckmarkDark =>
+      const SvgGenImage('assets/svg/completed_checkmark_dark.svg');
 
-  /// File path: assets/img/general/pasaporte.png
-  AssetGenImage get pasaporte =>
-      const AssetGenImage('assets/img/general/pasaporte.png');
+  /// File path: assets/svg/documents.svg
+  SvgGenImage get documents => const SvgGenImage('assets/svg/documents.svg');
 
-  /// File path: assets/img/general/qr.png
-  AssetGenImage get qr => const AssetGenImage('assets/img/general/qr.png');
+  /// File path: assets/svg/exit.svg
+  SvgGenImage get exit => const SvgGenImage('assets/svg/exit.svg');
 
-  /// File path: assets/img/general/sin_logo.png
-  AssetGenImage get sinLogo =>
-      const AssetGenImage('assets/img/general/sin_logo.png');
+  /// File path: assets/svg/face_id.svg
+  SvgGenImage get faceId => const SvgGenImage('assets/svg/face_id.svg');
 
-  /// File path: assets/img/general/splash.png
-  AssetGenImage get splash =>
-      const AssetGenImage('assets/img/general/splash.png');
+  /// File path: assets/svg/fingerprint.svg
+  SvgGenImage get fingerprint =>
+      const SvgGenImage('assets/svg/fingerprint.svg');
+
+  /// File path: assets/svg/fingerprint_grey.svg
+  SvgGenImage get fingerprintGrey =>
+      const SvgGenImage('assets/svg/fingerprint_grey.svg');
+
+  /// File path: assets/svg/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/svg/home.svg');
+
+  /// File path: assets/svg/key.svg
+  SvgGenImage get key => const SvgGenImage('assets/svg/key.svg');
+
+  /// File path: assets/svg/menu.svg
+  SvgGenImage get menu => const SvgGenImage('assets/svg/menu.svg');
+
+  /// File path: assets/svg/passport.svg
+  SvgGenImage get passport => const SvgGenImage('assets/svg/passport.svg');
+
+  /// File path: assets/svg/pen.svg
+  SvgGenImage get pen => const SvgGenImage('assets/svg/pen.svg');
+
+  /// File path: assets/svg/rotated_fingerprint.svg
+  SvgGenImage get rotatedFingerprint =>
+      const SvgGenImage('assets/svg/rotated_fingerprint.svg');
+
+  /// File path: assets/svg/settings.svg
+  SvgGenImage get settings => const SvgGenImage('assets/svg/settings.svg');
+
+  /// File path: assets/svg/simple_cert.svg
+  SvgGenImage get simpleCert => const SvgGenImage('assets/svg/simple_cert.svg');
+
+  /// File path: assets/svg/simple_inscriptions.svg
+  SvgGenImage get simpleInscriptions =>
+      const SvgGenImage('assets/svg/simple_inscriptions.svg');
+
+  /// File path: assets/svg/user.svg
+  SvgGenImage get user => const SvgGenImage('assets/svg/user.svg');
+
+  /// File path: assets/svg/validate_docs.svg
+  SvgGenImage get validateDocs =>
+      const SvgGenImage('assets/svg/validate_docs.svg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
-        agenda,
-        agendarTurno1,
-        agendarTurno2,
-        agendarTurno3,
-        backgroundAuth,
+  List<SvgGenImage> get values => [
+        avatar,
+        bell,
+        businessService,
+        calendar,
+        calendar2,
+        cardAccount,
         cedula,
-        certificado,
-        certificados,
-        checkmark,
-        enLinea,
-        footer,
-        huella,
-        logo,
-        pasaporte,
-        qr,
-        sinLogo,
-        splash
+        cedula2,
+        checkDocument,
+        checkOnline,
+        civilRecord,
+        completedCheckmark,
+        completedCheckmarkDark,
+        documents,
+        exit,
+        faceId,
+        fingerprint,
+        fingerprintGrey,
+        home,
+        key,
+        menu,
+        passport,
+        pen,
+        rotatedFingerprint,
+        settings,
+        simpleCert,
+        simpleInscriptions,
+        user,
+        validateDocs
       ];
 }
 
 class Assets {
   Assets._();
 
-  static const $AssetsImgGen img = $AssetsImgGen();
+  static const $AssetsPngGen png = $AssetsPngGen();
+  static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
 class AssetGenImage {
@@ -218,6 +279,59 @@ class AssetGenImage {
   }
 
   ImageProvider provider() => AssetImage(_assetName);
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    SvgTheme theme = const SvgTheme(),
+    ColorFilter? colorFilter,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated Clip? clipBehavior,
+    @deprecated bool cacheColorFilter = false,
+  }) {
+    return SvgPicture.asset(
+      _assetName,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+      colorFilter: colorFilter,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      // clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
+    );
+  }
 
   String get path => _assetName;
 
