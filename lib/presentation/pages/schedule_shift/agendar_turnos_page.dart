@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/home_page_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_shift/widgets/stepper1_agendar_turnos.dart';
@@ -8,9 +8,7 @@ import 'package:registro_civil_apk/presentation/pages/schedule_shift/widgets/ste
 import 'package:registro_civil_apk/presentation/pages/schedule_shift/widgets/stepper4_agendar_turnos.dart';
 import 'package:registro_civil_apk/presentation/widgets/another_stepper_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffold_home_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
-import 'package:registro_civil_apk/presentation/widgets/texto_widget_sliver.dart';
 
 class AgendarTurnosPage extends ConsumerStatefulWidget {
   const AgendarTurnosPage({super.key});
@@ -38,115 +36,116 @@ class _AgendarTurnosPageState extends ConsumerState<AgendarTurnosPage> {
         }
         return true;
       },
-      child: ScaffoldHomeWidget(
-        slivers: [
-          TextoWidgetSliver(
-            titulo: l10n.obtTurno,
-            paddingTop: 20,
-            prevoius: stepperModel.currentIndex != 0
-                ? Positioned(
-                    left: 40,
-                    top: -5,
-                    child: IconButton(
-                      onPressed: () =>
-                          ref.read(agendarTurnosStepperRiv.notifier).previous(),
-                      icon: Icon(
-                        Icons.arrow_back_outlined,
-                        color: color,
-                        size: 30,
-                      ),
-                    ),
-                  )
-                : null,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  AnotherStepperWidget(
-                    activeIndex: stepperModel.currentIndex,
-                    totalElement: 4,
-                    barThickness: 22,
-                    size: 50,
-                    fontSize: 20,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.58,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 40),
-                            child: PrimaryLabel(
-                              stepperModel.title(
-                                l10n: context.l10n,
-                                det: stepper4,
-                                stepper2SelTurno: stepper2SelTurno,
-                              ),
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                        stepper(
-                          stepperModel.currentIndex,
-                          color,
-                        ),
-                        if (stepperModel.showButton(stepper3))
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 40,
-                              right: 40,
-                              top: 15,
-                              bottom: 20,
-                            ),
-                            child: ElevatedButtonWidget(
-                              width: double.maxFinite,
-                              title: stepperModel.buttonText(
-                                l10n: l10n,
-                                det: stepper4,
-                                age: stepper3,
-                                stepper2SelTurno: stepper2SelTurno,
-                              ),
-                              onPressed: !stepperModel.disabledButton(
-                                stepper2YaSelTurno: stepper2YaSelTurno,
-                                stepper2SelTurno: stepper2SelTurno,
-                              )
-                                  ? () => stepperModel.actionButton(
-                                        context,
-                                        stepper: ref.read(
-                                          agendarTurnosStepperRiv.notifier,
-                                        ),
-                                        stepper4: ref.read(
-                                          agendarTurnosStepper4Riv.notifier,
-                                        ),
-                                        det: stepper4,
-                                        age: stepper3,
-                                        stepper2SelTurno: stepper2SelTurno,
-                                        stepper2actSelturno: ref.read(
-                                          agendarTurnosStepper2SelecTurnoRiv
-                                              .notifier,
-                                        ),
-                                        stepper2actYaSelturno: ref.read(
-                                          agendarTurnosStepper2Riv.notifier,
-                                        ),
-                                      )
-                                  : null,
-                            ),
-                          )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+      child: Text('asd'),
+      // child: ScaffoldHomeWidget(
+      //   slivers: [
+      //     TextoWidgetSliver(
+      //       titulo: l10n.obtTurno,
+      //       paddingTop: 20,
+      //       prevoius: stepperModel.currentIndex != 0
+      //           ? Positioned(
+      //               left: 40,
+      //               top: -5,
+      //               child: IconButton(
+      //                 onPressed: () =>
+      //                     ref.read(agendarTurnosStepperRiv.notifier).previous(),
+      //                 icon: Icon(
+      //                   Icons.arrow_back_outlined,
+      //                   color: color,
+      //                   size: 30,
+      //                 ),
+      //               ),
+      //             )
+      //           : null,
+      //     ),
+      //     SliverToBoxAdapter(
+      //       child: Padding(
+      //         padding: const EdgeInsets.symmetric(horizontal: 20),
+      //         child: Column(
+      //           children: [
+      //             AnotherStepperWidget(
+      //               activeIndex: stepperModel.currentIndex,
+      //               totalElement: 4,
+      //               barThickness: 22,
+      //               size: 50,
+      //               fontSize: 20,
+      //             ),
+      //             SizedBox(
+      //               height: MediaQuery.of(context).size.height * 0.58,
+      //               child: Column(
+      //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //                 children: [
+      //                   Padding(
+      //                     padding: const EdgeInsets.only(top: 10),
+      //                     child: Padding(
+      //                       padding: const EdgeInsets.symmetric(horizontal: 40),
+      //                       child: PrimaryLabel(
+      //                         stepperModel.title(
+      //                           l10n: context.l10n,
+      //                           det: stepper4,
+      //                           stepper2SelTurno: stepper2SelTurno,
+      //                         ),
+      //                         color: Theme.of(context).primaryColor,
+      //                         fontWeight: FontWeight.bold,
+      //                         fontSize: 20,
+      //                       ),
+      //                     ),
+      //                   ),
+      //                   stepper(
+      //                     stepperModel.currentIndex,
+      //                     color,
+      //                   ),
+      //                   if (stepperModel.showButton(stepper3))
+      //                     Padding(
+      //                       padding: const EdgeInsets.only(
+      //                         left: 40,
+      //                         right: 40,
+      //                         top: 15,
+      //                         bottom: 20,
+      //                       ),
+      //                       child: ElevatedButtonWidget(
+      //                         width: double.maxFinite,
+      //                         title: stepperModel.buttonText(
+      //                           l10n: l10n,
+      //                           det: stepper4,
+      //                           age: stepper3,
+      //                           stepper2SelTurno: stepper2SelTurno,
+      //                         ),
+      //                         onPressed: !stepperModel.disabledButton(
+      //                           stepper2YaSelTurno: stepper2YaSelTurno,
+      //                           stepper2SelTurno: stepper2SelTurno,
+      //                         )
+      //                             ? () => stepperModel.actionButton(
+      //                                   context,
+      //                                   stepper: ref.read(
+      //                                     agendarTurnosStepperRiv.notifier,
+      //                                   ),
+      //                                   stepper4: ref.read(
+      //                                     agendarTurnosStepper4Riv.notifier,
+      //                                   ),
+      //                                   det: stepper4,
+      //                                   age: stepper3,
+      //                                   stepper2SelTurno: stepper2SelTurno,
+      //                                   stepper2actSelturno: ref.read(
+      //                                     agendarTurnosStepper2SelecTurnoRiv
+      //                                         .notifier,
+      //                                   ),
+      //                                   stepper2actYaSelturno: ref.read(
+      //                                     agendarTurnosStepper2Riv.notifier,
+      //                                   ),
+      //                                 )
+      //                             : null,
+      //                       ),
+      //                     )
+      //                 ],
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 

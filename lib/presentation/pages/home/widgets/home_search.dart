@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/theme/theme.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
+
+class HopmeSearch extends StatelessWidget {
+  const HopmeSearch({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Row(
+      children: [
+        const Spacer(),
+        Flexible(
+          flex: 8,
+          child: PrimaryTextFormField(
+            suffixIcon: Icons.search,
+            colorLabel: blue,
+            hint: l10n.buscar,
+            colorSuffixIcon: Colors.grey,
+            borderColor: blue,
+            padding: 15,
+          ).horizontalPadding(10),
+        ),
+        Container(
+          width: 40,
+          height: 40,
+          decoration: const ShapeDecoration(
+            gradient: gradient,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.horizontal(
+                left: Radius.circular(100),
+              ),
+            ),
+          ),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.horizontal(
+              left: Radius.circular(100),
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: IconButton(
+                icon: const Icon(Icons.edit_document),
+                color: Colors.white,
+                onPressed: () {},
+              ),
+            ),
+          ),
+        ),
+      ],
+    ).verticalPadding(20);
+  }
+}

@@ -7,7 +7,7 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dar
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/text_form_field_auth.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Step3Page extends ConsumerWidget {
@@ -35,14 +35,14 @@ class Step3Page extends ConsumerWidget {
               l10n.cuaSegNomPrimo,
               textAlign: TextAlign.start,
             ),
-            TextFormFieldAuth(
+            PrimaryTextFormField(
               label: l10n.responda,
             ),
             PrimaryLabel(
               l10n.ciuConPadres,
               textAlign: TextAlign.start,
             ),
-            TextFormFieldAuth(
+            PrimaryTextFormField(
               label: l10n.responda,
             ),
             ElevatedButtonWidget(

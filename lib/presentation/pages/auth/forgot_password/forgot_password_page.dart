@@ -7,7 +7,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/text_form_field_auth.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
@@ -29,7 +29,7 @@ class ForgotPasswordPage extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          TextFormFieldAuth(
+          PrimaryTextFormField(
             label: l10n.correoE,
             //prefixIcon: Icons.payment,
             textInputType: TextInputType.emailAddress,

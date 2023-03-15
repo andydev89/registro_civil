@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 
-class TextFormFieldAuth extends StatelessWidget {
-  const TextFormFieldAuth({
+class PrimaryTextFormField extends StatelessWidget {
+  const PrimaryTextFormField({
     super.key,
     this.readOnly = false,
     this.obscureText = false,

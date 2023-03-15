@@ -6,7 +6,7 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dar
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/text_form_field_auth.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Step4Page extends ConsumerWidget {
@@ -30,15 +30,15 @@ class Step4Page extends ConsumerWidget {
                 l10n.ingDatos,
               ),
             ),
-            TextFormFieldAuth(
+            PrimaryTextFormField(
               label: l10n.correoE,
             ),
-            TextFormFieldAuth(
+            PrimaryTextFormField(
               label: l10n.password,
               suffixIcon: Icons.remove_red_eye,
               colorSuffixIcon: Colors.white,
             ),
-            TextFormFieldAuth(
+            PrimaryTextFormField(
               label: l10n.confirmarContrasena,
               suffixIcon: Icons.remove_red_eye,
               colorSuffixIcon: Colors.white,

@@ -7,7 +7,7 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dar
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/text_form_field_auth.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Step1Page extends ConsumerWidget {
@@ -22,7 +22,7 @@ class Step1Page extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           PrimaryLabel(l10n.ingNumCedula),
-          TextFormFieldAuth(
+          PrimaryTextFormField(
             label: l10n.numCedula,
             prefixIcon: Icons.payment,
             textInputType: TextInputType.number,

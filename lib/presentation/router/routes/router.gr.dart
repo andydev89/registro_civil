@@ -34,6 +34,12 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    HomeRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const HomeRouterPage(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -182,6 +188,18 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    ServicesRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ServicesPage(),
+      );
+    },
+    ProceduresRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ProceduresPage(),
+      );
+    },
   };
 
   @override
@@ -288,7 +306,24 @@ class _$AppRouter extends RootStackRouter {
                   parent: AuthRouterRoute.name,
                 ),
               ],
-            )
+            ),
+            RouteConfig(
+              HomeRouterRoute.name,
+              path: 'home-router-page',
+              parent: RootRouterRoute.name,
+              children: [
+                RouteConfig(
+                  ServicesRoute.name,
+                  path: '',
+                  parent: HomeRouterRoute.name,
+                ),
+                RouteConfig(
+                  ProceduresRoute.name,
+                  path: 'procedures-page',
+                  parent: HomeRouterRoute.name,
+                ),
+              ],
+            ),
           ],
         )
       ];
@@ -318,6 +353,19 @@ class AuthRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'AuthRouterRoute';
+}
+
+/// generated route for
+/// [HomeRouterPage]
+class HomeRouterRoute extends PageRouteInfo<void> {
+  const HomeRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          HomeRouterRoute.name,
+          path: 'home-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeRouterRoute';
 }
 
 /// generated route for
@@ -536,4 +584,28 @@ class FingerPrint2Route extends PageRouteInfo<void> {
         );
 
   static const String name = 'FingerPrint2Route';
+}
+
+/// generated route for
+/// [ServicesPage]
+class ServicesRoute extends PageRouteInfo<void> {
+  const ServicesRoute()
+      : super(
+          ServicesRoute.name,
+          path: '',
+        );
+
+  static const String name = 'ServicesRoute';
+}
+
+/// generated route for
+/// [ProceduresPage]
+class ProceduresRoute extends PageRouteInfo<void> {
+  const ProceduresRoute()
+      : super(
+          ProceduresRoute.name,
+          path: 'procedures-page',
+        );
+
+  static const String name = 'ProceduresRoute';
 }
