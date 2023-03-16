@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/home_page_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/icon_gradiente_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
@@ -132,7 +132,7 @@ class Stepper2AgendarTurnos extends ConsumerWidget {
     return Flexible(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: ElevatedButtonWidget(
+        child: PrimaryButton(
           height: 20,
           fontWeight: FontWeight.normal,
           fontSize: 14,

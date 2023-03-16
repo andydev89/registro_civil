@@ -8,8 +8,8 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dar
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/circular_icon_auth.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/text_button_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_text_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Step2Page extends ConsumerWidget {
@@ -70,13 +70,13 @@ class Step2Page extends ConsumerWidget {
                 ),
               ],
             ),
-            ElevatedButtonWidget(
+            PrimaryButton(
               title: cargoData ? l10n.siguiente : l10n.escanear,
               onPressed: () {
                 //TODO escanear rostro
               },
             ),
-            TextButtonWidget(
+            PrimaryTextButton(
               title: l10n.salPaso,
               onPressed: () {
                 ref.read(stepperIndexProvider.notifier).index++;

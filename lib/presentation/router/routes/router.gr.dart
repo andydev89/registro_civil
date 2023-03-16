@@ -40,6 +40,14 @@ class _$AppRouter extends RootStackRouter {
         child: const HomeRouterPage(),
       );
     },
+    TexterRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const TexterPage(),
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     LoginRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -324,6 +332,11 @@ class _$AppRouter extends RootStackRouter {
                 ),
               ],
             ),
+            RouteConfig(
+              TexterRoute.name,
+              path: 'texter-page',
+              parent: RootRouterRoute.name,
+            ),
           ],
         )
       ];
@@ -366,6 +379,18 @@ class HomeRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRouterRoute';
+}
+
+/// generated route for
+/// [TexterPage]
+class TexterRoute extends PageRouteInfo<void> {
+  const TexterRoute()
+      : super(
+          TexterRoute.name,
+          path: 'texter-page',
+        );
+
+  static const String name = 'TexterRoute';
 }
 
 /// generated route for

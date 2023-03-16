@@ -7,9 +7,9 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/icon_button_auth.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/text_button_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_text_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
@@ -43,7 +43,7 @@ class LoginPage extends StatelessWidget {
             suffixIcon: Ionicons.eye_off_outline,
             colorSuffixIcon: Colors.white,
           ),
-          TextButtonWidget(
+          PrimaryTextButton(
             title: l10n.olvPassword,
             mainAxisAlignment: MainAxisAlignment.end,
             onPressed: () =>
@@ -65,7 +65,7 @@ class LoginPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 5),
-            child: ElevatedButtonWidget(
+            child: PrimaryButton(
               title: l10n.loggin,
               width: double.maxFinite,
               onPressed: () => context.replaceRoute(const HomeRouterRoute()),
@@ -79,7 +79,7 @@ class LoginPage extends StatelessWidget {
               l10n.noCuenta,
             ),
           ),
-          TextButtonWidget(
+          PrimaryTextButton(
             title: l10n.regAqui,
             onPressed: () => context.navigateTo(const RegisterRouterRoute()),
             fontWeight: FontWeight.bold,

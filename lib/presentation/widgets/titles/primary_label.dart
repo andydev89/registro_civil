@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class PrimaryLabel extends StatelessWidget {
   const PrimaryLabel(
@@ -38,6 +39,7 @@ class PrimaryLabel extends StatelessWidget {
         Visibility(
           visible: icono != null,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
                 icono,
@@ -49,14 +51,13 @@ class PrimaryLabel extends StatelessWidget {
           ),
         ),
         Flexible(
-          child: Text(
-            isToUpperCase ? title.toUpperCase() : title,
-            style: TextStyle(
-              fontWeight: fontWeight,
-              fontSize: fontSize,
-              color: color,
-              shadows: shadows,
-            ),
+          child: PrimaryText(
+            title,
+            isToUpperCase: isToUpperCase,
+            fontWeight: fontWeight,
+            fontSize: fontSize,
+            color: color,
+            shadows: shadows,
             maxLines: maxlines,
             textAlign: textAlign,
           ),

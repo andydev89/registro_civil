@@ -21,6 +21,7 @@ import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart
 import 'package:registro_civil_apk/presentation/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/services/services_page.dart';
+import 'package:registro_civil_apk/presentation/pages/test/test_page.dart';
 
 part 'router.gr.dart';
 
@@ -137,6 +138,10 @@ part 'router.gr.dart';
               page: ProceduresPage,
             ),
           ],
+        ),
+        // TEST
+        CustomRoute(
+          page: TexterPage,
         ),
       ],
     ),

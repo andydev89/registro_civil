@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/title_subtitle_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class TitleSubtitleTextoWidget extends StatelessWidget {
   const TitleSubtitleTextoWidget({
-    super.key,
     required this.title,
     required this.subtitle,
+    super.key,
     this.width,
     this.color,
     this.fontSize,
