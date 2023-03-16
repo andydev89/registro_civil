@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/auth_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/circular_icon_auth.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -23,65 +24,67 @@ class Step2Page extends ConsumerWidget {
         ref.read(stepperIndexProvider.notifier).index--;
         return Future(() => true);
       },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: PrimaryLabel(
-              l10n.capIdenDigBiometrica,
+      child: ScrollableContent(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: PrimaryLabel(
+                l10n.capIdenDigBiometrica,
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircularIconAuth(
-                padding: 35,
-                bottomLabbel: l10n.rostro,
-                child: Assets.img.auth.faceid.image(
-                  width: 30,
-                  height: 30,
-                  fit: BoxFit.cover,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CircularIconAuth(
+                  padding: 35,
+                  bottomLabbel: l10n.rostro,
+                  child: Assets.svg.faceId.svg(
+                    width: 30,
+                    height: 30,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              CircularIconAuth(
-                padding: 15,
-                bottomLabbel: l10n.rosCedula,
-                child: Column(
-                  children: [
-                    Assets.img.auth.faceid.image(
-                      width: 30,
-                      height: 30,
-                      fit: BoxFit.cover,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Assets.img.auth.cedula.image(
-                      width: 30,
-                      height: 30,
-                      fit: BoxFit.cover,
-                    ),
-                  ],
+                CircularIconAuth(
+                  padding: 15,
+                  bottomLabbel: l10n.rosCedula,
+                  child: Column(
+                    children: [
+                      Assets.svg.faceId.svg(
+                        width: 30,
+                        height: 30,
+                        fit: BoxFit.cover,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Assets.svg.cedula2.svg(
+                        width: 30,
+                        height: 30,
+                        fit: BoxFit.cover,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          ElevatedButtonWidget(
-            title: cargoData ? l10n.siguiente : l10n.escanear,
-            onPressed: () {
-              //TODO escanear rostro
-            },
-          ),
-          TextButtonWidget(
-            title: l10n.salPaso,
-            onPressed: () {
-              ref.read(stepperIndexProvider.notifier).index++;
-              context.navigateTo(const Step3Route());
-            },
-          ),
-        ],
+              ],
+            ),
+            ElevatedButtonWidget(
+              title: cargoData ? l10n.siguiente : l10n.escanear,
+              onPressed: () {
+                //TODO escanear rostro
+              },
+            ),
+            TextButtonWidget(
+              title: l10n.salPaso,
+              onPressed: () {
+                ref.read(stepperIndexProvider.notifier).index++;
+                context.navigateTo(const Step3Route());
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

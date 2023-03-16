@@ -8,8 +8,8 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dar
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/icon_button_auth.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/text_button_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/text_form_field_auth.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
@@ -20,6 +20,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AuthCard(
+      scrollContentOnResized: true,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -27,7 +28,7 @@ class LoginPage extends StatelessWidget {
           PrimaryTitle(
             title: l10n.loggin,
           ),
-          TextFormFieldAuth(
+          PrimaryTextFormField(
             label: l10n.numCedula,
             prefixIcon: Icons.payment,
             textInputType: TextInputType.number,
@@ -35,7 +36,7 @@ class LoginPage extends StatelessWidget {
               FilteringTextInputFormatter.digitsOnly,
             ],
           ),
-          TextFormFieldAuth(
+          PrimaryTextFormField(
             label: l10n.password,
             prefixIcon: Icons.key,
             obscureText: true,
@@ -67,7 +68,7 @@ class LoginPage extends StatelessWidget {
             child: ElevatedButtonWidget(
               title: l10n.loggin,
               width: double.maxFinite,
-              // onPressed: () => context.navigateTo(Home),
+              onPressed: () => context.replaceRoute(const HomeRouterRoute()),
             ),
           ),
           Padding(

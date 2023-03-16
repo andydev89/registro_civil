@@ -8,6 +8,6 @@ class RegistroCivilLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Assets.img.general.logo.image();
+    return Assets.png.logo.image();
   }
 }

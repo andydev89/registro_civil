@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 
 class Background extends StatelessWidget {
   const Background({
@@ -16,8 +17,7 @@ class Background extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        Image.asset(
-          'assets/img/auth/background_auth.png',
+        Assets.png.backgroundAuth.image(
           width: width ?? size.width,
           height: height ?? size.height,
           fit: fit ?? BoxFit.cover,

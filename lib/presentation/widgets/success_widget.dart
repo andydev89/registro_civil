@@ -14,7 +14,7 @@ class SuccessWidget extends StatelessWidget {
       shaderCallback: (Rect bounds) {
         return gradientePrincipal().createShader(bounds);
       },
-      child: Assets.img.general.checkmark.image(),
+      child: Assets.svg.completedCheckmark.svg(),
     );
   }
 }

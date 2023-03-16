@@ -16,12 +16,13 @@ class FingerPrintPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AuthCard(
+      scrollContentOnResized: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           PrimaryTitle(title: l10n.loggin),
           PrimaryLabel(l10n.colDedSensor),
-          Assets.img.auth.fingerpoint.image(
+          Assets.svg.fingerprint.svg(
             width: 150,
             height: 150,
             fit: BoxFit.cover,

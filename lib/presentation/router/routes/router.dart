@@ -17,7 +17,10 @@ import 'package:registro_civil_apk/presentation/pages/auth/scan/scan_dni_page.da
 import 'package:registro_civil_apk/presentation/pages/auth/scan/scan_face_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/scan/scan_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.dart';
+import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/services/services_page.dart';
 
 part 'router.gr.dart';
 
@@ -120,6 +123,18 @@ part 'router.gr.dart';
             CustomRoute(
               transitionsBuilder: TransitionsBuilders.slideLeft,
               page: SuccessPage,
+            ),
+          ],
+        ),
+        CupertinoRoute(
+          page: HomeRouterPage,
+          children: [
+            CupertinoRoute(
+              initial: true,
+              page: ServicesPage,
+            ),
+            CupertinoRoute(
+              page: ProceduresPage,
             ),
           ],
         ),

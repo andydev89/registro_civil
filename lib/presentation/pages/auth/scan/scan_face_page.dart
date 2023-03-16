@@ -18,13 +18,14 @@ class ScanFacePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AuthCard(
+      scrollContentOnResized: true,
       child: Column(
         children: [
           PrimaryTitle(
             title: l10n.loggin,
           ),
           CircularIconAuth(
-            child: Assets.img.auth.faceid.image(
+            child: Assets.svg.faceId.svg(
               width: 50,
               height: 50,
               fit: BoxFit.cover,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
@@ -10,39 +11,39 @@ enum IconoBotonEnum {
 }
 
 extension IconoBotonExtension on IconoBotonEnum {
-  Image image({
+  SvgPicture image({
     double height = 30,
     double width = 30,
   }) {
     if (this == IconoBotonEnum.cedula) {
-      return Assets.img.auth.cedula.image(
+      return Assets.svg.cedula.svg(
         height: height,
         width: width,
         fit: BoxFit.cover,
       );
     }
     if (this == IconoBotonEnum.faceID) {
-      return Assets.img.auth.faceid.image(
+      return Assets.svg.faceId.svg(
         height: height,
         width: width,
         fit: BoxFit.cover,
       );
     }
     if (this == IconoBotonEnum.huella) {
-      return Assets.img.auth.fingerpoint.image(
+      return Assets.svg.fingerprint.svg(
         height: height,
         width: width,
         fit: BoxFit.cover,
       );
     }
-    if (this == IconoBotonEnum.scanFace) {
-      return Assets.img.auth.usuario.image(
-        height: height,
-        width: width,
-        fit: BoxFit.cover,
-      );
-    }
-    return Assets.img.general.logo.image(
+    // if (this == IconoBotonEnum.scanFace) {
+    //   return Assets.svg.user.svg(
+    //     height: height,
+    //     width: width,
+    //     fit: BoxFit.cover,
+    //   );
+    // }
+    return Assets.svg.user.svg(
       height: height,
       width: width,
       fit: BoxFit.cover,
