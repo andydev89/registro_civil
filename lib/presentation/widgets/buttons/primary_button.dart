@@ -3,8 +3,8 @@ import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
-class ElevatedButtonWidget extends StatelessWidget {
-  const ElevatedButtonWidget({
+class PrimaryButton extends StatelessWidget {
+  const PrimaryButton({
     super.key,
     this.backgroundColor,
     this.disabledBackgroundColor,

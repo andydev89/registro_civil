@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
 
 class HopmeSearch extends StatelessWidget {
@@ -27,28 +28,16 @@ class HopmeSearch extends StatelessWidget {
         const SizedBox(
           width: 5,
         ),
-        Container(
+        const PrimaryIconButton(
           width: 30,
           height: 40,
-          decoration: const ShapeDecoration(
-            gradient: gradient,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.horizontal(
-                left: Radius.circular(100),
-              ),
-            ),
+          icon: Icon(
+            Icons.edit_document,
+            color: Colors.white,
           ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.horizontal(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.horizontal(
               left: Radius.circular(100),
-            ),
-            child: Material(
-              color: Colors.transparent,
-              child: IconButton(
-                icon: const Icon(Icons.edit_document),
-                color: Colors.white,
-                onPressed: () {},
-              ),
             ),
           ),
         ),

@@ -7,7 +7,7 @@ import 'package:registro_civil_apk/presentation/pages/schedule_shift/widgets/ste
 import 'package:registro_civil_apk/presentation/pages/schedule_shift/widgets/stepper3_agendar_turnos.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_shift/widgets/stepper4_agendar_turnos.dart';
 import 'package:registro_civil_apk/presentation/widgets/another_stepper_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/elevated_button_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class AgendarTurnosPage extends ConsumerStatefulWidget {

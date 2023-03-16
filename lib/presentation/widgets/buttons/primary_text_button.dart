@@ -3,8 +3,8 @@ import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
-class TextButtonWidget extends StatelessWidget {
-  const TextButtonWidget({
+class PrimaryTextButton extends StatelessWidget {
+  const PrimaryTextButton({
     super.key,
     required this.title,
     this.onPressed,

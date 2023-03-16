@@ -1,14 +1,12 @@
-import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/routes_enum.dart';
 import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/theme/theme.dart';
-import 'package:registro_civil_apk/presentation/widgets/background_widget.dart';
-import 'package:registro_civil_apk/presentation/pages/home/widgets/logo_bottom_sheet.dart';
 import 'package:registro_civil_apk/presentation/pages/home/widgets/button_drawer_home_widget.dart';
+import 'package:registro_civil_apk/presentation/pages/home/widgets/logo_bottom_sheet.dart';
+import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
