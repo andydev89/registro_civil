@@ -89,5 +89,10 @@
   "tipservicios": "Types of services",
   "selServicio": "Select a service",
   "horDisponibles": "Available hours",
-  "aceptar": "Accept"
+  "aceptar": "Accept",
+  "tramites": "Procedures",
+  "servicios": "Services",
+  "copiasActasRegistrales": "Copies of registration records",
+  "registroCivil": "Civil registration",
+  "validacionDocumentos": "Document validation"
 }

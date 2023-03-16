@@ -25,7 +25,7 @@ class ScanFacePage extends StatelessWidget {
             title: l10n.loggin,
           ),
           CircularIconAuth(
-            child: Assets.img.auth.faceid.image(
+            child: Assets.svg.faceId.svg(
               width: 50,
               height: 50,
               fit: BoxFit.cover,

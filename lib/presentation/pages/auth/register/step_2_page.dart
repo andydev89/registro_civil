@@ -41,7 +41,7 @@ class Step2Page extends ConsumerWidget {
                 CircularIconAuth(
                   padding: 35,
                   bottomLabbel: l10n.rostro,
-                  child: Assets.img.auth.faceid.image(
+                  child: Assets.svg.faceId.svg(
                     width: 30,
                     height: 30,
                     fit: BoxFit.cover,
@@ -52,7 +52,7 @@ class Step2Page extends ConsumerWidget {
                   bottomLabbel: l10n.rosCedula,
                   child: Column(
                     children: [
-                      Assets.img.auth.faceid.image(
+                      Assets.svg.faceId.svg(
                         width: 30,
                         height: 30,
                         fit: BoxFit.cover,
@@ -60,7 +60,7 @@ class Step2Page extends ConsumerWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Assets.img.auth.cedula.image(
+                      Assets.svg.cedula2.svg(
                         width: 30,
                         height: 30,
                         fit: BoxFit.cover,

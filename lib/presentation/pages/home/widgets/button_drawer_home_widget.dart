@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class ButtonDrawerHomeWidget extends StatelessWidget {
   const ButtonDrawerHomeWidget({
     super.key,
-    required this.icono,
+    required this.icon,
     required this.titulo,
     required this.onPressed,
   });
 
-  final IconData icono;
+  final Widget icon;
   final String titulo;
   final void Function() onPressed;
 
@@ -17,19 +18,19 @@ class ButtonDrawerHomeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: onPressed,
-      icon: Icon(
-        icono,
-        size: 45,
-        color: Colors.white,
-      ),
-      label: Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: PrimaryLabel(
-          titulo,
-          fontSize: 28,
-          fontWeight: FontWeight.bold,
+      icon: Padding(
+        padding: const EdgeInsets.only(right: 20),
+        child: SizedBox.square(
+          dimension: 40,
+          child: icon,
         ),
       ),
-    );
+      label: PrimaryLabel(
+        titulo,
+        fontSize: 28,
+        mainAxisAlignment: MainAxisAlignment.start,
+        fontWeight: FontWeight.bold,
+      ),
+    ).verticalPadding(3);
   }
 }

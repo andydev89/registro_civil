@@ -10,7 +10,7 @@ class ElementWidget extends StatelessWidget {
     this.onTap,
   });
   final String titulo;
-  final IconData icono;
+  final Widget icono;
   final void Function()? onTap;
 
   @override
@@ -23,11 +23,7 @@ class ElementWidget extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
             ShadowsWidget(
-              child: Icon(
-                icono,
-                size: 50,
-                color: Theme.of(context).primaryColor,
-              ),
+              child: icono,
             ),
             const SizedBox(height: 10),
             PrimaryLabel(

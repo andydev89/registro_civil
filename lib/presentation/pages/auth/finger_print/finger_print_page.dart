@@ -25,7 +25,7 @@ class FingerPrintPage extends StatelessWidget {
         children: [
           PrimaryTitle(title: l10n.loggin),
           PrimaryLabel(l10n.colDedSensor),
-          Assets.img.auth.fingerpoint.image(
+          Assets.svg.fingerprint.svg(
             width: 150,
             height: 150,
             fit: BoxFit.cover,

@@ -89,5 +89,10 @@
   "tipservicios" : "Tipos de servicios",
   "selServicio" : "Seleccione un servicio",
   "horDisponibles" : "Horarios disponibles",
-  "aceptar" : "Aceptar"
+  "aceptar" : "Aceptar",
+  "tramites": "Trámites",
+  "servicios": "Servicios",
+  "copiasActasRegistrales": "Copias de actas registrales",
+  "registroCivil": "Registro civil",
+  "validacionDocumentos": "Validación de documentos"
 }

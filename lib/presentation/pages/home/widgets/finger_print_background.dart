@@ -12,7 +12,7 @@ class FingerPrintBackground extends StatelessWidget {
         angle: -1,
         child: Align(
           alignment: Alignment.bottomRight,
-          child: Assets.img.general.huella.image(
+          child: Assets.png.fingerPrint.image(
             color: Colors.grey[300],
           ),
         ),
