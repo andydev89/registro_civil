@@ -128,7 +128,6 @@ class DrawerWidget extends StatelessWidget {
             fontSize: 22,
             fontWeight: FontWeight.bold,
             maxlines: 1,
-            mainAxisAlignment: MainAxisAlignment.center,
           ),
         ),
         badges.Badge(
