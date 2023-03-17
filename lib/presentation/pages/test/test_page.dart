@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/presentation/widgets/circle_avatar_card.dart';
+import 'package:registro_civil_apk/presentation/models/circle_avatar_card_model.dart';
+import 'package:registro_civil_apk/presentation/widgets/scrollables/circle_avatar_card_grid.dart';
 
 class TexterPage extends StatelessWidget {
   const TexterPage({super.key});
@@ -8,37 +9,32 @@ class TexterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 0.8,
-        children: [
-          CircleAvatarCardWidget(
-            image: (width) => Assets.png.certificadoNacimiento.image(
-              width: width,
-              height: width,
-            ),
-            title: 'Certificado de nacimiento',
-            onPressedCheck: () {},
-            onPressedView: () {},
+      body: CircleAvatarCardGrid(
+        elements: [
+          CircleAvatarCardModel(
+            image: Assets.png.agendarTurno1.image(),
+            title: 'Certificado',
           ),
-          // CircleAvatarCardWidget(
-          //   svgImage: const Icon(Icons.ac_unit),
-          //   title: 'Certificado de nacimiento',
-          //   onPressedCheck: () {},
-          //   onPressedView: () {},
-          // ),
-          // CircleAvatarCardWidget(
-          //   svgImage: const Icon(Icons.ac_unit),
-          //   title: 'Certificado de nacimiento',
-          //   onPressedCheck: () {},
-          //   onPressedView: () {},
-          // ),
-          // CircleAvatarCardWidget(
-          //   svgImage: const Icon(Icons.ac_unit),
-          //   title: 'Certificado de nacimiento',
-          //   onPressedCheck: () {},
-          //   onPressedView: () {},
-          // ),
+          CircleAvatarCardModel(
+            image: Assets.png.agendarTurno1.image(),
+            title: 'Certificado',
+          ),
+          CircleAvatarCardModel(
+            image: Assets.png.agendarTurno1.image(),
+            title: 'Certificado',
+          ),
+          CircleAvatarCardModel(
+            image: Assets.png.agendarTurno1.image(),
+            title: 'Certificado',
+          ),
+          CircleAvatarCardModel(
+            image: Assets.png.agendarTurno1.image(),
+            title: 'Certificado',
+          ),
+          CircleAvatarCardModel(
+            image: Assets.png.agendarTurno1.image(),
+            title: 'Certificado',
+          ),
         ],
       ),
     );
