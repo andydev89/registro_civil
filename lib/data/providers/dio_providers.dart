@@ -23,5 +23,5 @@ Dio dio(DioRef ref) {
 Api api(ApiRef ref) {
   final dio = ref.watch(dioProvider);
   //TODO(lara1994): agregar la url base
-  return Api(dio);
+  return Api(dio, baseUrl: 'http://registro-civil-api.ddns.net/');
 }
