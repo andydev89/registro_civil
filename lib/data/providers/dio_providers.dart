@@ -22,6 +22,5 @@ Dio dio(DioRef ref) {
 @riverpod
 Api api(ApiRef ref) {
   final dio = ref.watch(dioProvider);
-  //TODO(lara1994): agregar la url base
   return Api(dio, baseUrl: 'http://registro-civil-api.ddns.net/');
 }
