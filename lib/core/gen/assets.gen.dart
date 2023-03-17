@@ -33,6 +33,10 @@ class $AssetsPngGen {
   AssetGenImage get backgroundAuth =>
       const AssetGenImage('assets/png/background_auth.png');
 
+  /// File path: assets/png/certificado_nacimiento.png
+  AssetGenImage get certificadoNacimiento =>
+      const AssetGenImage('assets/png/certificado_nacimiento.png');
+
   /// File path: assets/png/finger_print.png
   AssetGenImage get fingerPrint =>
       const AssetGenImage('assets/png/finger_print.png');
@@ -66,6 +70,7 @@ class $AssetsPngGen {
         agendarTurno3,
         anverso,
         backgroundAuth,
+        certificadoNacimiento,
         fingerPrint,
         footer,
         logo,
@@ -328,7 +333,7 @@ class SvgGenImage {
       colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      // clipBehavior: clipBehavior!,
+      // clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }
