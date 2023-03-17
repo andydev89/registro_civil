@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class CircleAvatarCardWidget extends StatelessWidget {
   const CircleAvatarCardWidget({
@@ -10,85 +12,87 @@ class CircleAvatarCardWidget extends StatelessWidget {
     this.onPressedView,
     super.key,
   });
-  final Widget Function(double) image;
   final String title;
+  final Image image;
   final void Function()? onPressedCheck;
   final void Function()? onPressedView;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final radius = size.width * 0.9;
     return Stack(
       children: [
-        Positioned(
-          top: -size.height * 0.1,
-          left: 0,
-          right: 0,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(40),
-            child: Card(
-              color: const Color.fromRGBO(245, 245, 245, 1),
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40),
-              ),
-              child: Container(
-                padding: EdgeInsets.only(top: size.height * 0.25),
-                height: size.height * 0.4,
-                width: size.width * 0.7,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: PrimaryText(
-                        title,
-                        fontSize: 25,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          PrimaryIconButton(
-                            width: 55,
-                            height: 55,
-                            icon: const Icon(
-                              Icons.check_circle,
-                              color: Colors.white,
-                            ),
-                            onPressed: onPressedCheck,
-                          ),
-                          PrimaryIconButton(
-                            width: 55,
-                            height: 55,
-                            icon: const Icon(
-                              Icons.remove_red_eye,
-                              color: Colors.white,
-                            ),
-                            onPressed: onPressedView,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+        Container(
+          margin: const EdgeInsets.only(top: 80),
+          decoration: ShapeDecoration(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
             ),
+            color: Colors.grey.shade200,
+            shadows: const <BoxShadow>[
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 5,
+                spreadRadius: 1,
+                offset: Offset(0, 5),
+              ),
+              BoxShadow(
+                color: Color.fromRGBO(217, 210, 200, 0.51),
+                offset: Offset(6, 6),
+                blurRadius: 16,
+              ),
+              BoxShadow(
+                color: Color.fromRGBO(255, 255, 255, 0.83),
+                offset: Offset(-6, -6),
+                blurRadius: 16,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              PrimaryLabel(
+                title,
+                color: primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  PrimaryIconButton(
+                    width: 55,
+                    height: 55,
+                    icon: const Icon(
+                      Icons.check_circle,
+                      color: Colors.white,
+                    ),
+                    onPressed: onPressedCheck,
+                  ),
+                  PrimaryIconButton(
+                    width: 55,
+                    height: 55,
+                    icon: const Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.white,
+                    ),
+                    onPressed: onPressedView,
+                  ),
+                ],
+              ).verticalPadding(20),
+            ],
           ),
         ),
-        Positioned(
-          top: -radius * 0.3,
-          left: 0,
-          right: 0,
+        AspectRatio(
+          aspectRatio: 1,
           child: Container(
-            width: size.width * 0.8,
-            decoration: const BoxDecoration(shape: BoxShape.circle),
-            child: image.call(size.width*0.8),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: image.image,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         ),
       ],

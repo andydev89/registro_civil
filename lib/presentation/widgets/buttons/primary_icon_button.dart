@@ -26,6 +26,14 @@ class PrimaryIconButton extends StatelessWidget {
       decoration: ShapeDecoration(
         gradient: gradientePrincipal(),
         shape: shape ?? RoundedRectangleBorder(borderRadius: borderRadius()),
+        shadows: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 5,
+            spreadRadius: 1,
+            offset: Offset(0, 5),
+          ),
+        ],
       ),
       child: IconButton(
         icon: icon,
