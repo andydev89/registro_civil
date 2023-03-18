@@ -7,7 +7,7 @@ part of 'register_model.dart';
 // **************************************************************************
 
 NuiModel _$NuiModelFromJson(Map<String, dynamic> json) => NuiModel(
-      json['nui'] as String,
+      nui: json['nui'] as String? ?? '',
     );
 
 Map<String, dynamic> _$NuiModelToJson(NuiModel instance) => <String, dynamic>{
@@ -17,20 +17,20 @@ Map<String, dynamic> _$NuiModelToJson(NuiModel instance) => <String, dynamic>{
 SecurityQuestionsModel _$SecurityQuestionsModelFromJson(
         Map<String, dynamic> json) =>
     SecurityQuestionsModel(
-      birthCity: json['birthCity'] as String,
-      birthYear: json['birthYear'] as int,
+      cityMetParents: json['cityMetParents'] as String? ?? '',
+      nameElderCousin: json['nameElderCousin'] as String? ?? '',
     );
 
 Map<String, dynamic> _$SecurityQuestionsModelToJson(
         SecurityQuestionsModel instance) =>
     <String, dynamic>{
-      'birthCity': instance.birthCity,
-      'birthYear': instance.birthYear,
+      'cityMetParents': instance.cityMetParents,
+      'nameElderCousin': instance.nameElderCousin,
     };
 
 EnterDataModel _$EnterDataModelFromJson(Map<String, dynamic> json) =>
     EnterDataModel(
-      email: json['email'] as String,
+      email: json['email'] as String? ?? '',
       confirmPassword: json['confirmPassword'] == null
           ? null
           : ConfirmPasswordModel.fromJson(
@@ -59,11 +59,16 @@ Map<String, dynamic> _$ConfirmPasswordModelToJson(
 
 RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) =>
     RegisterModel(
-      nui: NuiModel.fromJson(json['nui'] as Map<String, dynamic>),
-      securityQuestions: SecurityQuestionsModel.fromJson(
-          json['securityQuestions'] as Map<String, dynamic>),
-      enterData:
-          EnterDataModel.fromJson(json['enterData'] as Map<String, dynamic>),
+      nui: json['nui'] == null
+          ? null
+          : NuiModel.fromJson(json['nui'] as Map<String, dynamic>),
+      securityQuestions: json['securityQuestions'] == null
+          ? null
+          : SecurityQuestionsModel.fromJson(
+              json['securityQuestions'] as Map<String, dynamic>),
+      enterData: json['enterData'] == null
+          ? null
+          : EnterDataModel.fromJson(json['enterData'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$RegisterModelToJson(RegisterModel instance) =>

@@ -5,25 +5,58 @@ Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
 }
 
 Map<String, dynamic>? ecuadorDniValidator(AbstractControl<dynamic> control) {
-  final value = control.value as String;
-  final sum = value
-      .substring(0, 9)
-      .split('')
-      .map(int.parse)
-      .fold(0, (int sum, int digit) => sum + digit * (10 - digit));
-  final checkDigit = 11 - (sum % 11);
-  final lastDigit = int.parse(value.substring(9));
-
-  if (checkDigit == 10 && lastDigit == 0 || checkDigit == lastDigit) {
-    return null;
+  final idNumber = control.value as String?;
+  if (idNumber == null || idNumber.isEmpty) return null;
+  if (idNumber.length != 10) return null;
+  // Check that the first two digits correspond to a valid province code
+  final provinceCode = idNumber.substring(0, 2);
+  final validProvinceCodes = <String>[
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10'
+  ];
+  if (!validProvinceCodes.contains(provinceCode)) {
+    return {'invalidProvinceCode': true};
   }
-  return {'invalidDni': true};
+  // Calculate the verification digit
+  //and compare it with the 10th digit of the ID number
+  final oddDigits = <int>[
+    int.parse(idNumber[0]),
+    int.parse(idNumber[2]),
+    int.parse(idNumber[4]),
+    int.parse(idNumber[6]),
+    int.parse(idNumber[8])
+  ];
+  final evenDigits = <int>[
+    int.parse(idNumber[1]),
+    int.parse(idNumber[3]),
+    int.parse(idNumber[5]),
+    int.parse(idNumber[7])
+  ];
+  final oddSum = oddDigits
+      .map((digit) => (digit * 2 > 9) ? digit * 2 - 9 : digit * 2)
+      .reduce((a, b) => a + b);
+  final evenSum = evenDigits.reduce((a, b) => a + b);
+  final totalSum = oddSum + evenSum;
+  final verificationDigit = (totalSum % 10 == 0) ? 0 : 10 - (totalSum % 10);
+  if (verificationDigit != int.parse(idNumber[9])) {
+    return {'invalidDni': true};
+  }
+  return null;
 }
 
 Map<String, dynamic>? lengthDniValidatorValidator(
   AbstractControl<dynamic> control,
 ) {
-  final value = control.value as String;
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) return null;
   if (value.length != 10) {
     return {'lengthError': true};
   } else {
@@ -47,6 +80,23 @@ Map<String, dynamic>? passwordsMustMatch(AbstractControl<dynamic> control) {
       ..markAsTouched();
   } else {
     confirmPassword.removeError(ValidationMessage.mustMatch);
+  }
+  return null;
+}
+
+Map<String, dynamic>? emailValidator(AbstractControl<dynamic> control) {
+  return Validators.email(control);
+}
+
+// passwordValid
+
+Map<String, dynamic>? passwordValidator(AbstractControl<dynamic> control) {
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) return null;
+  final passwordRegExp =
+      RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\d\s:])([^\s]){8,20}$');
+  if (!passwordRegExp.hasMatch(value)) {
+    return {'invalidPassword': true};
   }
   return null;
 }

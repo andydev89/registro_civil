@@ -19,7 +19,7 @@ class _Api implements Api {
   String? baseUrl;
 
   @override
-  Future<BasicResponse<dynamic>> register({required registerModel}) async {
+  Future<BasicResponse<dynamic>> register(registerModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -27,13 +27,40 @@ class _Api implements Api {
     _data.addAll(registerModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BasicResponse<dynamic>>(Options(
-      method: 'PUT',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/identity/api/user',
+              '/identity/api/user/register',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BasicResponse<dynamic>.fromJson(
+      _result.data!,
+      (json) => json as dynamic,
+    );
+    return value;
+  }
+
+  @override
+  Future<BasicResponse<dynamic>> login(loginModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(loginModel.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BasicResponse<dynamic>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/identity/api/auth/login',
               queryParameters: queryParameters,
               data: _data,
             )

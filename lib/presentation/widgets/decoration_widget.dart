@@ -5,10 +5,9 @@ InputDecoration decoracionAuth({
   String? texto,
   String? hint,
   IconData? iconoPrefix,
-  IconData? iconoSuffix,
+  Widget? suffixIcon,
   void Function()? onPressedSuffix,
   Color? colorPrefixIcon,
-  Color? colorSuffixIcon,
   Color? colorLabel,
   double fontSize = fontSizeDefault,
   double? radius,
@@ -37,6 +36,10 @@ InputDecoration decoracionAuth({
       fontSize: fontSize,
       fontWeight: fontWeight,
     ),
+    // errorStyle: TextStyle(
+    //   color: Colors.red,
+    //   fontWeight: fontWeight,
+    // ),
     focusedBorder: OutlineInputBorder(
       borderRadius: borderRadius(radius: radius),
       borderSide: BorderSide(color: borderColor ?? Colors.white),
@@ -47,16 +50,7 @@ InputDecoration decoracionAuth({
       borderSide: BorderSide(color: borderColor ?? Colors.white),
     ),
     labelText: texto,
-    suffixIcon: iconoSuffix != null
-        ? IconButton(
-            onPressed: onPressedSuffix,
-            icon: Icon(
-              iconoSuffix,
-              color: colorSuffixIcon ?? colorPrefixIcon,
-              size: 25,
-            ),
-          )
-        : null,
+    suffixIcon:suffixIcon,
     prefixIcon: iconoPrefix == null
         ? null
         : Icon(

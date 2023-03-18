@@ -193,7 +193,7 @@ class NuiModelForm implements FormModel<NuiModel> {
   final String? path;
 
   String nuiControlPath() => pathBuilder(nuiControlName);
-  String get _nuiValue => nuiControl.value as String;
+  String get _nuiValue => nuiControl.value ?? "";
   bool get containsNui {
     try {
       form.control(nuiControlPath());
@@ -259,7 +259,7 @@ class NuiModelForm implements FormModel<NuiModel> {
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return NuiModel(_nuiValue);
+    return NuiModel(nui: _nuiValue);
   }
 
   NuiModelForm copyWithPath(String? path) {
@@ -618,9 +618,9 @@ class SecurityQuestionsModelForm implements FormModel<SecurityQuestionsModel> {
     this.path,
   ) {}
 
-  static String birthCityControlName = "birthCity";
+  static String cityMetParentsControlName = "cityMetParents";
 
-  static String birthYearControlName = "birthYear";
+  static String nameElderCousinControlName = "nameElderCousin";
 
   final SecurityQuestionsModel? securityQuestionsModel;
 
@@ -628,120 +628,121 @@ class SecurityQuestionsModelForm implements FormModel<SecurityQuestionsModel> {
 
   final String? path;
 
-  String birthCityControlPath() => pathBuilder(birthCityControlName);
-  String birthYearControlPath() => pathBuilder(birthYearControlName);
-  String get _birthCityValue => birthCityControl.value as String;
-  int get _birthYearValue => birthYearControl.value as int;
-  bool get containsBirthCity {
+  String cityMetParentsControlPath() => pathBuilder(cityMetParentsControlName);
+  String nameElderCousinControlPath() =>
+      pathBuilder(nameElderCousinControlName);
+  String get _cityMetParentsValue => cityMetParentsControl.value ?? "";
+  String get _nameElderCousinValue => nameElderCousinControl.value ?? "";
+  bool get containsCityMetParents {
     try {
-      form.control(birthCityControlPath());
+      form.control(cityMetParentsControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  bool get containsBirthYear {
+  bool get containsNameElderCousin {
     try {
-      form.control(birthYearControlPath());
+      form.control(nameElderCousinControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  Object? get birthCityErrors => birthCityControl.errors;
-  Object? get birthYearErrors => birthYearControl.errors;
-  void get birthCityFocus => form.focus(birthCityControlPath());
-  void get birthYearFocus => form.focus(birthYearControlPath());
-  void birthCityValueUpdate(
+  Object? get cityMetParentsErrors => cityMetParentsControl.errors;
+  Object? get nameElderCousinErrors => nameElderCousinControl.errors;
+  void get cityMetParentsFocus => form.focus(cityMetParentsControlPath());
+  void get nameElderCousinFocus => form.focus(nameElderCousinControlPath());
+  void cityMetParentsValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    birthCityControl.updateValue(value,
+    cityMetParentsControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void birthYearValueUpdate(
-    int value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    birthYearControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void birthCityValuePatch(
+  void nameElderCousinValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    birthCityControl.patchValue(value,
+    nameElderCousinControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void birthYearValuePatch(
-    int value, {
+  void cityMetParentsValuePatch(
+    String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    birthYearControl.patchValue(value,
+    cityMetParentsControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void birthCityValueReset(
+  void nameElderCousinValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    nameElderCousinControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void cityMetParentsValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      birthCityControl.reset(
+      cityMetParentsControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void birthYearValueReset(
-    int value, {
+  void nameElderCousinValueReset(
+    String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      birthYearControl.reset(
+      nameElderCousinControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get birthCityControl =>
-      form.control(birthCityControlPath()) as FormControl<String>;
-  FormControl<int> get birthYearControl =>
-      form.control(birthYearControlPath()) as FormControl<int>;
-  void birthCitySetDisabled(
+  FormControl<String> get cityMetParentsControl =>
+      form.control(cityMetParentsControlPath()) as FormControl<String>;
+  FormControl<String> get nameElderCousinControl =>
+      form.control(nameElderCousinControlPath()) as FormControl<String>;
+  void cityMetParentsSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      birthCityControl.markAsDisabled(
+      cityMetParentsControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      birthCityControl.markAsEnabled(
+      cityMetParentsControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     }
   }
 
-  void birthYearSetDisabled(
+  void nameElderCousinSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      birthYearControl.markAsDisabled(
+      nameElderCousinControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      birthYearControl.markAsEnabled(
+      nameElderCousinControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -756,7 +757,8 @@ class SecurityQuestionsModelForm implements FormModel<SecurityQuestionsModel> {
       );
     }
     return SecurityQuestionsModel(
-        birthCity: _birthCityValue, birthYear: _birthYearValue);
+        cityMetParents: _cityMetParentsValue,
+        nameElderCousin: _nameElderCousinValue);
   }
 
   SecurityQuestionsModelForm copyWithPath(String? path) {
@@ -799,15 +801,15 @@ class SecurityQuestionsModelForm implements FormModel<SecurityQuestionsModel> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        birthCityControlName: FormControl<String>(
-            value: securityQuestionsModel?.birthCity,
+        cityMetParentsControlName: FormControl<String>(
+            value: securityQuestionsModel?.cityMetParents,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        birthYearControlName: FormControl<int>(
-            value: securityQuestionsModel?.birthYear,
+        nameElderCousinControlName: FormControl<String>(
+            value: securityQuestionsModel?.nameElderCousin,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -1139,7 +1141,7 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
   String emailControlPath() => pathBuilder(emailControlName);
   String confirmPasswordControlPath() =>
       pathBuilder(confirmPasswordControlName);
-  String get _emailValue => emailControl.value as String;
+  String get _emailValue => emailControl.value ?? "";
   ConfirmPasswordModel? get _confirmPasswordValue => confirmPasswordForm.model;
   bool get containsEmail {
     try {
@@ -1347,7 +1349,7 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
   FormGroup formElements() => FormGroup({
         emailControlName: FormControl<String>(
             value: enterDataModel?.email,
-            validators: [requiredValidator],
+            validators: [requiredValidator, emailValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -1551,7 +1553,7 @@ class ConfirmPasswordModelForm implements FormModel<ConfirmPasswordModel> {
   FormGroup formElements() => FormGroup({
         newPasswordControlName: FormControl<String>(
             value: confirmPasswordModel?.newPassword,
-            validators: [requiredValidator],
+            validators: [requiredValidator, passwordValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

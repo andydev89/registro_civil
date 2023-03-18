@@ -7,7 +7,7 @@ part 'register_model.gform.dart';
 @JsonSerializable()
 @ReactiveFormAnnotation()
 class NuiModel {
-  NuiModel(
+  NuiModel({
     @FormControlAnnotation(
       validators: [
         requiredValidator,
@@ -15,8 +15,8 @@ class NuiModel {
         lengthDniValidatorValidator,
       ],
     )
-        this.nui,
-  );
+        this.nui = '',
+  });
 
   factory NuiModel.fromJson(Map<String, dynamic> json) =>
       _$NuiModelFromJson(json);
@@ -31,9 +31,9 @@ class NuiModel {
 class SecurityQuestionsModel {
   SecurityQuestionsModel({
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.birthCity,
+        this.cityMetParents = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.birthYear,
+        this.nameElderCousin = '',
   });
 
   factory SecurityQuestionsModel.fromJson(Map<String, dynamic> json) =>
@@ -41,11 +41,12 @@ class SecurityQuestionsModel {
 
   Map<String, dynamic> toJson() => _$SecurityQuestionsModelToJson(this);
 
-  final String birthCity;
-  final int birthYear;
+  final String cityMetParents;
+  final String nameElderCousin;
 
-  bool verifyAnswers(String city, int year) {
-    return city.toLowerCase() == birthCity.toLowerCase() && year == birthYear;
+  bool verifyAnswers(String city, String cousin) {
+    return city.toLowerCase() == cityMetParents.toLowerCase() &&
+        nameElderCousin.toLowerCase() == cousin.toLowerCase();
   }
 }
 
@@ -53,7 +54,8 @@ class SecurityQuestionsModel {
 @ReactiveFormAnnotation()
 class EnterDataModel {
   EnterDataModel({
-    @FormControlAnnotation(validators: [requiredValidator]) required this.email,
+    @FormControlAnnotation(validators: [requiredValidator, emailValidator])
+        this.email = '',
     this.confirmPassword,
   });
 
@@ -70,7 +72,7 @@ class EnterDataModel {
 @FormGroupAnnotation<ConfirmPasswordModel>(validators: [passwordsMustMatch])
 class ConfirmPasswordModel {
   ConfirmPasswordModel({
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(validators: [requiredValidator, passwordValidator])
         this.newPassword = '',
     @FormControlAnnotation(validators: [requiredValidator])
         this.confirmPassword = '',
@@ -88,10 +90,12 @@ class ConfirmPasswordModel {
 @JsonSerializable()
 class RegisterModel {
   RegisterModel({
-    required this.nui,
-    required this.securityQuestions,
-    required this.enterData,
-  });
+    NuiModel? nui,
+    SecurityQuestionsModel? securityQuestions,
+    EnterDataModel? enterData,
+  })  : nui = nui ?? NuiModel(),
+        securityQuestions = securityQuestions ?? SecurityQuestionsModel(),
+        enterData = enterData ?? EnterDataModel();
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) =>
       _$RegisterModelFromJson(json);
@@ -101,4 +105,16 @@ class RegisterModel {
   final NuiModel nui;
   final SecurityQuestionsModel securityQuestions;
   final EnterDataModel enterData;
+
+  RegisterModel copyWith({
+    NuiModel? nui,
+    SecurityQuestionsModel? securityQuestions,
+    EnterDataModel? enterData,
+  }) {
+    return RegisterModel(
+      nui: nui ?? this.nui,
+      securityQuestions: securityQuestions ?? this.securityQuestions,
+      enterData: enterData ?? this.enterData,
+    );
+  }
 }

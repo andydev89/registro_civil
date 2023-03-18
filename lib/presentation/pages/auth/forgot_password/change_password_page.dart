@@ -4,6 +4,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/secondary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
@@ -28,15 +29,21 @@ class ChangePasswordPage extends StatelessWidget {
           ),
           PrimaryTextFormField(
             label: l10n.nuevaContrasena,
-            suffixIcon: Ionicons.eye_off_outline,
-            colorSuffixIcon: Colors.white,
+            // suffixIcon: Ionicons.eye_off_outline,
+            // colorSuffixIcon: Colors.white,
             textInputType: TextInputType.visiblePassword,
             inputFormatters: const [],
+            suffixIcon: SecondaryIconButton(
+              onPressed: () {},
+              icon: Icons.remove_red_eye,
+            ),
           ),
           PrimaryTextFormField(
             label: l10n.confirmarContrasena,
-            colorSuffixIcon: Colors.white,
-            suffixIcon: Ionicons.eye_off_outline,
+            suffixIcon: SecondaryIconButton(
+              onPressed: () {},
+              icon: Icons.remove_red_eye,
+            ),
             textInputType: TextInputType.visiblePassword,
             inputFormatters: const [],
           ),

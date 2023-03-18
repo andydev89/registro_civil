@@ -3,6 +3,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/secondary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
 
 class HopmeSearch extends StatelessWidget {
@@ -17,12 +18,15 @@ class HopmeSearch extends StatelessWidget {
         Flexible(
           flex: 10,
           child: PrimaryTextFormField(
-            suffixIcon: Icons.search,
             colorLabel: blue,
             hint: l10n.buscar,
-            colorSuffixIcon: Colors.grey,
             borderColor: blue,
             padding: 15,
+            suffixIcon: SecondaryIconButton(
+              onPressed: () {},
+              icon: Icons.search,
+              color: Colors.grey,
+            ),
           ),
         ),
         const SizedBox(
