@@ -33,7 +33,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              '/identity/api/user/register',
+              '/api/user/register',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -60,7 +60,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              '/identity/api/auth/login',
+              '/api/login',
               queryParameters: queryParameters,
               data: _data,
             )

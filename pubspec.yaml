@@ -57,6 +57,7 @@ flutter:
   assets:
     - assets/svg/
     - assets/png/
+    - assets/jpg/
 
 flutter_native_splash:
   background_image: "assets/img/general/splash.png"

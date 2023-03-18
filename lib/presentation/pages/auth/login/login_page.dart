@@ -15,7 +15,7 @@ import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_f
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends HookWidget {
   const LoginPage({super.key});
 
   @override
@@ -90,7 +90,7 @@ class LoginPage extends StatelessWidget {
                       title: l10n.loggin,
                       width: double.maxFinite,
                       onPressed: form.form.valid
-                          ? () => context.replaceRoute(const HomeRouterRoute())
+                          ? () => context.replaceRoute(const RootRouterRoute())
                           : null,
                     );
                   },

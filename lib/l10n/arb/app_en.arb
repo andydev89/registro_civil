@@ -94,5 +94,7 @@
   "servicios": "Services",
   "copiasActasRegistrales": "Copies of registration records",
   "registroCivil": "Civil registration",
-  "validacionDocumentos": "Document validation"
+  "validacionDocumentos": "Document validation",
+  "inscripcionesRegistrosSimpres": "Simple registrations and registrations",
+  "convalidacionDocumentos": "Document validation"
 }
