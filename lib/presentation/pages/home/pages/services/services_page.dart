@@ -16,7 +16,7 @@ class ServicesPage extends StatelessWidget {
       mainAxisSpacing: 8,
       children: [
         ElementWidget(
-          onTap: () {},
+          onTap: () => context.navigateTo(const ScheduleShiftRouterRoute()),
           titulo: l10n.ageTurnos,
           icono: Assets.svg.calendar.svg(),
         ),

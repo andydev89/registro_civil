@@ -94,5 +94,7 @@
   "servicios": "Servicios",
   "copiasActasRegistrales": "Copias de actas registrales",
   "registroCivil": "Registro civil",
-  "validacionDocumentos": "Validación de documentos"
+  "validacionDocumentos": "Validación de documentos",
+  "inscripcionesRegistrosSimpres": "Inscripciones y registros simples",
+  "convalidacionDocumentos": "Convalidación de documentos"
 }

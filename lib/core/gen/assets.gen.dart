@@ -11,6 +11,17 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsJpgGen {
+  const $AssetsJpgGen();
+
+  /// File path: assets/jpg/primary_app_bar_background.jpg
+  AssetGenImage get primaryAppBarBackground =>
+      const AssetGenImage('assets/jpg/primary_app_bar_background.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [primaryAppBarBackground];
+}
+
 class $AssetsPngGen {
   const $AssetsPngGen();
 
@@ -221,6 +232,7 @@ class $AssetsSvgGen {
 class Assets {
   Assets._();
 
+  static const $AssetsJpgGen jpg = $AssetsJpgGen();
   static const $AssetsPngGen png = $AssetsPngGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
 }

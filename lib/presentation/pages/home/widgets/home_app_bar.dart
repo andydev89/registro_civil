@@ -14,7 +14,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: DecoratedBox(
         decoration: ShapeDecoration(
           image: DecorationImage(
-            image: Assets.png.backgroundAuth.image().image,
+            image: Assets.jpg.primaryAppBarBackground.image().image,
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               blue.withOpacity(0.7),
