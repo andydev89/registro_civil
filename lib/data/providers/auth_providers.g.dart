@@ -6,7 +6,7 @@ part of 'auth_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$registerHash() => r'766602d638f7466d31ada239ae8fd3e5f889fd4e';
+String _$checkRegisterHash() => r'9db151bca3f65539cf170e74b1febed69e45573e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,29 +29,29 @@ class _SystemHash {
   }
 }
 
-typedef RegisterRef = AutoDisposeFutureProviderRef<bool>;
+typedef CheckRegisterRef = AutoDisposeFutureProviderRef<bool>;
 
-/// See also [register].
-@ProviderFor(register)
-const registerProvider = RegisterFamily();
+/// See also [checkRegister].
+@ProviderFor(checkRegister)
+const checkRegisterProvider = CheckRegisterFamily();
 
-/// See also [register].
-class RegisterFamily extends Family<AsyncValue<bool>> {
-  /// See also [register].
-  const RegisterFamily();
+/// See also [checkRegister].
+class CheckRegisterFamily extends Family<AsyncValue<bool>> {
+  /// See also [checkRegister].
+  const CheckRegisterFamily();
 
-  /// See also [register].
-  RegisterProvider call(
+  /// See also [checkRegister].
+  CheckRegisterProvider call(
     RegisterModel registerModel,
   ) {
-    return RegisterProvider(
+    return CheckRegisterProvider(
       registerModel,
     );
   }
 
   @override
-  RegisterProvider getProviderOverride(
-    covariant RegisterProvider provider,
+  CheckRegisterProvider getProviderOverride(
+    covariant CheckRegisterProvider provider,
   ) {
     return call(
       provider.registerModel,
@@ -70,34 +70,36 @@ class RegisterFamily extends Family<AsyncValue<bool>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'registerProvider';
+  String? get name => r'checkRegisterProvider';
 }
 
-/// See also [register].
-class RegisterProvider extends AutoDisposeFutureProvider<bool> {
-  /// See also [register].
-  RegisterProvider(
+/// See also [checkRegister].
+class CheckRegisterProvider extends AutoDisposeFutureProvider<bool> {
+  /// See also [checkRegister].
+  CheckRegisterProvider(
     this.registerModel,
   ) : super.internal(
-          (ref) => register(
+          (ref) => checkRegister(
             ref,
             registerModel,
           ),
-          from: registerProvider,
-          name: r'registerProvider',
+          from: checkRegisterProvider,
+          name: r'checkRegisterProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$registerHash,
-          dependencies: RegisterFamily._dependencies,
-          allTransitiveDependencies: RegisterFamily._allTransitiveDependencies,
+                  : _$checkRegisterHash,
+          dependencies: CheckRegisterFamily._dependencies,
+          allTransitiveDependencies:
+              CheckRegisterFamily._allTransitiveDependencies,
         );
 
   final RegisterModel registerModel;
 
   @override
   bool operator ==(Object other) {
-    return other is RegisterProvider && other.registerModel == registerModel;
+    return other is CheckRegisterProvider &&
+        other.registerModel == registerModel;
   }
 
   @override
@@ -108,4 +110,101 @@ class RegisterProvider extends AutoDisposeFutureProvider<bool> {
     return _SystemHash.finish(hash);
   }
 }
+
+String _$loginHash() => r'a40512868ffe6001c8c5d645b28890be9ca97c3b';
+typedef LoginRef = AutoDisposeFutureProviderRef<String?>;
+
+/// See also [login].
+@ProviderFor(login)
+const loginProvider = LoginFamily();
+
+/// See also [login].
+class LoginFamily extends Family<AsyncValue<String?>> {
+  /// See also [login].
+  const LoginFamily();
+
+  /// See also [login].
+  LoginProvider call(
+    LoginModel loginModel,
+  ) {
+    return LoginProvider(
+      loginModel,
+    );
+  }
+
+  @override
+  LoginProvider getProviderOverride(
+    covariant LoginProvider provider,
+  ) {
+    return call(
+      provider.loginModel,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'loginProvider';
+}
+
+/// See also [login].
+class LoginProvider extends AutoDisposeFutureProvider<String?> {
+  /// See also [login].
+  LoginProvider(
+    this.loginModel,
+  ) : super.internal(
+          (ref) => login(
+            ref,
+            loginModel,
+          ),
+          from: loginProvider,
+          name: r'loginProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$loginHash,
+          dependencies: LoginFamily._dependencies,
+          allTransitiveDependencies: LoginFamily._allTransitiveDependencies,
+        );
+
+  final LoginModel loginModel;
+
+  @override
+  bool operator ==(Object other) {
+    return other is LoginProvider && other.loginModel == loginModel;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, loginModel.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$registerHash() => r'75468e669720d1c9961b3f38d4c957d2976d83b2';
+
+/// See also [Register].
+@ProviderFor(Register)
+final registerProvider =
+    AutoDisposeNotifierProvider<Register, RegisterModel>.internal(
+  Register.new,
+  name: r'registerProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$registerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Register = AutoDisposeNotifier<RegisterModel>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

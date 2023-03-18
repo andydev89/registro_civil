@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:registro_civil_apk/data/models/auth/login_model.dart';
+import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/basic_response_model.dart';
-import 'package:registro_civil_apk/data/models/register_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api.g.dart';
@@ -9,9 +10,13 @@ part 'api.g.dart';
 abstract class Api {
   factory Api(Dio dio, {String baseUrl}) = _Api;
 
-  ///Refresh token
-  @POST('/identity/api/user/register')
-  Future<BasicResponse<dynamic>> register({
-    @Body() required RegisterModel registerModel,
-  });
+  @POST('/api/user/register')
+  Future<BasicResponse<dynamic>> register(
+    @Body() RegisterModel registerModel,
+  );
+
+  @POST('/api/login')
+  Future<BasicResponse<dynamic>> login(
+    @Body() LoginModel loginModel,
+  );
 }

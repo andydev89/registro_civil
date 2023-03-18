@@ -18,7 +18,6 @@ class PrimaryTextFormField extends StatelessWidget {
     this.colorPrefixIcon,
     this.colorLabel,
     this.suffixIcon,
-    this.colorSuffixIcon,
     this.maxLength,
     this.maxLines = 1,
     this.minLines,
@@ -34,8 +33,8 @@ class PrimaryTextFormField extends StatelessWidget {
     this.padding = 18,
   });
 
-  final bool readOnly;
   final TextEditingController? controller;
+  final bool readOnly;
   final String? hint;
   final String? label;
   final String? Function(String?)? validator;
@@ -43,11 +42,10 @@ class PrimaryTextFormField extends StatelessWidget {
   final void Function(String?)? onSaved;
   final void Function()? onTap;
   final IconData? prefixIcon;
-  final IconData? suffixIcon;
+  final Widget? suffixIcon;
   final void Function()? onPressedSuffix;
   final TextInputType? textInputType;
   final Color? colorPrefixIcon;
-  final Color? colorSuffixIcon;
   final Color? colorLabel;
   final bool obscureText;
   final int? maxLength;
@@ -79,8 +77,7 @@ class PrimaryTextFormField extends StatelessWidget {
       ),
       decoration: decoracionAuth(
         padding: padding,
-        colorSuffixIcon: colorSuffixIcon,
-        iconoSuffix: suffixIcon,
+        suffixIcon: suffixIcon,
         onPressedSuffix: onPressedSuffix,
         texto: label,
         hint: hint,
