@@ -68,7 +68,7 @@ class LoginPage extends StatelessWidget {
             child: PrimaryButton(
               title: l10n.loggin,
               width: double.maxFinite,
-              onPressed: () => context.replaceRoute(const HomeRouterRoute()),
+              onPressed: () => context.replaceRoute(const RootRouterRoute()),
             ),
           ),
           Padding(

@@ -17,14 +17,6 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    RootRouterRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: const RootRouterPage(),
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
     AuthRouterRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -34,16 +26,10 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    HomeRouterRoute.name: (routeData) {
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: const HomeRouterPage(),
-      );
-    },
-    TexterRoute.name: (routeData) {
+    RootRouterRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const TexterPage(),
+        child: const RootRouterPage(),
         opaque: true,
         barrierDismissible: false,
       );
@@ -196,6 +182,26 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    HomeRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const HomeRouterPage(),
+      );
+    },
+    ScheduleShiftRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ScheduleShiftRouterPage(),
+      );
+    },
+    TexterRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const TexterPage(),
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ServicesRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -208,116 +214,121 @@ class _$AppRouter extends RootStackRouter {
         child: const ProceduresPage(),
       );
     },
+    ScheduleShiftFirstStepRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ScheduleShiftFirstStepPage(),
+      );
+    },
   };
 
   @override
   List<RouteConfig> get routes => [
         RouteConfig(
-          RootRouterRoute.name,
+          AuthRouterRoute.name,
           path: '/',
           children: [
             RouteConfig(
-              AuthRouterRoute.name,
+              LoginRoute.name,
               path: '',
-              parent: RootRouterRoute.name,
+              parent: AuthRouterRoute.name,
+            ),
+            RouteConfig(
+              RegisterRouterRoute.name,
+              path: 'register-router-page',
+              parent: AuthRouterRoute.name,
               children: [
                 RouteConfig(
-                  LoginRoute.name,
+                  Step1Route.name,
                   path: '',
-                  parent: AuthRouterRoute.name,
+                  parent: RegisterRouterRoute.name,
+                  meta: <String, dynamic>{'index': 0},
                 ),
                 RouteConfig(
-                  RegisterRouterRoute.name,
-                  path: 'register-router-page',
-                  parent: AuthRouterRoute.name,
-                  children: [
-                    RouteConfig(
-                      Step1Route.name,
-                      path: '',
-                      parent: RegisterRouterRoute.name,
-                      meta: <String, dynamic>{'index': 0},
-                    ),
-                    RouteConfig(
-                      Step2Route.name,
-                      path: 'step2-page',
-                      parent: RegisterRouterRoute.name,
-                      meta: <String, dynamic>{'index': 1},
-                    ),
-                    RouteConfig(
-                      Step3Route.name,
-                      path: 'step3-page',
-                      parent: RegisterRouterRoute.name,
-                      meta: <String, dynamic>{'index': 2},
-                    ),
-                    RouteConfig(
-                      Step4Route.name,
-                      path: 'step4-page',
-                      parent: RegisterRouterRoute.name,
-                      meta: <String, dynamic>{'index': 3},
-                    ),
-                  ],
+                  Step2Route.name,
+                  path: 'step2-page',
+                  parent: RegisterRouterRoute.name,
+                  meta: <String, dynamic>{'index': 1},
                 ),
                 RouteConfig(
-                  ForgotPasswordRouterRoute.name,
-                  path: 'forgot-password-router-page',
-                  parent: AuthRouterRoute.name,
-                  children: [
-                    RouteConfig(
-                      ForgotPasswordRoute.name,
-                      path: '',
-                      parent: ForgotPasswordRouterRoute.name,
-                    ),
-                    RouteConfig(
-                      ChangePasswordRoute.name,
-                      path: 'change-password-page',
-                      parent: ForgotPasswordRouterRoute.name,
-                    ),
-                  ],
+                  Step3Route.name,
+                  path: 'step3-page',
+                  parent: RegisterRouterRoute.name,
+                  meta: <String, dynamic>{'index': 2},
                 ),
                 RouteConfig(
-                  ScanRouterRoute.name,
-                  path: 'scan-router-page',
-                  parent: AuthRouterRoute.name,
-                  children: [
-                    RouteConfig(
-                      ScanFaceRoute.name,
-                      path: '',
-                      parent: ScanRouterRoute.name,
-                    ),
-                    RouteConfig(
-                      ScanDniRoute.name,
-                      path: 'scan-dni-page',
-                      parent: ScanRouterRoute.name,
-                    ),
-                  ],
-                ),
-                RouteConfig(
-                  FingerPrintRouterRoute.name,
-                  path: 'finger-print-router-page',
-                  parent: AuthRouterRoute.name,
-                  children: [
-                    RouteConfig(
-                      FingerPrintRoute.name,
-                      path: '',
-                      parent: FingerPrintRouterRoute.name,
-                    ),
-                    RouteConfig(
-                      FingerPrint2Route.name,
-                      path: 'finger-print2-page',
-                      parent: FingerPrintRouterRoute.name,
-                    ),
-                  ],
-                ),
-                RouteConfig(
-                  SuccessRoute.name,
-                  path: 'success-page',
-                  parent: AuthRouterRoute.name,
+                  Step4Route.name,
+                  path: 'step4-page',
+                  parent: RegisterRouterRoute.name,
+                  meta: <String, dynamic>{'index': 3},
                 ),
               ],
             ),
             RouteConfig(
+              ForgotPasswordRouterRoute.name,
+              path: 'forgot-password-router-page',
+              parent: AuthRouterRoute.name,
+              children: [
+                RouteConfig(
+                  ForgotPasswordRoute.name,
+                  path: '',
+                  parent: ForgotPasswordRouterRoute.name,
+                ),
+                RouteConfig(
+                  ChangePasswordRoute.name,
+                  path: 'change-password-page',
+                  parent: ForgotPasswordRouterRoute.name,
+                ),
+              ],
+            ),
+            RouteConfig(
+              ScanRouterRoute.name,
+              path: 'scan-router-page',
+              parent: AuthRouterRoute.name,
+              children: [
+                RouteConfig(
+                  ScanFaceRoute.name,
+                  path: '',
+                  parent: ScanRouterRoute.name,
+                ),
+                RouteConfig(
+                  ScanDniRoute.name,
+                  path: 'scan-dni-page',
+                  parent: ScanRouterRoute.name,
+                ),
+              ],
+            ),
+            RouteConfig(
+              FingerPrintRouterRoute.name,
+              path: 'finger-print-router-page',
+              parent: AuthRouterRoute.name,
+              children: [
+                RouteConfig(
+                  FingerPrintRoute.name,
+                  path: '',
+                  parent: FingerPrintRouterRoute.name,
+                ),
+                RouteConfig(
+                  FingerPrint2Route.name,
+                  path: 'finger-print2-page',
+                  parent: FingerPrintRouterRoute.name,
+                ),
+              ],
+            ),
+            RouteConfig(
+              SuccessRoute.name,
+              path: 'success-page',
+              parent: AuthRouterRoute.name,
+            ),
+          ],
+        ),
+        RouteConfig(
+          RootRouterRoute.name,
+          path: '/root-router-page',
+          children: [
+            RouteConfig(
               HomeRouterRoute.name,
-              path: 'home-router-page',
+              path: '',
               parent: RootRouterRoute.name,
               children: [
                 RouteConfig(
@@ -333,26 +344,25 @@ class _$AppRouter extends RootStackRouter {
               ],
             ),
             RouteConfig(
+              ScheduleShiftRouterRoute.name,
+              path: 'schedule-shift-router-page',
+              parent: RootRouterRoute.name,
+              children: [
+                RouteConfig(
+                  ScheduleShiftFirstStepRoute.name,
+                  path: '',
+                  parent: ScheduleShiftRouterRoute.name,
+                )
+              ],
+            ),
+            RouteConfig(
               TexterRoute.name,
               path: 'texter-page',
               parent: RootRouterRoute.name,
             ),
           ],
-        )
+        ),
       ];
-}
-
-/// generated route for
-/// [RootRouterPage]
-class RootRouterRoute extends PageRouteInfo<void> {
-  const RootRouterRoute({List<PageRouteInfo>? children})
-      : super(
-          RootRouterRoute.name,
-          path: '/',
-          initialChildren: children,
-        );
-
-  static const String name = 'RootRouterRoute';
 }
 
 /// generated route for
@@ -361,7 +371,7 @@ class AuthRouterRoute extends PageRouteInfo<void> {
   const AuthRouterRoute({List<PageRouteInfo>? children})
       : super(
           AuthRouterRoute.name,
-          path: '',
+          path: '/',
           initialChildren: children,
         );
 
@@ -369,28 +379,16 @@ class AuthRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [HomeRouterPage]
-class HomeRouterRoute extends PageRouteInfo<void> {
-  const HomeRouterRoute({List<PageRouteInfo>? children})
+/// [RootRouterPage]
+class RootRouterRoute extends PageRouteInfo<void> {
+  const RootRouterRoute({List<PageRouteInfo>? children})
       : super(
-          HomeRouterRoute.name,
-          path: 'home-router-page',
+          RootRouterRoute.name,
+          path: '/root-router-page',
           initialChildren: children,
         );
 
-  static const String name = 'HomeRouterRoute';
-}
-
-/// generated route for
-/// [TexterPage]
-class TexterRoute extends PageRouteInfo<void> {
-  const TexterRoute()
-      : super(
-          TexterRoute.name,
-          path: 'texter-page',
-        );
-
-  static const String name = 'TexterRoute';
+  static const String name = 'RootRouterRoute';
 }
 
 /// generated route for
@@ -612,6 +610,44 @@ class FingerPrint2Route extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [HomeRouterPage]
+class HomeRouterRoute extends PageRouteInfo<void> {
+  const HomeRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          HomeRouterRoute.name,
+          path: '',
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeRouterRoute';
+}
+
+/// generated route for
+/// [ScheduleShiftRouterPage]
+class ScheduleShiftRouterRoute extends PageRouteInfo<void> {
+  const ScheduleShiftRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          ScheduleShiftRouterRoute.name,
+          path: 'schedule-shift-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'ScheduleShiftRouterRoute';
+}
+
+/// generated route for
+/// [TexterPage]
+class TexterRoute extends PageRouteInfo<void> {
+  const TexterRoute()
+      : super(
+          TexterRoute.name,
+          path: 'texter-page',
+        );
+
+  static const String name = 'TexterRoute';
+}
+
+/// generated route for
 /// [ServicesPage]
 class ServicesRoute extends PageRouteInfo<void> {
   const ServicesRoute()
@@ -633,4 +669,16 @@ class ProceduresRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ProceduresRoute';
+}
+
+/// generated route for
+/// [ScheduleShiftFirstStepPage]
+class ScheduleShiftFirstStepRoute extends PageRouteInfo<void> {
+  const ScheduleShiftFirstStepRoute()
+      : super(
+          ScheduleShiftFirstStepRoute.name,
+          path: '',
+        );
+
+  static const String name = 'ScheduleShiftFirstStepRoute';
 }
