@@ -10,7 +10,7 @@ abstract class Api {
   factory Api(Dio dio, {String baseUrl}) = _Api;
 
   ///Refresh token
-  @PUT('/identity/api/user')
+  @POST('/identity/api/user/register')
   Future<BasicResponse<dynamic>> register({
     @Body() required RegisterModel registerModel,
   });
