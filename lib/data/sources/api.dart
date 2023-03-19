@@ -10,7 +10,7 @@ part 'api.g.dart';
 abstract class Api {
   factory Api(Dio dio, {String baseUrl}) = _Api;
 
-  @POST('/api/user/register')
+  @POST('/api/register')
   Future<BasicResponse<dynamic>> register(
     @Body() RegisterModel registerModel,
   );

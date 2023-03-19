@@ -59,21 +59,19 @@ Map<String, dynamic> _$ConfirmPasswordModelToJson(
 
 RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) =>
     RegisterModel(
-      nui: json['nui'] == null
-          ? null
-          : NuiModel.fromJson(json['nui'] as Map<String, dynamic>),
-      securityQuestions: json['securityQuestions'] == null
-          ? null
-          : SecurityQuestionsModel.fromJson(
-              json['securityQuestions'] as Map<String, dynamic>),
-      enterData: json['enterData'] == null
-          ? null
-          : EnterDataModel.fromJson(json['enterData'] as Map<String, dynamic>),
+      nui: json['nui'] as String? ?? '',
+      password: json['password'] as String? ?? '',
+      email: json['email'] as String? ?? '',
+      questions: (json['questions'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, e as String),
+          ) ??
+          const {},
     );
 
 Map<String, dynamic> _$RegisterModelToJson(RegisterModel instance) =>
     <String, dynamic>{
       'nui': instance.nui,
-      'securityQuestions': instance.securityQuestions,
-      'enterData': instance.enterData,
+      'password': instance.password,
+      'email': instance.email,
+      'questions': instance.questions,
     };

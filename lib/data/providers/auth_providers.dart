@@ -9,13 +9,20 @@ class Register extends _$Register {
   @override
   RegisterModel build() => RegisterModel();
 
-  void updateNui(NuiModel nui) => state = state.copyWith(nui: nui);
+  void updateNui(NuiModel nui) => state = state.copyWith(nui: nui.nui);
 
   void updateSecurityQuestions(SecurityQuestionsModel securityQuestions) =>
-      state = state.copyWith(securityQuestions: securityQuestions);
+      state = state.copyWith(questions: {
+        '¿Cuál es el segundo nombre de tu primo mayor?':
+            securityQuestions.nameElderCousin,
+        '¿En qué ciudad se conocieron tus padres?':
+            securityQuestions.cityMetParents,
+      });
 
-  void updateEnterData(EnterDataModel enterData) =>
-      state = state.copyWith(enterData: enterData);
+  void updateEnterData(EnterDataModel enterData) => state = state.copyWith(
+        email: enterData.email,
+        password: enterData.confirmPassword!.newPassword,
+      );
 
   // void _reset() => state = RegisterModel();
 }

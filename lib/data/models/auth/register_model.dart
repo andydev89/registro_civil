@@ -90,31 +90,32 @@ class ConfirmPasswordModel {
 @JsonSerializable()
 class RegisterModel {
   RegisterModel({
-    NuiModel? nui,
-    SecurityQuestionsModel? securityQuestions,
-    EnterDataModel? enterData,
-  })  : nui = nui ?? NuiModel(),
-        securityQuestions = securityQuestions ?? SecurityQuestionsModel(),
-        enterData = enterData ?? EnterDataModel();
+    this.nui = '',
+    this.password = '',
+    this.email = '',
+    this.questions = const {},
+  });
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) =>
       _$RegisterModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$RegisterModelToJson(this);
-
-  final NuiModel nui;
-  final SecurityQuestionsModel securityQuestions;
-  final EnterDataModel enterData;
+  final String nui;
+  final String password;
+  final String email;
+  final Map<String, String> questions;
 
   RegisterModel copyWith({
-    NuiModel? nui,
-    SecurityQuestionsModel? securityQuestions,
-    EnterDataModel? enterData,
+    String? nui,
+    String? password,
+    String? email,
+    Map<String, String>? questions,
   }) {
     return RegisterModel(
       nui: nui ?? this.nui,
-      securityQuestions: securityQuestions ?? this.securityQuestions,
-      enterData: enterData ?? this.enterData,
+      password: password ?? this.password,
+      email: email ?? this.email,
+      questions: questions ?? this.questions,
     );
   }
 }
