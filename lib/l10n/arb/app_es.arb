@@ -12,7 +12,7 @@
   "escRostro": "Escanear rostro",
   "facID": "Face ID",
   "regCuenta": "Registrar cuenta",
-  "ingNumCedula": "Ingrese se número de cedula",
+  "ingNumCedula": "Ingrese se número de cédula",
   "validar": "Validar",
   "capIdenDigBiometrica": "Capturar identidad digital\n biométrica",
   "rostro": "Rostro",
@@ -89,5 +89,12 @@
   "tipservicios" : "Tipos de servicios",
   "selServicio" : "Seleccione un servicio",
   "horDisponibles" : "Horarios disponibles",
-  "aceptar" : "Aceptar"
+  "aceptar" : "Aceptar",
+  "tramites": "Trámites",
+  "servicios": "Servicios",
+  "copiasActasRegistrales": "Copias de actas registrales",
+  "registroCivil": "Registro civil",
+  "validacionDocumentos": "Validación de documentos",
+  "inscripcionesRegistrosSimpres": "Inscripciones y registros simples",
+  "convalidacionDocumentos": "Convalidación de documentos"
 }

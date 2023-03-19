@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/home_enum/agendar_turnos_enum.dart';
 import 'package:registro_civil_apk/data/enum/home_enum/detalles_turno_enum.dart';
 import 'package:registro_civil_apk/data/enum/routes_enum.dart';
