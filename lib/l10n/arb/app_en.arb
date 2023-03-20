@@ -115,5 +115,19 @@
   "duplicadoCed": "Duplicate ID",
   "cedulacionExtPriVez": "ID for the first time abroad",
   "celebracionMat": "Marriage celebration",
-  "registroNacExt": "Birth registration abroad"
+  "registroNacExt": "Birth registration abroad",
+  "personal": "Personal",
+  "familiar": "Familiar",
+  "obtengaSuTurno": "Get your turn",
+  "completeInformacionSolicitada": "Complete the requested information",
+  "tipoServicio": "Service type",
+  "seleccione": "Select",
+  "seleccioneMetodoPago": "Select a payment method",
+  "realizarPago": "Make payment",
+  "introduzcaCodigoBancario": "Enter the voucher code issued by the bank where you made the payment",
+  "codigo": "Code",
+  "escriba": "Write",
+  "provincia": "Province",
+  "agencia": "Agency",
+  "fechaParaTurno": "Date for shift"
 }

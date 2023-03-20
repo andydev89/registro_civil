@@ -115,5 +115,19 @@
   "duplicadoCed": "Duplicado de cédula",
   "cedulacionExtPriVez": "Cedulación extranjeros por primera vez",
   "celebracionMat": "Celebración de matrimonio",
-  "registroNacExt": "Registro de nacimiento en el exterior"
+  "registroNacExt": "Registro de nacimiento en el exterior",
+  "personal": "Personal",
+  "familiar": "Familiar",
+  "obtengaSuTurno": "Obtenga su turno",
+  "completeInformacionSolicitada": "Complete la información solicitada",
+  "tipoServicio": "Tipo de servicios",
+  "seleccione": "Seleccione",
+  "seleccioneMetodoPago": "Seleccione un método de pago",
+  "realizarPago": "Realizar pago",
+  "introduzcaCodigoBancario": "Introduzca el código del comprobante emitido por la entidad bancaria donde realizó el pago",
+  "codigo": "Código",
+  "escriba": "Escriba",
+  "provincia": "Provincia",
+  "agencia": "Agencia",
+  "fechaParaTurno": "Fecha para el turno"
 }

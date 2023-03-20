@@ -40,7 +40,7 @@ class Step3Page extends ConsumerWidget {
                 ),
                 PrimaryReactiveFormField(
                   formControl: form.nameElderCousinControl,
-                  title: l10n.responda,
+                  label: l10n.responda,
                 ),
                 PrimaryLabel(
                   l10n.ciuConPadres,
@@ -48,7 +48,7 @@ class Step3Page extends ConsumerWidget {
                 ),
                 PrimaryReactiveFormField(
                   formControl: form.cityMetParentsControl,
-                  title: l10n.responda,
+                  label: l10n.responda,
                 ),
                 ReactiveSecurityQuestionsModelFormConsumer(
                   builder: (_, form, __) {

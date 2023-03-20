@@ -45,13 +45,13 @@ class Step4Page extends HookConsumerWidget {
                 ),
                 PrimaryReactiveFormField(
                   formControl: form.emailControl,
-                  title: l10n.correoE,
+                  label: l10n.correoE,
                   keyboardType: TextInputType.emailAddress,
                 ),
                 PrimaryReactiveFormField(
                   formControl: form.confirmPasswordForm.newPasswordControl,
                   obscureText: !showPassword.value,
-                  title: l10n.password,
+                  label: l10n.password,
                   controller: newPasswordController,
                   suffixIcon: SecondaryIconButton(
                     onPressed: toggleShowPassword,
@@ -63,7 +63,7 @@ class Step4Page extends HookConsumerWidget {
                 PrimaryReactiveFormField(
                   formControl: form.confirmPasswordForm.confirmPasswordControl,
                   obscureText: !showPassword.value,
-                  title: l10n.confirmarContrasena,
+                  label: l10n.confirmarContrasena,
                   suffixIcon: SecondaryIconButton(
                     onPressed: toggleShowPassword,
                     icon: showPassword.value

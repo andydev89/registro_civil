@@ -27,7 +27,7 @@ class Step1Page extends ConsumerWidget {
             PrimaryLabel(l10n.ingNumCedula),
             PrimaryReactiveFormField<String>(
               formControl: form.nuiControl,
-              title: l10n.numCedula,
+              label: l10n.numCedula,
               prefixIcon: Icons.payment,
               keyboardType: TextInputType.number,
               inputFormatters: [

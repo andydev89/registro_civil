@@ -1,7 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
@@ -11,12 +11,12 @@ class ScheduleShiftScaffold extends StatelessWidget {
     required this.body,
     required this.title,
     required this.subtitle,
-    required this.buttonText,
+    this.bottomNavigationBar,
   });
   final Widget body;
   final String title;
   final String subtitle;
-  final String buttonText;
+  final Widget? bottomNavigationBar;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,12 @@ class ScheduleShiftScaffold extends StatelessWidget {
         appBar: AppBar(
           foregroundColor: primaryColor,
           backgroundColor: Colors.transparent,
+          leading: const AutoLeadingButton(),
           elevation: 0,
           centerTitle: true,
           title: PrimaryTitle(
-            textAlign: TextAlign.start,
             title: title,
             color: primaryColor,
-            mainAxisAlignment: MainAxisAlignment.start,
           ),
         ),
         body: Center(
@@ -44,15 +43,12 @@ class ScheduleShiftScaffold extends StatelessWidget {
               PrimaryText(
                 subtitle,
                 color: primaryColor,
-                textAlign: TextAlign.end,
-              ).verticalPadding(20),
+              ).symmetricPadding(20, 30),
               body,
             ],
           ),
         ),
-        persistentFooterButtons: [
-          PrimaryButton(title: buttonText).symmetricPadding(10, 30),
-        ],
+        bottomNavigationBar: bottomNavigationBar,
       ),
     );
   }
