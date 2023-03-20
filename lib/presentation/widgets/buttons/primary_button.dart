@@ -11,7 +11,7 @@ class PrimaryButton extends HookWidget {
     this.disabledBackgroundColor,
     this.colorText,
     this.disabledForegroundColor,
-    this.width = double.minPositive,
+    this.width = double.maxFinite,
     this.onPressed,
     this.onPressedAsync,
     required this.title,
