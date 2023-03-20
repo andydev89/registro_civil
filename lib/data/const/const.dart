@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-const fontSizeDefault = 18.0;
+const fontSizeDefault = 15.0;
 
 const gradienteApp = [
   Color.fromRGBO(1, 15, 56, 1),

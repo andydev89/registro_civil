@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/widgets/another_stepper_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
@@ -14,13 +14,14 @@ class RegisterRouterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AuthCard(
+    return TranslucentCard(
       child: AutoRouter(
         builder: (context, content) => Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             PrimaryTitle(
               title: l10n.regCuenta,
+              color: Colors.white,
             ),
             Consumer(
               builder: (context, ref, child) {

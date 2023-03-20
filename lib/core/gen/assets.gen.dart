@@ -174,6 +174,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/calendar.svg
   SvgGenImage get calendar => const SvgGenImage('assets/svg/calendar.svg');
 
+  /// File path: assets/svg/calendar3.svg
+  SvgGenImage get calendar3 => const SvgGenImage('assets/svg/calendar3.svg');
+
   /// File path: assets/svg/calendar_2.svg
   SvgGenImage get calendar2 => const SvgGenImage('assets/svg/calendar_2.svg');
 
@@ -199,16 +202,14 @@ class $AssetsSvgGen {
   SvgGenImage get civilRecord =>
       const SvgGenImage('assets/svg/civil_record.svg');
 
-  /// File path: assets/svg/completed_checkmark.svg
-  SvgGenImage get completedCheckmark =>
-      const SvgGenImage('assets/svg/completed_checkmark.svg');
-
-  /// File path: assets/svg/completed_checkmark_dark.svg
-  SvgGenImage get completedCheckmarkDark =>
-      const SvgGenImage('assets/svg/completed_checkmark_dark.svg');
+  /// File path: assets/svg/clock.svg
+  SvgGenImage get clock => const SvgGenImage('assets/svg/clock.svg');
 
   /// File path: assets/svg/documents.svg
   SvgGenImage get documents => const SvgGenImage('assets/svg/documents.svg');
+
+  /// File path: assets/svg/error.svg
+  SvgGenImage get error => const SvgGenImage('assets/svg/error.svg');
 
   /// File path: assets/svg/exit.svg
   SvgGenImage get exit => const SvgGenImage('assets/svg/exit.svg');
@@ -239,6 +240,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/pen.svg
   SvgGenImage get pen => const SvgGenImage('assets/svg/pen.svg');
 
+  /// File path: assets/svg/qr_code.svg
+  SvgGenImage get qrCode => const SvgGenImage('assets/svg/qr_code.svg');
+
   /// File path: assets/svg/rotated_fingerprint.svg
   SvgGenImage get rotatedFingerprint =>
       const SvgGenImage('assets/svg/rotated_fingerprint.svg');
@@ -253,6 +257,12 @@ class $AssetsSvgGen {
   SvgGenImage get simpleInscriptions =>
       const SvgGenImage('assets/svg/simple_inscriptions.svg');
 
+  /// File path: assets/svg/success.svg
+  SvgGenImage get success => const SvgGenImage('assets/svg/success.svg');
+
+  /// File path: assets/svg/success2.svg
+  SvgGenImage get success2 => const SvgGenImage('assets/svg/success2.svg');
+
   /// File path: assets/svg/user.svg
   SvgGenImage get user => const SvgGenImage('assets/svg/user.svg');
 
@@ -266,6 +276,7 @@ class $AssetsSvgGen {
         bell,
         businessService,
         calendar,
+        calendar3,
         calendar2,
         cardAccount,
         cedula,
@@ -273,9 +284,9 @@ class $AssetsSvgGen {
         checkDocument,
         checkOnline,
         civilRecord,
-        completedCheckmark,
-        completedCheckmarkDark,
+        clock,
         documents,
+        error,
         exit,
         faceId,
         fingerprint,
@@ -285,10 +296,13 @@ class $AssetsSvgGen {
         menu,
         passport,
         pen,
+        qrCode,
         rotatedFingerprint,
         settings,
         simpleCert,
         simpleInscriptions,
+        success,
+        success2,
         user,
         validateDocs
       ];

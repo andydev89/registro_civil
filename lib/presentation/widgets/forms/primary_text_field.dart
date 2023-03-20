@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
 
-class PrimaryTextFormField extends StatelessWidget {
-  const PrimaryTextFormField({
+class PrimaryTextField extends StatelessWidget {
+  const PrimaryTextField({
     super.key,
     this.controller,
     this.hintText,
@@ -14,7 +15,7 @@ class PrimaryTextFormField extends StatelessWidget {
     this.fontWeight = FontWeight.normal,
     this.fontSize = fontSizeDefault,
     this.padding = 18,
-    this.ligthTheme = false,
+    this.ligth = false,
     this.onTap,
   });
 
@@ -27,7 +28,7 @@ class PrimaryTextFormField extends StatelessWidget {
   final FontWeight fontWeight;
   final double fontSize;
   final double? padding;
-  final bool ligthTheme;
+  final bool ligth;
   final void Function()? onTap;
 
   @override
@@ -47,21 +48,13 @@ class PrimaryTextFormField extends StatelessWidget {
           onTap: onTap,
           controller: controller,
           style: TextStyle(
-            color: ligthTheme ? Colors.white : Colors.black,
+            color: ligth ? Colors.white : Colors.black,
             fontSize: fontSize,
             fontWeight: fontWeight,
           ),
-          decoration: InputDecoration(
-            suffixIcon: suffixIcon?.horizontalPadding(10),
-            suffixIconConstraints: const BoxConstraints(maxHeight: 20),
+          decoration: primaryInputDecoration(
+            light: ligth,
             hintText: hintText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 20,
-            ),
           ),
         ),
       ],

@@ -20,12 +20,19 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.
 import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/services/services_page.dart';
+import 'package:registro_civil_apk/presentation/pages/my_turns/my_turns_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
-import 'package:registro_civil_apk/presentation/pages/schedule_shift/schedule_shift_first_step_page.dart';
-import 'package:registro_civil_apk/presentation/pages/schedule_shift/schedule_shift_router_page.dart';
-import 'package:registro_civil_apk/presentation/pages/schedule_shift/schedule_shift_second_step.dart';
-import 'package:registro_civil_apk/presentation/pages/schedule_shift/schedule_shift_third_step.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_familiar_page.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_personal_page.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_second_step/schedule_turn_second_step_page.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_thrid_step/schedule_turn_third_step_page.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/turn_details/turn_details_page.dart';
+import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/schedule_turn_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/test/test_page.dart';
+import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
+import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 
 part 'router.gr.dart';
 
@@ -146,19 +153,40 @@ part 'router.gr.dart';
         ),
         //SCHEDULE SHIFT
         CupertinoRoute(
-          page: ScheduleShiftRouterPage,
+          page: ScheduleTurnRouterPage,
           children: [
             CupertinoRoute(
-              page: ScheduleShiftFirstStepPage,
+              page: ScheduleTurnFirstStepRouterPage,
               initial: true,
+              children: [
+                CustomRoute(
+                  page: ScheduleTurnFirstStepPersonalPage,
+                  initial: true,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                CupertinoRoute(
+                  page: ScheduleTurnFirstStepFamiliarPage,
+                ),
+              ],
             ),
             CupertinoRoute(
-              page: ScheduleShiftSecondStepPage,
+              page: ScheduleTurnSecondStepPage,
             ),
             CupertinoRoute(
-              page: ScheduleShiftThirdStepPage,
+              page: ScheduleTurnThirdStepPage,
+            ),
+            CupertinoRoute(
+              page: ShiftDetailsPage,
             ),
           ],
+        ),
+        //NOTIFICATION
+        CupertinoRoute(
+          page: NotificationPage,
+        ),
+        //MY TURNS
+        CupertinoRoute(
+          page: MyTurnsPage,
         ),
         // TEST
         CustomRoute(

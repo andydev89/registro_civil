@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/theme/theme.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
+
+Future<T?> showAcceptCancelDialog<T>(
+  BuildContext context, {
+  required String title,
+  required String message,
+  void Function()? onAccept,
+  void Function()? onCancel,
+}) {
+  final l10n = context.l10n;
+  return showDialog<T?>(
+    barrierColor: primaryColor.withOpacity(0.9),
+    context: context,
+    builder: (context) => Center(
+      child: TranslucentCard(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PrimaryTitle(title: title),
+            PrimaryText(
+              message,
+              color: Colors.black,
+            ).verticalPadding(40),
+            PrimaryButton(
+              title: l10n.aceptar,
+              onPressed: onAccept,
+            ),
+            PrimaryButton(
+              title: l10n.cancelar,
+              onPressed: onCancel,
+            ).verticalPadding(10),
+          ],
+        ),
+      ),
+    ),
+  );
+}

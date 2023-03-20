@@ -5,12 +5,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/secondary_icon_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_form_field.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Step4Page extends HookConsumerWidget {
@@ -43,15 +43,17 @@ class Step4Page extends HookConsumerWidget {
                     l10n.ingDatos,
                   ),
                 ),
-                PrimaryReactiveFormField(
+                PrimaryReactiveTextField(
+                  ligth: true,
                   formControl: form.emailControl,
-                  label: l10n.correoE,
+                  hintText: l10n.correoE,
                   keyboardType: TextInputType.emailAddress,
                 ),
-                PrimaryReactiveFormField(
+                PrimaryReactiveTextField(
+                  ligth: true,
                   formControl: form.confirmPasswordForm.newPasswordControl,
                   obscureText: !showPassword.value,
-                  label: l10n.password,
+                  hintText: l10n.password,
                   controller: newPasswordController,
                   suffixIcon: SecondaryIconButton(
                     onPressed: toggleShowPassword,
@@ -60,10 +62,11 @@ class Step4Page extends HookConsumerWidget {
                         : Icons.visibility_off,
                   ),
                 ),
-                PrimaryReactiveFormField(
+                PrimaryReactiveTextField(
+                  ligth: true,
                   formControl: form.confirmPasswordForm.confirmPasswordControl,
                   obscureText: !showPassword.value,
-                  label: l10n.confirmarContrasena,
+                  hintText: l10n.confirmarContrasena,
                   suffixIcon: SecondaryIconButton(
                     onPressed: toggleShowPassword,
                     icon: showPassword.value
@@ -75,7 +78,6 @@ class Step4Page extends HookConsumerWidget {
                   builder: (_, form, __) {
                     return PrimaryButton(
                       title: l10n.registrar,
-                      width: double.maxFinite,
                       onPressedAsync: form.form.valid
                           ? () async {
                               ref
