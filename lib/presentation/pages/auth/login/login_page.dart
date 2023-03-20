@@ -90,7 +90,9 @@ class LoginPage extends HookWidget {
                       title: l10n.loggin,
                       width: double.maxFinite,
                       onPressed: form.form.valid
-                          ? () => context.replaceRoute(const RootRouterRoute())
+                          ? () {
+                              context.replaceRoute(const RootRouterRoute());
+                            }
                           : null,
                     );
                   },
