@@ -90,6 +90,7 @@
   "selServicio": "Select a service",
   "horDisponibles": "Available hours",
   "aceptar": "Accept",
+  "cancelar": "Cancel",
   "tramites": "Procedures",
   "copiasActasRegistrales": "Copies of registration records",
   "registroCivil": "Civil registration",
@@ -129,5 +130,10 @@
   "escriba": "Write",
   "provincia": "Province",
   "agencia": "Agency",
-  "fechaParaTurno": "Date for shift"
+  "fechaParaTurno": "Date for shift",
+  "ageTurno": "Schedule shift",
+    "turnoReservadoMensajeFormal": "Your appointment has been successfully booked!",
+  "turnoReservadoMensajeCorreoFormal": "We have sent a notification to your email with the details of your shift.",
+  "confirmacion": "Confirmation",
+  "seguroCancelarTurno": "Are you sure to cancel your turn?"
 }

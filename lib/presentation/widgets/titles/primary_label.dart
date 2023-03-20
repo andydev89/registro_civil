@@ -8,7 +8,7 @@ class PrimaryLabel extends StatelessWidget {
     this.icono,
     this.color = Colors.white,
     this.colorIcono,
-    this.fontSize = fontSizeDefault,
+    this.fontSize = fontSizeDefault + 5,
     this.iconSize = 20,
     this.fontWeight = FontWeight.normal,
     this.mainAxisAlignment = MainAxisAlignment.center,

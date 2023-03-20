@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
 
-class PrimaryReactiveFormField<T> extends StatelessWidget {
-  const PrimaryReactiveFormField({
+class PrimaryReactiveTextField<T> extends StatelessWidget {
+  const PrimaryReactiveTextField({
     required this.formControl,
     this.label,
     this.keyboardType,
@@ -15,19 +16,18 @@ class PrimaryReactiveFormField<T> extends StatelessWidget {
     this.fontWeight = FontWeight.normal,
     this.fontSize = fontSizeDefault,
     this.inputFormatters,
-    this.colorPrefixIcon,
     this.prefixIcon,
     this.suffixIcon,
-    this.ligthTheme = true,
+    this.ligth = false,
     this.hintText,
     this.onTap,
+    this.setSuffixIconConstraints = false,
     super.key,
   });
   final FormControl<T>? formControl;
   final String? label;
   final List<TextInputFormatter>? inputFormatters;
-  final IconData? prefixIcon;
-  final Color? colorPrefixIcon;
+  final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool readOnly;
   final bool obscureText;
@@ -35,8 +35,9 @@ class PrimaryReactiveFormField<T> extends StatelessWidget {
   final double fontSize;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
-  final bool ligthTheme;
+  final bool ligth;
   final String? hintText;
+  final bool setSuffixIconConstraints;
   final void Function(FormControl<T>)? onTap;
 
   @override
@@ -45,7 +46,7 @@ class PrimaryReactiveFormField<T> extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (!ligthTheme && label != null)
+        if (!ligth && label != null)
           Text(
             label!,
             style: const TextStyle(fontSize: 15),
@@ -57,11 +58,11 @@ class PrimaryReactiveFormField<T> extends StatelessWidget {
           controller: controller,
           onTap: onTap,
           style: TextStyle(
-            color: ligthTheme ? Colors.white : Colors.black,
+            color: ligth ? Colors.white : Colors.black,
             fontSize: fontSize,
             fontWeight: fontWeight,
           ),
-          cursorColor: ligthTheme ? Colors.white : Colors.black,
+          cursorColor: ligth ? Colors.white : Colors.black,
           keyboardType: keyboardType,
           validationMessages: {
             ValidationMessage.required: (error) => 'Este campo es requerido',
@@ -79,34 +80,15 @@ class PrimaryReactiveFormField<T> extends StatelessWidget {
                 'número y un caracter especial',
           },
           inputFormatters: inputFormatters,
-          decoration: InputDecoration(
-            suffixIcon: suffixIcon?.horizontalPadding(10),
-            suffixIconConstraints: const BoxConstraints(maxHeight: 20),
+          decoration: primaryInputDecoration(
+            light: ligth,
             hintText: hintText,
-            hintStyle: TextStyle(
-              color: ligthTheme ? Colors.white : Colors.black,
-              fontSize: fontSize,
-              fontWeight: fontWeight,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ligthTheme ? Colors.white : Colors.black,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ligthTheme ? Colors.white : Colors.black,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 20,
-            ),
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
+            setSuffixIconConstraints: setSuffixIconConstraints,
           ),
         ),
       ],
-    );
+    ).verticalPadding(10);
   }
 }

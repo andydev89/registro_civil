@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
 
 class PrimaryReactiveDropdown<T> extends StatelessWidget {
   const PrimaryReactiveDropdown({
@@ -27,15 +28,8 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
         ReactiveDropdownField(
           formControl: formControl,
           borderRadius: BorderRadius.circular(10),
-          decoration: InputDecoration(
+          decoration: primaryInputDecoration(
             hintText: hintText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 20,
-            ),
           ),
           items: items
               .map(
@@ -47,6 +41,6 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
               .toList(),
         ),
       ],
-    );
+    ).verticalPadding(10);
   }
 }

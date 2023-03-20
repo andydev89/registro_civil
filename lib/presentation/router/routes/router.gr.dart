@@ -188,10 +188,32 @@ class _$AppRouter extends RootStackRouter {
         child: const HomeRouterPage(),
       );
     },
-    ScheduleShiftRouterRoute.name: (routeData) {
+    ScheduleTurnRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ScheduleShiftRouterPage(),
+        child: const ScheduleTurnRouterPage(),
+      );
+    },
+    NotificationRoute.name: (routeData) {
+      final args = routeData.argsAs<NotificationRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: NotificationPage(
+          key: args.key,
+          title: args.title,
+          subtitle: args.subtitle,
+          message: args.message,
+          bottonTitle: args.bottonTitle,
+          buttonText: args.buttonText,
+          notificationType: args.notificationType,
+          onTap: args.onTap,
+        ),
+      );
+    },
+    MyTurnsRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const MyTurnsPage(),
       );
     },
     TexterRoute.name: (routeData) {
@@ -214,22 +236,51 @@ class _$AppRouter extends RootStackRouter {
         child: const ProceduresPage(),
       );
     },
-    ScheduleShiftFirstStepRoute.name: (routeData) {
+    ScheduleTurnFirstStepRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ScheduleShiftFirstStepPage(),
+        child: const ScheduleTurnFirstStepRouterPage(),
       );
     },
-    ScheduleShiftSecondStepRoute.name: (routeData) {
+    ScheduleTurnSecondStepRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ScheduleShiftSecondStepPage(),
+        child: const ScheduleTurnSecondStepPage(),
       );
     },
-    ScheduleShiftThirdStepRoute.name: (routeData) {
+    ScheduleTurnThirdStepRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ScheduleShiftThirdStepPage(),
+        child: const ScheduleTurnThirdStepPage(),
+      );
+    },
+    ShiftDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<ShiftDetailsRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: ShiftDetailsPage(
+          key: args.key,
+          city: args.city,
+          agency: args.agency,
+          service: args.service,
+          date: args.date,
+          time: args.time,
+        ),
+      );
+    },
+    ScheduleTurnFirstStepPersonalRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const ScheduleTurnFirstStepPersonalPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ScheduleTurnFirstStepFamiliarRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ScheduleTurnFirstStepFamiliarPage(),
       );
     },
   };
@@ -356,26 +407,53 @@ class _$AppRouter extends RootStackRouter {
               ],
             ),
             RouteConfig(
-              ScheduleShiftRouterRoute.name,
-              path: 'schedule-shift-router-page',
+              ScheduleTurnRouterRoute.name,
+              path: 'schedule-turn-router-page',
               parent: RootRouterRoute.name,
               children: [
                 RouteConfig(
-                  ScheduleShiftFirstStepRoute.name,
+                  ScheduleTurnFirstStepRouterRoute.name,
                   path: '',
-                  parent: ScheduleShiftRouterRoute.name,
+                  parent: ScheduleTurnRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      ScheduleTurnFirstStepPersonalRoute.name,
+                      path: '',
+                      parent: ScheduleTurnFirstStepRouterRoute.name,
+                    ),
+                    RouteConfig(
+                      ScheduleTurnFirstStepFamiliarRoute.name,
+                      path: 'schedule-turn-first-step-familiar-page',
+                      parent: ScheduleTurnFirstStepRouterRoute.name,
+                    ),
+                  ],
                 ),
                 RouteConfig(
-                  ScheduleShiftSecondStepRoute.name,
-                  path: 'schedule-shift-second-step-page',
-                  parent: ScheduleShiftRouterRoute.name,
+                  ScheduleTurnSecondStepRoute.name,
+                  path: 'schedule-turn-second-step-page',
+                  parent: ScheduleTurnRouterRoute.name,
                 ),
                 RouteConfig(
-                  ScheduleShiftThirdStepRoute.name,
-                  path: 'schedule-shift-third-step-page',
-                  parent: ScheduleShiftRouterRoute.name,
+                  ScheduleTurnThirdStepRoute.name,
+                  path: 'schedule-turn-third-step-page',
+                  parent: ScheduleTurnRouterRoute.name,
+                ),
+                RouteConfig(
+                  ShiftDetailsRoute.name,
+                  path: 'shift-details-page',
+                  parent: ScheduleTurnRouterRoute.name,
                 ),
               ],
+            ),
+            RouteConfig(
+              NotificationRoute.name,
+              path: 'notification-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
+              MyTurnsRoute.name,
+              path: 'my-turns-page',
+              parent: RootRouterRoute.name,
             ),
             RouteConfig(
               TexterRoute.name,
@@ -645,16 +723,92 @@ class HomeRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ScheduleShiftRouterPage]
-class ScheduleShiftRouterRoute extends PageRouteInfo<void> {
-  const ScheduleShiftRouterRoute({List<PageRouteInfo>? children})
+/// [ScheduleTurnRouterPage]
+class ScheduleTurnRouterRoute extends PageRouteInfo<void> {
+  const ScheduleTurnRouterRoute({List<PageRouteInfo>? children})
       : super(
-          ScheduleShiftRouterRoute.name,
-          path: 'schedule-shift-router-page',
+          ScheduleTurnRouterRoute.name,
+          path: 'schedule-turn-router-page',
           initialChildren: children,
         );
 
-  static const String name = 'ScheduleShiftRouterRoute';
+  static const String name = 'ScheduleTurnRouterRoute';
+}
+
+/// generated route for
+/// [NotificationPage]
+class NotificationRoute extends PageRouteInfo<NotificationRouteArgs> {
+  NotificationRoute({
+    Key? key,
+    String? title,
+    String? subtitle,
+    String? message,
+    String? bottonTitle,
+    required String buttonText,
+    required NotificationType notificationType,
+    void Function()? onTap,
+  }) : super(
+          NotificationRoute.name,
+          path: 'notification-page',
+          args: NotificationRouteArgs(
+            key: key,
+            title: title,
+            subtitle: subtitle,
+            message: message,
+            bottonTitle: bottonTitle,
+            buttonText: buttonText,
+            notificationType: notificationType,
+            onTap: onTap,
+          ),
+        );
+
+  static const String name = 'NotificationRoute';
+}
+
+class NotificationRouteArgs {
+  const NotificationRouteArgs({
+    this.key,
+    this.title,
+    this.subtitle,
+    this.message,
+    this.bottonTitle,
+    required this.buttonText,
+    required this.notificationType,
+    this.onTap,
+  });
+
+  final Key? key;
+
+  final String? title;
+
+  final String? subtitle;
+
+  final String? message;
+
+  final String? bottonTitle;
+
+  final String buttonText;
+
+  final NotificationType notificationType;
+
+  final void Function()? onTap;
+
+  @override
+  String toString() {
+    return 'NotificationRouteArgs{key: $key, title: $title, subtitle: $subtitle, message: $message, bottonTitle: $bottonTitle, buttonText: $buttonText, notificationType: $notificationType, onTap: $onTap}';
+  }
+}
+
+/// generated route for
+/// [MyTurnsPage]
+class MyTurnsRoute extends PageRouteInfo<void> {
+  const MyTurnsRoute()
+      : super(
+          MyTurnsRoute.name,
+          path: 'my-turns-page',
+        );
+
+  static const String name = 'MyTurnsRoute';
 }
 
 /// generated route for
@@ -694,37 +848,116 @@ class ProceduresRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ScheduleShiftFirstStepPage]
-class ScheduleShiftFirstStepRoute extends PageRouteInfo<void> {
-  const ScheduleShiftFirstStepRoute()
+/// [ScheduleTurnFirstStepRouterPage]
+class ScheduleTurnFirstStepRouterRoute extends PageRouteInfo<void> {
+  const ScheduleTurnFirstStepRouterRoute({List<PageRouteInfo>? children})
       : super(
-          ScheduleShiftFirstStepRoute.name,
+          ScheduleTurnFirstStepRouterRoute.name,
+          path: '',
+          initialChildren: children,
+        );
+
+  static const String name = 'ScheduleTurnFirstStepRouterRoute';
+}
+
+/// generated route for
+/// [ScheduleTurnSecondStepPage]
+class ScheduleTurnSecondStepRoute extends PageRouteInfo<void> {
+  const ScheduleTurnSecondStepRoute()
+      : super(
+          ScheduleTurnSecondStepRoute.name,
+          path: 'schedule-turn-second-step-page',
+        );
+
+  static const String name = 'ScheduleTurnSecondStepRoute';
+}
+
+/// generated route for
+/// [ScheduleTurnThirdStepPage]
+class ScheduleTurnThirdStepRoute extends PageRouteInfo<void> {
+  const ScheduleTurnThirdStepRoute()
+      : super(
+          ScheduleTurnThirdStepRoute.name,
+          path: 'schedule-turn-third-step-page',
+        );
+
+  static const String name = 'ScheduleTurnThirdStepRoute';
+}
+
+/// generated route for
+/// [ShiftDetailsPage]
+class ShiftDetailsRoute extends PageRouteInfo<ShiftDetailsRouteArgs> {
+  ShiftDetailsRoute({
+    Key? key,
+    required String city,
+    required String agency,
+    required ServiceType service,
+    required DateTime date,
+    required TimeOfDay time,
+  }) : super(
+          ShiftDetailsRoute.name,
+          path: 'shift-details-page',
+          args: ShiftDetailsRouteArgs(
+            key: key,
+            city: city,
+            agency: agency,
+            service: service,
+            date: date,
+            time: time,
+          ),
+        );
+
+  static const String name = 'ShiftDetailsRoute';
+}
+
+class ShiftDetailsRouteArgs {
+  const ShiftDetailsRouteArgs({
+    this.key,
+    required this.city,
+    required this.agency,
+    required this.service,
+    required this.date,
+    required this.time,
+  });
+
+  final Key? key;
+
+  final String city;
+
+  final String agency;
+
+  final ServiceType service;
+
+  final DateTime date;
+
+  final TimeOfDay time;
+
+  @override
+  String toString() {
+    return 'ShiftDetailsRouteArgs{key: $key, city: $city, agency: $agency, service: $service, date: $date, time: $time}';
+  }
+}
+
+/// generated route for
+/// [ScheduleTurnFirstStepPersonalPage]
+class ScheduleTurnFirstStepPersonalRoute extends PageRouteInfo<void> {
+  const ScheduleTurnFirstStepPersonalRoute()
+      : super(
+          ScheduleTurnFirstStepPersonalRoute.name,
           path: '',
         );
 
-  static const String name = 'ScheduleShiftFirstStepRoute';
+  static const String name = 'ScheduleTurnFirstStepPersonalRoute';
 }
 
 /// generated route for
-/// [ScheduleShiftSecondStepPage]
-class ScheduleShiftSecondStepRoute extends PageRouteInfo<void> {
-  const ScheduleShiftSecondStepRoute()
+/// [ScheduleTurnFirstStepFamiliarPage]
+class ScheduleTurnFirstStepFamiliarRoute extends PageRouteInfo<void> {
+  const ScheduleTurnFirstStepFamiliarRoute()
       : super(
-          ScheduleShiftSecondStepRoute.name,
-          path: 'schedule-shift-second-step-page',
+          ScheduleTurnFirstStepFamiliarRoute.name,
+          path: 'schedule-turn-first-step-familiar-page',
         );
 
-  static const String name = 'ScheduleShiftSecondStepRoute';
-}
-
-/// generated route for
-/// [ScheduleShiftThirdStepPage]
-class ScheduleShiftThirdStepRoute extends PageRouteInfo<void> {
-  const ScheduleShiftThirdStepRoute()
-      : super(
-          ScheduleShiftThirdStepRoute.name,
-          path: 'schedule-shift-third-step-page',
-        );
-
-  static const String name = 'ScheduleShiftThirdStepRoute';
+  static const String name = 'ScheduleTurnFirstStepFamiliarRoute';
 }

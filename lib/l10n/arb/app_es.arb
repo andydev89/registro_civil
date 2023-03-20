@@ -90,6 +90,7 @@
   "selServicio": "Seleccione un servicio",
   "horDisponibles": "Horarios disponibles",
   "aceptar": "Aceptar",
+  "cancelar": "Cancelar",
   "tramites": "Trámites",
   "copiasActasRegistrales": "Copias de actas registrales",
   "registroCivil": "Registro civil",
@@ -129,5 +130,10 @@
   "escriba": "Escriba",
   "provincia": "Provincia",
   "agencia": "Agencia",
-  "fechaParaTurno": "Fecha para el turno"
+  "fechaParaTurno": "Fecha para el turno",
+  "ageTurno": "Agendar turno",
+  "turnoReservadoMensajeFormal": "¡Su turno se ha reservado satisfactoriamente!",
+  "turnoReservadoMensajeCorreoFormal": "Le hemos enviado una notificación a su correo electrónico con los detalles de su turno.",
+  "confirmacion": "Confirmación",
+  "seguroCancelarTurno": "¿Está seguro de cancelar su turno?"
 }

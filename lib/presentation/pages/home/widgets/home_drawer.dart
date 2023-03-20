@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
@@ -5,8 +6,9 @@ import 'package:registro_civil_apk/data/enum/routes_enum.dart';
 import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/home/widgets/button_drawer_home_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
+import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
@@ -61,10 +63,7 @@ class HomeDrawer extends StatelessWidget {
                         ButtonDrawerHomeWidget(
                           icon: Assets.svg.home.svg(),
                           titulo: l10n.inicio,
-                          onPressed: () => irAYBorrarAnterior(
-                            context,
-                            ruta: RoutesEnum.nuestrosServicios,
-                          ),
+                          onPressed: () {},
                         ),
                         ButtonDrawerHomeWidget(
                           icon: Assets.svg.user.svg(),
@@ -79,7 +78,10 @@ class HomeDrawer extends StatelessWidget {
                         ButtonDrawerHomeWidget(
                           icon: Assets.svg.calendar2.svg(),
                           titulo: l10n.misTurnos,
-                          onPressed: () {},
+                          onPressed: () {
+                            Scaffold.of(context).closeDrawer();
+                            context.navigateTo(const MyTurnsRoute());
+                          },
                         ),
                         ButtonDrawerHomeWidget(
                           icon: Assets.svg.settings.svg(),

@@ -4,11 +4,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_form_field.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Step3Page extends ConsumerWidget {
@@ -38,23 +38,24 @@ class Step3Page extends ConsumerWidget {
                   l10n.cuaSegNomPrimo,
                   textAlign: TextAlign.start,
                 ),
-                PrimaryReactiveFormField(
+                PrimaryReactiveTextField(
                   formControl: form.nameElderCousinControl,
-                  label: l10n.responda,
+                  ligth: true,
+                  hintText: l10n.responda,
                 ),
                 PrimaryLabel(
                   l10n.ciuConPadres,
                   textAlign: TextAlign.start,
                 ),
-                PrimaryReactiveFormField(
+                PrimaryReactiveTextField(
+                  ligth: true,
                   formControl: form.cityMetParentsControl,
-                  label: l10n.responda,
+                  hintText: l10n.responda,
                 ),
                 ReactiveSecurityQuestionsModelFormConsumer(
                   builder: (_, form, __) {
                     return PrimaryButton(
                       title: l10n.siguiente,
-                      width: double.maxFinite,
                       onPressed: form.form.valid
                           ? () {
                               ref

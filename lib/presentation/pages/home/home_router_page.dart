@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/home/widgets/home_search.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/finger_print_scaffold.dart';
@@ -38,7 +38,7 @@ class HomeRouterPage extends StatelessWidget {
               ],
             ),
           ).symmetricPadding(20, 25),
-          const HopmeSearch(),
+          const PrimarySearch(),
           Expanded(child: child),
         ],
       ),

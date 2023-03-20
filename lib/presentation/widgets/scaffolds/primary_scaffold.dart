@@ -5,17 +5,17 @@ import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
-class ScheduleShiftScaffold extends StatelessWidget {
-  const ScheduleShiftScaffold({
+class PrimaryScaffold extends StatelessWidget {
+  const PrimaryScaffold({
     super.key,
     required this.body,
     required this.title,
-    required this.subtitle,
+    this.subtitle,
     this.bottomNavigationBar,
   });
   final Widget body;
   final String title;
-  final String subtitle;
+  final String? subtitle;
   final Widget? bottomNavigationBar;
 
   @override
@@ -40,10 +40,11 @@ class ScheduleShiftScaffold extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              PrimaryText(
-                subtitle,
-                color: primaryColor,
-              ).symmetricPadding(20, 30),
+              if (subtitle != null)
+                PrimaryText(
+                  subtitle!,
+                  color: primaryColor,
+                ).symmetricPadding(20, 30),
               body,
             ],
           ),

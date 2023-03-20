@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/secondary_icon_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_form_field.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
@@ -14,20 +14,22 @@ class ChangePasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AuthCard(
+    return TranslucentCard(
       scrollContentOnResized: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           PrimaryTitle(
             title: l10n.cambiarContrasena,
+            color: Colors.white,
           ),
           PrimaryLabel(l10n.ingreseDatos),
           const SizedBox(
             height: 5,
           ),
-          PrimaryTextFormField(
-            label: l10n.nuevaContrasena,
+          PrimaryTextField(
+            hintText: l10n.nuevaContrasena,
+            ligth: true,
             // suffixIcon: Ionicons.eye_off_outline,
             // colorSuffixIcon: Colors.white,
             textInputType: TextInputType.visiblePassword,
@@ -36,8 +38,9 @@ class ChangePasswordPage extends StatelessWidget {
               icon: Icons.remove_red_eye,
             ),
           ),
-          PrimaryTextFormField(
-            label: l10n.confirmarContrasena,
+          PrimaryTextField(
+            hintText: l10n.confirmarContrasena,
+            ligth: true,
             suffixIcon: SecondaryIconButton(
               onPressed: () {},
               icon: Icons.remove_red_eye,

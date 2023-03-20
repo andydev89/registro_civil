@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/icon_button_auth.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
@@ -15,7 +15,7 @@ class FingerPrintPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AuthCard(
+    return TranslucentCard(
       scrollContentOnResized: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

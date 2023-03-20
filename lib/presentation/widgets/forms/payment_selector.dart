@@ -18,7 +18,7 @@ class PaymentSelector extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedIndex = useState(0);
+    final selectedIndex = useState<int?>(null);
     return Column(
       children: [
         Text(

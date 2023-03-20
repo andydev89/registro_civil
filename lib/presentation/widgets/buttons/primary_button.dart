@@ -11,14 +11,13 @@ class PrimaryButton extends HookWidget {
     this.disabledBackgroundColor,
     this.colorText,
     this.disabledForegroundColor,
-    this.width = double.maxFinite,
     this.onPressed,
     this.onPressedAsync,
     required this.title,
     this.padding = const EdgeInsets.symmetric(vertical: 17),
     this.elevation,
-    this.height = 40,
-    this.radius = 25,
+    // this.height = 40,
+    // this.radius = 25,
     this.fontSize = fontSizeDefault,
     this.mainAxisAlignment = MainAxisAlignment.center,
     this.fontWeight = FontWeight.bold,
@@ -33,9 +32,8 @@ class PrimaryButton extends HookWidget {
   final Color? disabledBackgroundColor;
   final Color? colorText;
   final Color? disabledForegroundColor;
-  final double width;
-  final double height;
-  final double radius;
+  // final double height;
+  // final double radius;
   final void Function()? onPressed;
   final Future<void> Function()? onPressedAsync;
   final double fontSize;
@@ -50,12 +48,12 @@ class PrimaryButton extends HookWidget {
   Widget build(BuildContext context) {
     final isLoading = useState(false);
 
-    return Container(
+    return DecoratedBox(
       decoration: ShapeDecoration(
         shape: const StadiumBorder(),
         gradient: gradientePrincipal(),
       ),
-      height: height + 15,
+      // height: height + 15,
       child: ElevatedButton(
         onPressed: onPressed == null && onPressedAsync == null
             ? null
@@ -74,9 +72,8 @@ class PrimaryButton extends HookWidget {
           disabledBackgroundColor: disabledBackgroundColor,
           colorText: colorText,
           disabledForegroundColor: disabledForegroundColor,
-          width: width,
-          height: height,
-          radius: radius,
+          // height: height,
+          // radius: radius,
           padding: padding,
           elevation: elevation,
         ),
