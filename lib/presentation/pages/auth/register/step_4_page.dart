@@ -76,8 +76,8 @@ class Step4Page extends HookConsumerWidget {
                     return PrimaryButton(
                       title: l10n.registrar,
                       width: double.maxFinite,
-                      onPressed: form.form.valid
-                          ? () {
+                      onPressedAsync: form.form.valid
+                          ? () async {
                               ref
                                   .read(registerProvider.notifier)
                                   .updateEnterData(form.model);

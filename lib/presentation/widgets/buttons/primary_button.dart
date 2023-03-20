@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
-class PrimaryButton extends StatelessWidget {
+class PrimaryButton extends HookWidget {
   const PrimaryButton({
     super.key,
     this.backgroundColor,
     this.disabledBackgroundColor,
     this.colorText,
     this.disabledForegroundColor,
-    this.width = double.minPositive,
+    this.width = double.maxFinite,
     this.onPressed,
+    this.onPressedAsync,
     required this.title,
     this.padding = const EdgeInsets.symmetric(vertical: 17),
     this.elevation,
@@ -21,7 +23,11 @@ class PrimaryButton extends StatelessWidget {
     this.mainAxisAlignment = MainAxisAlignment.center,
     this.fontWeight = FontWeight.bold,
     this.isToUpperCase = false,
-  });
+  }) : assert(
+          onPressed == null || onPressedAsync == null,
+          'No se pueden proporcionar onPressed '
+          'y onPressedAsync al mismo tiempo',
+        );
 
   final Color? backgroundColor;
   final Color? disabledBackgroundColor;
@@ -31,6 +37,7 @@ class PrimaryButton extends StatelessWidget {
   final double height;
   final double radius;
   final void Function()? onPressed;
+  final Future<void> Function()? onPressedAsync;
   final double fontSize;
   final MainAxisAlignment mainAxisAlignment;
   final String title;
@@ -41,6 +48,8 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = useState(false);
+
     return Container(
       decoration: ShapeDecoration(
         shape: const StadiumBorder(),
@@ -48,11 +57,17 @@ class PrimaryButton extends StatelessWidget {
       ),
       height: height + 15,
       child: ElevatedButton(
-        onPressed: onPressed == null
+        onPressed: onPressed == null && onPressedAsync == null
             ? null
-            : () {
-                FocusScope.of(context).unfocus();
-                onPressed!.call();
+            : () async {
+                if (isLoading.value) return;
+                if (onPressedAsync != null) {
+                  isLoading.value = true;
+                  await onPressedAsync!.call();
+                  isLoading.value = false;
+                } else {
+                  onPressed!.call();
+                }
               },
         style: botonEstilo(
           backgroundColor: backgroundColor ?? Colors.transparent,
@@ -65,14 +80,18 @@ class PrimaryButton extends StatelessWidget {
           padding: padding,
           elevation: elevation,
         ),
-        child: PrimaryLabel(
-          fontWeight: fontWeight,
-          fontSize: fontSize,
-          title,
-          color: onPressed == null ? disabledForegroundColor : colorText,
-          mainAxisAlignment: mainAxisAlignment,
-          isToUpperCase: isToUpperCase,
-        ),
+        child: isLoading.value
+            ? const CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              )
+            : PrimaryLabel(
+                fontWeight: fontWeight,
+                fontSize: fontSize,
+                title,
+                color: onPressed == null ? disabledForegroundColor : colorText,
+                mainAxisAlignment: mainAxisAlignment,
+                isToUpperCase: isToUpperCase,
+              ),
       ),
     );
   }
