@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/auth_card.dart';
@@ -32,7 +31,6 @@ class ChangePasswordPage extends StatelessWidget {
             // suffixIcon: Ionicons.eye_off_outline,
             // colorSuffixIcon: Colors.white,
             textInputType: TextInputType.visiblePassword,
-            inputFormatters: const [],
             suffixIcon: SecondaryIconButton(
               onPressed: () {},
               icon: Icons.remove_red_eye,
@@ -45,7 +43,6 @@ class ChangePasswordPage extends StatelessWidget {
               icon: Icons.remove_red_eye,
             ),
             textInputType: TextInputType.visiblePassword,
-            inputFormatters: const [],
           ),
           const SizedBox(
             height: 5,

@@ -220,6 +220,18 @@ class _$AppRouter extends RootStackRouter {
         child: const ScheduleShiftFirstStepPage(),
       );
     },
+    ScheduleShiftSecondStepRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ScheduleShiftSecondStepPage(),
+      );
+    },
+    ScheduleShiftThirdStepRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ScheduleShiftThirdStepPage(),
+      );
+    },
   };
 
   @override
@@ -352,7 +364,17 @@ class _$AppRouter extends RootStackRouter {
                   ScheduleShiftFirstStepRoute.name,
                   path: '',
                   parent: ScheduleShiftRouterRoute.name,
-                )
+                ),
+                RouteConfig(
+                  ScheduleShiftSecondStepRoute.name,
+                  path: 'schedule-shift-second-step-page',
+                  parent: ScheduleShiftRouterRoute.name,
+                ),
+                RouteConfig(
+                  ScheduleShiftThirdStepRoute.name,
+                  path: 'schedule-shift-third-step-page',
+                  parent: ScheduleShiftRouterRoute.name,
+                ),
               ],
             ),
             RouteConfig(
@@ -681,4 +703,28 @@ class ScheduleShiftFirstStepRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ScheduleShiftFirstStepRoute';
+}
+
+/// generated route for
+/// [ScheduleShiftSecondStepPage]
+class ScheduleShiftSecondStepRoute extends PageRouteInfo<void> {
+  const ScheduleShiftSecondStepRoute()
+      : super(
+          ScheduleShiftSecondStepRoute.name,
+          path: 'schedule-shift-second-step-page',
+        );
+
+  static const String name = 'ScheduleShiftSecondStepRoute';
+}
+
+/// generated route for
+/// [ScheduleShiftThirdStepPage]
+class ScheduleShiftThirdStepRoute extends PageRouteInfo<void> {
+  const ScheduleShiftThirdStepRoute()
+      : super(
+          ScheduleShiftThirdStepRoute.name,
+          path: 'schedule-shift-third-step-page',
+        );
+
+  static const String name = 'ScheduleShiftThirdStepRoute';
 }

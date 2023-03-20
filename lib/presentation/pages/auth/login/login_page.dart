@@ -37,10 +37,11 @@ class LoginPage extends HookWidget {
             children: [
               PrimaryTitle(
                 title: l10n.loggin,
+                color: Colors.white,
               ),
               PrimaryReactiveFormField(
                 formControl: form.identificationControl,
-                title: l10n.numCedula,
+                hintText: l10n.numCedula,
                 prefixIcon: Icons.payment,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
@@ -50,7 +51,7 @@ class LoginPage extends HookWidget {
               ),
               PrimaryReactiveFormField(
                 formControl: form.passwordControl,
-                title: l10n.password,
+                hintText: l10n.password,
                 obscureText: !showPassword.value,
                 controller: newPasswordController,
                 prefixIcon: Icons.key,

@@ -10,12 +10,11 @@ class ScheduleShiftRouterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AutoRouter(
-      builder: (context, content) => ScheduleShiftScaffold(
-        body: Text('asd'),
-        title: 'Obtenga su turno',
-        subtitle: 'Complete la informacion solicitada',
-        buttonText: l10n.continuar,
-      ),
-    );
+        // builder: (context, content) => ScheduleShiftScaffold(
+        //   body: Expanded(child: content),
+        //   title: context.routeData.name,
+        //   subtitle: 'Complete la informacion solicitada',
+        // ),
+        );
   }
 }
