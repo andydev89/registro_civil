@@ -96,5 +96,19 @@
   "registroCivil": "Registro civil",
   "validacionDocumentos": "Validación de documentos",
   "inscripcionesRegistrosSimpres": "Inscripciones y registros simples",
-  "convalidacionDocumentos": "Convalidación de documentos"
+  "convalidacionDocumentos": "Convalidación de documentos",
+  "personal": "Personal",
+  "familiar": "Familiar",
+  "obtengaSuTurno": "Obtenga su turno",
+  "completeInformacionSolicitada": "Complete la información solicitada",
+  "tipoServicio": "Tipo de servicios",
+  "seleccione": "Seleccione",
+  "seleccioneMetodoPago": "Seleccione un método de pago",
+  "realizarPago": "Realizar pago",
+  "introduzcaCodigoBancario": "Introduzca el código del comprobante emitido por la entidad bancaria donde realizó el pago",
+  "codigo": "Código",
+  "escriba": "Escriba",
+  "provincia": "Provincia",
+  "agencia": "Agencia",
+  "fechaParaTurno": "Fecha para el turno"
 }

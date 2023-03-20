@@ -35,6 +35,7 @@ class PrimaryLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: mainAxisAlignment,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Visibility(
           visible: icono != null,

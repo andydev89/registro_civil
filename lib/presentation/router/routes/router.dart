@@ -23,6 +23,8 @@ import 'package:registro_civil_apk/presentation/pages/home/pages/services/servic
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_shift/schedule_shift_first_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_shift/schedule_shift_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_shift/schedule_shift_second_step.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_shift/schedule_shift_third_step.dart';
 import 'package:registro_civil_apk/presentation/pages/test/test_page.dart';
 
 part 'router.gr.dart';
@@ -149,6 +151,12 @@ part 'router.gr.dart';
             CupertinoRoute(
               page: ScheduleShiftFirstStepPage,
               initial: true,
+            ),
+            CupertinoRoute(
+              page: ScheduleShiftSecondStepPage,
+            ),
+            CupertinoRoute(
+              page: ScheduleShiftThirdStepPage,
             ),
           ],
         ),

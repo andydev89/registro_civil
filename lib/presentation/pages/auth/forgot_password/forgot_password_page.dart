@@ -31,7 +31,6 @@ class ForgotPasswordPage extends StatelessWidget {
             label: l10n.correoE,
             //prefixIcon: Icons.payment,
             textInputType: TextInputType.emailAddress,
-            inputFormatters: const [],
           ),
           const SizedBox(
             height: 5,
