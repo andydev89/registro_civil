@@ -3,15 +3,20 @@ import 'package:registro_civil_apk/presentation/models/circle_avatar_card_model.
 import 'package:registro_civil_apk/presentation/widgets/circle_avatar_card.dart';
 
 class CircleAvatarCardGrid extends StatelessWidget {
-  const CircleAvatarCardGrid({super.key, required this.elements});
+  const CircleAvatarCardGrid({
+    super.key,
+    required this.elements,
+    this.crossAxisCount = 2,
+  });
   final List<CircleAvatarCardModel> elements;
+  final int crossAxisCount;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
         childAspectRatio: 0.55,
         crossAxisSpacing: 20,
       ),
