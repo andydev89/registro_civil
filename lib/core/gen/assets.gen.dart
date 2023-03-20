@@ -37,6 +37,10 @@ class $AssetsPngGen {
   AssetGenImage get agendarTurno3 =>
       const AssetGenImage('assets/png/agendar_turno3.png');
 
+  /// File path: assets/png/agendar_turnos.png
+  AssetGenImage get agendarTurnos =>
+      const AssetGenImage('assets/png/agendar_turnos.png');
+
   /// File path: assets/png/anverso.png
   AssetGenImage get anverso => const AssetGenImage('assets/png/anverso.png');
 
@@ -44,9 +48,33 @@ class $AssetsPngGen {
   AssetGenImage get backgroundAuth =>
       const AssetGenImage('assets/png/background_auth.png');
 
+  /// File path: assets/png/certificado_defuncion.png
+  AssetGenImage get certificadoDefuncion =>
+      const AssetGenImage('assets/png/certificado_defuncion.png');
+
+  /// File path: assets/png/certificado_firma_electronica.png
+  AssetGenImage get certificadoFirmaElectronica =>
+      const AssetGenImage('assets/png/certificado_firma_electronica.png');
+
+  /// File path: assets/png/certificado_genero.png
+  AssetGenImage get certificadoGenero =>
+      const AssetGenImage('assets/png/certificado_genero.png');
+
+  /// File path: assets/png/certificado_identidad.png
+  AssetGenImage get certificadoIdentidad =>
+      const AssetGenImage('assets/png/certificado_identidad.png');
+
+  /// File path: assets/png/certificado_matrimonio.png
+  AssetGenImage get certificadoMatrimonio =>
+      const AssetGenImage('assets/png/certificado_matrimonio.png');
+
   /// File path: assets/png/certificado_nacimiento.png
   AssetGenImage get certificadoNacimiento =>
       const AssetGenImage('assets/png/certificado_nacimiento.png');
+
+  /// File path: assets/png/certificado_union_hecho.png
+  AssetGenImage get certificadoUnionHecho =>
+      const AssetGenImage('assets/png/certificado_union_hecho.png');
 
   /// File path: assets/png/finger_print.png
   AssetGenImage get fingerPrint =>
@@ -58,8 +86,20 @@ class $AssetsPngGen {
   /// File path: assets/png/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/png/logo.png');
 
+  /// File path: assets/png/pago_convalidacion_documentos.png
+  AssetGenImage get pagoConvalidacionDocumentos =>
+      const AssetGenImage('assets/png/pago_convalidacion_documentos.png');
+
+  /// File path: assets/png/pago_servicio_ingresos_sentencias.png
+  AssetGenImage get pagoServicioIngresosSentencias =>
+      const AssetGenImage('assets/png/pago_servicio_ingresos_sentencias.png');
+
   /// File path: assets/png/qr.png
   AssetGenImage get qr => const AssetGenImage('assets/png/qr.png');
+
+  /// File path: assets/png/registro_residencia.png
+  AssetGenImage get registroResidencia =>
+      const AssetGenImage('assets/png/registro_residencia.png');
 
   /// File path: assets/png/reverso.png
   AssetGenImage get reverso => const AssetGenImage('assets/png/reverso.png');
@@ -68,28 +108,53 @@ class $AssetsPngGen {
   AssetGenImage get rostroCedula =>
       const AssetGenImage('assets/png/rostro_cedula.png');
 
+  /// File path: assets/png/seguimiento_linea.png
+  AssetGenImage get seguimientoLinea =>
+      const AssetGenImage('assets/png/seguimiento_linea.png');
+
   /// File path: assets/png/splash.png
   AssetGenImage get splash => const AssetGenImage('assets/png/splash.png');
 
   /// File path: assets/png/usuario.jpg
   AssetGenImage get usuario => const AssetGenImage('assets/png/usuario.jpg');
 
+  /// File path: assets/png/validacion_datos_personales.png
+  AssetGenImage get validacionDatosPersonales =>
+      const AssetGenImage('assets/png/validacion_datos_personales.png');
+
+  /// File path: assets/png/validacion_documentos.png
+  AssetGenImage get validacionDocumentos =>
+      const AssetGenImage('assets/png/validacion_documentos.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         agendarTurno1,
         agendarTurno2,
         agendarTurno3,
+        agendarTurnos,
         anverso,
         backgroundAuth,
+        certificadoDefuncion,
+        certificadoFirmaElectronica,
+        certificadoGenero,
+        certificadoIdentidad,
+        certificadoMatrimonio,
         certificadoNacimiento,
+        certificadoUnionHecho,
         fingerPrint,
         footer,
         logo,
+        pagoConvalidacionDocumentos,
+        pagoServicioIngresosSentencias,
         qr,
+        registroResidencia,
         reverso,
         rostroCedula,
+        seguimientoLinea,
         splash,
-        usuario
+        usuario,
+        validacionDatosPersonales,
+        validacionDocumentos
       ];
 }
 

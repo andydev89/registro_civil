@@ -15,7 +15,7 @@ abstract class Api {
     @Body() RegisterModel registerModel,
   );
 
-  @POST('/api/login')
+  @POST('/api/auth/login')
   Future<BasicResponse<dynamic>> login(
     @Body() LoginModel loginModel,
   );

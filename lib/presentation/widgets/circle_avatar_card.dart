@@ -50,10 +50,14 @@ class CircleAvatarCardWidget extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              PrimaryLabel(
-                title,
-                color: primaryColor,
-                fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2.5),
+                child: PrimaryLabel(
+                  title,
+                  color: primaryColor,
+                  fontWeight: FontWeight.bold,
+                  maxlines: 3,
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -77,7 +81,7 @@ class CircleAvatarCardWidget extends StatelessWidget {
                     onPressed: onPressedView,
                   ),
                 ],
-              ).verticalPadding(20),
+              ).verticalPadding(30),
             ],
           ),
         ),
