@@ -167,6 +167,10 @@ class $AssetsSvgGen {
   /// File path: assets/svg/bell.svg
   SvgGenImage get bell => const SvgGenImage('assets/svg/bell.svg');
 
+  /// File path: assets/svg/bottom_arrow.svg
+  SvgGenImage get bottomArrow =>
+      const SvgGenImage('assets/svg/bottom_arrow.svg');
+
   /// File path: assets/svg/business_service.svg
   SvgGenImage get businessService =>
       const SvgGenImage('assets/svg/business_service.svg');
@@ -243,6 +247,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/qr_code.svg
   SvgGenImage get qrCode => const SvgGenImage('assets/svg/qr_code.svg');
 
+  /// File path: assets/svg/rigth_arrow.svg
+  SvgGenImage get rigthArrow => const SvgGenImage('assets/svg/rigth_arrow.svg');
+
   /// File path: assets/svg/rotated_fingerprint.svg
   SvgGenImage get rotatedFingerprint =>
       const SvgGenImage('assets/svg/rotated_fingerprint.svg');
@@ -274,6 +281,7 @@ class $AssetsSvgGen {
   List<SvgGenImage> get values => [
         avatar,
         bell,
+        bottomArrow,
         businessService,
         calendar,
         calendar3,
@@ -297,6 +305,7 @@ class $AssetsSvgGen {
         passport,
         pen,
         qrCode,
+        rigthArrow,
         rotatedFingerprint,
         settings,
         simpleCert,

@@ -18,7 +18,6 @@ class PrimaryTextButton extends StatelessWidget {
     this.fontSize = fontSizeDefault,
     this.padding = const EdgeInsets.all(10),
     this.fontWeight = FontWeight.normal,
-    this.mainAxisAlignment = MainAxisAlignment.center,
     this.colorBorder = Colors.transparent,
     this.widthBorde = 1,
   });
@@ -35,7 +34,6 @@ class PrimaryTextButton extends StatelessWidget {
   final double? elevation;
   final FontWeight fontWeight;
   final bool isToUpperCase;
-  final MainAxisAlignment mainAxisAlignment;
   final Color colorBorder;
   final double widthBorde;
 
@@ -63,7 +61,6 @@ class PrimaryTextButton extends StatelessWidget {
         isToUpperCase ? title.toUpperCase() : title,
         fontSize: fontSize,
         fontWeight: fontWeight,
-        mainAxisAlignment: mainAxisAlignment,
       ),
     );
   }

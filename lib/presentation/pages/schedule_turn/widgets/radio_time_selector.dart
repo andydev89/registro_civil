@@ -38,8 +38,15 @@ class RadioTimeSelector extends StatelessWidget {
                       formControl: formControl,
                     ),
                     PrimaryText(
-                      DateFormat.jm().format(DateTime(
-                          now.year, now.month, now.day, e.hour, e.minute)),
+                      DateFormat.jm().format(
+                        DateTime(
+                          now.year,
+                          now.month,
+                          now.day,
+                          e.hour,
+                          e.minute,
+                        ),
+                      ),
                       color: ligthBlue,
                     ),
                   ],

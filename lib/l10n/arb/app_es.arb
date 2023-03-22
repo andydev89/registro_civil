@@ -135,5 +135,8 @@
   "turnoReservadoMensajeFormal": "¡Su turno se ha reservado satisfactoriamente!",
   "turnoReservadoMensajeCorreoFormal": "Le hemos enviado una notificación a su correo electrónico con los detalles de su turno.",
   "confirmacion": "Confirmación",
-  "seguroCancelarTurno": "¿Está seguro de cancelar su turno?"
+  "seguroCancelarTurno": "¿Está seguro de cancelar su turno?",
+  "reservacion": "Reservación",
+  "hora": "Hora",
+  "estado": "Estado"
 }
