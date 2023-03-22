@@ -135,5 +135,8 @@
     "turnoReservadoMensajeFormal": "Your appointment has been successfully booked!",
   "turnoReservadoMensajeCorreoFormal": "We have sent a notification to your email with the details of your shift.",
   "confirmacion": "Confirmation",
-  "seguroCancelarTurno": "Are you sure to cancel your turn?"
+  "seguroCancelarTurno": "Are you sure to cancel your turn?",
+  "reservacion": "Reservation",
+  "hora": "Hour",
+  "estado": "State"
 }

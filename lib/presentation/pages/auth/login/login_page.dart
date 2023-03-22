@@ -67,7 +67,6 @@ class LoginPage extends HookWidget {
               ),
               PrimaryTextButton(
                 title: l10n.olvPassword,
-                mainAxisAlignment: MainAxisAlignment.end,
                 onPressed: () =>
                     context.navigateTo(const ForgotPasswordRouterRoute()),
               ),

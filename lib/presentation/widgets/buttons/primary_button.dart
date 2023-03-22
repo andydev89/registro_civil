@@ -86,7 +86,6 @@ class PrimaryButton extends HookWidget {
                 fontSize: fontSize,
                 title,
                 color: onPressed == null ? disabledForegroundColor : colorText,
-                mainAxisAlignment: mainAxisAlignment,
                 isToUpperCase: isToUpperCase,
               ),
       ),
