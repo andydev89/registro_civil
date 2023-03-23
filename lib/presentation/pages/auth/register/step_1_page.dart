@@ -28,10 +28,11 @@ class Step1Page extends ConsumerWidget {
             children: [
               PrimaryLabel(
                 l10n.ingNumCedula,
+                color: Colors.white,
               ),
               PrimaryReactiveTextField<String>(
                 formControl: form.nuiControl,
-                label: l10n.numCedula,
+                hintText: l10n.numCedula,
                 ligth: true,
                 prefixIcon: Assets.svg.cedula.svg(),
                 keyboardType: TextInputType.number,

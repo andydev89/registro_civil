@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-class FingerPrintRouterPage extends StatelessWidget {
-  const FingerPrintRouterPage({super.key});
+class SimpleCertificateRouterPage extends StatelessWidget {
+  const SimpleCertificateRouterPage({super.key});
 
   @override
   Widget build(BuildContext context) {

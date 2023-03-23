@@ -39,7 +39,7 @@ class AnotherStepperWidget extends StatelessWidget {
             child: Center(
               child: PrimaryLabel(
                 '${index + 1}',
-                fontWeight: FontWeight.bold,
+                color: Colors.white,
                 fontSize: fontSize,
               ),
             ),

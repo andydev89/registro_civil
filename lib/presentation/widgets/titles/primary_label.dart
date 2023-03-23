@@ -16,6 +16,7 @@ class PrimaryLabel extends StatelessWidget {
     this.textAlign = TextAlign.center,
     super.key,
     this.shadows,
+    this.underlining = false,
   });
   final String title;
   final Color? color;
@@ -27,6 +28,7 @@ class PrimaryLabel extends StatelessWidget {
   final int? maxlines;
   final TextAlign? textAlign;
   final List<Shadow>? shadows;
+  final bool underlining;
 
   @override
   Widget build(BuildContext context) {
