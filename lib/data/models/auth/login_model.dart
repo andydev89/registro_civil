@@ -12,7 +12,7 @@ class LoginModel {
     @FormControlAnnotation(validators: [
       requiredValidator,
       ecuadorDniValidator,
-      lengthDniValidatorValidator,
+      length10Validator,
     ])
         this.identification = '',
     @FormControlAnnotation(validators: [

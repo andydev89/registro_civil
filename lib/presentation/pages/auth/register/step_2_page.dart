@@ -70,18 +70,22 @@ class Step2Page extends ConsumerWidget {
                 ),
               ],
             ),
-            PrimaryButton(
-              title: cargoData ? l10n.siguiente : l10n.escanear,
-              onPressed: () {
-                //TODO escanear rostro
-              },
-            ),
-            PrimaryTextButton(
-              title: l10n.salPaso,
-              onPressed: () {
-                ref.read(stepperIndexProvider.notifier).index++;
-                context.navigateTo(const Step3Route());
-              },
+            Column(
+              children: [
+                PrimaryButton(
+                  title: cargoData ? l10n.siguiente : l10n.escanear,
+                  onPressed: () {
+                    //TODO escanear rostro
+                  },
+                ),
+                PrimaryTextButton(
+                  title: l10n.salPaso,
+                  onPressed: () {
+                    ref.read(stepperIndexProvider.notifier).index++;
+                    context.navigateTo(const Step3Route());
+                  },
+                ),
+              ],
             ),
           ],
         ),

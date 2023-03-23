@@ -29,7 +29,7 @@ class ScanFacePage extends StatelessWidget {
               width: 50,
               height: 50,
               fit: BoxFit.cover,
-            ),
+          ),
           ).verticalPadding(30),
           PrimaryButton(
             title: l10n.escRostro,
@@ -44,11 +44,11 @@ class ScanFacePage extends StatelessWidget {
                 icon: IconoBotonEnum.cedula,
                 onPressed: () => context.popRoute(),
               ),
-              IconButtonAuth(
-                icon: IconoBotonEnum.huella,
-                onPressed: () =>
-                    context.replaceRoute(const FingerPrintRouterRoute()),
-              ),
+              // IconButtonAuth(
+              //   icon: IconoBotonEnum.huella,
+              //   onPressed: () =>
+              //       context.replaceRoute(const FingerPrintRouterRoute()),
+              // ),
             ],
           ),
         ],

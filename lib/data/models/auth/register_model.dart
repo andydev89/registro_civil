@@ -12,7 +12,7 @@ class NuiModel {
       validators: [
         requiredValidator,
         ecuadorDniValidator,
-        lengthDniValidatorValidator,
+        length10Validator,
       ],
     )
         this.nui = '',
@@ -28,35 +28,18 @@ class NuiModel {
 
 @JsonSerializable()
 @ReactiveFormAnnotation()
-class SecurityQuestionsModel {
-  SecurityQuestionsModel({
-    @FormControlAnnotation(validators: [requiredValidator])
-        this.cityMetParents = '',
-    @FormControlAnnotation(validators: [requiredValidator])
-        this.nameElderCousin = '',
-  });
-
-  factory SecurityQuestionsModel.fromJson(Map<String, dynamic> json) =>
-      _$SecurityQuestionsModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SecurityQuestionsModelToJson(this);
-
-  final String cityMetParents;
-  final String nameElderCousin;
-
-  bool verifyAnswers(String city, String cousin) {
-    return city.toLowerCase() == cityMetParents.toLowerCase() &&
-        nameElderCousin.toLowerCase() == cousin.toLowerCase();
-  }
-}
-
-@JsonSerializable()
-@ReactiveFormAnnotation()
 class EnterDataModel {
   EnterDataModel({
     @FormControlAnnotation(validators: [requiredValidator, emailValidator])
         this.email = '',
-    this.confirmPassword,
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        length10Validator,
+      ],
+      asyncValidators: [phoneNumberEcuadorValidation],
+    )
+        this.phoneNumber = '',
   });
 
   factory EnterDataModel.fromJson(Map<String, dynamic> json) =>
@@ -65,6 +48,38 @@ class EnterDataModel {
   Map<String, dynamic> toJson() => _$EnterDataModelToJson(this);
 
   final String email;
+  final String phoneNumber;
+}
+
+@JsonSerializable()
+@ReactiveFormAnnotation()
+class OtpModel {
+  OtpModel({
+    @FormControlAnnotation(validators: [requiredValidator, length6Validator])
+        this.otp = '',
+    @FormControlAnnotation(validators: [requiredTrueValidator])
+        this.isVerified = false,
+  });
+
+  factory OtpModel.fromJson(Map<String, dynamic> json) =>
+      _$OtpModelFromJson(json);
+  final String otp;
+  final bool isVerified;
+
+  Map<String, dynamic> toJson() => _$OtpModelToJson(this);
+}
+
+@JsonSerializable()
+@ReactiveFormAnnotation()
+class PasswordModel {
+  PasswordModel({
+    this.confirmPassword,
+  });
+
+  factory PasswordModel.fromJson(Map<String, dynamic> json) =>
+      _$PasswordModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PasswordModelToJson(this);
   final ConfirmPasswordModel? confirmPassword;
 }
 
@@ -93,7 +108,7 @@ class RegisterModel {
     this.nui = '',
     this.password = '',
     this.email = '',
-    this.questions = const {},
+    this.phoneNumber = '',
   });
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) =>
@@ -103,19 +118,19 @@ class RegisterModel {
   final String nui;
   final String password;
   final String email;
-  final Map<String, String> questions;
+  final String phoneNumber;
 
   RegisterModel copyWith({
     String? nui,
     String? password,
     String? email,
-    Map<String, String>? questions,
+    String? phoneNumber,
   }) {
     return RegisterModel(
       nui: nui ?? this.nui,
       password: password ?? this.password,
       email: email ?? this.email,
-      questions: questions ?? this.questions,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
     );
   }
 }

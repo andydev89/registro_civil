@@ -1,3 +1,4 @@
+import 'package:libphonenumber/libphonenumber.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
@@ -52,13 +53,13 @@ Map<String, dynamic>? ecuadorDniValidator(AbstractControl<dynamic> control) {
   return null;
 }
 
-Map<String, dynamic>? lengthDniValidatorValidator(
+Map<String, dynamic>? length10Validator(
   AbstractControl<dynamic> control,
 ) {
   final value = control.value as String?;
   if (value == null || value.isEmpty) return null;
   if (value.length != 10) {
-    return {'lengthError': true};
+    return {'length10Error': true};
   } else {
     return null;
   }
@@ -99,4 +100,36 @@ Map<String, dynamic>? passwordValidator(AbstractControl<dynamic> control) {
     return {'invalidPassword': true};
   }
   return null;
+}
+
+Future<Map<String, dynamic>?> phoneNumberEcuadorValidation(
+  AbstractControl<dynamic> control,
+) async {
+  final value = control.value as String?;
+
+  if (value == null || value.isEmpty) return null;
+  final isValid = await PhoneNumberUtil.isValidPhoneNumber(
+    phoneNumber: value,
+    isoCode: 'EC', // Código ISO del país (Ecuador)
+  );
+  if (!isValid!) {
+    return {'invalidPhoneNumber': true};
+  }
+  return null;
+}
+
+// validar que un bool sea true
+Map<String, dynamic>? requiredTrueValidator(AbstractControl<dynamic> control) {
+  return Validators.requiredTrue(control);
+}
+
+// validar que un String tenga lenght ==6
+Map<String, dynamic>? length6Validator(AbstractControl<dynamic> control) {
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) return null;
+  if (value.length != 6) {
+    return {'length6Error': true};
+  } else {
+    return null;
+  }
 }

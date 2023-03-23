@@ -17,6 +17,7 @@ class PrimaryLabel extends StatelessWidget {
     this.textAlign = TextAlign.center,
     super.key,
     this.shadows,
+    this.underlining = false,
   });
   final String title;
   final IconData? icono;
@@ -30,6 +31,7 @@ class PrimaryLabel extends StatelessWidget {
   final int? maxlines;
   final TextAlign? textAlign;
   final List<Shadow>? shadows;
+  final bool underlining;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,7 @@ class PrimaryLabel extends StatelessWidget {
             shadows: shadows,
             maxLines: maxlines,
             textAlign: textAlign,
+            underlining: underlining,
           ),
         ),
       ],

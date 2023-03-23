@@ -192,7 +192,7 @@ class LoginProvider extends AutoDisposeFutureProvider<String?> {
   }
 }
 
-String _$registerHash() => r'b70c62199f614b3df691cf4881fe50a47bfa14a6';
+String _$registerHash() => r'bea2d775459ce8b699ae16ab6d38d1bfd66f9be4';
 
 /// See also [Register].
 @ProviderFor(Register)

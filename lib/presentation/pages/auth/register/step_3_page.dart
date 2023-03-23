@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
@@ -23,44 +24,58 @@ class Step3Page extends ConsumerWidget {
         return Future(() => true);
       },
       child: ScrollableContent(
-        child: SecurityQuestionsModelFormBuilder(
+        child: EnterDataModelFormBuilder(
           builder: (_, form, __) {
             return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: PrimaryLabel(
-                    l10n.resSigPreguntas,
+                    l10n.ingreseDatos,
+                    textAlign: TextAlign.start,
                   ),
                 ),
-                PrimaryLabel(
-                  l10n.cuaSegNomPrimo,
-                  textAlign: TextAlign.start,
+                Row(
+                  children: const [
+                    PrimaryLabel(
+                      'Nombre: Luis Pérez Pérez',
+                      textAlign: TextAlign.start,
+                    ),
+                  ],
                 ),
                 PrimaryReactiveTextField(
-                  formControl: form.nameElderCousinControl,
+                  prefixIcon: Icon(
+                    Icons.alternate_email,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  formControl: form.emailControl,
                   ligth: true,
-                  hintText: l10n.responda,
-                ),
-                PrimaryLabel(
-                  l10n.ciuConPadres,
-                  textAlign: TextAlign.start,
+                  hintText: l10n.correoE,
                 ),
                 PrimaryReactiveTextField(
+                  prefixIcon: Icon(
+                    Icons.phone_android,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   ligth: true,
-                  formControl: form.cityMetParentsControl,
-                  hintText: l10n.responda,
+                  formControl: form.phoneNumberControl,
+                  hintText: l10n.telefonoCel,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(10),
+                  ],
                 ),
-                ReactiveSecurityQuestionsModelFormConsumer(
+                const SizedBox(height: 50),
+                ReactiveEnterDataModelFormConsumer(
                   builder: (_, form, __) {
                     return PrimaryButton(
-                      title: l10n.siguiente,
+                      title: l10n.verificar,
                       onPressed: form.form.valid
                           ? () {
                               ref
                                   .read(registerProvider.notifier)
-                                  .updateSecurityQuestions(form.model);
+                                  .updateEnterData(form.model);
                               ref.read(stepperIndexProvider.notifier).index++;
                               context.navigateTo(const Step4Route());
                             }

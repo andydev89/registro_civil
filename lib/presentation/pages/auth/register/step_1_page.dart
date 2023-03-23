@@ -31,7 +31,7 @@ class Step1Page extends ConsumerWidget {
               ),
               PrimaryReactiveTextField<String>(
                 formControl: form.nuiControl,
-                label: l10n.numCedula,
+                hintText: l10n.numCedula,
                 ligth: true,
                 prefixIcon: Assets.svg.cedula.svg(),
                 keyboardType: TextInputType.number,

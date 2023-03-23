@@ -6,12 +6,12 @@ import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/icon_button_auth.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_text_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/secondary_icon_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_password_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
@@ -22,11 +22,6 @@ class LoginPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final newPasswordController = useTextEditingController();
-    final showPassword = useState(false);
-    void toggleShowPassword() {
-      showPassword.value = !showPassword.value;
-    }
 
     return TranslucentCard(
       scrollContentOnResized: true,
@@ -51,25 +46,27 @@ class LoginPage extends HookWidget {
                   LengthLimitingTextInputFormatter(10),
                 ],
               ),
-              PrimaryReactiveTextField(
-                formControl: form.passwordControl,
-                hintText: l10n.password,
-                ligth: true,
-                obscureText: !showPassword.value,
-                controller: newPasswordController,
-                prefixIcon: Assets.svg.key.svg(),
-                suffixIcon: SecondaryIconButton(
-                  onPressed: toggleShowPassword,
-                  icon: showPassword.value
-                      ? Icons.visibility
-                      : Icons.visibility_off,
-                ),
-              ),
-              PrimaryTextButton(
-                title: l10n.olvPassword,
-                mainAxisAlignment: MainAxisAlignment.end,
-                onPressed: () =>
-                    context.navigateTo(const ForgotPasswordRouterRoute()),
+              Column(
+                children: [
+                  PrimaryReactivePasswordField(
+                    formControl: form.passwordControl,
+                    hintText: l10n.password,
+                    ligth: true,
+                    prefixIcon: Assets.svg.key.svg(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      PrimaryTextButton(
+                        title: l10n.olvPassword,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        width: double.minPositive,
+                        onPressed: () => context
+                            .navigateTo(const ForgotPasswordRouterRoute()),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -79,11 +76,11 @@ class LoginPage extends HookWidget {
                     onPressed: () =>
                         context.navigateTo(const ScanRouterRoute()),
                   ),
-                  IconButtonAuth(
-                    icon: IconoBotonEnum.huella,
-                    onPressed: () =>
-                        context.navigateTo(const FingerPrintRouterRoute()),
-                  ),
+                  // IconButtonAuth(
+                  //   icon: IconoBotonEnum.huella,
+                  //   onPressed: () =>
+                  //       context.navigateTo(const FingerPrintRouterRoute()),
+                  // ),
                 ],
               ),
               Padding(

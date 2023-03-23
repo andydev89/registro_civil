@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/auth_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/finger_print/finger_print_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/finger_print/finger_print_page2.dart';
@@ -13,6 +15,7 @@ import 'package:registro_civil_apk/presentation/pages/auth/register/step_1_page.
 import 'package:registro_civil_apk/presentation/pages/auth/register/step_2_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/register/step_3_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/register/step_4_page.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/register/step_5_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/scan/scan_dni_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/scan/scan_face_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/scan/scan_router_page.dart';
@@ -21,6 +24,7 @@ import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/services/services_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/my_turns_page.dart';
+import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_familiar_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_personal_page.dart';
@@ -28,11 +32,8 @@ import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedu
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_second_step/schedule_turn_second_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_thrid_step/schedule_turn_third_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/turn_details/turn_details_page.dart';
-import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/schedule_turn_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/test/test_page.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
-import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 
 part 'router.gr.dart';
 
@@ -76,6 +77,11 @@ part 'router.gr.dart';
               transitionsBuilder: TransitionsBuilders.slideLeft,
               page: Step4Page,
               meta: {'index': 3},
+            ),
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              page: Step5Page,
+              meta: {'index': 4},
             ),
           ],
         ),

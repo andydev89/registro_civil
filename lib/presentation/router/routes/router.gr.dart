@@ -128,6 +128,15 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    Step5Route.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const Step5Page(),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ForgotPasswordRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -324,6 +333,12 @@ class _$AppRouter extends RootStackRouter {
                   path: 'step4-page',
                   parent: RegisterRouterRoute.name,
                   meta: <String, dynamic>{'index': 3},
+                ),
+                RouteConfig(
+                  Step5Route.name,
+                  path: 'step5-page',
+                  parent: RegisterRouterRoute.name,
+                  meta: <String, dynamic>{'index': 4},
                 ),
               ],
             ),
@@ -635,6 +650,18 @@ class Step4Route extends PageRouteInfo<void> {
         );
 
   static const String name = 'Step4Route';
+}
+
+/// generated route for
+/// [Step5Page]
+class Step5Route extends PageRouteInfo<void> {
+  const Step5Route()
+      : super(
+          Step5Route.name,
+          path: 'step5-page',
+        );
+
+  static const String name = 'Step5Route';
 }
 
 /// generated route for
