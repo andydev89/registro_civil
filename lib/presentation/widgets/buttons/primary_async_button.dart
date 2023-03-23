@@ -16,7 +16,6 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(vertical: 17),
     this.elevation,
     this.fontSize = fontSizeDefault,
-    this.mainAxisAlignment = MainAxisAlignment.center,
     this.fontWeight = FontWeight.bold,
     this.isToUpperCase = false,
     this.onError,
@@ -31,7 +30,6 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
   final void Function(Object)? onError;
   final Future<void> Function()? onPressedAsync;
   final double fontSize;
-  final MainAxisAlignment mainAxisAlignment;
   final String title;
   final EdgeInsetsGeometry? padding;
   final double? elevation;
@@ -90,10 +88,9 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
         successPadding: EdgeInsets.zero,
         child: PrimaryLabel(
           isToUpperCase ? title.toUpperCase() : title,
-          color: colorText,
+          color: colorText ?? Colors.white,
           fontSize: fontSize,
           fontWeight: fontWeight,
-          mainAxisAlignment: mainAxisAlignment,
         ),
       ),
     );

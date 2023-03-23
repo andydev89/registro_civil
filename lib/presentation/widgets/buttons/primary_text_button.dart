@@ -61,6 +61,7 @@ class PrimaryTextButton extends StatelessWidget {
         isToUpperCase ? title.toUpperCase() : title,
         fontSize: fontSize,
         fontWeight: fontWeight,
+        color: foregroundColor,
       ),
     );
   }

@@ -70,15 +70,6 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    FingerPrintRouterRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: const FingerPrintRouterPage(),
-        transitionsBuilder: TransitionsBuilders.slideLeft,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
     SuccessRoute.name: (routeData) {
       final args = routeData.argsAs<SuccessRouteArgs>();
       return CustomPage<dynamic>(
@@ -164,33 +155,6 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    ScanDniRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: const ScanDniPage(),
-        transitionsBuilder: TransitionsBuilders.slideLeft,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
-    FingerPrintRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: const FingerPrintPage(),
-        transitionsBuilder: TransitionsBuilders.slideLeft,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
-    FingerPrint2Route.name: (routeData) {
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: const FingerPrint2Page(),
-        transitionsBuilder: TransitionsBuilders.slideLeft,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
     HomeRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -201,6 +165,12 @@ class _$AppRouter extends RootStackRouter {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: const ScheduleTurnRouterPage(),
+      );
+    },
+    SimpleCertificateRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const SimpleCertificateRouterPage(),
       );
     },
     NotificationRoute.name: (routeData) {
@@ -292,6 +262,27 @@ class _$AppRouter extends RootStackRouter {
         child: const ScheduleTurnFirstStepFamiliarPage(),
       );
     },
+    SimpleCertificateFirstStepRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const SimpleCertificateFirstStepRouterPage(),
+      );
+    },
+    SimpleCertificateFirstStepPersonalRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const SimpleCertificateFirstStepPersonalPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    SimpleCertificateFirstStepFamiliarRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const SimpleCertificateFirstStepFamiliarPage(),
+      );
+    },
   };
 
   @override
@@ -368,29 +359,7 @@ class _$AppRouter extends RootStackRouter {
                   ScanFaceRoute.name,
                   path: '',
                   parent: ScanRouterRoute.name,
-                ),
-                RouteConfig(
-                  ScanDniRoute.name,
-                  path: 'scan-dni-page',
-                  parent: ScanRouterRoute.name,
-                ),
-              ],
-            ),
-            RouteConfig(
-              FingerPrintRouterRoute.name,
-              path: 'finger-print-router-page',
-              parent: AuthRouterRoute.name,
-              children: [
-                RouteConfig(
-                  FingerPrintRoute.name,
-                  path: '',
-                  parent: FingerPrintRouterRoute.name,
-                ),
-                RouteConfig(
-                  FingerPrint2Route.name,
-                  path: 'finger-print2-page',
-                  parent: FingerPrintRouterRoute.name,
-                ),
+                )
               ],
             ),
             RouteConfig(
@@ -458,6 +427,30 @@ class _$AppRouter extends RootStackRouter {
                   path: 'shift-details-page',
                   parent: ScheduleTurnRouterRoute.name,
                 ),
+              ],
+            ),
+            RouteConfig(
+              SimpleCertificateRouterRoute.name,
+              path: 'simple-certificate-router-page',
+              parent: RootRouterRoute.name,
+              children: [
+                RouteConfig(
+                  SimpleCertificateFirstStepRouterRoute.name,
+                  path: '',
+                  parent: SimpleCertificateRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      SimpleCertificateFirstStepPersonalRoute.name,
+                      path: '',
+                      parent: SimpleCertificateFirstStepRouterRoute.name,
+                    ),
+                    RouteConfig(
+                      SimpleCertificateFirstStepFamiliarRoute.name,
+                      path: 'simple-certificate-first-step-familiar-page',
+                      parent: SimpleCertificateFirstStepRouterRoute.name,
+                    ),
+                  ],
+                )
               ],
             ),
             RouteConfig(
@@ -555,19 +548,6 @@ class ScanRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ScanRouterRoute';
-}
-
-/// generated route for
-/// [FingerPrintRouterPage]
-class FingerPrintRouterRoute extends PageRouteInfo<void> {
-  const FingerPrintRouterRoute({List<PageRouteInfo>? children})
-      : super(
-          FingerPrintRouterRoute.name,
-          path: 'finger-print-router-page',
-          initialChildren: children,
-        );
-
-  static const String name = 'FingerPrintRouterRoute';
 }
 
 /// generated route for
@@ -701,42 +681,6 @@ class ScanFaceRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ScanDniPage]
-class ScanDniRoute extends PageRouteInfo<void> {
-  const ScanDniRoute()
-      : super(
-          ScanDniRoute.name,
-          path: 'scan-dni-page',
-        );
-
-  static const String name = 'ScanDniRoute';
-}
-
-/// generated route for
-/// [FingerPrintPage]
-class FingerPrintRoute extends PageRouteInfo<void> {
-  const FingerPrintRoute()
-      : super(
-          FingerPrintRoute.name,
-          path: '',
-        );
-
-  static const String name = 'FingerPrintRoute';
-}
-
-/// generated route for
-/// [FingerPrint2Page]
-class FingerPrint2Route extends PageRouteInfo<void> {
-  const FingerPrint2Route()
-      : super(
-          FingerPrint2Route.name,
-          path: 'finger-print2-page',
-        );
-
-  static const String name = 'FingerPrint2Route';
-}
-
-/// generated route for
 /// [HomeRouterPage]
 class HomeRouterRoute extends PageRouteInfo<void> {
   const HomeRouterRoute({List<PageRouteInfo>? children})
@@ -760,6 +704,19 @@ class ScheduleTurnRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ScheduleTurnRouterRoute';
+}
+
+/// generated route for
+/// [SimpleCertificateRouterPage]
+class SimpleCertificateRouterRoute extends PageRouteInfo<void> {
+  const SimpleCertificateRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          SimpleCertificateRouterRoute.name,
+          path: 'simple-certificate-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'SimpleCertificateRouterRoute';
 }
 
 /// generated route for
@@ -987,4 +944,41 @@ class ScheduleTurnFirstStepFamiliarRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ScheduleTurnFirstStepFamiliarRoute';
+}
+
+/// generated route for
+/// [SimpleCertificateFirstStepRouterPage]
+class SimpleCertificateFirstStepRouterRoute extends PageRouteInfo<void> {
+  const SimpleCertificateFirstStepRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          SimpleCertificateFirstStepRouterRoute.name,
+          path: '',
+          initialChildren: children,
+        );
+
+  static const String name = 'SimpleCertificateFirstStepRouterRoute';
+}
+
+/// generated route for
+/// [SimpleCertificateFirstStepPersonalPage]
+class SimpleCertificateFirstStepPersonalRoute extends PageRouteInfo<void> {
+  const SimpleCertificateFirstStepPersonalRoute()
+      : super(
+          SimpleCertificateFirstStepPersonalRoute.name,
+          path: '',
+        );
+
+  static const String name = 'SimpleCertificateFirstStepPersonalRoute';
+}
+
+/// generated route for
+/// [SimpleCertificateFirstStepFamiliarPage]
+class SimpleCertificateFirstStepFamiliarRoute extends PageRouteInfo<void> {
+  const SimpleCertificateFirstStepFamiliarRoute()
+      : super(
+          SimpleCertificateFirstStepFamiliarRoute.name,
+          path: 'simple-certificate-first-step-familiar-page',
+        );
+
+  static const String name = 'SimpleCertificateFirstStepFamiliarRoute';
 }

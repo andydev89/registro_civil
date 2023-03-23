@@ -31,24 +31,29 @@ class Step5Page extends ConsumerWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: PrimaryLabel(
-                    l10n.ingreseCon,
-                  ),
+                Column(
+                  children: [
+                    PrimaryLabel(
+                      l10n.ingreseCon,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(height: 20),
+                    PrimaryReactivePasswordField(
+                      ligth: true,
+                      formControl: form.confirmPasswordForm.newPasswordControl,
+                      hintText: l10n.password,
+                      prefixIcon: Assets.svg.key.svg(),
+                    ),
+                    PrimaryReactivePasswordField(
+                      ligth: true,
+                      formControl:
+                          form.confirmPasswordForm.confirmPasswordControl,
+                      hintText: l10n.confirmarContrasena,
+                      prefixIcon: Assets.svg.key.svg(),
+                    ),
+                  ],
                 ),
-                PrimaryReactivePasswordField(
-                  ligth: true,
-                  formControl: form.confirmPasswordForm.newPasswordControl,
-                  hintText: l10n.password,
-                  prefixIcon: Assets.svg.key.svg(),
-                ),
-                PrimaryReactivePasswordField(
-                  ligth: true,
-                  formControl: form.confirmPasswordForm.confirmPasswordControl,
-                  hintText: l10n.confirmarContrasena,
-                  prefixIcon: Assets.svg.key.svg(),
-                ),
+                const SizedBox(height: 50),
                 ReactivePasswordModelFormConsumer(
                   builder: (_, form, __) {
                     return PrimaryAsyncButton<bool>(
@@ -59,12 +64,16 @@ class Step5Page extends ConsumerWidget {
                             children: [
                               PrimaryLabel(
                                 l10n.regSatisfactorio,
-                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
                               const SizedBox(
                                 height: 30,
                               ),
-                              PrimaryLabel(l10n.envCorreo),
+                              PrimaryLabel(
+                                l10n.envCorreo,
+                                color: Colors.white,
+                                fontWeight: FontWeight.normal,
+                              ),
                             ],
                           ),
                         ),

@@ -35,12 +35,17 @@ class Step4Page extends ConsumerWidget {
                   padding: const EdgeInsets.only(top: 20),
                   child: PrimaryLabel(
                     l10n.ingreseCodVer,
+                    color: Colors.white,
                   ),
                 ),
-                PrimaryLabel(
-                  l10n.terminosCondiciones,
-                  maxlines: 99,
-                  fontSize: fontSizeDefault,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: PrimaryLabel(
+                    l10n.terminosCondiciones,
+                    maxlines: 99,
+                    fontSize: fontSizeDefault,
+                    color: Colors.white,
+                  ),
                 ),
                 OTPTextField(
                   length: 6,
@@ -70,7 +75,6 @@ class Step4Page extends ConsumerWidget {
                   title: PrimaryLabel(
                     l10n.aceptarTer,
                     fontSize: fontSizeDefault,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     color: Theme.of(context).primaryColor,
                     underlining: true,
                   ),

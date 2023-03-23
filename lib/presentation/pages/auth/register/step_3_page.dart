@@ -29,41 +29,46 @@ class Step3Page extends ConsumerWidget {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: PrimaryLabel(
-                    l10n.ingreseDatos,
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                Row(
-                  children: const [
+                Column(
+                  children: [
                     PrimaryLabel(
-                      'Nombre: Luis Pérez Pérez',
-                      textAlign: TextAlign.start,
+                      l10n.ingreseDatos,
+                      color: Colors.white,
                     ),
-                  ],
-                ),
-                PrimaryReactiveTextField(
-                  prefixIcon: Icon(
-                    Icons.alternate_email,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  formControl: form.emailControl,
-                  ligth: true,
-                  hintText: l10n.correoE,
-                ),
-                PrimaryReactiveTextField(
-                  prefixIcon: Icon(
-                    Icons.phone_android,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  ligth: true,
-                  formControl: form.phoneNumberControl,
-                  hintText: l10n.telefonoCel,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(10),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: const [
+                        PrimaryLabel(
+                          'Nombre: Luis Pérez Pérez',
+                          textAlign: TextAlign.start,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    PrimaryReactiveTextField(
+                      prefixIcon: Icon(
+                        Icons.alternate_email,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      formControl: form.emailControl,
+                      ligth: true,
+                      hintText: l10n.correoE,
+                    ),
+                    const SizedBox(height: 20),
+                    PrimaryReactiveTextField(
+                      prefixIcon: Icon(
+                        Icons.phone_android,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      ligth: true,
+                      formControl: form.phoneNumberControl,
+                      hintText: l10n.telefonoCel,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(10),
+                      ],
+                    ),
                   ],
                 ),
                 const SizedBox(height: 50),

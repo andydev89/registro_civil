@@ -6,7 +6,7 @@ part of 'auth_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$checkRegisterHash() => r'9db151bca3f65539cf170e74b1febed69e45573e';
+String _$loginHash() => r'a40512868ffe6001c8c5d645b28890be9ca97c3b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,89 +29,6 @@ class _SystemHash {
   }
 }
 
-typedef CheckRegisterRef = AutoDisposeFutureProviderRef<bool>;
-
-/// See also [checkRegister].
-@ProviderFor(checkRegister)
-const checkRegisterProvider = CheckRegisterFamily();
-
-/// See also [checkRegister].
-class CheckRegisterFamily extends Family<AsyncValue<bool>> {
-  /// See also [checkRegister].
-  const CheckRegisterFamily();
-
-  /// See also [checkRegister].
-  CheckRegisterProvider call(
-    RegisterModel registerModel,
-  ) {
-    return CheckRegisterProvider(
-      registerModel,
-    );
-  }
-
-  @override
-  CheckRegisterProvider getProviderOverride(
-    covariant CheckRegisterProvider provider,
-  ) {
-    return call(
-      provider.registerModel,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'checkRegisterProvider';
-}
-
-/// See also [checkRegister].
-class CheckRegisterProvider extends AutoDisposeFutureProvider<bool> {
-  /// See also [checkRegister].
-  CheckRegisterProvider(
-    this.registerModel,
-  ) : super.internal(
-          (ref) => checkRegister(
-            ref,
-            registerModel,
-          ),
-          from: checkRegisterProvider,
-          name: r'checkRegisterProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$checkRegisterHash,
-          dependencies: CheckRegisterFamily._dependencies,
-          allTransitiveDependencies:
-              CheckRegisterFamily._allTransitiveDependencies,
-        );
-
-  final RegisterModel registerModel;
-
-  @override
-  bool operator ==(Object other) {
-    return other is CheckRegisterProvider &&
-        other.registerModel == registerModel;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, registerModel.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-String _$loginHash() => r'a40512868ffe6001c8c5d645b28890be9ca97c3b';
 typedef LoginRef = AutoDisposeFutureProviderRef<String?>;
 
 /// See also [login].
@@ -192,7 +109,7 @@ class LoginProvider extends AutoDisposeFutureProvider<String?> {
   }
 }
 
-String _$registerHash() => r'bea2d775459ce8b699ae16ab6d38d1bfd66f9be4';
+String _$registerHash() => r'107b8eeb4b37df081a2821e18eb8cc823caa3d02';
 
 /// See also [Register].
 @ProviderFor(Register)

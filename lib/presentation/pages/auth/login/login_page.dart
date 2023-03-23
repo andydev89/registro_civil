@@ -35,19 +35,19 @@ class LoginPage extends HookWidget {
                 title: l10n.loggin,
                 color: Colors.white,
               ),
-              PrimaryReactiveTextField(
-                formControl: form.identificationControl,
-                hintText: l10n.numCedula,
-                prefixIcon: Assets.svg.cedula.svg(),
-                keyboardType: TextInputType.number,
-                ligth: true,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(10),
-                ],
-              ),
               Column(
                 children: [
+                  PrimaryReactiveTextField(
+                    formControl: form.identificationControl,
+                    hintText: l10n.numCedula,
+                    prefixIcon: Assets.svg.cedula.svg(),
+                    keyboardType: TextInputType.number,
+                    ligth: true,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(10),
+                    ],
+                  ),
                   PrimaryReactivePasswordField(
                     formControl: form.passwordControl,
                     hintText: l10n.password,
@@ -68,48 +68,48 @@ class LoginPage extends HookWidget {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButtonAuth(
                     icon: IconoBotonEnum.faceID,
                     onPressed: () =>
                         context.navigateTo(const ScanRouterRoute()),
                   ),
-                  // IconButtonAuth(
-                  //   icon: IconoBotonEnum.huella,
-                  //   onPressed: () =>
-                  //       context.navigateTo(const FingerPrintRouterRoute()),
-                  // ),
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: ReactiveLoginModelFormConsumer(
-                  builder: (_, form, __) {
-                    return PrimaryButton(
-                      title: l10n.loggin,
-                      onPressed: form.form.valid
-                          ? () {
-                              context.replaceRoute(const RootRouterRoute());
-                            }
-                          : null,
-                    );
-                  },
+                padding: const EdgeInsets.only(top: 20),
+                child: Column(
+                  children: [
+                    ReactiveLoginModelFormConsumer(
+                      builder: (_, form, __) {
+                        return PrimaryButton(
+                          title: l10n.loggin,
+                          onPressed: form.form.valid
+                              ? () {
+                                  context.replaceRoute(const RootRouterRoute());
+                                }
+                              : null,
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    PrimaryLabel(
+                      l10n.noCuenta,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    PrimaryTextButton(
+                      title: l10n.regAqui,
+                      foregroundColor: Colors.white,
+                      onPressed: () =>
+                          context.navigateTo(const RegisterRouterRoute()),
+                      fontWeight: FontWeight.bold,
+                    )
+                  ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                ),
-                child: PrimaryLabel(
-                  l10n.noCuenta,
-                ),
-              ),
-              PrimaryTextButton(
-                title: l10n.regAqui,
-                onPressed: () =>
-                    context.navigateTo(const RegisterRouterRoute()),
-                fontWeight: FontWeight.bold,
               )
             ],
           );
