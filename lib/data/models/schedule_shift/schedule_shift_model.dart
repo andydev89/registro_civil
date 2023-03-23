@@ -23,20 +23,33 @@ class ScheduleShiftFirstStepPersonalModel {
 class ScheduleShiftFirstStepFamiliarModel {
   ScheduleShiftFirstStepFamiliarModel({
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.identificationNumber,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.service,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.relationship,
-    @FormControlAnnotation(validators: [requiredValidator])
         required this.paymentMethod,
+    @FormControlAnnotation(
+      touched: true,
+    )
+        this.scheduleForMe = false,
+    @FormArrayAnnotation(validators: [requiredValidator])
+        this.family = const [],
+  });
+
+  final PaymentMethodType paymentMethod;
+  final bool scheduleForMe;
+  final List<FamiliarFormModel> family;
+}
+
+@FormGroupAnnotation()
+class FamiliarFormModel {
+  FamiliarFormModel({
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.identificationNumber,
+    @FormControlAnnotation(validators: [requiredValidator]) this.service,
+    @FormControlAnnotation(validators: [requiredValidator]) this.relationship,
   });
 
   ///Cedula
-  final int identificationNumber;
-  final RelationshipType relationship;
-  final ServiceType service;
-  final PaymentMethodType paymentMethod;
+  final int? identificationNumber;
+  final RelationshipType? relationship;
+  final ServiceType? service;
 }
 
 @ReactiveFormAnnotation()

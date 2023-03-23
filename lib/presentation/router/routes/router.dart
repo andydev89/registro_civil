@@ -21,6 +21,9 @@ import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/services/services_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/my_turns_page.dart';
+import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.dart';
+import 'package:registro_civil_apk/presentation/pages/payment/payment_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/payment/select_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_familiar_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_personal_page.dart';
@@ -187,6 +190,19 @@ part 'router.gr.dart';
         //MY TURNS
         CupertinoRoute(
           page: MyTurnsPage,
+        ),
+        //PAYMENT
+        CupertinoRoute(
+          page: PaymentRouterPage,
+          children: [
+            CupertinoRoute(
+              page: SelectPaymentPage,
+              initial: true,
+            ),
+            CupertinoRoute(
+              page: MakePaymentPage,
+            ),
+          ],
         ),
         // TEST
         CustomRoute(

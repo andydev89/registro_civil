@@ -22,7 +22,7 @@ class ScheduleTurnFirstStepRouterPage extends HookWidget {
           builder: (context, content) => Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Row(
                     children: [

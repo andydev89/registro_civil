@@ -216,6 +216,12 @@ class _$AppRouter extends RootStackRouter {
         child: const MyTurnsPage(),
       );
     },
+    PaymentRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const PaymentRouterPage(),
+      );
+    },
     TexterRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -281,6 +287,18 @@ class _$AppRouter extends RootStackRouter {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: const ScheduleTurnFirstStepFamiliarPage(),
+      );
+    },
+    SelectPaymentRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const SelectPaymentPage(),
+      );
+    },
+    MakePaymentRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const MakePaymentPage(),
       );
     },
   };
@@ -454,6 +472,23 @@ class _$AppRouter extends RootStackRouter {
               MyTurnsRoute.name,
               path: 'my-turns-page',
               parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
+              PaymentRouterRoute.name,
+              path: 'payment-router-page',
+              parent: RootRouterRoute.name,
+              children: [
+                RouteConfig(
+                  SelectPaymentRoute.name,
+                  path: '',
+                  parent: PaymentRouterRoute.name,
+                ),
+                RouteConfig(
+                  MakePaymentRoute.name,
+                  path: 'make-payment-page',
+                  parent: PaymentRouterRoute.name,
+                ),
+              ],
             ),
             RouteConfig(
               TexterRoute.name,
@@ -812,6 +847,19 @@ class MyTurnsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [PaymentRouterPage]
+class PaymentRouterRoute extends PageRouteInfo<void> {
+  const PaymentRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          PaymentRouterRoute.name,
+          path: 'payment-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'PaymentRouterRoute';
+}
+
+/// generated route for
 /// [TexterPage]
 class TexterRoute extends PageRouteInfo<void> {
   const TexterRoute()
@@ -960,4 +1008,28 @@ class ScheduleTurnFirstStepFamiliarRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ScheduleTurnFirstStepFamiliarRoute';
+}
+
+/// generated route for
+/// [SelectPaymentPage]
+class SelectPaymentRoute extends PageRouteInfo<void> {
+  const SelectPaymentRoute()
+      : super(
+          SelectPaymentRoute.name,
+          path: '',
+        );
+
+  static const String name = 'SelectPaymentRoute';
+}
+
+/// generated route for
+/// [MakePaymentPage]
+class MakePaymentRoute extends PageRouteInfo<void> {
+  const MakePaymentRoute()
+      : super(
+          MakePaymentRoute.name,
+          path: 'make-payment-page',
+        );
+
+  static const String name = 'MakePaymentRoute';
 }

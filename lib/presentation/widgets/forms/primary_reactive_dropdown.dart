@@ -6,12 +6,14 @@ import 'package:registro_civil_apk/presentation/widgets/decorations/input_decora
 class PrimaryReactiveDropdown<T> extends StatelessWidget {
   const PrimaryReactiveDropdown({
     super.key,
-    required this.formControl,
+    this.formControl,
+    this.formControlName,
     required this.items,
     this.hintText,
     required this.label,
   });
-  final FormControl<T> formControl;
+  final FormControl<T>? formControl;
+  final String? formControlName;
   final List<T> items;
   final String? hintText;
   final String label;
@@ -27,6 +29,7 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
         ).verticalPadding(5),
         ReactiveDropdownField(
           formControl: formControl,
+          formControlName: formControlName,
           borderRadius: BorderRadius.circular(10),
           decoration: primaryInputDecoration(
             hintText: hintText,

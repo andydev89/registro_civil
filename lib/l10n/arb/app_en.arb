@@ -138,5 +138,7 @@
   "seguroCancelarTurno": "Are you sure to cancel your turn?",
   "reservacion": "Reservation",
   "hora": "Hour",
-  "estado": "State"
+  "estado": "State",
+  "parentezco": "Relationship",
+  "agendarTurnoParaMi": "Schedule appointment for me"
 }
