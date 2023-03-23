@@ -55,6 +55,7 @@ class PrimaryTextField extends StatelessWidget {
           decoration: primaryInputDecoration(
             light: ligth,
             hintText: hintText,
+            suffixIcon: suffixIcon,
           ),
         ),
       ],
