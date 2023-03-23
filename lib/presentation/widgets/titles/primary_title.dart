@@ -7,22 +7,18 @@ class PrimaryTitle extends StatelessWidget {
     this.title,
     this.color,
     this.textAlign,
-    this.mainAxisAlignment = MainAxisAlignment.center,
   });
   final String? title;
   final Color? color;
   final TextAlign? textAlign;
-  final MainAxisAlignment mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     return PrimaryLabel(
       title ?? '',
       fontSize: 25,
-      fontWeight: FontWeight.bold,
       color: color,
       textAlign: textAlign,
-      mainAxisAlignment: mainAxisAlignment,
     );
   }
 }

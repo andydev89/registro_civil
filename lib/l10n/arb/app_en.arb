@@ -150,4 +150,7 @@
   "aceptarTer": "I accept the terms and conditions",
   "verificar": "Verify",
   "ingreseCon" : "Enter your password"
+  "reservacion": "Reservation",
+  "hora": "Hour",
+  "estado": "State"
 }

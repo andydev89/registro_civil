@@ -60,7 +60,6 @@ class PrimaryButton extends StatelessWidget {
           fontSize: fontSize,
           title,
           color: onPressed == null ? disabledForegroundColor : colorText,
-          mainAxisAlignment: mainAxisAlignment,
           isToUpperCase: isToUpperCase,
         ),
       ),

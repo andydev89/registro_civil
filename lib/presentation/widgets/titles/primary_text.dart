@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/presentation/theme/theme.dart';
 
 class PrimaryText extends StatelessWidget {
   const PrimaryText(
     this.title, {
-    this.color = Colors.white,
+    this.color = primaryColor,
     this.fontSize = fontSizeDefault,
     this.fontWeight = FontWeight.normal,
     this.isToUpperCase = false,
