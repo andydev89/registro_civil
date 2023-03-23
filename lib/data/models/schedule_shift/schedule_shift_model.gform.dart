@@ -714,15 +714,21 @@ class ScheduleShiftFirstStepFamiliarModelForm
     this.scheduleShiftFirstStepFamiliarModel,
     this.form,
     this.path,
-  ) {}
-
-  static String identificationNumberControlName = "identificationNumber";
-
-  static String serviceControlName = "service";
-
-  static String relationshipControlName = "relationship";
+  ) {
+    familyFamiliarFormModelForm =
+        (scheduleShiftFirstStepFamiliarModel?.family ?? [])
+            .asMap()
+            .map((k, v) => MapEntry(
+                k, FamiliarFormModelForm(v, form, pathBuilder("family.$k"))))
+            .values
+            .toList();
+  }
 
   static String paymentMethodControlName = "paymentMethod";
+
+  static String scheduleForMeControlName = "scheduleForMe";
+
+  static String familyControlName = "family";
 
   final ScheduleShiftFirstStepFamiliarModel?
       scheduleShiftFirstStepFamiliarModel;
@@ -731,45 +737,28 @@ class ScheduleShiftFirstStepFamiliarModelForm
 
   final String? path;
 
-  String identificationNumberControlPath() =>
-      pathBuilder(identificationNumberControlName);
-  String serviceControlPath() => pathBuilder(serviceControlName);
-  String relationshipControlPath() => pathBuilder(relationshipControlName);
+  late List<FamiliarFormModelForm> familyFamiliarFormModelForm;
+
   String paymentMethodControlPath() => pathBuilder(paymentMethodControlName);
-  int get _identificationNumberValue =>
-      identificationNumberControl.value as int;
-  ServiceType get _serviceValue => serviceControl.value as ServiceType;
-  RelationshipType get _relationshipValue =>
-      relationshipControl.value as RelationshipType;
+  String scheduleForMeControlPath() => pathBuilder(scheduleForMeControlName);
+  String familyControlPath() => pathBuilder(familyControlName);
   PaymentMethodType get _paymentMethodValue =>
       paymentMethodControl.value as PaymentMethodType;
-  bool get containsIdentificationNumber {
-    try {
-      form.control(identificationNumberControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsService {
-    try {
-      form.control(serviceControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsRelationship {
-    try {
-      form.control(relationshipControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
+  bool get _scheduleForMeValue => scheduleForMeControl.value as bool;
+  List<FamiliarFormModel> get _familyValue => familyFamiliarFormModelForm
+      .asMap()
+      .map(
+        (k, v) => MapEntry(
+          k,
+          v
+              .copyWithPath(
+                pathBuilder("family.$k"),
+              )
+              .model,
+        ),
+      )
+      .values
+      .toList();
   bool get containsPaymentMethod {
     try {
       form.control(paymentMethodControlPath());
@@ -779,42 +768,30 @@ class ScheduleShiftFirstStepFamiliarModelForm
     }
   }
 
-  Object? get identificationNumberErrors => identificationNumberControl.errors;
-  Object? get serviceErrors => serviceControl.errors;
-  Object? get relationshipErrors => relationshipControl.errors;
+  bool get containsScheduleForMe {
+    try {
+      form.control(scheduleForMeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsFamily {
+    try {
+      form.control(familyControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get paymentMethodErrors => paymentMethodControl.errors;
-  void get identificationNumberFocus =>
-      form.focus(identificationNumberControlPath());
-  void get serviceFocus => form.focus(serviceControlPath());
-  void get relationshipFocus => form.focus(relationshipControlPath());
+  Object? get scheduleForMeErrors => scheduleForMeControl.errors;
+  Object? get familyErrors => familyControl.errors;
   void get paymentMethodFocus => form.focus(paymentMethodControlPath());
-  void identificationNumberValueUpdate(
-    int value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    identificationNumberControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void serviceValueUpdate(
-    ServiceType value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    serviceControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void relationshipValueUpdate(
-    RelationshipType value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    relationshipControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
+  void get scheduleForMeFocus => form.focus(scheduleForMeControlPath());
+  void get familyFocus => form.focus(familyControlPath());
   void paymentMethodValueUpdate(
     PaymentMethodType value, {
     bool updateParent = true,
@@ -824,31 +801,108 @@ class ScheduleShiftFirstStepFamiliarModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void identificationNumberValuePatch(
-    int value, {
+  void scheduleForMeValueUpdate(
+    bool value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    identificationNumberControl.patchValue(value,
+    scheduleForMeControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void serviceValuePatch(
-    ServiceType value, {
+  void familyValueUpdate(
+    List<FamiliarFormModel> value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    serviceControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    if ((value).isEmpty) {
+      familyClear(updateParent: updateParent, emitEvent: emitEvent);
+
+      return;
+    }
+
+    final updateList = (value)
+        .asMap()
+        .map(
+          (k, v) => MapEntry(
+            k,
+            FamiliarFormModelForm(v, form, pathBuilder("family.$k")),
+          ),
+        )
+        .values
+        .toList();
+
+    familyFamiliarFormModelForm.clear();
+    familyFamiliarFormModelForm.addAll(updateList);
+
+    final toUpdate = <FamiliarFormModelForm>[];
+    final toAdd = <FamiliarFormModelForm>[];
+
+    updateList.asMap().forEach((k, v) {
+      if (familyFamiliarFormModelForm.asMap().containsKey(k) &&
+          (familyControl.value ?? []).asMap().containsKey(k)) {
+        toUpdate.add(v);
+      } else {
+        toAdd.add(v);
+      }
+    });
+
+    if (toUpdate.isNotEmpty) {
+      familyControl.updateValue(
+          toUpdate.map((e) => e.formElements().rawValue).toList(),
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+    }
+
+    if (toAdd.isNotEmpty) {
+      toAdd.forEach((e) {
+        familyControl.add(e.formElements(),
+            updateParent: updateParent, emitEvent: emitEvent);
+      });
+    }
   }
 
-  void relationshipValuePatch(
-    RelationshipType value, {
+  void familyInsert(
+    int i,
+    FamiliarFormModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    relationshipControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
+    if (familyFamiliarFormModelForm.length < i) {
+      addFamilyItem(value);
+      return;
+    }
+
+    final item = FamiliarFormModelForm(
+      value,
+      form,
+      pathBuilder('family.$i'),
+    );
+
+    familyFamiliarFormModelForm.insert(i, item);
+
+    familyFamiliarFormModelForm.asMap().forEach((k, v) {
+      if (k > i) {
+        familyFamiliarFormModelForm[k] = v.copyWithPath(
+          pathBuilder("family.$k"),
+        );
+      }
+    });
+
+    familyControl.insert(
+      i,
+      item.formElements(),
+      updateParent: updateParent,
+      emitEvent: emitEvent,
+    );
+  }
+
+  void familyClear({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    familyFamiliarFormModelForm.clear();
+    familyControl.clear(updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void paymentMethodValuePatch(
@@ -860,33 +914,40 @@ class ScheduleShiftFirstStepFamiliarModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void identificationNumberValueReset(
-    int value, {
+  void scheduleForMeValuePatch(
+    bool value, {
     bool updateParent = true,
     bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      identificationNumberControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void serviceValueReset(
-    ServiceType value, {
+  }) {
+    scheduleForMeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void familyValuePatch(
+    List<FamiliarFormModel> value, {
     bool updateParent = true,
     bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      serviceControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void relationshipValueReset(
-    RelationshipType value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      relationshipControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  }) {
+    final keys = familyFamiliarFormModelForm.asMap().keys;
+
+    final toPatch = <FamiliarFormModelForm>[];
+    (value).asMap().forEach(
+      (k, v) {
+        if (keys.contains(k)) {
+          final patch =
+              FamiliarFormModelForm(v, form, pathBuilder("family.$k"));
+          familyFamiliarFormModelForm[k] = patch;
+          toPatch.add(patch);
+        }
+      },
+    );
+
+    familyControl.patchValue(
+        toPatch.map((e) => e.formElements().rawValue).toList(),
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
   void paymentMethodValueReset(
     PaymentMethodType value, {
     bool updateParent = true,
@@ -896,69 +957,37 @@ class ScheduleShiftFirstStepFamiliarModelForm
   }) =>
       paymentMethodControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<int> get identificationNumberControl =>
-      form.control(identificationNumberControlPath()) as FormControl<int>;
-  FormControl<ServiceType> get serviceControl =>
-      form.control(serviceControlPath()) as FormControl<ServiceType>;
-  FormControl<RelationshipType> get relationshipControl =>
-      form.control(relationshipControlPath()) as FormControl<RelationshipType>;
+  void scheduleForMeValueReset(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      scheduleForMeControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void familyValueReset(
+    List<FamiliarFormModel> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      familyControl.reset(
+          value: value
+              .map((e) => FamiliarFormModelForm(e, FormGroup({}), null)
+                  .formElements()
+                  .rawValue)
+              .toList(),
+          updateParent: updateParent,
+          emitEvent: emitEvent);
   FormControl<PaymentMethodType> get paymentMethodControl =>
       form.control(paymentMethodControlPath())
           as FormControl<PaymentMethodType>;
-  void identificationNumberSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      identificationNumberControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      identificationNumberControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void serviceSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      serviceControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      serviceControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void relationshipSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      relationshipControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      relationshipControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
+  FormControl<bool> get scheduleForMeControl =>
+      form.control(scheduleForMeControlPath()) as FormControl<bool>;
+  FormArray<Map<String, Object?>> get familyControl =>
+      form.control(familyControlPath()) as FormArray<Map<String, Object?>>;
   void paymentMethodSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -977,6 +1006,73 @@ class ScheduleShiftFirstStepFamiliarModelForm
     }
   }
 
+  void scheduleForMeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      scheduleForMeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      scheduleForMeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void familySetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      familyControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      familyControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  ExtendedControl<List<Map<String, Object?>?>, List<FamiliarFormModelForm>>
+      get familyExtendedControl => ExtendedControl<List<Map<String, Object?>?>,
+              List<FamiliarFormModelForm>>(
+          form.control(familyControlPath()) as FormArray<Map<String, Object?>>,
+          () => familyFamiliarFormModelForm);
+  void addFamilyItem(FamiliarFormModel value) {
+    final formClass = FamiliarFormModelForm(value, form,
+        pathBuilder('family.${familyFamiliarFormModelForm.length}'));
+
+    familyFamiliarFormModelForm.add(formClass);
+    familyControl.add(formClass.formElements());
+  }
+
+  void removeFamilyItemAtIndex(int i) {
+    if (familyFamiliarFormModelForm.asMap().containsKey(i) &&
+        (familyControl.value ?? []).asMap().containsKey(i)) {
+      familyFamiliarFormModelForm.removeAt(i);
+
+      familyFamiliarFormModelForm.asMap().forEach((k, v) {
+        familyFamiliarFormModelForm[k] =
+            v.copyWithPath(pathBuilder("family.$k"));
+      });
+
+      familyControl.removeAt(i);
+    }
+  }
+
+  void addFamilyItemList(List<FamiliarFormModel> value) {
+    value.map((e) => addFamilyItem(e));
+  }
+
   @override
   ScheduleShiftFirstStepFamiliarModel get model {
     if (!form.valid) {
@@ -985,10 +1081,9 @@ class ScheduleShiftFirstStepFamiliarModelForm
       );
     }
     return ScheduleShiftFirstStepFamiliarModel(
-        identificationNumber: _identificationNumberValue,
-        service: _serviceValue,
-        relationship: _relationshipValue,
-        paymentMethod: _paymentMethodValue);
+        paymentMethod: _paymentMethodValue,
+        scheduleForMe: _scheduleForMeValue,
+        family: _familyValue);
   }
 
   ScheduleShiftFirstStepFamiliarModelForm copyWithPath(String? path) {
@@ -1033,29 +1128,386 @@ class ScheduleShiftFirstStepFamiliarModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
+        paymentMethodControlName: FormControl<PaymentMethodType>(
+            value: scheduleShiftFirstStepFamiliarModel?.paymentMethod,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        scheduleForMeControlName: FormControl<bool>(
+            value: scheduleShiftFirstStepFamiliarModel?.scheduleForMe,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: true),
+        familyControlName: FormArray(
+            familyFamiliarFormModelForm.map((e) => e.formElements()).toList(),
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
+  FamiliarFormModelForm(
+    this.familiarFormModel,
+    this.form,
+    this.path,
+  ) {}
+
+  static String identificationNumberControlName = "identificationNumber";
+
+  static String serviceControlName = "service";
+
+  static String relationshipControlName = "relationship";
+
+  final FamiliarFormModel? familiarFormModel;
+
+  final FormGroup form;
+
+  final String? path;
+
+  String identificationNumberControlPath() =>
+      pathBuilder(identificationNumberControlName);
+  String serviceControlPath() => pathBuilder(serviceControlName);
+  String relationshipControlPath() => pathBuilder(relationshipControlName);
+  int? get _identificationNumberValue => identificationNumberControl?.value;
+  ServiceType? get _serviceValue => serviceControl?.value;
+  RelationshipType? get _relationshipValue => relationshipControl?.value;
+  bool get containsIdentificationNumber {
+    try {
+      form.control(identificationNumberControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsService {
+    try {
+      form.control(serviceControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsRelationship {
+    try {
+      form.control(relationshipControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get identificationNumberErrors => identificationNumberControl?.errors;
+  Object? get serviceErrors => serviceControl?.errors;
+  Object? get relationshipErrors => relationshipControl?.errors;
+  void get identificationNumberFocus =>
+      form.focus(identificationNumberControlPath());
+  void get serviceFocus => form.focus(serviceControlPath());
+  void get relationshipFocus => form.focus(relationshipControlPath());
+  void identificationNumberRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsIdentificationNumber) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          identificationNumberControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            identificationNumberControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void serviceRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsService) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          serviceControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            serviceControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void relationshipRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsRelationship) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          relationshipControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            relationshipControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void identificationNumberValueUpdate(
+    int? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identificationNumberControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void serviceValueUpdate(
+    ServiceType? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    serviceControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void relationshipValueUpdate(
+    RelationshipType? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    relationshipControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void identificationNumberValuePatch(
+    int? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identificationNumberControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void serviceValuePatch(
+    ServiceType? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    serviceControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void relationshipValuePatch(
+    RelationshipType? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    relationshipControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void identificationNumberValueReset(
+    int? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      identificationNumberControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void serviceValueReset(
+    ServiceType? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      serviceControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void relationshipValueReset(
+    RelationshipType? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      relationshipControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<int>? get identificationNumberControl =>
+      containsIdentificationNumber
+          ? form.control(identificationNumberControlPath()) as FormControl<int>?
+          : null;
+  FormControl<ServiceType>? get serviceControl => containsService
+      ? form.control(serviceControlPath()) as FormControl<ServiceType>?
+      : null;
+  FormControl<RelationshipType>? get relationshipControl => containsRelationship
+      ? form.control(relationshipControlPath())
+          as FormControl<RelationshipType>?
+      : null;
+  void identificationNumberSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      identificationNumberControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      identificationNumberControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void serviceSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      serviceControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      serviceControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void relationshipSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      relationshipControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      relationshipControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  @override
+  FamiliarFormModel get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return FamiliarFormModel(
+        identificationNumber: _identificationNumberValue,
+        service: _serviceValue,
+        relationship: _relationshipValue);
+  }
+
+  FamiliarFormModelForm copyWithPath(String? path) {
+    return FamiliarFormModelForm(familiarFormModel, form, path);
+  }
+
+  @override
+  void updateValue(
+    FamiliarFormModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.updateValue(
+          FamiliarFormModelForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void resetValue(
+    FamiliarFormModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: FamiliarFormModelForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+  FormGroup formElements() => FormGroup({
         identificationNumberControlName: FormControl<int>(
-            value: scheduleShiftFirstStepFamiliarModel?.identificationNumber,
+            value: familiarFormModel?.identificationNumber,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         serviceControlName: FormControl<ServiceType>(
-            value: scheduleShiftFirstStepFamiliarModel?.service,
+            value: familiarFormModel?.service,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         relationshipControlName: FormControl<RelationshipType>(
-            value: scheduleShiftFirstStepFamiliarModel?.relationship,
-            validators: [requiredValidator],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        paymentMethodControlName: FormControl<PaymentMethodType>(
-            value: scheduleShiftFirstStepFamiliarModel?.paymentMethod,
+            value: familiarFormModel?.relationship,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

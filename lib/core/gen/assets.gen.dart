@@ -221,6 +221,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/face_id.svg
   SvgGenImage get faceId => const SvgGenImage('assets/svg/face_id.svg');
 
+  /// File path: assets/svg/family_add.svg
+  SvgGenImage get familyAdd => const SvgGenImage('assets/svg/family_add.svg');
+
   /// File path: assets/svg/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/svg/filter.svg');
 
@@ -270,6 +273,9 @@ class $AssetsSvgGen {
   SvgGenImage get simpleInscriptions =>
       const SvgGenImage('assets/svg/simple_inscriptions.svg');
 
+  /// File path: assets/svg/star_check.svg
+  SvgGenImage get starCheck => const SvgGenImage('assets/svg/star_check.svg');
+
   /// File path: assets/svg/success.svg
   SvgGenImage get success => const SvgGenImage('assets/svg/success.svg');
 
@@ -303,6 +309,7 @@ class $AssetsSvgGen {
         error,
         exit,
         faceId,
+        familyAdd,
         filter,
         fingerprint,
         fingerprintGrey,
@@ -318,6 +325,7 @@ class $AssetsSvgGen {
         settings,
         simpleCert,
         simpleInscriptions,
+        starCheck,
         success,
         success2,
         user,

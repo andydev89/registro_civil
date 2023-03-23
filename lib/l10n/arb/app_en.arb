@@ -152,5 +152,7 @@
   "ingreseCon" : "Enter your password",
   "reservacion": "Reservation",
   "hora": "Hour",
-  "estado": "State"
+  "estado": "State",
+  "parentezco": "Relationship",
+  "agendarTurnoParaMi": "Schedule appointment for me"
 }

@@ -24,23 +24,23 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              PrimaryReactiveTextField(
-                formControl: formModel.identificationNumberControl,
-                hintText: '${l10n.escriba}...',
-                keyboardType: TextInputType.number,
-              ).horizontalPadding(40),
-              PrimaryReactiveDropdown(
-                label: l10n.servicio,
-                formControl: formModel.relationshipControl,
-                items: RelationshipType.values,
-                hintText: '${l10n.seleccione}...',
-              ).horizontalPadding(40),
-              PrimaryReactiveDropdown(
-                label: l10n.seleccioneMetodoPago,
-                formControl: formModel.serviceControl,
-                items: ServiceType.values,
-                hintText: '${l10n.seleccione}...',
-              ).horizontalPadding(40),
+              // PrimaryReactiveTextField(
+              //   formControl: formModel.identificationNumberControl,
+              //   hintText: '${l10n.escriba}...',
+              //   keyboardType: TextInputType.number,
+              // ).horizontalPadding(40),
+              // PrimaryReactiveDropdown(
+              //   label: l10n.servicio,
+              //   formControl: formModel.relationshipControl,
+              //   items: RelationshipType.values,
+              //   hintText: '${l10n.seleccione}...',
+              // ).horizontalPadding(40),
+              // PrimaryReactiveDropdown(
+              //   label: l10n.seleccioneMetodoPago,
+              //   formControl: formModel.serviceControl,
+              //   items: ServiceType.values,
+              //   hintText: '${l10n.seleccione}...',
+              // ).horizontalPadding(40),
               PaymentSelector(
                 label: l10n.seleccioneMetodoPago,
                 formControl: formModel.paymentMethodControl,

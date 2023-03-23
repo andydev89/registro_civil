@@ -8,7 +8,8 @@ import 'package:registro_civil_apk/presentation/widgets/decorations/input_decora
 
 class PrimaryReactiveTextField<T> extends StatelessWidget {
   const PrimaryReactiveTextField({
-    required this.formControl,
+    this.formControl,
+    this.formControlName,
     this.label,
     this.keyboardType,
     this.controller,
@@ -26,6 +27,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
     super.key,
   });
   final FormControl<T>? formControl;
+  final String? formControlName;
   final String? label;
   final List<TextInputFormatter>? inputFormatters;
   final Widget? prefixIcon;
@@ -55,6 +57,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
           ).verticalPadding(5),
         ReactiveTextField<T>(
           formControl: formControl,
+          formControlName: formControlName,
           readOnly: readOnly,
           obscureText: obscureText,
           controller: controller,

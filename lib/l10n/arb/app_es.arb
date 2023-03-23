@@ -151,5 +151,7 @@
   "seguroCancelarTurno": "¿Está seguro de cancelar su turno?",
   "reservacion": "Reservación",
   "hora": "Hora",
-  "estado": "Estado"
+  "estado": "Estado",
+  "parentezco": "Parentezco",
+  "agendarTurnoParaMi": "Agendar turno para mí"
 }
