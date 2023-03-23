@@ -16,25 +16,27 @@ class CircularIconAuth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          DecoratedBox(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: grey,
-                width: 5,
-              ),
-            ),
-            child: Center(
-              child: child.symmetricPadding(padding, padding),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        DecoratedBox(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: grey,
+              width: 5,
             ),
           ),
-          if (bottomLabbel != null) PrimaryLabel(bottomLabbel!),
-        ],
-      ),
+          child: Center(
+            child: child.symmetricPadding(padding, padding),
+          ),
+        ),
+        if (bottomLabbel != null)
+          PrimaryLabel(
+            bottomLabbel!,
+            color: Colors.white,
+          ),
+      ],
     );
   }
 }

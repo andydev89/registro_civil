@@ -55,8 +55,8 @@ class CircleAvatarCardWidget extends StatelessWidget {
                 child: PrimaryLabel(
                   title,
                   color: primaryColor,
-                  fontWeight: FontWeight.bold,
                   maxlines: 3,
+                  fontSize: 20,
                 ),
               ),
               Row(
@@ -81,7 +81,7 @@ class CircleAvatarCardWidget extends StatelessWidget {
                     onPressed: onPressedView,
                   ),
                 ],
-              ).verticalPadding(30),
+              ).verticalPadding(25),
             ],
           ),
         ),

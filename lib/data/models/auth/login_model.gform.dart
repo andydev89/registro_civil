@@ -369,7 +369,7 @@ class LoginModelForm implements FormModel<LoginModel> {
             validators: [
               requiredValidator,
               ecuadorDniValidator,
-              lengthDniValidatorValidator
+              length10Validator
             ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

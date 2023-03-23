@@ -4,12 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/riverpod/declaration/auth_riverpod.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/circular_icon_auth.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_text_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Step2Page extends ConsumerWidget {
@@ -32,6 +32,7 @@ class Step2Page extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 20),
               child: PrimaryLabel(
                 l10n.capIdenDigBiometrica,
+                color: Colors.white,
               ),
             ),
             Row(
@@ -70,18 +71,22 @@ class Step2Page extends ConsumerWidget {
                 ),
               ],
             ),
-            PrimaryButton(
-              title: cargoData ? l10n.siguiente : l10n.escanear,
-              onPressed: () {
-                //TODO escanear rostro
-              },
-            ),
-            PrimaryTextButton(
-              title: l10n.salPaso,
-              onPressed: () {
-                ref.read(stepperIndexProvider.notifier).index++;
-                context.navigateTo(const Step3Route());
-              },
+            Column(
+              children: [
+                PrimaryButton(
+                  title: cargoData ? l10n.siguiente : l10n.escanear,
+                  onPressed: () {
+                    //TODO escanear rostro
+                  },
+                ),
+                PrimaryTextButton(
+                  title: l10n.salPaso,
+                  onPressed: () {
+                    ref.read(stepperIndexProvider.notifier).index++;
+                    context.navigateTo(const Step3Route());
+                  },
+                ),
+              ],
             ),
           ],
         ),

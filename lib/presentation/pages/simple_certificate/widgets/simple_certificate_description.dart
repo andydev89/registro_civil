@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ScanDniPage extends StatelessWidget {
-  const ScanDniPage({super.key});
+class SimpleCertificateDescription extends StatelessWidget {
+  const SimpleCertificateDescription({super.key});
 
   @override
   Widget build(BuildContext context) {
