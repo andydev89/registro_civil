@@ -221,6 +221,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/face_id.svg
   SvgGenImage get faceId => const SvgGenImage('assets/svg/face_id.svg');
 
+  /// File path: assets/svg/filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/svg/filter.svg');
+
   /// File path: assets/svg/fingerprint.svg
   SvgGenImage get fingerprint =>
       const SvgGenImage('assets/svg/fingerprint.svg');
@@ -253,6 +256,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/rotated_fingerprint.svg
   SvgGenImage get rotatedFingerprint =>
       const SvgGenImage('assets/svg/rotated_fingerprint.svg');
+
+  /// File path: assets/svg/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/svg/search.svg');
 
   /// File path: assets/svg/settings.svg
   SvgGenImage get settings => const SvgGenImage('assets/svg/settings.svg');
@@ -297,6 +303,7 @@ class $AssetsSvgGen {
         error,
         exit,
         faceId,
+        filter,
         fingerprint,
         fingerprintGrey,
         home,
@@ -307,6 +314,7 @@ class $AssetsSvgGen {
         qrCode,
         rigthArrow,
         rotatedFingerprint,
+        search,
         settings,
         simpleCert,
         simpleInscriptions,

@@ -26,11 +26,7 @@ class MyTurnExpandableCard extends StatelessWidget {
     final controller = ExpandedTileController();
     final rotation = ValueNotifier<double>(0);
     controller.addListener(() {
-      if (controller.isExpanded) {
-        rotation.value = 0;
-      } else {
-        rotation.value = 0.25;
-      }
+      rotation.value = controller.isExpanded ? 0 : 0.25;
     });
     final l10n = context.l10n;
     final now = DateTime.now();
