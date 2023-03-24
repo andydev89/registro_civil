@@ -42,3 +42,14 @@ Future<T?> showAcceptCancelDialog<T>(
     ),
   );
 }
+
+Future<void> showContentDialog(BuildContext context, Widget content) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: content,
+      );
+    },
+  );
+}

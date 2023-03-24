@@ -149,10 +149,19 @@
   "terminosCondiciones": "Please enter the verification code sent to your email/cell phone, remember that this code will be active for 5 minutes, after that time your code will have expired. In case of not receiving your code check in the junk mail or spam folder; In case of not receiving your code write to the email enlinea@registrocivil.gob.ec",
   "aceptarTer": "I accept the terms and conditions",
   "verificar": "Verify",
-  "ingreseCon" : "Enter your password",
+  "ingreseCon": "Enter your password",
   "reservacion": "Reservation",
   "hora": "Hour",
   "estado": "State",
   "parentezco": "Relationship",
-  "agendarTurnoParaMi": "Schedule appointment for me"
+  "agendarTurnoParaMi": "Schedule appointment for me",
+  "certificadoNacDes": "It is the document issued by the Civil Registry, which attests to the fact of birth, providing information on: names of the registered, date, place, sex and filiation of the registered. nIt can be requested by the citizen who owns the information or only for their relatives: Child under 18 years of age, Deceased parents, Spouse / Cohabitant legally constituted.",
+  "certificadoMatDes": "It is the document issued by the Civil Registry, which attests to the act of marriage, providing information on: spouses, date and place of the act. It can be requested by the citizen who owns the information.",
+  "certificadoDefDes": "This document may be requested only for their relatives: Child under 18 years of age, deceased parents and legally constituted Spouse/Cohabitant.",
+  "certificadoIdenDes": "It is the document issued by the Civil Registry, which attests to the identity registry, providing information on: names and surnames, NUI, Nationality, among others. It can be requested by the citizen who owns the information.",
+  "certificadoUniHecDes": "It is the document issued by the Civil Registry, which attests to the registration of de facto union, providing information on: cohabitants, date and place of registration. It can be requested by the citizen who owns the information.",
+  "descuentoCon": "Discount applies -CONADIS",
+  "noIva": "No IVA",
+  "descripcion": "Description",
+  "descuentos": "Discounts"
 }
