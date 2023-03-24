@@ -107,16 +107,6 @@
   "certificadoDefDes": "Este documento podrá ser solicitado únicamente para sus familiares: Hijo menor de 18 años, Padres fallecidos y del Cónyuge/Conviviente legalmente constituido.",
   "certificadoIdenDes": "Es el documento emitido por el Registro Civil, que da fe del registro de identidad, proporcionando información de: nombres y apellidos , NUI, Nacionalidad, entre otros. Puede ser solicitado por el ciudadano titular de la información.",
   "certificadoUniHecDes": "Es el documento emitido por el Registro Civil, que da fe del registro de unión de hecho, proporcionando información de: convivientes, fecha y lugar de registro. Puede ser solicitado por el ciudadano titular de la información.",
-  "certificadoNacDis": "Certificado de nacimiento",
-  "certificadoMatDis": "Certificado de matrimonio",
-  "certificadoDefDis": "Certificado de defunción",
-  "certificadoIdenDis": "Certificado de identidad",
-  "certificadoUniHecDis": "Certificado de unión de hecho",
-  "certificadoNacIva": "Certificado de nacimiento",
-  "certificadoMatIva": "Certificado de matrimonio",
-  "certificadoDefIva": "Certificado de defunción",
-  "certificadoIdenIva": "Certificado de identidad",
-  "certificadoUniHecIva": "Certificado de unión de hecho",
   "copiaActRegUniHec": "Copia de acta registral de unión de hecho",
   "copiaActRegRegGen": "Copia de acta registral de registro de género",
   "copiaActRegMat": "Copia de acta registral de matrimonio",
@@ -153,5 +143,9 @@
   "hora": "Hora",
   "estado": "Estado",
   "parentezco": "Parentezco",
-  "agendarTurnoParaMi": "Agendar turno para mí"
+  "agendarTurnoParaMi": "Agendar turno para mí",
+  "descuentoCon": "Aplica descuento -CONADIS",
+  "noIva": "No aplica IVA",
+  "descripcion": "Descripción",
+  "descuentos": "Descuentos"
 }

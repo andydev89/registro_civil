@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
+import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/auth_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/change_password_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_page.dart';
@@ -170,7 +171,7 @@ part 'router.gr.dart';
           ],
         ),
         // SIMPLE CERTIFICATE
-         CupertinoRoute(
+        CupertinoRoute(
           page: SimpleCertificateRouterPage,
           children: [
             CupertinoRoute(
