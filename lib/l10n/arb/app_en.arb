@@ -163,5 +163,10 @@
   "descuentoCon": "Discount applies -CONADIS",
   "noIva": "No IVA",
   "descripcion": "Description",
-  "descuentos": "Discounts"
+  "descuentos": "Discounts",
+  "conyugueOconviviente": "Spouse or cohabitant",
+  "hijoMenorDeEdad": "Minor child",
+  "hermano": "Brother",
+  "padre": "Father",
+  "madre": "Mother"
 }

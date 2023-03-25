@@ -147,5 +147,10 @@
   "descuentoCon": "Aplica descuento -CONADIS",
   "noIva": "No aplica IVA",
   "descripcion": "Descripción",
-  "descuentos": "Descuentos"
+  "descuentos": "Descuentos",
+  "conyugueOconviviente": "Cónyugue o conviviente",
+  "hijoMenorDeEdad": "Hijo menor de edad",
+  "hermano": "Hermano",
+  "padre": "Padre",
+  "madre": "Madre"
 }

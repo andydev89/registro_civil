@@ -6,11 +6,10 @@ import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/theme/theme.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class ShiftDetailsPage extends StatelessWidget {
@@ -53,7 +52,7 @@ class ShiftDetailsPage extends StatelessWidget {
                     ),
                     RowLabel(
                       boldLabel: l10n.servicio,
-                      simpleLabel: service.toText,
+                      simpleLabel: service.translate(context),
                     ),
                     Row(
                       children: [
@@ -63,7 +62,6 @@ class ShiftDetailsPage extends StatelessWidget {
                         ),
                         PrimaryText(
                           DateFormat('dd-MM-yyyy').format(date),
-                          color: primaryColor,
                         ),
                       ],
                     ).verticalPadding(5),
@@ -83,7 +81,6 @@ class ShiftDetailsPage extends StatelessWidget {
                               time.minute,
                             ),
                           ),
-                          color: primaryColor,
                         ),
                       ],
                     ).verticalPadding(5),
@@ -131,7 +128,6 @@ class RowLabel extends StatelessWidget {
       children: [
         PrimaryText(
           '$boldLabel:',
-          color: primaryColor,
           fontWeight: FontWeight.bold,
         ),
         const SizedBox(
@@ -139,7 +135,6 @@ class RowLabel extends StatelessWidget {
         ),
         PrimaryText(
           simpleLabel,
-          color: primaryColor,
         ),
       ],
     ).verticalPadding(5);
