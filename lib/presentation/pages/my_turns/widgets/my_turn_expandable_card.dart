@@ -58,7 +58,7 @@ class MyTurnExpandableCard extends StatelessWidget {
             ),
             DescriptionRow(
               label: l10n.servicio,
-              text: data.service.toText,
+              text: data.service.translate(context),
             ),
             DescriptionRow(
               label: l10n.fecha,

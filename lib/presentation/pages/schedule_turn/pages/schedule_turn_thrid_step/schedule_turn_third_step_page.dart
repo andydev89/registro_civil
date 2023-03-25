@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
+import 'package:registro_civil_apk/data/enum/schedule_shift/agencias_test.dart';
+import 'package:registro_civil_apk/data/enum/schedule_shift/provincias_test.dart';
 import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
 import 'package:registro_civil_apk/data/models/schedule_shift/schedule_shift_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -31,21 +33,15 @@ class ScheduleTurnThirdStepPage extends StatelessWidget {
               children: [
                 PrimaryReactiveDropdown(
                   formControl: formModel.stateControl,
-                  items: const [
-                    'Provincia 1',
-                    'Provincia 2',
-                    'Provincia 3',
-                  ],
+                  //TODO esto va a cambiar por un objeto q viene del back
+                  items: ProvinciasTest.values,
                   hintText: '${l10n.seleccione}...',
                   label: l10n.provincia,
                 ),
                 PrimaryReactiveDropdown(
                   formControl: formModel.agencyControl,
-                  items: const [
-                    'Agencia 1',
-                    'Agencia 2',
-                    'Agencia 3',
-                  ],
+                  //TODO esto va a cambiar por un objeto q viene del back
+                  items: AgenciasTest.values,
                   hintText: '${l10n.seleccione}...',
                   label: l10n.agencia,
                 ),

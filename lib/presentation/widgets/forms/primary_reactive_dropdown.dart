@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
 
 class PrimaryReactiveDropdown<T> extends StatelessWidget {
@@ -14,7 +15,7 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
   });
   final FormControl<T>? formControl;
   final String? formControlName;
-  final List<T> items;
+  final List<Translatable> items;
   final String? hintText;
   final String label;
 
@@ -38,7 +39,7 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
               .map(
                 (e) => DropdownMenuItem(
                   value: e,
-                  child: Text(e.toString()),
+                  child: Text(e.translate(context)),
                 ),
               )
               .toList(),
