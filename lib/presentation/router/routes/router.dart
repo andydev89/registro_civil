@@ -49,7 +49,6 @@ part 'router.gr.dart';
     CustomRoute(
       transitionsBuilder: TransitionsBuilders.slideLeft,
       page: AuthRouterPage,
-      initial: true,
       children: [
         //LOGIN
         CustomRoute(
@@ -127,6 +126,7 @@ part 'router.gr.dart';
     //ROOT
     CustomRoute(
       page: RootRouterPage,
+      initial: true,
       children: [
         //HOME
         CupertinoRoute(
