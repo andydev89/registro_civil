@@ -182,5 +182,10 @@
   "subtotal": "Subtotal",
   "descuentoConadis": "Discount CONADIS",
   "totalPagar": "Total to pay",
-  "pedidos": "Orders"
+  "pedidos": "Orders",
+  "conyugueOconviviente": "Spouse or cohabitant",
+  "hijoMenorDeEdad": "Minor child",
+  "hermano": "Brother",
+  "padre": "Father",
+  "madre": "Mother"
 }
