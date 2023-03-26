@@ -274,19 +274,31 @@ class _$AppRouter extends RootStackRouter {
         child: const SimpleCertificateFirstStepRouterPage(),
       );
     },
-    SimpleCertificateFirstStepPersonalRoute.name: (routeData) {
+    SimpleCertificateSecondStepRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const SimpleCertificateSecondStepPage(),
+      );
+    },
+    SimpleCertificateThirdStepRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const SimpleCertificateThirdStepPage(),
+      );
+    },
+    SimpleCertificateFirstStepFamiliarRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const SimpleCertificateFirstStepPersonalPage(),
+        child: const SimpleCertificateFirstStepFamiliarPage(),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
       );
     },
-    SimpleCertificateFirstStepFamiliarRoute.name: (routeData) {
+    SimpleCertificateFirstStepPersonalRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const SimpleCertificateFirstStepFamiliarPage(),
+        child: const SimpleCertificateFirstStepPersonalPage(),
       );
     },
     SelectPaymentRoute.name: (routeData) {
@@ -307,7 +319,7 @@ class _$AppRouter extends RootStackRouter {
   List<RouteConfig> get routes => [
         RouteConfig(
           AuthRouterRoute.name,
-          path: '/',
+          path: '/auth-router-page',
           children: [
             RouteConfig(
               LoginRoute.name,
@@ -389,7 +401,7 @@ class _$AppRouter extends RootStackRouter {
         ),
         RouteConfig(
           RootRouterRoute.name,
-          path: '/root-router-page',
+          path: '/',
           children: [
             RouteConfig(
               HomeRouterRoute.name,
@@ -458,17 +470,27 @@ class _$AppRouter extends RootStackRouter {
                   parent: SimpleCertificateRouterRoute.name,
                   children: [
                     RouteConfig(
-                      SimpleCertificateFirstStepPersonalRoute.name,
+                      SimpleCertificateFirstStepFamiliarRoute.name,
                       path: '',
                       parent: SimpleCertificateFirstStepRouterRoute.name,
                     ),
                     RouteConfig(
-                      SimpleCertificateFirstStepFamiliarRoute.name,
-                      path: 'simple-certificate-first-step-familiar-page',
+                      SimpleCertificateFirstStepPersonalRoute.name,
+                      path: 'simple-certificate-first-step-personal-page',
                       parent: SimpleCertificateFirstStepRouterRoute.name,
                     ),
                   ],
-                )
+                ),
+                RouteConfig(
+                  SimpleCertificateSecondStepRoute.name,
+                  path: 'simple-certificate-second-step-page',
+                  parent: SimpleCertificateRouterRoute.name,
+                ),
+                RouteConfig(
+                  SimpleCertificateThirdStepRoute.name,
+                  path: 'simple-certificate-third-step-page',
+                  parent: SimpleCertificateRouterRoute.name,
+                ),
               ],
             ),
             RouteConfig(
@@ -514,7 +536,7 @@ class AuthRouterRoute extends PageRouteInfo<void> {
   const AuthRouterRoute({List<PageRouteInfo>? children})
       : super(
           AuthRouterRoute.name,
-          path: '/',
+          path: '/auth-router-page',
           initialChildren: children,
         );
 
@@ -527,7 +549,7 @@ class RootRouterRoute extends PageRouteInfo<void> {
   const RootRouterRoute({List<PageRouteInfo>? children})
       : super(
           RootRouterRoute.name,
-          path: '/root-router-page',
+          path: '/',
           initialChildren: children,
         );
 
@@ -1008,15 +1030,27 @@ class SimpleCertificateFirstStepRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [SimpleCertificateFirstStepPersonalPage]
-class SimpleCertificateFirstStepPersonalRoute extends PageRouteInfo<void> {
-  const SimpleCertificateFirstStepPersonalRoute()
+/// [SimpleCertificateSecondStepPage]
+class SimpleCertificateSecondStepRoute extends PageRouteInfo<void> {
+  const SimpleCertificateSecondStepRoute()
       : super(
-          SimpleCertificateFirstStepPersonalRoute.name,
-          path: '',
+          SimpleCertificateSecondStepRoute.name,
+          path: 'simple-certificate-second-step-page',
         );
 
-  static const String name = 'SimpleCertificateFirstStepPersonalRoute';
+  static const String name = 'SimpleCertificateSecondStepRoute';
+}
+
+/// generated route for
+/// [SimpleCertificateThirdStepPage]
+class SimpleCertificateThirdStepRoute extends PageRouteInfo<void> {
+  const SimpleCertificateThirdStepRoute()
+      : super(
+          SimpleCertificateThirdStepRoute.name,
+          path: 'simple-certificate-third-step-page',
+        );
+
+  static const String name = 'SimpleCertificateThirdStepRoute';
 }
 
 /// generated route for
@@ -1025,10 +1059,22 @@ class SimpleCertificateFirstStepFamiliarRoute extends PageRouteInfo<void> {
   const SimpleCertificateFirstStepFamiliarRoute()
       : super(
           SimpleCertificateFirstStepFamiliarRoute.name,
-          path: 'simple-certificate-first-step-familiar-page',
+          path: '',
         );
 
   static const String name = 'SimpleCertificateFirstStepFamiliarRoute';
+}
+
+/// generated route for
+/// [SimpleCertificateFirstStepPersonalPage]
+class SimpleCertificateFirstStepPersonalRoute extends PageRouteInfo<void> {
+  const SimpleCertificateFirstStepPersonalRoute()
+      : super(
+          SimpleCertificateFirstStepPersonalRoute.name,
+          path: 'simple-certificate-first-step-personal-page',
+        );
+
+  static const String name = 'SimpleCertificateFirstStepPersonalRoute';
 }
 
 /// generated route for

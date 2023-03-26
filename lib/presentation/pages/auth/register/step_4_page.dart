@@ -11,6 +11,7 @@ import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_check_box.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class Step4Page extends ConsumerWidget {
@@ -70,18 +71,11 @@ class Step4Page extends ConsumerWidget {
                   },
                   onCompleted: (pin) => form.otpControl.value = pin,
                 ),
-                ReactiveCheckboxListTile(
+                PrimaryReactiveCheckBox(
                   formControl: form.isVerifiedControl,
-                  title: PrimaryLabel(
-                    l10n.aceptarTer,
-                    fontSize: fontSizeDefault,
-                    color: Theme.of(context).primaryColor,
-                    underlining: true,
-                  ),
+                  label: l10n.aceptarTer, underlining: true,
                   activeColor: const Color.fromRGBO(10, 141, 208, 1),
                   checkColor: Colors.white,
-                  dense: true,
-                  controlAffinity: ListTileControlAffinity.leading,
                 ),
                 ReactiveOtpModelFormConsumer(
                   builder: (_, form, __) {

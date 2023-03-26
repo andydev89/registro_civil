@@ -2,8 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/routes_enum.dart';
-import 'package:registro_civil_apk/data/methods/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/home/widgets/button_drawer_home_widget.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -100,10 +98,8 @@ class HomeDrawer extends StatelessWidget {
                         ButtonDrawerHomeWidget(
                           icon: Assets.svg.exit.svg(),
                           titulo: l10n.cerrSesion,
-                          onPressed: () => irAYBorrarAnterior(
-                            context,
-                            ruta: RoutesEnum.loginCedula,
-                          ),
+                          onPressed: () =>
+                              context.navigateTo(const HomeRouterRoute()),
                         ),
                       ],
                     ).verticalPadding(20),
@@ -135,7 +131,7 @@ class DrawerUserData extends StatelessWidget {
           child: PrimaryLabel(
             '${l10n.hola}, Luis Pérez Pérez',
             fontSize: 20,
-            fontWeight: FontWeight.bold,
+            color: Colors.white,
             maxlines: 1,
           ).horizontalPadding(3),
         ),

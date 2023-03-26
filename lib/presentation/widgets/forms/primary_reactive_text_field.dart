@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
 
@@ -69,17 +70,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
           ),
           cursorColor: ligth ? Colors.white : Colors.black,
           keyboardType: keyboardType,
-          validationMessages: {
-            ValidationMessage.required: (error) => l10n.campoReq,
-            ValidationMessage.email: (error) => l10n.intrudcirCorrVal,
-            ValidationMessage.mustMatch: (error) => l10n.passwordCoi,
-            'invalidDni': (error) => l10n.intrducirNumIdeVal,
-            'length10Error': (error) => l10n.introducirNum10Dig,
-            'invalidProvinceCode': (error) => l10n.introducirCodProVal,
-            'invalidPassword': (error) => l10n.password8Car,
-            'invalidPhoneNumber': (error) => l10n.intrudcirNumTelVal,
-            'length6Error' : (error) => l10n.introducirNum6Dig,
-          },
+          validationMessages: validationMessage(l10n),
           inputFormatters: inputFormatters,
           decoration: primaryInputDecoration(
             light: ligth,

@@ -28,6 +28,7 @@ class ButtonDrawerHomeWidget extends StatelessWidget {
       label: PrimaryLabel(
         titulo,
         fontSize: 28,
+            color: Colors.white,
       ),
     ).verticalPadding(3);
   }

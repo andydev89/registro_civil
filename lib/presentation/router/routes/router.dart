@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/auth_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/change_password_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_page.dart';
@@ -36,7 +35,9 @@ import 'package:registro_civil_apk/presentation/pages/schedule_turn/schedule_tur
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_first_step/simple_certificate_first_step_familiar_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_first_step/simple_certificate_first_step_personal_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_first_step/simple_certificate_first_step_router_page.dart';
-import 'package:registro_civil_apk/presentation/pages/simple_certificate/widgets/simple_certificate_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_second_step/simple_certificate_second_step_page.dart';
+import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_third_step/simple_certificate_third_step_page.dart';
+import 'package:registro_civil_apk/presentation/pages/simple_certificate/simple_certificate_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/test/test_page.dart';
 
 part 'router.gr.dart';
@@ -48,7 +49,6 @@ part 'router.gr.dart';
     CustomRoute(
       transitionsBuilder: TransitionsBuilders.slideLeft,
       page: AuthRouterPage,
-      initial: true,
       children: [
         //LOGIN
         CustomRoute(
@@ -126,6 +126,7 @@ part 'router.gr.dart';
     //ROOT
     CustomRoute(
       page: RootRouterPage,
+      initial: true,
       children: [
         //HOME
         CupertinoRoute(
@@ -179,21 +180,21 @@ part 'router.gr.dart';
               initial: true,
               children: [
                 CustomRoute(
-                  page: SimpleCertificateFirstStepPersonalPage,
+                  page: SimpleCertificateFirstStepFamiliarPage,
                   initial: true,
                   transitionsBuilder: TransitionsBuilders.slideRight,
                 ),
                 CupertinoRoute(
-                  page: SimpleCertificateFirstStepFamiliarPage,
+                  page: SimpleCertificateFirstStepPersonalPage,
                 ),
               ],
             ),
-            // CupertinoRoute(
-            //   page: ScheduleTurnSecondStepPage,
-            // ),
-            // CupertinoRoute(
-            //   page: ScheduleTurnThirdStepPage,
-            // ),
+            CupertinoRoute(
+              page: SimpleCertificateSecondStepPage,
+            ),
+            CupertinoRoute(
+              page: SimpleCertificateThirdStepPage,
+            ),
             // CupertinoRoute(
             //   page: ShiftDetailsPage,
             // ),

@@ -1,5 +1,7 @@
 import 'package:libphonenumber/libphonenumber.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
+import 'package:registro_civil_apk/l10n/l10n.dart';
 
 Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
   return Validators.required(control);
@@ -133,3 +135,55 @@ Map<String, dynamic>? length6Validator(AbstractControl<dynamic> control) {
     return null;
   }
 }
+
+Map<String, dynamic>? conadisNumberValidatorGroup(
+    AbstractControl<dynamic> conadisModel) {
+  final conadis = conadisModel.value as Map<String, dynamic>;
+  final isConadis = conadis['conadis'] as bool? ?? false;
+  final conadisNumber = conadis['conadisNumber'] as String? ?? '';
+  if (!isConadis) {
+    (conadisModel as FormGroup).controls['conadisNumber']!
+      ..removeError(ValidationMessage.required)
+      ..removeError('invalidConadisNumber');
+    return null;
+  }
+
+  if (isConadis && conadisNumber.isEmpty) {
+    (conadisModel as FormGroup)
+        .controls['conadisNumber']!
+        .setErrors({ValidationMessage.required: true});
+    return {ValidationMessage.required: true};
+  }
+  // Añade aquí la lógica adicional que necesitas para validar conadisNumber
+  if (!_validateConadisNumber(conadisNumber)) {
+    (conadisModel as FormGroup)
+        .controls['conadisNumber']!
+        .setErrors({'invalidConadisNumber': true});
+    return {'invalidConadisNumber': true};
+  }
+  return null; // Devuelve null si la validación es exitosa
+}
+
+bool _validateConadisNumber(String conadisNumber) {
+  // Añade aquí la lógica adicional que necesitas para validar conadisNumber
+  // TODO(laroca1994): buscar validacion de numero conadis
+  final isValid = RegExp(r'^\d{7,}$').hasMatch(conadisNumber);
+  if (!isValid) return false;
+  return true;
+}
+
+Map<String, String Function(dynamic error)> validationMessage(
+  AppLocalizations l10n,
+) =>
+    {
+      ValidationMessage.required: (error) => l10n.campoReq,
+      ValidationMessage.email: (error) => l10n.intrudcirCorrVal,
+      ValidationMessage.mustMatch: (error) => l10n.passwordCoi,
+      'invalidDni': (error) => l10n.intrducirNumIdeVal,
+      'length10Error': (error) => l10n.introducirNum10Dig,
+      'invalidProvinceCode': (error) => l10n.introducirCodProVal,
+      'invalidPassword': (error) => l10n.password8Car,
+      'invalidPhoneNumber': (error) => l10n.intrudcirNumTelVal,
+      'length6Error': (error) => l10n.introducirNum6Dig,
+      'invalidConadisNumber': (error) => l10n.introducirNum6Dig,
+    };

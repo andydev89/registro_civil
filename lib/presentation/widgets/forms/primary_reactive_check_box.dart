@@ -7,20 +7,30 @@ class PrimaryReactiveCheckBox extends StatelessWidget {
     super.key,
     required this.formControl,
     required this.label,
+    this.onChanged,
+    this.activeColor,
+    this.checkColor,
+    this.underlining=false,
   });
   final FormControl<bool> formControl;
   final String label;
+  final void Function(FormControl<bool>)? onChanged;
+  final Color? activeColor;
+  final Color? checkColor;
+  final bool underlining; 
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ReactiveCheckbox(
-          formControl: formControl,
-        ),
-        PrimaryText(label),
-      ],
+    return ReactiveCheckboxListTile(
+      formControl: formControl,
+      onChanged: onChanged,
+      activeColor: activeColor,
+      checkColor: checkColor,
+      title: PrimaryText(
+        label,
+        underlining: underlining,
+      ),
+      controlAffinity: ListTileControlAffinity.leading,
     );
   }
 }
