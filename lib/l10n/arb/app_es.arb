@@ -171,5 +171,6 @@
   "hijoMenorDeEdad": "Hijo menor de edad",
   "hermano": "Hermano",
   "padre": "Padre",
-  "madre": "Madre"
+  "madre": "Madre",
+  "copiaActRegDef": "Copia de acta registral de Defunción"
 }

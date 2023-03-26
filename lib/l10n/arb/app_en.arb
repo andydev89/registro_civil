@@ -187,5 +187,6 @@
   "hijoMenorDeEdad": "Minor child",
   "hermano": "Brother",
   "padre": "Father",
-  "madre": "Mother"
+  "madre": "Mother",
+  "copiaActRegDef": "Copy of registration record of death"
 }

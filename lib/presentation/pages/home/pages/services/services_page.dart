@@ -129,6 +129,11 @@ class ServicesPage extends StatelessWidget {
             title: l10n.copiaActRegUniHec,
             onPressedCheck: () {},
             onPressedView: () {},
+          ), CircleAvatarCardModel(
+            image: Assets.png.certificadoDefuncion.image(),
+            title: l10n.copiaActRegDef,
+            onPressedCheck: () {},
+            onPressedView: () {},
           ),
           CircleAvatarCardModel(
             image: Assets.png.pagoServicioIngresosSentencias.image(),
