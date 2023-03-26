@@ -186,6 +186,7 @@ class _$AppRouter extends RootStackRouter {
           buttonText: args.buttonText,
           notificationType: args.notificationType,
           onTap: args.onTap,
+          description: args.description,
         ),
       );
     },
@@ -195,10 +196,29 @@ class _$AppRouter extends RootStackRouter {
         child: const MyTurnsPage(),
       );
     },
-    PaymentRouterRoute.name: (routeData) {
+    SelectPaymentRoute.name: (routeData) {
+      final args = routeData.argsAs<SelectPaymentRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const PaymentRouterPage(),
+        child: SelectPaymentPage(
+          key: args.key,
+          requestNumber: args.requestNumber,
+          totalToPay: args.totalToPay,
+        ),
+      );
+    },
+    MakePaymentRoute.name: (routeData) {
+      final args = routeData.argsAs<MakePaymentRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: MakePaymentPage(
+          key: args.key,
+          requestNumber: args.requestNumber,
+          totalToPay: args.totalToPay,
+          buttonText: args.buttonText,
+          onTapSuccessPayment: args.onTapSuccessPayment,
+          onTapFailedPayment: args.onTapFailedPayment,
+        ),
       );
     },
     TexterRoute.name: (routeData) {
@@ -227,29 +247,36 @@ class _$AppRouter extends RootStackRouter {
         child: const ScheduleTurnFirstStepRouterPage(),
       );
     },
-    ScheduleTurnSecondStepRoute.name: (routeData) {
+    CodeRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ScheduleTurnSecondStepPage(),
+        child: const CodePage(),
       );
     },
-    ScheduleTurnThirdStepRoute.name: (routeData) {
+    ScheduleTurnSecondRoute.name: (routeData) {
+      final args = routeData.argsAs<ScheduleTurnSecondRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ScheduleTurnThirdStepPage(),
+        child: ScheduleTurnSecondPage(
+          key: args.key,
+          paymentMethod: args.paymentMethod,
+        ),
       );
     },
-    ShiftDetailsRoute.name: (routeData) {
-      final args = routeData.argsAs<ShiftDetailsRouteArgs>();
+    TurnDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<TurnDetailsRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: ShiftDetailsPage(
+        child: TurnDetailsPage(
           key: args.key,
           city: args.city,
           agency: args.agency,
           service: args.service,
           date: args.date,
           time: args.time,
+          paymentMethod: args.paymentMethod,
+          requestNumber: args.requestNumber,
+          totalToPay: args.totalToPay,
         ),
       );
     },
@@ -299,18 +326,6 @@ class _$AppRouter extends RootStackRouter {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: const SimpleCertificateFirstStepPersonalPage(),
-      );
-    },
-    SelectPaymentRoute.name: (routeData) {
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: const SelectPaymentPage(),
-      );
-    },
-    MakePaymentRoute.name: (routeData) {
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: const MakePaymentPage(),
       );
     },
   };
@@ -443,18 +458,18 @@ class _$AppRouter extends RootStackRouter {
                   ],
                 ),
                 RouteConfig(
-                  ScheduleTurnSecondStepRoute.name,
-                  path: 'schedule-turn-second-step-page',
+                  CodeRoute.name,
+                  path: 'code-page',
                   parent: ScheduleTurnRouterRoute.name,
                 ),
                 RouteConfig(
-                  ScheduleTurnThirdStepRoute.name,
-                  path: 'schedule-turn-third-step-page',
+                  ScheduleTurnSecondRoute.name,
+                  path: 'schedule-turn-second-page',
                   parent: ScheduleTurnRouterRoute.name,
                 ),
                 RouteConfig(
-                  ShiftDetailsRoute.name,
-                  path: 'shift-details-page',
+                  TurnDetailsRoute.name,
+                  path: 'turn-details-page',
                   parent: ScheduleTurnRouterRoute.name,
                 ),
               ],
@@ -504,21 +519,14 @@ class _$AppRouter extends RootStackRouter {
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
-              PaymentRouterRoute.name,
-              path: 'payment-router-page',
+              SelectPaymentRoute.name,
+              path: 'select-payment-page',
               parent: RootRouterRoute.name,
-              children: [
-                RouteConfig(
-                  SelectPaymentRoute.name,
-                  path: '',
-                  parent: PaymentRouterRoute.name,
-                ),
-                RouteConfig(
-                  MakePaymentRoute.name,
-                  path: 'make-payment-page',
-                  parent: PaymentRouterRoute.name,
-                ),
-              ],
+            ),
+            RouteConfig(
+              MakePaymentRoute.name,
+              path: 'make-payment-page',
+              parent: RootRouterRoute.name,
             ),
             RouteConfig(
               TexterRoute.name,
@@ -787,7 +795,8 @@ class NotificationRoute extends PageRouteInfo<NotificationRouteArgs> {
     String? bottonTitle,
     required String buttonText,
     required NotificationType notificationType,
-    void Function()? onTap,
+    void Function(BuildContext)? onTap,
+    Widget? description,
   }) : super(
           NotificationRoute.name,
           path: 'notification-page',
@@ -800,6 +809,7 @@ class NotificationRoute extends PageRouteInfo<NotificationRouteArgs> {
             buttonText: buttonText,
             notificationType: notificationType,
             onTap: onTap,
+            description: description,
           ),
         );
 
@@ -816,6 +826,7 @@ class NotificationRouteArgs {
     required this.buttonText,
     required this.notificationType,
     this.onTap,
+    this.description,
   });
 
   final Key? key;
@@ -832,11 +843,13 @@ class NotificationRouteArgs {
 
   final NotificationType notificationType;
 
-  final void Function()? onTap;
+  final void Function(BuildContext)? onTap;
+
+  final Widget? description;
 
   @override
   String toString() {
-    return 'NotificationRouteArgs{key: $key, title: $title, subtitle: $subtitle, message: $message, bottonTitle: $bottonTitle, buttonText: $buttonText, notificationType: $notificationType, onTap: $onTap}';
+    return 'NotificationRouteArgs{key: $key, title: $title, subtitle: $subtitle, message: $message, bottonTitle: $bottonTitle, buttonText: $buttonText, notificationType: $notificationType, onTap: $onTap, description: $description}';
   }
 }
 
@@ -853,16 +866,96 @@ class MyTurnsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [PaymentRouterPage]
-class PaymentRouterRoute extends PageRouteInfo<void> {
-  const PaymentRouterRoute({List<PageRouteInfo>? children})
-      : super(
-          PaymentRouterRoute.name,
-          path: 'payment-router-page',
-          initialChildren: children,
+/// [SelectPaymentPage]
+class SelectPaymentRoute extends PageRouteInfo<SelectPaymentRouteArgs> {
+  SelectPaymentRoute({
+    Key? key,
+    required int requestNumber,
+    required double totalToPay,
+  }) : super(
+          SelectPaymentRoute.name,
+          path: 'select-payment-page',
+          args: SelectPaymentRouteArgs(
+            key: key,
+            requestNumber: requestNumber,
+            totalToPay: totalToPay,
+          ),
         );
 
-  static const String name = 'PaymentRouterRoute';
+  static const String name = 'SelectPaymentRoute';
+}
+
+class SelectPaymentRouteArgs {
+  const SelectPaymentRouteArgs({
+    this.key,
+    required this.requestNumber,
+    required this.totalToPay,
+  });
+
+  final Key? key;
+
+  final int requestNumber;
+
+  final double totalToPay;
+
+  @override
+  String toString() {
+    return 'SelectPaymentRouteArgs{key: $key, requestNumber: $requestNumber, totalToPay: $totalToPay}';
+  }
+}
+
+/// generated route for
+/// [MakePaymentPage]
+class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
+  MakePaymentRoute({
+    Key? key,
+    required int requestNumber,
+    required double totalToPay,
+    required String buttonText,
+    void Function(BuildContext)? onTapSuccessPayment,
+    void Function(BuildContext)? onTapFailedPayment,
+  }) : super(
+          MakePaymentRoute.name,
+          path: 'make-payment-page',
+          args: MakePaymentRouteArgs(
+            key: key,
+            requestNumber: requestNumber,
+            totalToPay: totalToPay,
+            buttonText: buttonText,
+            onTapSuccessPayment: onTapSuccessPayment,
+            onTapFailedPayment: onTapFailedPayment,
+          ),
+        );
+
+  static const String name = 'MakePaymentRoute';
+}
+
+class MakePaymentRouteArgs {
+  const MakePaymentRouteArgs({
+    this.key,
+    required this.requestNumber,
+    required this.totalToPay,
+    required this.buttonText,
+    this.onTapSuccessPayment,
+    this.onTapFailedPayment,
+  });
+
+  final Key? key;
+
+  final int requestNumber;
+
+  final double totalToPay;
+
+  final String buttonText;
+
+  final void Function(BuildContext)? onTapSuccessPayment;
+
+  final void Function(BuildContext)? onTapFailedPayment;
+
+  @override
+  String toString() {
+    return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, totalToPay: $totalToPay, buttonText: $buttonText, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment}';
+  }
 }
 
 /// generated route for
@@ -915,63 +1008,95 @@ class ScheduleTurnFirstStepRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ScheduleTurnSecondStepPage]
-class ScheduleTurnSecondStepRoute extends PageRouteInfo<void> {
-  const ScheduleTurnSecondStepRoute()
+/// [CodePage]
+class CodeRoute extends PageRouteInfo<void> {
+  const CodeRoute()
       : super(
-          ScheduleTurnSecondStepRoute.name,
-          path: 'schedule-turn-second-step-page',
+          CodeRoute.name,
+          path: 'code-page',
         );
 
-  static const String name = 'ScheduleTurnSecondStepRoute';
+  static const String name = 'CodeRoute';
 }
 
 /// generated route for
-/// [ScheduleTurnThirdStepPage]
-class ScheduleTurnThirdStepRoute extends PageRouteInfo<void> {
-  const ScheduleTurnThirdStepRoute()
-      : super(
-          ScheduleTurnThirdStepRoute.name,
-          path: 'schedule-turn-third-step-page',
+/// [ScheduleTurnSecondPage]
+class ScheduleTurnSecondRoute
+    extends PageRouteInfo<ScheduleTurnSecondRouteArgs> {
+  ScheduleTurnSecondRoute({
+    Key? key,
+    required PaymentMethodType paymentMethod,
+  }) : super(
+          ScheduleTurnSecondRoute.name,
+          path: 'schedule-turn-second-page',
+          args: ScheduleTurnSecondRouteArgs(
+            key: key,
+            paymentMethod: paymentMethod,
+          ),
         );
 
-  static const String name = 'ScheduleTurnThirdStepRoute';
+  static const String name = 'ScheduleTurnSecondRoute';
+}
+
+class ScheduleTurnSecondRouteArgs {
+  const ScheduleTurnSecondRouteArgs({
+    this.key,
+    required this.paymentMethod,
+  });
+
+  final Key? key;
+
+  final PaymentMethodType paymentMethod;
+
+  @override
+  String toString() {
+    return 'ScheduleTurnSecondRouteArgs{key: $key, paymentMethod: $paymentMethod}';
+  }
 }
 
 /// generated route for
-/// [ShiftDetailsPage]
-class ShiftDetailsRoute extends PageRouteInfo<ShiftDetailsRouteArgs> {
-  ShiftDetailsRoute({
+/// [TurnDetailsPage]
+class TurnDetailsRoute extends PageRouteInfo<TurnDetailsRouteArgs> {
+  TurnDetailsRoute({
     Key? key,
     required String city,
     required String agency,
     required ServiceType service,
     required DateTime date,
     required TimeOfDay time,
+    required PaymentMethodType paymentMethod,
+    required int requestNumber,
+    required double totalToPay,
   }) : super(
-          ShiftDetailsRoute.name,
-          path: 'shift-details-page',
-          args: ShiftDetailsRouteArgs(
+          TurnDetailsRoute.name,
+          path: 'turn-details-page',
+          args: TurnDetailsRouteArgs(
             key: key,
             city: city,
             agency: agency,
             service: service,
             date: date,
             time: time,
+            paymentMethod: paymentMethod,
+            requestNumber: requestNumber,
+            totalToPay: totalToPay,
           ),
         );
 
-  static const String name = 'ShiftDetailsRoute';
+  static const String name = 'TurnDetailsRoute';
 }
 
-class ShiftDetailsRouteArgs {
-  const ShiftDetailsRouteArgs({
+class TurnDetailsRouteArgs {
+  const TurnDetailsRouteArgs({
     this.key,
     required this.city,
     required this.agency,
     required this.service,
     required this.date,
     required this.time,
+    required this.paymentMethod,
+    required this.requestNumber,
+    required this.totalToPay,
   });
 
   final Key? key;
@@ -986,9 +1111,15 @@ class ShiftDetailsRouteArgs {
 
   final TimeOfDay time;
 
+  final PaymentMethodType paymentMethod;
+
+  final int requestNumber;
+
+  final double totalToPay;
+
   @override
   String toString() {
-    return 'ShiftDetailsRouteArgs{key: $key, city: $city, agency: $agency, service: $service, date: $date, time: $time}';
+    return 'TurnDetailsRouteArgs{key: $key, city: $city, agency: $agency, service: $service, date: $date, time: $time, paymentMethod: $paymentMethod, requestNumber: $requestNumber, totalToPay: $totalToPay}';
   }
 }
 
@@ -1075,28 +1206,4 @@ class SimpleCertificateFirstStepPersonalRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SimpleCertificateFirstStepPersonalRoute';
-}
-
-/// generated route for
-/// [SelectPaymentPage]
-class SelectPaymentRoute extends PageRouteInfo<void> {
-  const SelectPaymentRoute()
-      : super(
-          SelectPaymentRoute.name,
-          path: '',
-        );
-
-  static const String name = 'SelectPaymentRoute';
-}
-
-/// generated route for
-/// [MakePaymentPage]
-class MakePaymentRoute extends PageRouteInfo<void> {
-  const MakePaymentRoute()
-      : super(
-          MakePaymentRoute.name,
-          path: 'make-payment-page',
-        );
-
-  static const String name = 'MakePaymentRoute';
 }

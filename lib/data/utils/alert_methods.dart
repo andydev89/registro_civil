@@ -24,7 +24,7 @@ void _error(String message) {
   AlertController.show('Error', message, TypeAlert.error);
 }
 
-// This method takes in a message and type of alert as parameters, 
+// This method takes in a message and type of alert as parameters,
 //and calls the appropriate methods depending on the type of alert.
 void showAlert(String message, TypeAlert type) {
   <TypeAlert, void Function(String)>{
