@@ -84,7 +84,7 @@
   "verhayReaPagServicio": "Verifique que haya realizado el pago del servicio para poder agendar su turno.",
   "confirmar": "Confirmar",
   "turResSatisfactoriamente": "¡Su turno se ha reservado \nsatisfactoriamente!",
-  "envNotCorElectronico": "Le hemos enviado una notificación a su correo electrónico con los detalles de su turno.",
+  "envNotCorElectronicoReservarTurno": "Le hemos enviado una notificación a su correo electrónico con los detalles de su turno.",
   "tipservicios": "Tipos de servicios",
   "selServicio": "Seleccione un servicio",
   "horDisponibles": "Horarios disponibles",
@@ -233,5 +233,17 @@
   "s641": "Teléfono celular residencial requerido",
   "s642": "El teléfono celular residencial debe ser único",
   "s643": "El correo electrónico residencial debe ser único",
-  "s644": "El NUI residencial debe ser único"
+  "s644": "El NUI residencial debe ser único",
+  "nombre": "Nombre",
+  "apellidos": "Apellidos",
+  "direccion": "Dirección",
+  "codigoPostal": "Código postal",
+  "enCasoDeTenerProblemasEscribanosA": "En caso de tener problemas escríbanos a",
+  "solicitud": "Solicitud",
+  "datosDelCliente": "Datos del cliente",
+  "confirmarPago": "Confirmar pago",
+  "confirmacionDePago": "Confirmación de pago",
+  "misPedidos": "Mis pedidos",
+  "pagoRealizadoConExito": "¡Pago realizado con éxito!",
+  "envNotCorElectronicoDetallesDeSolicitud": "Le hemos enviado una notificación a su correo electrónico con los detalles de su solicitud"
 }

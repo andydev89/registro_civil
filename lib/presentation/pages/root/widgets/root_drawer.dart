@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/home/widgets/button_drawer_home_widget.dart';
+import 'package:registro_civil_apk/presentation/pages/root/widgets/button_drawer.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
-class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({
+class RootDrawer extends StatelessWidget {
+  const RootDrawer({
     super.key,
     this.backgroundColor,
     this.beforeConfiguracion = const [],
@@ -58,22 +58,22 @@ class HomeDrawer extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ButtonDrawerHomeWidget(
+                        ButtonDrawer(
                           icon: Assets.svg.home.svg(),
                           titulo: l10n.inicio,
                           onPressed: () {},
                         ),
-                        ButtonDrawerHomeWidget(
+                        ButtonDrawer(
                           icon: Assets.svg.user.svg(),
                           titulo: l10n.miPerfil,
                           onPressed: () {},
                         ),
-                        ButtonDrawerHomeWidget(
+                        ButtonDrawer(
                           icon: Assets.svg.businessService.svg(),
                           titulo: l10n.misTramites,
                           onPressed: () {},
                         ),
-                        ButtonDrawerHomeWidget(
+                        ButtonDrawer(
                           icon: Assets.svg.calendar2.svg(),
                           titulo: l10n.misTurnos,
                           onPressed: () {
@@ -81,12 +81,12 @@ class HomeDrawer extends StatelessWidget {
                             context.navigateTo(const MyTurnsRoute());
                           },
                         ),
-                        ButtonDrawerHomeWidget(
+                        ButtonDrawer(
                           icon: Assets.svg.settings.svg(),
                           titulo: l10n.configuracion,
                           onPressed: () {},
                         ),
-                        ButtonDrawerHomeWidget(
+                        ButtonDrawer(
                           icon: const Icon(
                             Icons.help_outline_outlined,
                             size: 40,
@@ -95,7 +95,7 @@ class HomeDrawer extends StatelessWidget {
                           titulo: l10n.ayuda,
                           onPressed: () {},
                         ),
-                        ButtonDrawerHomeWidget(
+                        ButtonDrawer(
                           icon: Assets.svg.exit.svg(),
                           titulo: l10n.cerrSesion,
                           onPressed: () =>

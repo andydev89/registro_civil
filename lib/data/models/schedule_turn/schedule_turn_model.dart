@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/relationship_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/agencias_test.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/provincias_test.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/relationship_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
-part 'schedule_shift_model.gform.dart';
+part 'schedule_turn_model.gform.dart';
 
 @ReactiveFormAnnotation()
-class ScheduleShiftFirstStepPersonalModel {
-  ScheduleShiftFirstStepPersonalModel({
+class ScheduleTurnFirstStepPersonalModel {
+  ScheduleTurnFirstStepPersonalModel({
     @FormControlAnnotation(validators: [requiredValidator])
         required this.service,
     @FormControlAnnotation(validators: [requiredValidator])
@@ -20,15 +22,15 @@ class ScheduleShiftFirstStepPersonalModel {
 }
 
 @ReactiveFormAnnotation()
-class ScheduleShiftFirstStepFamiliarModel {
-  ScheduleShiftFirstStepFamiliarModel({
+class ScheduleTurnFirstStepFamiliarModel {
+  ScheduleTurnFirstStepFamiliarModel({
     @FormControlAnnotation(validators: [requiredValidator])
         required this.paymentMethod,
-    @FormControlAnnotation(
+    @FormControlAnnotation<dynamic>(
       touched: true,
     )
         this.scheduleForMe = false,
-    @FormArrayAnnotation(validators: [requiredValidator])
+    @FormArrayAnnotation<dynamic>(validators: [requiredValidator])
         this.family = const [],
   });
 
@@ -37,7 +39,7 @@ class ScheduleShiftFirstStepFamiliarModel {
   final List<FamiliarFormModel> family;
 }
 
-@FormGroupAnnotation()
+@FormGroupAnnotation<dynamic>()
 class FamiliarFormModel {
   FamiliarFormModel({
     @FormControlAnnotation(validators: [requiredValidator])
@@ -53,26 +55,18 @@ class FamiliarFormModel {
 }
 
 @ReactiveFormAnnotation()
-class ScheduleShiftSecondStepModel {
-  ScheduleShiftSecondStepModel({
-    @FormControlAnnotation(validators: [requiredValidator]) required this.code,
-  });
-
-  final String code;
-}
-
-@ReactiveFormAnnotation()
-class ScheduleShiftThirdStepModel {
-  ScheduleShiftThirdStepModel({
-    @FormControlAnnotation(validators: [requiredValidator]) required this.state,
+class ScheduleTurnSecondStepModel {
+  ScheduleTurnSecondStepModel({
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.province,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.agency,
     @FormControlAnnotation(validators: [requiredValidator]) required this.date,
     @FormControlAnnotation(validators: [requiredValidator]) required this.time,
   });
 
-  final String state;
-  final String agency;
+  final ProvinciasTest province;
+  final AgenciasTest agency;
   final DateTime date;
   final TimeOfDay time;
 }

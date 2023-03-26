@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/presentation/pages/home/widgets/finger_print_background.dart';
-import 'package:registro_civil_apk/presentation/pages/home/widgets/home_app_bar.dart';
-import 'package:registro_civil_apk/presentation/pages/home/widgets/home_drawer.dart';
+import 'package:registro_civil_apk/presentation/pages/root/widgets/finger_print_background.dart';
+import 'package:registro_civil_apk/presentation/pages/root/widgets/root_app_bar.dart';
+import 'package:registro_civil_apk/presentation/pages/root/widgets/root_drawer.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
 
@@ -22,8 +22,8 @@ class FingerPrintScaffold extends StatelessWidget {
         dividerColor: Colors.transparent,
       ),
       child: Scaffold(
-        appBar: const HomeAppBar(),
-        drawer: const HomeDrawer(),
+        appBar: const RootAppBar(),
+        drawer: const RootDrawer(),
         body: Stack(
           children: [
             const FingerPrintBackground(),

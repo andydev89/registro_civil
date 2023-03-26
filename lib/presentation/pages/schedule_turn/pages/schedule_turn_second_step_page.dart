@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/agencias_test.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/provincias_test.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
-import 'package:registro_civil_apk/data/models/schedule_shift/schedule_shift_model.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/agencias_test.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/provincias_test.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/widgets/radio_time_selector.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -15,13 +16,17 @@ import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_d
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
-class ScheduleTurnThirdStepPage extends StatelessWidget {
-  const ScheduleTurnThirdStepPage({super.key});
+class ScheduleTurnSecondPage extends StatelessWidget {
+  const ScheduleTurnSecondPage({
+    super.key,
+    required this.paymentMethod,
+  });
+  final PaymentMethodType paymentMethod;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return ScheduleShiftThirdStepModelFormBuilder(
+    return ScheduleTurnSecondStepModelFormBuilder(
       builder: (context, formModel, child) => PrimaryScaffold(
         title: l10n.obtTurno,
         subtitle: l10n.completeInformacionSolicitada,
@@ -32,23 +37,20 @@ class ScheduleTurnThirdStepPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 PrimaryReactiveDropdown(
-                  formControl: formModel.stateControl,
+                  formControl: formModel.provinceControl,
                   //TODO esto va a cambiar por un objeto q viene del back
                   items: ProvinciasTest.values,
-                  hintText: '${l10n.seleccione}...',
                   label: l10n.provincia,
                 ),
                 PrimaryReactiveDropdown(
                   formControl: formModel.agencyControl,
                   //TODO esto va a cambiar por un objeto q viene del back
                   items: AgenciasTest.values,
-                  hintText: '${l10n.seleccione}...',
                   label: l10n.agencia,
                 ),
                 ReactiveDatePicker(
                   builder: (context, picker, child) => PrimaryReactiveTextField(
                     label: l10n.fechaParaTurno,
-                    hintText: '${l10n.seleccione}...',
                     suffixIcon: Assets.svg.calendar.svg(),
                     onTap: (control) => picker.showPicker(),
                     formControl: formModel.dateControl,
@@ -88,17 +90,20 @@ class ScheduleTurnThirdStepPage extends StatelessWidget {
             ).horizontalPadding(40),
           ),
         ),
-        bottomNavigationBar: ReactiveScheduleShiftThirdStepModelFormConsumer(
+        bottomNavigationBar: ReactiveScheduleTurnSecondStepModelFormConsumer(
           builder: (context, formModel, child) => PrimaryButton(
             title: l10n.ageTurno,
             onPressed: formModel.form.valid
                 ? () => context.navigateTo(
-                      ShiftDetailsRoute(
+                      TurnDetailsRoute(
                         city: 'Guayaquil',
                         agency: 'Matriz',
                         service: ServiceType.identificationCard,
                         date: DateTime.now(),
                         time: TimeOfDay.now(),
+                        paymentMethod: paymentMethod,
+                        requestNumber: 12569,
+                        totalToPay: 15,
                       ),
                     )
                 : null,

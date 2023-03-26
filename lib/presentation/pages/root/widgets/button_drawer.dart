@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
-class ButtonDrawerHomeWidget extends StatelessWidget {
-  const ButtonDrawerHomeWidget({
+class ButtonDrawer extends StatelessWidget {
+  const ButtonDrawer({
     super.key,
     required this.icon,
     required this.titulo,
@@ -28,7 +28,7 @@ class ButtonDrawerHomeWidget extends StatelessWidget {
       label: PrimaryLabel(
         titulo,
         fontSize: 28,
-            color: Colors.white,
+        color: Colors.white,
       ),
     ).verticalPadding(3);
   }

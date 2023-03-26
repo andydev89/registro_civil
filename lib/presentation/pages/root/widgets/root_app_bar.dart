@@ -4,8 +4,8 @@ import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
-class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({super.key});
+class RootAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const RootAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   label: const PrimaryLabel(
                     '2',
                     fontSize: 10,
+                    color: Colors.white,
                   ),
                   child: Assets.svg.bell.svg(),
                 ),

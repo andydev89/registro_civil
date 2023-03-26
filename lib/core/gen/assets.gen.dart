@@ -193,6 +193,10 @@ class $AssetsSvgGen {
   SvgGenImage get cardAccount =>
       const SvgGenImage('assets/svg/card_account.svg');
 
+  /// File path: assets/svg/ccorrespondent_payment_text.svg
+  SvgGenImage get ccorrespondentPaymentText =>
+      const SvgGenImage('assets/svg/ccorrespondent_payment_text.svg');
+
   /// File path: assets/svg/cedula.svg
   SvgGenImage get cedula => const SvgGenImage('assets/svg/cedula.svg');
 
@@ -213,6 +217,10 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/clock.svg
   SvgGenImage get clock => const SvgGenImage('assets/svg/clock.svg');
+
+  /// File path: assets/svg/correspondent_payment.svg
+  SvgGenImage get correspondentPayment =>
+      const SvgGenImage('assets/svg/correspondent_payment.svg');
 
   /// File path: assets/svg/documents.svg
   SvgGenImage get documents => const SvgGenImage('assets/svg/documents.svg');
@@ -254,6 +262,14 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/pen.svg
   SvgGenImage get pen => const SvgGenImage('assets/svg/pen.svg');
+
+  /// File path: assets/svg/place_to_pay_payment.svg
+  SvgGenImage get placeToPayPayment =>
+      const SvgGenImage('assets/svg/place_to_pay_payment.svg');
+
+  /// File path: assets/svg/place_to_pay_payment_text.svg
+  SvgGenImage get placeToPayPaymentText =>
+      const SvgGenImage('assets/svg/place_to_pay_payment_text.svg');
 
   /// File path: assets/svg/qr_code.svg
   SvgGenImage get qrCode => const SvgGenImage('assets/svg/qr_code.svg');
@@ -304,12 +320,14 @@ class $AssetsSvgGen {
         calendar3,
         calendar2,
         cardAccount,
+        ccorrespondentPaymentText,
         cedula,
         cedula2,
         checkDocument,
         checkOnline,
         civilRecord,
         clock,
+        correspondentPayment,
         documents,
         error,
         exit,
@@ -323,6 +341,8 @@ class $AssetsSvgGen {
         menu,
         passport,
         pen,
+        placeToPayPayment,
+        placeToPayPaymentText,
         qrCode,
         rigthArrow,
         rotatedFingerprint,
