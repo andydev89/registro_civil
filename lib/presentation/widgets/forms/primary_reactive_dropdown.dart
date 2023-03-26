@@ -16,14 +16,12 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
     required this.items,
     this.hintText,
     required this.label,
-    this.toText,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
   final List<Translatable> items;
   final String? hintText;
   final String label;
-  final String Function(T)? toText;
 
   @override
   Widget build(BuildContext context) {

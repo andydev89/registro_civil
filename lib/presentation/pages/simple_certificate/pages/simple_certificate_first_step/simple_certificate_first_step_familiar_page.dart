@@ -51,7 +51,6 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
                         items: RelationshipSimpleCertificateEnum.values,
                         label: l10n.parentezco,
                         hintText: '${l10n.seleccione}...',
-                        toText: (relationship) => relationship.toText(l10n),
                       ),
                     ),
                   ],
