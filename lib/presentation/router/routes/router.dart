@@ -49,6 +49,7 @@ part 'router.gr.dart';
     CustomRoute(
       transitionsBuilder: TransitionsBuilders.slideLeft,
       page: AuthRouterPage,
+      path: '/auth',
       children: [
         //LOGIN
         CustomRoute(

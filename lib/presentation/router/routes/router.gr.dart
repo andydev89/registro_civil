@@ -319,7 +319,7 @@ class _$AppRouter extends RootStackRouter {
   List<RouteConfig> get routes => [
         RouteConfig(
           AuthRouterRoute.name,
-          path: '/auth-router-page',
+          path: '/auth',
           children: [
             RouteConfig(
               LoginRoute.name,
@@ -536,7 +536,7 @@ class AuthRouterRoute extends PageRouteInfo<void> {
   const AuthRouterRoute({List<PageRouteInfo>? children})
       : super(
           AuthRouterRoute.name,
-          path: '/auth-router-page',
+          path: '/auth',
           initialChildren: children,
         );
 
