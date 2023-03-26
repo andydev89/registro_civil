@@ -43,12 +43,21 @@ Future<T?> showAcceptCancelDialog<T>(
   );
 }
 
-Future<void> showContentDialog(BuildContext context, Widget content) {
+Future<void> showContentDialog(
+  BuildContext context, {
+  required Widget content,
+  Color? backgroundColor,
+}) {
   return showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
         content: content,
+        backgroundColor:
+            backgroundColor ?? const Color.fromRGBO(255, 255, 255, 0.75),
       );
     },
   );

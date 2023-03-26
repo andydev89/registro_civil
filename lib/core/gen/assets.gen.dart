@@ -72,6 +72,10 @@ class $AssetsPngGen {
   AssetGenImage get certificadoNacimiento =>
       const AssetGenImage('assets/png/certificado_nacimiento.png');
 
+  /// File path: assets/png/certificado_simple.png
+  AssetGenImage get certificadoSimple =>
+      const AssetGenImage('assets/png/certificado_simple.png');
+
   /// File path: assets/png/certificado_union_hecho.png
   AssetGenImage get certificadoUnionHecho =>
       const AssetGenImage('assets/png/certificado_union_hecho.png');
@@ -140,6 +144,7 @@ class $AssetsPngGen {
         certificadoIdentidad,
         certificadoMatrimonio,
         certificadoNacimiento,
+        certificadoSimple,
         certificadoUnionHecho,
         fingerPrint,
         footer,

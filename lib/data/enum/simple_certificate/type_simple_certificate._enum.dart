@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 enum TypeSimpleCertificateEnum {
@@ -41,4 +41,19 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
   }
 
   double get price => this == TypeSimpleCertificateEnum.identity ? 5 : 3;
+
+  AssetGenImage get image {
+    switch (this) {
+      case TypeSimpleCertificateEnum.factorUnion:
+        return Assets.png.certificadoUnionHecho;
+      case TypeSimpleCertificateEnum.marriage:
+        return Assets.png.certificadoMatrimonio;
+      case TypeSimpleCertificateEnum.death:
+        return Assets.png.certificadoDefuncion;
+      case TypeSimpleCertificateEnum.identity:
+        return Assets.png.certificadoIdentidad;
+      case TypeSimpleCertificateEnum.birth:
+        return Assets.png.certificadoNacimiento;
+    }
+  }
 }

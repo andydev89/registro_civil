@@ -3,6 +3,8 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class PrimaryReactiveDropdown<T> extends StatelessWidget {
   const PrimaryReactiveDropdown({
@@ -12,21 +14,24 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
     required this.items,
     this.hintText,
     required this.label,
+    this.toText,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
   final List<Translatable> items;
   final String? hintText;
   final String label;
+  final String Function(T)? toText;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        PrimaryLabel(
           label,
-          style: const TextStyle(fontSize: 15),
+          fontWeight: FontWeight.normal,
         ).verticalPadding(5),
         ReactiveDropdownField(
           formControl: formControl,
@@ -43,6 +48,7 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
                 ),
               )
               .toList(),
+          validationMessages: validationMessage(l10n),
         ),
       ],
     ).verticalPadding(10);
