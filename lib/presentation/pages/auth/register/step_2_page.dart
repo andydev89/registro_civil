@@ -40,7 +40,6 @@ class Step2Page extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircularIconAuth(
-                  padding: 35,
                   bottomLabbel: l10n.rostro,
                   child: Assets.svg.faceId.svg(
                     width: 30,
@@ -49,7 +48,7 @@ class Step2Page extends ConsumerWidget {
                   ),
                 ),
                 CircularIconAuth(
-                  padding: 35,
+                  verPadding: 15,
                   bottomLabbel: l10n.rosCedula,
                   child: Column(
                     children: [
