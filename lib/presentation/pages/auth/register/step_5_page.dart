@@ -1,10 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/models/responses/auth_response/auth_response.dart';
+import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -56,9 +60,10 @@ class Step5Page extends ConsumerWidget {
                 const SizedBox(height: 50),
                 ReactivePasswordModelFormConsumer(
                   builder: (_, form, __) {
-                    return PrimaryAsyncButton<bool>(
+                    return PrimaryAsyncButton<
+                        ResponseModel<List<RegisterResponseModel>?>>(
                       title: l10n.registrar,
-                      onSuccess: () => context.replaceRoute(
+                      onSuccess: (result) => context.replaceRoute(
                         SuccessRoute(
                           child: Column(
                             children: [
@@ -78,9 +83,10 @@ class Step5Page extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      onError: (error) {
-                        showErrorSnackBar(context, error.toString());
-                      },
+                      onError: (p0) => showAlert(
+                        p0.translate(context),
+                        TypeAlert.error,
+                      ),
                       onPressedAsync: form.form.valid
                           ? () {
                               final registerModel = ref.watch(registerProvider);

@@ -108,7 +108,7 @@ class RegisterModel {
     this.nui = '',
     this.password = '',
     this.email = '',
-    this.phoneNumber = '',
+    this.phone = '',
   });
 
   factory RegisterModel.fromJson(Map<String, dynamic> json) =>
@@ -118,19 +118,19 @@ class RegisterModel {
   final String nui;
   final String password;
   final String email;
-  final String phoneNumber;
+  final String phone;
 
   RegisterModel copyWith({
     String? nui,
     String? password,
     String? email,
-    String? phoneNumber,
+    String? phone,
   }) {
     return RegisterModel(
       nui: nui ?? this.nui,
       password: password ?? this.password,
       email: email ?? this.email,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
+      phone: phone?? this.phone,
     );
   }
 }

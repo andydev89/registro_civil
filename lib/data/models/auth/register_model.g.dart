@@ -68,7 +68,7 @@ RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) =>
       nui: json['nui'] as String? ?? '',
       password: json['password'] as String? ?? '',
       email: json['email'] as String? ?? '',
-      phoneNumber: json['phoneNumber'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
     );
 
 Map<String, dynamic> _$RegisterModelToJson(RegisterModel instance) =>
@@ -76,5 +76,5 @@ Map<String, dynamic> _$RegisterModelToJson(RegisterModel instance) =>
       'nui': instance.nui,
       'password': instance.password,
       'email': instance.email,
-      'phoneNumber': instance.phoneNumber,
+      'phone': instance.phone,
     };

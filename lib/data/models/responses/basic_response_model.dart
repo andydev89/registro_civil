@@ -1,27 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'basic_response_model.g.dart';
 
-@JsonSerializable(genericArgumentFactories: true)
-class BasicResponse<T> {
-  BasicResponse({
-    required this.statusCode,
-    required this.body,
-  });
-
-  factory BasicResponse.fromJson(
-    Map<String, dynamic> json,
-    T Function(Object? json) fromJsonT,
-  ) =>
-      _$BasicResponseFromJson(json, fromJsonT);
-
-  Map<String, dynamic> toJson(
-    Object Function(T value) toJsonT,
-  ) =>
-      _$BasicResponseToJson(this, toJsonT);
-
-  final int statusCode;
-  final T? body;
-}
 
 @JsonSerializable(genericArgumentFactories: true)
 class ResponseModel<T> {
@@ -45,7 +24,7 @@ class ResponseModel<T> {
   final T? data;
 
   Map<String, dynamic> toJson(
-    Object Function(T value) toJsonT,
+    Object? Function(T value) toJsonT,
   ) =>
       _$ResponseModelToJson(this, toJsonT);
 }
@@ -83,7 +62,7 @@ class ResponseModelPagination<T> {
   final int? pageNumbers;
 
   Map<String, dynamic> toJson(
-    Object Function(T value) toJsonT,
+    Object? Function(T value) toJsonT,
   ) =>
       _$ResponseModelPaginationToJson(this, toJsonT);
 }

@@ -1,3 +1,4 @@
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
@@ -18,7 +19,7 @@ class Register extends _$Register {
   void updateEnterData(EnterDataModel enterData) {
     state = state.copyWith(
       email: enterData.email,
-      phoneNumber: enterData.phoneNumber,
+      phone: enterData.phoneNumber,
     );
   }
 
@@ -45,8 +46,26 @@ class Register extends _$Register {
 Future<String?> login(LoginRef ref, LoginModel loginModel) async {
   final api = ref.watch(apiProvider);
   final response = await api.login(loginModel);
-  if (response.statusCode == 200) {
-    return (response.body as Map<String, dynamic>)['token'] as String?;
+  if (response.status == 200) {
+    return (response.data as Map<String, dynamic>)['token'] as String?;
   }
   return null;
 }
+
+final isLoggedIn = ValueNotifier(false);
+
+// @riverpod
+// class IsLoggedIn extends _$IsLoggedIn {
+//   @override
+//   bool build() {
+//     return false;
+//   }
+
+//   @override
+//   bool get state;
+
+//   @override
+//    set state(bool value) {
+//     state = value;
+//   }
+// }

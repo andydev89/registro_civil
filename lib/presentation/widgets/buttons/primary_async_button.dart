@@ -1,6 +1,9 @@
 import 'package:async_button_builder/async_button_builder.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
+import 'package:registro_civil_apk/data/utils/methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
@@ -26,9 +29,9 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
   final Color? disabledBackgroundColor;
   final Color? colorText;
   final Color? disabledForegroundColor;
-  final void Function()? onSuccess;
-  final void Function(Object)? onError;
-  final Future<void> Function()? onPressedAsync;
+  final void Function(T)? onSuccess;
+  final void Function(StatusCodes)? onError;
+  final Future<T> Function()? onPressedAsync;
   final double fontSize;
   final String title;
   final EdgeInsetsGeometry? padding;
@@ -38,7 +41,6 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var buttonState = const ButtonState.idle();
     return DecoratedBox(
       decoration: ShapeDecoration(
         shape: const StadiumBorder(),
@@ -46,14 +48,24 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
       ),
       // height: height + 15,
       child: AsyncButtonBuilder(
-        buttonState: buttonState,
         loadingWidget: const AspectRatio(
           aspectRatio: 1,
           child: CircularProgressIndicator(
             color: Colors.white,
           ),
         ),
-        onPressed: onPressedAsync,
+        onPressed: () async {
+          try {
+            final result = await onPressedAsync?.call();
+            onSuccess?.call(result!);
+          } catch (e) {
+            if (e is! DioError) return onError?.call(StatusCodes.s999);
+
+            onError?.call(
+              convertToStatusCode(e.response?.data as Map<String, dynamic>),
+            );
+          }
+        },
         builder: (context, child, callback, buttonState) {
           final buttonColor = buttonState.when(
             idle: () => backgroundColor ?? Colors.transparent,
@@ -62,12 +74,14 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
             success: () => backgroundColor ?? Colors.transparent,
           );
           return ElevatedButton(
-            onPressed: callback,
+            onPressed: onPressedAsync == null ? null : callback,
             style: botonEstilo(
-              backgroundColor: buttonColor,
-              disabledBackgroundColor: buttonColor,
-              colorText: colorText,
-              disabledForegroundColor: buttonColor,
+              backgroundColor: onPressedAsync == null ? null : buttonColor,
+              disabledBackgroundColor:
+                  onPressedAsync == null ? null : buttonColor,
+              colorText: onPressedAsync == null ? null : colorText,
+              disabledForegroundColor:
+                  onPressedAsync == null ? null : buttonColor,
               padding: padding,
               elevation: elevation,
             ),
@@ -77,18 +91,20 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
             ),
           );
         },
-        successWidget: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-        errorWidget: const Icon(
-          Icons.error,
-          color: Colors.red,
-        ),
+        // successWidget: const Icon(
+        //   Icons.check,
+        //   color: Colors.white,
+        // ),
+        // errorWidget: const Icon(
+        //   Icons.error,
+        //   color: Colors.red,
+        // ),
+        showSuccess: false,
+        showError: false,
         successPadding: EdgeInsets.zero,
         child: PrimaryLabel(
           isToUpperCase ? title.toUpperCase() : title,
-          color: colorText ?? Colors.white,
+          color: onPressedAsync == null ? Colors.grey : Colors.white,
           fontSize: fontSize,
           fontWeight: fontWeight,
         ),

@@ -1,14 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
+import 'package:registro_civil_apk/data/models/responses/auth_response/auth_response.dart';
+import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
+import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/icon_button_auth.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_text_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_password_field.dart';
@@ -83,13 +90,25 @@ class LoginPage extends HookWidget {
                   children: [
                     ReactiveLoginModelFormConsumer(
                       builder: (_, form, __) {
-                        return PrimaryButton(
-                          title: l10n.loggin,
-                          onPressed: form.form.valid
-                              ? () {
-                                  context.replaceRoute(const RootRouterRoute());
-                                }
-                              : null,
+                        return Consumer(
+                          builder: (_, ref, __) {
+                            return PrimaryAsyncButton<
+                                ResponseModel<List<LoginResponseModel>?>>(
+                              title: l10n.loggin,
+                              onError: (p0) => showAlert(
+                                p0.translate(context),
+                                TypeAlert.error,
+                              ),
+                              onSuccess: (result) {
+                               isLoggedIn.value = true; 
+                                context.navigateBack();
+                              },
+                              onPressedAsync: form.form.valid
+                                  ? () async =>
+                                      ref.watch(apiProvider).login(form.model)
+                                  : null,
+                            );
+                          },
                         );
                       },
                     ),

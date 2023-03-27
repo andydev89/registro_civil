@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/auth_router_page.dart';
@@ -38,7 +39,7 @@ import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/s
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_second_step/simple_certificate_second_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_third_step/simple_certificate_third_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/simple_certificate_router_page.dart';
-import 'package:registro_civil_apk/presentation/pages/test/test_page.dart';
+import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
 
 part 'router.gr.dart';
 
@@ -145,6 +146,7 @@ part 'router.gr.dart';
         ),
         //SCHEDULE SHIFT
         CupertinoRoute(
+          guards: [AuthGuard],
           page: ScheduleTurnRouterPage,
           children: [
             CupertinoRoute(
@@ -174,6 +176,7 @@ part 'router.gr.dart';
         ),
         // SIMPLE CERTIFICATE
         CupertinoRoute(
+          guards: [AuthGuard],
           page: SimpleCertificateRouterPage,
           children: [
             CupertinoRoute(
@@ -207,10 +210,12 @@ part 'router.gr.dart';
         ),
         //MY TURNS
         CupertinoRoute(
+          guards: [AuthGuard],
           page: MyTurnsPage,
         ),
         //PAYMENT
         CupertinoRoute(
+          guards: [AuthGuard],
           page: PaymentRouterPage,
           children: [
             CupertinoRoute(
@@ -222,13 +227,12 @@ part 'router.gr.dart';
             ),
           ],
         ),
-        // TEST
-        CustomRoute(
-          page: TexterPage,
-        ),
       ],
     ),
   ],
 )
 // extend the generated private router
-class AppRouter extends _$AppRouter {}
+class AppRouter extends _$AppRouter {
+  AppRouter()
+      : super(authGuard: AuthGuard());
+}

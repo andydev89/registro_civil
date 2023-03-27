@@ -7,3 +7,4 @@ const gradienteApp = [
   Color.fromRGBO(0, 78, 146, 0.8),
 ];
 
+bool isUserLoggedIn = false;
