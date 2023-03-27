@@ -85,7 +85,7 @@
   "verhayReaPagServicio": "Verify that you have made the payment of the service in order to schedule your appointment.",
   "confirmar": "Confirm",
   "turResSatisfactoriamente": "Your turn has been successfully booked!",
-  "envNotCorElectronico": "We have sent you a notification to your email with the details of your shift.",
+  "envNotCorElectronicoReservarTurno": "We have sent you a notification to your email with the details of your shift.",
   "tipservicios": "Types of services",
   "selServicio": "Select a service",
   "horDisponibles": "Available hours",
@@ -249,5 +249,17 @@
   "s641": "Residential Cell Phone Required",
   "s642": "Residential Cell Phone Unique",
   "s643": "Residential Email Unique",
-  "s644": "Residential Nui Unique"
+  "s644": "Residential Nui Unique",
+  "nombre": "Name",
+  "apellidos": "Last name",
+  "direccion": "Address",
+  "codigoPostal": "Postal code",
+  "enCasoDeTenerProblemasEscribanosA": "If you have problems write to us at",
+  "solicitud": "Request",
+  "datosDelCliente": "Client information",
+  "confirmarPago": "Confirm payment",
+  "confirmacionDePago": "Payment confirmation",
+  "misPedidos": "My orders",
+  "pagoRealizadoConExito": "Payment successful!",
+  "envNotCorElectronicoDetallesDeSolicitud": "We have sent a notification to your email with the details of your request"
 }

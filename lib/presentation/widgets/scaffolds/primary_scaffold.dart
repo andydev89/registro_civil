@@ -43,7 +43,6 @@ class PrimaryScaffold extends StatelessWidget {
               if (subtitle != null)
                 PrimaryText(
                   subtitle!,
-                  color: primaryColor,
                 ).symmetricPadding(20, 30),
               body,
             ],

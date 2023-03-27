@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/auth_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/change_password_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_page.dart';
@@ -23,15 +21,14 @@ import 'package:registro_civil_apk/presentation/pages/home/pages/services/servic
 import 'package:registro_civil_apk/presentation/pages/my_turns/my_turns_page.dart';
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.dart';
-import 'package:registro_civil_apk/presentation/pages/payment/payment_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/select_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/code_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_familiar_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_personal_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_router_page.dart';
-import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_second_step/schedule_turn_second_step_page.dart';
-import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_thrid_step/schedule_turn_third_step_page.dart';
-import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/turn_details/turn_details_page.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_second_step_page.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/turn_details_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/schedule_turn_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_first_step/simple_certificate_first_step_familiar_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_first_step/simple_certificate_first_step_personal_page.dart';
@@ -144,7 +141,7 @@ part 'router.gr.dart';
             ),
           ],
         ),
-        //SCHEDULE SHIFT
+        //SCHEDULE TURN
         CupertinoRoute(
           guards: [AuthGuard],
           page: ScheduleTurnRouterPage,
@@ -164,13 +161,13 @@ part 'router.gr.dart';
               ],
             ),
             CupertinoRoute(
-              page: ScheduleTurnSecondStepPage,
+              page: CodePage,
             ),
             CupertinoRoute(
-              page: ScheduleTurnThirdStepPage,
+              page: ScheduleTurnSecondPage,
             ),
             CupertinoRoute(
-              page: ShiftDetailsPage,
+              page: TurnDetailsPage,
             ),
           ],
         ),
@@ -213,19 +210,13 @@ part 'router.gr.dart';
           guards: [AuthGuard],
           page: MyTurnsPage,
         ),
+
         //PAYMENT
         CupertinoRoute(
-          guards: [AuthGuard],
-          page: PaymentRouterPage,
-          children: [
-            CupertinoRoute(
-              page: SelectPaymentPage,
-              initial: true,
-            ),
-            CupertinoRoute(
-              page: MakePaymentPage,
-            ),
-          ],
+          page: SelectPaymentPage,
+        ),
+        CupertinoRoute(
+          page: MakePaymentPage,
         ),
       ],
     ),

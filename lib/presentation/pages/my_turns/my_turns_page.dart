@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/models/my_turn_expandable_card_model.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/widgets/my_turn_expandable_card.dart';

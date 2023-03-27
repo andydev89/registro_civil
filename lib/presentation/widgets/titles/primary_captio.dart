@@ -9,6 +9,7 @@ class PrimaryCaption extends StatelessWidget {
     this.fontSize = fontSizeDefault,
     this.isToUpperCase = false,
     this.textAlign = TextAlign.center,
+    this.fontWeight = FontWeight.normal,
     super.key,
   });
 
@@ -17,6 +18,7 @@ class PrimaryCaption extends StatelessWidget {
   final double fontSize;
   final bool isToUpperCase;
   final TextAlign? textAlign;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class PrimaryCaption extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize,
         color: color,
+        fontWeight: fontWeight,
       ),
       textAlign: textAlign,
     );

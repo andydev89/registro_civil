@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/relationship_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
-import 'package:registro_civil_apk/data/models/schedule_shift/schedule_shift_model.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/relationship_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -22,7 +22,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return ScheduleShiftFirstStepFamiliarModelFormBuilder(
+    return ScheduleTurnFirstStepFamiliarModelFormBuilder(
       initState: (context, formModel) {
         formModel.addFamilyItem(
           FamiliarFormModel(),
@@ -34,13 +34,15 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 60, right: 10),
+                padding: const EdgeInsets.only(left: 30, right: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    PrimaryReactiveCheckBox(
-                      formControl: formModel.scheduleForMeControl,
-                      label: l10n.agendarTurnoParaMi,
+                    Expanded(
+                      child: PrimaryReactiveCheckBox(
+                        formControl: formModel.scheduleForMeControl,
+                        label: l10n.agendarTurnoParaMi,
+                      ),
                     ),
                     PrimaryIconButton(
                       icon: Assets.svg.familyAdd.svg(),
@@ -65,7 +67,6 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                             children: [
                               PrimaryReactiveTextField<int>(
                                 formControlName: '$key.identificationNumber',
-                                hintText: '${l10n.escriba}...',
                                 keyboardType: TextInputType.number,
                                 label: l10n.cedula,
                               ).horizontalPadding(60),
@@ -78,11 +79,11 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Flexible(
-                                      child: PrimaryReactiveDropdown(
+                                      child: PrimaryReactiveDropdown<
+                                          RelationshipType>(
                                         label: l10n.parentezco,
                                         formControlName: '$key.relationship',
                                         items: RelationshipType.values,
-                                        hintText: '${l10n.seleccione}...',
                                       ),
                                     ),
                                     const SizedBox(
@@ -95,11 +96,10 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              PrimaryReactiveDropdown(
+                              PrimaryReactiveDropdown<ServiceType>(
                                 label: l10n.tipoServicio,
                                 formControlName: '$key.service',
                                 items: ServiceType.values,
-                                hintText: '${l10n.seleccione}...',
                               ).horizontalPadding(60),
                             ],
                           ),
@@ -118,11 +118,24 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
           ),
         ),
         bottomNavigationBar:
-            ReactiveScheduleShiftFirstStepFamiliarModelFormConsumer(
+            ReactiveScheduleTurnFirstStepFamiliarModelFormConsumer(
           builder: (context, formModel, child) => PrimaryButton(
             title: l10n.continuar,
             onPressed: formModel.form.valid
-                ? () => context.navigateTo(const ScheduleTurnSecondStepRoute())
+                ? () {
+                    if (formModel.model.paymentMethod ==
+                        PaymentMethodType.correspondentPayment) {
+                      context.navigateTo(
+                        const CodeRoute(),
+                      );
+                    } else {
+                      context.navigateTo(
+                        ScheduleTurnSecondRoute(
+                          paymentMethod: formModel.model.paymentMethod,
+                        ),
+                      );
+                    }
+                  }
                 : null,
           ).symmetricPadding(10, 30),
         ),

@@ -4,7 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -12,20 +13,26 @@ import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart'
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class ShiftDetailsPage extends StatelessWidget {
-  const ShiftDetailsPage({
+class TurnDetailsPage extends StatelessWidget {
+  const TurnDetailsPage({
     super.key,
     required this.city,
     required this.agency,
     required this.service,
     required this.date,
     required this.time,
+    required this.paymentMethod,
+    required this.requestNumber,
+    required this.totalToPay,
   });
   final String city;
   final String agency;
   final ServiceType service;
   final DateTime date;
   final TimeOfDay time;
+  final PaymentMethodType paymentMethod;
+  final int requestNumber;
+  final double totalToPay;
 
   @override
   Widget build(BuildContext context) {
@@ -98,16 +105,40 @@ class ShiftDetailsPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: PrimaryButton(
-        title: l10n.ageTurno,
-        onPressed: () => context.navigateTo(
-          NotificationRoute(
-            notificationType: NotificationType.succes,
-            message: l10n.turnoReservadoMensajeFormal,
-            bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
-            buttonText: l10n.misTurnos,
-            onTap: () => context.navigateTo(const MyTurnsRoute()),
-          ),
-        ),
+        title: l10n.confirmar,
+        onPressed: () {
+          if (paymentMethod == PaymentMethodType.correspondentPayment) {
+            //Navegar a la vista de mostrar la confirmacion y luego a mis turnos
+            context.replaceRoute(
+              NotificationRoute(
+                notificationType: NotificationType.succes,
+                message: l10n.turnoReservadoMensajeFormal,
+                bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
+                buttonText: l10n.misTurnos,
+                onTap: (cxt) => cxt.replaceRoute(const MyTurnsRoute()),
+              ),
+            );
+          } else {
+            //Navegar a la vista de hacer el pago
+            context.replaceRoute(
+              MakePaymentRoute(
+                requestNumber: requestNumber,
+                totalToPay: totalToPay,
+                buttonText: l10n.continuar,
+                onTapSuccessPayment: (cxt) => cxt.replaceRoute(
+                  NotificationRoute(
+                    buttonText: l10n.misTurnos,
+                    message: l10n.turnoReservadoMensajeFormal,
+                    bottonTitle: l10n.envNotCorElectronicoDetallesDeSolicitud,
+                    notificationType: NotificationType.succes,
+                    onTap: (context) =>
+                        context.replaceRoute(const MyTurnsRoute()),
+                  ),
+                ),
+              ),
+            );
+          }
+        },
       ).symmetricPadding(10, 30),
     );
   }

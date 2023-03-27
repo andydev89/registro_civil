@@ -6,6 +6,7 @@ import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class PrimaryReactiveTextField<T> extends StatelessWidget {
   const PrimaryReactiveTextField({
@@ -52,9 +53,8 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (!ligth && label != null)
-          Text(
+          PrimaryText(
             label!,
-            style: const TextStyle(fontSize: 15),
           ).verticalPadding(5),
         ReactiveTextField<T>(
           formControl: formControl,
@@ -74,7 +74,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
           inputFormatters: inputFormatters,
           decoration: primaryInputDecoration(
             light: ligth,
-            hintText: hintText,
+            hintText: hintText ?? '${l10n.escriba}...',
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             setSuffixIconConstraints: setSuffixIconConstraints,

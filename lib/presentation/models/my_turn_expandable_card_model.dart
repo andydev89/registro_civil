@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/data/enum/schedule_shift/service_type.dart';
+import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
 
 class MyTurnExpandableCardModel {
   MyTurnExpandableCardModel({

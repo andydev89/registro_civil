@@ -5,7 +5,6 @@ import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class PrimaryReactiveDropdown<T> extends StatelessWidget {
@@ -29,16 +28,15 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PrimaryLabel(
+        PrimaryText(
           label,
-          fontWeight: FontWeight.normal,
         ).verticalPadding(5),
         ReactiveDropdownField(
           formControl: formControl,
           formControlName: formControlName,
           borderRadius: BorderRadius.circular(10),
           decoration: primaryInputDecoration(
-            hintText: hintText,
+            hintText: hintText ?? '${l10n.seleccione}...',
           ),
           items: items
               .map(

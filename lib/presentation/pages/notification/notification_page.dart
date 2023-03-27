@@ -18,6 +18,7 @@ class NotificationPage extends StatelessWidget {
     required this.buttonText,
     required this.notificationType,
     this.onTap,
+    this.description,
   });
   final String? title;
   final String? subtitle;
@@ -25,7 +26,8 @@ class NotificationPage extends StatelessWidget {
   final String? bottonTitle;
   final String buttonText;
   final NotificationType notificationType;
-  final void Function()? onTap;
+  final void Function(BuildContext context)? onTap;
+  final Widget? description;
 
   @override
   Widget build(BuildContext context) {
@@ -37,25 +39,35 @@ class NotificationPage extends StatelessWidget {
         child: Column(
           children: [
             notificationType.image,
-            if (message != null)
-              PrimaryLabel(
-                message!,
-                color: primaryColor,
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  if (message != null)
+                    PrimaryLabel(
+                      message!,
+                      color: primaryColor,
+                    ),
+                  if (description != null) description!,
+                  if (bottonTitle != null)
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 20, left: 20, right: 20),
+                      child: PrimaryText(
+                        bottonTitle!,
+                      ),
+                    ),
+                ],
               ),
-            const Spacer(),
-            if (bottonTitle != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: PrimaryText(
-                  bottonTitle!,
-                ),
-              ),
+            ),
           ],
         ),
       ),
       bottomNavigationBar: PrimaryButton(
-        title: l10n.misTurnos,
-        onPressed: onTap,
+        title: buttonText,
+        onPressed: () {
+          onTap?.call(context);
+        },
       ).symmetricPadding(10, 30),
     );
   }
