@@ -7,12 +7,14 @@ class CircularIconAuth extends StatelessWidget {
   const CircularIconAuth({
     super.key,
     required this.child,
-    this.padding = 50,
     this.bottomLabbel,
+    this.horPadding = 35,
+    this.verPadding = 35,
   });
   final Widget child;
-  final double padding;
   final String? bottomLabbel;
+  final double horPadding;
+  final double verPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class CircularIconAuth extends StatelessWidget {
               width: 5,
             ),
           ),
-          child: child.symmetricPadding(padding, padding),
+          child: child.symmetricPadding(verPadding, horPadding),
         ),
         if (bottomLabbel != null)
           PrimaryLabel(
