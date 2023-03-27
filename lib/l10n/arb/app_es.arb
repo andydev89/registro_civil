@@ -245,5 +245,6 @@
   "confirmacionDePago": "Confirmación de pago",
   "misPedidos": "Mis pedidos",
   "pagoRealizadoConExito": "¡Pago realizado con éxito!",
-  "envNotCorElectronicoDetallesDeSolicitud": "Le hemos enviado una notificación a su correo electrónico con los detalles de su solicitud"
+  "envNotCorElectronicoDetallesDeSolicitud": "Le hemos enviado una notificación a su correo electrónico con los detalles de su solicitud",
+  "ingreseCon": "Ingrese su contraseña"
 }

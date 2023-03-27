@@ -47,7 +47,7 @@ Future<String?> login(LoginRef ref, LoginModel loginModel) async {
   final api = ref.watch(apiProvider);
   final response = await api.login(loginModel);
   if (response.status == 200) {
-    return (response.data as Map<String, dynamic>)['token'] as String?;
+    return response.data?.first.jwtToken;
   }
   return null;
 }

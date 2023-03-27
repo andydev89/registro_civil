@@ -89,10 +89,10 @@ class Step5Page extends ConsumerWidget {
                       ),
                       onPressedAsync: form.form.valid
                           ? () {
-                              final registerModel = ref.watch(registerProvider);
                               ref
                                   .read(registerProvider.notifier)
                                   .updatePassword(form.model);
+                              final registerModel = ref.watch(registerProvider);
                               return ref
                                   .watch(apiProvider)
                                   .register(registerModel);

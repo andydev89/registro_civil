@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/button_drawer.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -45,66 +46,99 @@ class RootDrawer extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const RegistroCivilLogo().symmetricPadding(20, 40),
-                  const DrawerUserData(),
-                  const Divider(
-                    thickness: 1,
-                    color: Colors.white,
-                  ),
-                  SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ButtonDrawer(
-                          icon: Assets.svg.home.svg(),
-                          titulo: l10n.inicio,
-                          onPressed: () {},
-                        ),
-                        ButtonDrawer(
-                          icon: Assets.svg.user.svg(),
-                          titulo: l10n.miPerfil,
-                          onPressed: () {},
-                        ),
-                        ButtonDrawer(
-                          icon: Assets.svg.businessService.svg(),
-                          titulo: l10n.misTramites,
-                          onPressed: () {},
-                        ),
-                        ButtonDrawer(
-                          icon: Assets.svg.calendar2.svg(),
-                          titulo: l10n.misTurnos,
-                          onPressed: () {
-                            Scaffold.of(context).closeDrawer();
-                            context.navigateTo(const MyTurnsRoute());
-                          },
-                        ),
-                        ButtonDrawer(
-                          icon: Assets.svg.settings.svg(),
-                          titulo: l10n.configuracion,
-                          onPressed: () {},
-                        ),
-                        ButtonDrawer(
-                          icon: const Icon(
-                            Icons.help_outline_outlined,
-                            size: 40,
-                            color: Colors.white,
-                          ),
-                          titulo: l10n.ayuda,
-                          onPressed: () {},
-                        ),
-                        ButtonDrawer(
-                          icon: Assets.svg.exit.svg(),
-                          titulo: l10n.cerrSesion,
-                          onPressed: () =>
-                              context.navigateTo(const HomeRouterRoute()),
-                        ),
-                      ],
-                    ).verticalPadding(20),
-                  ),
-                ],
+              ValueListenableBuilder<bool>(
+                valueListenable: isLoggedIn,
+                builder: (_, value, __) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const RegistroCivilLogo().symmetricPadding(20, 40),
+                      Visibility(
+                        visible: value,
+                        child: const DrawerUserData(),
+                      ),
+                      const Divider(
+                        thickness: 1,
+                        color: Colors.white,
+                      ),
+                      SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Visibility(
+                              visible: !value,
+                              child: ButtonDrawer(
+                                icon: Assets.svg.home.svg(),
+                                titulo: l10n.loggin,
+                                onPressed: () {
+                                  Scaffold.of(context).closeDrawer();
+                                  context.navigateTo(const AuthRouterRoute());
+                                },
+                              ),
+                            ),
+                            Visibility(
+                              visible: value,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ButtonDrawer(
+                                    icon: Assets.svg.home.svg(),
+                                    titulo: l10n.inicio,
+                                    onPressed: () =>
+                                        Scaffold.of(context).closeDrawer(),
+                                  ),
+                                  ButtonDrawer(
+                                    icon: Assets.svg.user.svg(),
+                                    titulo: l10n.miPerfil,
+                                    onPressed: () {},
+                                  ),
+                                  ButtonDrawer(
+                                    icon: Assets.svg.businessService.svg(),
+                                    titulo: l10n.misTramites,
+                                    onPressed: () {},
+                                  ),
+                                  ButtonDrawer(
+                                    icon: Assets.svg.calendar2.svg(),
+                                    titulo: l10n.misTurnos,
+                                    onPressed: () {
+                                      Scaffold.of(context).closeDrawer();
+                                      context.navigateTo(const MyTurnsRoute());
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ButtonDrawer(
+                              icon: Assets.svg.settings.svg(),
+                              titulo: l10n.configuracion,
+                              onPressed: () {},
+                            ),
+                            ButtonDrawer(
+                              icon: const Icon(
+                                Icons.help_outline_outlined,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                              titulo: l10n.ayuda,
+                              onPressed: () {},
+                            ),
+                            Visibility(
+                              visible: value,
+                              child: ButtonDrawer(
+                                icon: Assets.svg.exit.svg(),
+                                titulo: l10n.cerrSesion,
+                                onPressed: () {
+                                  isLoggedIn.value = false;
+                                  Scaffold.of(context).closeDrawer();
+                                },
+                              ),
+                            ),
+                          ],
+                        ).verticalPadding(20),
+                      ),
+                    ],
+                  );
+                },
               ),
               const LogoBottomSheet(
                 backgroundColor: Colors.transparent,

@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/data/models/auth/enter_email_model.dart';
+import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
@@ -17,33 +20,45 @@ class ForgotPasswordPage extends StatelessWidget {
     final l10n = context.l10n;
     return TranslucentCard(
       scrollContentOnResized: true,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          PrimaryTitle(
-            title: l10n.cambiarContrasena,
-            color: Colors.white,
-          ),
-          PrimaryLabel(
-            l10n.ingreseCorreo,
-            color: Colors.white,
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          PrimaryTextField(
-            textInputType: TextInputType.emailAddress,
-            hintText: l10n.correoE,
-            ligth: true,
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          PrimaryButton(
-            title: l10n.siguiente,
-            onPressed: () => context.navigateTo(const ChangePasswordRoute()),
-          ).withRevealAnimation,
-        ],
+      child: EnterEmailModelFormBuilder(
+        builder: (_, form, __) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              PrimaryTitle(
+                title: l10n.cambiarContrasena,
+                color: Colors.white,
+              ),
+              PrimaryLabel(
+                l10n.ingreseCorreo,
+                color: Colors.white,
+                fontWeight: FontWeight.normal,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              PrimaryReactiveTextField<String>(
+                formControl: form.emailControl,
+                keyboardType: TextInputType.emailAddress,
+                hintText: l10n.correoE,
+                ligth: true,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              ReactiveEnterEmailModelFormConsumer(
+                builder: (_, form, __) {
+                  return PrimaryButton(
+                    title: l10n.siguiente,
+                    onPressed: form.form.valid
+                        ? () => context.navigateTo(const ChangePasswordRoute())
+                        : null,
+                  ).withRevealAnimation;
+                },
+              ),
+            ],
+          );
+        },
       ),
     );
   }

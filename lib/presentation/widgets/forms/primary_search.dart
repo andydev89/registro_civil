@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_text_field.dart';
 
@@ -26,13 +27,18 @@ class PrimarySearch extends StatelessWidget {
             suffixIcon: Assets.svg.search.svg(),
           ),
         ),
-        Visibility(
-          visible: showFilter,
-          child: IconButton(
-            icon: Assets.svg.filter.svg(),
-            splashRadius: 25,
-            onPressed: onPressed,
-          ).horizontalPadding(10),
+        ValueListenableBuilder<bool>(
+          valueListenable: isLoggedIn,
+          builder: (_,value ,__) {
+            return Visibility(
+              visible: value &&showFilter ,
+              child: IconButton(
+                icon: Assets.svg.filter.svg(),
+                splashRadius: 25,
+                onPressed: onPressed,
+              ).horizontalPadding(10),
+            );
+          },
         ),
       ],
     );
