@@ -6,7 +6,7 @@ part of 'auth_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginHash() => r'a40512868ffe6001c8c5d645b28890be9ca97c3b';
+String _$loginHash() => r'7d643fa1ff36ead0f1409a5c722c1e809e5d7519';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -109,7 +109,7 @@ class LoginProvider extends AutoDisposeFutureProvider<String?> {
   }
 }
 
-String _$registerHash() => r'107b8eeb4b37df081a2821e18eb8cc823caa3d02';
+String _$registerHash() => r'86971dc85879380c258f059aea34ed19744e5bc1';
 
 /// See also [Register].
 @ProviderFor(Register)

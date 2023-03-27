@@ -19,14 +19,15 @@ class _Api implements Api {
   String? baseUrl;
 
   @override
-  Future<BasicResponse<dynamic>> register(registerModel) async {
+  Future<ResponseModel<List<RegisterResponseModel>?>> register(
+      registerModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(registerModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BasicResponse<dynamic>>(Options(
+        _setStreamType<ResponseModel<List<RegisterResponseModel>>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -38,22 +39,27 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BasicResponse<dynamic>.fromJson(
+    final value = ResponseModel<List<RegisterResponseModel>>.fromJson(
       _result.data!,
-      (json) => json as dynamic,
+      (json) => json is List<dynamic>
+          ? json
+              .map<RegisterResponseModel>((i) =>
+                  RegisterResponseModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
     );
     return value;
   }
 
   @override
-  Future<BasicResponse<dynamic>> login(loginModel) async {
+  Future<ResponseModel<List<LoginResponseModel>?>> login(loginModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(loginModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BasicResponse<dynamic>>(Options(
+        _setStreamType<ResponseModel<List<LoginResponseModel>>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -65,9 +71,14 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BasicResponse<dynamic>.fromJson(
+    final value = ResponseModel<List<LoginResponseModel>>.fromJson(
       _result.data!,
-      (json) => json as dynamic,
+      (json) => json is List<dynamic>
+          ? json
+              .map<LoginResponseModel>(
+                  (i) => LoginResponseModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
     );
     return value;
   }

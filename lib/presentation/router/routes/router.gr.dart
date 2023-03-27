@@ -13,7 +13,12 @@
 part of 'router.dart';
 
 class _$AppRouter extends RootStackRouter {
-  _$AppRouter([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
+  _$AppRouter({
+    GlobalKey<NavigatorState>? navigatorKey,
+    required this.authGuard,
+  }) : super(navigatorKey);
+
+  final AuthGuard authGuard;
 
   @override
   final Map<String, PageFactory> pagesMap = {
@@ -219,14 +224,6 @@ class _$AppRouter extends RootStackRouter {
           onTapSuccessPayment: args.onTapSuccessPayment,
           onTapFailedPayment: args.onTapFailedPayment,
         ),
-      );
-    },
-    TexterRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: const TexterPage(),
-        opaque: true,
-        barrierDismissible: false,
       );
     },
     ServicesRoute.name: (routeData) {
@@ -439,6 +436,7 @@ class _$AppRouter extends RootStackRouter {
               ScheduleTurnRouterRoute.name,
               path: 'schedule-turn-router-page',
               parent: RootRouterRoute.name,
+              guards: [authGuard],
               children: [
                 RouteConfig(
                   ScheduleTurnFirstStepRouterRoute.name,
@@ -478,6 +476,7 @@ class _$AppRouter extends RootStackRouter {
               SimpleCertificateRouterRoute.name,
               path: 'simple-certificate-router-page',
               parent: RootRouterRoute.name,
+              guards: [authGuard],
               children: [
                 RouteConfig(
                   SimpleCertificateFirstStepRouterRoute.name,
@@ -517,6 +516,7 @@ class _$AppRouter extends RootStackRouter {
               MyTurnsRoute.name,
               path: 'my-turns-page',
               parent: RootRouterRoute.name,
+              guards: [authGuard],
             ),
             RouteConfig(
               SelectPaymentRoute.name,
@@ -526,11 +526,6 @@ class _$AppRouter extends RootStackRouter {
             RouteConfig(
               MakePaymentRoute.name,
               path: 'make-payment-page',
-              parent: RootRouterRoute.name,
-            ),
-            RouteConfig(
-              TexterRoute.name,
-              path: 'texter-page',
               parent: RootRouterRoute.name,
             ),
           ],
@@ -956,18 +951,6 @@ class MakePaymentRouteArgs {
   String toString() {
     return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, totalToPay: $totalToPay, buttonText: $buttonText, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment}';
   }
-}
-
-/// generated route for
-/// [TexterPage]
-class TexterRoute extends PageRouteInfo<void> {
-  const TexterRoute()
-      : super(
-          TexterRoute.name,
-          path: 'texter-page',
-        );
-
-  static const String name = 'TexterRoute';
 }
 
 /// generated route for

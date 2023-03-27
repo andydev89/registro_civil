@@ -36,7 +36,7 @@ import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/s
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_second_step/simple_certificate_second_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_third_step/simple_certificate_third_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/simple_certificate_router_page.dart';
-import 'package:registro_civil_apk/presentation/pages/test/test_page.dart';
+import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
 
 part 'router.gr.dart';
 
@@ -143,6 +143,7 @@ part 'router.gr.dart';
         ),
         //SCHEDULE TURN
         CupertinoRoute(
+          guards: [AuthGuard],
           page: ScheduleTurnRouterPage,
           children: [
             CupertinoRoute(
@@ -172,6 +173,7 @@ part 'router.gr.dart';
         ),
         // SIMPLE CERTIFICATE
         CupertinoRoute(
+          guards: [AuthGuard],
           page: SimpleCertificateRouterPage,
           children: [
             CupertinoRoute(
@@ -205,6 +207,7 @@ part 'router.gr.dart';
         ),
         //MY TURNS
         CupertinoRoute(
+          guards: [AuthGuard],
           page: MyTurnsPage,
         ),
 
@@ -215,14 +218,12 @@ part 'router.gr.dart';
         CupertinoRoute(
           page: MakePaymentPage,
         ),
-
-        // TEST
-        CustomRoute(
-          page: TexterPage,
-        ),
       ],
     ),
   ],
 )
 // extend the generated private router
-class AppRouter extends _$AppRouter {}
+class AppRouter extends _$AppRouter {
+  AppRouter()
+      : super(authGuard: AuthGuard());
+}

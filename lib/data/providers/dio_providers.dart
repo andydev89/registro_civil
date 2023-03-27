@@ -29,44 +29,50 @@ Api api(ApiRef ref) {
   return Api(dio, baseUrl: 'http://api.registro-civil.ddns.net/');
 }
 
-class MyNotificationInterceptor implements Interceptor {
-  MyNotificationInterceptor(this.context);
-  final BuildContext context;
+// class MyNotificationInterceptor implements Interceptor {
+//   MyNotificationInterceptor(this.context);
+//   final BuildContext context;
 
-  @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
-    final statusCode = err.response?.statusCode;
-    if (statusCode != null && statusCode >= 400 && statusCode < 600) {
-      showAlert(
-        _getStatusCode(statusCode).translate(context),
-        TypeAlert.error,
-      );
-    }
-    handler.next(err);
-  }
+//   @override
+//   void onError(DioError err, ErrorInterceptorHandler handler) {
+//     final statusCode = err.response?.statusCode;
+//     if (statusCode != null && statusCode >= 400) {
+//       final response = err.response;
+//       final map = response?.data as Map?;
+//       final status = map?['status'] as int?;
+//       final responseStatusCode = status ?? 999;
+//       // final statusCodeEnum = _getStatusCode(responseStatusCode);
+//       // final translate = statusCodeEnum.translate(context);
+//       // showAlert(
+//       //   translate,
+//       //   TypeAlert.error,
+//       // );
+//     }
+//     handler.next(err);
+//   }
 
-  @override
-  void onResponse(
-      Response<dynamic> response, ResponseInterceptorHandler handler) {
-    final statusCode = response.statusCode;
-    if (statusCode != null && statusCode! >= 200 && statusCode! < 300) {
-      showAlert(
-        _getStatusCode(statusCode).translate(context),
-        TypeAlert.success,
-      );
-    }
-    return handler.next(response);
-  }
+//   @override
+//   void onResponse(
+//       Response<dynamic> response, ResponseInterceptorHandler handler) {
+//     final statusCode = response.statusCode;
+//     if (statusCode != null && statusCode! >= 200 && statusCode! < 300) {
+//       showAlert(
+//         _getStatusCode(statusCode).translate(context),
+//         TypeAlert.success,
+//       );
+//     }
+//     return handler.next(response);
+//   }
 
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    return handler.next(options);
-  }
+//   @override
+//   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+//     return handler.next(options);
+//   }
 
-  StatusCodes _getStatusCode(int statusCode) {
-    return StatusCodes.values.firstWhere(
-      (e) => e.toText == 's$statusCode',
-      orElse: () => StatusCodes.s999,
-    );
-  }
-}
+//   StatusCodes _getStatusCode(int statusCode) {
+//     return StatusCodes.values.firstWhere(
+//       (e) => e.toText == 's$statusCode',
+//       orElse: () => StatusCodes.s999,
+//     );
+//   }
+// }
