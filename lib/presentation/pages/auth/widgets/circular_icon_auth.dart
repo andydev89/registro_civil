@@ -27,9 +27,7 @@ class CircularIconAuth extends StatelessWidget {
               width: 5,
             ),
           ),
-          child: Center(
-            child: child.symmetricPadding(padding, padding),
-          ),
+          child: child.symmetricPadding(padding, padding),
         ),
         if (bottomLabbel != null)
           PrimaryLabel(

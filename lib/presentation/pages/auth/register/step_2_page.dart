@@ -49,7 +49,7 @@ class Step2Page extends ConsumerWidget {
                   ),
                 ),
                 CircularIconAuth(
-                  padding: 15,
+                  padding: 35,
                   bottomLabbel: l10n.rosCedula,
                   child: Column(
                     children: [
