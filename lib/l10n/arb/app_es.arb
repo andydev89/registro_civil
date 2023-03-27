@@ -28,6 +28,7 @@
   "salPaso": "Saltar paso",
   "escanear": "Escanear",
   "siguiente": "Siguiente",
+  "campoReq": "Este campo es requerido",
   "cambiarContrasena": "Cambiar contraseña",
   "confirmarContrasena": "Confirmar contraseña",
   "correoE": "Correo electrónico",
