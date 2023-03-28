@@ -34,7 +34,6 @@ import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/s
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_first_step/simple_certificate_first_step_personal_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_first_step/simple_certificate_first_step_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_second_step/simple_certificate_second_step_page.dart';
-import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_third_step/simple_certificate_third_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/simple_certificate_router_page.dart';
 import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
 
@@ -192,9 +191,6 @@ part 'router.gr.dart';
             ),
             CupertinoRoute(
               page: SimpleCertificateSecondStepPage,
-            ),
-            CupertinoRoute(
-              page: SimpleCertificateThirdStepPage,
             ),
             // CupertinoRoute(
             //   page: ShiftDetailsPage,

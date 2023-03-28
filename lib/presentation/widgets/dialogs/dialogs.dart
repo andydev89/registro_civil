@@ -4,6 +4,8 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/offers_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/sliding_dialog.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
@@ -63,4 +65,10 @@ Future<void> showContentDialog(
   );
 }
 
-
+Future<void> showOffersDialog(BuildContext context, {Widget? child}) async {
+await showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return SlidingDialog(child: child ?? const OffersWidget());},
+    );
+}

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/finger_print_background.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/root_app_bar.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/root_drawer.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
 
 class FingerPrintScaffold extends StatelessWidget {
@@ -28,21 +30,30 @@ class FingerPrintScaffold extends StatelessWidget {
           children: [
             const FingerPrintBackground(),
             body,
-            Padding(
-              padding: const EdgeInsets.only(top: 90),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: PrimaryIconButton(
-                  width: 30,
-                  height: 40,
-                  icon: Assets.svg.checkDocument.svg(),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.horizontal(
-                      left: Radius.circular(100),
+            ValueListenableBuilder<bool>(
+              valueListenable: isLoggedIn,
+              builder: (_, value,__) {
+                return Visibility(
+                  visible: value,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 90),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: PrimaryIconButton(
+                        width: 30,
+                        height: 40,
+                        icon: Assets.svg.checkDocument.svg(),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.horizontal(
+                            left: Radius.circular(100),
+                          ),
+                        ),
+                        onPressed: () => showOffersDialog(context),
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),

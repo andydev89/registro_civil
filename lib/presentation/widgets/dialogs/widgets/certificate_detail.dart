@@ -3,8 +3,8 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_third_step/widgets/modify_cant.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/modify_cant.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
