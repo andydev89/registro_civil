@@ -9,16 +9,20 @@ part 'login_model.gform.dart';
 @ReactiveFormAnnotation()
 class LoginModel {
   LoginModel({
-    @FormControlAnnotation(validators: [
-      requiredValidator,
-      ecuadorDniValidator,
-      length10Validator,
-    ])
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        ecuadorDniValidator,
+        length10Validator,
+      ],
+    )
         this.identification = '',
-    @FormControlAnnotation(validators: [
-      requiredValidator,
-      passwordValidator,
-    ])
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        passwordValidator,
+      ],
+    )
         this.password = '',
   });
 

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 part 'basic_response_model.g.dart';
-
 
 @JsonSerializable(genericArgumentFactories: true)
 class ResponseModel<T> {
@@ -18,10 +18,14 @@ class ResponseModel<T> {
   ) =>
       _$ResponseModelFromJson(json, fromJsonT);
   final String timestamp;
-  final int status;
+  final StatusCode status;
   final String message;
   final List<String>? errors;
   final T? data;
+  bool get success =>
+      status == StatusCode.s200 ||
+      status == StatusCode.s201 ||
+      status == StatusCode.s202;
 
   Map<String, dynamic> toJson(
     Object? Function(T value) toJsonT,
@@ -51,7 +55,7 @@ class ResponseModelPagination<T> {
       _$ResponseModelPaginationFromJson(json, fromJsonT);
 
   final String timestamp;
-  final int status;
+  final StatusCode status;
   final String message;
   final List<String>? errors;
   final T? data;
@@ -60,6 +64,10 @@ class ResponseModelPagination<T> {
   final int? pageElements;
   final int? pageLimit;
   final int? pageNumbers;
+  bool get success =>
+      status == StatusCode.s200 ||
+      status == StatusCode.s201 ||
+      status == StatusCode.s202;
 
   Map<String, dynamic> toJson(
     Object? Function(T value) toJsonT,

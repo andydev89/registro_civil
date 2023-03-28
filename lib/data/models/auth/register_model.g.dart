@@ -32,8 +32,8 @@ OtpModel _$OtpModelFromJson(Map<String, dynamic> json) => OtpModel(
     );
 
 Map<String, dynamic> _$OtpModelToJson(OtpModel instance) => <String, dynamic>{
-      'otp': instance.otp,
       'isVerified': instance.isVerified,
+      'otp': instance.otp,
     };
 
 PasswordModel _$PasswordModelFromJson(Map<String, dynamic> json) =>
@@ -59,8 +59,8 @@ ConfirmPasswordModel _$ConfirmPasswordModelFromJson(
 Map<String, dynamic> _$ConfirmPasswordModelToJson(
         ConfirmPasswordModel instance) =>
     <String, dynamic>{
-      'newPassword': instance.newPassword,
       'confirmPassword': instance.confirmPassword,
+      'newPassword': instance.newPassword,
     };
 
 RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) =>
@@ -73,8 +73,8 @@ RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$RegisterModelToJson(RegisterModel instance) =>
     <String, dynamic>{
+      'email': instance.email,
       'nui': instance.nui,
       'password': instance.password,
-      'email': instance.email,
       'phone': instance.phone,
     };
