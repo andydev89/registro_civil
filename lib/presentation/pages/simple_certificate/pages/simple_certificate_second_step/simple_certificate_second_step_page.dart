@@ -5,6 +5,7 @@ import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
 class SimpleCertificateSecondStepPage extends StatelessWidget {
@@ -26,8 +27,10 @@ class SimpleCertificateSecondStepPage extends StatelessWidget {
                 children: [
                   PrimaryButton(
                     title: l10n.aceptar,
-                    onPressed: () => context
-                        .navigateTo(const SimpleCertificateThirdStepRoute()),
+                    onPressed: () {
+                      showOffersDialog(context);
+                      context.navigateTo(const HomeRouterRoute());
+                    },
                   ),
                   const SizedBox(height: 15),
                   PrimaryButton(

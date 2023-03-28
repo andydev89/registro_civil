@@ -6,11 +6,11 @@ import 'package:registro_civil_apk/presentation/router/observer/router_observer.
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 
-class App extends ConsumerWidget {
+class App extends StatelessWidget {
   App({super.key});
   final appRouter = AppRouter();
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     // final isLoggedIn = ref.watch(isLoggedInProvider);
     // ref.watch(dioProvider).interceptors.addAll(
     //   [

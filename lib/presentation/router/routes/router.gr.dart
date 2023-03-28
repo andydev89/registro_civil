@@ -304,12 +304,6 @@ class _$AppRouter extends RootStackRouter {
         child: const SimpleCertificateSecondStepPage(),
       );
     },
-    SimpleCertificateThirdStepRoute.name: (routeData) {
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: const SimpleCertificateThirdStepPage(),
-      );
-    },
     SimpleCertificateFirstStepFamiliarRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -498,11 +492,6 @@ class _$AppRouter extends RootStackRouter {
                 RouteConfig(
                   SimpleCertificateSecondStepRoute.name,
                   path: 'simple-certificate-second-step-page',
-                  parent: SimpleCertificateRouterRoute.name,
-                ),
-                RouteConfig(
-                  SimpleCertificateThirdStepRoute.name,
-                  path: 'simple-certificate-third-step-page',
                   parent: SimpleCertificateRouterRoute.name,
                 ),
               ],
@@ -1153,18 +1142,6 @@ class SimpleCertificateSecondStepRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SimpleCertificateSecondStepRoute';
-}
-
-/// generated route for
-/// [SimpleCertificateThirdStepPage]
-class SimpleCertificateThirdStepRoute extends PageRouteInfo<void> {
-  const SimpleCertificateThirdStepRoute()
-      : super(
-          SimpleCertificateThirdStepRoute.name,
-          path: 'simple-certificate-third-step-page',
-        );
-
-  static const String name = 'SimpleCertificateThirdStepRoute';
 }
 
 /// generated route for
