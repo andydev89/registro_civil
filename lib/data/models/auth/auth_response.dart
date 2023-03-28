@@ -8,8 +8,9 @@ class RegisterResponseModel {
 
   factory RegisterResponseModel.fromJson(Map<String, dynamic> json) =>
       _$RegisterResponseModelFromJson(json);
-  String id;
+
   String command;
+  String id;
 
   Map<String, dynamic> toJson() => _$RegisterResponseModelToJson(this);
 }
@@ -17,6 +18,7 @@ class RegisterResponseModel {
 @JsonSerializable()
 class LoginResponseModel {
   LoginResponseModel({required this.jwtToken});
+
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseModelFromJson(json);
 

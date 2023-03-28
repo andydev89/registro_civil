@@ -21,9 +21,9 @@ class NuiModel {
   factory NuiModel.fromJson(Map<String, dynamic> json) =>
       _$NuiModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NuiModelToJson(this);
-
   final String nui;
+
+  Map<String, dynamic> toJson() => _$NuiModelToJson(this);
 }
 
 @JsonSerializable()
@@ -45,10 +45,10 @@ class EnterDataModel {
   factory EnterDataModel.fromJson(Map<String, dynamic> json) =>
       _$EnterDataModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$EnterDataModelToJson(this);
-
   final String email;
   final String phoneNumber;
+
+  Map<String, dynamic> toJson() => _$EnterDataModelToJson(this);
 }
 
 @JsonSerializable()
@@ -63,8 +63,9 @@ class OtpModel {
 
   factory OtpModel.fromJson(Map<String, dynamic> json) =>
       _$OtpModelFromJson(json);
-  final String otp;
+
   final bool isVerified;
+  final String otp;
 
   Map<String, dynamic> toJson() => _$OtpModelToJson(this);
 }
@@ -79,8 +80,9 @@ class PasswordModel {
   factory PasswordModel.fromJson(Map<String, dynamic> json) =>
       _$PasswordModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PasswordModelToJson(this);
   final ConfirmPasswordModel? confirmPassword;
+
+  Map<String, dynamic> toJson() => _$PasswordModelToJson(this);
 }
 
 @JsonSerializable()
@@ -96,10 +98,10 @@ class ConfirmPasswordModel {
   factory ConfirmPasswordModel.fromJson(Map<String, dynamic> json) =>
       _$ConfirmPasswordModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ConfirmPasswordModelToJson(this);
-
-  final String newPassword;
   final String confirmPassword;
+  final String newPassword;
+
+  Map<String, dynamic> toJson() => _$ConfirmPasswordModelToJson(this);
 }
 
 @JsonSerializable()
@@ -114,11 +116,12 @@ class RegisterModel {
   factory RegisterModel.fromJson(Map<String, dynamic> json) =>
       _$RegisterModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RegisterModelToJson(this);
+  final String email;
   final String nui;
   final String password;
-  final String email;
   final String phone;
+
+  Map<String, dynamic> toJson() => _$RegisterModelToJson(this);
 
   RegisterModel copyWith({
     String? nui,
@@ -130,7 +133,7 @@ class RegisterModel {
       nui: nui ?? this.nui,
       password: password ?? this.password,
       email: email ?? this.email,
-      phone: phone?? this.phone,
+      phone: phone ?? this.phone,
     );
   }
 }

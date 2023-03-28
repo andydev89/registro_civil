@@ -5,6 +5,7 @@ import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.d
 import 'package:registro_civil_apk/data/enum/schedule_turn/provincias_test.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/relationship_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
+import 'package:registro_civil_apk/data/models/commons/province_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 part 'schedule_turn_model.gform.dart';
 
@@ -65,7 +66,7 @@ class ScheduleTurnSecondStepModel {
     @FormControlAnnotation(validators: [requiredValidator]) required this.time,
   });
 
-  final ProvinciasTest province;
+  final ProvinceModel province;
   final AgenciasTest agency;
   final DateTime date;
   final TimeOfDay time;

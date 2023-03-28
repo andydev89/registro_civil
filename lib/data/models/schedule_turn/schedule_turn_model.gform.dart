@@ -1844,7 +1844,7 @@ class ScheduleTurnSecondStepModelForm
   String agencyControlPath() => pathBuilder(agencyControlName);
   String dateControlPath() => pathBuilder(dateControlName);
   String timeControlPath() => pathBuilder(timeControlName);
-  ProvinciasTest get _provinceValue => provinceControl.value as ProvinciasTest;
+  ProvinceModel get _provinceValue => provinceControl.value as ProvinceModel;
   AgenciasTest get _agencyValue => agencyControl.value as AgenciasTest;
   DateTime get _dateValue => dateControl.value as DateTime;
   TimeOfDay get _timeValue => timeControl.value as TimeOfDay;
@@ -1893,7 +1893,7 @@ class ScheduleTurnSecondStepModelForm
   void get dateFocus => form.focus(dateControlPath());
   void get timeFocus => form.focus(timeControlPath());
   void provinceValueUpdate(
-    ProvinciasTest value, {
+    ProvinceModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1929,7 +1929,7 @@ class ScheduleTurnSecondStepModelForm
   }
 
   void provinceValuePatch(
-    ProvinciasTest value, {
+    ProvinceModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1965,7 +1965,7 @@ class ScheduleTurnSecondStepModelForm
   }
 
   void provinceValueReset(
-    ProvinciasTest value, {
+    ProvinceModel value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -2000,8 +2000,8 @@ class ScheduleTurnSecondStepModelForm
   }) =>
       timeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<ProvinciasTest> get provinceControl =>
-      form.control(provinceControlPath()) as FormControl<ProvinciasTest>;
+  FormControl<ProvinceModel> get provinceControl =>
+      form.control(provinceControlPath()) as FormControl<ProvinceModel>;
   FormControl<AgenciasTest> get agencyControl =>
       form.control(agencyControlPath()) as FormControl<AgenciasTest>;
   FormControl<DateTime> get dateControl =>
@@ -2135,7 +2135,7 @@ class ScheduleTurnSecondStepModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        provinceControlName: FormControl<ProvinciasTest>(
+        provinceControlName: FormControl<ProvinceModel>(
             value: scheduleTurnSecondStepModel?.province,
             validators: [requiredValidator],
             asyncValidators: [],
