@@ -261,5 +261,9 @@
   "confirmacionDePago": "Payment confirmation",
   "misPedidos": "My orders",
   "pagoRealizadoConExito": "Payment successful!",
-  "envNotCorElectronicoDetallesDeSolicitud": "We have sent a notification to your email with the details of your request"
+  "envNotCorElectronicoDetallesDeSolicitud": "We have sent a notification to your email with the details of your request",
+  "copiaActRegMatDes":"It is a true certified copy of the original registration or marriage record that is in the DIGERIC files.",
+  "copiaActRegRegGenDes":"It is a faithful certified copy of the original gender record that is in the DIGERIC files.",
+  "copiaActRegUniHecDes":"It is a true certified copy of the original common-law union record that is in the DIGERIC files.",
+  "copiaActRegNacDes":"It is a true certified copy of the original registration or birth record that is in the DIGERIC files."
 }

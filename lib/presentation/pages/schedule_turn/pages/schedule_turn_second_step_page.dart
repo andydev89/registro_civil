@@ -38,13 +38,15 @@ class ScheduleTurnSecondPage extends StatelessWidget {
               children: [
                 PrimaryReactiveDropdown(
                   formControl: formModel.provinceControl,
-                  //TODO esto va a cambiar por un objeto q viene del back
+                  // TODO(alejandro): esto va a cambiar
+                  // por un objeto q viene del back
                   items: ProvinciasTest.values,
                   label: l10n.provincia,
                 ),
                 PrimaryReactiveDropdown(
                   formControl: formModel.agencyControl,
-                  //TODO esto va a cambiar por un objeto q viene del back
+                  // TODO(alejandro): esto va a cambiar por 
+                  //un objeto q viene del back
                   items: AgenciasTest.values,
                   label: l10n.agencia,
                 ),

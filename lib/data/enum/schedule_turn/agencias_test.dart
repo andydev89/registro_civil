@@ -1,8 +1,8 @@
-// TODO esta clase se quitara y se podnar un objeto q venga del back
+// TODO(alejandro): esta clase se quitara y se podnar un objeto q venga del back
 //esto es momentaneo apra probar
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
-import 'package:registro_civil_apk/l10n/l10n.dart';
+// import 'package:registro_civil_apk/l10n/l10n.dart';
 
 enum AgenciasTest implements Translatable {
   ///Conyugue o conviviente
@@ -17,7 +17,7 @@ enum AgenciasTest implements Translatable {
 
   @override
   String translate(BuildContext context) {
-    final l10n = context.l10n;
+    // final l10n = context.l10n;
     switch (this) {
       case agencia1:
         return 'Agencia 1';

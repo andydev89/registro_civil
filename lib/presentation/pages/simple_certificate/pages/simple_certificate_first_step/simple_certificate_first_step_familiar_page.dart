@@ -2,19 +2,24 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_enum.dart';
+import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_check_box.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
-  const SimpleCertificateFirstStepFamiliarPage({super.key});
+  const SimpleCertificateFirstStepFamiliarPage({
+    required this.typeSimpleCertificate,
+    super.key,
+  });
+  final TypeSimpleCertificateEnum typeSimpleCertificate;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,8 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
     return SimpleCertificateFirstStepFamiliarModelFormBuilder(
       builder: (context, formModel, child) {
         final isCanadis = ValueNotifier(
-            formModel.conadisModelForm.conadisControl.value ?? false);
+          formModel.conadisModelForm.conadisControl.value ?? false,
+        );
         return Scaffold(
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
@@ -34,13 +40,9 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                   textAlign: TextAlign.start,
                 ),
-                PrimaryReactiveTextField(
+                PrimaryReactiveNuiField(
                   formControl: formModel.nuiControl,
                   hintText: '${l10n.escriba}...',
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(10),
-                  ],
                 ),
                 Row(
                   children: [
@@ -94,8 +96,11 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
             builder: (context, formModel, child) => PrimaryButton(
               title: l10n.aceptar,
               onPressed: formModel.form.valid
-                  ? () => context
-                      .navigateTo(const SimpleCertificateSecondStepRoute())
+                  ? () => context.navigateTo(
+                        SimpleCertificateSecondStepRoute(
+                          typeSimpleCertificate: typeSimpleCertificate,
+                        ),
+                      )
                   : null,
             ).symmetricPadding(10, 30),
           ),

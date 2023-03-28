@@ -9,10 +9,12 @@ class SlidingDialog extends Dialog {
       position: Tween<Offset>(
         begin: const Offset(1, 0),
         end: Offset.zero,
-      ).animate(CurvedAnimation(
-        parent: ModalRoute.of(context)!.animation!,
-        curve: Curves.easeInOut,
-      )),
+      ).animate(
+        CurvedAnimation(
+          parent: ModalRoute.of(context)!.animation!,
+          curve: Curves.easeInOut,
+        ),
+      ),
       child: Material(
         type: MaterialType.transparency,
         child: Align(

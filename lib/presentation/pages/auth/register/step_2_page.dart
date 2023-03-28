@@ -75,7 +75,7 @@ class Step2Page extends ConsumerWidget {
                 PrimaryButton(
                   title: cargoData ? l10n.siguiente : l10n.escanear,
                   onPressed: () {
-                    //TODO escanear rostro
+                    // TODO(alguien): escanear rostro
                   },
                 ),
                 PrimaryTextButton(

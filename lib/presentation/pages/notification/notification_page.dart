@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
-import 'package:registro_civil_apk/l10n/l10n.dart';
+// import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
@@ -31,7 +31,7 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
+    // final l10n = context.l10n;
     return PrimaryScaffold(
       title: title ?? '',
       subtitle: subtitle ?? '',
@@ -52,7 +52,7 @@ class NotificationPage extends StatelessWidget {
                   if (bottonTitle != null)
                     Padding(
                       padding: const EdgeInsets.only(
-                          bottom: 20, left: 20, right: 20),
+                          bottom: 20, left: 20, right: 20,),
                       child: PrimaryText(
                         bottonTitle!,
                       ),

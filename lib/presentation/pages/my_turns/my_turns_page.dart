@@ -20,7 +20,7 @@ class MyTurnsPage extends StatelessWidget {
           PrimarySearch(
             showFilter: true,
             onPressed: () {
-              print('asd');
+              // print('asd');
             },
           ).symmetricPadding(20, 20),
           MyTurnExpandableCard(

@@ -57,7 +57,7 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
         onPressed: () async {
           try {
             final result = await onPressedAsync?.call();
-            onSuccess?.call(result!);
+            onSuccess?.call(result as T);
           } catch (e) {
             if (e is! DioError) return onError?.call(StatusCodes.s999);
 

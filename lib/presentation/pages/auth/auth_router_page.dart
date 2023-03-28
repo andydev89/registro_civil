@@ -34,8 +34,8 @@ class AuthRouterPage extends StatelessWidget {
                           .withRevealAnimation,
                     ),
                   ),
-                  const Flexible(
-                    child: AutoRouter(),
+                   Flexible(
+                    child: const AutoRouter().verticalPadding(10),
                   ),
                 ],
               ),

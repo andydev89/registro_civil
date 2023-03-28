@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 

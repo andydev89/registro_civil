@@ -1,10 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/sources/api.dart';
-import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dio_providers.g.dart';

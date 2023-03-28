@@ -5,8 +5,6 @@ import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_cert
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
@@ -56,7 +54,7 @@ class CertificateDescription extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 5,top: 10),
+                padding: const EdgeInsets.only(bottom: 5, top: 10),
                 child: Row(
                   children: [
                     PrimaryText(
@@ -88,7 +86,10 @@ class CertificateDescription extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 45,vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 45,
+                    vertical: 10,
+                  ),
                   child: PrimaryText(
                     '${l10n.precio}: \$'
                     '${typeSimpleCertificate.price.toStringAsFixed(2)}',

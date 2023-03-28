@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
@@ -63,6 +64,6 @@ class PrimaryButton extends StatelessWidget {
           isToUpperCase: isToUpperCase,
         ),
       ),
-    );
+    ).withRevealAnimation;
   }
 }

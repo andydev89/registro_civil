@@ -47,8 +47,11 @@ class ServicesPage extends StatelessWidget {
           CircleAvatarCardModel(
             image: Assets.png.certificadoNacimiento.image(),
             title: l10n.certificadoNac,
-            onPressedCheck: () =>
-                context.navigateTo(const SimpleCertificateRouterRoute()),
+            onPressedCheck: () => context.navigateTo(
+              SimpleCertificateRouterRoute(
+                typeSimpleCertificate: TypeSimpleCertificateEnum.birth,
+              ),
+            ),
             onPressedView: () => showContentDialog(
               context,
               content: const CertificateDescription(
@@ -59,7 +62,11 @@ class ServicesPage extends StatelessWidget {
           CircleAvatarCardModel(
             image: Assets.png.certificadoMatrimonio.image(),
             title: l10n.certificadoMat,
-            onPressedCheck: () {},
+            onPressedCheck: () => context.navigateTo(
+              SimpleCertificateRouterRoute(
+                typeSimpleCertificate: TypeSimpleCertificateEnum.marriage,
+              ),
+            ),
             onPressedView: () => showContentDialog(
               context,
               content: const CertificateDescription(
@@ -70,7 +77,11 @@ class ServicesPage extends StatelessWidget {
           CircleAvatarCardModel(
             image: Assets.png.certificadoDefuncion.image(),
             title: l10n.certificadoDef,
-            onPressedCheck: () {},
+            onPressedCheck: () => context.navigateTo(
+              SimpleCertificateRouterRoute(
+                typeSimpleCertificate: TypeSimpleCertificateEnum.death,
+              ),
+            ),
             onPressedView: () => showContentDialog(
               context,
               content: const CertificateDescription(
@@ -81,7 +92,11 @@ class ServicesPage extends StatelessWidget {
           CircleAvatarCardModel(
             image: Assets.png.certificadoUnionHecho.image(),
             title: l10n.certificadoUniHec,
-            onPressedCheck: () {},
+            onPressedCheck: () => context.navigateTo(
+              SimpleCertificateRouterRoute(
+                typeSimpleCertificate: TypeSimpleCertificateEnum.factorUnion,
+              ),
+            ),
             onPressedView: () => showContentDialog(
               context,
               content: const CertificateDescription(
@@ -92,7 +107,11 @@ class ServicesPage extends StatelessWidget {
           CircleAvatarCardModel(
             image: Assets.png.certificadoIdentidad.image(),
             title: l10n.certificadoIden,
-            onPressedCheck: () {},
+            onPressedCheck: () => context.navigateTo(
+              SimpleCertificateRouterRoute(
+                typeSimpleCertificate: TypeSimpleCertificateEnum.identity,
+              ),
+            ),
             onPressedView: () => showContentDialog(
               context,
               content: const CertificateDescription(
@@ -109,27 +128,72 @@ class ServicesPage extends StatelessWidget {
           CircleAvatarCardModel(
             image: Assets.png.certificadoNacimiento.image(),
             title: l10n.copiaActRegNac,
-            onPressedCheck: () {},
-            onPressedView: () {},
+            onPressedCheck: () => context.navigateTo(
+              SimpleCertificateRouterRoute(
+                typeSimpleCertificate:
+                    TypeSimpleCertificateEnum.copyBirthRegistrationCertificate,
+              ),
+            ),
+            onPressedView: () => showContentDialog(
+              context,
+              content: const CertificateDescription(
+                typeSimpleCertificate:
+                    TypeSimpleCertificateEnum.copyBirthRegistrationCertificate,
+              ),
+            ),
           ),
           CircleAvatarCardModel(
             image: Assets.png.certificadoMatrimonio.image(),
             title: l10n.copiaActRegMat,
-            onPressedCheck: () {},
-            onPressedView: () {},
+            onPressedCheck: () => context.navigateTo(
+              SimpleCertificateRouterRoute(
+                typeSimpleCertificate: TypeSimpleCertificateEnum
+                    .copyMarriageRegistrationCertificate,
+              ),
+            ),
+            onPressedView: () => showContentDialog(
+              context,
+              content: const CertificateDescription(
+                typeSimpleCertificate: TypeSimpleCertificateEnum
+                    .copyMarriageRegistrationCertificate,
+              ),
+            ),
           ),
           CircleAvatarCardModel(
             image: Assets.png.certificadoGenero.image(),
             title: l10n.copiaActRegRegGen,
-            onPressedCheck: () {},
-            onPressedView: () {},
+            onPressedCheck: () => context.navigateTo(
+              SimpleCertificateRouterRoute(
+                typeSimpleCertificate: TypeSimpleCertificateEnum
+                    .copyRegistrationCertificateGenderRegistration,
+              ),
+            ),
+            onPressedView: () => showContentDialog(
+              context,
+              content: const CertificateDescription(
+                typeSimpleCertificate: TypeSimpleCertificateEnum
+                    .copyRegistrationCertificateGenderRegistration,
+              ),
+            ),
           ),
           CircleAvatarCardModel(
             image: Assets.png.certificadoUnionHecho.image(),
             title: l10n.copiaActRegUniHec,
-            onPressedCheck: () {},
-            onPressedView: () {},
-          ), CircleAvatarCardModel(
+            onPressedCheck: () => context.navigateTo(
+              SimpleCertificateRouterRoute(
+                typeSimpleCertificate: TypeSimpleCertificateEnum
+                    .copyFactoUnionRegistrationCertificate,
+              ),
+            ),
+            onPressedView: () => showContentDialog(
+              context,
+              content: const CertificateDescription(
+                typeSimpleCertificate: TypeSimpleCertificateEnum
+                    .copyFactoUnionRegistrationCertificate,
+              ),
+            ),
+          ),
+          CircleAvatarCardModel(
             image: Assets.png.certificadoDefuncion.image(),
             title: l10n.copiaActRegDef,
             onPressedCheck: () {},
