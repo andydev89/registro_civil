@@ -44,7 +44,7 @@ class SimpleCertificateSecondStepPage extends StatelessWidget {
                         context.navigateTo(const HomeRouterRoute()),
                   ),
                 ],
-              ).horizontalPadding(60),
+              ).horizontalPadding(30),
             ),
           ],
         ),

@@ -13,6 +13,7 @@ import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_d
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
   const SimpleCertificateFirstStepFamiliarPage({
@@ -31,65 +32,67 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
         );
         return Scaffold(
           backgroundColor: Colors.transparent,
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                PrimaryLabel(
-                  l10n.numeroCedFam,
-                  fontWeight: FontWeight.normal,
-                  textAlign: TextAlign.start,
-                ),
-                PrimaryReactiveNuiField(
-                  formControl: formModel.nuiControl,
-                  hintText: '${l10n.escriba}...',
-                ),
-                Row(
-                  children: [
-                    Flexible(
-                      child: PrimaryReactiveDropdown<
-                          RelationshipSimpleCertificateEnum>(
-                        formControl: formModel.relationshipControl,
-                        items: RelationshipSimpleCertificateEnum.values,
-                        label: l10n.parentezco,
-                        hintText: '${l10n.seleccione}...',
+          body: Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: LayoutBuilder(
+              builder: (context, constraints) => SingleChildScrollView(
+                child: Container(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      PrimaryText(l10n.numeroCedFam),
+                      PrimaryReactiveNuiField(
+                        formControl: formModel.nuiControl,
+                        hintText: '${l10n.escriba}...',
                       ),
-                    ),
-                  ],
-                ),
-                PrimaryReactiveCheckBox(
-                  formControl: formModel.conadisModelForm.conadisControl,
-                  label: l10n.tieneCarConadis,
-                  onChanged: (value) => isCanadis.value = value.value ?? false,
-                ),
-                ValueListenableBuilder<bool>(
-                  valueListenable: isCanadis,
-                  builder: (_, value, __) {
-                    return Visibility(
-                      visible: value,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          const PrimaryLabel(
-                            'No. CONADIS',
-                            fontWeight: FontWeight.normal,
-                          ),
-                          PrimaryReactiveTextField(
-                            formControl:
-                                formModel.conadisModelForm.conadisNumberControl,
-                            hintText: '01234567',
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(8),
-                            ],
+                          Flexible(
+                            child: PrimaryReactiveDropdown<
+                                RelationshipSimpleCertificateEnum>(
+                              formControl: formModel.relationshipControl,
+                              items: RelationshipSimpleCertificateEnum.values,
+                              label: l10n.parentezco,
+                              hintText: '${l10n.seleccione}...',
+                            ),
                           ),
                         ],
                       ),
-                    );
-                  },
+                      PrimaryReactiveCheckBox(
+                        formControl: formModel.conadisModelForm.conadisControl,
+                        label: l10n.tieneCarConadis,
+                        onChanged: (value) =>
+                            isCanadis.value = value.value ?? false,
+                      ),
+                      ValueListenableBuilder<bool>(
+                        valueListenable: isCanadis,
+                        builder: (_, value, __) {
+                          return Visibility(
+                            visible: value,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const PrimaryText('No. CONADIS'),
+                                PrimaryReactiveTextField(
+                                  formControl: formModel
+                                      .conadisModelForm.conadisNumberControl,
+                                  hintText: '01234567',
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(8),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ).horizontalPadding(60),
                 ),
-              ],
-            ).horizontalPadding(60),
+              ),
+            ),
           ),
           bottomNavigationBar:
               ReactiveSimpleCertificateFirstStepFamiliarModelFormConsumer(

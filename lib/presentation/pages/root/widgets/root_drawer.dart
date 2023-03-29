@@ -86,7 +86,7 @@ class RootDrawer extends StatelessWidget {
                                     titulo: l10n.inicio,
                                     onPressed: () {
                                       Scaffold.of(context).closeDrawer();
-                                      context.navigateNamedTo('/home');
+                                      context.navigateTo(const HomeRouterRoute());
                                     },
                                   ),
                                   ButtonDrawer(

@@ -21,12 +21,12 @@ class SimpleCertificateFirstStepPersonalPage extends StatelessWidget {
     return NuiModelFormBuilder(
       builder: (context, formModel, child) => Scaffold(
         backgroundColor: Colors.transparent,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SingleChildScrollView(
+        body: LayoutBuilder(
+          builder: (context, constraints) => SingleChildScrollView(
+            child: Container(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   PrimaryReactiveNuiField(
                     label: l10n.numCedula,
@@ -35,9 +35,9 @@ class SimpleCertificateFirstStepPersonalPage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ],
-        ).horizontalPadding(60),
+            ).horizontalPadding(60),
+          ),
+        ),
         bottomNavigationBar: ReactiveNuiModelFormConsumer(
           builder: (context, formModel, child) => PrimaryButton(
             title: l10n.aceptar,
