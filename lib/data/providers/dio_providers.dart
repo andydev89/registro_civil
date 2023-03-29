@@ -8,6 +8,12 @@ part 'dio_providers.g.dart';
 @riverpod
 Dio dio(DioRef ref) {
   return Dio()
+    ..options = BaseOptions(
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODAwMzY1MTgsInN1YiI6IjEwMTAxMDEwMTAiLCJpc3MiOiJJZGVudGl0eSIsInJvbGVzIjoiUk9MRV9DSVRJWkVOIiwiZXhwIjoxNjgwMTIyOTE4fQ.4faXmvx99qY4ibfFRoXFpZ4frfFAfQLAmbpPr-ADquo'
+      },
+    )
     ..interceptors.add(
       PrettyDioLogger(
         requestHeader: true,

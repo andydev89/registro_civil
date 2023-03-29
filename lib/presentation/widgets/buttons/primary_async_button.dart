@@ -30,7 +30,7 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
   final Color? colorText;
   final Color? disabledForegroundColor;
   final void Function(T)? onSuccess;
-  final void Function(StatusCodes)? onError;
+  final void Function(StatusCode)? onError;
   final Future<T> Function()? onPressedAsync;
   final double fontSize;
   final String title;
@@ -59,7 +59,7 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
             final result = await onPressedAsync?.call();
             onSuccess?.call(result as T);
           } catch (e) {
-            if (e is! DioError) return onError?.call(StatusCodes.s999);
+            if (e is! DioError) return onError?.call(StatusCode.s999);
 
             onError?.call(
               convertToStatusCode(e.response?.data as Map<String, dynamic>),

@@ -12,6 +12,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/widgets/radio_time_selector.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_province.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
@@ -36,13 +37,7 @@ class ScheduleTurnSecondPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                PrimaryReactiveDropdown(
-                  formControl: formModel.provinceControl,
-                  // TODO(alejandro): esto va a cambiar
-                  // por un objeto q viene del back
-                  items: ProvinciasTest.values,
-                  label: l10n.provincia,
-                ),
+                SelectProvince(formControl: formModel.provinceControl),
                 PrimaryReactiveDropdown(
                   formControl: formModel.agencyControl,
                   // TODO(alejandro): esto va a cambiar por 

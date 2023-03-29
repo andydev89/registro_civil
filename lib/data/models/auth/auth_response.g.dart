@@ -16,8 +16,8 @@ RegisterResponseModel _$RegisterResponseModelFromJson(
 Map<String, dynamic> _$RegisterResponseModelToJson(
         RegisterResponseModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'command': instance.command,
+      'id': instance.id,
     };
 
 LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) =>
