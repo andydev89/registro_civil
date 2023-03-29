@@ -7,12 +7,22 @@ class CircleAvatarCardGrid extends StatelessWidget {
     super.key,
     required this.elements,
     this.crossAxisCount = 2,
+    this.filter = '',
   });
   final List<CircleAvatarCardModel> elements;
   final int crossAxisCount;
+  final String filter;
 
   @override
   Widget build(BuildContext context) {
+    final filterElements = filter.isEmpty
+        ? elements
+        : elements
+            .where(
+              (element) =>
+                  element.title.toLowerCase().contains(filter.toLowerCase()),
+            )
+            .toList();
     return GridView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -20,12 +30,12 @@ class CircleAvatarCardGrid extends StatelessWidget {
         childAspectRatio: 0.55,
         crossAxisSpacing: 20,
       ),
-      itemCount: elements.length,
+      itemCount: filterElements.length,
       itemBuilder: (context, index) => CircleAvatarCardWidget(
-        image: elements[index].image,
-        title: elements[index].title,
-        onPressedCheck: elements[index].onPressedCheck,
-        onPressedView: elements[index].onPressedView,
+        image: filterElements[index].image,
+        title: filterElements[index].title,
+        onPressedCheck: filterElements[index].onPressedCheck,
+        onPressedView: filterElements[index].onPressedView,
       ),
     );
   }

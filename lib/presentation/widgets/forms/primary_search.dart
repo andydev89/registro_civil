@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_text_field.dart';
 
-class PrimarySearch extends StatelessWidget {
+class PrimarySearch extends StatefulWidget {
   const PrimarySearch({
     super.key,
     this.showFilter = false,
     this.onPressed,
+    this.filter = '',
+    this.onChanged,
   });
   final bool showFilter;
+  final String filter;
   final void Function()? onPressed;
+  final void Function(String)? onChanged;
+
+  @override
+  State<PrimarySearch> createState() => _PrimarySearchState();
+}
+
+class _PrimarySearchState extends State<PrimarySearch> {
+
+  late TextEditingController controller;
+  @override
+  void initState() {
+    controller = TextEditingController(text: widget.filter);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,22 +39,19 @@ class PrimarySearch extends StatelessWidget {
         Flexible(
           child: PrimaryTextField(
             hintText: l10n.buscar,
+            controller: controller,
             padding: 15,
+            onChanged: widget.onChanged,
             suffixIcon: Assets.svg.search.svg(),
           ),
         ),
-        ValueListenableBuilder<bool>(
-          valueListenable: isLoggedIn,
-          builder: (_,value ,__) {
-            return Visibility(
-              visible: value &&showFilter ,
-              child: IconButton(
-                icon: Assets.svg.filter.svg(),
-                splashRadius: 25,
-                onPressed: onPressed,
-              ).horizontalPadding(10),
-            );
-          },
+        Visibility(
+          visible: widget.showFilter,
+          child: IconButton(
+            icon: Assets.svg.filter.svg(),
+            splashRadius: 25,
+            onPressed: widget.onPressed,
+          ).horizontalPadding(10),
         ),
       ],
     );
