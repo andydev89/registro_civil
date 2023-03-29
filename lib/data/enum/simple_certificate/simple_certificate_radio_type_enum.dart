@@ -1,11 +1,12 @@
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
-enum SimpleCertificateRadioTypeEnum{
+enum SimpleCertificateRadioTypeEnum {
   familiar,
   personal,
 }
 
-extension SimpleCertificateRadioTypeEnumExtension on SimpleCertificateRadioTypeEnum {
+extension SimpleCertificateRadioTypeEnumExtension
+    on SimpleCertificateRadioTypeEnum {
   String toText(AppLocalizations l10n) {
     switch (this) {
       case SimpleCertificateRadioTypeEnum.familiar:

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -54,7 +53,7 @@ class ChangePasswordPage extends StatelessWidget {
                   return PrimaryButton(
                     title: l10n.cambiarContrasena,
                     onPressed: form.form.valid ? () {} : null,
-                  ).withRevealAnimation;
+                  );
                 },
               ),
             ],

@@ -35,7 +35,7 @@ class ScanFacePage extends StatelessWidget {
           PrimaryButton(
             title: l10n.escRostro,
             onPressed: () {
-              //TODO escanear rostro
+              // TODO(alguien): escanear rostro
             },
           ).verticalPadding(20),
           Row(

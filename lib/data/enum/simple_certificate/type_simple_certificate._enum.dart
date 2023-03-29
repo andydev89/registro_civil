@@ -7,6 +7,10 @@ enum TypeSimpleCertificateEnum {
   death,
   identity,
   birth,
+  copyMarriageRegistrationCertificate,
+  copyRegistrationCertificateGenderRegistration,
+  copyFactoUnionRegistrationCertificate,
+  copyBirthRegistrationCertificate,
 }
 
 extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
@@ -22,6 +26,15 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
         return l10n.certificadoIden;
       case TypeSimpleCertificateEnum.birth:
         return l10n.certificadoNac;
+      case TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
+        return l10n.copiaActRegMat;
+      case TypeSimpleCertificateEnum
+          .copyRegistrationCertificateGenderRegistration:
+        return l10n.copiaActRegRegGen;
+      case TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate:
+        return l10n.copiaActRegUniHec;
+      case TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
+        return l10n.copiaActRegNac;
     }
   }
 
@@ -37,10 +50,31 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
         return l10n.certificadoIdenDes;
       case TypeSimpleCertificateEnum.birth:
         return l10n.certificadoNacDes;
+      case TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
+        return l10n.copiaActRegMatDes;
+      case TypeSimpleCertificateEnum
+          .copyRegistrationCertificateGenderRegistration:
+        return l10n.copiaActRegRegGenDes;
+      case TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate:
+        return l10n.copiaActRegUniHecDes;
+      case TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
+        return l10n.copiaActRegNacDes;
     }
   }
 
-  double get price => this == TypeSimpleCertificateEnum.identity ? 5 : 3;
+  double get price {
+    if (this == TypeSimpleCertificateEnum.identity) return 5;
+    if (_isPrice6) return 6;
+    return 3;
+  }
+
+  bool get _isPrice6 =>
+      this == TypeSimpleCertificateEnum.copyBirthRegistrationCertificate ||
+      this == TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate ||
+      this == TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate ||
+      this ==
+          TypeSimpleCertificateEnum
+              .copyRegistrationCertificateGenderRegistration;
 
   AssetGenImage get image {
     switch (this) {
@@ -53,6 +87,15 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
       case TypeSimpleCertificateEnum.identity:
         return Assets.png.certificadoIdentidad;
       case TypeSimpleCertificateEnum.birth:
+        return Assets.png.certificadoNacimiento;
+      case TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
+        return Assets.png.certificadoMatrimonio;
+      case TypeSimpleCertificateEnum
+          .copyRegistrationCertificateGenderRegistration:
+        return Assets.png.certificadoGenero;
+      case TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate:
+        return Assets.png.certificadoUnionHecho;
+      case TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
         return Assets.png.certificadoNacimiento;
     }
   }

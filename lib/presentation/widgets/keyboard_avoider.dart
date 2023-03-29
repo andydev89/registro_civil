@@ -4,10 +4,13 @@ import 'dart:math';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-/// Wraps the [child] in a [AnimatedContainer] that adjusts its bottom [padding] to accommodate the on-screen keyboard.
-/// Unlike a [Scaffold], it only insets by the actual amount obscured by the keyboard.
+/// Wraps the [child] in a [AnimatedContainer] that adjusts its
+///  bottom [padding] to accommodate the on-screen keyboard.
+/// Unlike a [Scaffold], it only insets by the actual amount 
+/// obscured by the keyboard.
 /// If [autoScroll] is true and the [child] contains a focused widget such as a [TextField],
-/// automatically scrolls so that it is just visible above the keyboard, plus any additional [focusPadding].
+/// automatically scrolls so that it is just visible above the 
+/// keyboard, plus any additional [focusPadding].
 class KeyboardAvoider extends StatefulWidget {
   KeyboardAvoider({
     super.key,
@@ -199,16 +202,13 @@ class _KeyboardAvoiderState extends State<KeyboardAvoider>
   RenderObject? _findFocusedObject(RenderObject? root) {
     if (root == null) return null;
 
-    final q = Queue<RenderObject>();
-    q.add(root);
+    final q = Queue<RenderObject>()..add(root);
     while (q.isNotEmpty) {
       final node = q.removeFirst();
       if (node is RenderEditable && node.hasFocus) {
         return node;
       }
-      node.visitChildren((child) {
-        q.add(child);
-      });
+      node.visitChildren(q.add);
     }
     return null;
   }

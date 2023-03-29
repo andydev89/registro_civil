@@ -1,6 +1,5 @@
 import 'package:libphonenumber/libphonenumber.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
@@ -137,7 +136,8 @@ Map<String, dynamic>? length6Validator(AbstractControl<dynamic> control) {
 }
 
 Map<String, dynamic>? conadisNumberValidatorGroup(
-    AbstractControl<dynamic> conadisModel) {
+  AbstractControl<dynamic> conadisModel,
+) {
   final conadis = conadisModel.value as Map<String, dynamic>;
   final isConadis = conadis['conadis'] as bool? ?? false;
   final conadisNumber = conadis['conadisNumber'] as String? ?? '';
@@ -179,6 +179,7 @@ Map<String, String Function(dynamic error)> validationMessage(
       ValidationMessage.required: (error) => l10n.campoReq,
       ValidationMessage.email: (error) => l10n.intrudcirCorrVal,
       ValidationMessage.mustMatch: (error) => l10n.passwordCoi,
+      // TODO(jang): convertir esto a enum
       'invalidDni': (error) => l10n.intrducirNumIdeVal,
       'length10Error': (error) => l10n.introducirNum10Dig,
       'invalidProvinceCode': (error) => l10n.introducirCodProVal,

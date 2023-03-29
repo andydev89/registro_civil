@@ -293,30 +293,49 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     SimpleCertificateFirstStepRouterRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<SimpleCertificateFirstStepRouterRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const SimpleCertificateFirstStepRouterPage(),
+        child: SimpleCertificateFirstStepRouterPage(
+          typeSimpleCertificate: args.typeSimpleCertificate,
+          key: args.key,
+        ),
       );
     },
     SimpleCertificateSecondStepRoute.name: (routeData) {
+      final args = routeData.argsAs<SimpleCertificateSecondStepRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const SimpleCertificateSecondStepPage(),
+        child: SimpleCertificateSecondStepPage(
+          typeSimpleCertificate: args.typeSimpleCertificate,
+          key: args.key,
+        ),
       );
     },
     SimpleCertificateFirstStepFamiliarRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<SimpleCertificateFirstStepFamiliarRouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const SimpleCertificateFirstStepFamiliarPage(),
+        child: SimpleCertificateFirstStepFamiliarPage(
+          typeSimpleCertificate: args.typeSimpleCertificate,
+          key: args.key,
+        ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
       );
     },
     SimpleCertificateFirstStepPersonalRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<SimpleCertificateFirstStepPersonalRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const SimpleCertificateFirstStepPersonalPage(),
+        child: SimpleCertificateFirstStepPersonalPage(
+          typeSimpleCertificate: args.typeSimpleCertificate,
+          key: args.key,
+        ),
       );
     },
   };
@@ -1121,49 +1140,142 @@ class ScheduleTurnFirstStepFamiliarRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SimpleCertificateFirstStepRouterPage]
-class SimpleCertificateFirstStepRouterRoute extends PageRouteInfo<void> {
-  const SimpleCertificateFirstStepRouterRoute({List<PageRouteInfo>? children})
-      : super(
+class SimpleCertificateFirstStepRouterRoute
+    extends PageRouteInfo<SimpleCertificateFirstStepRouterRouteArgs> {
+  SimpleCertificateFirstStepRouterRoute({
+    required TypeSimpleCertificateEnum typeSimpleCertificate,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           SimpleCertificateFirstStepRouterRoute.name,
           path: '',
+          args: SimpleCertificateFirstStepRouterRouteArgs(
+            typeSimpleCertificate: typeSimpleCertificate,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'SimpleCertificateFirstStepRouterRoute';
 }
 
+class SimpleCertificateFirstStepRouterRouteArgs {
+  const SimpleCertificateFirstStepRouterRouteArgs({
+    required this.typeSimpleCertificate,
+    this.key,
+  });
+
+  final TypeSimpleCertificateEnum typeSimpleCertificate;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SimpleCertificateFirstStepRouterRouteArgs{typeSimpleCertificate: $typeSimpleCertificate, key: $key}';
+  }
+}
+
 /// generated route for
 /// [SimpleCertificateSecondStepPage]
-class SimpleCertificateSecondStepRoute extends PageRouteInfo<void> {
-  const SimpleCertificateSecondStepRoute()
-      : super(
+class SimpleCertificateSecondStepRoute
+    extends PageRouteInfo<SimpleCertificateSecondStepRouteArgs> {
+  SimpleCertificateSecondStepRoute({
+    required TypeSimpleCertificateEnum typeSimpleCertificate,
+    Key? key,
+  }) : super(
           SimpleCertificateSecondStepRoute.name,
           path: 'simple-certificate-second-step-page',
+          args: SimpleCertificateSecondStepRouteArgs(
+            typeSimpleCertificate: typeSimpleCertificate,
+            key: key,
+          ),
         );
 
   static const String name = 'SimpleCertificateSecondStepRoute';
 }
 
+class SimpleCertificateSecondStepRouteArgs {
+  const SimpleCertificateSecondStepRouteArgs({
+    required this.typeSimpleCertificate,
+    this.key,
+  });
+
+  final TypeSimpleCertificateEnum typeSimpleCertificate;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SimpleCertificateSecondStepRouteArgs{typeSimpleCertificate: $typeSimpleCertificate, key: $key}';
+  }
+}
+
 /// generated route for
 /// [SimpleCertificateFirstStepFamiliarPage]
-class SimpleCertificateFirstStepFamiliarRoute extends PageRouteInfo<void> {
-  const SimpleCertificateFirstStepFamiliarRoute()
-      : super(
+class SimpleCertificateFirstStepFamiliarRoute
+    extends PageRouteInfo<SimpleCertificateFirstStepFamiliarRouteArgs> {
+  SimpleCertificateFirstStepFamiliarRoute({
+    required TypeSimpleCertificateEnum typeSimpleCertificate,
+    Key? key,
+  }) : super(
           SimpleCertificateFirstStepFamiliarRoute.name,
           path: '',
+          args: SimpleCertificateFirstStepFamiliarRouteArgs(
+            typeSimpleCertificate: typeSimpleCertificate,
+            key: key,
+          ),
         );
 
   static const String name = 'SimpleCertificateFirstStepFamiliarRoute';
 }
 
+class SimpleCertificateFirstStepFamiliarRouteArgs {
+  const SimpleCertificateFirstStepFamiliarRouteArgs({
+    required this.typeSimpleCertificate,
+    this.key,
+  });
+
+  final TypeSimpleCertificateEnum typeSimpleCertificate;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SimpleCertificateFirstStepFamiliarRouteArgs{typeSimpleCertificate: $typeSimpleCertificate, key: $key}';
+  }
+}
+
 /// generated route for
 /// [SimpleCertificateFirstStepPersonalPage]
-class SimpleCertificateFirstStepPersonalRoute extends PageRouteInfo<void> {
-  const SimpleCertificateFirstStepPersonalRoute()
-      : super(
+class SimpleCertificateFirstStepPersonalRoute
+    extends PageRouteInfo<SimpleCertificateFirstStepPersonalRouteArgs> {
+  SimpleCertificateFirstStepPersonalRoute({
+    required TypeSimpleCertificateEnum typeSimpleCertificate,
+    Key? key,
+  }) : super(
           SimpleCertificateFirstStepPersonalRoute.name,
           path: 'simple-certificate-first-step-personal-page',
+          args: SimpleCertificateFirstStepPersonalRouteArgs(
+            typeSimpleCertificate: typeSimpleCertificate,
+            key: key,
+          ),
         );
 
   static const String name = 'SimpleCertificateFirstStepPersonalRoute';
+}
+
+class SimpleCertificateFirstStepPersonalRouteArgs {
+  const SimpleCertificateFirstStepPersonalRouteArgs({
+    required this.typeSimpleCertificate,
+    this.key,
+  });
+
+  final TypeSimpleCertificateEnum typeSimpleCertificate;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SimpleCertificateFirstStepPersonalRouteArgs{typeSimpleCertificate: $typeSimpleCertificate, key: $key}';
+  }
 }

@@ -32,9 +32,11 @@ class PrimaryScaffold extends StatelessWidget {
           leading: const AutoLeadingButton(),
           elevation: 0,
           centerTitle: true,
-          title: PrimaryTitle(
-            title: title,
-            color: primaryColor,
+          title: Center(
+            child: PrimaryTitle(
+              title: title,
+              color: primaryColor,
+            ),
           ),
         ),
         body: Center(

@@ -7,6 +7,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_email_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
@@ -71,12 +72,13 @@ class MakePaymentPage extends StatelessWidget {
                         label: l10n.ciudad,
                         formControl: formModel.cityControl,
                       ),
-                      //TODO crear un componente reactivo para los telefonos
+                      // TODO(alejandro): crear un componente 
+                      //reactivo para los telefonos
                       PrimaryReactiveTextField(
                         label: l10n.telefonoCel,
                         formControl: formModel.phoneControl,
                       ),
-                      PrimaryReactiveTextField(
+                      PrimaryReactiveEmailField(
                         label: l10n.correoE,
                         formControl: formModel.emailControl,
                       ),
@@ -89,7 +91,7 @@ class MakePaymentPage extends StatelessWidget {
                         color: blue,
                         textAlign: TextAlign.start,
                       ),
-                      //TODO hacer esto un link al correo
+                      // TODO(alejandro): hacer esto un link al correo
                       const PrimaryCaption(
                         'enlinea@registrocivil.gob.ec',
                         color: blue,
@@ -106,7 +108,7 @@ class MakePaymentPage extends StatelessWidget {
           builder: (context, formModel, child) => PrimaryButton(
             title: l10n.confirmarPago,
             onPressed: formModel.form.valid
-                //TODO aqui hacer la logica de pagar
+                // TODO(alejandro): aqui hacer la logica de pagar
                 //mostrar el cargando y luego la respuesta
                 ? () => context.replaceRoute(
                       NotificationRoute(

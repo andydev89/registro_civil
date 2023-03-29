@@ -6,10 +6,12 @@ part 'enter_email_model.gform.dart';
 @ReactiveFormAnnotation()
 class EnterEmailModel {
   EnterEmailModel({
-    @FormControlAnnotation(validators: [
-      requiredValidator,
-      emailValidator,
-    ])
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        emailValidator,
+      ],
+    )
         this.email = '',
   });
 

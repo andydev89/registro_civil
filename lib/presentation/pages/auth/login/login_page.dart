@@ -18,6 +18,7 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_text_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_password_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
@@ -44,16 +45,11 @@ class LoginPage extends HookWidget {
               ),
               Column(
                 children: [
-                  PrimaryReactiveTextField(
+                  PrimaryReactiveNuiField(
                     formControl: form.identificationControl,
                     hintText: l10n.numCedula,
                     prefixIcon: Assets.svg.cedula.svg(),
-                    keyboardType: TextInputType.number,
                     ligth: true,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(10),
-                    ],
                   ),
                   PrimaryReactivePasswordField(
                     formControl: form.passwordControl,
