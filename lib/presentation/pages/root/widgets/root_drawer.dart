@@ -84,8 +84,10 @@ class RootDrawer extends StatelessWidget {
                                   ButtonDrawer(
                                     icon: Assets.svg.home.svg(),
                                     titulo: l10n.inicio,
-                                    onPressed: () =>
-                                        Scaffold.of(context).closeDrawer(),
+                                    onPressed: () {
+                                      Scaffold.of(context).closeDrawer();
+                                      context.navigateNamedTo('/home');
+                                    },
                                   ),
                                   ButtonDrawer(
                                     icon: Assets.svg.user.svg(),

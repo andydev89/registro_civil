@@ -4,6 +4,7 @@ import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/models/circle_avatar_card_model.dart';
+import 'package:registro_civil_apk/presentation/pages/simple_certificate/utils/simple_certificate_utils.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/widgets/certificate_description.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
@@ -48,9 +49,7 @@ class ServicesPage extends StatelessWidget {
             image: Assets.png.certificadoNacimiento.image(),
             title: l10n.certificadoNac,
             onPressedCheck: () => context.navigateTo(
-              SimpleCertificateRouterRoute(
-                typeSimpleCertificate: TypeSimpleCertificateEnum.birth,
-              ),
+              getSimpleCertificateRoute(TypeSimpleCertificateEnum.birth),
             ),
             onPressedView: () => showContentDialog(
               context,
@@ -63,9 +62,7 @@ class ServicesPage extends StatelessWidget {
             image: Assets.png.certificadoMatrimonio.image(),
             title: l10n.certificadoMat,
             onPressedCheck: () => context.navigateTo(
-              SimpleCertificateRouterRoute(
-                typeSimpleCertificate: TypeSimpleCertificateEnum.marriage,
-              ),
+              getSimpleCertificateRoute(TypeSimpleCertificateEnum.marriage),
             ),
             onPressedView: () => showContentDialog(
               context,
@@ -78,9 +75,7 @@ class ServicesPage extends StatelessWidget {
             image: Assets.png.certificadoDefuncion.image(),
             title: l10n.certificadoDef,
             onPressedCheck: () => context.navigateTo(
-              SimpleCertificateRouterRoute(
-                typeSimpleCertificate: TypeSimpleCertificateEnum.death,
-              ),
+              getSimpleCertificateRoute(TypeSimpleCertificateEnum.death),
             ),
             onPressedView: () => showContentDialog(
               context,
@@ -93,9 +88,7 @@ class ServicesPage extends StatelessWidget {
             image: Assets.png.certificadoUnionHecho.image(),
             title: l10n.certificadoUniHec,
             onPressedCheck: () => context.navigateTo(
-              SimpleCertificateRouterRoute(
-                typeSimpleCertificate: TypeSimpleCertificateEnum.factorUnion,
-              ),
+              getSimpleCertificateRoute(TypeSimpleCertificateEnum.factorUnion),
             ),
             onPressedView: () => showContentDialog(
               context,
@@ -108,9 +101,7 @@ class ServicesPage extends StatelessWidget {
             image: Assets.png.certificadoIdentidad.image(),
             title: l10n.certificadoIden,
             onPressedCheck: () => context.navigateTo(
-              SimpleCertificateRouterRoute(
-                typeSimpleCertificate: TypeSimpleCertificateEnum.identity,
-              ),
+              getSimpleCertificateRoute(TypeSimpleCertificateEnum.identity),
             ),
             onPressedView: () => showContentDialog(
               context,
@@ -129,9 +120,8 @@ class ServicesPage extends StatelessWidget {
             image: Assets.png.certificadoNacimiento.image(),
             title: l10n.copiaActRegNac,
             onPressedCheck: () => context.navigateTo(
-              SimpleCertificateRouterRoute(
-                typeSimpleCertificate:
-                    TypeSimpleCertificateEnum.copyBirthRegistrationCertificate,
+              getSimpleCertificateRoute(
+                TypeSimpleCertificateEnum.copyBirthRegistrationCertificate,
               ),
             ),
             onPressedView: () => showContentDialog(
@@ -146,9 +136,8 @@ class ServicesPage extends StatelessWidget {
             image: Assets.png.certificadoMatrimonio.image(),
             title: l10n.copiaActRegMat,
             onPressedCheck: () => context.navigateTo(
-              SimpleCertificateRouterRoute(
-                typeSimpleCertificate: TypeSimpleCertificateEnum
-                    .copyMarriageRegistrationCertificate,
+              getSimpleCertificateRoute(
+                TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate,
               ),
             ),
             onPressedView: () => showContentDialog(
@@ -163,8 +152,8 @@ class ServicesPage extends StatelessWidget {
             image: Assets.png.certificadoGenero.image(),
             title: l10n.copiaActRegRegGen,
             onPressedCheck: () => context.navigateTo(
-              SimpleCertificateRouterRoute(
-                typeSimpleCertificate: TypeSimpleCertificateEnum
+              getSimpleCertificateRoute(
+                TypeSimpleCertificateEnum
                     .copyRegistrationCertificateGenderRegistration,
               ),
             ),
@@ -180,9 +169,8 @@ class ServicesPage extends StatelessWidget {
             image: Assets.png.certificadoUnionHecho.image(),
             title: l10n.copiaActRegUniHec,
             onPressedCheck: () => context.navigateTo(
-              SimpleCertificateRouterRoute(
-                typeSimpleCertificate: TypeSimpleCertificateEnum
-                    .copyFactoUnionRegistrationCertificate,
+              getSimpleCertificateRoute(
+                TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate,
               ),
             ),
             onPressedView: () => showContentDialog(

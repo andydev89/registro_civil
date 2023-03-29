@@ -173,13 +173,9 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     SimpleCertificateRouterRoute.name: (routeData) {
-      final args = routeData.argsAs<SimpleCertificateRouterRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: SimpleCertificateRouterPage(
-          typeSimpleCertificate: args.typeSimpleCertificate,
-          key: args.key,
-        ),
+        child: const SimpleCertificateRouterPage(),
       );
     },
     NotificationRoute.name: (routeData) {
@@ -780,39 +776,15 @@ class ScheduleTurnRouterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SimpleCertificateRouterPage]
-class SimpleCertificateRouterRoute
-    extends PageRouteInfo<SimpleCertificateRouterRouteArgs> {
-  SimpleCertificateRouterRoute({
-    required TypeSimpleCertificateEnum typeSimpleCertificate,
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
+class SimpleCertificateRouterRoute extends PageRouteInfo<void> {
+  const SimpleCertificateRouterRoute({List<PageRouteInfo>? children})
+      : super(
           SimpleCertificateRouterRoute.name,
           path: 'simple-certificate-router-page',
-          args: SimpleCertificateRouterRouteArgs(
-            typeSimpleCertificate: typeSimpleCertificate,
-            key: key,
-          ),
           initialChildren: children,
         );
 
   static const String name = 'SimpleCertificateRouterRoute';
-}
-
-class SimpleCertificateRouterRouteArgs {
-  const SimpleCertificateRouterRouteArgs({
-    required this.typeSimpleCertificate,
-    this.key,
-  });
-
-  final TypeSimpleCertificateEnum typeSimpleCertificate;
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'SimpleCertificateRouterRouteArgs{typeSimpleCertificate: $typeSimpleCertificate, key: $key}';
-  }
 }
 
 /// generated route for
