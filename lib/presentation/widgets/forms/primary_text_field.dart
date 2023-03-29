@@ -17,6 +17,7 @@ class PrimaryTextField extends StatelessWidget {
     this.padding = 18,
     this.ligth = false,
     this.onTap,
+    this.onChanged,
   });
 
   final TextEditingController? controller;
@@ -30,6 +31,7 @@ class PrimaryTextField extends StatelessWidget {
   final double? padding;
   final bool ligth;
   final void Function()? onTap;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,7 @@ class PrimaryTextField extends StatelessWidget {
           key: key,
           keyboardType: textInputType,
           onTap: onTap,
+          onChanged: onChanged,
           controller: controller,
           style: TextStyle(
             color: ligth ? Colors.white : Colors.black,
