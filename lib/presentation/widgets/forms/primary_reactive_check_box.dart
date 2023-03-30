@@ -11,6 +11,7 @@ class PrimaryReactiveCheckBox extends StatelessWidget {
     this.activeColor,
     this.checkColor,
     this.underlining = false,
+    this.textAlign = TextAlign.start,
   });
   final FormControl<bool> formControl;
   final String label;
@@ -18,6 +19,7 @@ class PrimaryReactiveCheckBox extends StatelessWidget {
   final Color? activeColor;
   final Color? checkColor;
   final bool underlining;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class PrimaryReactiveCheckBox extends StatelessWidget {
       title: PrimaryText(
         label,
         underlining: underlining,
+        textAlign: textAlign,
       ),
       controlAffinity: ListTileControlAffinity.leading,
     );

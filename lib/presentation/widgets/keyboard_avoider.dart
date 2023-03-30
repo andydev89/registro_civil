@@ -1,3 +1,6 @@
+// ignore_for_file: comment_references, avoid_bool_literals_in_conditional_e
+// xpressions
+
 import 'dart:collection';
 import 'dart:math';
 
@@ -6,10 +9,11 @@ import 'package:flutter/widgets.dart';
 
 /// Wraps the [child] in a [AnimatedContainer] that adjusts its
 ///  bottom [padding] to accommodate the on-screen keyboard.
-/// Unlike a [Scaffold], it only insets by the actual amount 
+/// Unlike a [Scaffold], it only insets by the actual amount
 /// obscured by the keyboard.
-/// If [autoScroll] is true and the [child] contains a focused widget such as a [TextField],
-/// automatically scrolls so that it is just visible above the 
+/// If [autoScroll] is true and the [child] contains a focused widget such as
+/// a [TextField],
+/// automatically scrolls so that it is just visible above the
 /// keyboard, plus any additional [focusPadding].
 class KeyboardAvoider extends StatefulWidget {
   KeyboardAvoider({
@@ -19,9 +23,10 @@ class KeyboardAvoider extends StatefulWidget {
     this.curve = Curves.easeOut,
     this.autoScroll = false,
     this.focusPadding = 12.0,
-  }) : assert(child is ScrollView ? child.controller != null : true);
+  }) : assert(child is ScrollView && child.controller != null, '');
 
-  /// The child to embed. If the [child] is not a [ScrollView], it is automatically embedded in a [SingleChildScrollView].
+  /// The child to embed. If the [child] is not a [ScrollView], it is 
+  /// automatically embedded in a [SingleChildScrollView].
   /// If the [child] is a [ScrollView], it must have a [ScrollController].
   final Widget child;
 

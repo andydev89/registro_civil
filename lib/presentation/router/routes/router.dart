@@ -19,7 +19,8 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.
 import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/services/services_page.dart';
-import 'package:registro_civil_apk/presentation/pages/my_turns/my_turns_page.dart';
+import 'package:registro_civil_apk/presentation/pages/my_orders/pages/my_order_rejecting_page.dart';
+import 'package:registro_civil_apk/presentation/pages/my_turns/pages/my_turns_page.dart';
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/select_payment_page.dart';
@@ -194,7 +195,7 @@ part 'router.gr.dart';
               page: SimpleCertificateSecondStepPage,
             ),
             // CupertinoRoute(
-            //   page: ShiftDetailsPage,
+            //   page: SimpleCertificateErrorPage,
             // ),
           ],
         ),
@@ -207,7 +208,10 @@ part 'router.gr.dart';
           guards: [AuthGuard],
           page: MyTurnsPage,
         ),
-
+        // My OODERS
+        CupertinoRoute(
+          page: MyOrderRejectingPage,
+        ),
         //PAYMENT
         CupertinoRoute(
           page: SelectPaymentPage,

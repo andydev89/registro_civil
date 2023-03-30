@@ -86,7 +86,9 @@ class RootDrawer extends StatelessWidget {
                                     titulo: l10n.inicio,
                                     onPressed: () {
                                       Scaffold.of(context).closeDrawer();
-                                      context.navigateTo(const HomeRouterRoute());
+                                      context.navigateTo(
+                                        const HomeRouterRoute(),
+                                      );
                                     },
                                   ),
                                   ButtonDrawer(
@@ -96,7 +98,7 @@ class RootDrawer extends StatelessWidget {
                                   ),
                                   ButtonDrawer(
                                     icon: Assets.svg.businessService.svg(),
-                                    titulo: l10n.misTramites,
+                                    titulo: l10n.misPedidos,
                                     onPressed: () {},
                                   ),
                                   ButtonDrawer(

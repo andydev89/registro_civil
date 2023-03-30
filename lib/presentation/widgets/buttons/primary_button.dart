@@ -47,7 +47,10 @@ class PrimaryButton extends StatelessWidget {
       ),
       // height: height + 15,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: onPressed == null ? null : () {
+          FocusScope.of(context).unfocus();
+          onPressed!.call();
+        },
         style: botonEstilo(
           backgroundColor: backgroundColor ?? Colors.transparent,
           disabledBackgroundColor: disabledBackgroundColor,

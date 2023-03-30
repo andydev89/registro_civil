@@ -35,6 +35,7 @@ class _PrimarySearchState extends State<PrimarySearch> {
     final l10n = context.l10n;
     return Row(
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Flexible(
           child: PrimaryTextField(
@@ -51,7 +52,7 @@ class _PrimarySearchState extends State<PrimarySearch> {
             icon: Assets.svg.filter.svg(),
             splashRadius: 25,
             onPressed: widget.onPressed,
-          ).horizontalPadding(10),
+          ),
         ),
       ],
     );

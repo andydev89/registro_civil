@@ -4,8 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/schedule_shift_type.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_radio_list_tile.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class ScheduleTurnFirstStepRouterPage extends HookWidget {
   const ScheduleTurnFirstStepRouterPage({super.key});
@@ -24,41 +24,31 @@ class ScheduleTurnFirstStepRouterPage extends HookWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Row(
-                    children: [
-                      Radio(
-                        value: ScheduleShiftType.personal,
-                        groupValue: selectedRadio.value,
-                        onChanged: (value) {
-                          selectedRadio.value = ScheduleShiftType.personal;
-                          context.replaceRoute(
-                            const ScheduleTurnFirstStepPersonalRoute(),
-                          );
-                        },
-                      ),
-                      PrimaryText(
-                        l10n.personal,
-                        color: Colors.black,
-                      ),
-                    ],
+                  Expanded(
+                    child: PrimaryRadioListTile(
+                      value: ScheduleShiftType.personal,
+                      groupValue: selectedRadio.value,
+                      title: l10n.personal,
+                      onChanged: (value) {
+                        selectedRadio.value = ScheduleShiftType.personal;
+                        context.replaceRoute(
+                          const ScheduleTurnFirstStepPersonalRoute(),
+                        );
+                      },
+                    ),
                   ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: ScheduleShiftType.familiar,
-                        groupValue: selectedRadio.value,
-                        onChanged: (value) {
-                          selectedRadio.value = ScheduleShiftType.familiar;
-                          context.replaceRoute(
-                            const ScheduleTurnFirstStepFamiliarRoute(),
-                          );
-                        },
-                      ),
-                      PrimaryText(
-                        l10n.familiar,
-                        color: Colors.black,
-                      ),
-                    ],
+                  Expanded(
+                    child: PrimaryRadioListTile(
+                      value: ScheduleShiftType.familiar,
+                      groupValue: selectedRadio.value,
+                      title: l10n.familiar,
+                      onChanged: (value) {
+                        selectedRadio.value = ScheduleShiftType.familiar;
+                        context.replaceRoute(
+                          const ScheduleTurnFirstStepFamiliarRoute(),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

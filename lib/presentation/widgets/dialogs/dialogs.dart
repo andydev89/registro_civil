@@ -15,6 +15,7 @@ Future<T?> showAcceptCancelDialog<T>(
   required String message,
   void Function()? onAccept,
   void Function()? onCancel,
+  bool automaticClose = true,
 }) {
   final l10n = context.l10n;
   return showDialog<T?>(
@@ -22,6 +23,7 @@ Future<T?> showAcceptCancelDialog<T>(
     context: context,
     builder: (context) => Center(
       child: TranslucentCard(
+        color: Theme.of(context).dialogBackgroundColor,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -32,11 +34,21 @@ Future<T?> showAcceptCancelDialog<T>(
             ).verticalPadding(40),
             PrimaryButton(
               title: l10n.aceptar,
-              onPressed: onAccept,
+              onPressed: onAccept == null
+                  ? null
+                  : () {
+                      Navigator.of(context).pop();
+                      onAccept.call();
+                    },
             ),
             PrimaryButton(
               title: l10n.cancelar,
-              onPressed: onCancel,
+              onPressed: onCancel == null && !automaticClose
+                  ? null
+                  : () {
+                      if (automaticClose) Navigator.of(context).pop();
+                      onCancel?.call();
+                    },
             ).verticalPadding(10),
           ],
         ),
@@ -59,16 +71,17 @@ Future<void> showContentDialog(
         ),
         content: content,
         backgroundColor:
-            backgroundColor ?? const Color.fromRGBO(255, 255, 255, 0.75),
+            backgroundColor ?? Theme.of(context).dialogBackgroundColor,
       );
     },
   );
 }
 
 Future<void> showOffersDialog(BuildContext context, {Widget? child}) async {
-await showDialog<void>(
+  await showDialog<void>(
     context: context,
     builder: (BuildContext context) {
-      return SlidingDialog(child: child ?? const OffersWidget());},
-    );
+      return SlidingDialog(child: child ?? const OffersWidget());
+    },
+  );
 }

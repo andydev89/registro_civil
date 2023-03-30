@@ -16,6 +16,7 @@ const gradient = LinearGradient(
 final lightTheme = ThemeData(
   primaryColor: primaryColor,
   cardColor: const Color.fromRGBO(255, 255, 255, 0.43),
+  dialogBackgroundColor: const Color.fromRGBO(255, 255, 255, 0.75),
   // colorScheme: const ColorScheme.light().copyWith(
   //   primary: primaryColor,
   //   // secondary: secondaryColor,

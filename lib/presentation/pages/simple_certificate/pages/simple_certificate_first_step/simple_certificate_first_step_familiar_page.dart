@@ -12,7 +12,6 @@ import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_c
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
@@ -78,6 +77,7 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
                                   formControl: formModel
                                       .conadisModelForm.conadisNumberControl,
                                   hintText: '01234567',
+                                  keyboardType: TextInputType.number,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly,
                                     LengthLimitingTextInputFormatter(8),
@@ -89,7 +89,7 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
                         },
                       ),
                     ],
-                  ).horizontalPadding(60),
+                  ).horizontalPadding(20),
                 ),
               ),
             ),
@@ -105,7 +105,7 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
                         ),
                       )
                   : null,
-            ).symmetricPadding(10, 30),
+            ).verticalPadding(20),
           ),
         );
       },

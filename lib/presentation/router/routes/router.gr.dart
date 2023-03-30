@@ -205,6 +205,12 @@ class _$AppRouter extends RootStackRouter {
         child: const MyTurnsPage(),
       );
     },
+    MyOrderRejectingRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const MyOrderRejectingPage(),
+      );
+    },
     SelectPaymentRoute.name: (routeData) {
       final args = routeData.argsAs<SelectPaymentRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -529,6 +535,11 @@ class _$AppRouter extends RootStackRouter {
               path: 'my-turns-page',
               parent: RootRouterRoute.name,
               guards: [authGuard],
+            ),
+            RouteConfig(
+              MyOrderRejectingRoute.name,
+              path: 'my-order-rejecting-page',
+              parent: RootRouterRoute.name,
             ),
             RouteConfig(
               SelectPaymentRoute.name,
@@ -892,6 +903,18 @@ class MyTurnsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MyTurnsRoute';
+}
+
+/// generated route for
+/// [MyOrderRejectingPage]
+class MyOrderRejectingRoute extends PageRouteInfo<void> {
+  const MyOrderRejectingRoute()
+      : super(
+          MyOrderRejectingRoute.name,
+          path: 'my-order-rejecting-page',
+        );
+
+  static const String name = 'MyOrderRejectingRoute';
 }
 
 /// generated route for

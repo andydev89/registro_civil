@@ -25,7 +25,7 @@ class CodePage extends StatelessWidget {
           child: PrimaryReactiveTextField(
             formControl: formModel.codeControl,
             label: l10n.codigo,
-          ).symmetricPadding(40, 40),
+          ).verticalPadding(40),
         ),
         bottomNavigationBar: ReactiveCodeModelFormConsumer(
           builder: (context, formModel, child) => PrimaryButton(

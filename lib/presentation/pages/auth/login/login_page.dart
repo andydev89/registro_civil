@@ -16,6 +16,7 @@ import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.d
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_password_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
 class LoginPage extends ConsumerWidget {
@@ -103,7 +104,7 @@ class LoginPage extends ConsumerWidget {
                       },
                     ),
                     const SizedBox(height: 20),
-                    PrimaryLabel(
+                    PrimaryText(
                       l10n.noCuenta,
                       color: Colors.white,
                     ),
