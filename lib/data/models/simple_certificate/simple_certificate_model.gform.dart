@@ -1256,3 +1256,514 @@ class ReactiveNuiModelFormFormGroupArrayBuilder<V> extends StatelessWidget {
     );
   }
 }
+
+class ReactiveRejectInformationFormConsumer extends StatelessWidget {
+  const ReactiveRejectInformationFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
+
+  final Widget? child;
+
+  final Widget Function(
+          BuildContext context, RejectInformationForm formModel, Widget? child)
+      builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveRejectInformationForm.of(context);
+
+    if (formModel is! RejectInformationForm) {
+      throw FormControlParentNotFoundException(this);
+    }
+    return builder(context, formModel, child);
+  }
+}
+
+class RejectInformationFormInheritedStreamer
+    extends InheritedStreamer<dynamic> {
+  const RejectInformationFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
+
+  final RejectInformationForm form;
+}
+
+class ReactiveRejectInformationForm extends StatelessWidget {
+  const ReactiveRejectInformationForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
+
+  final Widget child;
+
+  final RejectInformationForm form;
+
+  final WillPopCallback? onWillPop;
+
+  static RejectInformationForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
+    if (listen) {
+      return context
+          .dependOnInheritedWidgetOfExactType<
+              RejectInformationFormInheritedStreamer>()
+          ?.form;
+    }
+
+    final element = context.getElementForInheritedWidgetOfExactType<
+        RejectInformationFormInheritedStreamer>();
+    return element == null
+        ? null
+        : (element.widget as RejectInformationFormInheritedStreamer).form;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RejectInformationFormInheritedStreamer(
+      form: form,
+      stream: form.form.statusChanged,
+      child: WillPopScope(
+        onWillPop: onWillPop,
+        child: child,
+      ),
+    );
+  }
+}
+
+class RejectInformationFormBuilder extends StatefulWidget {
+  const RejectInformationFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final RejectInformation? model;
+
+  final Widget? child;
+
+  final WillPopCallback? onWillPop;
+
+  final Widget Function(
+          BuildContext context, RejectInformationForm formModel, Widget? child)
+      builder;
+
+  final void Function(BuildContext context, RejectInformationForm formModel)?
+      initState;
+
+  @override
+  _RejectInformationFormBuilderState createState() =>
+      _RejectInformationFormBuilderState();
+}
+
+class _RejectInformationFormBuilderState
+    extends State<RejectInformationFormBuilder> {
+  late FormGroup _form;
+
+  late RejectInformationForm _formModel;
+
+  @override
+  void initState() {
+    _form = FormGroup({});
+    _formModel = RejectInformationForm(widget.model, _form, null);
+
+    final elements = _formModel.formElements();
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    if (elements.disabled) {
+      _form.markAsDisabled();
+    }
+
+    _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant RejectInformationFormBuilder oldWidget) {
+    if (widget.model != oldWidget.model) {
+      _formModel = RejectInformationForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
+
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveRejectInformationForm(
+      form: _formModel,
+      onWillPop: widget.onWillPop,
+      child: ReactiveFormBuilder(
+        form: () => _form,
+        onWillPop: widget.onWillPop,
+        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class RejectInformationForm implements FormModel<RejectInformation> {
+  RejectInformationForm(
+    this.rejectInformation,
+    this.form,
+    this.path,
+  ) {}
+
+  static String rejectReasonControlName = "rejectReason";
+
+  static String rejectDescriptionControlName = "rejectDescription";
+
+  final RejectInformation? rejectInformation;
+
+  final FormGroup form;
+
+  final String? path;
+
+  String rejectReasonControlPath() => pathBuilder(rejectReasonControlName);
+  String rejectDescriptionControlPath() =>
+      pathBuilder(rejectDescriptionControlName);
+  OrdersRejectingReason get _rejectReasonValue =>
+      rejectReasonControl.value as OrdersRejectingReason;
+  String get _rejectDescriptionValue =>
+      rejectDescriptionControl.value as String;
+  bool get containsRejectReason {
+    try {
+      form.control(rejectReasonControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsRejectDescription {
+    try {
+      form.control(rejectDescriptionControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get rejectReasonErrors => rejectReasonControl.errors;
+  Object? get rejectDescriptionErrors => rejectDescriptionControl.errors;
+  void get rejectReasonFocus => form.focus(rejectReasonControlPath());
+  void get rejectDescriptionFocus => form.focus(rejectDescriptionControlPath());
+  void rejectReasonValueUpdate(
+    OrdersRejectingReason value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    rejectReasonControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void rejectDescriptionValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    rejectDescriptionControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void rejectReasonValuePatch(
+    OrdersRejectingReason value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    rejectReasonControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void rejectDescriptionValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    rejectDescriptionControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void rejectReasonValueReset(
+    OrdersRejectingReason value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      rejectReasonControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void rejectDescriptionValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      rejectDescriptionControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<OrdersRejectingReason> get rejectReasonControl =>
+      form.control(rejectReasonControlPath())
+          as FormControl<OrdersRejectingReason>;
+  FormControl<String> get rejectDescriptionControl =>
+      form.control(rejectDescriptionControlPath()) as FormControl<String>;
+  void rejectReasonSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      rejectReasonControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      rejectReasonControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void rejectDescriptionSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      rejectDescriptionControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      rejectDescriptionControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  @override
+  RejectInformation get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return RejectInformation(
+        rejectReason: _rejectReasonValue,
+        rejectDescription: _rejectDescriptionValue);
+  }
+
+  RejectInformationForm copyWithPath(String? path) {
+    return RejectInformationForm(rejectInformation, form, path);
+  }
+
+  @override
+  void updateValue(
+    RejectInformation value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.updateValue(
+          RejectInformationForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void resetValue(
+    RejectInformation value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: RejectInformationForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+  FormGroup formElements() => FormGroup({
+        rejectReasonControlName: FormControl<OrdersRejectingReason>(
+            value: rejectInformation?.rejectReason,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        rejectDescriptionControlName: FormControl<String>(
+            value: rejectInformation?.rejectDescription,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+class ReactiveRejectInformationFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveRejectInformationFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(RejectInformationForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      RejectInformationForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, T? item, RejectInformationForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveRejectInformationForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveRejectInformationFormFormGroupArrayBuilder<V>
+    extends StatelessWidget {
+  const ReactiveRejectInformationFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      RejectInformationForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      RejectInformationForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, V? item, RejectInformationForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveRejectInformationForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}

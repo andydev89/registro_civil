@@ -55,7 +55,6 @@
   "nueServicios": "New services",
   "hola": "Hello",
   "miPerfil": "My profile",
-  "misTramites": "My procedures",
   "misTurnos": "My appointments",
   "inicio": "Home",
   "configuracion": "Settings",
@@ -265,5 +264,12 @@
   "copiaActRegMatDes":"It is a true certified copy of the original registration or marriage record that is in the DIGERIC files.",
   "copiaActRegRegGenDes":"It is a faithful certified copy of the original gender record that is in the DIGERIC files.",
   "copiaActRegUniHecDes":"It is a true certified copy of the original common-law union record that is in the DIGERIC files.",
-  "copiaActRegNacDes":"It is a true certified copy of the original registration or birth record that is in the DIGERIC files."
+  "copiaActRegNacDes":"It is a true certified copy of the original registration or birth record that is in the DIGERIC files.",
+  "rechazarInf": "Reject information",
+  "causasRec": "Reasons for rejecting",
+  "observaciones": "Observations",
+  "pedidosRazRec1" : "The digitized image does NOT contain the physical or electronic subscription (Act is NOT marginalized)",
+  "pedidosRazRec2" : "The digitized image does NOT correspond to what was requested",
+  "pedidosRazRec3" : "The scanned image is NOT legible or the orientation of the scanned image is NOT correct to issue the certificate",
+  "pedidosRazRec4" : "The digitized image corresponds to another person"
 }

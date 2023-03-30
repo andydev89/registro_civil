@@ -29,28 +29,29 @@ class PrimaryScaffold extends StatelessWidget {
         appBar: AppBar(
           foregroundColor: primaryColor,
           backgroundColor: Colors.transparent,
-          leading: const AutoLeadingButton(),
+          leading: const AutoLeadingButton().verticalPadding(10),
           elevation: 0,
           centerTitle: true,
-          title: Center(
+          title: Container(
+            margin: const EdgeInsets.only(top: 10),
             child: PrimaryTitle(
               title: title,
               color: primaryColor,
             ),
           ),
         ),
-        body: Center(
-          child: Column(
-            children: [
-              if (subtitle != null)
-                PrimaryText(
-                  subtitle!,
-                ).symmetricPadding(20, 30),
-              body,
-            ],
-          ),
-        ),
-        bottomNavigationBar: bottomNavigationBar,
+        body: Column(
+          children: [
+            if (subtitle != null)
+              PrimaryText(
+                subtitle!,
+              ).symmetricPadding(20, 30),
+            body,
+          ],
+        ).horizontalPadding(40),
+        bottomNavigationBar: bottomNavigationBar == null
+            ? null
+            : bottomNavigationBar!.symmetricPadding(20, 40),
       ),
     );
   }
