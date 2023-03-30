@@ -84,7 +84,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModelPagination<List<ProvinceModel>?>> provinces(
+  Future<ResponseModelPagination<List<LocationModel>?>> provinces(
     pageNo,
     pageSize,
   ) async {
@@ -96,7 +96,7 @@ class _Api implements Api {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModelPagination<List<ProvinceModel>>>(Options(
+        _setStreamType<ResponseModelPagination<List<LocationModel>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -108,12 +108,49 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModelPagination<List<ProvinceModel>>.fromJson(
+    final value = ResponseModelPagination<List<LocationModel>>.fromJson(
       _result.data!,
       (json) => json is List<dynamic>
           ? json
-              .map<ProvinceModel>(
-                  (i) => ProvinceModel.fromJson(i as Map<String, dynamic>))
+              .map<LocationModel>(
+                  (i) => LocationModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModelPagination<List<AgencyModel>?>> agencies(
+    pageNo,
+    pageSize,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<AgencyModel>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/identity/api/agency',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModelPagination<List<AgencyModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<AgencyModel>(
+                  (i) => AgencyModel.fromJson(i as Map<String, dynamic>))
               .toList()
           : List.empty(),
     );

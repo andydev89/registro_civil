@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/agencias_test.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
+import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/widgets/radio_time_selector.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_province.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
+import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
@@ -36,13 +35,15 @@ class ScheduleTurnSecondPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                SelectProvince(formControl: formModel.provinceControl),
-                PrimaryReactiveDropdown(
+                SelectElementFromApi(
+                  formControl: formModel.provinceControl,
+                  label: l10n.provincia,
+                  provider: provincesProvider,
+                ),
+                SelectElementFromApi(
                   formControl: formModel.agencyControl,
-                  // TODO(alejandro): esto va a cambiar por 
-                  //un objeto q viene del back
-                  items: AgenciasTest.values,
                   label: l10n.agencia,
+                  provider: agenciesProvider,
                 ),
                 ReactiveDatePicker(
                   builder: (context, picker, child) => PrimaryReactiveTextField(
@@ -92,8 +93,8 @@ class ScheduleTurnSecondPage extends StatelessWidget {
             onPressed: formModel.form.valid
                 ? () => context.navigateTo(
                       TurnDetailsRoute(
-                        city: 'Guayaquil',
-                        agency: 'Matriz',
+                        city: formModel.model.province.name,
+                        agency: formModel.model.agency.name,
                         service: ServiceType.identificationCard,
                         date: DateTime.now(),
                         time: TimeOfDay.now(),

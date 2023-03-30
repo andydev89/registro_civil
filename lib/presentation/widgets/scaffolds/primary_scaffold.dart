@@ -50,10 +50,9 @@ class PrimaryScaffold extends StatelessWidget {
                 ).symmetricPadding(20, 30),
               body,
             ],
-          ).horizontalPadding(40),
-          bottomNavigationBar: bottomNavigationBar == null
-              ? null
-              : bottomNavigationBar!.symmetricPadding(20, 40),
+          ).horizontalPadding(20),
+          bottomNavigationBar:
+              bottomNavigationBar == null ? null : bottomNavigationBar!,
         ),
       ),
     );
