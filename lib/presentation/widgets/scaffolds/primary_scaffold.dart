@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
@@ -24,34 +25,36 @@ class PrimaryScaffold extends StatelessWidget {
       data: Theme.of(context).copyWith(
         dividerColor: Colors.transparent,
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          foregroundColor: primaryColor,
+      child: KeyboardDismissOnTap(
+        child: Scaffold(
           backgroundColor: Colors.transparent,
-          leading: const AutoLeadingButton().verticalPadding(10),
-          elevation: 0,
-          centerTitle: true,
-          title: Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: PrimaryTitle(
-              title: title,
-              color: primaryColor,
+          appBar: AppBar(
+            foregroundColor: primaryColor,
+            backgroundColor: Colors.transparent,
+            leading: const AutoLeadingButton().verticalPadding(10),
+            elevation: 0,
+            centerTitle: true,
+            title: Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: PrimaryTitle(
+                title: title,
+                color: primaryColor,
+              ),
             ),
           ),
+          body: Column(
+            children: [
+              if (subtitle != null)
+                PrimaryText(
+                  subtitle!,
+                ).symmetricPadding(20, 30),
+              body,
+            ],
+          ).horizontalPadding(40),
+          bottomNavigationBar: bottomNavigationBar == null
+              ? null
+              : bottomNavigationBar!.symmetricPadding(20, 40),
         ),
-        body: Column(
-          children: [
-            if (subtitle != null)
-              PrimaryText(
-                subtitle!,
-              ).symmetricPadding(20, 30),
-            body,
-          ],
-        ).horizontalPadding(40),
-        bottomNavigationBar: bottomNavigationBar == null
-            ? null
-            : bottomNavigationBar!.symmetricPadding(20, 40),
       ),
     );
   }

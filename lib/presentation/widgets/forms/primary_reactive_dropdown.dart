@@ -48,7 +48,7 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
                   child: PrimaryText(
                     e.translate(context),
                     textAlign: TextAlign.start,
-                  ).verticalPadding(5),
+                  ),
                 ),
               )
               .toList(),

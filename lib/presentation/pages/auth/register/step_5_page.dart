@@ -16,6 +16,7 @@ import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_bu
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_password_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class Step5Page extends ConsumerWidget {
   const Step5Page({super.key});
@@ -37,7 +38,7 @@ class Step5Page extends ConsumerWidget {
               children: [
                 Column(
                   children: [
-                    PrimaryLabel(
+                    PrimaryText(
                       l10n.ingreseCon,
                       color: Colors.white,
                     ),
@@ -108,13 +109,4 @@ class Step5Page extends ConsumerWidget {
       ),
     );
   }
-}
-
-void showErrorSnackBar(BuildContext context, String errorMessage) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(errorMessage),
-      backgroundColor: Colors.red,
-    ),
-  );
 }

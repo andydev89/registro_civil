@@ -5,7 +5,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_password_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
 class ChangePasswordPage extends StatelessWidget {
@@ -25,9 +25,8 @@ class ChangePasswordPage extends StatelessWidget {
                 title: l10n.cambiarContrasena,
                 color: Colors.white,
               ),
-              PrimaryLabel(
+              PrimaryText(
                 l10n.ingreseCon,
-                fontWeight: FontWeight.normal,
                 color: Colors.white,
               ),
               const SizedBox(

@@ -5,7 +5,6 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/agencias_test.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/provincias_test.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -84,7 +83,7 @@ class ScheduleTurnSecondPage extends StatelessWidget {
                   ],
                 ),
               ],
-            ).horizontalPadding(40),
+            ),
           ),
         ),
         bottomNavigationBar: ReactiveScheduleTurnSecondStepModelFormConsumer(

@@ -11,7 +11,7 @@ import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.d
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_email_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class Step3Page extends ConsumerWidget {
   const Step3Page({super.key});
@@ -32,16 +32,15 @@ class Step3Page extends ConsumerWidget {
               children: [
                 Column(
                   children: [
-                    PrimaryLabel(
+                    PrimaryText(
                       l10n.ingreseDatos,
                       color: Colors.white,
                     ),
                     const SizedBox(height: 20),
                     Row(
                       children: const [
-                        PrimaryLabel(
+                        PrimaryText(
                           'Nombre: Luis Pérez Pérez',
-                          textAlign: TextAlign.start,
                           color: Colors.white,
                         ),
                       ],
