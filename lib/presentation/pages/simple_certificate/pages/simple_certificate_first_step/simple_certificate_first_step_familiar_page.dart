@@ -89,7 +89,7 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
                         },
                       ),
                     ],
-                  ).horizontalPadding(60),
+                  ).horizontalPadding(20),
                 ),
               ),
             ),
@@ -105,7 +105,7 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
                         ),
                       )
                   : null,
-            ).symmetricPadding(10, 30),
+            ).verticalPadding(20),
           ),
         );
       },

@@ -5,6 +5,7 @@ import 'package:registro_civil_apk/data/enum/simple_certificate/simple_certifica
 import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_radio_list_tile.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
@@ -30,9 +31,10 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: RadioListTile(
+                    child: PrimaryRadioListTile(
                       value: SimpleCertificateRadioTypeEnum.familiar,
                       groupValue: selectedRadio.value,
+                      title: l10n.datosFam,
                       onChanged: (value) {
                         selectedRadio.value =
                             SimpleCertificateRadioTypeEnum.familiar;
@@ -42,16 +44,13 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
                           ),
                         );
                       },
-                      title: PrimaryText(
-                        l10n.datosFam,
-                        color: Colors.black,
-                      ),
                     ),
                   ),
                   Expanded(
-                    child: RadioListTile(
+                    child: PrimaryRadioListTile(
                       value: SimpleCertificateRadioTypeEnum.personal,
                       groupValue: selectedRadio.value,
+                      title: l10n.datosPer,
                       onChanged: (value) {
                         selectedRadio.value =
                             SimpleCertificateRadioTypeEnum.personal;
@@ -61,10 +60,6 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
                           ),
                         );
                       },
-                      title: PrimaryText(
-                        l10n.datosPer,
-                        color: Colors.black,
-                      ),
                     ),
                   ),
                 ],
