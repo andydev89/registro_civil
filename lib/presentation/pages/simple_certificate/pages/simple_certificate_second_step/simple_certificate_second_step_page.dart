@@ -21,14 +21,13 @@ class SimpleCertificateSecondStepPage extends StatelessWidget {
     final l10n = context.l10n;
     return PrimaryScaffold(
       title: l10n.verificarInfo,
-      body: Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Assets.png.certificadoSimple.image(),
-            Expanded(
-              child: Column(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 30),
+        child: Center(child: Assets.png.certificadoSimple.image()),
+      ),
+      bottomNavigationBar: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   PrimaryButton(
                     title: l10n.aceptar,
@@ -44,11 +43,7 @@ class SimpleCertificateSecondStepPage extends StatelessWidget {
                         context.navigateTo(const HomeRouterRoute()),
                   ),
                 ],
-              ).horizontalPadding(30),
-            ),
-          ],
-        ),
-      ),
+              ),
     );
   }
 }

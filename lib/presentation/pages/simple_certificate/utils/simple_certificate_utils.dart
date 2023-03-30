@@ -3,7 +3,8 @@ import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_cert
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 
 PageRouteInfo<dynamic> getSimpleCertificateRoute(
-        TypeSimpleCertificateEnum type) =>
+  TypeSimpleCertificateEnum type,
+) =>
     SimpleCertificateRouterRoute(
       children: [
         SimpleCertificateFirstStepRouterRoute(

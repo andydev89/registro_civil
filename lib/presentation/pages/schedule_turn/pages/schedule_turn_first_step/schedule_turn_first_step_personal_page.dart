@@ -26,12 +26,12 @@ class ScheduleTurnFirstStepPersonalPage extends StatelessWidget {
                 label: l10n.servicio,
                 formControl: formModel.serviceControl,
                 items: ServiceType.values,
-              ).horizontalPadding(40),
+              ).horizontalPadding(20),
               PaymentSelector(
                 label: l10n.seleccioneMetodoPago,
                 formControl: formModel.paymentMethodControl,
                 paymentMethods: PaymentMethodType.values,
-              ).symmetricPadding(20, 20),
+              ).verticalPadding(20),
             ],
           ),
         ),
@@ -55,8 +55,8 @@ class ScheduleTurnFirstStepPersonalPage extends StatelessWidget {
                     }
                   }
                 : null,
-          ).symmetricPadding(10, 30),
-        ),
+          ),
+        ).verticalPadding(20),
       ),
     );
   }

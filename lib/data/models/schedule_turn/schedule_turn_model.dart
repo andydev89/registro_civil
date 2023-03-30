@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/agencias_test.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/provincias_test.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/relationship_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
 import 'package:registro_civil_apk/data/models/commons/province_model.dart';
@@ -43,14 +42,22 @@ class ScheduleTurnFirstStepFamiliarModel {
 @FormGroupAnnotation<dynamic>()
 class FamiliarFormModel {
   FamiliarFormModel({
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        ecuadorDniValidator,
+        length10Validator,
+      ],
+    )
         this.identificationNumber,
-    @FormControlAnnotation(validators: [requiredValidator]) this.service,
-    @FormControlAnnotation(validators: [requiredValidator]) this.relationship,
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.service,
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.relationship,
   });
 
   ///Cedula
-  final int? identificationNumber;
+  final String? identificationNumber;
   final RelationshipType? relationship;
   final ServiceType? service;
 }

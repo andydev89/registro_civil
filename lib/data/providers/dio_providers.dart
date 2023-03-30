@@ -11,7 +11,7 @@ Dio dio(DioRef ref) {
     ..options = BaseOptions(
       headers: {
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODAwMzY1MTgsInN1YiI6IjEwMTAxMDEwMTAiLCJpc3MiOiJJZGVudGl0eSIsInJvbGVzIjoiUk9MRV9DSVRJWkVOIiwiZXhwIjoxNjgwMTIyOTE4fQ.4faXmvx99qY4ibfFRoXFpZ4frfFAfQLAmbpPr-ADquo'
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODAxNTE3NzYsInN1YiI6IjEwMTAxMDEwMTAiLCJpc3MiOiJJZGVudGl0eSIsInJvbGVzIjoiUk9MRV9DSVRJWkVOIiwiZXhwIjoxNjgwMjM4MTc2fQ.MhW7qxV0N1VWPCHhx6i_aNk67NYZEh4teQT0tWZfONw'
       },
     )
     ..interceptors.add(

@@ -11,7 +11,7 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_check_box.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class Step4Page extends ConsumerWidget {
   const Step4Page({super.key});
@@ -33,17 +33,16 @@ class Step4Page extends ConsumerWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
-                  child: PrimaryLabel(
+                  child: PrimaryText(
                     l10n.ingreseCodVer,
                     color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: PrimaryLabel(
+                  child: PrimaryText(
                     l10n.terminosCondiciones,
-                    maxlines: 99,
-                    fontSize: fontSizeDefault,
                     color: Colors.white,
                   ),
                 ),

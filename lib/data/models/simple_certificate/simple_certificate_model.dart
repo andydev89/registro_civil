@@ -1,4 +1,5 @@
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/simple_certificate/refecting_reason_enum.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_enum.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
@@ -50,4 +51,17 @@ class NuiModel {
   });
 
   final String nui;
+}
+
+@ReactiveFormAnnotation()
+class RejectInformation {
+  RejectInformation({
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.rejectReason,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.rejectDescription,
+  });
+
+  final OrdersRejectingReason rejectReason;
+  final String rejectDescription;
 }

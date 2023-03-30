@@ -22,7 +22,7 @@ class MyTurnsPage extends StatelessWidget {
             onPressed: () {
               // print('asd');
             },
-          ).symmetricPadding(20, 20),
+          ).verticalPadding(20),
           MyTurnExpandableCard(
             data: MyTurnExpandableCardModel(
               id: 12569,

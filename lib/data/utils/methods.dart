@@ -6,7 +6,7 @@ StatusCode convertToStatusCode(Map<String, dynamic>? response) {
   try {
     final basicResponse = ResponseModel.fromJson(response, (json) => null);
     return _getStatusCode(basicResponse.status);
-  } on Exception catch (e) {
+  } on Exception catch (_) {
     return StatusCode.s999;
   }
 }

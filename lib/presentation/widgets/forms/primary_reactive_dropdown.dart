@@ -15,12 +15,14 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
     required this.items,
     this.hintText,
     required this.label,
+    this.isExpanded = false,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
   final List<Translatable> items;
   final String? hintText;
   final String label;
+  final bool isExpanded;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +40,15 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
           decoration: primaryInputDecoration(
             hintText: hintText ?? '${l10n.seleccione}...',
           ),
+          isExpanded: isExpanded,
           items: items
               .map(
                 (e) => DropdownMenuItem(
                   value: e,
-                  child: Text(e.translate(context)),
+                  child: PrimaryText(
+                    e.translate(context),
+                    textAlign: TextAlign.start,
+                  ),
                 ),
               )
               .toList(),

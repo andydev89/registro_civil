@@ -10,7 +10,7 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class Step1Page extends ConsumerWidget {
   const Step1Page({super.key});
@@ -22,10 +22,9 @@ class Step1Page extends ConsumerWidget {
       child: NuiModelFormBuilder(
         builder: (_, form, __) {
           return Column(
-            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              PrimaryLabel(
+              PrimaryText(
                 l10n.ingNumCedula,
                 color: Colors.white,
               ),

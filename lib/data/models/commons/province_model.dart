@@ -1,4 +1,5 @@
-import 'package:flutter/src/widgets/framework.dart';
+
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 part 'province_model.g.dart';

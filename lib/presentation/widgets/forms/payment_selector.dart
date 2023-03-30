@@ -4,6 +4,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:power_ups/extensions/iterable_extension.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class PaymentSelector extends HookWidget {
   const PaymentSelector({
@@ -21,10 +22,7 @@ class PaymentSelector extends HookWidget {
     final selectedIndex = useState<int?>(null);
     return Column(
       children: [
-        Text(
-          label,
-          style: const TextStyle(fontSize: 15),
-        ).verticalPadding(5),
+        PrimaryText(label).verticalPadding(5),
         ...paymentMethods.mapWithIndex(
           (index, e) => GestureDetector(
             onTap: () {

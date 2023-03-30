@@ -14,7 +14,7 @@ import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_but
 import 'package:registro_civil_apk/presentation/widgets/forms/payment_selector.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_check_box.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 
 class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
   const ScheduleTurnFirstStepFamiliarPage({super.key});
@@ -34,7 +34,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 30, right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -65,14 +65,13 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                           key,
                           Column(
                             children: [
-                              PrimaryReactiveTextField<int>(
+                              PrimaryReactiveNuiField<String>(
                                 formControlName: '$key.identificationNumber',
-                                keyboardType: TextInputType.number,
                                 label: l10n.cedula,
-                              ).horizontalPadding(60),
+                              ).horizontalPadding(20),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 60, right: 10),
+                                    const EdgeInsets.only(left: 20,right: 20),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -100,7 +99,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                                 label: l10n.tipoServicio,
                                 formControlName: '$key.service',
                                 items: ServiceType.values,
-                              ).horizontalPadding(60),
+                              ).horizontalPadding(20),
                             ],
                           ),
                         ),
@@ -113,7 +112,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                 label: l10n.seleccioneMetodoPago,
                 formControl: formModel.paymentMethodControl,
                 paymentMethods: PaymentMethodType.values,
-              ).symmetricPadding(20, 20),
+              ).symmetricPadding(20, 5),
             ],
           ),
         ),
@@ -137,8 +136,8 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                     }
                   }
                 : null,
-          ).symmetricPadding(10, 30),
-        ),
+          ),
+        ).verticalPadding(20),
       ),
     );
   }

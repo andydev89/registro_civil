@@ -1176,7 +1176,7 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
       pathBuilder(identificationNumberControlName);
   String serviceControlPath() => pathBuilder(serviceControlName);
   String relationshipControlPath() => pathBuilder(relationshipControlName);
-  int? get _identificationNumberValue => identificationNumberControl?.value;
+  String? get _identificationNumberValue => identificationNumberControl?.value;
   ServiceType? get _serviceValue => serviceControl?.value;
   RelationshipType? get _relationshipValue => relationshipControl?.value;
   bool get containsIdentificationNumber {
@@ -1292,7 +1292,7 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   }
 
   void identificationNumberValueUpdate(
-    int? value, {
+    String? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1319,7 +1319,7 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   }
 
   void identificationNumberValuePatch(
-    int? value, {
+    String? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1346,7 +1346,7 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   }
 
   void identificationNumberValueReset(
-    int? value, {
+    String? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1372,9 +1372,10 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   }) =>
       relationshipControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<int>? get identificationNumberControl =>
+  FormControl<String>? get identificationNumberControl =>
       containsIdentificationNumber
-          ? form.control(identificationNumberControlPath()) as FormControl<int>?
+          ? form.control(identificationNumberControlPath())
+              as FormControl<String>?
           : null;
   FormControl<ServiceType>? get serviceControl => containsService
       ? form.control(serviceControlPath()) as FormControl<ServiceType>?
@@ -1490,9 +1491,13 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        identificationNumberControlName: FormControl<int>(
+        identificationNumberControlName: FormControl<String>(
             value: familiarFormModel?.identificationNumber,
-            validators: [requiredValidator],
+            validators: [
+              requiredValidator,
+              ecuadorDniValidator,
+              length10Validator
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

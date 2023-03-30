@@ -97,11 +97,12 @@ class MyTurnExpandableCard extends StatelessWidget {
               height: 20,
             ),
             PrimaryButton(
-              title: 'Mostrar dialog',
+              title: l10n.cancelar,
               onPressed: () => showAcceptCancelDialog<void>(
                 context,
                 title: l10n.confirmacion,
                 message: l10n.seguroCancelarTurno,
+                onAccept: () {},
               ),
             ),
           ],

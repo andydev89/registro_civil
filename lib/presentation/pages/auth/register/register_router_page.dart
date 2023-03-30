@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
@@ -18,7 +19,8 @@ class RegisterRouterPage extends ConsumerWidget {
     ref.watch(registerProvider);
     return TranslucentCard(
       child: AutoRouter(
-        builder: (context, content) => Column(
+        builder: (_, content) => Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.min,
           children: [
             PrimaryTitle(
@@ -34,10 +36,14 @@ class RegisterRouterPage extends ConsumerWidget {
                 ).verticalPadding(20);
               },
             ),
-            Flexible(child: content),
+            Flexible(
+              child: KeyboardDismissOnTap(
+                child: content,
+              ),
+            ),
           ],
         ),
-      ),
+      ).verticalPadding(10),
     );
   }
 }
