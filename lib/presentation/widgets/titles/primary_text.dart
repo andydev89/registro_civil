@@ -14,6 +14,7 @@ class PrimaryText extends StatelessWidget {
     super.key,
     this.shadows,
     this.underlining = false,
+    this.overFlow,
   });
 
   final String title;
@@ -25,6 +26,7 @@ class PrimaryText extends StatelessWidget {
   final TextAlign? textAlign;
   final List<Shadow>? shadows;
   final bool underlining;
+  final TextOverflow? overFlow;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class PrimaryText extends StatelessWidget {
         shadows: shadows,
         decoration: underlining ? TextDecoration.underline : null,
       ),
+      overflow: overFlow,
       maxLines: maxLines,
       textAlign: textAlign,
     );

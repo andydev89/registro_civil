@@ -21,7 +21,7 @@ final registerProvider =
 );
 
 typedef _$Register = AutoDisposeNotifier<RegisterModel>;
-String _$loginHash() => r'278bcae11f1ffc5899e0896e378a50c73d11d451';
+String _$loginHash() => r'f90d88bea57824d1b62e7daa92e9e6fce61eaf5e';
 
 /// See also [Login].
 @ProviderFor(Login)

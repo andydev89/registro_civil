@@ -1,5 +1,5 @@
-import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 import 'package:fresh_dio/fresh_dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:registro_civil_apk/data/sources/api.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -9,30 +9,28 @@ part 'dio_providers.g.dart';
 Dio dio(DioRef ref) {
   final fresh = ref.watch(freshProvider);
   return Dio()
-    ..interceptors.addAll(
-      [
-        fresh,
-        PrettyDioLogger(
-          requestHeader: true,
-          queryParameters: true,
-          requestBody: true,
-          responseHeader: true,
-          showCUrl: true,
-        ),
-      ],
+    ..options.baseUrl = 'http://api.registro-civil.ddns.net/'
+    ..interceptors.add(fresh)
+    ..interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+      ),
     );
 }
 
 @riverpod
 Api api(ApiRef ref) {
   final dio = ref.watch(dioProvider);
-  return Api(dio, baseUrl: 'http://api.registro-civil.ddns.net/');
+  return Api(dio);
 }
 
 @riverpod
 Fresh<OAuth2Token> fresh(FreshRef ref) {
   return Fresh.oAuth2(
     tokenStorage: InMemoryTokenStorage<OAuth2Token>(),
+    shouldRefresh: (response) => true,
     refreshToken: (token, client) {
       //TODO hacer la peticion para refrescar el token
       return Future(

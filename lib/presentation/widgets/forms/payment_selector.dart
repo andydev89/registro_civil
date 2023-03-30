@@ -65,7 +65,7 @@ class PaymentCard extends StatelessWidget {
           ),
         ],
       ),
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

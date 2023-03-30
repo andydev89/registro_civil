@@ -5,6 +5,8 @@ import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/refresh_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class PrimaryReactiveDropdown<T> extends StatelessWidget {
@@ -12,10 +14,13 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
     super.key,
     this.formControl,
     this.formControlName,
-    required this.items,
+    this.items = const [],
     this.hintText,
     required this.label,
-    this.isExpanded = false,
+    this.isExpanded = true,
+    this.isLoading = false,
+    this.hasError = false,
+    this.onError,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
@@ -23,6 +28,9 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
   final String? hintText;
   final String label;
   final bool isExpanded;
+  final bool isLoading;
+  final bool hasError;
+  final void Function()? onError;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +44,21 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
         ReactiveDropdownField(
           formControl: formControl,
           formControlName: formControlName,
+          icon: hasError
+              ? RefreshStatus(onRefresh: onError)
+              : isLoading
+                  ? const LoadingStatus()
+                  : null,
           borderRadius: BorderRadius.circular(10),
-          decoration: primaryInputDecoration(
-            hintText: hintText ?? '${l10n.seleccione}...',
-          ),
+          decoration: primaryInputDecoration(),
           isExpanded: isExpanded,
+          hint: Text(
+            hasError
+                ? l10n.errorAlObtenerLosDatos
+                : isLoading
+                    ? l10n.cargando
+                    : hintText ?? '${l10n.seleccione}...',
+          ),
           items: items
               .map(
                 (e) => DropdownMenuItem(
@@ -48,6 +66,7 @@ class PrimaryReactiveDropdown<T> extends StatelessWidget {
                   child: PrimaryText(
                     e.translate(context),
                     textAlign: TextAlign.start,
+                    overFlow: TextOverflow.ellipsis,
                   ),
                 ),
               )

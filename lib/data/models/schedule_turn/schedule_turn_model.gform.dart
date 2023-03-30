@@ -1849,8 +1849,8 @@ class ScheduleTurnSecondStepModelForm
   String agencyControlPath() => pathBuilder(agencyControlName);
   String dateControlPath() => pathBuilder(dateControlName);
   String timeControlPath() => pathBuilder(timeControlName);
-  ProvinceModel get _provinceValue => provinceControl.value as ProvinceModel;
-  AgenciasTest get _agencyValue => agencyControl.value as AgenciasTest;
+  LocationModel get _provinceValue => provinceControl.value as LocationModel;
+  AgencyModel get _agencyValue => agencyControl.value as AgencyModel;
   DateTime get _dateValue => dateControl.value as DateTime;
   TimeOfDay get _timeValue => timeControl.value as TimeOfDay;
   bool get containsProvince {
@@ -1898,7 +1898,7 @@ class ScheduleTurnSecondStepModelForm
   void get dateFocus => form.focus(dateControlPath());
   void get timeFocus => form.focus(timeControlPath());
   void provinceValueUpdate(
-    ProvinceModel value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1907,7 +1907,7 @@ class ScheduleTurnSecondStepModelForm
   }
 
   void agencyValueUpdate(
-    AgenciasTest value, {
+    AgencyModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1934,7 +1934,7 @@ class ScheduleTurnSecondStepModelForm
   }
 
   void provinceValuePatch(
-    ProvinceModel value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1943,7 +1943,7 @@ class ScheduleTurnSecondStepModelForm
   }
 
   void agencyValuePatch(
-    AgenciasTest value, {
+    AgencyModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1970,7 +1970,7 @@ class ScheduleTurnSecondStepModelForm
   }
 
   void provinceValueReset(
-    ProvinceModel value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1979,7 +1979,7 @@ class ScheduleTurnSecondStepModelForm
       provinceControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void agencyValueReset(
-    AgenciasTest value, {
+    AgencyModel value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -2005,10 +2005,10 @@ class ScheduleTurnSecondStepModelForm
   }) =>
       timeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<ProvinceModel> get provinceControl =>
-      form.control(provinceControlPath()) as FormControl<ProvinceModel>;
-  FormControl<AgenciasTest> get agencyControl =>
-      form.control(agencyControlPath()) as FormControl<AgenciasTest>;
+  FormControl<LocationModel> get provinceControl =>
+      form.control(provinceControlPath()) as FormControl<LocationModel>;
+  FormControl<AgencyModel> get agencyControl =>
+      form.control(agencyControlPath()) as FormControl<AgencyModel>;
   FormControl<DateTime> get dateControl =>
       form.control(dateControlPath()) as FormControl<DateTime>;
   FormControl<TimeOfDay> get timeControl =>
@@ -2140,14 +2140,14 @@ class ScheduleTurnSecondStepModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        provinceControlName: FormControl<ProvinceModel>(
+        provinceControlName: FormControl<LocationModel>(
             value: scheduleTurnSecondStepModel?.province,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        agencyControlName: FormControl<AgenciasTest>(
+        agencyControlName: FormControl<AgencyModel>(
             value: scheduleTurnSecondStepModel?.agency,
             validators: [requiredValidator],
             asyncValidators: [],

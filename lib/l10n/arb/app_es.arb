@@ -271,5 +271,7 @@
   "pedidosRazRec1" : "La imagen digitalizada NO contiene la suscripción física o electrónica (Acta NO está marginada)",
   "pedidosRazRec2" : "La imagen digitalizada NO corresponde a lo que se solicitó",
   "pedidosRazRec3" : "La imagen digitalizada NO es legible o la orientación de la imagen digitalizada NO es la correcta para emitir el certificado",
-  "pedidosRazRec4" : "La imagen digitalizada corresponde a otra persona"
+  "pedidosRazRec4" : "La imagen digitalizada corresponde a otra persona",
+  "cargando" : "Cargando",
+  "errorAlObtenerLosDatos" : "Error al obtener los datos"
 }
