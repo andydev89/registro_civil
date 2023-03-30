@@ -1,9 +1,7 @@
 import 'package:async_button_builder/async_button_builder.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
-import 'package:registro_civil_apk/data/utils/methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
@@ -14,7 +12,7 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
     this.disabledBackgroundColor,
     this.colorText,
     this.disabledForegroundColor,
-    this.onPressedAsync,
+    this.onPressed,
     required this.title,
     this.padding = const EdgeInsets.symmetric(vertical: 17),
     this.elevation,
@@ -31,7 +29,7 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
   final Color? disabledForegroundColor;
   final void Function(T)? onSuccess;
   final void Function(StatusCode)? onError;
-  final Future<T> Function()? onPressedAsync;
+  final Future<T> Function()? onPressed;
   final double fontSize;
   final String title;
   final EdgeInsetsGeometry? padding;
@@ -54,18 +52,7 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        onPressed: () async {
-          try {
-            final result = await onPressedAsync?.call();
-            onSuccess?.call(result as T);
-          } catch (e) {
-            if (e is! DioError) return onError?.call(StatusCode.s999);
-
-            onError?.call(
-              convertToStatusCode(e.response?.data as Map<String, dynamic>),
-            );
-          }
-        },
+        onPressed: onPressed,
         builder: (context, child, callback, buttonState) {
           final buttonColor = buttonState.when(
             idle: () => backgroundColor ?? Colors.transparent,
@@ -74,14 +61,12 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
             success: () => backgroundColor ?? Colors.transparent,
           );
           return ElevatedButton(
-            onPressed: onPressedAsync == null ? null : callback,
+            onPressed: onPressed == null ? null : callback,
             style: botonEstilo(
-              backgroundColor: onPressedAsync == null ? null : buttonColor,
-              disabledBackgroundColor:
-                  onPressedAsync == null ? null : buttonColor,
-              colorText: onPressedAsync == null ? null : colorText,
-              disabledForegroundColor:
-                  onPressedAsync == null ? null : buttonColor,
+              backgroundColor: onPressed == null ? null : buttonColor,
+              disabledBackgroundColor: onPressed == null ? null : buttonColor,
+              colorText: onPressed == null ? null : colorText,
+              disabledForegroundColor: onPressed == null ? null : buttonColor,
               padding: padding,
               elevation: elevation,
             ),
@@ -104,7 +89,7 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
         successPadding: EdgeInsets.zero,
         child: PrimaryLabel(
           isToUpperCase ? title.toUpperCase() : title,
-          color: onPressedAsync == null ? Colors.grey : Colors.white,
+          color: onPressed == null ? Colors.grey : Colors.white,
           fontSize: fontSize,
           fontWeight: fontWeight,
         ),

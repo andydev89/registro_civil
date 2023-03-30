@@ -6,7 +6,7 @@ part of 'dio_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dioHash() => r'aa8e84e4f91bded964356baba67be64d0b750960';
+String _$dioHash() => r'5d166a9784fdbd095ed88222e31789b1a9dd075b';
 
 /// See also [dio].
 @ProviderFor(dio)
@@ -34,4 +34,18 @@ final apiProvider = AutoDisposeProvider<Api>.internal(
 );
 
 typedef ApiRef = AutoDisposeProviderRef<Api>;
+String _$freshHash() => r'a53199f2c52ddff9a18fc80cd26095dcb97883e8';
+
+/// See also [fresh].
+@ProviderFor(fresh)
+final freshProvider = AutoDisposeProvider<Fresh<OAuth2Token>>.internal(
+  fresh,
+  name: r'freshProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$freshHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef FreshRef = AutoDisposeProviderRef<Fresh<OAuth2Token>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
