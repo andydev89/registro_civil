@@ -493,6 +493,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
+  fresh:
+    dependency: transitive
+    description:
+      name: fresh
+      sha256: ddac8f76fdd51f5edb6c17af784a077b0df7afe5086d126602f8b6ec7e354e20
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.1"
+  fresh_dio:
+    dependency: "direct main"
+    description:
+      name: fresh_dio
+      sha256: "59ea9569ce59da77e7a11d1c3fbe4999453276c3825fd13f60f25df338242039"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
   frontend_server_client:
     dependency: transitive
     description:

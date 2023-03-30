@@ -87,7 +87,7 @@ class Step5Page extends ConsumerWidget {
                         p0.translate(context),
                         TypeAlert.error,
                       ),
-                      onPressedAsync: form.form.valid
+                      onPressed: form.form.valid
                           ? () {
                               ref
                                   .read(registerProvider.notifier)

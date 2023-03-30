@@ -26,6 +26,7 @@ dependencies:
   flutter_pretty_dio_logger: ^3.0.0
   flutter_riverpod: ^2.3.2
   flutter_svg: ^2.0.4
+  fresh_dio: ^0.4.0
   # fresh_dio: ^0.3.2
   hooks_riverpod: ^2.3.2
   intl: ^0.17.0

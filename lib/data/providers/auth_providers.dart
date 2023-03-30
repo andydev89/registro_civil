@@ -1,3 +1,5 @@
+import 'package:fresh_dio/fresh_dio.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
@@ -8,11 +10,6 @@ part 'auth_providers.g.dart';
 
 @riverpod
 class Register extends _$Register {
-  @override
-  RegisterModel build() {
-    return RegisterModel();
-  }
-
   void updateNui(NuiModel nui) {
     state = state.copyWith(nui: nui.nui);
   }
@@ -31,6 +28,44 @@ class Register extends _$Register {
   }
 
   // void _reset() => state = RegisterModel();
+
+  @override
+  RegisterModel build() {
+    return RegisterModel();
+  }
+}
+
+@riverpod
+class Login extends _$Login {
+  Future<void> login(LoginModel loginModel) async {
+    final api = ref.watch(apiProvider);
+    final response = await api.login(loginModel);
+    final fresh = ref.watch(freshProvider);
+    if (response.status == StatusCode.s200) {
+      final oauthToken = OAuth2Token(
+        accessToken: response.data!.first.jwtToken,
+        //TODO pasar el refresh token
+        // refreshToken: response.result!.refreshToken,
+      );
+      await fresh.setToken(oauthToken);
+      state = const Result.ok(true);
+    } else {
+      state = Result.err(response.status);
+    }
+  }
+
+  bool get isLoggedIn {
+    return state.when(
+      ok: (p0) => p0,
+      err: (p0) => false,
+    );
+  }
+
+  @override
+  Result<bool, StatusCode> build() {
+    //TODO aqui devolver el user local, si no redireccionar para el login
+    return const Result.ok(false);
+  }
 }
 
 // @riverpod
@@ -42,19 +77,6 @@ class Register extends _$Register {
 //   // return response.statusCode == 200;
 //   return false;
 // }
-
-@riverpod
-Future<String?> login(LoginRef ref, LoginModel loginModel) async {
-  final api = ref.watch(apiProvider);
-  final response = await api.login(loginModel);
-  ref.watch(dioProvider).options.headers = {
-    'Authorization': 'Bearer ${response.data?.first.jwtToken}'
-  };
-  if (response.status == StatusCode.s200) {
-    return response.data?.first.jwtToken;
-  }
-  return null;
-}
 
 final isLoggedIn = ValueNotifier(false);
 
