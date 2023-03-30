@@ -4,6 +4,7 @@ import 'package:power_ups/extensions/extensions.dart';
 InputDecoration primaryInputDecoration({
   bool light = false,
   Widget? suffixIcon,
+  Widget? suffix,
   Widget? prefixIcon,
   double? fontSize,
   FontWeight? fontWeight,
@@ -13,6 +14,7 @@ InputDecoration primaryInputDecoration({
   bool setSuffixIconConstraints = false,
 }) {
   return InputDecoration(
+    suffix: suffix,
     suffixIcon: suffixIcon?.horizontalPadding(10),
     prefixIcon: prefixIcon?.horizontalPadding(15),
     // prefixIconConstraints: const BoxConstraints(maxHeight: 20),

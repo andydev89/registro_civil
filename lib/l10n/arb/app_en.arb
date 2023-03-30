@@ -271,5 +271,7 @@
   "pedidosRazRec1" : "The digitized image does NOT contain the physical or electronic subscription (Act is NOT marginalized)",
   "pedidosRazRec2" : "The digitized image does NOT correspond to what was requested",
   "pedidosRazRec3" : "The scanned image is NOT legible or the orientation of the scanned image is NOT correct to issue the certificate",
-  "pedidosRazRec4" : "The digitized image corresponds to another person"
+  "pedidosRazRec4" : "The digitized image corresponds to another person",
+  "cargando" : "Loading",
+  "errorAlObtenerLosDatos" : "Error getting the data"
 }
