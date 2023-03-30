@@ -23,6 +23,7 @@ Future<T?> showAcceptCancelDialog<T>(
     context: context,
     builder: (context) => Center(
       child: TranslucentCard(
+        color: Theme.of(context).dialogBackgroundColor,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -42,7 +43,7 @@ Future<T?> showAcceptCancelDialog<T>(
             ),
             PrimaryButton(
               title: l10n.cancelar,
-              onPressed: onCancel == null &&!automaticClose
+              onPressed: onCancel == null && !automaticClose
                   ? null
                   : () {
                       if (automaticClose) Navigator.of(context).pop();
@@ -70,7 +71,7 @@ Future<void> showContentDialog(
         ),
         content: content,
         backgroundColor:
-            backgroundColor ?? const Color.fromRGBO(255, 255, 255, 0.75),
+            backgroundColor ?? Theme.of(context).dialogBackgroundColor,
       );
     },
   );
