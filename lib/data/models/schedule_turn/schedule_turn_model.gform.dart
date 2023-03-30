@@ -1139,7 +1139,7 @@ class ScheduleTurnFirstStepFamiliarModelForm
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: true),
+            touched: false),
         familyControlName: FormArray(
             familyFamiliarFormModelForm.map((e) => e.formElements()).toList(),
             validators: [requiredValidator],
