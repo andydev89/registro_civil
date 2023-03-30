@@ -43,7 +43,7 @@ class Login extends _$Login {
     final fresh = ref.watch(freshProvider);
     if (response.status == StatusCode.s200) {
       final oauthToken = OAuth2Token(
-        accessToken: response.data!.first.jwtToken,
+        accessToken: response.data!.first.jwtToken, tokenType: 'Bearer',
         //TODO pasar el refresh token
         // refreshToken: response.result!.refreshToken,
       );
