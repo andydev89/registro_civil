@@ -143,11 +143,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Flexible(
-                    child: PrimaryText(
-                      DateFormat.MMMM().format(day),
-                      color: Colors.white,
-                    ),
+                  child: PrimaryText(
+                    DateFormat.MMMM().format(day),
+                    color: Colors.white,
                   ),
                 ),
               ),

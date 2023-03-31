@@ -43,7 +43,7 @@ class SimpleCertificateSecondStepPage extends StatelessWidget {
                         context.navigateTo(const HomeRouterRoute()),
                   ),
                 ],
-              ),
+              ).symmetricPadding(10, 30),
     );
   }
 }

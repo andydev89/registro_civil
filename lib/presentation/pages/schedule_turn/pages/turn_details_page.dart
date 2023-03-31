@@ -139,7 +139,7 @@ class TurnDetailsPage extends StatelessWidget {
             );
           }
         },
-      ),
+      ).symmetricPadding(10, 30),
     );
   }
 }

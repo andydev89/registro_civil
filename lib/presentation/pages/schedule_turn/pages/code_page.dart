@@ -21,12 +21,10 @@ class CodePage extends StatelessWidget {
       builder: (context, formModel, child) => PrimaryScaffold(
         title: l10n.realizarPago,
         subtitle: l10n.introduzcaCodigoBancario,
-        body: Center(
-          child: PrimaryReactiveTextField(
-            formControl: formModel.codeControl,
-            label: l10n.codigo,
-          ).verticalPadding(40),
-        ),
+        body: PrimaryReactiveTextField(
+          formControl: formModel.codeControl,
+          label: l10n.codigo,
+        ).symmetricPadding(40,20),
         bottomNavigationBar: ReactiveCodeModelFormConsumer(
           builder: (context, formModel, child) => PrimaryButton(
             title: l10n.continuar,

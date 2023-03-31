@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
@@ -13,7 +11,6 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_date_picker.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
 class ScheduleTurnSecondPage extends StatelessWidget {
