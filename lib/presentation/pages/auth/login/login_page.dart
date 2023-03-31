@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
@@ -15,7 +16,6 @@ import 'package:registro_civil_apk/presentation/widgets/buttons/primary_text_but
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_password_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
@@ -26,18 +26,20 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    ref.listen(
-      loginProvider,
-      (previous, next) {
-        next.when(
-          ok: onLogin,
-          err: (error) => showAlert(
-            error.translate(context),
-            TypeAlert.error,
-          ),
-        );
-      },
-    );
+    // ref.listen(
+    //   loginProvider,
+    //   (previous, next) {
+    //     next.whenData(
+    //       (value) => value.when(
+    //         ok: onLogin,
+    //         err: (error) => showAlert(
+    //           error.translate(context),
+    //           TypeAlert.error,
+    //         ),
+    //       ),
+    //     );
+    //   },
+    // );
     return TranslucentCard(
       scrollContentOnResized: true,
       child: LoginModelFormBuilder(
@@ -99,6 +101,13 @@ class LoginPage extends ConsumerWidget {
                               ? () => ref
                                   .read(loginProvider.notifier)
                                   .login(form.model)
+                                  .when(
+                                    ok: onLogin,
+                                    err: (error) => showAlert(
+                                      error.translate(context),
+                                      TypeAlert.error,
+                                    ),
+                                  )
                               : null,
                         );
                       },
