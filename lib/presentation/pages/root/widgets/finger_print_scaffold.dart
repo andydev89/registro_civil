@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/finger_print_background.dart';
@@ -30,11 +31,11 @@ class FingerPrintScaffold extends StatelessWidget {
           children: [
             const FingerPrintBackground(),
             body,
-            ValueListenableBuilder<bool>(
-              valueListenable: isLoggedIn,
-              builder: (_, value,__) {
+            Consumer(
+              builder: (_, ref, __) {
+                final isLogged = ref.watch(loginProvider.notifier).isLoggedIn;
                 return Visibility(
-                  visible: value,
+                  visible: isLogged,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 90),
                     child: Align(

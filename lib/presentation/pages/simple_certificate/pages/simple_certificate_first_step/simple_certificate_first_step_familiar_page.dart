@@ -105,7 +105,7 @@ class SimpleCertificateFirstStepFamiliarPage extends StatelessWidget {
                         ),
                       )
                   : null,
-            ).verticalPadding(20),
+            ).symmetricPadding(10, 30),
           ),
         );
       },
