@@ -24,6 +24,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
     final l10n = context.l10n;
     return ScheduleTurnFirstStepFamiliarModelFormBuilder(
       initState: (context, formModel) {
+        formModel.scheduleForMeControl.updateValue(false);
         formModel.addFamilyItem(
           FamiliarFormModel(),
         );
@@ -71,7 +72,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                               ).horizontalPadding(20),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 20,right: 20),
+                                    const EdgeInsets.only(left: 20, right: 20),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,

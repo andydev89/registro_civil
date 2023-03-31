@@ -27,10 +27,7 @@ class ScheduleTurnFirstStepFamiliarModel {
   ScheduleTurnFirstStepFamiliarModel({
     @FormControlAnnotation(validators: [requiredValidator])
         required this.paymentMethod,
-    @FormControlAnnotation<dynamic>(
-      touched: true,
-    )
-        this.scheduleForMe = false,
+    @FormControlAnnotation<dynamic>() this.scheduleForMe = false,
     @FormArrayAnnotation<dynamic>(validators: [requiredValidator])
         this.family = const [],
   });
@@ -70,12 +67,12 @@ class ScheduleTurnSecondStepModel {
         required this.province,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.agency,
-    @FormControlAnnotation(validators: [requiredValidator]) required this.date,
+    @FormControlAnnotation(validators: [requiredValidator]) required this.dates,
     @FormControlAnnotation(validators: [requiredValidator]) required this.time,
   });
 
   final LocationModel province;
   final AgencyModel agency;
-  final DateTime date;
+  final List<DateTime> dates;
   final TimeOfDay time;
 }

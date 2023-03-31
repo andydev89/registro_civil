@@ -5,6 +5,7 @@ const yellow = Color(0xffFFC926);
 const grey = Color(0xffCCCCCC);
 const blue = Color(0xff24487A);
 const ligthBlue = Color(0xff2983F4);
+const green = Color(0xff5CA71B);
 const gradient = LinearGradient(
   colors: [
     primaryColor,

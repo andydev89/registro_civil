@@ -12,6 +12,7 @@ import 'package:registro_civil_apk/presentation/pages/schedule_turn/widgets/radi
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_date_picker.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
@@ -45,17 +46,9 @@ class ScheduleTurnSecondPage extends StatelessWidget {
                   label: l10n.agencia,
                   provider: agenciesProvider,
                 ),
-                ReactiveDatePicker(
-                  builder: (context, picker, child) => PrimaryReactiveTextField(
-                    label: l10n.fechaParaTurno,
-                    suffixIcon: Assets.svg.calendar.svg(),
-                    onTap: (control) => picker.showPicker(),
-                    formControl: formModel.dateControl,
-                    setSuffixIconConstraints: true,
-                  ),
-                  formControl: formModel.dateControl,
-                  firstDate: DateTime.now(),
-                  lastDate: DateUtils.addMonthsToMonthDate(DateTime.now(), 30),
+                PrimaryReactiveDatePicker(
+                  formControl: formModel.datesControl,
+                  label: l10n.fechaParaTurno,
                 ),
                 RadioTimeSelector(
                   label: l10n.horDisponibles,
