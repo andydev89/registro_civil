@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
@@ -10,6 +11,9 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/show_only_in_login.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class RootDrawer extends ConsumerWidget {
@@ -28,8 +32,8 @@ class RootDrawer extends ConsumerWidget {
   final Color? color;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLogged = ref.watch(loginProvider.notifier).isLoggedIn;
     final l10n = context.l10n;
+    final auth = ref.watch(loginProvider.notifier);
     return Drawer(
       backgroundColor: backgroundColor,
       width: MediaQuery.of(context).size.width,
@@ -48,98 +52,108 @@ class RootDrawer extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const RegistroCivilLogo().symmetricPadding(20, 40),
-                  Visibility(
-                    visible: isLogged,
-                    child: const DrawerUserData(),
-                  ),
-                  const Divider(
-                    thickness: 1,
-                    color: Colors.white,
-                  ),
-                  SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Visibility(
-                          visible: !isLogged,
-                          child: ButtonDrawer(
-                            icon: Assets.svg.home.svg(),
-                            titulo: l10n.loggin,
-                            onPressed: () {
-                              Scaffold.of(context).closeDrawer();
-                              context.navigateTo(const AuthRouterRoute());
-                            },
-                          ),
-                        ),
-                        Visibility(
-                          visible: isLogged,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ButtonDrawer(
-                                icon: Assets.svg.home.svg(),
-                                titulo: l10n.inicio,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const RegistroCivilLogo().symmetricPadding(20, 40),
+                      const ShowOnlyInLogin(
+                        child: DrawerUserData(),
+                      ),
+                      const Divider(
+                        thickness: 1,
+                        color: Colors.white,
+                      ),
+                      SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //TODO esto mostrarlo solo cuando no este autenticado
+                            ButtonDrawer(
+                              icon: Assets.svg.home.svg(),
+                              titulo: l10n.loggin,
+                              onPressed: () {
+                                Scaffold.of(context).closeDrawer();
+                                context.navigateTo(
+                                  AuthRouterRoute(
+                                    children: [
+                                      LoginRoute(
+                                        onLogin: (result) {
+                                          //TODO arreglar esto
+                                          context.router.popUntilRoot();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                            ShowOnlyInLogin(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ButtonDrawer(
+                                    icon: Assets.svg.home.svg(),
+                                    titulo: l10n.inicio,
+                                    onPressed: () {
+                                      Scaffold.of(context).closeDrawer();
+                                      context.navigateTo(
+                                        const HomeRouterRoute(),
+                                      );
+                                    },
+                                  ),
+                                  ButtonDrawer(
+                                    icon: Assets.svg.user.svg(),
+                                    titulo: l10n.miPerfil,
+                                    onPressed: () {},
+                                  ),
+                                  ButtonDrawer(
+                                    icon: Assets.svg.businessService.svg(),
+                                    titulo: l10n.misPedidos,
+                                    onPressed: () {},
+                                  ),
+                                  ButtonDrawer(
+                                    icon: Assets.svg.calendar2.svg(),
+                                    titulo: l10n.misTurnos,
+                                    onPressed: () {
+                                      Scaffold.of(context).closeDrawer();
+                                      context.navigateTo(const MyTurnsRoute());
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ButtonDrawer(
+                              icon: Assets.svg.settings.svg(),
+                              titulo: l10n.configuracion,
+                              onPressed: () {},
+                            ),
+                            ButtonDrawer(
+                              icon: const Icon(
+                                Icons.help_outline_outlined,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                              titulo: l10n.ayuda,
+                              onPressed: () {},
+                            ),
+                            ShowOnlyInLogin(
+                              child: ButtonDrawer(
+                                icon: Assets.svg.exit.svg(),
+                                titulo: l10n.cerrSesion,
                                 onPressed: () {
+                                  auth.logout();
                                   Scaffold.of(context).closeDrawer();
-                                  context.navigateTo(
-                                    const HomeRouterRoute(),
-                                  );
                                 },
                               ),
-                              ButtonDrawer(
-                                icon: Assets.svg.user.svg(),
-                                titulo: l10n.miPerfil,
-                                onPressed: () {},
-                              ),
-                              ButtonDrawer(
-                                icon: Assets.svg.businessService.svg(),
-                                titulo: l10n.misPedidos,
-                                onPressed: () {},
-                              ),
-                              ButtonDrawer(
-                                icon: Assets.svg.calendar2.svg(),
-                                titulo: l10n.misTurnos,
-                                onPressed: () {
-                                  // Scaffold.of(context).closeDrawer();
-                                  context.navigateTo(const MyTurnsRoute());
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        ButtonDrawer(
-                          icon: Assets.svg.settings.svg(),
-                          titulo: l10n.configuracion,
-                          onPressed: () {},
-                        ),
-                        ButtonDrawer(
-                          icon: const Icon(
-                            Icons.help_outline_outlined,
-                            size: 40,
-                            color: Colors.white,
-                          ),
-                          titulo: l10n.ayuda,
-                          onPressed: () {},
-                        ),
-                        Visibility(
-                          visible: isLogged,
-                          child: ButtonDrawer(
-                            icon: Assets.svg.exit.svg(),
-                            titulo: l10n.cerrSesion,
-                            onPressed: () {
-                              ref.read(loginProvider.notifier).logout();
-                              Scaffold.of(context).closeDrawer();
-                            },
-                          ),
-                        ),
-                      ],
-                    ).verticalPadding(20),
+                            ),
+                          ],
+                        ).verticalPadding(20),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
               const LogoBottomSheet(
                 backgroundColor: Colors.transparent,

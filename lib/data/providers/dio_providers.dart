@@ -1,6 +1,7 @@
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:registro_civil_apk/data/sources/api.dart';
+import 'package:registro_civil_apk/data/sources/sp_token_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dio_providers.g.dart';
@@ -29,7 +30,7 @@ Api api(ApiRef ref) {
 @riverpod
 Fresh<OAuth2Token> fresh(FreshRef ref) {
   return Fresh.oAuth2(
-    tokenStorage: InMemoryTokenStorage<OAuth2Token>(),
+    tokenStorage: SSTokenStorage(),
     shouldRefresh: (response) => true,
     refreshToken: (token, client) {
       //TODO hacer la peticion para refrescar el token

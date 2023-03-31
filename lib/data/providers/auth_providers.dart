@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
@@ -36,7 +38,7 @@ class Register extends _$Register {
 
 @riverpod
 class Login extends _$Login {
-  Future<void> login(LoginModel loginModel) async {
+  Future<Result<bool, StatusCode>> login(LoginModel loginModel) async {
     final api = ref.watch(apiProvider);
     final response = await api.login(loginModel);
     final fresh = ref.watch(freshProvider);
@@ -47,54 +49,42 @@ class Login extends _$Login {
         // refreshToken: response.result!.refreshToken,
       );
       await fresh.setToken(oauthToken);
-      state = const Result.ok(true);
+      state = const AsyncData(true);
+      return const Result.ok(true);
     } else {
-      state = Result.err(response.status);
+      state = const AsyncData(false);
+      return Result.err(response.status);
     }
   }
 
-  bool get isLoggedIn {
-    return state.when(
-      ok: (p0) => p0,
-      err: (p0) => false,
-    );
-  }
-
   Future<void> logout() async {
+    //TODO ahcer request a logout en el api
     final fresh = ref.watch(freshProvider);
     await fresh.revokeToken();
-    state = const Result.ok(false);
+    await fresh.clearToken();
+    state = const AsyncData(false);
   }
 
+  // Future<bool> get isLoggedIn async {
+  //   const storage = FlutterSecureStorage();
+  //   final value = await storage.read(key: 'token');
+  //   if (value != null) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
   @override
-  Result<bool, StatusCode> build() {
-    //TODO aqui devolver el user local, si no redireccionar para el login
-    return const Result.ok(false);
+  Future<bool> build() async {
+    const storage = FlutterSecureStorage();
+    final value = await storage.read(key: 'token');
+    if (value != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
-// @riverpod
-// Future<bool> checkRegister(
-//     CheckRegisterRef ref, RegisterModel registerModel) async {
-//   final api = ref.watch(apiProvider);
-//   await Future.delayed(const Duration(seconds: 2), () {});
-//   // final response = await api.register(registerModel);
-//   // return response.statusCode == 200;
-//   return false;
-// }
-
-// @riverpod
-// class IsLoggedIn extends _$IsLoggedIn {
-//   @override
-//   bool build() {
-//     return false;
-//   }
-
-//   @override
-//   bool get state;
-
-//   @override
-//    set state(bool value) {
-//     state = value;
-//   }
-// }
+final isLoggedIn = ValueNotifier(false);

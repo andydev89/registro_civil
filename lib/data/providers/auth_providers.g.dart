@@ -21,12 +21,11 @@ final registerProvider =
 );
 
 typedef _$Register = AutoDisposeNotifier<RegisterModel>;
-String _$loginHash() => r'f90d88bea57824d1b62e7daa92e9e6fce61eaf5e';
+String _$loginHash() => r'b710269aeb6f8ce663da45e070b150335b257c64';
 
 /// See also [Login].
 @ProviderFor(Login)
-final loginProvider =
-    AutoDisposeNotifierProvider<Login, Result<bool, StatusCode>>.internal(
+final loginProvider = AutoDisposeAsyncNotifierProvider<Login, bool>.internal(
   Login.new,
   name: r'loginProvider',
   debugGetCreateSourceHash:
@@ -35,5 +34,5 @@ final loginProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$Login = AutoDisposeNotifier<Result<bool, StatusCode>>;
+typedef _$Login = AutoDisposeAsyncNotifier<bool>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

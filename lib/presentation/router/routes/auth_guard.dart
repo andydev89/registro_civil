@@ -5,18 +5,19 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 
 class AuthGuard extends AutoRouteGuard {
   AuthGuard(this.ref);
+
   WidgetRef ref;
 
   @override
-  void onNavigation(
+  Future<void> onNavigation(
     NavigationResolver resolver,
     StackRouter router,
-  ) {
-    final login = ref.watch(loginProvider.notifier);
-    if (login.isLoggedIn) {
+  ) async {
+    final data = await ref.watch(loginProvider.notifier).future;
+    if (data) {
       resolver.next();
     } else {
-      router.push(
+      await router.push(
         AuthRouterRoute(
           children: [
             LoginRoute(
