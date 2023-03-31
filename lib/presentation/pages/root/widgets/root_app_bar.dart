@@ -36,9 +36,13 @@ class RootAppBar extends StatelessWidget implements PreferredSizeWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                InkWell(
-                  onTap: () => Scaffold.of(context).openDrawer(),
-                  child: Assets.svg.menu.svg(),
+                SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: InkWell(
+                    onTap: () => Scaffold.of(context).openDrawer(),
+                    child: Assets.svg.menu.svg(),
+                  ),
                 ),
                 const Flexible(child: RegistroCivilLogo()),
                 Consumer(

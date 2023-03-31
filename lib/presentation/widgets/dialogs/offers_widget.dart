@@ -183,9 +183,9 @@ class _OffersWidgetState
                         onPressed: () {},
                       ),
                     ],
-                  ).verticalPadding(20)
+                  ).symmetricPadding( 10,20)
                 ],
-              ).symmetricPadding(20,20),
+              ).horizontalPadding(10),
             ),
           ],
         ),

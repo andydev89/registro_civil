@@ -104,7 +104,7 @@ class RootDrawer extends ConsumerWidget {
                                 icon: Assets.svg.calendar2.svg(),
                                 titulo: l10n.misTurnos,
                                 onPressed: () {
-                                  Scaffold.of(context).closeDrawer();
+                                  // Scaffold.of(context).closeDrawer();
                                   context.navigateTo(const MyTurnsRoute());
                                 },
                               ),
