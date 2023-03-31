@@ -1835,7 +1835,7 @@ class ScheduleTurnSecondStepModelForm
 
   static String agencyControlName = "agency";
 
-  static String dateControlName = "date";
+  static String datesControlName = "dates";
 
   static String timeControlName = "time";
 
@@ -1847,11 +1847,11 @@ class ScheduleTurnSecondStepModelForm
 
   String provinceControlPath() => pathBuilder(provinceControlName);
   String agencyControlPath() => pathBuilder(agencyControlName);
-  String dateControlPath() => pathBuilder(dateControlName);
+  String datesControlPath() => pathBuilder(datesControlName);
   String timeControlPath() => pathBuilder(timeControlName);
   LocationModel get _provinceValue => provinceControl.value as LocationModel;
   AgencyModel get _agencyValue => agencyControl.value as AgencyModel;
-  DateTime get _dateValue => dateControl.value as DateTime;
+  List<DateTime> get _datesValue => datesControl.value as List<DateTime>;
   TimeOfDay get _timeValue => timeControl.value as TimeOfDay;
   bool get containsProvince {
     try {
@@ -1871,9 +1871,9 @@ class ScheduleTurnSecondStepModelForm
     }
   }
 
-  bool get containsDate {
+  bool get containsDates {
     try {
-      form.control(dateControlPath());
+      form.control(datesControlPath());
       return true;
     } catch (e) {
       return false;
@@ -1891,11 +1891,11 @@ class ScheduleTurnSecondStepModelForm
 
   Object? get provinceErrors => provinceControl.errors;
   Object? get agencyErrors => agencyControl.errors;
-  Object? get dateErrors => dateControl.errors;
+  Object? get datesErrors => datesControl.errors;
   Object? get timeErrors => timeControl.errors;
   void get provinceFocus => form.focus(provinceControlPath());
   void get agencyFocus => form.focus(agencyControlPath());
-  void get dateFocus => form.focus(dateControlPath());
+  void get datesFocus => form.focus(datesControlPath());
   void get timeFocus => form.focus(timeControlPath());
   void provinceValueUpdate(
     LocationModel value, {
@@ -1915,12 +1915,12 @@ class ScheduleTurnSecondStepModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void dateValueUpdate(
-    DateTime value, {
+  void datesValueUpdate(
+    List<DateTime> value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    dateControl.updateValue(value,
+    datesControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1951,12 +1951,12 @@ class ScheduleTurnSecondStepModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void dateValuePatch(
-    DateTime value, {
+  void datesValuePatch(
+    List<DateTime> value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    dateControl.patchValue(value,
+    datesControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1987,14 +1987,14 @@ class ScheduleTurnSecondStepModelForm
   }) =>
       agencyControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void dateValueReset(
-    DateTime value, {
+  void datesValueReset(
+    List<DateTime> value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      dateControl.reset(
+      datesControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void timeValueReset(
     TimeOfDay value, {
@@ -2009,8 +2009,8 @@ class ScheduleTurnSecondStepModelForm
       form.control(provinceControlPath()) as FormControl<LocationModel>;
   FormControl<AgencyModel> get agencyControl =>
       form.control(agencyControlPath()) as FormControl<AgencyModel>;
-  FormControl<DateTime> get dateControl =>
-      form.control(dateControlPath()) as FormControl<DateTime>;
+  FormControl<List<DateTime>> get datesControl =>
+      form.control(datesControlPath()) as FormControl<List<DateTime>>;
   FormControl<TimeOfDay> get timeControl =>
       form.control(timeControlPath()) as FormControl<TimeOfDay>;
   void provinceSetDisabled(
@@ -2049,18 +2049,18 @@ class ScheduleTurnSecondStepModelForm
     }
   }
 
-  void dateSetDisabled(
+  void datesSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      dateControl.markAsDisabled(
+      datesControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      dateControl.markAsEnabled(
+      datesControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -2095,7 +2095,7 @@ class ScheduleTurnSecondStepModelForm
     return ScheduleTurnSecondStepModel(
         province: _provinceValue,
         agency: _agencyValue,
-        date: _dateValue,
+        dates: _datesValue,
         time: _timeValue);
   }
 
@@ -2154,8 +2154,8 @@ class ScheduleTurnSecondStepModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        dateControlName: FormControl<DateTime>(
-            value: scheduleTurnSecondStepModel?.date,
+        datesControlName: FormControl<List<DateTime>>(
+            value: scheduleTurnSecondStepModel?.dates,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

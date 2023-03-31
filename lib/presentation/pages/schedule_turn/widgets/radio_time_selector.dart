@@ -11,9 +11,10 @@ class RadioTimeSelector extends StatelessWidget {
     required this.label,
     required this.formControl,
   });
-  final List<TimeOfDay> times;
-  final String label;
+
   final FormControl<TimeOfDay> formControl;
+  final String label;
+  final List<TimeOfDay> times;
 
   @override
   Widget build(BuildContext context) {
