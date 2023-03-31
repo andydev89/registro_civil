@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/presentation/theme/theme.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_radio_tile.dart';
 
 class RadioTimeSelector extends StatelessWidget {
   const RadioTimeSelector({
@@ -27,32 +26,26 @@ class RadioTimeSelector extends StatelessWidget {
           label,
           style: const TextStyle(fontSize: 15),
         ).verticalPadding(5),
-        Wrap(
-          children: times
-              .map(
-                (e) => Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ReactiveRadio(
-                      value: e,
-                      formControl: formControl,
-                    ),
-                    PrimaryText(
-                      DateFormat.jm().format(
-                        DateTime(
-                          now.year,
-                          now.month,
-                          now.day,
-                          e.hour,
-                          e.minute,
-                        ),
+        Center(
+          child: Wrap(
+            children: times
+                .map(
+                  (e) => PrimaryReactiveRadioTile(
+                    label: DateFormat.jm().format(
+                      DateTime(
+                        now.year,
+                        now.month,
+                        now.day,
+                        e.hour,
+                        e.minute,
                       ),
-                      color: ligthBlue,
                     ),
-                  ],
-                ),
-              )
-              .toList(),
+                    value: e,
+                    formControl: formControl,
+                  ),
+                )
+                .toList(),
+          ),
         ),
       ],
     ).verticalPadding(10);
