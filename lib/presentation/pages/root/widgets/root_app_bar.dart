@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
@@ -40,11 +41,12 @@ class RootAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: Assets.svg.menu.svg(),
                 ),
                 const Flexible(child: RegistroCivilLogo()),
-                ValueListenableBuilder<bool>(
-                  valueListenable: isLoggedIn,
-                  builder: (_, value, __) {
+                Consumer(
+                  builder: (_, ref, __) {
+                    final isLogged =
+                        ref.watch(loginProvider.notifier).isLoggedIn;
                     return Visibility(
-                      visible: value,
+                      visible: isLogged,
                       child: Badge(
                         label: const PrimaryLabel(
                           '2',

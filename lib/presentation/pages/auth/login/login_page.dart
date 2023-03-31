@@ -15,7 +15,6 @@ import 'package:registro_civil_apk/presentation/widgets/buttons/primary_text_but
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_password_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 

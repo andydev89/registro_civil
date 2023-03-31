@@ -1,6 +1,5 @@
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:oxidized/oxidized.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
@@ -61,6 +60,12 @@ class Login extends _$Login {
     );
   }
 
+  Future<void> logout() async {
+    final fresh = ref.watch(freshProvider);
+    await fresh.revokeToken();
+    state = const Result.ok(false);
+  }
+
   @override
   Result<bool, StatusCode> build() {
     //TODO aqui devolver el user local, si no redireccionar para el login
@@ -77,8 +82,6 @@ class Login extends _$Login {
 //   // return response.statusCode == 200;
 //   return false;
 // }
-
-final isLoggedIn = ValueNotifier(false);
 
 // @riverpod
 // class IsLoggedIn extends _$IsLoggedIn {
