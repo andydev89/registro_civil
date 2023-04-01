@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/agencias_test.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/relationship_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
@@ -67,12 +66,12 @@ class ScheduleTurnSecondStepModel {
         required this.province,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.agency,
-    @FormControlAnnotation(validators: [requiredValidator]) required this.dates,
+    @FormControlAnnotation(validators: [requiredValidator]) required this.date,
     @FormControlAnnotation(validators: [requiredValidator]) required this.time,
   });
 
   final LocationModel province;
   final AgencyModel agency;
-  final List<DateTime> dates;
+  final DateTime date;
   final TimeOfDay time;
 }
