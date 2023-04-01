@@ -21,14 +21,17 @@ class ButtonDrawer extends StatelessWidget {
       icon: Padding(
         padding: const EdgeInsets.only(right: 20),
         child: SizedBox.square(
-          dimension: 40,
+          dimension: 30,
           child: icon,
         ),
       ),
-      label: PrimaryLabel(
-        titulo,
-        fontSize: 28,
-        color: Colors.white,
+      label: Row(
+        children: [
+          PrimaryLabel(
+            titulo,
+            color: Colors.white,
+          ),
+        ],
       ),
     ).verticalPadding(3);
   }

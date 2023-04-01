@@ -14,3 +14,18 @@ class StepperIndex extends _$StepperIndex {
 
   int get index => state;
 }
+@riverpod
+class AuthStepper2Data extends _$AuthStepper2Data {
+  @override
+  bool build() {
+    return false;
+  }
+
+@override
+  set state(bool state) {
+    this.state = state;
+  }
+
+@override
+  bool get state => state;
+}

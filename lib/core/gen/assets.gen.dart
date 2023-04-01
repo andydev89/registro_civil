@@ -248,6 +248,9 @@ class $AssetsSvgGen {
   SvgGenImage get fingerprintGrey =>
       const SvgGenImage('assets/svg/fingerprint_grey.svg');
 
+  /// File path: assets/svg/help.svg
+  SvgGenImage get help => const SvgGenImage('assets/svg/help.svg');
+
   /// File path: assets/svg/home.svg
   SvgGenImage get home => const SvgGenImage('assets/svg/home.svg');
 
@@ -336,6 +339,7 @@ class $AssetsSvgGen {
         filter,
         fingerprint,
         fingerprintGrey,
+        help,
         home,
         key,
         menu,

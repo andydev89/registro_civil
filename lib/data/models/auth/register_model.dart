@@ -1,3 +1,4 @@
+import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
@@ -104,6 +105,7 @@ class ConfirmPasswordModel {
   Map<String, dynamic> toJson() => _$ConfirmPasswordModelToJson(this);
 }
 
+@collection
 @JsonSerializable()
 class RegisterModel {
   RegisterModel({
@@ -116,10 +118,11 @@ class RegisterModel {
   factory RegisterModel.fromJson(Map<String, dynamic> json) =>
       _$RegisterModelFromJson(json);
 
-  final String email;
-  final String nui;
-  final String password;
-  final String phone;
+  Id id = 0;
+  late String email;
+  late String nui;
+  late String password;
+  late String phone;
 
   Map<String, dynamic> toJson() => _$RegisterModelToJson(this);
 

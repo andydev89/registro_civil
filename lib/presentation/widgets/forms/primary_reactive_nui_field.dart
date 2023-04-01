@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/data/providers/isar/user_provider.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class PrimaryReactiveNuiField<T> extends StatelessWidget {
+class PrimaryReactiveNuiField<T> extends ConsumerWidget {
   const PrimaryReactiveNuiField({
     this.formControl,
     this.formControlName,
@@ -25,6 +27,7 @@ class PrimaryReactiveNuiField<T> extends StatelessWidget {
     this.onTap,
     this.setSuffixIconConstraints = false,
     super.key,
+    this.init = false,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
@@ -40,9 +43,14 @@ class PrimaryReactiveNuiField<T> extends StatelessWidget {
   final String? hintText;
   final bool setSuffixIconConstraints;
   final void Function(FormControl<T>)? onTap;
+  final bool init;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final nui = ref.watch(userProvider).nui;
+    if (init && nui.isNotEmpty) {
+      formControl?.value = nui as T;
+    }
     final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +63,7 @@ class PrimaryReactiveNuiField<T> extends StatelessWidget {
         ReactiveTextField<T>(
           formControl: formControl,
           formControlName: formControlName,
-          readOnly: readOnly,
+          readOnly: init || readOnly,
           obscureText: obscureText,
           controller: controller,
           onTap: onTap,
@@ -64,7 +72,6 @@ class PrimaryReactiveNuiField<T> extends StatelessWidget {
             fontSize: fontSize,
             fontWeight: fontWeight,
           ),
-          
           cursorColor: ligth ? Colors.white : Colors.black,
           keyboardType: TextInputType.number,
           validationMessages: validationMessage(l10n),

@@ -6,7 +6,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/modify_cant.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class CertificateDetail extends StatelessWidget {
   const CertificateDetail({
@@ -27,7 +27,7 @@ class CertificateDetail extends StatelessWidget {
     );
     const size = 40.0;
     final l10n = context.l10n;
-    const width = 20.0;
+    const width = 8.0;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -40,8 +40,10 @@ class CertificateDetail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
-                    child: PrimaryLabel(
+                    child: PrimaryText(
                       typeSimpleCertificate.title(l10n),
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.start,
                     ),
                   ),
                 ],
@@ -62,7 +64,7 @@ class CertificateDetail extends StatelessWidget {
         ValueListenableBuilder<int>(
           valueListenable: cant,
           builder: (_, value, __) {
-            return Expanded(
+            return Flexible(
               child: ModifyCant(
                 cant: value,
                 onCantChanged: (onCantChanged) {
@@ -80,8 +82,9 @@ class CertificateDetail extends StatelessWidget {
             ValueListenableBuilder<double>(
               valueListenable: totalPay,
               builder: (_, value, __) {
-                return PrimaryLabel(
+                return PrimaryText(
                   '\$ ${value.toStringAsFixed(2)}',
+                  fontWeight: FontWeight.bold,
                 );
               },
             ),
