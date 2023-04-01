@@ -44,8 +44,14 @@ class ScheduleTurnSecondPage extends StatelessWidget {
                   provider: agenciesProvider,
                 ),
                 PrimaryReactiveDatePicker(
-                  formControl: formModel.datesControl,
+                  formControl: formModel.dateControl,
                   label: l10n.fechaParaTurno,
+                  //TODO fechas de ejemplo, estas las tiene q mandar el backend
+                  availablesDate: [
+                    DateTime.now().add(const Duration(days: 1)),
+                    DateTime.now().add(const Duration(days: 2)),
+                    DateTime.now().add(const Duration(days: 3)),
+                  ],
                 ),
                 RadioTimeSelector(
                   label: l10n.horDisponibles,
