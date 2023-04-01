@@ -4,6 +4,7 @@ import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/show_only_in_login.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class RootAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -45,22 +46,15 @@ class RootAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 const Flexible(child: RegistroCivilLogo()),
-                Consumer(
-                  builder: (_, ref, __) {
-                    final isLogged =
-                        ref.watch(loginProvider.notifier).isLoggedIn;
-                    return Visibility(
-                      visible: isLogged,
-                      child: Badge(
-                        label: const PrimaryLabel(
-                          '2',
-                          fontSize: 10,
-                          color: Colors.white,
-                        ),
-                        child: Assets.svg.bell.svg(),
-                      ),
-                    );
-                  },
+                ShowOnlyInLogin(
+                  child: Badge(
+                    label: const PrimaryLabel(
+                      '2',
+                      fontSize: 10,
+                      color: Colors.white,
+                    ),
+                    child: Assets.svg.bell.svg(),
+                  ),
                 ),
               ],
             ),

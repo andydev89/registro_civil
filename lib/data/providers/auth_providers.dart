@@ -86,5 +86,3 @@ class Login extends _$Login {
     }
   }
 }
-
-final isLoggedIn = ValueNotifier(false);

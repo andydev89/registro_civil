@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/auth_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/change_password_page.dart';

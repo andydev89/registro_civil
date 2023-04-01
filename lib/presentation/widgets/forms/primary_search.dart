@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_text_field.dart';

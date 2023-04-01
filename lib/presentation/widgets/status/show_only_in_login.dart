@@ -6,8 +6,10 @@ class ShowOnlyInLogin extends ConsumerWidget {
   const ShowOnlyInLogin({
     super.key,
     required this.child,
+    this.showOntrue = true,
   });
   final Widget child;
+  final bool showOntrue;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15,7 +17,7 @@ class ShowOnlyInLogin extends ConsumerWidget {
     return FutureBuilder(
       future: auth.future,
       builder: (context, snapshot) => Visibility(
-        visible: snapshot.hasData && snapshot.data!,
+        visible: snapshot.hasData && (snapshot.data! == showOntrue),
         child: child,
       ),
     );

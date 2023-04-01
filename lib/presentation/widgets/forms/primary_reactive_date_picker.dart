@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:popover/popover.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
