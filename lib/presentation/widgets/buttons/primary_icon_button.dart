@@ -35,10 +35,11 @@ class PrimaryIconButton extends StatelessWidget {
           ),
         ],
       ),
-      child: IconButton(
-        icon: icon,
+      child: RawMaterialButton(
+        shape: RoundedRectangleBorder(borderRadius: borderRadius()),
         onPressed: onPressed,
-        color: Colors.white,
+        child: icon,
+        // color: Colors.white,
       ),
     );
   }

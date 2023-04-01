@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_text_field.dart';
@@ -21,7 +22,6 @@ class PrimarySearch extends StatefulWidget {
 }
 
 class _PrimarySearchState extends State<PrimarySearch> {
-
   late TextEditingController controller;
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _PrimarySearchState extends State<PrimarySearch> {
             controller: controller,
             padding: 15,
             onChanged: widget.onChanged,
-            suffixIcon: Assets.svg.search.svg(),
+            suffixIcon: Assets.svg.search.svg().horizontalPadding(10),
           ),
         ),
         Visibility(

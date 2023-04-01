@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/secondary_svg_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/show_only_in_loggedin_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
@@ -30,28 +31,29 @@ class RootAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 20),
+            padding: const EdgeInsets.only(bottom: 10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: InkWell(
-                    onTap: () => Scaffold.of(context).openDrawer(),
-                    child: Assets.svg.menu.svg(),
-                  ),
+                SecondarySvgIconButton(
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  svgIcon: Assets.svg.menu.svg(),
                 ),
                 const Flexible(child: RegistroCivilLogo()),
                 ShowOnlyInLoggedInStatus(
                   child: Badge(
+                    alignment: const AlignmentDirectional(20, 5),
                     label: const PrimaryLabel(
+                      //TODO mostrar el numero de notificaciones sin leer
                       '2',
                       fontSize: 10,
                       color: Colors.white,
                     ),
-                    child: Assets.svg.bell.svg(),
+                    child: SecondarySvgIconButton(
+                      onPressed: () {},
+                      svgIcon: Assets.svg.bell.svg(),
+                    ),
                   ),
                 ),
               ],
