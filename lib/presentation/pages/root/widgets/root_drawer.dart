@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
@@ -11,8 +10,6 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/show_only_in_loggedin_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 

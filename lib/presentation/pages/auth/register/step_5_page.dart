@@ -2,12 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
@@ -61,29 +59,8 @@ class Step5Page extends ConsumerWidget {
                 const SizedBox(height: 50),
                 ReactivePasswordModelFormConsumer(
                   builder: (_, form, __) {
-                    return PrimaryAsyncButton<
-                        ResponseModel<List<RegisterResponseModel>?>>(
+                    return PrimaryAsyncButton(
                       title: l10n.registrar,
-                      onSuccess: (result) => context.replaceRoute(
-                        SuccessRoute(
-                          child: Column(
-                            children: [
-                              PrimaryLabel(
-                                l10n.regSatisfactorio,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              PrimaryLabel(
-                                l10n.envCorreo,
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                       onError: (p0) => showAlert(
                         p0.translate(context),
                         TypeAlert.error,
@@ -91,12 +68,40 @@ class Step5Page extends ConsumerWidget {
                       onPressed: form.form.valid
                           ? () {
                               ref
-                                  .read(registerProvider.notifier)
+                                  .read(registerModelRivProvider.notifier)
                                   .updatePassword(form.model);
-                              final registerModel = ref.watch(registerProvider);
+                              final registerModel = ref.watch(
+                                registerModelRivProvider,
+                              );
                               return ref
-                                  .watch(apiProvider)
-                                  .register(registerModel);
+                                  .read(registerProvider.notifier)
+                                  .register(registerModel)
+                                  .when(
+                                    ok: (result) => context.replaceRoute(
+                                      SuccessRoute(
+                                        child: Column(
+                                          children: [
+                                            PrimaryLabel(
+                                              l10n.regSatisfactorio,
+                                              color: Colors.white,
+                                            ),
+                                            const SizedBox(
+                                              height: 30,
+                                            ),
+                                            PrimaryLabel(
+                                              l10n.envCorreo,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    err: (error) => showAlert(
+                                      error.translate(context),
+                                      TypeAlert.error,
+                                    ),
+                                  );
                             }
                           : null,
                     );

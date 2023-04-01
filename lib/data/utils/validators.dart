@@ -12,19 +12,33 @@ Map<String, dynamic>? ecuadorDniValidator(AbstractControl<dynamic> control) {
   if (idNumber.length != 10) return null;
   // Check that the first two digits correspond to a valid province code
   final provinceCode = idNumber.substring(0, 2);
-  final validProvinceCodes = <String>[
-    '01',
-    '02',
-    '03',
-    '04',
-    '05',
-    '06',
-    '07',
-    '08',
-    '09',
-    '10'
-  ];
-  if (!validProvinceCodes.contains(provinceCode)) {
+  final validProvinceCodes = <String, String>{
+    '01': 'Azuay',
+    '02': 'Bolívar',
+    '03': 'Cañar',
+    '04': 'Carchi',
+    '05': 'Cotopaxi',
+    '06': 'Chimborazo',
+    '07': 'El Oro',
+    '08': 'Esmeraldas',
+    '09': 'Guayas',
+    '10': 'Imbabura',
+    '11': 'Loja',
+    '12': 'Los Ríos',
+    '13': 'Manabí',
+    '14': 'Morona Santiago',
+    '15': 'Napo',
+    '16': 'Pastaza',
+    '17': 'Pichincha',
+    '18': 'Tungurahua',
+    '19': 'Zamora Chinchipe',
+    '20': 'Galápagos',
+    '21': 'Sucumbíos',
+    '22': 'Orellana',
+    '23': 'Santo Domingo de los Tsáchilas',
+    '24': 'Santa Elena',
+  };
+  if (!validProvinceCodes.containsKey(provinceCode)) {
     return {'invalidProvinceCode': true};
   }
   // Calculate the verification digit

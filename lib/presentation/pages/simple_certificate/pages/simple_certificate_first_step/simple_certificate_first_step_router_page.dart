@@ -7,7 +7,6 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_radio_list_tile.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class SimpleCertificateFirstStepRouterPage extends HookWidget {
   const SimpleCertificateFirstStepRouterPage({

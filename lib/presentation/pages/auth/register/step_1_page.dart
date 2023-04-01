@@ -41,7 +41,7 @@ class Step1Page extends ConsumerWidget {
                     onPressed: form.nuiControl.valid
                         ? () {
                             ref
-                                .read(registerProvider.notifier)
+                                .read(registerModelRivProvider.notifier)
                                 .updateNui(form.model);
                             ref.read(stepperIndexProvider.notifier).index++;
                             context.navigateTo(const Step2Route());
