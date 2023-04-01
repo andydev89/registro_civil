@@ -5,7 +5,7 @@ class TranslucentCard extends StatelessWidget {
       {super.key,
       required this.child,
       this.scrollContentOnResized = false,
-      this.color});
+      this.color,});
   final Widget child;
   final bool scrollContentOnResized;
   final Color? color;

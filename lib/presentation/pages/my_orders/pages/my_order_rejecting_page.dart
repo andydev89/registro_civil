@@ -29,7 +29,6 @@ class MyOrderRejectingPage extends StatelessWidget {
                 formControl: form.rejectReasonControl,
                 items: OrdersRejectingReason.values,
                 label: l10n.causasRec,
-                isExpanded: true,
               ).verticalPadding(20),
               PrimaryText(
                 l10n.observaciones,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/finger_print_background.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/root_app_bar.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/root_drawer.dart';
