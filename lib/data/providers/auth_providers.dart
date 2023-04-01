@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'auth_providers.g.dart';
 
 @riverpod
-class Register extends _$Register {
+class RegisterModelRiv extends _$RegisterModelRiv {
   void updateNui(NuiModel nui) {
     state = state.copyWith(nui: nui.nui);
   }
@@ -72,5 +72,22 @@ class Login extends _$Login {
     } else {
       return false;
     }
+  }
+}
+
+@riverpod
+class Register extends _$Register {
+  @override
+  Future<bool> build() async {
+    return false;
+  }
+
+  Future<Result<bool, StatusCode>> register(RegisterModel model) async {
+    final api = ref.watch(apiProvider);
+    final response = await api.register(model);
+    return <bool, Result<bool, StatusCode>>{
+      true: const Result.ok(true),
+      false: Result.err(response.status),
+    }[response.status == StatusCode.s200]!;
   }
 }

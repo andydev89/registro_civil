@@ -79,7 +79,7 @@ class Step3Page extends ConsumerWidget {
                       onPressed: form.form.valid
                           ? () {
                               ref
-                                  .read(registerProvider.notifier)
+                                  .read(registerModelRivProvider.notifier)
                                   .updateEnterData(form.model);
                               ref.read(stepperIndexProvider.notifier).index++;
                               context.navigateTo(const Step4Route());
