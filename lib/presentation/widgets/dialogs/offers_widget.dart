@@ -58,137 +58,140 @@ class _OffersWidgetState
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Scaffold(
-      body: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: gradientePrincipal(),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  PrimaryTitle(
-                    title: l10n.pedidos,
-                    color: Colors.white,
-                  ).symmetricPadding(5, 32),
-                  IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: Stack(
-                        children: const [
-                          Center(
-                            child: Icon(
-                              Icons.circle_outlined,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                          ),
-                          Center(
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                        ],
-                      ),).horizontalPadding(10)
-                ],
-              ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: List.generate(
-                          cant,
-                          (index) => Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                children: [
-                                  Flexible(
-                                    child: CertificateDetail(
-                                      typeSimpleCertificate:
-                                          TypeSimpleCertificateEnum.birth,
-                                      totalPayFunction: (value) =>
-                                          updateTotal(index, value),
-                                      cantElement: cantElement(index),
-                                    ).verticalPadding(5),
-                                  ),
-                                ],
+    return FocusScope(
+      node: FocusScopeNode(canRequestFocus: false),
+      child: Scaffold(
+        body: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: gradientePrincipal(),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PrimaryTitle(
+                      title: l10n.pedidos,
+                      color: Colors.white,
+                    ).symmetricPadding(5, 32),
+                    IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: Stack(
+                          children: const [
+                            Center(
+                              child: Icon(
+                                Icons.circle_outlined,
+                                color: Colors.white,
+                                size: 30,
                               ),
-                              const Divider(color: Colors.grey, height: 2),
-                            ],
+                            ),
+                            Center(
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ],
+                        ),).horizontalPadding(10)
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: List.generate(
+                            cant,
+                            (index) => Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  children: [
+                                    Flexible(
+                                      child: CertificateDetail(
+                                        typeSimpleCertificate:
+                                            TypeSimpleCertificateEnum.birth,
+                                        totalPayFunction: (value) =>
+                                            updateTotal(index, value),
+                                        cantElement: cantElement(index),
+                                      ).verticalPadding(5),
+                                    ),
+                                  ],
+                                ),
+                                const Divider(color: Colors.grey, height: 2),
+                              ],
+                            ),
                           ),
-                        ),
-                      ).verticalPadding(10),
+                        ).verticalPadding(10),
+                      ),
                     ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          PrimaryLabel(l10n.subtotal),
-                          PrimaryCaption(
-                            '\$${totalPay().toStringAsFixed(2)}',
-                            fontSize: fontSizeDefault + 3,
-                          ),
-                        ],
-                      ).verticalPadding(10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          PrimaryLabel(l10n.descuentoConadis),
-                          PrimaryCaption(
-                            '\$${0.toStringAsFixed(2)}',
-                            fontSize: fontSizeDefault + 3,
-                          ),
-                        ],
-                      ).verticalPadding(10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const PrimaryLabel('IVA'),
-                          PrimaryCaption(
-                            '\$${0.toStringAsFixed(2)}',
-                            fontSize: fontSizeDefault + 3,
-                          ),
-                        ],
-                      ).verticalPadding(10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          PrimaryLabel(l10n.totalPagar),
-                          PrimaryLabel('\$${totalPay().toStringAsFixed(2)}'),
-                        ],
-                      ).verticalPadding(10),
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      PrimaryButton(
-                        title: l10n.pagar,
-                        onPressed: () {},
-                      ),
-                      const SizedBox(height: 15),
-                      PrimaryButton(
-                        title: l10n.realizarSol,
-                        onPressed: () {},
-                      ),
-                    ],
-                  ).symmetricPadding( 10,20)
-                ],
-              ).horizontalPadding(10),
-            ),
-          ],
-        ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            PrimaryLabel(l10n.subtotal),
+                            PrimaryCaption(
+                              '\$${totalPay().toStringAsFixed(2)}',
+                              fontSize: fontSizeDefault + 3,
+                            ),
+                          ],
+                        ).verticalPadding(10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            PrimaryLabel(l10n.descuentoConadis),
+                            PrimaryCaption(
+                              '\$${0.toStringAsFixed(2)}',
+                              fontSize: fontSizeDefault + 3,
+                            ),
+                          ],
+                        ).verticalPadding(10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const PrimaryLabel('IVA'),
+                            PrimaryCaption(
+                              '\$${0.toStringAsFixed(2)}',
+                              fontSize: fontSizeDefault + 3,
+                            ),
+                          ],
+                        ).verticalPadding(10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            PrimaryLabel(l10n.totalPagar),
+                            PrimaryLabel('\$${totalPay().toStringAsFixed(2)}'),
+                          ],
+                        ).verticalPadding(10),
+                      ],
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        PrimaryButton(
+                          title: l10n.pagar,
+                          onPressed: () {},
+                        ),
+                        const SizedBox(height: 15),
+                        PrimaryButton(
+                          title: l10n.realizarSol,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ).symmetricPadding( 10,20)
+                  ],
+                ).horizontalPadding(10),
+              ),
+            ],
+          ),
+      ),
     );
   }
 }
