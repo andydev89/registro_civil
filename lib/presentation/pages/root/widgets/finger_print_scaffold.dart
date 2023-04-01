@@ -8,6 +8,7 @@ import 'package:registro_civil_apk/presentation/pages/root/widgets/root_drawer.d
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/show_only_in_loggedin_status.dart';
 
 class FingerPrintScaffold extends StatelessWidget {
   const FingerPrintScaffold({
@@ -31,30 +32,24 @@ class FingerPrintScaffold extends StatelessWidget {
           children: [
             const FingerPrintBackground(),
             body,
-            Consumer(
-              builder: (_, ref, __) {
-                final isLogged = ref.watch(loginProvider.notifier).isLoggedIn;
-                return Visibility(
-                  visible: isLogged,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 90),
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: PrimaryIconButton(
-                        width: 30,
-                        height: 40,
-                        icon: Assets.svg.checkDocument.svg(),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.horizontal(
-                            left: Radius.circular(100),
-                          ),
-                        ),
-                        onPressed: () => showOffersDialog(context),
+            ShowOnlyInLoggedInStatus(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 90),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: PrimaryIconButton(
+                    width: 30,
+                    height: 40,
+                    icon: Assets.svg.checkDocument.svg(),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(100),
                       ),
                     ),
+                    onPressed: () => showOffersDialog(context),
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ],
         ),

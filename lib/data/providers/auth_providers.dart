@@ -58,22 +58,11 @@ class Login extends _$Login {
   }
 
   Future<void> logout() async {
-    //TODO ahcer request a logout en el api
     final fresh = ref.watch(freshProvider);
     await fresh.revokeToken();
     await fresh.clearToken();
     state = const AsyncData(false);
   }
-
-  // Future<bool> get isLoggedIn async {
-  //   const storage = FlutterSecureStorage();
-  //   final value = await storage.read(key: 'token');
-  //   if (value != null) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 
   @override
   Future<bool> build() async {

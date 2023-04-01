@@ -21,7 +21,7 @@ class AuthGuard extends AutoRouteGuard {
         AuthRouterRoute(
           children: [
             LoginRoute(
-              onLogin: (result) {
+              onLogin: (context, result) {
                 router.pop();
                 resolver.next(result);
               },
