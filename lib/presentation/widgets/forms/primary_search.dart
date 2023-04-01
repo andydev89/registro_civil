@@ -22,7 +22,6 @@ class PrimarySearch extends StatefulWidget {
 }
 
 class _PrimarySearchState extends State<PrimarySearch> {
-
   late TextEditingController controller;
   @override
   void initState() {
@@ -43,7 +42,7 @@ class _PrimarySearchState extends State<PrimarySearch> {
             controller: controller,
             padding: 15,
             onChanged: widget.onChanged,
-            suffixIcon: Assets.svg.search.svg(),
+            suffixIcon: Assets.svg.search.svg().horizontalPadding(10),
           ),
         ),
         Visibility(
