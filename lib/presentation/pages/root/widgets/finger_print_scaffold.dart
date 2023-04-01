@@ -6,7 +6,7 @@ import 'package:registro_civil_apk/presentation/pages/root/widgets/root_drawer.d
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/show_only_in_login.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/show_only_in_loggedin_status.dart';
 
 class FingerPrintScaffold extends StatelessWidget {
   const FingerPrintScaffold({
@@ -30,7 +30,7 @@ class FingerPrintScaffold extends StatelessWidget {
           children: [
             const FingerPrintBackground(),
             body,
-            ShowOnlyInLogin(
+            ShowOnlyInLoggedInStatus(
               child: Padding(
                 padding: const EdgeInsets.only(top: 90),
                 child: Align(

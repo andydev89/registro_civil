@@ -21,7 +21,7 @@ import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dar
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key, required this.onLogin});
-  final void Function(bool) onLogin;
+  final void Function(BuildContext, bool) onLogin;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -102,7 +102,7 @@ class LoginPage extends ConsumerWidget {
                                   .read(loginProvider.notifier)
                                   .login(form.model)
                                   .when(
-                                    ok: onLogin,
+                                    ok: (value) => onLogin(context, value),
                                     err: (error) => showAlert(
                                       error.translate(context),
                                       TypeAlert.error,

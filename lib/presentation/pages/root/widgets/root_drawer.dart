@@ -10,7 +10,7 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/registro_civil_logo.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/show_only_in_login.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/show_only_in_loggedin_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class RootDrawer extends ConsumerWidget {
@@ -55,7 +55,7 @@ class RootDrawer extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const RegistroCivilLogo().symmetricPadding(20, 40),
-                      const ShowOnlyInLogin(
+                      const ShowOnlyInLoggedInStatus(
                         child: DrawerUserData(),
                       ),
                       const Divider(
@@ -66,8 +66,8 @@ class RootDrawer extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ShowOnlyInLogin(
-                              showOntrue: false,
+                            ShowOnlyInLoggedInStatus(
+                              reversedCondition: true,
                               child: ButtonDrawer(
                                 icon: Assets.svg.home.svg(),
                                 titulo: l10n.loggin,
@@ -77,9 +77,8 @@ class RootDrawer extends ConsumerWidget {
                                     AuthRouterRoute(
                                       children: [
                                         LoginRoute(
-                                          onLogin: (result) {
-                                            //TODO arreglar esto
-                                            context.router.popUntilRoot();
+                                          onLogin: (context, result) {
+                                            context.router.popTop();
                                           },
                                         ),
                                       ],
@@ -88,7 +87,7 @@ class RootDrawer extends ConsumerWidget {
                                 },
                               ),
                             ),
-                            ShowOnlyInLogin(
+                            ShowOnlyInLoggedInStatus(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -137,11 +136,12 @@ class RootDrawer extends ConsumerWidget {
                               titulo: l10n.ayuda,
                               onPressed: () {},
                             ),
-                            ShowOnlyInLogin(
+                            ShowOnlyInLoggedInStatus(
                               child: ButtonDrawer(
                                 icon: Assets.svg.exit.svg(),
                                 titulo: l10n.cerrSesion,
                                 onPressed: () {
+                                  context.navigateTo(const HomeRouterRoute());
                                   auth.logout();
                                   Scaffold.of(context).closeDrawer();
                                 },

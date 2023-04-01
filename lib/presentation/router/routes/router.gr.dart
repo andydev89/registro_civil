@@ -587,7 +587,11 @@ class RootRouterRoute extends PageRouteInfo<void> {
 class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
     Key? key,
-    required void Function(bool) onLogin,
+    required void Function(
+      BuildContext,
+      bool,
+    )
+        onLogin,
   }) : super(
           LoginRoute.name,
           path: '',
@@ -608,7 +612,10 @@ class LoginRouteArgs {
 
   final Key? key;
 
-  final void Function(bool) onLogin;
+  final void Function(
+    BuildContext,
+    bool,
+  ) onLogin;
 
   @override
   String toString() {

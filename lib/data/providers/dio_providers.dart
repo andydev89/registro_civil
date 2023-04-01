@@ -11,6 +11,10 @@ Dio dio(DioRef ref) {
   final fresh = ref.watch(freshProvider);
   return Dio()
     ..options.baseUrl = 'http://api.registro-civil.ddns.net/'
+    ..options.validateStatus = (status) {
+      //TODO esto cambiarlo cuando el back corrija el error de devolver 500 en autenticacion incorrecta
+      return true;
+    }
     ..interceptors.add(fresh)
     ..interceptors.add(
       PrettyDioLogger(
