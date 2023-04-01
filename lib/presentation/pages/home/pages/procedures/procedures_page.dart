@@ -10,40 +10,37 @@ class ProceduresPage extends ConsumerWidget {
   const ProceduresPage({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final filter = ref.watch(searchHomeProvider);
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: CircleAvatarCardGrid(
-        filter: filter,
-        elements: [
-          CircleAvatarCardModel(
-            image: Assets.png.certificadoIdentidad.image(),
-            title: l10n.duplicadoCed,
-            onPressedCheck: () {},
-            onPressedView: () {},
-          ),
-          CircleAvatarCardModel(
-            image: Assets.png.certificadoIdentidad.image(),
-            title: l10n.cedulacionExtPriVez,
-            onPressedCheck: () {},
-            onPressedView: () {},
-          ),
-          CircleAvatarCardModel(
-            image: Assets.png.certificadoMatrimonio.image(),
-            title: l10n.celebracionMat,
-            onPressedCheck: () {},
-            onPressedView: () {},
-          ),
-          CircleAvatarCardModel(
-            image: Assets.png.certificadoNacimiento.image(),
-            title: l10n.registroNacExt,
-            onPressedCheck: () {},
-            onPressedView: () {},
-          ),
-        ],
-      ),
+    return CircleAvatarCardGrid(
+      filter: filter,
+      elements: [
+        CircleAvatarCardModel(
+          image: Assets.png.certificadoIdentidad.image(),
+          title: l10n.duplicadoCed,
+          onPressedCheck: () {},
+          onPressedView: () {},
+        ),
+        CircleAvatarCardModel(
+          image: Assets.png.certificadoIdentidad.image(),
+          title: l10n.cedulacionExtPriVez,
+          onPressedCheck: () {},
+          onPressedView: () {},
+        ),
+        CircleAvatarCardModel(
+          image: Assets.png.certificadoMatrimonio.image(),
+          title: l10n.celebracionMat,
+          onPressedCheck: () {},
+          onPressedView: () {},
+        ),
+        CircleAvatarCardModel(
+          image: Assets.png.certificadoNacimiento.image(),
+          title: l10n.registroNacExt,
+          onPressedCheck: () {},
+          onPressedView: () {},
+        ),
+      ],
     );
   }
 }

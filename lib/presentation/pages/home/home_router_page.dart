@@ -30,6 +30,7 @@ class HomeRouterPage extends StatelessWidget {
             child: TabBar(
               controller: tabController,
               unselectedLabelColor: Colors.grey,
+              splashBorderRadius: BorderRadius.circular(1000),
               indicator: const ShapeDecoration(
                 shape: StadiumBorder(),
                 gradient: gradient,
