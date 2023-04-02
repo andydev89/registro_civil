@@ -6,7 +6,7 @@ import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
-import 'package:registro_civil_apk/data/providers/isar/user_provider.dart';
+import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'auth_providers.g.dart';
 

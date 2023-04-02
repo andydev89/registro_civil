@@ -38,11 +38,10 @@ class ModifyCant extends StatelessWidget {
                 size: size,
               ),
             ),
-            Flexible(
-                child: PrimaryText(
+            PrimaryText(
               cant.toString(),
               fontWeight: FontWeight.bold,
-            ),).horizontalPadding(8),
+            ).horizontalPadding(8),
             PrimaryIconButton(
               shape: const BeveledRectangleBorder(),
               width: width,

@@ -33,7 +33,7 @@ class CertificateDetail extends StatelessWidget {
       children: [
         Flexible(child: typeSimpleCertificate.image.image()),
         const SizedBox(width: width),
-        Flexible(
+        Expanded(
           child: Column(
             children: [
               Row(
@@ -44,6 +44,7 @@ class CertificateDetail extends StatelessWidget {
                       typeSimpleCertificate.title(l10n),
                       fontWeight: FontWeight.bold,
                       textAlign: TextAlign.start,
+                      maxLines: 3,
                     ),
                   ),
                 ],
@@ -96,14 +97,20 @@ class CertificateDetail extends StatelessWidget {
                   onPressed: () {},
                   width: size,
                   height: size,
-                  icon: const Icon(Icons.remove_red_eye_sharp),
+                  icon: const Icon(
+                    Icons.remove_red_eye_sharp,
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(width: 10),
                 PrimaryIconButton(
                   onPressed: () {},
                   width: size,
                   height: size,
-                  icon: const Icon(Icons.delete_outline_sharp),
+                  icon: const Icon(
+                    Icons.delete_outline_sharp,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             )
