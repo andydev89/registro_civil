@@ -24,6 +24,11 @@ abstract class Api {
     @Body() LoginModel loginModel,
   );
 
+  @POST('/api/auth/refresh')
+  Future<ResponseModel<LoginResponseModel?>> refreshToken(
+    @Query('token') String token,
+  );
+
   //COMMONS
   @GET('/identity/api/location/province')
   Future<ResponseModelPagination<List<LocationModel>?>> provinces(

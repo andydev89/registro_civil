@@ -1,10 +1,11 @@
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
+import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -45,9 +46,9 @@ class Login extends _$Login {
     final fresh = ref.watch(freshProvider);
     if (response.status == StatusCode.s200) {
       final oauthToken = OAuth2Token(
-        accessToken: response.data!.jwtToken, tokenType: 'Bearer',
-        //TODO pasar el refresh token
-        // refreshToken: response.result!.refreshToken,
+        accessToken: response.data!.jwtToken,
+        tokenType: 'Bearer',
+        expiresIn: response.data!.usefulLifeInMillis,
       );
       await fresh.setToken(oauthToken);
       ref.read(userProvider.notifier).saveLogin(loginModel);
@@ -93,5 +94,24 @@ class Register extends _$Register {
       true: const Result.ok(true),
       false: Result.err(response.status),
     }[response.status == StatusCode.s200]!;
+  }
+}
+
+@riverpod
+Future<OAuth2Token?> refreshToken(
+  RefreshTokenRef ref,
+  String token,
+) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.refreshToken(token);
+  if (response.status == StatusCode.s200) {
+    final oauthToken = OAuth2Token(
+      accessToken: response.data!.jwtToken,
+      tokenType: 'Bearer',
+      expiresIn: response.data!.usefulLifeInMillis,
+    );
+    return oauthToken;
+  } else {
+    return null;
   }
 }
