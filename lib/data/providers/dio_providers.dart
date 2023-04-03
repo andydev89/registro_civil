@@ -1,5 +1,6 @@
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/sources/api.dart';
 import 'package:registro_civil_apk/data/sources/sp_token_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -35,60 +36,12 @@ Api api(ApiRef ref) {
 Fresh<OAuth2Token> fresh(FreshRef ref) {
   return Fresh.oAuth2(
     tokenStorage: SSTokenStorage(),
-    shouldRefresh: (response) => true,
-    refreshToken: (token, client) {
-      //TODO hacer la peticion para refrescar el token
-      return Future(
-        () => token!,
-      );
+    shouldRefresh: (response) =>
+        response?.statusCode == 401 || response?.statusCode == 403,
+    refreshToken: (token, client) async {
+      final oauthToken =
+          await ref.read(refreshTokenProvider(token!.accessToken).future);
+      return oauthToken ?? token;
     },
   );
 }
-
-// class MyNotificationInterceptor implements Interceptor {
-//   MyNotificationInterceptor(this.context);
-//   final BuildContext context;
-
-//   @override
-//   void onError(DioError err, ErrorInterceptorHandler handler) {
-//     final statusCode = err.response?.statusCode;
-//     if (statusCode != null && statusCode >= 400) {
-//       final response = err.response;
-//       final map = response?.data as Map?;
-//       final status = map?['status'] as int?;
-//       final responseStatusCode = status ?? 999;
-//       // final statusCodeEnum = _getStatusCode(responseStatusCode);
-//       // final translate = statusCodeEnum.translate(context);
-//       // showAlert(
-//       //   translate,
-//       //   TypeAlert.error,
-//       // );
-//     }
-//     handler.next(err);
-//   }
-
-//   @override
-//   void onResponse(
-//       Response<dynamic> response, ResponseInterceptorHandler handler) {
-//     final statusCode = response.statusCode;
-//     if (statusCode != null && statusCode! >= 200 && statusCode! < 300) {
-//       showAlert(
-//         _getStatusCode(statusCode).translate(context),
-//         TypeAlert.success,
-//       );
-//     }
-//     return handler.next(response);
-//   }
-
-//   @override
-//   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-//     return handler.next(options);
-//   }
-
-//   StatusCodes _getStatusCode(int statusCode) {
-//     return StatusCodes.values.firstWhere(
-//       (e) => e.toText == 's$statusCode',
-//       orElse: () => StatusCodes.s999,
-//     );
-//   }
-// }

@@ -81,6 +81,34 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModel<LoginResponseModel?>> refreshToken(token) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'token': token};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<LoginResponseModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/auth/refresh',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<LoginResponseModel?>.fromJson(
+      _result.data!,
+      (json) => json == null
+          ? null
+          : LoginResponseModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModelPagination<List<LocationModel>?>> provinces(
     pageNo,
     pageSize,
