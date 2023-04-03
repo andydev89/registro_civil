@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:popover/popover.dart';
+import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
@@ -30,12 +30,18 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
       onTap: (control) => showDialog<Widget>(
         context: context,
         builder: (context) => Dialog(
-          child: AspectRatio(
-            aspectRatio: 5 / 6,
-            child: CustomCalendar(
-              formControl: formControl,
-              availablesDate: availablesDate,
-            ),
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CustomCalendar(
+                formControl: formControl,
+                availablesDate: availablesDate,
+              ).horizontalPadding(5),
+            ],
           ),
         ),
       ),
@@ -165,6 +171,6 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 }
 
-int _getHashCode(DateTime key) {
-  return key.day * 1000000 + key.month * 10000 + key.year;
-}
+// int _getHashCode(DateTime key) {
+//   return key.day * 1000000 + key.month * 10000 + key.year;
+// }
