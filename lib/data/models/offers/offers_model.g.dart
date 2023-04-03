@@ -22,8 +22,13 @@ const OffersModelSchema = CollectionSchema(
       name: r'cant',
       type: IsarType.long,
     ),
-    r'simpleCertificate': PropertySchema(
+    r'discountConadis': PropertySchema(
       id: 1,
+      name: r'discountConadis',
+      type: IsarType.bool,
+    ),
+    r'simpleCertificate': PropertySchema(
+      id: 2,
       name: r'simpleCertificate',
       type: IsarType.byte,
       enumMap: _OffersModelsimpleCertificateEnumValueMap,
@@ -59,7 +64,8 @@ void _offersModelSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeLong(offsets[0], object.cant);
-  writer.writeByte(offsets[1], object.simpleCertificate.index);
+  writer.writeBool(offsets[1], object.discountConadis);
+  writer.writeByte(offsets[2], object.simpleCertificate.index);
 }
 
 OffersModel _offersModelDeserialize(
@@ -70,8 +76,9 @@ OffersModel _offersModelDeserialize(
 ) {
   final object = OffersModel(
     cant: reader.readLong(offsets[0]),
+    discountConadis: reader.readBoolOrNull(offsets[1]) ?? false,
     simpleCertificate: _OffersModelsimpleCertificateValueEnumMap[
-            reader.readByteOrNull(offsets[1])] ??
+            reader.readByteOrNull(offsets[2])] ??
         TypeSimpleCertificateEnum.factorUnion,
   );
   object.id = id;
@@ -88,6 +95,8 @@ P _offersModelDeserializeProp<P>(
     case 0:
       return (reader.readLong(offset)) as P;
     case 1:
+      return (reader.readBoolOrNull(offset) ?? false) as P;
+    case 2:
       return (_OffersModelsimpleCertificateValueEnumMap[
               reader.readByteOrNull(offset)] ??
           TypeSimpleCertificateEnum.factorUnion) as P;
@@ -265,6 +274,16 @@ extension OffersModelQueryFilter
     });
   }
 
+  QueryBuilder<OffersModel, OffersModel, QAfterFilterCondition>
+      discountConadisEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'discountConadis',
+        value: value,
+      ));
+    });
+  }
+
   QueryBuilder<OffersModel, OffersModel, QAfterFilterCondition> idEqualTo(
       Id value) {
     return QueryBuilder.apply(this, (query) {
@@ -395,6 +414,19 @@ extension OffersModelQuerySortBy
     });
   }
 
+  QueryBuilder<OffersModel, OffersModel, QAfterSortBy> sortByDiscountConadis() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'discountConadis', Sort.asc);
+    });
+  }
+
+  QueryBuilder<OffersModel, OffersModel, QAfterSortBy>
+      sortByDiscountConadisDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'discountConadis', Sort.desc);
+    });
+  }
+
   QueryBuilder<OffersModel, OffersModel, QAfterSortBy>
       sortBySimpleCertificate() {
     return QueryBuilder.apply(this, (query) {
@@ -421,6 +453,19 @@ extension OffersModelQuerySortThenBy
   QueryBuilder<OffersModel, OffersModel, QAfterSortBy> thenByCantDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'cant', Sort.desc);
+    });
+  }
+
+  QueryBuilder<OffersModel, OffersModel, QAfterSortBy> thenByDiscountConadis() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'discountConadis', Sort.asc);
+    });
+  }
+
+  QueryBuilder<OffersModel, OffersModel, QAfterSortBy>
+      thenByDiscountConadisDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'discountConadis', Sort.desc);
     });
   }
 
@@ -460,6 +505,13 @@ extension OffersModelQueryWhereDistinct
   }
 
   QueryBuilder<OffersModel, OffersModel, QDistinct>
+      distinctByDiscountConadis() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'discountConadis');
+    });
+  }
+
+  QueryBuilder<OffersModel, OffersModel, QDistinct>
       distinctBySimpleCertificate() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'simpleCertificate');
@@ -481,6 +533,12 @@ extension OffersModelQueryProperty
     });
   }
 
+  QueryBuilder<OffersModel, bool, QQueryOperations> discountConadisProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'discountConadis');
+    });
+  }
+
   QueryBuilder<OffersModel, TypeSimpleCertificateEnum, QQueryOperations>
       simpleCertificateProperty() {
     return QueryBuilder.apply(this, (query) {
@@ -497,6 +555,7 @@ OffersModel _$OffersModelFromJson(Map<String, dynamic> json) => OffersModel(
       simpleCertificate: $enumDecode(
           _$TypeSimpleCertificateEnumEnumMap, json['simpleCertificate']),
       cant: json['cant'] as int,
+      discountConadis: json['discountConadis'] as bool? ?? false,
     )..id = json['id'] as int;
 
 Map<String, dynamic> _$OffersModelToJson(OffersModel instance) =>
@@ -505,6 +564,7 @@ Map<String, dynamic> _$OffersModelToJson(OffersModel instance) =>
       'simpleCertificate':
           _$TypeSimpleCertificateEnumEnumMap[instance.simpleCertificate]!,
       'cant': instance.cant,
+      'discountConadis': instance.discountConadis,
     };
 
 const _$TypeSimpleCertificateEnumEnumMap = {

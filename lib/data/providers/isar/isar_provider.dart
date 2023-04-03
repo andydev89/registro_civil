@@ -1,4 +1,5 @@
 import 'package:isar/isar.dart';
+import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
@@ -67,4 +68,46 @@ class Offers extends _$Offers {
     isar.writeTxnSync(() => isar.offersModels.deleteSync(model.id));
     state = state.where((element) => element.id != model.id).toList();
   }
+}
+
+@riverpod
+double subtotal(SubtotalRef ref) {
+  final offers = ref.watch(offersProvider);
+  return offers.fold(
+    0,
+    (previousValue, element) =>
+        previousValue + element.cant * element.simpleCertificate.price,
+  );
+}
+
+@riverpod
+double iva(IvaRef ref) {
+  final offers = ref.watch(offersProvider);
+  return offers.fold(
+    0,
+    (previousValue, element) =>
+        previousValue + element.cant * element.simpleCertificate.iva,
+  );
+}
+
+@riverpod
+double discountConadis(DiscountConadisRef ref) {
+  final offers = ref.watch(offersProvider);
+  return offers.fold(
+    0,
+    (previousValue, element) =>
+        previousValue +
+        element.cant *
+            (element.discountConadis
+                ? element.simpleCertificate.discountConadis
+                : 0),
+  );
+}
+
+@riverpod
+double totalPay(TotalPayRef ref) {
+  final subtotal = ref.watch(subtotalProvider);
+  final iva = ref.watch(ivaProvider);
+  final discountConadis = ref.watch(discountConadisProvider);
+  return subtotal + iva - discountConadis;
 }

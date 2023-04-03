@@ -9,6 +9,7 @@ class OffersModel {
   OffersModel({
     required this.simpleCertificate,
     required this.cant,
+    this.discountConadis = false,
   });
 
   factory OffersModel.fromJson(Map<String, dynamic> json) =>
@@ -18,22 +19,16 @@ class OffersModel {
   @enumerated
   late TypeSimpleCertificateEnum simpleCertificate;
   late int cant;
+  late bool discountConadis;
 
-  OffersModel operation({
-    required OperationType operation,
-  }) {
-    switch (operation) {
-      case OperationType.more:
-        return OffersModel(
-          simpleCertificate: simpleCertificate,
-          cant: cant + 1,
-        );
-      case OperationType.less:
-        return OffersModel(
-          simpleCertificate: simpleCertificate,
-          cant: cant > 1 ? cant - 1 : 1,
-        );
-    }
+  OffersModel operation(int cant) {
+    final updatedOffer = OffersModel(
+      simpleCertificate: simpleCertificate,
+      cant: cant,
+      discountConadis: discountConadis,
+    )..id = id;
+
+    return updatedOffer;
   }
 
   Map<String, dynamic> toJson() => _$OffersModelToJson(this);

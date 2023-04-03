@@ -1,9 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
+import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
@@ -12,50 +11,17 @@ import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.da
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
-class OffersWidget extends StatefulWidget {
+class OffersWidget extends ConsumerWidget {
   const OffersWidget({super.key});
 
   @override
-  State<OffersWidget> createState() => _OffersWidgetState();
-}
-
-class _OffersWidgetState extends State<OffersWidget> {
-  late List<double> certificateTotals;
-  late int cant;
-
-  @override
-  void initState() {
-    cant = Random().nextInt(2) + 2;
-    certificateTotals =
-        List.generate(cant, (index) => TypeSimpleCertificateEnum.birth.price);
-    super.initState();
-  }
-
-  void updateTotal(int index, double total) {
-    setState(() {
-      if (index >= certificateTotals.length) {
-        certificateTotals.add(total);
-      } else {
-        certificateTotals[index] = total;
-      }
-    });
-  }
-
-  double totalPay() {
-    if (certificateTotals.isEmpty) {
-      return cant * TypeSimpleCertificateEnum.birth.price;
-    }
-    return certificateTotals.reduce((value, element) => value + element);
-  }
-
-  int cantElement(int index) => certificateTotals.length > index
-      ? (certificateTotals[index] / TypeSimpleCertificateEnum.birth.price)
-          .round()
-      : 1;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final offers = ref.watch(offersProvider);
+    final subtotal = ref.watch(subtotalProvider);
+    final iva = ref.watch(ivaProvider);
+    final discountConadis = ref.watch(discountConadisProvider);
+    final totalPay = ref.watch(totalPayProvider);
     return FocusScope(
       node: FocusScopeNode(canRequestFocus: false),
       child: Scaffold(
@@ -104,28 +70,28 @@ class _OffersWidgetState extends State<OffersWidget> {
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
-                        children: List.generate(
-                          cant,
-                          (index) => Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
+                        children: offers
+                            .map(
+                              (offer) => Column(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Flexible(
-                                    child: CertificateDetail(
-                                      typeSimpleCertificate:
-                                          TypeSimpleCertificateEnum.birth,
-                                      totalPayFunction: (value) =>
-                                          updateTotal(index, value),
-                                      cantElement: cantElement(index),
-                                    ).verticalPadding(5),
+                                  Row(
+                                    children: [
+                                      Flexible(
+                                        child: CertificateDetail(
+                                          offer: offer,
+                                        ).verticalPadding(5),
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(
+                                    color: Colors.grey,
+                                    height: 2,
                                   ),
                                 ],
                               ),
-                              const Divider(color: Colors.grey, height: 2),
-                            ],
-                          ),
-                        ),
+                            )
+                            .toList(),
                       ).verticalPadding(10),
                     ),
                   ),
@@ -135,10 +101,12 @@ class _OffersWidgetState extends State<OffersWidget> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          PrimaryText(l10n.subtotal,
-                            fontWeight: FontWeight.bold,),
+                          PrimaryText(
+                            l10n.subtotal,
+                            fontWeight: FontWeight.bold,
+                          ),
                           PrimaryCaption(
-                            '\$${totalPay().toStringAsFixed(2)}',
+                            '\$${subtotal.toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -151,7 +119,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$${0.toStringAsFixed(2)}',
+                            '\$-${discountConadis.toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -164,7 +132,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$${0.toStringAsFixed(2)}',
+                            '\$${iva.toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -177,7 +145,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryText(
-                            '\$${totalPay().toStringAsFixed(2)}',
+                            '\$${totalPay.toStringAsFixed(2)}',
                             fontWeight: FontWeight.bold,
                           ),
                         ],
