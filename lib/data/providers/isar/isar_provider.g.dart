@@ -34,7 +34,7 @@ final subtotalProvider = AutoDisposeProvider<double>.internal(
 );
 
 typedef SubtotalRef = AutoDisposeProviderRef<double>;
-String _$ivaHash() => r'bce3a03ac19bd0f2b2b1bd1cb04593b633886f5f';
+String _$ivaHash() => r'0390c5e80851019d8b7ffc660ff4b9a2a0ed951b';
 
 /// See also [iva].
 @ProviderFor(iva)
@@ -48,7 +48,7 @@ final ivaProvider = AutoDisposeProvider<double>.internal(
 );
 
 typedef IvaRef = AutoDisposeProviderRef<double>;
-String _$discountConadisHash() => r'11ea00a7b143e25edd981e6bf0b6a8ccb5469049';
+String _$discountConadisHash() => r'5f5259890c105b3c19f23f0a3d85ffc8508f2f6e';
 
 /// See also [discountConadis].
 @ProviderFor(discountConadis)
