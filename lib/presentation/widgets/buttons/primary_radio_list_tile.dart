@@ -22,6 +22,8 @@ class PrimaryRadioListTile<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return RadioListTile<T>(
       value: value,
+      contentPadding: EdgeInsets.zero,
+      controlAffinity: ListTileControlAffinity.leading,
       groupValue: groupValue,
       title: PrimaryText(
         title,

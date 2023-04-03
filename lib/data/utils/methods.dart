@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 
@@ -16,4 +18,14 @@ StatusCode _getStatusCode(StatusCode statusCode) {
     (e) => e.code == statusCode.code,
     orElse: () => StatusCode.s999,
   );
+}
+
+
+
+Future<void> initMethod() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 }

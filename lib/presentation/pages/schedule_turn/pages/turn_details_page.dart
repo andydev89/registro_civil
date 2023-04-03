@@ -50,7 +50,7 @@ class TurnDetailsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RowLabel(
-                      boldLabel: l10n.ciudad,
+                      boldLabel: l10n.provincia,
                       simpleLabel: city,
                     ),
                     RowLabel(
@@ -97,7 +97,7 @@ class TurnDetailsPage extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: 1,
                     child: Assets.svg.qrCode.svg().symmetricPadding(10, 10),
-                  ),
+                  ).symmetricPadding(30, 30),
                 ),
               ],
             ),

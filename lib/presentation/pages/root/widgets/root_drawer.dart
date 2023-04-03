@@ -130,7 +130,7 @@ class RootDrawer extends ConsumerWidget {
                             ButtonDrawer(
                               icon: const Icon(
                                 Icons.help_outline_outlined,
-                                size: 40,
+                                size: 30,
                                 color: Colors.white,
                               ),
                               titulo: l10n.ayuda,

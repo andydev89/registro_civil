@@ -1,47 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
+import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
+import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/modify_cant.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class CertificateDetail extends StatelessWidget {
+class CertificateDetail extends ConsumerWidget {
   const CertificateDetail({
-    required this.typeSimpleCertificate,
-    required this.totalPayFunction,
-    required this.cantElement,
+    required this.offer,
     super.key,
   });
-  final TypeSimpleCertificateEnum typeSimpleCertificate;
-  final void Function(double) totalPayFunction;
-  final int cantElement;
+  final OffersModel offer;
 
   @override
-  Widget build(BuildContext context) {
-    final cant = ValueNotifier(cantElement);
-    final totalPay = ValueNotifier<double>(
-      cant.value * typeSimpleCertificate.price,
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final totalPay = offer.cant * offer.simpleCertificate.price;
     const size = 40.0;
     final l10n = context.l10n;
-    const width = 20.0;
+    const width = 8.0;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Flexible(child: typeSimpleCertificate.image.image()),
+        Flexible(child: offer.simpleCertificate.image.image()),
         const SizedBox(width: width),
-        Flexible(
+        Expanded(
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
-                    child: PrimaryLabel(
-                      typeSimpleCertificate.title(l10n),
+                    child: PrimaryText(
+                      offer.simpleCertificate.title(l10n),
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.start,
+                      maxLines: 3,
                     ),
                   ),
                 ],
@@ -50,7 +49,7 @@ class CertificateDetail extends StatelessWidget {
               Row(
                 children: [
                   PrimaryCaption(
-                    '\$${typeSimpleCertificate.price.toStringAsFixed(2)}',
+                    '\$${offer.simpleCertificate.price.toStringAsFixed(2)}',
                     fontSize: fontSizeDefault + 3,
                   ),
                 ],
@@ -59,31 +58,21 @@ class CertificateDetail extends StatelessWidget {
           ),
         ),
         const SizedBox(width: width),
-        ValueListenableBuilder<int>(
-          valueListenable: cant,
-          builder: (_, value, __) {
-            return Expanded(
-              child: ModifyCant(
-                cant: value,
-                onCantChanged: (onCantChanged) {
-                  cant.value = onCantChanged;
-                  totalPay.value = cant.value * typeSimpleCertificate.price;
-                  totalPayFunction(totalPay.value);
-                },
-              ),
-            );
-          },
+        Flexible(
+          child: ModifyCant(
+            cant: offer.cant,
+            onCantChanged: (onCantChanged) {
+              final newOffer = offer.operation(onCantChanged);
+              ref.read(offersProvider.notifier).save(newOffer);
+            },
+          ),
         ),
         const SizedBox(width: width),
         Column(
           children: [
-            ValueListenableBuilder<double>(
-              valueListenable: totalPay,
-              builder: (_, value, __) {
-                return PrimaryLabel(
-                  '\$ ${value.toStringAsFixed(2)}',
-                );
-              },
+            PrimaryText(
+              '\$ ${totalPay.toStringAsFixed(2)}',
+              fontWeight: FontWeight.bold,
             ),
             const SizedBox(height: 10),
             Row(
@@ -93,14 +82,20 @@ class CertificateDetail extends StatelessWidget {
                   onPressed: () {},
                   width: size,
                   height: size,
-                  icon: const Icon(Icons.remove_red_eye_sharp),
+                  icon: const Icon(
+                    Icons.remove_red_eye_sharp,
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(width: 10),
                 PrimaryIconButton(
                   onPressed: () {},
                   width: size,
                   height: size,
-                  icon: const Icon(Icons.delete_outline_sharp),
+                  icon: const Icon(
+                    Icons.delete_outline_sharp,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             )

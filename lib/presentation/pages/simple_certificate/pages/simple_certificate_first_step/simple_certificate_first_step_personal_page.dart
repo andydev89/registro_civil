@@ -32,6 +32,7 @@ class SimpleCertificateFirstStepPersonalPage extends StatelessWidget {
                     label: l10n.numCedula,
                     formControl: formModel.nuiControl,
                     hintText: '0123456789',
+                    init: true,
                   ),
                 ],
               ),

@@ -3,6 +3,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class CircleAvatarCardWidget extends StatelessWidget {
   const CircleAvatarCardWidget({
@@ -22,7 +23,7 @@ class CircleAvatarCardWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          margin: const EdgeInsets.only(top: 80),
+          margin: const EdgeInsets.only(top: 70),
           decoration: ShapeDecoration(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
@@ -52,11 +53,9 @@ class CircleAvatarCardWidget extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.5),
-                child: PrimaryLabel(
+                child: PrimaryText(
                   title,
-                  color: primaryColor,
-                  maxlines: 3,
-                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               Row(
@@ -81,7 +80,7 @@ class CircleAvatarCardWidget extends StatelessWidget {
                     onPressed: onPressedView,
                   ),
                 ],
-              ).verticalPadding(10),
+              ).verticalPadding(20),
             ],
           ),
         ),
