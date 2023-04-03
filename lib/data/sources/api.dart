@@ -20,7 +20,7 @@ abstract class Api {
   );
 
   @POST('/api/auth/login')
-  Future<ResponseModel<List<LoginResponseModel>?>> login(
+  Future<ResponseModel<LoginResponseModel?>> login(
     @Body() LoginModel loginModel,
   );
 

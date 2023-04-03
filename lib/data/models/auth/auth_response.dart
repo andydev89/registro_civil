@@ -17,12 +17,16 @@ class RegisterResponseModel {
 
 @JsonSerializable()
 class LoginResponseModel {
-  LoginResponseModel({required this.jwtToken});
+  LoginResponseModel({
+    required this.jwtToken,
+    this.usefulLifeInMillis,
+  });
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseModelFromJson(json);
 
   final String jwtToken;
+  final int? usefulLifeInMillis;
 
   Map<String, dynamic> toJson() => _$LoginResponseModelToJson(this);
 }

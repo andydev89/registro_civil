@@ -23,9 +23,11 @@ Map<String, dynamic> _$RegisterResponseModelToJson(
 LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) =>
     LoginResponseModel(
       jwtToken: json['jwtToken'] as String,
+      usefulLifeInMillis: json['usefulLifeInMillis'] as int?,
     );
 
 Map<String, dynamic> _$LoginResponseModelToJson(LoginResponseModel instance) =>
     <String, dynamic>{
       'jwtToken': instance.jwtToken,
+      'usefulLifeInMillis': instance.usefulLifeInMillis,
     };

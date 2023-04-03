@@ -52,14 +52,14 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<List<LoginResponseModel>?>> login(loginModel) async {
+  Future<ResponseModel<LoginResponseModel?>> login(loginModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(loginModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<List<LoginResponseModel>>>(Options(
+        _setStreamType<ResponseModel<LoginResponseModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -71,14 +71,11 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<List<LoginResponseModel>>.fromJson(
+    final value = ResponseModel<LoginResponseModel?>.fromJson(
       _result.data!,
-      (json) => json is List<dynamic>
-          ? json
-              .map<LoginResponseModel>(
-                  (i) => LoginResponseModel.fromJson(i as Map<String, dynamic>))
-              .toList()
-          : List.empty(),
+      (json) => json == null
+          ? null
+          : LoginResponseModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
