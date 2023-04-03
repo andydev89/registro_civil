@@ -1,3 +1,4 @@
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:oxidized/oxidized.dart';
@@ -5,6 +6,7 @@ import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'auth_providers.g.dart';
 
@@ -48,6 +50,7 @@ class Login extends _$Login {
         // refreshToken: response.result!.refreshToken,
       );
       await fresh.setToken(oauthToken);
+      ref.read(userProvider.notifier).saveLogin(loginModel);
       state = const AsyncData(true);
       return const Result.ok(true);
     } else {
@@ -60,6 +63,7 @@ class Login extends _$Login {
     final fresh = ref.watch(freshProvider);
     await fresh.revokeToken();
     await fresh.clearToken();
+    ref.read(userProvider.notifier).clear();
     state = const AsyncData(false);
   }
 

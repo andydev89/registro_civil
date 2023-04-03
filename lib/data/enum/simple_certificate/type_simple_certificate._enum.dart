@@ -99,4 +99,52 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
         return Assets.png.certificadoNacimiento;
     }
   }
+
+  double get iva {
+    switch (this) {
+      case TypeSimpleCertificateEnum.factorUnion:
+        return 0;
+      case TypeSimpleCertificateEnum.marriage:
+        return 0;
+      case TypeSimpleCertificateEnum.death:
+        return 0;
+      case TypeSimpleCertificateEnum.identity:
+        return 0;
+      case TypeSimpleCertificateEnum.birth:
+        return 0;
+      case TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
+        return 0;
+      case TypeSimpleCertificateEnum
+          .copyRegistrationCertificateGenderRegistration:
+        return 0;
+      case TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate:
+        return 0;
+      case TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
+        return 0;
+    }
+  }
+
+  double get discountConadis {
+    switch (this) {
+      case TypeSimpleCertificateEnum.factorUnion:
+        return 0;
+      case TypeSimpleCertificateEnum.marriage:
+        return 0;
+      case TypeSimpleCertificateEnum.death:
+        return 0;
+      case TypeSimpleCertificateEnum.identity:
+        return 0;
+      case TypeSimpleCertificateEnum.birth:
+        return 0;
+      case TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
+        return 0;
+      case TypeSimpleCertificateEnum
+          .copyRegistrationCertificateGenderRegistration:
+        return 0;
+      case TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate:
+        return 0;
+      case TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
+        return 0;
+    }
+  }
 }

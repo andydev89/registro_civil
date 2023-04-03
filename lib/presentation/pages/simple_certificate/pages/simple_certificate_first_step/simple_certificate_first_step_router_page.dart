@@ -27,7 +27,7 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
           builder: (context, content) => Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     child: PrimaryRadioListTile(
@@ -45,20 +45,24 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
                       },
                     ),
                   ),
-                  Expanded(
-                    child: PrimaryRadioListTile(
-                      value: SimpleCertificateRadioTypeEnum.personal,
-                      groupValue: selectedRadio.value,
-                      title: l10n.datosPer,
-                      onChanged: (value) {
-                        selectedRadio.value =
-                            SimpleCertificateRadioTypeEnum.personal;
-                        context.replaceRoute(
-                          SimpleCertificateFirstStepPersonalRoute(
-                            typeSimpleCertificate: typeSimpleCertificate,
-                          ),
-                        );
-                      },
+                  Visibility(
+                    visible: typeSimpleCertificate !=
+                        TypeSimpleCertificateEnum.death,
+                    child: Expanded(
+                      child: PrimaryRadioListTile(
+                        value: SimpleCertificateRadioTypeEnum.personal,
+                        groupValue: selectedRadio.value,
+                        title: l10n.datosPer,
+                        onChanged: (value) {
+                          selectedRadio.value =
+                              SimpleCertificateRadioTypeEnum.personal;
+                          context.replaceRoute(
+                            SimpleCertificateFirstStepPersonalRoute(
+                              typeSimpleCertificate: typeSimpleCertificate,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],

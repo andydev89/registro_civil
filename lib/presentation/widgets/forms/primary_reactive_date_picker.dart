@@ -27,19 +27,17 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
       label: label,
       readOnly: true,
       suffixIcon: Assets.svg.calendar.svg(),
-      onTap: (control) => showPopover(
+      onTap: (control) => showDialog<Widget>(
         context: context,
-        bodyBuilder: (context) => AspectRatio(
-          aspectRatio: 5 / 6,
-          child: CustomCalendar(
-            formControl: formControl,
-            availablesDate: availablesDate,
+        builder: (context) => Dialog(
+          child: AspectRatio(
+            aspectRatio: 5 / 6,
+            child: CustomCalendar(
+              formControl: formControl,
+              availablesDate: availablesDate,
+            ),
           ),
         ),
-        radius: 20,
-        width: 330,
-        arrowHeight: 0,
-        arrowWidth: 0,
       ),
       formControl: formControl,
       setSuffixIconConstraints: true,
@@ -99,19 +97,26 @@ class _CustomCalendarState extends State<CustomCalendar> {
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
-      firstDay: DateTime(2010, 10, 16),
+      firstDay: DateTime.now(),
       lastDay: DateTime.now().add(const Duration(days: 365 * 30)),
       focusedDay: _focusedDay,
       // selectedDayPredicate: (day) =>  _selectedDays.contains(day)
-      selectedDayPredicate: (day) => widget.availablesDate.any(
-        (element) => DateUtils.isSameDay(element, day),
-      ),
+      selectedDayPredicate: (day) {
+        return widget.availablesDate.any(
+              (element) => DateUtils.isSameDay(element, day),
+            ) &&
+            !day.isBefore(DateTime.now());
+      },
       availableCalendarFormats: const {
         CalendarFormat.month: 'Month',
       },
       onDaySelected: (selectedDay, focusedDay) {
-        widget.formControl.updateValue(selectedDay);
-        context.popRoute();
+        if (widget.availablesDate
+                .any((element) => DateUtils.isSameDay(element, selectedDay)) &&
+            !selectedDay.isBefore(DateTime.now())) {
+          widget.formControl.updateValue(selectedDay);
+          context.popRoute();
+        }
       },
       calendarStyle: CalendarStyle(
         selectedDecoration: ShapeDecoration(
