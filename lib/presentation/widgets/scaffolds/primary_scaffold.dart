@@ -31,7 +31,7 @@ class PrimaryScaffold extends StatelessWidget {
           appBar: AppBar(
             foregroundColor: primaryColor,
             backgroundColor: Colors.transparent,
-            leading: const AutoLeadingButton().verticalPadding(10),
+            leading: const AutoLeadingButton().verticalPadding(15),
             elevation: 0,
             centerTitle: true,
             title: Container(
@@ -39,6 +39,7 @@ class PrimaryScaffold extends StatelessWidget {
               child: PrimaryTitle(
                 title: title,
                 color: primaryColor,
+                maxlines: 4,
               ),
             ),
           ),

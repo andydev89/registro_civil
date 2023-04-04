@@ -236,6 +236,12 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    PaymentServiceJudgmentsNotarialActsRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const PaymentServiceJudgmentsNotarialActsPage(),
+      );
+    },
     ServicesRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -550,6 +556,12 @@ class _$AppRouter extends RootStackRouter {
               MakePaymentRoute.name,
               path: 'make-payment-page',
               parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
+              PaymentServiceJudgmentsNotarialActsRoute.name,
+              path: 'payment-service-judgments-notarial-acts-page',
+              parent: RootRouterRoute.name,
+              guards: [authGuard],
             ),
           ],
         ),
@@ -1015,6 +1027,18 @@ class MakePaymentRouteArgs {
   String toString() {
     return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, totalToPay: $totalToPay, buttonText: $buttonText, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment}';
   }
+}
+
+/// generated route for
+/// [PaymentServiceJudgmentsNotarialActsPage]
+class PaymentServiceJudgmentsNotarialActsRoute extends PageRouteInfo<void> {
+  const PaymentServiceJudgmentsNotarialActsRoute()
+      : super(
+          PaymentServiceJudgmentsNotarialActsRoute.name,
+          path: 'payment-service-judgments-notarial-acts-page',
+        );
+
+  static const String name = 'PaymentServiceJudgmentsNotarialActsRoute';
 }
 
 /// generated route for

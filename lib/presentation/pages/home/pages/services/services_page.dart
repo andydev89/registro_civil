@@ -192,7 +192,8 @@ class ServicesPage extends ConsumerWidget {
         CircleAvatarCardModel(
           image: Assets.png.pagoServicioIngresosSentencias.image(),
           title: l10n.pagoSerIngSeAcNot,
-          onPressedCheck: () {},
+          onPressedCheck: () => context
+              .navigateTo(const PaymentServiceJudgmentsNotarialActsRoute()),
           onPressedView: () {},
         ),
         CircleAvatarCardModel(

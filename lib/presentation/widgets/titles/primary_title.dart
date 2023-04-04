@@ -7,10 +7,12 @@ class PrimaryTitle extends StatelessWidget {
     this.title,
     this.color,
     this.textAlign,
+    this.maxlines,
   });
   final String? title;
   final Color? color;
   final TextAlign? textAlign;
+  final int? maxlines;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class PrimaryTitle extends StatelessWidget {
       fontSize: 25,
       color: color,
       textAlign: textAlign,
+      maxlines: maxlines,
     );
   }
 }
