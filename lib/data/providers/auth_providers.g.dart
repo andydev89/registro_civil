@@ -110,6 +110,24 @@ class RefreshTokenProvider extends AutoDisposeFutureProvider<OAuth2Token?> {
   }
 }
 
+String _$authenticationStatusHash() =>
+    r'edc3d445215bf33e1dce629b06671316396db051';
+
+/// See also [authenticationStatus].
+@ProviderFor(authenticationStatus)
+final authenticationStatusProvider =
+    AutoDisposeStreamProvider<AuthenticationStatus>.internal(
+  authenticationStatus,
+  name: r'authenticationStatusProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authenticationStatusHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AuthenticationStatusRef
+    = AutoDisposeStreamProviderRef<AuthenticationStatus>;
 String _$registerModelRivHash() => r'0711b7912b4d946b62441bdaf7ea4f2f37e1e9d4';
 
 /// See also [RegisterModelRiv].

@@ -34,7 +34,7 @@ final apiProvider = AutoDisposeProvider<Api>.internal(
 );
 
 typedef ApiRef = AutoDisposeProviderRef<Api>;
-String _$freshHash() => r'd51475619f506fd12141c129c28f42a99490ba4b';
+String _$freshHash() => r'06b6a77288ae8332c0b432ef46c16e95e2befa22';
 
 /// See also [fresh].
 @ProviderFor(fresh)

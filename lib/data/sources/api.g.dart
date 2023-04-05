@@ -94,7 +94,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              '/api/auth/refresh',
+              '/identity/api/auth/refresh',
               queryParameters: queryParameters,
               data: _data,
             )
