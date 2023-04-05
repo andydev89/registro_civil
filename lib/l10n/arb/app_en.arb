@@ -281,5 +281,6 @@
   "paymentServiceJudgmentsNotarialActsField5": "Registration of the separation of assets in marriage registration certificate",
   "paymentServiceJudgmentsNotarialActsField6": "Registration of separation or termination of the de facto union in the registration certificate of de facto union and update of the civil status",
   "pagoSerIngSenActNot": "Payment of the service by Entry of Judgments or Notarial Acts",
-  "debeSelAlMenUnElem": "You must select at least one item"
+  "debeSelAlMenUnElem": "You must select at least one item",
+  "sesionExp":"Sorry, your session has expired. Please log in again to continue."
 }
