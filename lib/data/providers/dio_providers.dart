@@ -36,12 +36,19 @@ Api api(ApiRef ref) {
 Fresh<OAuth2Token> fresh(FreshRef ref) {
   return Fresh.oAuth2(
     tokenStorage: SSTokenStorage(),
-    shouldRefresh: (response) =>
-        response?.statusCode == 401 || response?.statusCode == 403,
+    shouldRefresh: (response) {
+      print(response?.data['status']);
+      return response?.data['status'] == 401;
+    },
     refreshToken: (token, client) async {
       final oauthToken =
           await ref.read(refreshTokenProvider(token!.accessToken).future);
-      return oauthToken ?? token;
+      if (oauthToken != null) {
+        return oauthToken;
+      } else {
+        await ref.read(loginProvider.notifier).logout();
+        return token;
+      }
     },
   );
 }

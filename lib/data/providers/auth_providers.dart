@@ -113,3 +113,8 @@ Future<OAuth2Token?> refreshToken(
     return null;
   }
 }
+
+@riverpod
+Stream<AuthenticationStatus> authenticationStatus(AuthenticationStatusRef ref) {
+  return ref.watch(freshProvider).authenticationStatus;
+}

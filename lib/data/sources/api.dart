@@ -24,7 +24,7 @@ abstract class Api {
     @Body() LoginModel loginModel,
   );
 
-  @POST('/api/auth/refresh')
+  @POST('/identity/api/auth/refresh')
   Future<ResponseModel<LoginResponseModel?>> refreshToken(
     @Query('token') String token,
   );

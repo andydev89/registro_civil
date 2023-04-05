@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'isar_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Isar isar(IsarRef ref) {
   return Isar.openSync([
     RegisterModelSchema,
