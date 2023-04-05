@@ -210,7 +210,8 @@ class ServicesPage extends ConsumerWidget {
         CircleAvatarCardModel(
           image: Assets.png.registroResidencia.image(),
           title: l10n.registroRes,
-          onPressedCheck: () {},
+          onPressedCheck: () =>
+              context.navigateTo(const ResidenceRegistrationRouterRoute()),
           onPressedView: () {},
         ),
         CircleAvatarCardModel(
