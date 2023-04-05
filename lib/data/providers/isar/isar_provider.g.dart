@@ -6,11 +6,11 @@ part of 'isar_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isarHash() => r'4acb3adae7fa7c7262c9db95f8e93188ba617033';
+String _$isarHash() => r'36debdbcfa32401ce76d9094d8727283f34a5e29';
 
 /// See also [isar].
 @ProviderFor(isar)
-final isarProvider = AutoDisposeProvider<Isar>.internal(
+final isarProvider = Provider<Isar>.internal(
   isar,
   name: r'isarProvider',
   debugGetCreateSourceHash:
@@ -19,7 +19,7 @@ final isarProvider = AutoDisposeProvider<Isar>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef IsarRef = AutoDisposeProviderRef<Isar>;
+typedef IsarRef = ProviderRef<Isar>;
 String _$subtotalHash() => r'29e4abf65f759b7362598689d841758d9b7f50dd';
 
 /// See also [subtotal].

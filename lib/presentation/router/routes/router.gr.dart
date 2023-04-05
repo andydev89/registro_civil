@@ -182,6 +182,12 @@ class _$AppRouter extends RootStackRouter {
         child: const SimpleCertificateRouterPage(),
       );
     },
+    ResidenceRegistrationRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ResidenceRegistrationRouterPage(),
+      );
+    },
     NotificationRoute.name: (routeData) {
       final args = routeData.argsAs<NotificationRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -352,6 +358,12 @@ class _$AppRouter extends RootStackRouter {
           typeSimpleCertificate: args.typeSimpleCertificate,
           key: args.key,
         ),
+      );
+    },
+    RequestedInformationRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const RequestedInformationPage(),
       );
     },
   };
@@ -529,6 +541,19 @@ class _$AppRouter extends RootStackRouter {
                   path: 'simple-certificate-second-step-page',
                   parent: SimpleCertificateRouterRoute.name,
                 ),
+              ],
+            ),
+            RouteConfig(
+              ResidenceRegistrationRouterRoute.name,
+              path: 'residence-registration-router-page',
+              parent: RootRouterRoute.name,
+              guards: [authGuard],
+              children: [
+                RouteConfig(
+                  RequestedInformationRoute.name,
+                  path: '',
+                  parent: ResidenceRegistrationRouterRoute.name,
+                )
               ],
             ),
             RouteConfig(
@@ -841,6 +866,19 @@ class SimpleCertificateRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SimpleCertificateRouterRoute';
+}
+
+/// generated route for
+/// [ResidenceRegistrationRouterPage]
+class ResidenceRegistrationRouterRoute extends PageRouteInfo<void> {
+  const ResidenceRegistrationRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          ResidenceRegistrationRouterRoute.name,
+          path: 'residence-registration-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'ResidenceRegistrationRouterRoute';
 }
 
 /// generated route for
@@ -1358,4 +1396,16 @@ class SimpleCertificateFirstStepPersonalRouteArgs {
   String toString() {
     return 'SimpleCertificateFirstStepPersonalRouteArgs{typeSimpleCertificate: $typeSimpleCertificate, key: $key}';
   }
+}
+
+/// generated route for
+/// [RequestedInformationPage]
+class RequestedInformationRoute extends PageRouteInfo<void> {
+  const RequestedInformationRoute()
+      : super(
+          RequestedInformationRoute.name,
+          path: '',
+        );
+
+  static const String name = 'RequestedInformationRoute';
 }
