@@ -5,25 +5,31 @@ import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart
 class PrimaryReactiveCheckBox extends StatelessWidget {
   const PrimaryReactiveCheckBox({
     super.key,
-    required this.formControl,
+    this.formControl,
+    this.formControlName,
     required this.label,
     this.onChanged,
     this.activeColor,
     this.checkColor,
     this.underlining = false,
     this.textAlign = TextAlign.start,
-  });
-  final FormControl<bool> formControl;
+  }) : assert(
+          formControl != null || formControlName != null,
+          'formControl or formControlName must be provided',
+        );
+  final FormControl<bool>? formControl;
   final String label;
   final void Function(FormControl<bool>)? onChanged;
   final Color? activeColor;
   final Color? checkColor;
   final bool underlining;
   final TextAlign? textAlign;
+  final String? formControlName;
 
   @override
   Widget build(BuildContext context) {
     return ReactiveCheckboxListTile(
+      formControlName: formControlName,
       formControl: formControl,
       onChanged: onChanged,
       activeColor: activeColor,
