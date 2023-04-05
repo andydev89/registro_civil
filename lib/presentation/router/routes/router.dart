@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/auth_router_page.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/change_password_page.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_page.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_first_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_second_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/login/login_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/register/register_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/register/step_1_page.dart';
@@ -96,12 +96,12 @@ part 'router.gr.dart';
           children: [
             CustomRoute(
               transitionsBuilder: TransitionsBuilders.slideLeft,
-              page: ForgotPasswordPage,
+              page: ForgotPasswordFirstPage,
               initial: true,
             ),
             CustomRoute(
               transitionsBuilder: TransitionsBuilders.slideLeft,
-              page: ChangePasswordPage,
+              page: ForgotPasswordSecondPage,
             ),
           ],
         ),
