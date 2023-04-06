@@ -1719,7 +1719,7 @@ class OtpModelForm implements FormModel<OtpModel> {
   FormGroup formElements() => FormGroup({
         codeControlName: FormControl<String>(
             value: otpModel?.code,
-            validators: [requiredValidator, length6Validator],
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
