@@ -209,7 +209,8 @@ class ScheduleTurnFirstStepPersonalModelForm
 
   String serviceControlPath() => pathBuilder(serviceControlName);
   String paymentMethodControlPath() => pathBuilder(paymentMethodControlName);
-  ServiceType get _serviceValue => serviceControl.value as ServiceType;
+  TypeOfServiceModel get _serviceValue =>
+      serviceControl.value as TypeOfServiceModel;
   PaymentMethodType get _paymentMethodValue =>
       paymentMethodControl.value as PaymentMethodType;
   bool get containsService {
@@ -235,7 +236,7 @@ class ScheduleTurnFirstStepPersonalModelForm
   void get serviceFocus => form.focus(serviceControlPath());
   void get paymentMethodFocus => form.focus(paymentMethodControlPath());
   void serviceValueUpdate(
-    ServiceType value, {
+    TypeOfServiceModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -253,7 +254,7 @@ class ScheduleTurnFirstStepPersonalModelForm
   }
 
   void serviceValuePatch(
-    ServiceType value, {
+    TypeOfServiceModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -271,7 +272,7 @@ class ScheduleTurnFirstStepPersonalModelForm
   }
 
   void serviceValueReset(
-    ServiceType value, {
+    TypeOfServiceModel value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -288,8 +289,8 @@ class ScheduleTurnFirstStepPersonalModelForm
   }) =>
       paymentMethodControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<ServiceType> get serviceControl =>
-      form.control(serviceControlPath()) as FormControl<ServiceType>;
+  FormControl<TypeOfServiceModel> get serviceControl =>
+      form.control(serviceControlPath()) as FormControl<TypeOfServiceModel>;
   FormControl<PaymentMethodType> get paymentMethodControl =>
       form.control(paymentMethodControlPath())
           as FormControl<PaymentMethodType>;
@@ -382,7 +383,7 @@ class ScheduleTurnFirstStepPersonalModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        serviceControlName: FormControl<ServiceType>(
+        serviceControlName: FormControl<TypeOfServiceModel>(
             value: scheduleTurnFirstStepPersonalModel?.service,
             validators: [requiredValidator],
             asyncValidators: [],
@@ -1177,7 +1178,7 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   String serviceControlPath() => pathBuilder(serviceControlName);
   String relationshipControlPath() => pathBuilder(relationshipControlName);
   String? get _identificationNumberValue => identificationNumberControl?.value;
-  ServiceType? get _serviceValue => serviceControl?.value;
+  TypeOfServiceModel? get _serviceValue => serviceControl?.value;
   RelationshipType? get _relationshipValue => relationshipControl?.value;
   bool get containsIdentificationNumber {
     try {
@@ -1301,7 +1302,7 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   }
 
   void serviceValueUpdate(
-    ServiceType? value, {
+    TypeOfServiceModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1328,7 +1329,7 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   }
 
   void serviceValuePatch(
-    ServiceType? value, {
+    TypeOfServiceModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1355,7 +1356,7 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
       identificationNumberControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void serviceValueReset(
-    ServiceType? value, {
+    TypeOfServiceModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1377,8 +1378,8 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
           ? form.control(identificationNumberControlPath())
               as FormControl<String>?
           : null;
-  FormControl<ServiceType>? get serviceControl => containsService
-      ? form.control(serviceControlPath()) as FormControl<ServiceType>?
+  FormControl<TypeOfServiceModel>? get serviceControl => containsService
+      ? form.control(serviceControlPath()) as FormControl<TypeOfServiceModel>?
       : null;
   FormControl<RelationshipType>? get relationshipControl => containsRelationship
       ? form.control(relationshipControlPath())
@@ -1502,7 +1503,7 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        serviceControlName: FormControl<ServiceType>(
+        serviceControlName: FormControl<TypeOfServiceModel>(
             value: familiarFormModel?.service,
             validators: [requiredValidator],
             asyncValidators: [],

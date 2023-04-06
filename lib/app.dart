@@ -1,11 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
-import 'package:flutter_dropdown_alert/model/data_alert.dart';
-import 'package:fresh_dio/fresh_dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
-import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/observer/router_observer.dart';
 import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
@@ -30,13 +25,6 @@ class _AppState extends ConsumerState<App> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    ref.listen(authenticationStatusProvider, (previous, next) {
-      if (next.asData?.value == AuthenticationStatus.unauthenticated) {
-        showAlert(l10n.sesionExp, TypeAlert.warning);
-        context.navigateTo(const HomeRouterRoute());
-      }
-    });
     return MaterialApp.router(
       theme: lightTheme,
       // theme: lightTheme.copyWith(

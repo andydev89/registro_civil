@@ -5,7 +5,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
+import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -18,7 +18,7 @@ class TurnDetailsPage extends StatelessWidget {
     super.key,
     required this.city,
     required this.agency,
-    required this.service,
+    required this.typeOfService,
     required this.date,
     required this.time,
     required this.paymentMethod,
@@ -27,7 +27,7 @@ class TurnDetailsPage extends StatelessWidget {
   });
   final String city;
   final String agency;
-  final ServiceType service;
+  final TypeOfServiceModel typeOfService;
   final DateTime date;
   final TimeOfDay time;
   final PaymentMethodType paymentMethod;
@@ -59,7 +59,7 @@ class TurnDetailsPage extends StatelessWidget {
                     ),
                     RowLabel(
                       boldLabel: l10n.servicio,
-                      simpleLabel: service.translate(context),
+                      simpleLabel: typeOfService.translate(context),
                     ),
                     Row(
                       children: [

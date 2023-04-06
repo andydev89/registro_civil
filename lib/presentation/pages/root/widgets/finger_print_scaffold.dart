@@ -38,6 +38,9 @@ class FingerPrintScaffold extends StatelessWidget {
                   child: PrimaryIconButton(
                     width: 30,
                     height: 40,
+                    splashBorderRadius: const BorderRadius.horizontal(
+                      left: Radius.circular(100),
+                    ),
                     icon: Assets.svg.checkDocument.svg(),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.horizontal(

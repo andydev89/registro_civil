@@ -9,11 +9,13 @@ import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_d
 class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   const SelectElementFromApi({
     super.key,
-    required this.formControl,
+    this.formControl,
+    this.formControlName,
     required this.label,
     required this.provider,
   });
-  final FormControl<T> formControl;
+  final FormControl<T>? formControl;
+  final String? formControlName;
   final AutoDisposeFutureProvider<Result<List<T>, StatusCode>> provider;
   final String label;
 
@@ -21,6 +23,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final elements = ref.watch(provider);
     return PrimaryReactiveDropdown(
+      formControlName: formControlName,
       formControl: formControl,
       items: elements.asData?.value.when(
             ok: (data) => data,
