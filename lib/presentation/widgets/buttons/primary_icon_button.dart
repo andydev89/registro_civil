@@ -10,6 +10,7 @@ class PrimaryIconButton extends StatelessWidget {
     this.width,
     super.key,
     this.shape,
+    this.splashBorderRadius,
   });
   final Widget icon;
   final void Function()? onPressed;
@@ -17,6 +18,7 @@ class PrimaryIconButton extends StatelessWidget {
   final double? width;
   final double? height;
   final ShapeBorder? shape;
+  final BorderRadius? splashBorderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +37,23 @@ class PrimaryIconButton extends StatelessWidget {
           ),
         ],
       ),
-      child: RawMaterialButton(
-        shape: RoundedRectangleBorder(borderRadius: borderRadius()),
-        onPressed: onPressed,
-        child: icon,
-        // color: Colors.white,
+      child: ClipRRect(
+        borderRadius: splashBorderRadius ?? borderRadius(),
+        child: Material(
+          color: Colors.transparent,
+          child: IconButton(
+            icon: icon,
+            onPressed: onPressed,
+            color: Colors.white,
+          ),
+        ),
       ),
+      // child: RawMaterialButton(
+      //   shape: RoundedRectangleBorder(borderRadius: borderRadius()),
+      //   onPressed: onPressed,
+      //   child: icon,
+      //   // color: Colors.white,
+      // ),
     );
   }
 }

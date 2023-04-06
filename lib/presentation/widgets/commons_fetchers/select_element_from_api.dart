@@ -27,6 +27,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final elements = ref.watch(provider);
     return PrimaryReactiveDropdown(
+      formControlName: formControlName,
       formControl: formControl,
       light: light,
       hintText: hintText,

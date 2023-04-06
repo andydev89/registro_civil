@@ -38,4 +38,20 @@ final agenciesProvider =
 
 typedef AgenciesRef
     = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
+String _$servicesHash() => r'14cb8ea91cfa54b29b9178e3eb0daff2594e06dc';
+
+/// See also [services].
+@ProviderFor(services)
+final servicesProvider = AutoDisposeFutureProvider<
+    Result<List<TypeOfServiceModel>, StatusCode>>.internal(
+  services,
+  name: r'servicesProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$servicesHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ServicesRef = AutoDisposeFutureProviderRef<
+    Result<List<TypeOfServiceModel>, StatusCode>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

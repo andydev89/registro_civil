@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
@@ -16,7 +15,6 @@ class AgencyModel implements Translatable {
     required this.province,
     required this.canton,
     required this.parroquia,
-    required this.city,
     required this.region,
     this.latitude,
     this.longitude,
@@ -33,11 +31,13 @@ class AgencyModel implements Translatable {
   final LocationModel province;
   final LocationModel canton;
   final LocationModel parroquia;
-  final LocationModel city;
-  final LocationModel region;
-  final double? latitude;
-  final double? longitude;
+  final String region;
+  final String? latitude;
+  final String? longitude;
   final String state;
+
+  double? get lat => latitude != null ? double.tryParse(latitude!) : null;
+  double? get lon => longitude != null ? double.tryParse(longitude!) : null;
 
   Map<String, dynamic> toJson() => _$AgencyModelToJson(this);
 

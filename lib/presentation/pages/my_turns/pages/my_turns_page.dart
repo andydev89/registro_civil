@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
+import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/models/my_turn_expandable_card_model.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/widgets/my_turn_expandable_card.dart';
@@ -29,7 +29,19 @@ class MyTurnsPage extends StatelessWidget {
               agency: 'Matriz',
               city: 'Guayaqui',
               date: DateTime.now(),
-              service: ServiceType.identificationCard,
+              typeOfService: TypeOfServiceModel(
+                id: 1,
+                name: 'asd',
+                price: 22,
+                iva: 22,
+                discount: 22,
+                state: 'state',
+                publishWeb: true,
+                publishMovil: true,
+                iconoWeb: '',
+                iconoMovil: '',
+                typeService: 'typeService',
+              ),
               state: 'ASIGNADO',
               time: TimeOfDay.fromDateTime(DateTime.now()),
             ),
