@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/auth_router_page.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/change_password_page.dart';
-import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_page.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_first_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_second_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/login/login_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/register/register_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/register/step_1_page.dart';
@@ -23,6 +23,7 @@ import 'package:registro_civil_apk/presentation/pages/my_turns/pages/my_turns_pa
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/select_payment_page.dart';
+import 'package:registro_civil_apk/presentation/pages/payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/requested_information_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/residence_registration_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
@@ -97,12 +98,12 @@ part 'router.gr.dart';
           children: [
             CustomRoute(
               transitionsBuilder: TransitionsBuilders.slideLeft,
-              page: ForgotPasswordPage,
+              page: ForgotPasswordFirstPage,
               initial: true,
             ),
             CustomRoute(
               transitionsBuilder: TransitionsBuilders.slideLeft,
-              page: ChangePasswordPage,
+              page: ForgotPasswordSecondPage,
             ),
           ],
         ),
@@ -230,6 +231,11 @@ part 'router.gr.dart';
         ),
         CupertinoRoute(
           page: MakePaymentPage,
+        ),
+        // PaymentServiceJudgmentsNotarialActsPage
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: PaymentServiceJudgmentsNotarialActsPage,
         ),
       ],
     ),

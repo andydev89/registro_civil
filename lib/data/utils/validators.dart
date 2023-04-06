@@ -1,5 +1,6 @@
 import 'package:libphonenumber/libphonenumber.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/validators/validations_message_enum.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
@@ -39,7 +40,7 @@ Map<String, dynamic>? ecuadorDniValidator(AbstractControl<dynamic> control) {
     '24': 'Santa Elena',
   };
   if (!validProvinceCodes.containsKey(provinceCode)) {
-    return {'invalidProvinceCode': true};
+    return {ValidationsMessageEnum.invalidProvinceCode.toText: true};
   }
   // Calculate the verification digit
   //and compare it with the 10th digit of the ID number
@@ -63,7 +64,7 @@ Map<String, dynamic>? ecuadorDniValidator(AbstractControl<dynamic> control) {
   final totalSum = oddSum + evenSum;
   final verificationDigit = (totalSum % 10 == 0) ? 0 : 10 - (totalSum % 10);
   if (verificationDigit != int.parse(idNumber[9])) {
-    return {'invalidDni': true};
+    return {ValidationsMessageEnum.invalidDni.toText: true};
   }
   return null;
 }
@@ -74,7 +75,7 @@ Map<String, dynamic>? length10Validator(
   final value = control.value as String?;
   if (value == null || value.isEmpty) return null;
   if (value.length != 10) {
-    return {'length10Error': true};
+    return {ValidationsMessageEnum.length10Error.toText: true};
   } else {
     return null;
   }
@@ -112,7 +113,7 @@ Map<String, dynamic>? passwordValidator(AbstractControl<dynamic> control) {
   final passwordRegExp =
       RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\d\s:])([^\s]){8,20}$');
   if (!passwordRegExp.hasMatch(value)) {
-    return {'invalidPassword': true};
+    return {ValidationsMessageEnum.invalidPassword.toText: true};
   }
   return null;
 }
@@ -128,7 +129,7 @@ Future<Map<String, dynamic>?> phoneNumberEcuadorValidation(
     isoCode: 'EC', // Código ISO del país (Ecuador)
   );
   if (!isValid!) {
-    return {'invalidPhoneNumber': true};
+    return {ValidationsMessageEnum.invalidPhoneNumber.toText: true};
   }
   return null;
 }
@@ -143,7 +144,7 @@ Map<String, dynamic>? length6Validator(AbstractControl<dynamic> control) {
   final value = control.value as String?;
   if (value == null || value.isEmpty) return null;
   if (value.length != 6) {
-    return {'length6Error': true};
+    return {ValidationsMessageEnum.length6Error.toText: true};
   } else {
     return null;
   }
@@ -158,7 +159,7 @@ Map<String, dynamic>? conadisNumberValidatorGroup(
   if (!isConadis) {
     (conadisModel as FormGroup).controls['conadisNumber']!
       ..removeError(ValidationMessage.required)
-      ..removeError('invalidConadisNumber');
+      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText);
     return null;
   }
 
@@ -173,7 +174,7 @@ Map<String, dynamic>? conadisNumberValidatorGroup(
     (conadisModel as FormGroup)
         .controls['conadisNumber']!
         .setErrors({'invalidConadisNumber': true});
-    return {'invalidConadisNumber': true};
+    return {ValidationsMessageEnum.invalidConadisNumber.toText: true};
   }
   return null; // Devuelve null si la validación es exitosa
 }
@@ -186,6 +187,23 @@ bool _validateConadisNumber(String conadisNumber) {
   return true;
 }
 
+Map<String, dynamic>? atLeastOneElementValidator(
+    AbstractControl<dynamic> control) {
+  final value = control.value as List<bool?>;
+  var hasTrueElement = false;
+  for (final element in value) {
+    if (element ?? false) {
+      hasTrueElement = true;
+      break;
+    }
+  }
+
+  if (!hasTrueElement) {
+    return {ValidationsMessageEnum.atLeastOneElement.toText: true};
+  }
+  return null;
+}
+
 Map<String, String Function(dynamic error)> validationMessage(
   AppLocalizations l10n,
 ) =>
@@ -193,12 +211,20 @@ Map<String, String Function(dynamic error)> validationMessage(
       ValidationMessage.required: (error) => l10n.campoReq,
       ValidationMessage.email: (error) => l10n.intrudcirCorrVal,
       ValidationMessage.mustMatch: (error) => l10n.passwordCoi,
-      // TODO(jang): convertir esto a enum
-      'invalidDni': (error) => l10n.intrducirNumIdeVal,
-      'length10Error': (error) => l10n.introducirNum10Dig,
-      'invalidProvinceCode': (error) => l10n.introducirCodProVal,
-      'invalidPassword': (error) => l10n.password8Car,
-      'invalidPhoneNumber': (error) => l10n.intrudcirNumTelVal,
-      'length6Error': (error) => l10n.introducirNum6Dig,
-      'invalidConadisNumber': (error) => l10n.introducirNum6Dig,
+      ValidationsMessageEnum.invalidDni.toText: (error) =>
+          l10n.intrducirNumIdeVal,
+      ValidationsMessageEnum.length10Error.toText: (error) =>
+          l10n.introducirNum10Dig,
+      ValidationsMessageEnum.invalidProvinceCode.toText: (error) =>
+          l10n.introducirCodProVal,
+      ValidationsMessageEnum.invalidPassword.toText: (error) =>
+          l10n.password8Car,
+      ValidationsMessageEnum.invalidPhoneNumber.toText: (error) =>
+          l10n.intrudcirNumTelVal,
+      ValidationsMessageEnum.length6Error.toText: (error) =>
+          l10n.introducirNum6Dig,
+      ValidationsMessageEnum.invalidConadisNumber.toText: (error) =>
+          l10n.introducirNum6Dig,
+      ValidationsMessageEnum.atLeastOneElement.toText: (error) =>
+          l10n.debeSelAlMenUnElem,
     };

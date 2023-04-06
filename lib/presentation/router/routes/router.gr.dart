@@ -137,19 +137,19 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    ForgotPasswordRoute.name: (routeData) {
+    ForgotPasswordFirstRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const ForgotPasswordPage(),
+        child: const ForgotPasswordFirstPage(),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
       );
     },
-    ChangePasswordRoute.name: (routeData) {
+    ForgotPasswordSecondRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const ChangePasswordPage(),
+        child: const ForgotPasswordSecondPage(),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -240,6 +240,12 @@ class _$AppRouter extends RootStackRouter {
           onTapSuccessPayment: args.onTapSuccessPayment,
           onTapFailedPayment: args.onTapFailedPayment,
         ),
+      );
+    },
+    PaymentServiceJudgmentsNotarialActsRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const PaymentServiceJudgmentsNotarialActsPage(),
       );
     },
     ServicesRoute.name: (routeData) {
@@ -416,13 +422,13 @@ class _$AppRouter extends RootStackRouter {
               parent: AuthRouterRoute.name,
               children: [
                 RouteConfig(
-                  ForgotPasswordRoute.name,
+                  ForgotPasswordFirstRoute.name,
                   path: '',
                   parent: ForgotPasswordRouterRoute.name,
                 ),
                 RouteConfig(
-                  ChangePasswordRoute.name,
-                  path: 'change-password-page',
+                  ForgotPasswordSecondRoute.name,
+                  path: 'forgot-password-second-page',
                   parent: ForgotPasswordRouterRoute.name,
                 ),
               ],
@@ -575,6 +581,12 @@ class _$AppRouter extends RootStackRouter {
               MakePaymentRoute.name,
               path: 'make-payment-page',
               parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
+              PaymentServiceJudgmentsNotarialActsRoute.name,
+              path: 'payment-service-judgments-notarial-acts-page',
+              parent: RootRouterRoute.name,
+              guards: [authGuard],
             ),
           ],
         ),
@@ -782,27 +794,27 @@ class Step5Route extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ForgotPasswordPage]
-class ForgotPasswordRoute extends PageRouteInfo<void> {
-  const ForgotPasswordRoute()
+/// [ForgotPasswordFirstPage]
+class ForgotPasswordFirstRoute extends PageRouteInfo<void> {
+  const ForgotPasswordFirstRoute()
       : super(
-          ForgotPasswordRoute.name,
+          ForgotPasswordFirstRoute.name,
           path: '',
         );
 
-  static const String name = 'ForgotPasswordRoute';
+  static const String name = 'ForgotPasswordFirstRoute';
 }
 
 /// generated route for
-/// [ChangePasswordPage]
-class ChangePasswordRoute extends PageRouteInfo<void> {
-  const ChangePasswordRoute()
+/// [ForgotPasswordSecondPage]
+class ForgotPasswordSecondRoute extends PageRouteInfo<void> {
+  const ForgotPasswordSecondRoute()
       : super(
-          ChangePasswordRoute.name,
-          path: 'change-password-page',
+          ForgotPasswordSecondRoute.name,
+          path: 'forgot-password-second-page',
         );
 
-  static const String name = 'ChangePasswordRoute';
+  static const String name = 'ForgotPasswordSecondRoute';
 }
 
 /// generated route for
@@ -1053,6 +1065,18 @@ class MakePaymentRouteArgs {
   String toString() {
     return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, totalToPay: $totalToPay, buttonText: $buttonText, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment}';
   }
+}
+
+/// generated route for
+/// [PaymentServiceJudgmentsNotarialActsPage]
+class PaymentServiceJudgmentsNotarialActsRoute extends PageRouteInfo<void> {
+  const PaymentServiceJudgmentsNotarialActsRoute()
+      : super(
+          PaymentServiceJudgmentsNotarialActsRoute.name,
+          path: 'payment-service-judgments-notarial-acts-page',
+        );
+
+  static const String name = 'PaymentServiceJudgmentsNotarialActsRoute';
 }
 
 /// generated route for
