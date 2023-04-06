@@ -10,6 +10,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   const SelectElementFromApi({
     super.key,
     required this.formControl,
+    this.formControlName,
     this.label,
     required this.provider,
     this.light = false,
@@ -17,6 +18,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
     this.prefixIcon,
   });
   final FormControl<T>? formControl;
+  final String? formControlName;
   final AutoDisposeFutureProvider<Result<List<T>, StatusCode>> provider;
   final String? label;
   final bool light;
