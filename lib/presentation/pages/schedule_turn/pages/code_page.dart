@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
+import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/models/payment/code_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -12,7 +13,9 @@ import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffo
 class CodePage extends StatelessWidget {
   const CodePage({
     super.key,
+    required this.typeOfServiceModel,
   });
+  final TypeOfServiceModel typeOfServiceModel;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,7 @@ class CodePage extends StatelessWidget {
                 ? () => context.navigateTo(
                       ScheduleTurnSecondRoute(
                         paymentMethod: PaymentMethodType.correspondentPayment,
+                        typeOfServiceModel: typeOfServiceModel,
                       ),
                     )
                 : null,

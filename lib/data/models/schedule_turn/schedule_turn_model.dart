@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
 import 'package:registro_civil_apk/data/enum/schedule_turn/relationship_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/service_type.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
+import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 part 'schedule_turn_model.gform.dart';
 
@@ -18,7 +18,7 @@ class ScheduleTurnFirstStepPersonalModel {
   });
 
   final PaymentMethodType paymentMethod;
-  final ServiceType service;
+  final TypeOfServiceModel service;
 }
 
 @ReactiveFormAnnotation()
@@ -56,7 +56,7 @@ class FamiliarFormModel {
   ///Cedula
   final String? identificationNumber;
   final RelationshipType? relationship;
-  final ServiceType? service;
+  final TypeOfServiceModel? service;
 }
 
 @ReactiveFormAnnotation()

@@ -2,6 +2,7 @@ import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
+import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -24,6 +25,17 @@ Future<Result<List<AgencyModel>, StatusCode>> agencies(
 ) async {
   final api = ref.watch(apiProvider);
   final response = await api.agencies(0, 20);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+@riverpod
+Future<Result<List<TypeOfServiceModel>, StatusCode>> services(
+  ServicesRef ref,
+) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.services(0, 20);
   return response.success
       ? Result.ok(response.data!)
       : Result.err(response.status);

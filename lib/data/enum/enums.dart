@@ -6,7 +6,6 @@ export 'payment_service_judgments_notarial_acts/payment_service_judgments_notari
 export 'schedule_turn/payment_method_type.dart';
 export 'schedule_turn/relationship_type.dart';
 export 'schedule_turn/schedule_shift_type.dart';
-export 'schedule_turn/service_type.dart';
 export 'simple_certificate/relationship_simple_certificate_enum.dart';
 export 'simple_certificate/simple_certificate_radio_type_enum.dart';
 export 'simple_certificate/type_simple_certificate._enum.dart';

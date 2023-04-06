@@ -267,9 +267,13 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     CodeRoute.name: (routeData) {
+      final args = routeData.argsAs<CodeRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const CodePage(),
+        child: CodePage(
+          key: args.key,
+          typeOfServiceModel: args.typeOfServiceModel,
+        ),
       );
     },
     ScheduleTurnSecondRoute.name: (routeData) {
@@ -279,6 +283,7 @@ class _$AppRouter extends RootStackRouter {
         child: ScheduleTurnSecondPage(
           key: args.key,
           paymentMethod: args.paymentMethod,
+          typeOfServiceModel: args.typeOfServiceModel,
         ),
       );
     },
@@ -290,7 +295,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           city: args.city,
           agency: args.agency,
-          service: args.service,
+          typeOfService: args.typeOfService,
           date: args.date,
           time: args.time,
           paymentMethod: args.paymentMethod,
@@ -1118,14 +1123,36 @@ class ScheduleTurnFirstStepRouterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [CodePage]
-class CodeRoute extends PageRouteInfo<void> {
-  const CodeRoute()
-      : super(
+class CodeRoute extends PageRouteInfo<CodeRouteArgs> {
+  CodeRoute({
+    Key? key,
+    required TypeOfServiceModel typeOfServiceModel,
+  }) : super(
           CodeRoute.name,
           path: 'code-page',
+          args: CodeRouteArgs(
+            key: key,
+            typeOfServiceModel: typeOfServiceModel,
+          ),
         );
 
   static const String name = 'CodeRoute';
+}
+
+class CodeRouteArgs {
+  const CodeRouteArgs({
+    this.key,
+    required this.typeOfServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeOfServiceModel typeOfServiceModel;
+
+  @override
+  String toString() {
+    return 'CodeRouteArgs{key: $key, typeOfServiceModel: $typeOfServiceModel}';
+  }
 }
 
 /// generated route for
@@ -1135,12 +1162,14 @@ class ScheduleTurnSecondRoute
   ScheduleTurnSecondRoute({
     Key? key,
     required PaymentMethodType paymentMethod,
+    required TypeOfServiceModel typeOfServiceModel,
   }) : super(
           ScheduleTurnSecondRoute.name,
           path: 'schedule-turn-second-page',
           args: ScheduleTurnSecondRouteArgs(
             key: key,
             paymentMethod: paymentMethod,
+            typeOfServiceModel: typeOfServiceModel,
           ),
         );
 
@@ -1151,15 +1180,18 @@ class ScheduleTurnSecondRouteArgs {
   const ScheduleTurnSecondRouteArgs({
     this.key,
     required this.paymentMethod,
+    required this.typeOfServiceModel,
   });
 
   final Key? key;
 
   final PaymentMethodType paymentMethod;
 
+  final TypeOfServiceModel typeOfServiceModel;
+
   @override
   String toString() {
-    return 'ScheduleTurnSecondRouteArgs{key: $key, paymentMethod: $paymentMethod}';
+    return 'ScheduleTurnSecondRouteArgs{key: $key, paymentMethod: $paymentMethod, typeOfServiceModel: $typeOfServiceModel}';
   }
 }
 
@@ -1170,7 +1202,7 @@ class TurnDetailsRoute extends PageRouteInfo<TurnDetailsRouteArgs> {
     Key? key,
     required String city,
     required String agency,
-    required ServiceType service,
+    required TypeOfServiceModel typeOfService,
     required DateTime date,
     required TimeOfDay time,
     required PaymentMethodType paymentMethod,
@@ -1183,7 +1215,7 @@ class TurnDetailsRoute extends PageRouteInfo<TurnDetailsRouteArgs> {
             key: key,
             city: city,
             agency: agency,
-            service: service,
+            typeOfService: typeOfService,
             date: date,
             time: time,
             paymentMethod: paymentMethod,
@@ -1200,7 +1232,7 @@ class TurnDetailsRouteArgs {
     this.key,
     required this.city,
     required this.agency,
-    required this.service,
+    required this.typeOfService,
     required this.date,
     required this.time,
     required this.paymentMethod,
@@ -1214,7 +1246,7 @@ class TurnDetailsRouteArgs {
 
   final String agency;
 
-  final ServiceType service;
+  final TypeOfServiceModel typeOfService;
 
   final DateTime date;
 
@@ -1228,7 +1260,7 @@ class TurnDetailsRouteArgs {
 
   @override
   String toString() {
-    return 'TurnDetailsRouteArgs{key: $key, city: $city, agency: $agency, service: $service, date: $date, time: $time, paymentMethod: $paymentMethod, requestNumber: $requestNumber, totalToPay: $totalToPay}';
+    return 'TurnDetailsRouteArgs{key: $key, city: $city, agency: $agency, typeOfService: $typeOfService, date: $date, time: $time, paymentMethod: $paymentMethod, requestNumber: $requestNumber, totalToPay: $totalToPay}';
   }
 }
 
