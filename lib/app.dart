@@ -29,11 +29,6 @@ class _AppState extends ConsumerState<App> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(authenticationStatusProvider, (previous, next) {
-      if (next.asData?.value == AuthenticationStatus.unauthenticated) {
-        context.navigateTo(const HomeRouterRoute());
-      }
-    });
     return MaterialApp.router(
       theme: lightTheme,
       // theme: lightTheme.copyWith(
