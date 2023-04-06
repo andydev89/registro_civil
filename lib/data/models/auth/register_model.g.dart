@@ -1006,24 +1006,38 @@ Map<String, dynamic> _$NuiModelToJson(NuiModel instance) => <String, dynamic>{
 
 EnterDataModel _$EnterDataModelFromJson(Map<String, dynamic> json) =>
     EnterDataModel(
+      nui: json['nui'] as String? ?? '',
+      firstName: json['firstName'] as String? ?? '',
+      lastName: json['lastName'] as String? ?? '',
       email: json['email'] as String? ?? '',
-      phoneNumber: json['phoneNumber'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      telephoneOperator: EnterDataModel._telephoneOperatorFromJson(
+          json['telephoneOperator'] as String?),
     );
 
 Map<String, dynamic> _$EnterDataModelToJson(EnterDataModel instance) =>
     <String, dynamic>{
+      'nui': instance.nui,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
       'email': instance.email,
-      'phoneNumber': instance.phoneNumber,
+      'phone': instance.phone,
+      'telephoneOperator':
+          EnterDataModel._telephoneOperatorToJson(instance.telephoneOperator),
     };
 
 OtpModel _$OtpModelFromJson(Map<String, dynamic> json) => OtpModel(
-      otp: json['otp'] as String? ?? '',
+      code: json['code'] as String? ?? '',
       isVerified: json['isVerified'] as bool? ?? false,
+      password: json['password'] == null
+          ? null
+          : ConfirmPasswordModel.fromJson(
+              json['password'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$OtpModelToJson(OtpModel instance) => <String, dynamic>{
-      'isVerified': instance.isVerified,
-      'otp': instance.otp,
+      'code': instance.code,
+      'password': OtpModel._passwordToJson(instance.password),
     };
 
 PasswordModel _$PasswordModelFromJson(Map<String, dynamic> json) =>

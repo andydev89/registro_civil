@@ -15,8 +15,8 @@ class RegisterRouterPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(citizenProvider);
     final l10n = context.l10n;
-    ref.watch(registerModelRivProvider);
     return TranslucentCard(
       child: AutoRouter(
         builder: (_, content) => Column(

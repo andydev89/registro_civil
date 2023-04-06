@@ -19,32 +19,121 @@ class _Api implements Api {
   String? baseUrl;
 
   @override
-  Future<ResponseModel<List<RegisterResponseModel>?>> register(
-      registerModel) async {
+  Future<ResponseModel<RegisterCitizenModel>> registerValidateNui(
+      nuiModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(registerModel.toJson());
+    _data.addAll(nuiModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<List<RegisterResponseModel>>>(Options(
+        _setStreamType<ResponseModel<RegisterCitizenModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/api/register',
+              '/api/user/validate/citizen',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<List<RegisterResponseModel>>.fromJson(
+    final value = ResponseModel<RegisterCitizenModel>.fromJson(
+      _result.data!,
+      (json) => RegisterCitizenModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandModel>> registerData(enterDataModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(enterDataModel.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/user/register/data',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandModel>.fromJson(
+      _result.data!,
+      (json) => CommandModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CodeModel>> registerCode(enterDataModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(enterDataModel.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CodeModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/user/register/code',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CodeModel>.fromJson(
+      _result.data!,
+      (json) => CodeModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModelPagination<List<TelephoneOperatorModel>?>>
+      telephoneOperator(
+    pageNo,
+    pageSize,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<TelephoneOperatorModel>>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/api/operator',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        ResponseModelPagination<List<TelephoneOperatorModel>>.fromJson(
       _result.data!,
       (json) => json is List<dynamic>
           ? json
-              .map<RegisterResponseModel>((i) =>
-                  RegisterResponseModel.fromJson(i as Map<String, dynamic>))
+              .map<TelephoneOperatorModel>((i) =>
+                  TelephoneOperatorModel.fromJson(i as Map<String, dynamic>))
               .toList()
           : List.empty(),
     );

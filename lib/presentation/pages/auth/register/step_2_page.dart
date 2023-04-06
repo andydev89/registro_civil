@@ -13,6 +13,7 @@ import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart
 
 class Step2Page extends ConsumerWidget {
   const Step2Page({super.key});
+  
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

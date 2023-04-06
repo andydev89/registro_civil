@@ -6,6 +6,22 @@ part of 'auth_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$operatorsHash() => r'0bb3a1683b3318fa69c9fe4069b6c2128fb6decc';
+
+/// See also [operators].
+@ProviderFor(operators)
+final operatorsProvider = AutoDisposeFutureProvider<
+    Result<List<TelephoneOperatorModel>, StatusCode>>.internal(
+  operators,
+  name: r'operatorsProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$operatorsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef OperatorsRef = AutoDisposeFutureProviderRef<
+    Result<List<TelephoneOperatorModel>, StatusCode>>;
 String _$refreshTokenHash() => r'ae5945f554b48591e13f42c3c4bd5dc1eaa05e23';
 
 /// Copied from Dart SDK
@@ -128,22 +144,6 @@ final authenticationStatusProvider =
 
 typedef AuthenticationStatusRef
     = AutoDisposeStreamProviderRef<AuthenticationStatus>;
-String _$registerModelRivHash() => r'0711b7912b4d946b62441bdaf7ea4f2f37e1e9d4';
-
-/// See also [RegisterModelRiv].
-@ProviderFor(RegisterModelRiv)
-final registerModelRivProvider =
-    AutoDisposeNotifierProvider<RegisterModelRiv, RegisterModel>.internal(
-  RegisterModelRiv.new,
-  name: r'registerModelRivProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$registerModelRivHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$RegisterModelRiv = AutoDisposeNotifier<RegisterModel>;
 String _$loginHash() => r'6603c8783cdc35ee690c00f1e4a57fe9b4be2576';
 
 /// See also [Login].
@@ -158,19 +158,66 @@ final loginProvider = AutoDisposeAsyncNotifierProvider<Login, bool>.internal(
 );
 
 typedef _$Login = AutoDisposeAsyncNotifier<bool>;
-String _$registerHash() => r'ef44db0f1654be7ca5c123bd2743cb4ae0f9d38b';
+String _$registerValidateCitizenHash() =>
+    r'c1e830d2b09262e349e5901054f6fc025d4b4d5e';
 
-/// See also [Register].
-@ProviderFor(Register)
-final registerProvider =
-    AutoDisposeAsyncNotifierProvider<Register, bool>.internal(
-  Register.new,
-  name: r'registerProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$registerHash,
+/// See also [RegisterValidateCitizen].
+@ProviderFor(RegisterValidateCitizen)
+final registerValidateCitizenProvider = AutoDisposeNotifierProvider<
+    RegisterValidateCitizen, RegisterCitizenModel?>.internal(
+  RegisterValidateCitizen.new,
+  name: r'registerValidateCitizenProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$registerValidateCitizenHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$Register = AutoDisposeAsyncNotifier<bool>;
+typedef _$RegisterValidateCitizen = AutoDisposeNotifier<RegisterCitizenModel?>;
+String _$registerDataHash() => r'5bcaa6f3eba8cd0be5d035ed7731618adb794153';
+
+/// See also [RegisterData].
+@ProviderFor(RegisterData)
+final registerDataProvider =
+    AutoDisposeNotifierProvider<RegisterData, CommandModel?>.internal(
+  RegisterData.new,
+  name: r'registerDataProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$registerDataHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$RegisterData = AutoDisposeNotifier<CommandModel?>;
+String _$registerCodeHash() => r'7db9d19ba167f7484a210e5a1d211f275c4b2019';
+
+/// See also [RegisterCode].
+@ProviderFor(RegisterCode)
+final registerCodeProvider =
+    AutoDisposeNotifierProvider<RegisterCode, bool>.internal(
+  RegisterCode.new,
+  name: r'registerCodeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$registerCodeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$RegisterCode = AutoDisposeNotifier<bool>;
+String _$citizenHash() => r'2e0d3fbfb2012a5833ad696a5203db31f7b5af83';
+
+/// See also [Citizen].
+@ProviderFor(Citizen)
+final citizenProvider =
+    AutoDisposeNotifierProvider<Citizen, RegisterCitizenModel>.internal(
+  Citizen.new,
+  name: r'citizenProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$citizenHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Citizen = AutoDisposeNotifier<RegisterCitizenModel>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

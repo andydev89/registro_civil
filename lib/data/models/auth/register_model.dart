@@ -1,6 +1,7 @@
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 part 'register_model.g.dart';
 part 'register_model.gform.dart';
@@ -31,6 +32,18 @@ class NuiModel {
 @ReactiveFormAnnotation()
 class EnterDataModel {
   EnterDataModel({
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        ecuadorDniValidator,
+        length10Validator,
+      ],
+    )
+        this.nui = '',
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.firstName = '',
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.lastName = '',
     @FormControlAnnotation(validators: [requiredValidator, emailValidator])
         this.email = '',
     @FormControlAnnotation(
@@ -40,14 +53,36 @@ class EnterDataModel {
       ],
       asyncValidators: [phoneNumberEcuadorValidation],
     )
-        this.phoneNumber = '',
+        this.phone = '',
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.telephoneOperator,
   });
 
   factory EnterDataModel.fromJson(Map<String, dynamic> json) =>
       _$EnterDataModelFromJson(json);
 
+  final String nui;
+  final String firstName;
+  final String lastName;
   final String email;
-  final String phoneNumber;
+  final String phone;
+  @JsonKey(
+    toJson: _telephoneOperatorToJson,
+    fromJson: _telephoneOperatorFromJson,
+  )
+  final TelephoneOperatorModel? telephoneOperator;
+
+  static String? _telephoneOperatorToJson(
+    TelephoneOperatorModel? telephoneOperator,
+  ) =>
+      telephoneOperator?.id;
+
+  static TelephoneOperatorModel? _telephoneOperatorFromJson(
+    String? telephoneOperator,
+  ) =>
+      telephoneOperator == null
+          ? null
+          : TelephoneOperatorModel(id: telephoneOperator);
 
   Map<String, dynamic> toJson() => _$EnterDataModelToJson(this);
 }
@@ -56,17 +91,26 @@ class EnterDataModel {
 @ReactiveFormAnnotation()
 class OtpModel {
   OtpModel({
-    @FormControlAnnotation(validators: [requiredValidator, length6Validator])
-        this.otp = '',
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.code = '',
     @FormControlAnnotation(validators: [requiredTrueValidator])
         this.isVerified = false,
+    this.password,
   });
 
   factory OtpModel.fromJson(Map<String, dynamic> json) =>
       _$OtpModelFromJson(json);
 
+@JsonKey(includeToJson: false)
   final bool isVerified;
-  final String otp;
+  final String code;
+  @JsonKey(toJson: _passwordToJson)
+  final ConfirmPasswordModel? password;
+
+   static String? _passwordToJson(
+    ConfirmPasswordModel? passwordModel,
+  ) =>
+      passwordModel?.newPassword;
 
   Map<String, dynamic> toJson() => _$OtpModelToJson(this);
 }

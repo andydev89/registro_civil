@@ -618,9 +618,17 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
     this.path,
   ) {}
 
+  static String nuiControlName = "nui";
+
+  static String firstNameControlName = "firstName";
+
+  static String lastNameControlName = "lastName";
+
   static String emailControlName = "email";
 
-  static String phoneNumberControlName = "phoneNumber";
+  static String phoneControlName = "phone";
+
+  static String telephoneOperatorControlName = "telephoneOperator";
 
   final EnterDataModel? enterDataModel;
 
@@ -628,10 +636,47 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
 
   final String? path;
 
+  String nuiControlPath() => pathBuilder(nuiControlName);
+  String firstNameControlPath() => pathBuilder(firstNameControlName);
+  String lastNameControlPath() => pathBuilder(lastNameControlName);
   String emailControlPath() => pathBuilder(emailControlName);
-  String phoneNumberControlPath() => pathBuilder(phoneNumberControlName);
+  String phoneControlPath() => pathBuilder(phoneControlName);
+  String telephoneOperatorControlPath() =>
+      pathBuilder(telephoneOperatorControlName);
+  String get _nuiValue => nuiControl.value ?? "";
+  String get _firstNameValue => firstNameControl.value ?? "";
+  String get _lastNameValue => lastNameControl.value ?? "";
   String get _emailValue => emailControl.value ?? "";
-  String get _phoneNumberValue => phoneNumberControl.value ?? "";
+  String get _phoneValue => phoneControl.value ?? "";
+  TelephoneOperatorModel? get _telephoneOperatorValue =>
+      telephoneOperatorControl?.value;
+  bool get containsNui {
+    try {
+      form.control(nuiControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsFirstName {
+    try {
+      form.control(firstNameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsLastName {
+    try {
+      form.control(lastNameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsEmail {
     try {
       form.control(emailControlPath());
@@ -641,19 +686,89 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
     }
   }
 
-  bool get containsPhoneNumber {
+  bool get containsPhone {
     try {
-      form.control(phoneNumberControlPath());
+      form.control(phoneControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
+  bool get containsTelephoneOperator {
+    try {
+      form.control(telephoneOperatorControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get nuiErrors => nuiControl.errors;
+  Object? get firstNameErrors => firstNameControl.errors;
+  Object? get lastNameErrors => lastNameControl.errors;
   Object? get emailErrors => emailControl.errors;
-  Object? get phoneNumberErrors => phoneNumberControl.errors;
+  Object? get phoneErrors => phoneControl.errors;
+  Object? get telephoneOperatorErrors => telephoneOperatorControl?.errors;
+  void get nuiFocus => form.focus(nuiControlPath());
+  void get firstNameFocus => form.focus(firstNameControlPath());
+  void get lastNameFocus => form.focus(lastNameControlPath());
   void get emailFocus => form.focus(emailControlPath());
-  void get phoneNumberFocus => form.focus(phoneNumberControlPath());
+  void get phoneFocus => form.focus(phoneControlPath());
+  void get telephoneOperatorFocus => form.focus(telephoneOperatorControlPath());
+  void telephoneOperatorRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsTelephoneOperator) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          telephoneOperatorControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            telephoneOperatorControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void nuiValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    nuiControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void firstNameValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    firstNameControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void lastNameValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    lastNameControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void emailValueUpdate(
     String value, {
     bool updateParent = true,
@@ -663,12 +778,48 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void phoneNumberValueUpdate(
+  void phoneValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    phoneNumberControl.updateValue(value,
+    phoneControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void telephoneOperatorValueUpdate(
+    TelephoneOperatorModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    telephoneOperatorControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void nuiValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    nuiControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void firstNameValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    firstNameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void lastNameValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    lastNameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -681,15 +832,51 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void phoneNumberValuePatch(
+  void phoneValuePatch(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    phoneNumberControl.patchValue(value,
+    phoneControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void telephoneOperatorValuePatch(
+    TelephoneOperatorModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    telephoneOperatorControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void nuiValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      nuiControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void firstNameValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      firstNameControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void lastNameValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      lastNameControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void emailValueReset(
     String value, {
     bool updateParent = true,
@@ -699,19 +886,93 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
   }) =>
       emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void phoneNumberValueReset(
+  void phoneValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      phoneNumberControl.reset(
+      phoneControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void telephoneOperatorValueReset(
+    TelephoneOperatorModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      telephoneOperatorControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<String> get nuiControl =>
+      form.control(nuiControlPath()) as FormControl<String>;
+  FormControl<String> get firstNameControl =>
+      form.control(firstNameControlPath()) as FormControl<String>;
+  FormControl<String> get lastNameControl =>
+      form.control(lastNameControlPath()) as FormControl<String>;
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
-  FormControl<String> get phoneNumberControl =>
-      form.control(phoneNumberControlPath()) as FormControl<String>;
+  FormControl<String> get phoneControl =>
+      form.control(phoneControlPath()) as FormControl<String>;
+  FormControl<TelephoneOperatorModel>? get telephoneOperatorControl =>
+      containsTelephoneOperator
+          ? form.control(telephoneOperatorControlPath())
+              as FormControl<TelephoneOperatorModel>?
+          : null;
+  void nuiSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      nuiControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      nuiControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void firstNameSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      firstNameControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      firstNameControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void lastNameSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      lastNameControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      lastNameControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -730,18 +991,36 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
     }
   }
 
-  void phoneNumberSetDisabled(
+  void phoneSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      phoneNumberControl.markAsDisabled(
+      phoneControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      phoneNumberControl.markAsEnabled(
+      phoneControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void telephoneOperatorSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      telephoneOperatorControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      telephoneOperatorControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -755,7 +1034,13 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return EnterDataModel(email: _emailValue, phoneNumber: _phoneNumberValue);
+    return EnterDataModel(
+        nui: _nuiValue,
+        firstName: _firstNameValue,
+        lastName: _lastNameValue,
+        email: _emailValue,
+        phone: _phoneValue,
+        telephoneOperator: _telephoneOperatorValue);
   }
 
   EnterDataModelForm copyWithPath(String? path) {
@@ -798,6 +1083,31 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
+        nuiControlName: FormControl<String>(
+            value: enterDataModel?.nui,
+            validators: [
+              requiredValidator,
+              ecuadorDniValidator,
+              length10Validator
+            ],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        firstNameControlName: FormControl<String>(
+            value: enterDataModel?.firstName,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        lastNameControlName: FormControl<String>(
+            value: enterDataModel?.lastName,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         emailControlName: FormControl<String>(
             value: enterDataModel?.email,
             validators: [requiredValidator, emailValidator],
@@ -805,10 +1115,17 @@ class EnterDataModelForm implements FormModel<EnterDataModel> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        phoneNumberControlName: FormControl<String>(
-            value: enterDataModel?.phoneNumber,
+        phoneControlName: FormControl<String>(
+            value: enterDataModel?.phone,
             validators: [requiredValidator, length10Validator],
             asyncValidators: [phoneNumberEcuadorValidation],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        telephoneOperatorControlName: FormControl<TelephoneOperatorModel>(
+            value: enterDataModel?.telephoneOperator,
+            validators: [requiredValidator],
+            asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false)
@@ -1114,11 +1431,18 @@ class OtpModelForm implements FormModel<OtpModel> {
     this.otpModel,
     this.form,
     this.path,
-  ) {}
+  ) {
+    passwordForm = ConfirmPasswordModelForm(
+        otpModel?.password, form, pathBuilder('password'));
+  }
 
-  static String otpControlName = "otp";
+  static String codeControlName = "code";
 
   static String isVerifiedControlName = "isVerified";
+
+  static String passwordControlName = "password";
+
+  late ConfirmPasswordModelForm passwordForm;
 
   final OtpModel? otpModel;
 
@@ -1126,13 +1450,15 @@ class OtpModelForm implements FormModel<OtpModel> {
 
   final String? path;
 
-  String otpControlPath() => pathBuilder(otpControlName);
+  String codeControlPath() => pathBuilder(codeControlName);
   String isVerifiedControlPath() => pathBuilder(isVerifiedControlName);
-  String get _otpValue => otpControl.value ?? "";
+  String passwordControlPath() => pathBuilder(passwordControlName);
+  String get _codeValue => codeControl.value ?? "";
   bool get _isVerifiedValue => isVerifiedControl.value as bool;
-  bool get containsOtp {
+  ConfirmPasswordModel? get _passwordValue => passwordForm.model;
+  bool get containsCode {
     try {
-      form.control(otpControlPath());
+      form.control(codeControlPath());
       return true;
     } catch (e) {
       return false;
@@ -1148,16 +1474,53 @@ class OtpModelForm implements FormModel<OtpModel> {
     }
   }
 
-  Object? get otpErrors => otpControl.errors;
+  bool get containsPassword {
+    try {
+      form.control(passwordControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get codeErrors => codeControl.errors;
   Object? get isVerifiedErrors => isVerifiedControl.errors;
-  void get otpFocus => form.focus(otpControlPath());
+  Object? get passwordErrors => passwordControl?.errors;
+  void get codeFocus => form.focus(codeControlPath());
   void get isVerifiedFocus => form.focus(isVerifiedControlPath());
-  void otpValueUpdate(
+  void get passwordFocus => form.focus(passwordControlPath());
+  void passwordRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsPassword) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          passwordControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            passwordControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void codeValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    otpControl.updateValue(value,
+    codeControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1170,12 +1533,25 @@ class OtpModelForm implements FormModel<OtpModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void otpValuePatch(
+  void passwordValueUpdate(
+    ConfirmPasswordModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    passwordControl?.updateValue(
+        ConfirmPasswordModelForm(value, FormGroup({}), null)
+            .formElements()
+            .rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
+  void codeValuePatch(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    otpControl.patchValue(value,
+    codeControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1188,14 +1564,25 @@ class OtpModelForm implements FormModel<OtpModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void otpValueReset(
+  void passwordValuePatch(
+    ConfirmPasswordModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    passwordControl?.updateValue(
+        ConfirmPasswordModelForm(value, form, null).formElements().rawValue,
+        updateParent: updateParent,
+        emitEvent: emitEvent);
+  }
+
+  void codeValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      otpControl.reset(
+      codeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void isVerifiedValueReset(
     bool value, {
@@ -1206,22 +1593,38 @@ class OtpModelForm implements FormModel<OtpModel> {
   }) =>
       isVerifiedControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get otpControl =>
-      form.control(otpControlPath()) as FormControl<String>;
+  void passwordValueReset(
+    ConfirmPasswordModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      passwordControl?.reset(
+          value: ConfirmPasswordModelForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  FormControl<String> get codeControl =>
+      form.control(codeControlPath()) as FormControl<String>;
   FormControl<bool> get isVerifiedControl =>
       form.control(isVerifiedControlPath()) as FormControl<bool>;
-  void otpSetDisabled(
+  FormGroup? get passwordControl => containsPassword
+      ? form.control(passwordControlPath()) as FormGroup?
+      : null;
+  void codeSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      otpControl.markAsDisabled(
+      codeControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      otpControl.markAsEnabled(
+      codeControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1246,6 +1649,24 @@ class OtpModelForm implements FormModel<OtpModel> {
     }
   }
 
+  void passwordSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      passwordControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      passwordControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   OtpModel get model {
     if (!form.valid) {
@@ -1253,7 +1674,10 @@ class OtpModelForm implements FormModel<OtpModel> {
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return OtpModel(otp: _otpValue, isVerified: _isVerifiedValue);
+    return OtpModel(
+        code: _codeValue,
+        isVerified: _isVerifiedValue,
+        password: _passwordValue);
   }
 
   OtpModelForm copyWithPath(String? path) {
@@ -1293,8 +1717,8 @@ class OtpModelForm implements FormModel<OtpModel> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        otpControlName: FormControl<String>(
-            value: otpModel?.otp,
+        codeControlName: FormControl<String>(
+            value: otpModel?.code,
             validators: [requiredValidator, length6Validator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -1306,9 +1730,222 @@ class OtpModelForm implements FormModel<OtpModel> {
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
+            touched: false),
+        passwordControlName: passwordForm.formElements()
       },
           validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+class ConfirmPasswordModelForm implements FormModel<ConfirmPasswordModel> {
+  ConfirmPasswordModelForm(
+    this.confirmPasswordModel,
+    this.form,
+    this.path,
+  ) {}
+
+  static String newPasswordControlName = "newPassword";
+
+  static String confirmPasswordControlName = "confirmPassword";
+
+  final ConfirmPasswordModel? confirmPasswordModel;
+
+  final FormGroup form;
+
+  final String? path;
+
+  String newPasswordControlPath() => pathBuilder(newPasswordControlName);
+  String confirmPasswordControlPath() =>
+      pathBuilder(confirmPasswordControlName);
+  String get _newPasswordValue => newPasswordControl.value ?? "";
+  String get _confirmPasswordValue => confirmPasswordControl.value ?? "";
+  bool get containsNewPassword {
+    try {
+      form.control(newPasswordControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsConfirmPassword {
+    try {
+      form.control(confirmPasswordControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get newPasswordErrors => newPasswordControl.errors;
+  Object? get confirmPasswordErrors => confirmPasswordControl.errors;
+  void get newPasswordFocus => form.focus(newPasswordControlPath());
+  void get confirmPasswordFocus => form.focus(confirmPasswordControlPath());
+  void newPasswordValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    newPasswordControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void confirmPasswordValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    confirmPasswordControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void newPasswordValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    newPasswordControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void confirmPasswordValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    confirmPasswordControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void newPasswordValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      newPasswordControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void confirmPasswordValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      confirmPasswordControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<String> get newPasswordControl =>
+      form.control(newPasswordControlPath()) as FormControl<String>;
+  FormControl<String> get confirmPasswordControl =>
+      form.control(confirmPasswordControlPath()) as FormControl<String>;
+  void newPasswordSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      newPasswordControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      newPasswordControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void confirmPasswordSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      confirmPasswordControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      confirmPasswordControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  @override
+  ConfirmPasswordModel get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return ConfirmPasswordModel(
+        newPassword: _newPasswordValue, confirmPassword: _confirmPasswordValue);
+  }
+
+  ConfirmPasswordModelForm copyWithPath(String? path) {
+    return ConfirmPasswordModelForm(confirmPasswordModel, form, path);
+  }
+
+  @override
+  void updateValue(
+    ConfirmPasswordModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.updateValue(
+          ConfirmPasswordModelForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void resetValue(
+    ConfirmPasswordModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: ConfirmPasswordModelForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+  FormGroup formElements() => FormGroup({
+        newPasswordControlName: FormControl<String>(
+            value: confirmPasswordModel?.newPassword,
+            validators: [requiredValidator, passwordValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        confirmPasswordControlName: FormControl<String>(
+            value: confirmPasswordModel?.confirmPassword,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
+      },
+          validators: [
+            passwordsMustMatch
+          ],
           asyncValidators: [],
           asyncValidatorsDebounceTime: 250,
           disabled: false);
@@ -1777,218 +2414,6 @@ class PasswordModelForm implements FormModel<PasswordModel> {
       asyncValidators: [],
       asyncValidatorsDebounceTime: 250,
       disabled: false);
-}
-
-class ConfirmPasswordModelForm implements FormModel<ConfirmPasswordModel> {
-  ConfirmPasswordModelForm(
-    this.confirmPasswordModel,
-    this.form,
-    this.path,
-  ) {}
-
-  static String newPasswordControlName = "newPassword";
-
-  static String confirmPasswordControlName = "confirmPassword";
-
-  final ConfirmPasswordModel? confirmPasswordModel;
-
-  final FormGroup form;
-
-  final String? path;
-
-  String newPasswordControlPath() => pathBuilder(newPasswordControlName);
-  String confirmPasswordControlPath() =>
-      pathBuilder(confirmPasswordControlName);
-  String get _newPasswordValue => newPasswordControl.value ?? "";
-  String get _confirmPasswordValue => confirmPasswordControl.value ?? "";
-  bool get containsNewPassword {
-    try {
-      form.control(newPasswordControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsConfirmPassword {
-    try {
-      form.control(confirmPasswordControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  Object? get newPasswordErrors => newPasswordControl.errors;
-  Object? get confirmPasswordErrors => confirmPasswordControl.errors;
-  void get newPasswordFocus => form.focus(newPasswordControlPath());
-  void get confirmPasswordFocus => form.focus(confirmPasswordControlPath());
-  void newPasswordValueUpdate(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    newPasswordControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void confirmPasswordValueUpdate(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    confirmPasswordControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void newPasswordValuePatch(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    newPasswordControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void confirmPasswordValuePatch(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    confirmPasswordControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void newPasswordValueReset(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      newPasswordControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void confirmPasswordValueReset(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      confirmPasswordControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get newPasswordControl =>
-      form.control(newPasswordControlPath()) as FormControl<String>;
-  FormControl<String> get confirmPasswordControl =>
-      form.control(confirmPasswordControlPath()) as FormControl<String>;
-  void newPasswordSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      newPasswordControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      newPasswordControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void confirmPasswordSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      confirmPasswordControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      confirmPasswordControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  @override
-  ConfirmPasswordModel get model {
-    if (!form.valid) {
-      debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
-    }
-    return ConfirmPasswordModel(
-        newPassword: _newPasswordValue, confirmPassword: _confirmPasswordValue);
-  }
-
-  ConfirmPasswordModelForm copyWithPath(String? path) {
-    return ConfirmPasswordModelForm(confirmPasswordModel, form, path);
-  }
-
-  @override
-  void updateValue(
-    ConfirmPasswordModel? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.updateValue(
-          ConfirmPasswordModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    ConfirmPasswordModel? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: ConfirmPasswordModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void reset({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  String pathBuilder(String? pathItem) =>
-      [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
-        newPasswordControlName: FormControl<String>(
-            value: confirmPasswordModel?.newPassword,
-            validators: [requiredValidator, passwordValidator],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        confirmPasswordControlName: FormControl<String>(
-            value: confirmPasswordModel?.confirmPassword,
-            validators: [requiredValidator],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false)
-      },
-          validators: [
-            passwordsMustMatch
-          ],
-          asyncValidators: [],
-          asyncValidatorsDebounceTime: 250,
-          disabled: false);
 }
 
 class ReactivePasswordModelFormArrayBuilder<T> extends StatelessWidget {
