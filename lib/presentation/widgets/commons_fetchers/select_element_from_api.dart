@@ -9,7 +9,7 @@ import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_d
 class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   const SelectElementFromApi({
     super.key,
-    required this.formControl,
+    this.formControl,
     this.formControlName,
     this.label,
     required this.provider,
