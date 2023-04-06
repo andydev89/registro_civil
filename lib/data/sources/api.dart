@@ -51,7 +51,7 @@ abstract class Api {
   );
 
   //SCHEDULE
-  @GET('/identity/api/schedule/available')
+  @GET('/schedule/api/schedule/available')
   Future<ResponseModelPagination<List<ScheduleModel>?>> availableSchedules(
     @Query('pageNo') int pageNo,
     @Query('pageSize') int pageSize,

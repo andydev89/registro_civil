@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:registro_civil_apk/data/json_converters/date_converter.dart';
 import 'package:registro_civil_apk/data/json_converters/time_of_day_converter.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';

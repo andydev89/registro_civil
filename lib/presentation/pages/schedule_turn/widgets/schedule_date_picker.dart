@@ -5,8 +5,6 @@ import 'package:registro_civil_apk/data/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_date_picker.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
 
 class ScheduleDatePicker extends ConsumerWidget {
   const ScheduleDatePicker({
@@ -14,32 +12,47 @@ class ScheduleDatePicker extends ConsumerWidget {
     required this.label,
     required this.formControl,
     required this.typeOfServiceModel,
+    required this.starDate,
   });
 
   final FormControl<DateTime> formControl;
   final String label;
   final TypeOfServiceModel typeOfServiceModel;
+  final DateTime starDate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final schedules = ref.watch(
       availableSchedulesProvider(
-        DateTime.now(),
-        DateTime.now().lastDateOfMonth,
+        starDate,
+        starDate.lastDateOfMonth,
         typeOfServiceModel.id,
       ),
     );
-    return schedules.when(
-      data: (data) => data.when(
-        ok: (schedules) => PrimaryReactiveDatePicker(
-          formControl: formControl,
-          label: label,
-          availablesDate: schedules.map((e) => e.date).toList(),
+    return PrimaryReactiveDatePicker(
+      formControl: formControl,
+      label: label,
+      availablesDate: schedules.asData?.value.when(
+            ok: (data) => data.map((e) => e.date).toList(),
+            err: (error) => [],
+          ) ??
+          [],
+      isLoading: schedules.isLoading,
+      hasError: schedules.hasError,
+      onError: () => ref.refresh(
+        availableSchedulesProvider(
+          starDate,
+          starDate.lastDateOfMonth,
+          typeOfServiceModel.id,
         ),
-        err: (error) => ErrorStatus(messagge: error.toString()),
       ),
-      error: (error, stackTrace) => ErrorStatus(messagge: error.toString()),
-      loading: () => const LoadingStatus(),
+      onPageChanged: (date) => ref.refresh(
+        availableSchedulesProvider(
+          date,
+          date.lastDateOfMonth,
+          typeOfServiceModel.id,
+        ),
+      ),
     );
   }
 }

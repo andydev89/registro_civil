@@ -16,8 +16,8 @@ TypeOfServiceModel _$TypeOfServiceModelFromJson(Map<String, dynamic> json) =>
       state: json['state'] as String,
       publishWeb: json['publishWeb'] as bool,
       publishMovil: json['publishMovil'] as bool,
-      iconoWeb: json['iconoWeb'] as String,
-      iconoMovil: json['iconoMovil'] as String,
+      iconoWeb: json['iconoWeb'] as String?,
+      iconoMovil: json['iconoMovil'] as String?,
       typeService: json['typeService'] as String,
     );
 

@@ -23,8 +23,8 @@ class TypeOfServiceModel implements Translatable {
       _$TypeOfServiceModelFromJson(json);
 
   final double discount;
-  final String iconoMovil;
-  final String iconoWeb;
+  final String? iconoMovil;
+  final String? iconoWeb;
   final int id;
   final double iva;
   final String name;

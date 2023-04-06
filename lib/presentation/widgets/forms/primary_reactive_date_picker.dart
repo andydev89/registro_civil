@@ -4,8 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
+import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/refresh_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -15,18 +18,38 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
     required this.formControl,
     this.label,
     this.availablesDate = const [],
+    this.isLoading = false,
+    this.hasError = false,
+    this.onError,
+    this.hintText,
+    this.onPageChanged,
   });
 
   final FormControl<DateTime> formControl;
   final String? label;
   final List<DateTime> availablesDate;
+  final bool isLoading;
+  final bool hasError;
+  final void Function()? onError;
+  final String? hintText;
+  final void Function(DateTime)? onPageChanged;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return PrimaryReactiveTextField(
       label: label,
       readOnly: true,
-      suffixIcon: Assets.svg.calendar.svg(),
+      hintText: hasError
+          ? l10n.errorAlObtenerLosDatos
+          : isLoading
+              ? l10n.cargando
+              : hintText ?? '${l10n.seleccione}...',
+      suffixIcon: hasError
+          ? RefreshStatus(onRefresh: onError)
+          : isLoading
+              ? const LoadingStatus()
+              : Assets.svg.calendar.svg(),
       onTap: (control) => showDialog<Widget>(
         context: context,
         builder: (context) => Dialog(
@@ -40,10 +63,11 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
               CustomCalendar(
                 formControl: formControl,
                 availablesDate: availablesDate,
+                onPageChanged: onPageChanged,
               ).horizontalPadding(5),
             ],
           ),
-        ),
+        ).withRevealAnimation,
       ),
       formControl: formControl,
       setSuffixIconConstraints: true,
@@ -56,9 +80,11 @@ class CustomCalendar extends StatefulWidget {
     super.key,
     required this.formControl,
     required this.availablesDate,
+    this.onPageChanged,
   });
   final FormControl<DateTime> formControl;
   final List<DateTime> availablesDate;
+  final void Function(DateTime)? onPageChanged;
 
   @override
   State<CustomCalendar> createState() => _CustomCalendarState();
@@ -105,6 +131,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
     return TableCalendar(
       firstDay: DateTime.now(),
       lastDay: DateTime.now().add(const Duration(days: 365 * 30)),
+      onPageChanged: widget.onPageChanged,
       focusedDay: _focusedDay,
       // selectedDayPredicate: (day) =>  _selectedDays.contains(day)
       selectedDayPredicate: (day) {

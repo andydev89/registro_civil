@@ -49,6 +49,7 @@ class ScheduleTurnSecondPage extends StatelessWidget {
                   label: l10n.fechaParaTurno,
                   formControl: formModel.dateControl,
                   typeOfServiceModel: typeOfServiceModel,
+                  starDate: DateTime.now(),
                 ),
                 RadioTimeSelector(
                   label: l10n.horDisponibles,
