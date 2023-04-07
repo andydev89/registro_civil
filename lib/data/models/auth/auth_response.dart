@@ -23,6 +23,11 @@ class RegisterCitizenModel {
   String get otp => fullName.split(':').last.trim();
 
   Map<String, dynamic> toJson() => _$RegisterCitizenModelToJson(this);
+
+  @override
+  String toString() {
+    return toJson().toString();
+  }
 }
 
 @JsonSerializable()

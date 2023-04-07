@@ -29,13 +29,11 @@ class PrimaryReactiveRadioTile<T> extends StatelessWidget {
             value: value,
             formControl: formControl,
           ),
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: PrimaryText(
-                label,
-                color: ligthBlue,
-              ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: PrimaryText(
+              label,
+              color: ligthBlue,
             ),
           ),
         ],

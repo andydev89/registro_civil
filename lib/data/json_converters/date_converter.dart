@@ -1,0 +1,12 @@
+import 'package:intl/intl.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+class DateConverter implements JsonConverter<DateTime, String> {
+  const DateConverter();
+
+  @override
+  DateTime fromJson(String json) => DateTime.parse(json);
+
+  @override
+  String toJson(DateTime object) => DateFormat('yyyy-MM-dd').format(object);
+}

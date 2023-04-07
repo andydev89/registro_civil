@@ -144,7 +144,7 @@ final authenticationStatusProvider =
 
 typedef AuthenticationStatusRef
     = AutoDisposeStreamProviderRef<AuthenticationStatus>;
-String _$meHash() => r'ec20db25951fab0a4cb46fdea1a6ba0b044eea34';
+String _$meHash() => r'8f42215f5a43c795fb8f34b38d52cb17e528268b';
 
 /// See also [me].
 @ProviderFor(me)

@@ -9,15 +9,13 @@ class MyTurnExpandableCardModel {
     required this.time,
     required this.city,
     required this.agency,
-    required this.state,
   });
 
-  final int id;
+  final String id;
   final TypeOfServiceModel typeOfService;
   final DateTime date;
   final TimeOfDay time;
   final String city;
   final String agency;
   // TODO(alejandro): este estado debe ser un enum
-  final String state;
 }
