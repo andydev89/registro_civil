@@ -7,7 +7,7 @@ part of 'schedule_provider.dart';
 // **************************************************************************
 
 String _$availableSchedulesHash() =>
-    r'447ed73f6ac5e82b5f5fc2420e1b570fa7d5c05a';
+    r'4671d4e9c76aec6b5049e40aff8e91f5ff5d00f7';
 
 /// Copied from Dart SDK
 class _SystemHash {

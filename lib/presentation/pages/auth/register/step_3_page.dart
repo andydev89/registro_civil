@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
@@ -112,7 +111,9 @@ class Step3Page extends ConsumerWidget {
                                   context.navigateTo(const Step4Route());
                                 },
                                 err: (error) => showAlert(
-                                    error.translate(context), TypeAlert.error),
+                                  error.translate(context),
+                                  TypeAlert.error,
+                                ),
                               )
                           : null,
                     );
