@@ -59,4 +59,10 @@ abstract class Api {
     @Query('to') String to,
     @Query('typeOfService') int typeOfService,
   );
+
+  @GET('/schedule/api/schedule')
+  Future<ResponseModelPagination<List<ScheduleModel>?>> schedules(
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
 }

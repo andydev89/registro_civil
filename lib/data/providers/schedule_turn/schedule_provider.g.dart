@@ -130,4 +130,21 @@ class AvailableSchedulesProvider
     return _SystemHash.finish(hash);
   }
 }
+
+String _$schedulesHash() => r'b86bcd91ba72dd28a78636b6050df71116112061';
+
+/// See also [schedules].
+@ProviderFor(schedules)
+final schedulesProvider =
+    AutoDisposeFutureProvider<Result<List<ScheduleModel>, StatusCode>>.internal(
+  schedules,
+  name: r'schedulesProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$schedulesHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SchedulesRef
+    = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCode>>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

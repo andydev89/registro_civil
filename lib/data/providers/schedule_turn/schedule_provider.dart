@@ -14,10 +14,10 @@ Future<Result<List<ScheduleModel>, StatusCode>> availableSchedules(
   int typeOfService,
 ) async {
   final api = ref.watch(apiProvider);
-  //TODO hacer la paginacion
+  //No hace falta paginado porque el maximo es un mes
   final response = await api.availableSchedules(
     0,
-    20,
+    31,
     startDate.onlyDate,
     endDate.onlyDate,
     typeOfService,
@@ -26,3 +26,27 @@ Future<Result<List<ScheduleModel>, StatusCode>> availableSchedules(
       ? Result.ok(response.data!)
       : Result.err(response.status);
 }
+
+@riverpod
+Future<Result<List<ScheduleModel>, StatusCode>> schedules(
+  SchedulesRef ref,
+) async {
+  final api = ref.watch(apiProvider);
+  //TODO hacer paginado
+  final response = await api.schedules(0, 20);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+// @riverpod
+// class MySchedules extends _$MySchedules {
+//   @override
+//   Future<Result<List<ScheduleModel>, StatusCode>> build() async {
+//     return ref.watch(schedulesProvider.future);
+//   }
+
+//   void findSchedule(String key) {
+//     state = [...state.whenData((value) => value.when(ok: ok, err: err))]
+//   }
+// }
