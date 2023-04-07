@@ -75,7 +75,7 @@ OffersModel _offersModelDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = OffersModel(
-    cant: reader.readLong(offsets[0]),
+    cant: reader.readLongOrNull(offsets[0]) ?? 1,
     discountConadis: reader.readBoolOrNull(offsets[1]) ?? false,
     simpleCertificate: _OffersModelsimpleCertificateValueEnumMap[
             reader.readByteOrNull(offsets[2])] ??
@@ -93,7 +93,7 @@ P _offersModelDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLong(offset)) as P;
+      return (reader.readLongOrNull(offset) ?? 1) as P;
     case 1:
       return (reader.readBoolOrNull(offset) ?? false) as P;
     case 2:
@@ -554,7 +554,7 @@ extension OffersModelQueryProperty
 OffersModel _$OffersModelFromJson(Map<String, dynamic> json) => OffersModel(
       simpleCertificate: $enumDecode(
           _$TypeSimpleCertificateEnumEnumMap, json['simpleCertificate']),
-      cant: json['cant'] as int,
+      cant: json['cant'] as int? ?? 1,
       discountConadis: json['discountConadis'] as bool? ?? false,
     )..id = json['id'] as int;
 

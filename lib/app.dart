@@ -6,6 +6,7 @@ import 'package:registro_civil_apk/presentation/router/observer/router_observer.
 import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/sliding_dialog.dart';
 
 class App extends ConsumerStatefulWidget {
   const App({super.key});
@@ -42,10 +43,11 @@ class _AppState extends ConsumerState<App> {
           const DropdownAlert(),
         ],
       ),
+
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerDelegate: appRouter.delegate(
-        navigatorObservers: () => [RouterObserver()],
+        navigatorObservers: () => [RouterObserver(), SlidingDialogObserver()],
       ),
       routeInformationParser: appRouter.defaultRouteParser(),
     );

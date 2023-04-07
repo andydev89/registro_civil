@@ -77,11 +77,17 @@ Future<void> showContentDialog(
   );
 }
 
-Future<void> showOffersDialog(BuildContext context, {Widget? child}) async {
+Future<void> showOffersDialog(
+  BuildContext context,
+) async {
   await showDialog<void>(
     context: context,
     builder: (BuildContext context) {
-      return SlidingDialog(child: child ?? const OffersWidget());
+      return SlidingDialog(
+        child: (controller) => OffersWidget(
+          controller: controller,
+        ),
+      );
     },
   );
 }

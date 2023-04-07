@@ -165,19 +165,22 @@ class RootDrawer extends ConsumerWidget {
   }
 }
 
-class DrawerUserData extends StatelessWidget {
+class DrawerUserData extends ConsumerWidget {
   const DrawerUserData({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final me = ref.watch(meProvider).asData?.value;
+    final firstName = me?.firstName ?? '';
+    final lastName = me?.lastName ?? '';
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Assets.svg.avatar.svg(),
         Expanded(
           child: PrimaryLabel(
-            '${l10n.hola}, Luis Pérez Pérez',
+            '${l10n.hola}, $firstName $lastName',
             fontSize: 20,
             color: Colors.white,
             maxlines: 1,

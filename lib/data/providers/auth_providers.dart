@@ -6,36 +6,8 @@ import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
-import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'auth_providers.g.dart';
-
-// @riverpod
-// class RegisterModelRiv extends _$RegisterModelRiv {
-//   void updateNui(NuiModel nui) {
-//     state = state.copyWith(nui: nui.nui);
-//   }
-
-//   void updateEnterData(EnterDataModel enterData) {
-//     state = state.copyWith(
-//       email: enterData.email,
-//       phone: enterData.phoneNumber,
-//     );
-//   }
-
-//   void updatePassword(PasswordModel password) {
-//     state = state.copyWith(
-//       password: password.confirmPassword!.confirmPassword,
-//     );
-//   }
-
-//   // void _reset() => state = RegisterModel();
-
-//   @override
-//   RegisterModel build() {
-//     return RegisterModel();
-//   }
-// }
 
 @riverpod
 class Login extends _$Login {
@@ -50,7 +22,6 @@ class Login extends _$Login {
         expiresIn: response.data!.usefulLifeInMillis,
       );
       await fresh.setToken(oauthToken);
-      ref.read(userProvider.notifier).saveLogin(loginModel);
       state = const AsyncData(true);
       return const Result.ok(true);
     } else {
@@ -63,7 +34,6 @@ class Login extends _$Login {
     final fresh = ref.watch(freshProvider);
     await fresh.revokeToken();
     await fresh.clearToken();
-    ref.read(userProvider.notifier).clear();
     state = const AsyncData(false);
   }
 
@@ -187,4 +157,14 @@ Future<OAuth2Token?> refreshToken(
 @riverpod
 Stream<AuthenticationStatus> authenticationStatus(AuthenticationStatusRef ref) {
   return ref.watch(freshProvider).authenticationStatus;
+}
+
+@riverpod
+Future<MeModel> me(MeRef ref) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.me();
+  if (response.status == StatusCode.s200) {
+    return response.data!;
+  }
+  return MeModel();
 }

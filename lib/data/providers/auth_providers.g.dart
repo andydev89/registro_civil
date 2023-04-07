@@ -144,7 +144,21 @@ final authenticationStatusProvider =
 
 typedef AuthenticationStatusRef
     = AutoDisposeStreamProviderRef<AuthenticationStatus>;
-String _$loginHash() => r'6603c8783cdc35ee690c00f1e4a57fe9b4be2576';
+String _$meHash() => r'ec20db25951fab0a4cb46fdea1a6ba0b044eea34';
+
+/// See also [me].
+@ProviderFor(me)
+final meProvider = AutoDisposeFutureProvider<MeModel>.internal(
+  me,
+  name: r'meProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$meHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef MeRef = AutoDisposeFutureProviderRef<MeModel>;
+String _$loginHash() => r'b41eee76f80ed3ff28e4dfc56ae28c2dc0c1e664';
 
 /// See also [Login].
 @ProviderFor(Login)

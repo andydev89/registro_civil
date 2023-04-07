@@ -21,12 +21,12 @@ abstract class Api {
     @Body() NuiModel nuiModel,
   );
 
-   @POST('/api/user/register/data')
+  @POST('/api/user/register/data')
   Future<ResponseModel<CommandModel>> registerData(
     @Body() EnterDataModel enterDataModel,
   );
 
-   @POST('/api/user/register/code')
+  @POST('/api/user/register/code')
   Future<ResponseModel<CodeModel>> registerCode(
     @Body() OtpModel enterDataModel,
   );
@@ -37,6 +37,8 @@ abstract class Api {
     @Query('pageNo') int pageNo,
     @Query('pageSize') int pageSize,
   );
+  @GET('/identity/api/user/me')
+  Future<ResponseModel<MeModel>> me();
 
   @POST('/api/auth/login')
   Future<ResponseModel<LoginResponseModel?>> login(

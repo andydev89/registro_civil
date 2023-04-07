@@ -89,7 +89,8 @@ class CertificateDetail extends ConsumerWidget {
                 ),
                 const SizedBox(width: 10),
                 PrimaryIconButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      ref.read(offersProvider.notifier).delete(offer),
                   width: size,
                   height: size,
                   icon: const Icon(
