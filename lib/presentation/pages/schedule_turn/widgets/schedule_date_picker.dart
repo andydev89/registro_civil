@@ -13,9 +13,13 @@ class ScheduleDatePicker extends ConsumerWidget {
     required this.formControl,
     required this.typeOfServiceModel,
     required this.starDate,
+    required this.initialTime,
+    required this.endTime,
   });
 
   final FormControl<DateTime> formControl;
+  final FormControl<TimeOfDay>? initialTime;
+  final FormControl<TimeOfDay>? endTime;
   final String label;
   final TypeOfServiceModel typeOfServiceModel;
   final DateTime starDate;
@@ -46,6 +50,18 @@ class ScheduleDatePicker extends ConsumerWidget {
           typeOfServiceModel.id,
         ),
       ),
+      onDaySelected: (selectedDay) {
+        schedules.asData?.value.when(
+          ok: (data) {
+            final selectedSchedue = data.firstWhere(
+              (element) => element.date.onlyDate == selectedDay.onlyDate,
+            );
+            initialTime?.updateValue(selectedSchedue.startTime);
+            endTime?.updateValue(selectedSchedue.endingTime);
+          },
+          err: (error) => null,
+        );
+      },
       onPageChanged: (date) => ref.refresh(
         availableSchedulesProvider(
           date,

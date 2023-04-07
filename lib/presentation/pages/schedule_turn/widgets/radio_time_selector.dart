@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_radio_tile.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class RadioTimeSelector extends StatelessWidget {
   const RadioTimeSelector({
@@ -27,8 +28,16 @@ class RadioTimeSelector extends StatelessWidget {
           label,
           style: const TextStyle(fontSize: 15),
         ).verticalPadding(5),
-        Center(
-          child: Wrap(
+        Visibility(
+          visible: times.isNotEmpty,
+          replacement:
+              //TODO traducir
+              const Center(child: PrimaryText('No hay horarios disponibles')),
+          child: GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            childAspectRatio: 20 / 6,
             children: times
                 .map(
                   (e) => PrimaryReactiveRadioTile(

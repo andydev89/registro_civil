@@ -23,6 +23,7 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
     this.onError,
     this.hintText,
     this.onPageChanged,
+    this.onDaySelected,
   });
 
   final FormControl<DateTime> formControl;
@@ -33,6 +34,7 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
   final void Function()? onError;
   final String? hintText;
   final void Function(DateTime)? onPageChanged;
+  final void Function(DateTime)? onDaySelected;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,7 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
                 formControl: formControl,
                 availablesDate: availablesDate,
                 onPageChanged: onPageChanged,
+                onDaySelected: onDaySelected,
               ).horizontalPadding(5),
             ],
           ),
@@ -81,10 +84,12 @@ class CustomCalendar extends StatefulWidget {
     required this.formControl,
     required this.availablesDate,
     this.onPageChanged,
+    this.onDaySelected,
   });
   final FormControl<DateTime> formControl;
   final List<DateTime> availablesDate;
   final void Function(DateTime)? onPageChanged;
+  final void Function(DateTime)? onDaySelected;
 
   @override
   State<CustomCalendar> createState() => _CustomCalendarState();
@@ -148,6 +153,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                 .any((element) => DateUtils.isSameDay(element, selectedDay)) &&
             !selectedDay.isBefore(DateTime.now())) {
           widget.formControl.updateValue(selectedDay);
+          widget.onDaySelected?.call(selectedDay);
           context.popRoute();
         }
       },

@@ -68,10 +68,14 @@ class ScheduleTurnSecondStepModel {
         required this.agency,
     @FormControlAnnotation(validators: [requiredValidator]) required this.date,
     @FormControlAnnotation(validators: [requiredValidator]) required this.time,
+    @FormControlAnnotation<dynamic>() this.initialTime,
+    @FormControlAnnotation<dynamic>() this.endTime,
   });
 
   final LocationModel province;
   final AgencyModel agency;
   final DateTime date;
   final TimeOfDay time;
+  final TimeOfDay? initialTime;
+  final TimeOfDay? endTime;
 }
