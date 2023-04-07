@@ -16,10 +16,29 @@ abstract class Api {
   factory Api(Dio dio, {String baseUrl}) = _Api;
 
   //AUTH
-  @POST('/api/register')
-  Future<ResponseModel<List<RegisterResponseModel>?>> register(
-    @Body() RegisterModel registerModel,
+  @POST('/api/user/validate/citizen')
+  Future<ResponseModel<RegisterCitizenModel>> registerValidateNui(
+    @Body() NuiModel nuiModel,
   );
+
+  @POST('/api/user/register/data')
+  Future<ResponseModel<CommandModel>> registerData(
+    @Body() EnterDataModel enterDataModel,
+  );
+
+  @POST('/api/user/register/code')
+  Future<ResponseModel<CodeModel>> registerCode(
+    @Body() OtpModel enterDataModel,
+  );
+
+  @GET('/api/operator')
+  Future<ResponseModelPagination<List<TelephoneOperatorModel>?>>
+      telephoneOperator(
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
+  @GET('/identity/api/user/me')
+  Future<ResponseModel<MeModel>> me();
 
   @POST('/api/auth/login')
   Future<ResponseModel<LoginResponseModel?>> login(

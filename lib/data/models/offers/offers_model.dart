@@ -8,7 +8,7 @@ part 'offers_model.g.dart';
 class OffersModel {
   OffersModel({
     required this.simpleCertificate,
-    required this.cant,
+    this.cant = 1,
     this.discountConadis = false,
   });
 
@@ -27,7 +27,6 @@ class OffersModel {
       cant: cant,
       discountConadis: discountConadis,
     )..id = id;
-
     return updatedOffer;
   }
 
