@@ -18,7 +18,7 @@ class PrimaryTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return PrimaryLabel(
       title ?? '',
-      fontSize: 25,
+      fontSize: 20,
       color: color,
       textAlign: textAlign,
       maxlines: maxlines,

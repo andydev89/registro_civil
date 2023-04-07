@@ -1,7 +1,5 @@
 import 'package:isar/isar.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
-import 'package:registro_civil_apk/data/models/auth/login_model.dart';
-import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,44 +8,43 @@ part 'isar_provider.g.dart';
 @Riverpod(keepAlive: true)
 Isar isar(IsarRef ref) {
   return Isar.openSync([
-    RegisterModelSchema,
+    // MeModelSchema,
     OffersModelSchema,
   ]);
 }
 
-@riverpod
-class User extends _$User {
-  @override
-  RegisterModel build() {
-    final isar = ref.watch(isarProvider);
-    final user = isar.registerModels.getSync(0) ?? RegisterModel();
-    return user;
-  }
+// @Riverpod(keepAlive: true)
+// class Me extends _$Me {
+//   @override
+//   MeModel build() {
+//     final isar = ref.watch(isarProvider);
+//     final me = ref.watch(meApiProvider);
+//     if (me.isLoading) return MeModel();
+//     final model = me.asData!.value;
+//     isar.meModels.putSync(model);
+//     return model;
+//   }
 
-  void save(RegisterModel model) {
-    final isar = ref.watch(isarProvider);
-    isar.writeTxnSync(() => isar.registerModels.putSync(model));
-    state = model;
-  }
+//   void save(MeModel model) {
+//     final isar = ref.watch(isarProvider);
+//     isar.writeTxnSync(() => isar.meModels.putSync(model));
+//     state = model;
+//   }
 
-  void saveLogin(LoginModel model) {
-    final isar = ref.watch(isarProvider);
-    isar.writeTxnSync(
-      () => isar.registerModels.putSync(
-        RegisterModel(
-          nui: model.identification,
-        ),
-      ),
-    );
-    state = state.copyWith(nui: model.identification);
-  }
+//   void saveLogin(String nui) {
+//     final isar = ref.watch(isarProvider);
+//     final user = (isar.meModels.getSync(0) ?? MeModel())
+//       ..copyWith(identification: nui);
+//     isar.writeTxnSync(() => isar.meModels.putSync(user));
+//     state = user;
+//   }
 
-  void clear() {
-    final isar = ref.watch(isarProvider);
-    isar.writeTxnSync(() => isar.registerModels.deleteSync(0));
-    state = RegisterModel();
-  }
-}
+//   void clear() {
+//     final isar = ref.watch(isarProvider);
+//     isar.writeTxnSync(() => isar.meModels.deleteSync(0));
+//     state = MeModel();
+//   }
+// }
 
 @riverpod
 class Offers extends _$Offers {
@@ -60,7 +57,7 @@ class Offers extends _$Offers {
   void save(OffersModel model) {
     final isar = ref.watch(isarProvider);
     isar.writeTxnSync(() => isar.offersModels.putSync(model));
-    state = [...state, model];
+    state = [...isar.offersModels.where().findAllSync()];
   }
 
   void delete(OffersModel model) {

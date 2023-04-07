@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
@@ -47,8 +47,8 @@ class PrimaryReactiveNuiField<T> extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nui = ref.watch(userProvider).nui;
-    if (init && nui.isNotEmpty) {
+    if (init) {
+      final nui = ref.watch(meProvider).asData?.value.identification ?? '';
       formControl?.value = nui as T;
     }
     final l10n = context.l10n;

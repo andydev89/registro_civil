@@ -366,7 +366,7 @@ class LoginModelForm implements FormModel<LoginModel> {
   FormGroup formElements() => FormGroup({
         identificationControlName: FormControl<String>(
             value: loginModel?.identification,
-            validators: [requiredValidator],
+            validators: [requiredValidator, length10Validator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

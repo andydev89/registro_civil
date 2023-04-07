@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
@@ -36,16 +39,24 @@ class Step1Page extends ConsumerWidget {
               ),
               ReactiveNuiModelFormConsumer(
                 builder: (_, form, __) {
-                  return PrimaryButton(
+                  return PrimaryAsyncButton(
                     title: l10n.validar,
                     onPressed: form.nuiControl.valid
-                        ? () {
-                            ref
-                                .read(registerModelRivProvider.notifier)
-                                .updateNui(form.model);
-                            ref.read(stepperIndexProvider.notifier).index++;
-                            context.navigateTo(const Step2Route());
-                          }
+                        ? () => ref
+                            .read(registerValidateCitizenProvider.notifier)
+                            .registerValidateCitizen(form.model)
+                            .when(
+                              ok: (citizen) {
+                                ref.read(citizenProvider.notifier).state =
+                                    citizen;
+                                ref.read(stepperIndexProvider.notifier).index++;
+                                context.navigateTo(const Step2Route());
+                              },
+                              err: (error) => showAlert(
+                                error.translate(context),
+                                TypeAlert.error,
+                              ),
+                            )
                         : null,
                   );
                 },

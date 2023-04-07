@@ -11,13 +11,19 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
     super.key,
     this.formControl,
     this.formControlName,
-    required this.label,
+    this.label,
     required this.provider,
+    this.light = false,
+    this.hintText,
+    this.prefixIcon,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
   final AutoDisposeFutureProvider<Result<List<T>, StatusCode>> provider;
-  final String label;
+  final String? label;
+  final bool light;
+  final String? hintText;
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,6 +31,9 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
     return PrimaryReactiveDropdown(
       formControlName: formControlName,
       formControl: formControl,
+      light: light,
+      hintText: hintText,
+      prefixIcon: prefixIcon,
       items: elements.asData?.value.when(
             ok: (data) => data,
             err: (error) => null,
