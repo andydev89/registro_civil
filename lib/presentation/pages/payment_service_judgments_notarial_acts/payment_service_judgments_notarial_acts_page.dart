@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts_enum.dart';
@@ -24,52 +25,55 @@ class PaymentServiceJudgmentsNotarialActsPage extends StatelessWidget {
         }
         return PrimaryScaffold(
           title: l10n.pagoSerIngSeAcNot,
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                // ignore: lines_longer_than_80_chars
-                ReactivePaymentServiceJudgmentsNotarialActsModelFormArrayBuilder(
-                  formControl: formModel.typesControl,
-                  itemBuilder: (_, index, value, formModel) {
-                    return PrimaryReactiveCheckBox(
-                      formControl: formModel.typesControl.controls[index]
-                          as FormControl<bool>,
-                      label: PaymentServiceJudgmentsNotarialActsEnum.values
-                          .elementAt(index)
-                          .translate(context),
-                    );
-                  },
+          body: Expanded(
+            child: Scaffold(
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // ignore: lines_longer_than_80_chars
+                    ReactivePaymentServiceJudgmentsNotarialActsModelFormArrayBuilder(
+                      formControl: formModel.typesControl,
+                      itemBuilder: (_, index, value, formModel) {
+                        return PrimaryReactiveCheckBox(
+                          formControl: formModel.typesControl.controls[index]
+                              as FormControl<bool>,
+                          label: PaymentServiceJudgmentsNotarialActsEnum.values
+                              .elementAt(index)
+                              .translate(context),
+                        );
+                      },
+                    ),
+                    SelectElementFromApi(
+                      formControl: formModel.provinceControl,
+                      label: l10n.provincia,
+                      provider: provincesProvider,
+                    ).horizontalPadding(20),
+                    SelectElementFromApi(
+                      formControl: formModel.agencyControl,
+                      label: l10n.agencia,
+                      provider: agenciesProvider,
+                    ).horizontalPadding(20),
+                  ],
                 ),
-                SelectElementFromApi(
-                  formControl: formModel.provinceControl,
-                  label: l10n.provincia,
-                  provider: provincesProvider,
-                ),
-                SelectElementFromApi(
-                  formControl: formModel.agencyControl,
-                  label: l10n.agencia,
-                  provider: agenciesProvider,
-                ),
-              ],
+              ).verticalPadding(20),
+              bottomNavigationBar: ReactivePaymentServiceJudgmentsNotarialActsModelFormConsumer(
+              builder: (context, formModel, child) => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  PrimaryButton(
+                    title: l10n.pagar,
+                    onPressed: formModel.form.valid ? () {} : null,
+                  ),
+                  const SizedBox(height: 10),
+                  PrimaryButton(
+                    title: l10n.cancelar,
+                    onPressed: () => context.navigateBack(),
+                  ),
+                ],
+              ),
+            ).symmetricPadding(10, 30),
             ),
-          ).verticalPadding(20),
-          bottomNavigationBar:
-              ReactivePaymentServiceJudgmentsNotarialActsModelFormConsumer(
-            builder: (context, formModel, child) => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                PrimaryButton(
-                  title: l10n.pagar,
-                  onPressed: formModel.form.valid ? () {} : null,
-                ),
-                const SizedBox(height: 10),
-                PrimaryButton(
-                  title: l10n.cancelar,
-                  onPressed: () => context.navigateBack(),
-                ),
-              ],
-            ),
-          ).symmetricPadding(10, 30),
+          ),
         );
       },
     );

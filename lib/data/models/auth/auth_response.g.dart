@@ -6,18 +6,22 @@ part of 'auth_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RegisterResponseModel _$RegisterResponseModelFromJson(
+RegisterCitizenModel _$RegisterCitizenModelFromJson(
         Map<String, dynamic> json) =>
-    RegisterResponseModel(
-      id: json['id'] as String,
-      command: json['command'] as String,
+    RegisterCitizenModel(
+      nui: json['nui'] as String? ?? '',
+      firstName: json['firstName'] as String? ?? '',
+      lastName: json['lastName'] as String? ?? '',
+      fullName: json['fullName'] as String? ?? '',
     );
 
-Map<String, dynamic> _$RegisterResponseModelToJson(
-        RegisterResponseModel instance) =>
+Map<String, dynamic> _$RegisterCitizenModelToJson(
+        RegisterCitizenModel instance) =>
     <String, dynamic>{
-      'command': instance.command,
-      'id': instance.id,
+      'nui': instance.nui,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'fullName': instance.fullName,
     };
 
 LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) =>
@@ -30,4 +34,39 @@ Map<String, dynamic> _$LoginResponseModelToJson(LoginResponseModel instance) =>
     <String, dynamic>{
       'jwtToken': instance.jwtToken,
       'usefulLifeInMillis': instance.usefulLifeInMillis,
+    };
+
+TelephoneOperatorModel _$TelephoneOperatorModelFromJson(
+        Map<String, dynamic> json) =>
+    TelephoneOperatorModel(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$TelephoneOperatorModelToJson(
+        TelephoneOperatorModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };
+
+CommandModel _$CommandModelFromJson(Map<String, dynamic> json) => CommandModel(
+      id: json['id'] as String,
+      command: json['command'] as String,
+    );
+
+Map<String, dynamic> _$CommandModelToJson(CommandModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'command': instance.command,
+    };
+
+CodeModel _$CodeModelFromJson(Map<String, dynamic> json) => CodeModel(
+      code: json['code'] as String,
+      command: json['command'] as String,
+    );
+
+Map<String, dynamic> _$CodeModelToJson(CodeModel instance) => <String, dynamic>{
+      'code': instance.code,
+      'command': instance.command,
     };

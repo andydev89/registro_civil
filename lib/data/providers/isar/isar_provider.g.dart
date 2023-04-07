@@ -6,7 +6,7 @@ part of 'isar_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isarHash() => r'36debdbcfa32401ce76d9094d8727283f34a5e29';
+String _$isarHash() => r'a5a3466fb4e519d1d97deae9830ab323c5b68721';
 
 /// See also [isar].
 @ProviderFor(isar)
@@ -77,21 +77,7 @@ final totalPayProvider = AutoDisposeProvider<double>.internal(
 );
 
 typedef TotalPayRef = AutoDisposeProviderRef<double>;
-String _$userHash() => r'8879e1c2e6593c2d27cfa1f73bbf4804e3221736';
-
-/// See also [User].
-@ProviderFor(User)
-final userProvider = AutoDisposeNotifierProvider<User, RegisterModel>.internal(
-  User.new,
-  name: r'userProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$userHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$User = AutoDisposeNotifier<RegisterModel>;
-String _$offersHash() => r'60a6a95a365b9f0e738163445804d8a4499479df';
+String _$offersHash() => r'b446145f8bc781b025eb943b65067b5a05495ff2';
 
 /// See also [Offers].
 @ProviderFor(Offers)

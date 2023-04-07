@@ -6,13 +6,18 @@ import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/sliding_dialog.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/certificate_detail.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
 class OffersWidget extends ConsumerWidget {
-  const OffersWidget({super.key});
+  const OffersWidget({
+    super.key,
+    required this.controller,
+  });
+  final SlidingDialogController controller;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,7 +45,7 @@ class OffersWidget extends ConsumerWidget {
                     color: Colors.white,
                   ).symmetricPadding(5, 32),
                   IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => controller.closeDialog(context),
                     icon: Stack(
                       children: const [
                         Center(
@@ -67,34 +72,48 @@ class OffersWidget extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: SingleChildScrollView(
+                  if (offers.isNotEmpty)
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: offers
+                              .map(
+                                (offer) => Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Flexible(
+                                          child: CertificateDetail(
+                                            offer: offer,
+                                          ).verticalPadding(5),
+                                        ),
+                                      ],
+                                    ),
+                                    const Divider(
+                                      color: Colors.grey,
+                                      height: 2,
+                                    ),
+                                  ],
+                                ),
+                              )
+                              .toList(),
+                        ).verticalPadding(10),
+                      ),
+                    )
+                  else
+                    Expanded(
                       child: Column(
-                        children: offers
-                            .map(
-                              (offer) => Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Flexible(
-                                        child: CertificateDetail(
-                                          offer: offer,
-                                        ).verticalPadding(5),
-                                      ),
-                                    ],
-                                  ),
-                                  const Divider(
-                                    color: Colors.grey,
-                                    height: 2,
-                                  ),
-                                ],
-                              ),
-                            )
-                            .toList(),
-                      ).verticalPadding(10),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.remove_shopping_cart_outlined,
+                            color: Colors.grey.withOpacity(0.3),
+                            size: MediaQuery.of(context).size.width * 0.5,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -119,7 +138,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$-${discountConadis.toStringAsFixed(2)}',
+                            '-\$${discountConadis.toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -147,6 +166,7 @@ class OffersWidget extends ConsumerWidget {
                           PrimaryText(
                             '\$${totalPay.toStringAsFixed(2)}',
                             fontWeight: FontWeight.bold,
+                            fontSize: fontSizeDefault + 3,
                           ),
                         ],
                       ).verticalPadding(10),
@@ -157,7 +177,7 @@ class OffersWidget extends ConsumerWidget {
                     children: [
                       PrimaryButton(
                         title: l10n.pagar,
-                        onPressed: () {},
+                        onPressed: offers.isEmpty ? null : () {},
                       ),
                       const SizedBox(height: 15),
                       PrimaryButton(
