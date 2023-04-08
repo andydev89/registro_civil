@@ -12,8 +12,7 @@ class LoginModel {
     @FormControlAnnotation(
       validators: [
         requiredValidator,
-        // TODO(jang): quitar esto cuando se pueda
-        // ecuadorDniValidator,
+        ecuadorDniValidator,
         length10Validator,
       ],
     )
