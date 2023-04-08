@@ -37,7 +37,6 @@ Fresh<OAuth2Token> fresh(FreshRef ref) {
   return Fresh.oAuth2(
     tokenStorage: SSTokenStorage(),
     shouldRefresh: (response) {
-      print(response?.data['status']);
       return response?.data['status'] == 401;
     },
     refreshToken: (token, client) async {

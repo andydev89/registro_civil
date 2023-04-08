@@ -70,12 +70,18 @@ abstract class Api {
   );
 
   //SCHEDULE
-  @GET('/identity/api/schedule/available')
+  @GET('/schedule/api/schedule/available')
   Future<ResponseModelPagination<List<ScheduleModel>?>> availableSchedules(
     @Query('pageNo') int pageNo,
     @Query('pageSize') int pageSize,
     @Query('from') String from,
     @Query('to') String to,
     @Query('typeOfService') int typeOfService,
+  );
+
+  @GET('/schedule/api/schedule')
+  Future<ResponseModelPagination<List<ScheduleModel>?>> schedules(
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
   );
 }

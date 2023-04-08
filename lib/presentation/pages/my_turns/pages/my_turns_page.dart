@@ -1,52 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
+import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/models/my_turn_expandable_card_model.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/widgets/my_turn_expandable_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
 
-class MyTurnsPage extends StatelessWidget {
+class MyTurnsPage extends ConsumerWidget {
   const MyTurnsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final myTurns = ref.watch(schedulesProvider);
     return PrimaryScaffold(
+      horizontalPadding: 15,
       title: l10n.misTurnos,
-      body: Column(
-        children: [
-          PrimarySearch(
-            showFilter: true,
-            onPressed: () {
-              // print('asd');
-            },
-          ).verticalPadding(20),
-          MyTurnExpandableCard(
-            data: MyTurnExpandableCardModel(
-              id: 12569,
-              agency: 'Matriz',
-              city: 'Guayaqui',
-              date: DateTime.now(),
-              typeOfService: TypeOfServiceModel(
-                id: 1,
-                name: 'asd',
-                price: 22,
-                iva: 22,
-                discount: 22,
-                state: 'state',
-                publishWeb: true,
-                publishMovil: true,
-                iconoWeb: '',
-                iconoMovil: '',
-                typeService: 'typeService',
+      body: Expanded(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              PrimarySearch(
+                showFilter: true,
+                onPressed: () {
+                  // print('asd');
+                },
+              ).verticalPadding(20),
+              myTurns.when(
+                data: (data) => data.when(
+                  ok: (value) => Column(
+                    children: value
+                        .map(
+                          (e) => MyTurnExpandableCard(
+                            data: MyTurnExpandableCardModel(
+                              id: e.id,
+                              agency: e.agency.name,
+                              city: e.agency.region,
+                              date: e.date,
+                              typeOfService: e.typeOfService,
+                              time: e.startTime,
+                            ),
+                          ).verticalPadding(10),
+                        )
+                        .toList(),
+                  ),
+                  err: (error) => ErrorStatus(messagge: error.toString()),
+                ),
+                error: (error, stackTrace) =>
+                    ErrorStatus(messagge: error.toString()),
+                loading: () => const LoadingStatus(),
               ),
-              state: 'ASIGNADO',
-              time: TimeOfDay.fromDateTime(DateTime.now()),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

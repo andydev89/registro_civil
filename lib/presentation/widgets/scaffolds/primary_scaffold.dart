@@ -13,11 +13,13 @@ class PrimaryScaffold extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.bottomNavigationBar,
+    this.horizontalPadding = 20,
   });
   final Widget body;
   final String title;
   final String? subtitle;
   final Widget? bottomNavigationBar;
+  final double horizontalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class PrimaryScaffold extends StatelessWidget {
                 ).symmetricPadding(20, 30),
               body,
             ],
-          ).horizontalPadding(20),
+          ).horizontalPadding(horizontalPadding),
           bottomNavigationBar:
               bottomNavigationBar == null ? null : bottomNavigationBar!,
         ),
