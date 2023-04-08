@@ -29,100 +29,101 @@ class Step3Page extends ConsumerWidget {
         ref.read(stepperIndexProvider.notifier).index--;
         return Future(() => true);
       },
-      child: ScrollableContent(
-        child: EnterDataModelFormBuilder(
-          model: EnterDataModel(
-            nui: citizen.nui,
-            firstName: citizen.firstName,
-            lastName: citizen.lastName,
-          ),
-          builder: (_, form, __) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    PrimaryText(
-                      l10n.ingreseDatos,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        PrimaryText(
-                          '${l10n.nombre}: ${form.model.firstName}'
-                          ' ${form.model.lastName}',
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    PrimaryReactiveEmailField(
-                      prefixIcon: Icon(
-                        Icons.alternate_email,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      formControl: form.emailControl,
-                      ligth: true,
-                      hintText: l10n.correoE,
-                    ),
-                    const SizedBox(height: 20),
-                    PrimaryReactiveTextField(
-                      prefixIcon: Icon(
-                        Icons.phone_android,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      ligth: true,
-                      formControl: form.phoneControl,
-                      hintText: l10n.telefonoCel,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        LengthLimitingTextInputFormatter(10),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    SelectElementFromApi(
-                      formControl: form.telephoneOperatorControl,
-                      provider: operatorsProvider,
-                      light: true,
-                      prefixIcon: Icon(
-                        Icons.phone_android,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      hintText: l10n.operador,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 50),
-                ReactiveEnterDataModelFormConsumer(
-                  builder: (_, form, __) {
-                    return PrimaryAsyncButton(
-                      title: l10n.verificar,
-                      onPressed: form.form.valid
-                          ? () => ref
-                              .read(registerDataProvider.notifier)
-                              .registerData(form.model)
-                              .when(
-                                ok: (_) {
-                                  ref
-                                      .read(stepperIndexProvider.notifier)
-                                      .index++;
-                                  context.navigateTo(const Step4Route());
-                                },
-                                err: (error) => showAlert(
-                                  error.translate(context),
-                                  TypeAlert.error,
-                                ),
-                              )
-                          : null,
-                    );
-                  },
-                ),
-              ],
-            );
-          },
+      child: EnterDataModelFormBuilder(
+        model: EnterDataModel(
+          nui: citizen.nui,
+          firstName: citizen.firstName,
+          lastName: citizen.lastName,
         ),
+        builder: (_, form, __) {
+          return Scaffold(
+            backgroundColor: Colors.transparent,
+            body: ScrollableContent(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      PrimaryText(
+                        l10n.ingreseDatos,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          PrimaryText(
+                            '${l10n.nombre}: ${form.model.firstName}'
+                            ' ${form.model.lastName}',
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      PrimaryReactiveEmailField(
+                        prefixIcon: Icon(
+                          Icons.alternate_email,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        formControl: form.emailControl,
+                        ligth: true,
+                        hintText: l10n.correoE,
+                      ),
+                      const SizedBox(height: 20),
+                      PrimaryReactiveTextField(
+                        prefixIcon: Icon(
+                          Icons.phone_android,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        ligth: true,
+                        formControl: form.phoneControl,
+                        hintText: l10n.telefonoCel,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(10),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      SelectElementFromApi(
+                        formControl: form.telephoneOperatorControl,
+                        provider: operatorsProvider,
+                        light: true,
+                        prefixIcon: Icon(
+                          Icons.phone_android,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        hintText: l10n.operador,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 50),
+                ],
+              ),
+            ),
+            bottomNavigationBar: ReactiveEnterDataModelFormConsumer(
+              builder: (_, form, __) {
+                return PrimaryAsyncButton(
+                  title: l10n.verificar,
+                  onPressed: form.form.valid
+                      ? () => ref
+                          .read(registerDataProvider.notifier)
+                          .registerData(form.model)
+                          .when(
+                            ok: (_) {
+                              ref.read(stepperIndexProvider.notifier).index++;
+                              context.navigateTo(const Step4Route());
+                            },
+                            err: (error) => showAlert(
+                              error.translate(context),
+                              TypeAlert.error,
+                            ),
+                          )
+                      : null,
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }

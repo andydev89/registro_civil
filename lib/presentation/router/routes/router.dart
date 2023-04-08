@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/auth_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_first_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/forgot_password/forgot_password_router_page.dart';
@@ -40,7 +41,6 @@ import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/s
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_second_step/simple_certificate_second_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/simple_certificate_router_page.dart';
 import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
-import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 
 part 'router.gr.dart';
 

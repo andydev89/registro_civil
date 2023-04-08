@@ -283,5 +283,6 @@
   "pagoSerIngSenActNot": "Pago del servicio por Ingreso de Sentencias o Actas Notariales",
   "debeSelAlMenUnElem": "Debe seleccionar al menos un elemento",
   "sesionExp":"Lo sentimos, su sesión ha expirado. Por favor, vuelva a iniciar sesión para continuar.",
-  "operador": "Operador"
+  "operador": "Operador",
+  "invalidCode": "Código inválido"
 }
