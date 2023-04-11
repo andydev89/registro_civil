@@ -74,31 +74,33 @@ class OffersWidget extends ConsumerWidget {
                 children: [
                   if (offers.isNotEmpty)
                     Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: offers
-                              .map(
-                                (offer) => Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Flexible(
-                                          child: CertificateDetail(
-                                            offer: offer,
-                                          ).verticalPadding(5),
-                                        ),
-                                      ],
-                                    ),
-                                    const Divider(
-                                      color: Colors.grey,
-                                      height: 2,
-                                    ),
-                                  ],
-                                ),
-                              )
-                              .toList(),
-                        ).verticalPadding(10),
+                      child: Scrollbar(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: offers
+                                .map(
+                                  (offer) => Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Flexible(
+                                            child: CertificateDetail(
+                                              offer: offer,
+                                            ).verticalPadding(5),
+                                          ),
+                                        ],
+                                      ),
+                                      const Divider(
+                                        color: Colors.grey,
+                                        height: 2,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          ).verticalPadding(10),
+                        ),
                       ),
                     )
                   else

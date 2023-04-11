@@ -227,4 +227,5 @@ Map<String, String Function(dynamic error)> validationMessage(
           l10n.introducirNum6Dig,
       ValidationsMessageEnum.atLeastOneElement.toText: (error) =>
           l10n.debeSelAlMenUnElem,
+      ValidationsMessageEnum.invalidCode.toText: (error) => l10n.invalidCode,
     };

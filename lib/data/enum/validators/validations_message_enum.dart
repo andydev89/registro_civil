@@ -10,7 +10,9 @@ enum ValidationsMessageEnum implements Translatable {
   invalidPhoneNumber('invalidPhoneNumber'),
   length6Error('length6Error'),
   invalidConadisNumber('invalidConadisNumber'),
-  atLeastOneElement('atLeastOneElement');
+  atLeastOneElement('atLeastOneElement'),
+  invalidCode('invalidCode'),
+  ;
 
   const ValidationsMessageEnum(this.toText);
   final String toText;
@@ -35,6 +37,8 @@ enum ValidationsMessageEnum implements Translatable {
         return l10n.conadisNumError;
       case ValidationsMessageEnum.atLeastOneElement:
         return l10n.debeSelAlMenUnElem;
+      case ValidationsMessageEnum.invalidCode:
+        return l10n.invalidCode;
     }
   }
 }
