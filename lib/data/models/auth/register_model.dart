@@ -93,24 +93,28 @@ class OtpModel {
     @FormControlAnnotation(validators: [requiredValidator]) this.code = '',
     @FormControlAnnotation(validators: [requiredTrueValidator])
         this.isVerified = false,
-    this.password,
   });
 
   factory OtpModel.fromJson(Map<String, dynamic> json) =>
       _$OtpModelFromJson(json);
 
-  @JsonKey(includeToJson: false)
   final bool isVerified;
   final String code;
-  @JsonKey(toJson: _passwordToJson)
-  final ConfirmPasswordModel? password;
-
-  static String? _passwordToJson(
-    ConfirmPasswordModel? passwordModel,
-  ) =>
-      passwordModel?.newPassword;
 
   Map<String, dynamic> toJson() => _$OtpModelToJson(this);
+}
+
+@JsonSerializable()
+class RegisterModel {
+  RegisterModel({required this.code, required this.password});
+
+  factory RegisterModel.fromJson(Map<String, dynamic> json) =>
+      _$RegisterModelFromJson(json);
+  final String code;
+  final String password;
+
+
+  Map<String, dynamic> toJson() => _$RegisterModelToJson(this);
 }
 
 @JsonSerializable()

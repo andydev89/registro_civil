@@ -28,7 +28,7 @@ abstract class Api {
 
   @POST('/api/user/register/code')
   Future<ResponseModel<CodeModel>> registerCode(
-    @Body() OtpModel enterDataModel,
+    @Body() RegisterModel enterDataModel,
   );
 
   @GET('/api/operator')

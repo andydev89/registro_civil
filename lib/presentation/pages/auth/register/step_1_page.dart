@@ -21,50 +21,53 @@ class Step1Page extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    return ScrollableContent(
-      child: NuiModelFormBuilder(
-        builder: (_, form, __) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              PrimaryText(
-                l10n.ingNumCedula,
-                color: Colors.white,
-              ),
-              PrimaryReactiveNuiField<String>(
-                formControl: form.nuiControl,
-                hintText: l10n.numCedula,
-                ligth: true,
-                prefixIcon: Assets.svg.cedula.svg(),
-              ),
-              ReactiveNuiModelFormConsumer(
-                builder: (_, form, __) {
-                  return PrimaryAsyncButton(
-                    title: l10n.validar,
-                    onPressed: form.nuiControl.valid
-                        ? () => ref
-                            .read(registerValidateCitizenProvider.notifier)
-                            .registerValidateCitizen(form.model)
-                            .when(
-                              ok: (citizen) {
-                                ref.read(citizenProvider.notifier).state =
-                                    citizen;
-                                ref.read(stepperIndexProvider.notifier).index++;
-                                context.navigateTo(const Step2Route());
-                              },
-                              err: (error) => showAlert(
-                                error.translate(context),
-                                TypeAlert.error,
-                              ),
-                            )
-                        : null,
-                  );
-                },
-              ),
-            ],
-          );
-        },
-      ),
+    return NuiModelFormBuilder(
+      builder: (_, form, __) {
+        return Scaffold(
+          backgroundColor: Colors.transparent,
+          body: ScrollableContent(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                PrimaryText(
+                  l10n.ingNumCedula,
+                  color: Colors.white,
+                ),
+                PrimaryReactiveNuiField<String>(
+                  formControl: form.nuiControl,
+                  hintText: l10n.numCedula,
+                  ligth: true,
+                  prefixIcon: Assets.svg.cedula.svg(),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+          bottomNavigationBar: ReactiveNuiModelFormConsumer(
+            builder: (_, form, __) {
+              return PrimaryAsyncButton(
+                title: l10n.validar,
+                onPressed: form.nuiControl.valid
+                    ? () => ref
+                        .read(registerValidateCitizenProvider.notifier)
+                        .registerValidateCitizen(form.model)
+                        .when(
+                          ok: (citizen) {
+                            ref.read(stepperIndexProvider.notifier).index++;
+                            ref.read(citizenProvider.notifier).state = citizen;
+                            context.navigateTo(const Step2Route());
+                          },
+                          err: (error) => showAlert(
+                            error.translate(context),
+                            TypeAlert.error,
+                          ),
+                        )
+                    : null,
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

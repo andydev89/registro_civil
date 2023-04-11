@@ -1,23 +1,30 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_password_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class Step5Page extends ConsumerWidget {
-  const Step5Page({super.key});
+  const Step5Page({
+    super.key,
+    required this.code,
+  });
+  final String code;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-
     return WillPopScope(
       onWillPop: () {
         ref.read(stepperIndexProvider.notifier).index--;
@@ -60,45 +67,25 @@ class Step5Page extends ConsumerWidget {
                         p0.translate(context),
                         TypeAlert.error,
                       ),
-                      // onPressed: form.form.valid
-                      //     ? () {
-                      //         ref
-                      //             .read(registerModelRivProvider.notifier)
-                      //             .updatePassword(form.model);
-                      //         final registerModel = ref.watch(
-                      //           registerModelRivProvider,
-                      //         );
-                      //         return ref
-                      //             .read(registerProvider.notifier)
-                      //             .register(registerModel)
-                      //             .when(
-                      //               ok: (result) => context.replaceRoute(
-                      //                 SuccessRoute(
-                      //                   child: Column(
-                      //                     children: [
-                      //                       PrimaryLabel(
-                      //                         l10n.regSatisfactorio,
-                      //                         color: Colors.white,
-                      //                       ),
-                      //                       const SizedBox(
-                      //                         height: 30,
-                      //                       ),
-                      //                       PrimaryLabel(
-                      //                         l10n.envCorreo,
-                      //                         color: Colors.white,
-                      //                         fontWeight: FontWeight.normal,
-                      //                       ),
-                      //                     ],
-                      //                   ),
-                      //                 ),
-                      //               ),
-                      //               err: (error) => showAlert(
-                      //                 error.translate(context),
-                      //                 TypeAlert.error,
-                      //               ),
-                      //             );
-                      //       }
-                      //     : null,
+                      onPressed: form.form.valid
+                          ? () => ref
+                              .read(registerCodeProvider.notifier)
+                              .registerCode(
+                                RegisterModel(
+                                  code: code,
+                                  password:
+                                      form.model.confirmPassword!.newPassword,
+                                ),
+                              )
+                              .when(
+                                ok: (_) =>
+                                    context.replaceRoute(const SuccessRoute()),
+                                err: (error) => showAlert(
+                                  error.translate(context),
+                                  TypeAlert.error,
+                                ),
+                              )
+                          : null,
                     );
                   },
                 ),

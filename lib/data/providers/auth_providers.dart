@@ -97,7 +97,7 @@ class RegisterCode extends _$RegisterCode {
   }
 
   Future<Result<bool, StatusCode>> registerCode(
-    OtpModel model,
+    RegisterModel model,
   ) async {
     final api = ref.watch(apiProvider);
     final response = await api.registerCode(model);
