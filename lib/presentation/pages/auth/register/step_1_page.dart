@@ -53,8 +53,8 @@ class Step1Page extends ConsumerWidget {
                         .registerValidateCitizen(form.model)
                         .when(
                           ok: (citizen) {
-                            ref.read(citizenProvider.notifier).state = citizen;
                             ref.read(stepperIndexProvider.notifier).index++;
+                            ref.read(citizenProvider.notifier).state = citizen;
                             context.navigateTo(const Step2Route());
                           },
                           err: (error) => showAlert(

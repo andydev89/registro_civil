@@ -80,13 +80,9 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     SuccessRoute.name: (routeData) {
-      final args = routeData.argsAs<SuccessRouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: SuccessPage(
-          key: args.key,
-          child: args.child,
-        ),
+        child: const SuccessPage(),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -120,18 +116,26 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     Step4Route.name: (routeData) {
+      final args = routeData.argsAs<Step4RouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const Step4Page(),
+        child: Step4Page(
+          key: args.key,
+          command: args.command,
+        ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
       );
     },
     Step5Route.name: (routeData) {
+      final args = routeData.argsAs<Step5RouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const Step5Page(),
+        child: Step5Page(
+          key: args.key,
+          code: args.code,
+        ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -706,36 +710,14 @@ class ScanRouterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SuccessPage]
-class SuccessRoute extends PageRouteInfo<SuccessRouteArgs> {
-  SuccessRoute({
-    Key? key,
-    required Widget child,
-  }) : super(
+class SuccessRoute extends PageRouteInfo<void> {
+  const SuccessRoute()
+      : super(
           SuccessRoute.name,
           path: 'success-page',
-          args: SuccessRouteArgs(
-            key: key,
-            child: child,
-          ),
         );
 
   static const String name = 'SuccessRoute';
-}
-
-class SuccessRouteArgs {
-  const SuccessRouteArgs({
-    this.key,
-    required this.child,
-  });
-
-  final Key? key;
-
-  final Widget child;
-
-  @override
-  String toString() {
-    return 'SuccessRouteArgs{key: $key, child: $child}';
-  }
 }
 
 /// generated route for
@@ -776,26 +758,70 @@ class Step3Route extends PageRouteInfo<void> {
 
 /// generated route for
 /// [Step4Page]
-class Step4Route extends PageRouteInfo<void> {
-  const Step4Route()
-      : super(
+class Step4Route extends PageRouteInfo<Step4RouteArgs> {
+  Step4Route({
+    Key? key,
+    required String command,
+  }) : super(
           Step4Route.name,
           path: 'step4-page',
+          args: Step4RouteArgs(
+            key: key,
+            command: command,
+          ),
         );
 
   static const String name = 'Step4Route';
 }
 
+class Step4RouteArgs {
+  const Step4RouteArgs({
+    this.key,
+    required this.command,
+  });
+
+  final Key? key;
+
+  final String command;
+
+  @override
+  String toString() {
+    return 'Step4RouteArgs{key: $key, command: $command}';
+  }
+}
+
 /// generated route for
 /// [Step5Page]
-class Step5Route extends PageRouteInfo<void> {
-  const Step5Route()
-      : super(
+class Step5Route extends PageRouteInfo<Step5RouteArgs> {
+  Step5Route({
+    Key? key,
+    required String code,
+  }) : super(
           Step5Route.name,
           path: 'step5-page',
+          args: Step5RouteArgs(
+            key: key,
+            code: code,
+          ),
         );
 
   static const String name = 'Step5Route';
+}
+
+class Step5RouteArgs {
+  const Step5RouteArgs({
+    this.key,
+    required this.code,
+  });
+
+  final Key? key;
+
+  final String code;
+
+  @override
+  String toString() {
+    return 'Step5RouteArgs{key: $key, code: $code}';
+  }
 }
 
 /// generated route for
