@@ -14,8 +14,8 @@ class TypeOfServiceModel implements Translatable {
     required this.state,
     required this.publishWeb,
     required this.publishMovil,
-    required this.iconoWeb,
-    required this.iconoMovil,
+    this.iconoWeb,
+    this.iconoMovil,
     required this.typeService,
   });
 
