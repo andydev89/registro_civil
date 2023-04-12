@@ -284,5 +284,19 @@
   "debeSelAlMenUnElem": "Debe seleccionar al menos un elemento",
   "sesionExp":"Lo sentimos, su sesión ha expirado. Por favor, vuelva a iniciar sesión para continuar.",
   "operador": "Operador",
-  "invalidCode": "Código inválido"
+  "invalidCode": "Código inválido",
+  "cuentaConMedidorDeLuzElectrica": "Cuenta con medidor de luz eléctrica",
+  "codigoUnicoElectricoNacional": "Código único eléctrico nacional",
+  "canton": "Cantón",
+  "parroquia": "Parroquia",
+  "callePrincipal": "Calle principal",
+  "calleSecundaria": "Calle secundaria",
+  "tipoDeVivienda": "Tipo de vivienda",
+  "tenencia": "Tenencia",
+  "numeroDeVillaOEdificio": "Número de villa o edificio",
+  "numeroDePiso": "Número de piso",
+  "numeroDeDepartamento": "Número de departamento",
+  "tipoDeResidencia": "Tipo de residencia",
+  "annadirResidencia": "Añadir residencia",
+  "verCertificado": "Ver certificado"
 }

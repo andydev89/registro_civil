@@ -5,8 +5,8 @@ import 'package:registro_civil_apk/data/utils/validators.dart';
 part 'residence_registration_model.gform.dart';
 
 @ReactiveFormAnnotation()
-class ResidenceRegistrationModel {
-  ResidenceRegistrationModel({
+class ResidenceRegistrationFirstStepModel {
+  ResidenceRegistrationFirstStepModel({
     @FormControlAnnotation(validators: [requiredValidator])
         this.nationalElectricUnicCode,
     @FormControlAnnotation<dynamic>() this.haveElectricLightMeter = false,
@@ -16,6 +16,18 @@ class ResidenceRegistrationModel {
         required this.emailAddress,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.observations,
+  });
+
+  final int? nationalElectricUnicCode;
+  final bool haveElectricLightMeter;
+  final String phoneNumber;
+  final String emailAddress;
+  final String observations;
+}
+
+@ReactiveFormAnnotation()
+class ResidenceRegistrationSecondStepModel {
+  ResidenceRegistrationSecondStepModel({
     @FormControlAnnotation(validators: [requiredValidator])
         required this.province,
     @FormControlAnnotation(validators: [requiredValidator])
@@ -26,6 +38,18 @@ class ResidenceRegistrationModel {
         required this.primaryStreet,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.secondaryStreet,
+  });
+
+  final LocationModel province;
+  final String canton;
+  final String parroquia;
+  final String primaryStreet;
+  final String secondaryStreet;
+}
+
+@ReactiveFormAnnotation()
+class ResidenceRegistrationThirdStepModel {
+  ResidenceRegistrationThirdStepModel({
     @FormControlAnnotation(validators: [requiredValidator])
         required this.houseType,
     @FormControlAnnotation(validators: [requiredValidator])
@@ -40,17 +64,6 @@ class ResidenceRegistrationModel {
         required this.residenceType,
   });
 
-  final int? nationalElectricUnicCode;
-  final bool haveElectricLightMeter;
-  final String phoneNumber;
-  final String emailAddress;
-  final String observations;
-  final LocationModel province;
-  final String canton;
-  final String parroquia;
-  final String primaryStreet;
-  final String secondaryStreet;
-  //TODO: hacerlo un enum
   final String houseType;
   //TODO: hacerlo un enum
   ///Tenencia

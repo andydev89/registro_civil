@@ -25,7 +25,9 @@ import 'package:registro_civil_apk/presentation/pages/notification/notification_
 import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/select_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts_page.dart';
-import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/requested_information_page.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/request_information_firts_step_page.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/request_information_second_step_page.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/request_information_third_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/residence_registration_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/code_page.dart';
@@ -208,8 +210,14 @@ part 'router.gr.dart';
           page: ResidenceRegistrationRouterPage,
           children: [
             CupertinoRoute(
-              page: RequestedInformationPage,
+              page: RequestInformationFirstStepPage,
               initial: true,
+            ),
+            CupertinoRoute(
+              page: RequestInformationSecondStepPage,
+            ),
+            CupertinoRoute(
+              page: RequestInformationThirdStepPage,
             ),
           ],
         ),
