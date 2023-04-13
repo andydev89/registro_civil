@@ -284,5 +284,19 @@
   "debeSelAlMenUnElem": "You must select at least one item",
   "sesionExp":"Sorry, your session has expired. Please log in again to continue.",
   "operador": "Operator",
-  "invalidCode": "Invalid code"
+  "invalidCode": "Invalid code",
+  "cuentaConMedidorDeLuzElectrica": "Do you have an electricity meter?",
+  "codigoUnicoElectricoNacional": "Single national electrical code",
+  "canton": "Canton",
+  "parroquia": "Parish",
+  "callePrincipal": "Main Street",
+  "calleSecundaria": "Secondary street",
+  "tipoDeVivienda": "Housing type",
+  "tenencia": "Tenure",
+  "numeroDeVillaOEdificio": "Villa or building number",
+  "numeroDePiso": "Floor number",
+  "numeroDeDepartamento": "Department number",
+  "tipoDeResidencia": "Residence type",
+  "annadirResidencia": "Add residence",
+  "verCertificado": "See certificate"
 }

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
@@ -19,38 +20,47 @@ class HomeRouterPage extends StatelessWidget {
         ServicesRoute(),
         ProceduresRoute(),
       ],
-      builder: (context, child, tabController) => Column(
-        children: [
-          DecoratedBox(
-            decoration: ShapeDecoration(
-              shape: const StadiumBorder(),
-              color: grey.withOpacity(0.4),
-            ),
-            child: TabBar(
-              controller: tabController,
-              unselectedLabelColor: Colors.grey,
-              splashBorderRadius: BorderRadius.circular(1000),
-              indicator: const ShapeDecoration(
-                shape: StadiumBorder(),
-                gradient: gradient,
+      builder: (context, child, tabController) => ExtendedNestedScrollView(
+        floatHeaderSlivers: true,
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  DecoratedBox(
+                    decoration: ShapeDecoration(
+                      shape: const StadiumBorder(),
+                      color: grey.withOpacity(0.4),
+                    ),
+                    child: TabBar(
+                      controller: tabController,
+                      unselectedLabelColor: Colors.grey,
+                      splashBorderRadius: BorderRadius.circular(1000),
+                      indicator: const ShapeDecoration(
+                        shape: StadiumBorder(),
+                        gradient: gradient,
+                      ),
+                      tabs: [
+                        Tab(text: l10n.servicios),
+                        Tab(text: l10n.tramites),
+                      ],
+                    ),
+                  ).symmetricPadding(20, 25),
+                  Consumer(
+                    builder: (_, ref, __) {
+                      return PrimarySearch(
+                        filter: ref.watch(searchHomeProvider),
+                        onChanged: (p0) =>
+                            ref.read(searchHomeProvider.notifier).state = p0,
+                      ).symmetricPadding(10, 40);
+                    },
+                  ),
+                ],
               ),
-              tabs: [
-                Tab(text: l10n.servicios),
-                Tab(text: l10n.tramites),
-              ],
             ),
-          ).symmetricPadding(20, 25),
-          Consumer(
-            builder: (_, ref, __) {
-              return PrimarySearch(
-                filter: ref.watch(searchHomeProvider),
-                onChanged: (p0) =>
-                    ref.read(searchHomeProvider.notifier).state = p0,
-              ).horizontalPadding(40);
-            },
-          ),
-          Expanded(child: child),
-        ],
+          ];
+        },
+        body: child,
       ),
     );
   }
