@@ -1,11 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/secondary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/offers_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/sliding_dialog.dart';
+import 'package:registro_civil_apk/presentation/widgets/g_map.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
@@ -86,6 +90,43 @@ Future<void> showOffersDialog(
       return SlidingDialog(
         child: (controller) => OffersWidget(
           controller: controller,
+        ),
+      );
+    },
+  );
+}
+
+Future<void> showMapPickerDialog(
+  BuildContext context,
+) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Material(
+        color: Colors.transparent,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 100,
+            bottom: 40,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SecondaryIconButton(
+                onPressed: () => context.popRoute(),
+                icon: Icons.arrow_back,
+              ),
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: const GMap(),
+                ),
+              ),
+            ],
+          ),
         ),
       );
     },
