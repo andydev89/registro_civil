@@ -71,6 +71,18 @@ abstract class Api {
     @Query('pageSize') int pageSize,
   );
 
+  @GET('/identity/api/location/canton')
+  Future<ResponseModelPagination<List<LocationModel>?>> canton(
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
+
+  @GET('/identity/api/location/parroquia')
+  Future<ResponseModelPagination<List<LocationModel>?>> parroquias(
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
+
   @GET('/identity/api/agency')
   Future<ResponseModelPagination<List<AgencyModel>?>> agencies(
     @Query('pageNo') int pageNo,

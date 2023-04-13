@@ -3,7 +3,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/sources/api.dart';
-import 'package:registro_civil_apk/data/sources/sp_token_storage.dart';
+import 'package:registro_civil_apk/data/sources/ss_token_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dio_providers.g.dart';
@@ -38,7 +38,14 @@ Fresh<OAuth2Token> fresh(FreshRef ref) {
   return Fresh.oAuth2(
     tokenStorage: SSTokenStorage(),
     shouldRefresh: (response) {
-      return (response?.data as Map?)?['status'] == 401;
+      final uri = response?.realUri;
+      final status = response?.data['status'];
+      final shouldRefresh =
+          status == 401 && !uri!.path.contains('identity/api/auth/refresh');
+      if (!shouldRefresh) {
+        ref.read(loginProvider.notifier).logout();
+      }
+      return shouldRefresh;
     },
     refreshToken: (token, client) async {
       final oauthToken =
