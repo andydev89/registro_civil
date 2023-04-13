@@ -13,7 +13,29 @@ Future<Result<List<LocationModel>, StatusCode>> provinces(
   ProvincesRef ref,
 ) async {
   final api = ref.watch(apiProvider);
-  final response = await api.provinces(0, 20);
+  final response = await api.provinces(0, 100);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+@riverpod
+Future<Result<List<LocationModel>, StatusCode>> canton(
+  CantonRef ref,
+) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.canton(0, 100);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+@riverpod
+Future<Result<List<LocationModel>, StatusCode>> parroquia(
+  ParroquiaRef ref,
+) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.parroquias(0, 100);
   return response.success
       ? Result.ok(response.data!)
       : Result.err(response.status);
@@ -24,7 +46,7 @@ Future<Result<List<AgencyModel>, StatusCode>> agencies(
   AgenciesRef ref,
 ) async {
   final api = ref.watch(apiProvider);
-  final response = await api.agencies(0, 20);
+  final response = await api.agencies(0, 100);
   return response.success
       ? Result.ok(response.data!)
       : Result.err(response.status);
@@ -35,7 +57,7 @@ Future<Result<List<TypeOfServiceModel>, StatusCode>> services(
   ServicesRef ref,
 ) async {
   final api = ref.watch(apiProvider);
-  final response = await api.services(0, 20);
+  final response = await api.services(0, 100);
   return response.success
       ? Result.ok(response.data!)
       : Result.err(response.status);

@@ -41,8 +41,8 @@ class ResidenceRegistrationSecondStepModel {
   });
 
   final LocationModel province;
-  final String canton;
-  final String parroquia;
+  final LocationModel canton;
+  final LocationModel parroquia;
   final String primaryStreet;
   final String secondaryStreet;
 }

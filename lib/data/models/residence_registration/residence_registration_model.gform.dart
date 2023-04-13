@@ -992,8 +992,8 @@ class ResidenceRegistrationSecondStepModelForm
   String secondaryStreetControlPath() =>
       pathBuilder(secondaryStreetControlName);
   LocationModel get _provinceValue => provinceControl.value as LocationModel;
-  String get _cantonValue => cantonControl.value as String;
-  String get _parroquiaValue => parroquiaControl.value as String;
+  LocationModel get _cantonValue => cantonControl.value as LocationModel;
+  LocationModel get _parroquiaValue => parroquiaControl.value as LocationModel;
   String get _primaryStreetValue => primaryStreetControl.value as String;
   String get _secondaryStreetValue => secondaryStreetControl.value as String;
   bool get containsProvince {
@@ -1061,7 +1061,7 @@ class ResidenceRegistrationSecondStepModelForm
   }
 
   void cantonValueUpdate(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1070,7 +1070,7 @@ class ResidenceRegistrationSecondStepModelForm
   }
 
   void parroquiaValueUpdate(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1106,7 +1106,7 @@ class ResidenceRegistrationSecondStepModelForm
   }
 
   void cantonValuePatch(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1115,7 +1115,7 @@ class ResidenceRegistrationSecondStepModelForm
   }
 
   void parroquiaValuePatch(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1151,7 +1151,7 @@ class ResidenceRegistrationSecondStepModelForm
       provinceControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void cantonValueReset(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1160,7 +1160,7 @@ class ResidenceRegistrationSecondStepModelForm
       cantonControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void parroquiaValueReset(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1188,10 +1188,10 @@ class ResidenceRegistrationSecondStepModelForm
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<LocationModel> get provinceControl =>
       form.control(provinceControlPath()) as FormControl<LocationModel>;
-  FormControl<String> get cantonControl =>
-      form.control(cantonControlPath()) as FormControl<String>;
-  FormControl<String> get parroquiaControl =>
-      form.control(parroquiaControlPath()) as FormControl<String>;
+  FormControl<LocationModel> get cantonControl =>
+      form.control(cantonControlPath()) as FormControl<LocationModel>;
+  FormControl<LocationModel> get parroquiaControl =>
+      form.control(parroquiaControlPath()) as FormControl<LocationModel>;
   FormControl<String> get primaryStreetControl =>
       form.control(primaryStreetControlPath()) as FormControl<String>;
   FormControl<String> get secondaryStreetControl =>
@@ -1350,14 +1350,14 @@ class ResidenceRegistrationSecondStepModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        cantonControlName: FormControl<String>(
+        cantonControlName: FormControl<LocationModel>(
             value: residenceRegistrationSecondStepModel?.canton,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        parroquiaControlName: FormControl<String>(
+        parroquiaControlName: FormControl<LocationModel>(
             value: residenceRegistrationSecondStepModel?.parroquia,
             validators: [requiredValidator],
             asyncValidators: [],

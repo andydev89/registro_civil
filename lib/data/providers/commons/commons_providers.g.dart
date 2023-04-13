@@ -6,7 +6,7 @@ part of 'commons_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$provincesHash() => r'c571744e328b306570d7aecff428b4821f069d8f';
+String _$provincesHash() => r'fb8d719d5f01d727ff4456c5ab2653fe199b4bc1';
 
 /// See also [provinces].
 @ProviderFor(provinces)
@@ -22,7 +22,39 @@ final provincesProvider =
 
 typedef ProvincesRef
     = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCode>>;
-String _$agenciesHash() => r'd4dc27c3ff72f74bb60a38f39ae16faca7ab569f';
+String _$cantonHash() => r'ce5df292e20aa3a619f466d1ad73267bce2180fa';
+
+/// See also [canton].
+@ProviderFor(canton)
+final cantonProvider =
+    AutoDisposeFutureProvider<Result<List<LocationModel>, StatusCode>>.internal(
+  canton,
+  name: r'cantonProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$cantonHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef CantonRef
+    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCode>>;
+String _$parroquiaHash() => r'e3a0b940986beb2b340deb2cd9067e76c69214e8';
+
+/// See also [parroquia].
+@ProviderFor(parroquia)
+final parroquiaProvider =
+    AutoDisposeFutureProvider<Result<List<LocationModel>, StatusCode>>.internal(
+  parroquia,
+  name: r'parroquiaProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$parroquiaHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ParroquiaRef
+    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCode>>;
+String _$agenciesHash() => r'ec81c4e5a5ed483d2011ce3c6398c2f9b949c1d8';
 
 /// See also [agencies].
 @ProviderFor(agencies)
@@ -38,7 +70,7 @@ final agenciesProvider =
 
 typedef AgenciesRef
     = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
-String _$servicesHash() => r'14cb8ea91cfa54b29b9178e3eb0daff2594e06dc';
+String _$servicesHash() => r'2efe780260fcb04d133259c4954f969a8212e8a1';
 
 /// See also [services].
 @ProviderFor(services)

@@ -2,9 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
+import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/buttons_group/rigth_left_buttons.dart';
+import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 
 class RequestInformationSecondStepPage extends StatelessWidget {
@@ -17,15 +19,18 @@ class RequestInformationSecondStepPage extends StatelessWidget {
       builder: (context, formModel, child) => SingleChildScrollView(
         child: Column(
           children: [
-            PrimaryReactiveTextField(
+            SelectElementFromApi(
+              provider: provincesProvider,
               formControl: formModel.provinceControl,
               label: l10n.provincia,
             ),
-            PrimaryReactiveTextField(
+            SelectElementFromApi(
+              provider: cantonProvider,
               formControl: formModel.cantonControl,
               label: l10n.canton,
             ),
-            PrimaryReactiveTextField(
+            SelectElementFromApi(
+              provider: parroquiaProvider,
               formControl: formModel.parroquiaControl,
               label: l10n.parroquia,
             ),
