@@ -229,7 +229,7 @@ class SimpleCertificateFirstStepFamiliarModelForm
   String get _nuiValue => nuiControl.value ?? "";
   RelationshipSimpleCertificateEnum get _relationshipValue =>
       relationshipControl.value as RelationshipSimpleCertificateEnum;
-  ConadisModel? get _conadisModelValue => conadisModelForm.model;
+  ConadisModel get _conadisModelValue => conadisModelForm.model;
   bool get containsNui {
     try {
       form.control(nuiControlPath());
@@ -259,36 +259,10 @@ class SimpleCertificateFirstStepFamiliarModelForm
 
   Object? get nuiErrors => nuiControl.errors;
   Object? get relationshipErrors => relationshipControl.errors;
-  Object? get conadisModelErrors => conadisModelControl?.errors;
+  Object? get conadisModelErrors => conadisModelControl.errors;
   void get nuiFocus => form.focus(nuiControlPath());
   void get relationshipFocus => form.focus(relationshipControlPath());
   void get conadisModelFocus => form.focus(conadisModelControlPath());
-  void conadisModelRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsConadisModel) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          conadisModelControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            conadisModelControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
   void nuiValueUpdate(
     String value, {
     bool updateParent = true,
@@ -308,11 +282,11 @@ class SimpleCertificateFirstStepFamiliarModelForm
   }
 
   void conadisModelValueUpdate(
-    ConadisModel? value, {
+    ConadisModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    conadisModelControl?.updateValue(
+    conadisModelControl.updateValue(
         ConadisModelForm(value, FormGroup({}), null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
@@ -337,11 +311,11 @@ class SimpleCertificateFirstStepFamiliarModelForm
   }
 
   void conadisModelValuePatch(
-    ConadisModel? value, {
+    ConadisModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    conadisModelControl?.updateValue(
+    conadisModelControl.updateValue(
         ConadisModelForm(value, form, null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
@@ -366,13 +340,13 @@ class SimpleCertificateFirstStepFamiliarModelForm
       relationshipControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void conadisModelValueReset(
-    ConadisModel? value, {
+    ConadisModel value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      conadisModelControl?.reset(
+      conadisModelControl.reset(
           value: ConadisModelForm(value, FormGroup({}), null)
               .formElements()
               .rawValue,
@@ -383,9 +357,8 @@ class SimpleCertificateFirstStepFamiliarModelForm
   FormControl<RelationshipSimpleCertificateEnum> get relationshipControl =>
       form.control(relationshipControlPath())
           as FormControl<RelationshipSimpleCertificateEnum>;
-  FormGroup? get conadisModelControl => containsConadisModel
-      ? form.control(conadisModelControlPath()) as FormGroup?
-      : null;
+  FormGroup get conadisModelControl =>
+      form.control(conadisModelControlPath()) as FormGroup;
   void nuiSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -428,12 +401,12 @@ class SimpleCertificateFirstStepFamiliarModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      conadisModelControl?.markAsDisabled(
+      conadisModelControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      conadisModelControl?.markAsEnabled(
+      conadisModelControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -676,7 +649,7 @@ class ConadisModelForm implements FormModel<ConadisModel> {
 
   @override
   void updateValue(
-    ConadisModel? value, {
+    ConadisModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -686,7 +659,7 @@ class ConadisModelForm implements FormModel<ConadisModel> {
           emitEvent: emitEvent);
   @override
   void resetValue(
-    ConadisModel? value, {
+    ConadisModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>

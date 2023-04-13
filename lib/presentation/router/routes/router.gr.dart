@@ -339,7 +339,7 @@ class _$AppRouter extends RootStackRouter {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: SimpleCertificateSecondStepPage(
-          typeSimpleCertificate: args.typeSimpleCertificate,
+          simpleCertificateResponse: args.simpleCertificateResponse,
           key: args.key,
         ),
       );
@@ -1356,13 +1356,13 @@ class SimpleCertificateFirstStepRouterRouteArgs {
 class SimpleCertificateSecondStepRoute
     extends PageRouteInfo<SimpleCertificateSecondStepRouteArgs> {
   SimpleCertificateSecondStepRoute({
-    required TypeSimpleCertificateEnum typeSimpleCertificate,
+    required SimpleCertificateResponse simpleCertificateResponse,
     Key? key,
   }) : super(
           SimpleCertificateSecondStepRoute.name,
           path: 'simple-certificate-second-step-page',
           args: SimpleCertificateSecondStepRouteArgs(
-            typeSimpleCertificate: typeSimpleCertificate,
+            simpleCertificateResponse: simpleCertificateResponse,
             key: key,
           ),
         );
@@ -1372,17 +1372,17 @@ class SimpleCertificateSecondStepRoute
 
 class SimpleCertificateSecondStepRouteArgs {
   const SimpleCertificateSecondStepRouteArgs({
-    required this.typeSimpleCertificate,
+    required this.simpleCertificateResponse,
     this.key,
   });
 
-  final TypeSimpleCertificateEnum typeSimpleCertificate;
+  final SimpleCertificateResponse simpleCertificateResponse;
 
   final Key? key;
 
   @override
   String toString() {
-    return 'SimpleCertificateSecondStepRouteArgs{typeSimpleCertificate: $typeSimpleCertificate, key: $key}';
+    return 'SimpleCertificateSecondStepRouteArgs{simpleCertificateResponse: $simpleCertificateResponse, key: $key}';
   }
 }
 

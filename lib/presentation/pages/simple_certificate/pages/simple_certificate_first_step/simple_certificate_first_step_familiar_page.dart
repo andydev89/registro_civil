@@ -32,6 +32,8 @@ class SimpleCertificateFirstStepFamiliarPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return SimpleCertificateFirstStepFamiliarModelFormBuilder(
+      initState: (context, formModel) =>
+          formModel.conadisModelForm.conadisControl.updateValue(false),
       builder: (context, formModel, child) {
         final isCanadis = ValueNotifier(
           formModel.conadisModelForm.conadisControl.value ?? false,
@@ -115,21 +117,18 @@ class SimpleCertificateFirstStepFamiliarPage extends ConsumerWidget {
             builder: (context, formModel, child) => PrimaryAsyncButton(
               title: l10n.aceptar,
               onPressed: formModel.form.valid
-                  ? () => 
-                  ref
+                  ? () => ref
                       .read(simpleCertificateProvider.notifier)
                       .simpleCertificateFamiliar(
                         familiarModel: formModel.model,
                         type: typeSimpleCertificate,
                       )
                       .when(
-                        ok: (id) => 
-                        context.navigateTo(
+                        ok: (response) => context.navigateTo(
                           SimpleCertificateSecondStepRoute(
-                            typeSimpleCertificate: typeSimpleCertificate,
+                            simpleCertificateResponse: response,
                           ),
-                        )
-                        ,
+                        ),
                         err: (error) => showAlert(
                           error.translate(context),
                           TypeAlert.error,

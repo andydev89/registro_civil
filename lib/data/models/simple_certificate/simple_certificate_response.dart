@@ -15,7 +15,7 @@ class SimpleCertificateResponse {
       
   final int serviceId;
   final String command;
-  final List<String> document;
+  final String document;
 
   Map<String, dynamic> toJson() => _$SimpleCertificateResponseToJson(this);
 }

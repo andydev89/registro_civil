@@ -4,7 +4,6 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
-import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/modify_cant.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
@@ -60,8 +59,7 @@ class CertificateDetail extends ConsumerWidget {
           child: ModifyCant(
             cant: offer.cant,
             onCantChanged: (onCantChanged) {
-              final newOffer = offer.operation(onCantChanged);
-              ref.read(offersProvider.notifier).save(newOffer);
+              // final newOffer = offer.operation(onCantChanged);
             },
           ),
         ),
@@ -87,8 +85,7 @@ class CertificateDetail extends ConsumerWidget {
                 ),
                 const SizedBox(width: 10),
                 PrimaryIconButton(
-                  onPressed: () =>
-                      ref.read(offersProvider.notifier).delete(offer),
+                  onPressed: () {},
                   width: size,
                   height: size,
                   icon: const Icon(

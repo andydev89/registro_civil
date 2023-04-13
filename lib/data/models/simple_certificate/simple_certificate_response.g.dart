@@ -11,8 +11,7 @@ SimpleCertificateResponse _$SimpleCertificateResponseFromJson(
     SimpleCertificateResponse(
       serviceId: json['serviceId'] as int,
       command: json['command'] as String,
-      document:
-          (json['document'] as List<dynamic>).map((e) => e as String).toList(),
+      document: json['document'] as String,
     );
 
 Map<String, dynamic> _$SimpleCertificateResponseToJson(

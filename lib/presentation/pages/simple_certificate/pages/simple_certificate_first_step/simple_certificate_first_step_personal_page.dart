@@ -55,9 +55,9 @@ class SimpleCertificateFirstStepPersonalPage extends ConsumerWidget {
                       type: typeSimpleCertificate,
                     )
                     .when(
-                      ok: (id) => context.navigateTo(
+                      ok: (response) => context.navigateTo(
                         SimpleCertificateSecondStepRoute(
-                          typeSimpleCertificate: typeSimpleCertificate,
+                          simpleCertificateResponse: response,
                         ),
                       ),
                       err: (error) =>

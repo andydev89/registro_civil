@@ -54,7 +54,7 @@ abstract class Api {
 
   // SERVICES
 
-  @POST('/service/api/certification/simple')
+  @POST('/service/api/service/certification/simple')
   Future<ResponseModel<SimpleCertificateResponse>> simpleCertificate(
     @Body() SimpleCertificateModel simpleCertificateModel,
   );

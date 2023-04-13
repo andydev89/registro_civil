@@ -26,7 +26,7 @@ class SimpleCertificateFirstStepFamiliarModel {
 
   final String nui;
   final RelationshipSimpleCertificateEnum relationship;
-  final ConadisModel? conadisModel;
+  final ConadisModel conadisModel;
 }
 
 @FormGroupAnnotation<ConadisModel>(validators: [conadisNumberValidatorGroup])
