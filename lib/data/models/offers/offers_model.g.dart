@@ -79,7 +79,7 @@ OffersModel _offersModelDeserialize(
     discountConadis: reader.readBoolOrNull(offsets[1]) ?? false,
     simpleCertificate: _OffersModelsimpleCertificateValueEnumMap[
             reader.readByteOrNull(offsets[2])] ??
-        TypeSimpleCertificateEnum.factorUnion,
+        TypeSimpleCertificateEnum.birth,
   );
   object.id = id;
   return object;
@@ -99,29 +99,29 @@ P _offersModelDeserializeProp<P>(
     case 2:
       return (_OffersModelsimpleCertificateValueEnumMap[
               reader.readByteOrNull(offset)] ??
-          TypeSimpleCertificateEnum.factorUnion) as P;
+          TypeSimpleCertificateEnum.birth) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
 const _OffersModelsimpleCertificateEnumValueMap = {
-  'factorUnion': 0,
+  'birth': 0,
   'marriage': 1,
-  'death': 2,
-  'identity': 3,
-  'birth': 4,
+  'factorUnion': 2,
+  'death': 3,
+  'identity': 4,
   'copyMarriageRegistrationCertificate': 5,
   'copyRegistrationCertificateGenderRegistration': 6,
   'copyFactoUnionRegistrationCertificate': 7,
   'copyBirthRegistrationCertificate': 8,
 };
 const _OffersModelsimpleCertificateValueEnumMap = {
-  0: TypeSimpleCertificateEnum.factorUnion,
+  0: TypeSimpleCertificateEnum.birth,
   1: TypeSimpleCertificateEnum.marriage,
-  2: TypeSimpleCertificateEnum.death,
-  3: TypeSimpleCertificateEnum.identity,
-  4: TypeSimpleCertificateEnum.birth,
+  2: TypeSimpleCertificateEnum.factorUnion,
+  3: TypeSimpleCertificateEnum.death,
+  4: TypeSimpleCertificateEnum.identity,
   5: TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate,
   6: TypeSimpleCertificateEnum.copyRegistrationCertificateGenderRegistration,
   7: TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate,
@@ -568,17 +568,13 @@ Map<String, dynamic> _$OffersModelToJson(OffersModel instance) =>
     };
 
 const _$TypeSimpleCertificateEnumEnumMap = {
-  TypeSimpleCertificateEnum.factorUnion: 'factorUnion',
-  TypeSimpleCertificateEnum.marriage: 'marriage',
-  TypeSimpleCertificateEnum.death: 'death',
-  TypeSimpleCertificateEnum.identity: 'identity',
-  TypeSimpleCertificateEnum.birth: 'birth',
-  TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
-      'copyMarriageRegistrationCertificate',
-  TypeSimpleCertificateEnum.copyRegistrationCertificateGenderRegistration:
-      'copyRegistrationCertificateGenderRegistration',
-  TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate:
-      'copyFactoUnionRegistrationCertificate',
-  TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
-      'copyBirthRegistrationCertificate',
+  TypeSimpleCertificateEnum.birth: 'SERVICE_CERTIFICADO_NACIMIENTO',
+  TypeSimpleCertificateEnum.marriage: 'SERVICE_CERTIFICADO_MATRIMONIO',
+  TypeSimpleCertificateEnum.factorUnion: 'SERVICE_CERTIFICADO_UNION_HECHO',
+  TypeSimpleCertificateEnum.death: 'SERVICE_CERTIFICADO_DEFUNCION',
+  TypeSimpleCertificateEnum.identity: '',
+  TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate: '',
+  TypeSimpleCertificateEnum.copyRegistrationCertificateGenderRegistration: '',
+  TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate: '',
+  TypeSimpleCertificateEnum.copyBirthRegistrationCertificate: '',
 };

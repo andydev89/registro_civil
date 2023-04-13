@@ -48,8 +48,10 @@ class MyTurnExpandableCard extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                PrimaryLabel(
-                  '${l10n.reservacion} # ${data.id}',
+                Expanded(
+                  child: PrimaryLabel(
+                    '${l10n.reservacion} # ${data.id}',
+                  ),
                 ),
               ],
             ),

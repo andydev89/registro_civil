@@ -1,9 +1,12 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/refecting_reason_enum.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_enum.dart';
+import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
 part 'simple_certificate_model.gform.dart';
+part 'simple_certificate_model.g.dart';
 
 @ReactiveFormAnnotation()
 class SimpleCertificateFirstStepFamiliarModel {
@@ -23,34 +26,18 @@ class SimpleCertificateFirstStepFamiliarModel {
 
   final String nui;
   final RelationshipSimpleCertificateEnum relationship;
-  final ConadisModel conadisModel;
+  final ConadisModel? conadisModel;
 }
 
 @FormGroupAnnotation<ConadisModel>(validators: [conadisNumberValidatorGroup])
 class ConadisModel {
   ConadisModel({
-    @FormControlAnnotation<bool>() this.conadis = false,
+    @FormControlAnnotation<dynamic>() this.conadis = false,
     @FormControlAnnotation<String>() this.conadisNumber = '',
   });
 
   final bool conadis;
   final String conadisNumber;
-}
-
-@ReactiveFormAnnotation()
-class NuiModel {
-  NuiModel({
-    @FormControlAnnotation(
-      validators: [
-        requiredValidator,
-        ecuadorDniValidator,
-        length10Validator,
-      ],
-    )
-        this.nui = '',
-  });
-
-  final String nui;
 }
 
 @ReactiveFormAnnotation()
@@ -64,4 +51,47 @@ class RejectInformation {
 
   final OrdersRejectingReason rejectReason;
   final String rejectDescription;
+}
+
+@JsonSerializable()
+class SimpleCertificateModel {
+  SimpleCertificateModel({
+    required this.type,
+    required this.userNui,
+    required this.isFamily,
+    required this.typeFamily,
+    required this.nuiFamily,
+    required this.isConadis,
+    required this.nuiConadis,
+  });
+
+  SimpleCertificateModel.fromFamily({
+    required this.type,
+    required this.userNui,
+    required this.typeFamily,
+    required this.nuiFamily,
+    required this.isConadis,
+    required this.nuiConadis,
+  }) : isFamily = true;
+
+  SimpleCertificateModel.fromPersonal({
+    required this.type,
+    required this.userNui,
+  })  : typeFamily = RelationshipSimpleCertificateEnum.staff,
+        isFamily = false,
+        nuiFamily = '',
+        isConadis = false,
+        nuiConadis = '';
+
+  factory SimpleCertificateModel.fromJson(Map<String, dynamic> json) =>
+      _$SimpleCertificateModelFromJson(json);
+  final TypeSimpleCertificateEnum type;
+  final String userNui;
+  final bool isFamily;
+  final RelationshipSimpleCertificateEnum typeFamily;
+  final String nuiFamily;
+  final bool isConadis;
+  final String nuiConadis;
+
+  Map<String, dynamic> toJson() => _$SimpleCertificateModelToJson(this);
 }

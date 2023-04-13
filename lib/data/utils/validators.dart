@@ -1,6 +1,9 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:libphonenumber/libphonenumber.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/validators/validations_message_enum.dart';
+import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
@@ -8,11 +11,24 @@ Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
 }
 
 Map<String, dynamic>? ecuadorDniValidator(AbstractControl<dynamic> control) {
-  final idNumber = control.value as String?;
-  if (idNumber == null || idNumber.isEmpty) return null;
-  if (idNumber.length != 10) return null;
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) return null;
+  if (value.length != 10) return null;
   // Check that the first two digits correspond to a valid province code
-  final provinceCode = idNumber.substring(0, 2);
+  if (!_provinceCode(value)) {
+    return {ValidationsMessageEnum.invalidProvinceCode.toText: true};
+  }
+  // Calculate the verification digit
+  //and compare it with the 10th digit of the ID number
+
+  if (!_verificationDigit(value)) {
+    return {ValidationsMessageEnum.invalidDni.toText: true};
+  }
+  return null;
+}
+
+bool _provinceCode(String value) {
+  final provinceCode = value.substring(0, 2);
   final validProvinceCodes = <String, String>{
     '01': 'Azuay',
     '02': 'Bolívar',
@@ -39,23 +55,22 @@ Map<String, dynamic>? ecuadorDniValidator(AbstractControl<dynamic> control) {
     '23': 'Santo Domingo de los Tsáchilas',
     '24': 'Santa Elena',
   };
-  if (!validProvinceCodes.containsKey(provinceCode)) {
-    return {ValidationsMessageEnum.invalidProvinceCode.toText: true};
-  }
-  // Calculate the verification digit
-  //and compare it with the 10th digit of the ID number
+  return validProvinceCodes.containsKey(provinceCode);
+}
+
+bool _verificationDigit(String value) {
   final oddDigits = <int>[
-    int.parse(idNumber[0]),
-    int.parse(idNumber[2]),
-    int.parse(idNumber[4]),
-    int.parse(idNumber[6]),
-    int.parse(idNumber[8])
+    int.parse(value[0]),
+    int.parse(value[2]),
+    int.parse(value[4]),
+    int.parse(value[6]),
+    int.parse(value[8])
   ];
   final evenDigits = <int>[
-    int.parse(idNumber[1]),
-    int.parse(idNumber[3]),
-    int.parse(idNumber[5]),
-    int.parse(idNumber[7])
+    int.parse(value[1]),
+    int.parse(value[3]),
+    int.parse(value[5]),
+    int.parse(value[7])
   ];
   final oddSum = oddDigits
       .map((digit) => (digit * 2 > 9) ? digit * 2 - 9 : digit * 2)
@@ -63,10 +78,7 @@ Map<String, dynamic>? ecuadorDniValidator(AbstractControl<dynamic> control) {
   final evenSum = evenDigits.reduce((a, b) => a + b);
   final totalSum = oddSum + evenSum;
   final verificationDigit = (totalSum % 10 == 0) ? 0 : 10 - (totalSum % 10);
-  if (verificationDigit != int.parse(idNumber[9])) {
-    return {ValidationsMessageEnum.invalidDni.toText: true};
-  }
-  return null;
+  return verificationDigit == int.parse(value[9]);
 }
 
 Map<String, dynamic>? length10Validator(
@@ -79,6 +91,20 @@ Map<String, dynamic>? length10Validator(
   } else {
     return null;
   }
+}
+
+Future<bool?> validateNuiAsync(
+  String? nui,
+  WidgetRef ref,
+) async {
+  if (nui == null ||
+      nui.isEmpty ||
+      nui.length != 10 ||
+      !_provinceCode(nui) ||
+      !_verificationDigit(nui)) return null;
+  final api = ref.read(apiProvider);
+  final response = await api.registerValidateNui(NuiModel(nui: nui));
+  return response.success;
 }
 
 Map<String, dynamic>? passwordsMustMatch(AbstractControl<dynamic> control) {

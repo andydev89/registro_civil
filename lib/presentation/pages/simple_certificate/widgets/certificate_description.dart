@@ -27,7 +27,7 @@ class CertificateDescription extends StatelessWidget {
           Column(
             children: [
               PrimaryTitle(
-                title: typeSimpleCertificate.title(l10n),
+                title: typeSimpleCertificate.translate(context),
                 color: blue,
               ),
               Padding(

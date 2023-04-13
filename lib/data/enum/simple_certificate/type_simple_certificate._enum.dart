@@ -1,21 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
+import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
-enum TypeSimpleCertificateEnum {
-  factorUnion,
-  marriage,
-  death,
-  identity,
+enum TypeSimpleCertificateEnum implements Translatable {
+  @JsonValue('SERVICE_CERTIFICADO_NACIMIENTO')
   birth,
+  @JsonValue('SERVICE_CERTIFICADO_MATRIMONIO')
+  marriage,
+  @JsonValue('SERVICE_CERTIFICADO_UNION_HECHO')
+  factorUnion,
+  @JsonValue('SERVICE_CERTIFICADO_DEFUNCION')
+  death,
+  @JsonValue('')
+  identity,
+  @JsonValue('')
   copyMarriageRegistrationCertificate,
+  @JsonValue('')
   copyRegistrationCertificateGenderRegistration,
+  @JsonValue('')
   copyFactoUnionRegistrationCertificate,
-  copyBirthRegistrationCertificate,
-}
+  @JsonValue('')
+  copyBirthRegistrationCertificate;
 
-extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
-  String title(AppLocalizations l10n) {
-    switch (this) {
+  @override
+  String translate(BuildContext context) {
+    final l10n = context.l10n;
+     switch (this) {
       case TypeSimpleCertificateEnum.factorUnion:
         return l10n.certificadoUniHec;
       case TypeSimpleCertificateEnum.marriage:
@@ -37,6 +49,9 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
         return l10n.copiaActRegNac;
     }
   }
+}
+
+extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
 
   String description(AppLocalizations l10n) {
     switch (this) {

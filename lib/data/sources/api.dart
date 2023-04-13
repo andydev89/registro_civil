@@ -7,6 +7,8 @@ import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_model.dart';
+import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
+import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api.g.dart';
@@ -49,6 +51,18 @@ abstract class Api {
   Future<ResponseModel<LoginResponseModel?>> refreshToken(
     @Query('token') String token,
   );
+
+  // SERVICES
+
+  @POST('/service/api/certification/simple')
+  Future<ResponseModel<SimpleCertificateResponse>> simpleCertificate(
+    @Body() SimpleCertificateModel simpleCertificateModel,
+  );
+
+  // @POST('/service/api/service/validate')
+  // Future<ResponseModel<RegisterCitizenModel>> validateNui(
+  //   @Body() NuiModel nuiModel,
+  // );
 
   //COMMONS
   @GET('/identity/api/location/province')
