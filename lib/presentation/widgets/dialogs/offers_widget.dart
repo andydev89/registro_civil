@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/sliding_dialog.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/certificate_detail.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
@@ -22,11 +20,6 @@ class OffersWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final offers = ref.watch(offersProvider);
-    final subtotal = ref.watch(subtotalProvider);
-    final iva = ref.watch(ivaProvider);
-    final discountConadis = ref.watch(discountConadisProvider);
-    final totalPay = ref.watch(totalPayProvider);
     return FocusScope(
       node: FocusScopeNode(canRequestFocus: false),
       child: Scaffold(
@@ -72,38 +65,38 @@ class OffersWidget extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (offers.isNotEmpty)
-                    Expanded(
-                      child: Scrollbar(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: offers
-                                .map(
-                                  (offer) => Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Flexible(
-                                            child: CertificateDetail(
-                                              offer: offer,
-                                            ).verticalPadding(5),
-                                          ),
-                                        ],
-                                      ),
-                                      const Divider(
-                                        color: Colors.grey,
-                                        height: 2,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                                .toList(),
-                          ).verticalPadding(10),
-                        ),
-                      ),
-                    )
-                  else
+                  // if (offers.isNotEmpty)
+                  //   Expanded(
+                  //     child: Scrollbar(
+                  //       child: SingleChildScrollView(
+                  //         child: Column(
+                  //           children: offers
+                  //               .map(
+                  //                 (offer) => Column(
+                  //                   mainAxisSize: MainAxisSize.min,
+                  //                   children: [
+                  //                     Row(
+                  //                       children: [
+                  //                         Flexible(
+                  //                           child: CertificateDetail(
+                  //                             offer: offer,
+                  //                           ).verticalPadding(5),
+                  //                         ),
+                  //                       ],
+                  //                     ),
+                  //                     const Divider(
+                  //                       color: Colors.grey,
+                  //                       height: 2,
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               )
+                  //               .toList(),
+                  //         ).verticalPadding(10),
+                  //       ),
+                  //     ),
+                  //   )
+                  // else
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -127,7 +120,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$${subtotal.toStringAsFixed(2)}',
+                            '\$${0.toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -140,7 +133,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '-\$${discountConadis.toStringAsFixed(2)}',
+                            '-\$${0.toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -153,7 +146,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$${iva.toStringAsFixed(2)}',
+                            '\$${0.toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -166,7 +159,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryText(
-                            '\$${totalPay.toStringAsFixed(2)}',
+                            '\$${0.toStringAsFixed(2)}',
                             fontWeight: FontWeight.bold,
                             fontSize: fontSizeDefault + 3,
                           ),
@@ -179,7 +172,7 @@ class OffersWidget extends ConsumerWidget {
                     children: [
                       PrimaryButton(
                         title: l10n.pagar,
-                        onPressed: offers.isEmpty ? null : () {},
+                        onPressed:  () {},
                       ),
                       const SizedBox(height: 15),
                       PrimaryButton(

@@ -1,11 +1,10 @@
+import 'dart:convert';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
-import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
-import 'package:registro_civil_apk/data/providers/isar/isar_provider.dart';
+import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -14,19 +13,20 @@ import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffo
 
 class SimpleCertificateSecondStepPage extends ConsumerWidget {
   const SimpleCertificateSecondStepPage({
-    required this.typeSimpleCertificate,
+    required this.simpleCertificateResponse,
     super.key,
   });
-  final TypeSimpleCertificateEnum typeSimpleCertificate;
+  final SimpleCertificateResponse simpleCertificateResponse;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final bytes = base64Decode(simpleCertificateResponse.document);
     return PrimaryScaffold(
       title: l10n.verificarInfo,
       body: Padding(
         padding: const EdgeInsets.only(top: 30),
-        child: Center(child: Assets.png.certificadoSimple.image()),
+        child: Center(child: Image.memory(bytes)),
       ),
       bottomNavigationBar: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -35,11 +35,6 @@ class SimpleCertificateSecondStepPage extends ConsumerWidget {
           PrimaryButton(
             title: l10n.aceptar,
             onPressed: () {
-              ref.read(offersProvider.notifier).save(
-                    OffersModel(
-                      simpleCertificate: typeSimpleCertificate,
-                    ),
-                  );
               showOffersDialog(context);
               context.navigateTo(const HomeRouterRoute());
             },

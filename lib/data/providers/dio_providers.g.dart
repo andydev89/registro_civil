@@ -6,7 +6,7 @@ part of 'dio_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dioHash() => r'd686fa3542d5b1405ed22aed5ecf22cbf7ba24de';
+String _$dioHash() => r'5985b05fda6bf93c5fd3274728c5e0ab147678db';
 
 /// See also [dio].
 @ProviderFor(dio)
@@ -34,7 +34,7 @@ final apiProvider = AutoDisposeProvider<Api>.internal(
 );
 
 typedef ApiRef = AutoDisposeProviderRef<Api>;
-String _$freshHash() => r'952d88e67a1f3b3dcadb4b10df1321560254436c';
+String _$freshHash() => r'c9751a71a3a15d73460a21aaf7cce0366172396e';
 
 /// See also [fresh].
 @ProviderFor(fresh)
