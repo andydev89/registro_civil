@@ -1,14 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
+import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/providers/simple_certificate/simple_certificate_provider.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 
-class SimpleCertificateFirstStepPersonalPage extends StatelessWidget {
+class SimpleCertificateFirstStepPersonalPage extends ConsumerWidget {
   const SimpleCertificateFirstStepPersonalPage({
     required this.typeSimpleCertificate,
     super.key,
@@ -16,7 +21,7 @@ class SimpleCertificateFirstStepPersonalPage extends StatelessWidget {
   final TypeSimpleCertificateEnum typeSimpleCertificate;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return NuiModelFormBuilder(
       builder: (context, formModel, child) => Scaffold(
@@ -40,13 +45,23 @@ class SimpleCertificateFirstStepPersonalPage extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: ReactiveNuiModelFormConsumer(
-          builder: (context, formModel, child) => PrimaryButton(
+          builder: (context, formModel, child) => PrimaryAsyncButton(
             title: l10n.aceptar,
             onPressed: formModel.form.valid
-                ? () => context.navigateTo(
-                      SimpleCertificateSecondStepRoute(
-                        typeSimpleCertificate: typeSimpleCertificate,
+                ? () => ref
+                    .read(simpleCertificateProvider.notifier)
+                    .simpleCertificatePersonal(
+                      model: formModel.model,
+                      type: typeSimpleCertificate,
+                    )
+                    .when(
+                      ok: (response) => context.navigateTo(
+                        SimpleCertificateSecondStepRoute(
+                          simpleCertificateResponse: response,
+                        ),
                       ),
+                      err: (error) =>
+                          showAlert(error.translate(context), TypeAlert.error),
                     )
                 : null,
           ).symmetricPadding(10, 30),
