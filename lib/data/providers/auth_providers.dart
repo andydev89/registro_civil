@@ -150,6 +150,7 @@ Future<OAuth2Token?> refreshToken(
     );
     return oauthToken;
   } else {
+    await ref.read(loginProvider.notifier).logout();
     return null;
   }
 }
