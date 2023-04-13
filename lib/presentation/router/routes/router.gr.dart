@@ -369,10 +369,22 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    RequestedInformationRoute.name: (routeData) {
+    RequestInformationFirstStepRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const RequestedInformationPage(),
+        child: const RequestInformationFirstStepPage(),
+      );
+    },
+    RequestInformationSecondStepRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const RequestInformationSecondStepPage(),
+      );
+    },
+    RequestInformationThirdStepRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const RequestInformationThirdStepPage(),
       );
     },
   };
@@ -559,10 +571,20 @@ class _$AppRouter extends RootStackRouter {
               guards: [authGuard],
               children: [
                 RouteConfig(
-                  RequestedInformationRoute.name,
+                  RequestInformationFirstStepRoute.name,
                   path: '',
                   parent: ResidenceRegistrationRouterRoute.name,
-                )
+                ),
+                RouteConfig(
+                  RequestInformationSecondStepRoute.name,
+                  path: 'request-information-second-step-page',
+                  parent: ResidenceRegistrationRouterRoute.name,
+                ),
+                RouteConfig(
+                  RequestInformationThirdStepRoute.name,
+                  path: 'request-information-third-step-page',
+                  parent: ResidenceRegistrationRouterRoute.name,
+                ),
               ],
             ),
             RouteConfig(
@@ -1457,13 +1479,37 @@ class SimpleCertificateFirstStepPersonalRouteArgs {
 }
 
 /// generated route for
-/// [RequestedInformationPage]
-class RequestedInformationRoute extends PageRouteInfo<void> {
-  const RequestedInformationRoute()
+/// [RequestInformationFirstStepPage]
+class RequestInformationFirstStepRoute extends PageRouteInfo<void> {
+  const RequestInformationFirstStepRoute()
       : super(
-          RequestedInformationRoute.name,
+          RequestInformationFirstStepRoute.name,
           path: '',
         );
 
-  static const String name = 'RequestedInformationRoute';
+  static const String name = 'RequestInformationFirstStepRoute';
+}
+
+/// generated route for
+/// [RequestInformationSecondStepPage]
+class RequestInformationSecondStepRoute extends PageRouteInfo<void> {
+  const RequestInformationSecondStepRoute()
+      : super(
+          RequestInformationSecondStepRoute.name,
+          path: 'request-information-second-step-page',
+        );
+
+  static const String name = 'RequestInformationSecondStepRoute';
+}
+
+/// generated route for
+/// [RequestInformationThirdStepPage]
+class RequestInformationThirdStepRoute extends PageRouteInfo<void> {
+  const RequestInformationThirdStepRoute()
+      : super(
+          RequestInformationThirdStepRoute.name,
+          path: 'request-information-third-step-page',
+        );
+
+  static const String name = 'RequestInformationThirdStepRoute';
 }

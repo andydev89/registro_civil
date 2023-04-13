@@ -204,7 +204,7 @@ final registerDataProvider =
 );
 
 typedef _$RegisterData = AutoDisposeNotifier<CommandModel?>;
-String _$registerCodeHash() => r'7db9d19ba167f7484a210e5a1d211f275c4b2019';
+String _$registerCodeHash() => r'3322add17252ccc483b71434de3a13df8dfb3b44';
 
 /// See also [RegisterCode].
 @ProviderFor(RegisterCode)
