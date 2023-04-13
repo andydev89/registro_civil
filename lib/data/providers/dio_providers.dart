@@ -40,11 +40,8 @@ Fresh<OAuth2Token> fresh(FreshRef ref) {
     shouldRefresh: (response) {
       final uri = response?.realUri;
       final status = response?.data['status'];
-      final shouldRefresh =
-          status == 401 && !uri!.path.contains('identity/api/auth/refresh');
-      if (!shouldRefresh) {
-        ref.read(loginProvider.notifier).logout();
-      }
+      final shouldRefresh = status == 401 &&
+          (uri!.path.contains('identity/api/auth/refresh') == false);
       return shouldRefresh;
     },
     refreshToken: (token, client) async {
