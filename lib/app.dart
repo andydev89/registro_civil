@@ -1,8 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/observer/router_observer.dart';
 import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';

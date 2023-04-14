@@ -27,5 +27,5 @@ class AuthStepper2Data extends _$AuthStepper2Data {
   }
 
 @override
-  bool get state => state;
+  bool get state;
 }

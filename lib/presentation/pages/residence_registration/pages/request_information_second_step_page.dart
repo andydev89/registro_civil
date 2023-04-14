@@ -8,7 +8,6 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/buttons_group/rigth_left_buttons.dart';
 import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_map.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 
 class RequestInformationSecondStepPage extends StatelessWidget {
   const RequestInformationSecondStepPage({super.key});
