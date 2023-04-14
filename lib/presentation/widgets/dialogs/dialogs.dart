@@ -102,15 +102,15 @@ Future<void> showMapPickerDialog(
   return showDialog(
     context: context,
     builder: (BuildContext context) {
-      return Material(
-        color: Colors.transparent,
-        child: Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-            top: 100,
-            bottom: 40,
-          ),
+      return Padding(
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 100,
+          bottom: 40,
+        ),
+        child: Material(
+          color: Colors.transparent,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -128,7 +128,7 @@ Future<void> showMapPickerDialog(
             ],
           ),
         ),
-      );
+      ).withRevealAnimation;
     },
   );
 }
