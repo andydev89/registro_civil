@@ -29,6 +29,7 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   flutter_svg: ^2.0.4
   fresh_dio: ^0.4.0
+  google_maps_flutter: ^2.2.5
   hooks_riverpod: ^2.3.2
   intl: ^0.18.0
   ionicons: ^0.2.2
