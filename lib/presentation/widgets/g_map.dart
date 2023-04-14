@@ -1,16 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class GMap extends StatelessWidget {
-  const GMap({super.key});
+class GMap extends HookWidget {
+  const GMap({
+    super.key,
+    this.onPicked,
+  });
+  final void Function(LatLng latLng)? onPicked;
 
   @override
   Widget build(BuildContext context) {
-    return const GoogleMap(
-      initialCameraPosition: CameraPosition(
-        target: LatLng(37.42796133580664, -122.085749655962),
+    final markers = useState(<Marker>[]);
+    return GoogleMap(
+      initialCameraPosition: const CameraPosition(
+        target: LatLng(23.1330200, -82.3830400),
         zoom: 14.4746,
       ),
+      markers: Set.from(markers.value),
+      onTap: (LatLng latLng) {
+        markers.value = [
+          Marker(
+            markerId: const MarkerId(
+              'selectedMark',
+            ),
+            position: latLng,
+          ),
+        ];
+        onPicked?.call(latLng);
+      },
     );
   }
 }

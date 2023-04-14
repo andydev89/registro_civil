@@ -21,7 +21,7 @@ final stepperIndexProvider =
 );
 
 typedef _$StepperIndex = AutoDisposeNotifier<int>;
-String _$authStepper2DataHash() => r'5f92601ef8d705921657e2c9f825917a449f07cc';
+String _$authStepper2DataHash() => r'4a2e6bc3368fb1f2a357baee0dd3c21e593d9063';
 
 /// See also [AuthStepper2Data].
 @ProviderFor(AuthStepper2Data)
