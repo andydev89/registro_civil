@@ -21,3 +21,15 @@ Map<String, dynamic> _$SimpleCertificateResponseToJson(
       'command': instance.command,
       'document': instance.document,
     };
+
+ProcessResponse _$ProcessResponseFromJson(Map<String, dynamic> json) =>
+    ProcessResponse(
+      idMap: Map<String, int>.from(json['id'] as Map),
+      command: json['command'] as String,
+    );
+
+Map<String, dynamic> _$ProcessResponseToJson(ProcessResponse instance) =>
+    <String, dynamic>{
+      'id': instance.idMap,
+      'command': instance.command,
+    };

@@ -59,6 +59,16 @@ abstract class Api {
     @Body() SimpleCertificateModel simpleCertificateModel,
   );
 
+  @PUT('/service/api/service/process')
+  Future<ResponseModel<ProcessResponse>> process(
+    @Body() ProcessModel processModel,
+  );
+  
+  @PUT('/service/api/service/cancel')
+  Future<ResponseModel<ProcessResponse>> cancel(
+    @Body() CancelModel cancelModel,
+  );
+
   // @POST('/service/api/service/validate')
   // Future<ResponseModel<RegisterCitizenModel>> validateNui(
   //   @Body() NuiModel nuiModel,

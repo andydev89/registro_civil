@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 
@@ -20,12 +24,18 @@ StatusCode _getStatusCode(StatusCode statusCode) {
   );
 }
 
-
-
 Future<void> initMethod() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+}
+
+Future<File> createPdfFileFromBase64(String base64Pdf) async {
+  final bytes = base64Decode(base64Pdf);
+  final directory = await getTemporaryDirectory();
+  final pdfFile = File('${directory.path}/tempPdf.pdf');
+  await pdfFile.writeAsBytes(bytes, flush: true);
+  return pdfFile;
 }

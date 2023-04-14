@@ -52,3 +52,35 @@ const _$RelationshipSimpleCertificateEnumEnumMap = {
   RelationshipSimpleCertificateEnum.coexistent: 'COEXISTENT',
   RelationshipSimpleCertificateEnum.staff: 'STAFF',
 };
+
+ProcessModel _$ProcessModelFromJson(Map<String, dynamic> json) => ProcessModel(
+      id: json['id'] as int,
+      state: $enumDecode(_$ServicesStateEnumMap, json['state']),
+      observations: json['observations'] as String,
+    );
+
+Map<String, dynamic> _$ProcessModelToJson(ProcessModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'state': _$ServicesStateEnumMap[instance.state]!,
+      'observations': instance.observations,
+    };
+
+const _$ServicesStateEnumMap = {
+  ServicesState.inProgress: 'IN_PROGRESS',
+  ServicesState.approved: 'APPROVED',
+  ServicesState.withErrors: 'WITH_ERRORS',
+  ServicesState.cancelled: 'CANCELLED',
+  ServicesState.inactive: 'INACTIVE',
+};
+
+CancelModel _$CancelModelFromJson(Map<String, dynamic> json) => CancelModel(
+      id: json['id'] as int,
+      observations: json['observations'] as String,
+    );
+
+Map<String, dynamic> _$CancelModelToJson(CancelModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'observations': instance.observations,
+    };

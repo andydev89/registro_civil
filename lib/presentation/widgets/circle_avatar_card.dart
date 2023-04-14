@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class CircleAvatarCardWidget extends StatelessWidget {
@@ -80,7 +78,7 @@ class CircleAvatarCardWidget extends StatelessWidget {
                     onPressed: onPressedView,
                   ),
                 ],
-              ).verticalPadding(20),
+              ).verticalPadding(8),
             ],
           ),
         ),

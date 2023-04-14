@@ -8,8 +8,6 @@ import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provide
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/my_orders/models/my_order_expandable_card_model.dart';
 import 'package:registro_civil_apk/presentation/pages/my_orders/widgets/my_orders_expandable_card.dart';
-import 'package:registro_civil_apk/presentation/pages/my_turns/models/my_turn_expandable_card_model.dart';
-import 'package:registro_civil_apk/presentation/pages/my_turns/widgets/my_turns_expandable_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
