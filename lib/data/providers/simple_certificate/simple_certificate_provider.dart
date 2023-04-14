@@ -1,4 +1,5 @@
 import 'package:oxidized/oxidized.dart';
+import 'package:registro_civil_apk/data/enum/services/services_state_enum.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
@@ -14,7 +15,8 @@ class SimpleCertificate extends _$SimpleCertificate {
   @override
   void build() {}
 
-  Future<Result<SimpleCertificateResponse, StatusCode>> simpleCertificateFamiliar({
+  Future<Result<SimpleCertificateResponse, StatusCode>>
+      simpleCertificateFamiliar({
     required SimpleCertificateFirstStepFamiliarModel familiarModel,
     required TypeSimpleCertificateEnum type,
   }) async {
@@ -30,13 +32,14 @@ class SimpleCertificate extends _$SimpleCertificate {
         nuiConadis: familiarModel.conadisModel.conadisNumber,
       ),
     );
-    if (response.status == StatusCode.s200) {
+    if (response.success) {
       return Result.ok(response.data!);
     }
     return Result.err(response.status);
   }
 
-  Future<Result<SimpleCertificateResponse, StatusCode>> simpleCertificatePersonal({
+  Future<Result<SimpleCertificateResponse, StatusCode>>
+      simpleCertificatePersonal({
     required NuiModel model,
     required TypeSimpleCertificateEnum type,
   }) async {
@@ -47,7 +50,55 @@ class SimpleCertificate extends _$SimpleCertificate {
         userNui: model.nui,
       ),
     );
-    if (response.status == StatusCode.s200) {
+    if (response.success) {
+      return Result.ok(response.data!);
+    }
+    return Result.err(response.status);
+  }
+}
+
+@riverpod
+class Process extends _$Process {
+  @override
+  void build() {}
+
+  Future<Result<ProcessResponse, StatusCode>> processSimpleCertificate({
+    required int id,
+    String observations = '',
+    ServicesState? state,
+  }) async {
+    final api = ref.watch(apiProvider);
+    final response = await api.process(
+      ProcessModel(
+        id: id,
+        state: state ?? ServicesState.approved,
+        observations: observations,
+      ),
+    );
+    if (response.success) {
+      return Result.ok(response.data!);
+    }
+    return Result.err(response.status);
+  }
+}
+
+@riverpod
+class Cancel extends _$Cancel {
+  @override
+  void build() {}
+
+  Future<Result<ProcessResponse, StatusCode>> cancelSimpleCertificate({
+    required int id,
+    String observations = '',
+  }) async {
+    final api = ref.watch(apiProvider);
+    final response = await api.cancel(
+      CancelModel(
+        id: id,
+        observations: observations,
+      ),
+    );
+    if (response.success) {
       return Result.ok(response.data!);
     }
     return Result.err(response.status);

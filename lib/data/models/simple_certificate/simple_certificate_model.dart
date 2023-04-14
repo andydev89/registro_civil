@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/services/services_state_enum.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/refecting_reason_enum.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_enum.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
@@ -94,4 +95,36 @@ class SimpleCertificateModel {
   final String nuiConadis;
 
   Map<String, dynamic> toJson() => _$SimpleCertificateModelToJson(this);
+}
+
+@JsonSerializable()
+class ProcessModel {
+  ProcessModel({
+    required this.id,
+    required this.state,
+    required this.observations,
+  });
+
+  factory ProcessModel.fromJson(Map<String, dynamic> json) =>
+      _$ProcessModelFromJson(json);
+  final int id;
+  final ServicesState state;
+  final String observations;
+
+  Map<String, dynamic> toJson() => _$ProcessModelToJson(this);
+}
+
+@JsonSerializable()
+class CancelModel {
+  CancelModel({
+    required this.id,
+    required this.observations,
+  });
+
+  factory CancelModel.fromJson(Map<String, dynamic> json) =>
+      _$CancelModelFromJson(json);
+  final int id;
+  final String observations;
+
+  Map<String, dynamic> toJson() => _$CancelModelToJson(this);
 }
