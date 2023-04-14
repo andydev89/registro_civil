@@ -78,7 +78,7 @@ class CircleAvatarCardWidget extends StatelessWidget {
                     onPressed: onPressedView,
                   ),
                 ],
-              ).verticalPadding(20),
+              ).verticalPadding(8),
             ],
           ),
         ),
