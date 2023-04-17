@@ -52,8 +52,12 @@ abstract class Api {
     @Query('token') String token,
   );
 
-  // SERVICES
+  @POST('/identity/api/auth/validate')
+  Future<ResponseModel<dynamic>> validateToken(
+    @Query('token') String token,
+  );
 
+  // SERVICES
   @POST('/service/api/service/certification/simple')
   Future<ResponseModel<SimpleCertificateResponse>> simpleCertificate(
     @Body() SimpleCertificateModel simpleCertificateModel,

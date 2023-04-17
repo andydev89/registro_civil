@@ -28,8 +28,8 @@ class PrimaryReactiveMap extends ConsumerWidget {
         (latLng) async {
           final result =
               await ref.read(getPlaceFromLatLngProvider(latLng).future);
-          formControl
-              .updateValue(result.first.addressComponents.toList()[1].longName);
+          final route = result.first.formattedAddress;
+          formControl.updateValue(route);
         },
       ),
     );

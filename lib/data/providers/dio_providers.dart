@@ -38,21 +38,27 @@ Fresh<OAuth2Token> fresh(FreshRef ref) {
   return Fresh.oAuth2(
     tokenStorage: SSTokenStorage(),
     shouldRefresh: (response) {
-      final uri = response?.realUri;
+      // final uri = response?.realUri;
       final status = response?.data['status'];
-      final shouldRefresh = status == 401 &&
-          (uri!.path.contains('identity/api/auth/refresh') == false);
-      return shouldRefresh;
+      // final shouldRefresh = status == 401 &&
+      //     (uri!.path.contains('identity/api/auth/refresh') == false);
+      // return shouldRefresh;
+      if (status == 401) {
+        ref.read(loginProvider.notifier).logout();
+      }
+      return false;
     },
     refreshToken: (token, client) async {
-      final oauthToken =
-          await ref.read(refreshTokenProvider(token!.accessToken).future);
-      if (oauthToken != null) {
-        return oauthToken;
-      } else {
-        await ref.read(loginProvider.notifier).logout();
-        return token;
-      }
+      // final oauthToken =
+      //     await ref.read(refreshTokenProvider(token!.accessToken).future);
+      // if (oauthToken != null) {
+      //   return oauthToken;
+      // } else {
+      //   await ref.read(loginProvider.notifier).logout();
+      //   return token;
+      // }
+      await ref.read(loginProvider.notifier).logout();
+      return token!;
     },
   );
 }
