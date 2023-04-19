@@ -16,7 +16,7 @@ class TypeOfServiceModel implements Translatable {
     required this.publishMovil,
     this.iconoWeb,
     this.iconoMovil,
-    required this.typeService,
+    required this.type,
   });
 
   factory TypeOfServiceModel.fromJson(Map<String, dynamic> json) =>
@@ -32,7 +32,7 @@ class TypeOfServiceModel implements Translatable {
   final bool publishMovil;
   final bool publishWeb;
   final String state;
-  final String typeService;
+  final String type;
 
   Map<String, dynamic> toJson() => _$TypeOfServiceModelToJson(this);
 

@@ -59,7 +59,7 @@ class MyOrdersPage extends ConsumerWidget {
                                 state: 'state',
                                 publishWeb: false,
                                 publishMovil: true,
-                                typeService: 'typeService',
+                                type: 'typeService',
                               ),
                             ),
                           ).verticalPadding(10),

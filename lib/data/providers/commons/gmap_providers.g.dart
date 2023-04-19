@@ -7,7 +7,7 @@ part of 'gmap_providers.dart';
 // **************************************************************************
 
 String _$getPlaceFromLatLngHash() =>
-    r'5365a395a32904dbd032338729eb5592637e815d';
+    r'd8ec4e72fd80c24920f63f79baa1b20a46c0270b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -114,7 +114,7 @@ class GetPlaceFromLatLngProvider
   }
 }
 
-String _$gmapHash() => r'9a0de9d07fb0fc51c33b41de4b266e1a0199a273';
+String _$gmapHash() => r'518fd0bd72734512885d3796c1a49d986ae8df74';
 
 /// See also [Gmap].
 @ProviderFor(Gmap)
