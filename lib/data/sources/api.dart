@@ -116,6 +116,7 @@ abstract class Api {
     @Query('pageSize') int pageSize,
     @Query('from') String from,
     @Query('to') String to,
+    @Query('agency') String agency,
     @Query('typeOfService') int typeOfService,
   );
 

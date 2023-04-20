@@ -45,25 +45,31 @@ class ScheduleTurnSecondPage extends StatelessWidget {
                   label: l10n.agencia,
                   provider: agenciesProvider,
                 ),
-                ScheduleDatePicker(
-                  label: l10n.fechaParaTurno,
-                  formControl: formModel.dateControl,
-                  initialTime: formModel.initialTimeControl,
-                  endTime: formModel.endTimeControl,
-                  typeOfServiceModel: typeOfServiceModel,
-                  starDate: DateTime.now(),
-                ),
                 ReactiveScheduleTurnSecondStepModelFormConsumer(
                   builder: (context, formModel, child) {
-                    return Visibility(
-                      visible: formModel.dateControl.valid,
-                      child: ScheduleTimeSelector(
-                        formControl: formModel.timeControl,
-                        initialTime: formModel.initialTimeControl?.value ??
-                            TimeOfDay.now(),
-                        endTime:
-                            formModel.endTimeControl?.value ?? TimeOfDay.now(),
-                      ),
+                    return Column(
+                      children: [
+                        ScheduleDatePicker(
+                          disable: !formModel.agencyControl.valid,
+                          label: l10n.fechaParaTurno,
+                          formControl: formModel.dateControl,
+                          initialTime: formModel.initialTimeControl,
+                          endTime: formModel.endTimeControl,
+                          agency: formModel.agencyControl,
+                          typeOfServiceModel: typeOfServiceModel,
+                          starDate: DateTime.now(),
+                        ),
+                        Visibility(
+                          visible: formModel.dateControl.valid,
+                          child: ScheduleTimeSelector(
+                            formControl: formModel.timeControl,
+                            initialTime: formModel.initialTimeControl?.value ??
+                                TimeOfDay.now(),
+                            endTime: formModel.endTimeControl?.value ??
+                                TimeOfDay.now(),
+                          ),
+                        ),
+                      ],
                     );
                   },
                 ),

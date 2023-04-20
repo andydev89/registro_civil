@@ -24,6 +24,7 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
     this.hintText,
     this.onPageChanged,
     this.onDaySelected,
+    this.disable = false,
   });
 
   final FormControl<DateTime> formControl;
@@ -35,6 +36,7 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
   final String? hintText;
   final void Function(DateTime)? onPageChanged;
   final void Function(DateTime)? onDaySelected;
+  final bool disable;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
     return PrimaryReactiveTextField(
       label: label,
       readOnly: true,
+      disable: disable,
       hintText: hasError
           ? l10n.errorAlObtenerLosDatos
           : isLoading
@@ -52,26 +55,28 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
           : isLoading
               ? const LoadingStatus()
               : Assets.svg.calendar.svg(),
-      onTap: (control) => showDialog<Widget>(
-        context: context,
-        builder: (context) => Dialog(
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomCalendar(
-                formControl: formControl,
-                availablesDate: availablesDate,
-                onPageChanged: onPageChanged,
-                onDaySelected: onDaySelected,
-              ).horizontalPadding(5),
-            ],
-          ),
-        ).withRevealAnimation,
-      ),
+      onTap: (control) => !disable
+          ? showDialog<Widget>(
+              context: context,
+              builder: (context) => Dialog(
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CustomCalendar(
+                      formControl: formControl,
+                      availablesDate: availablesDate,
+                      onPageChanged: onPageChanged,
+                      onDaySelected: onDaySelected,
+                    ).horizontalPadding(5),
+                  ],
+                ),
+              ).withRevealAnimation,
+            )
+          : null,
       formControl: formControl,
       setSuffixIconConstraints: true,
     );

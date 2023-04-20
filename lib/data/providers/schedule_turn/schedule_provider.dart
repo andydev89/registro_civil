@@ -11,6 +11,7 @@ Future<Result<List<ScheduleModel>, StatusCode>> availableSchedules(
   AvailableSchedulesRef ref,
   DateTime startDate,
   DateTime endDate,
+  String agency,
   int typeOfService,
 ) async {
   final api = ref.watch(apiProvider);
@@ -20,6 +21,7 @@ Future<Result<List<ScheduleModel>, StatusCode>> availableSchedules(
     31,
     startDate.onlyDate,
     endDate.onlyDate,
+    agency,
     typeOfService,
   );
   return response.success

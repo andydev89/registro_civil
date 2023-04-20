@@ -524,6 +524,7 @@ class _Api implements Api {
     pageSize,
     from,
     to,
+    agency,
     typeOfService,
   ) async {
     const _extra = <String, dynamic>{};
@@ -532,6 +533,7 @@ class _Api implements Api {
       r'pageSize': pageSize,
       r'from': from,
       r'to': to,
+      r'agency': agency,
       r'typeOfService': typeOfService,
     };
     final _headers = <String, dynamic>{};

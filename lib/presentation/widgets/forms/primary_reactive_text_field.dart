@@ -26,6 +26,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
     this.hintText,
     this.onTap,
     this.setSuffixIconConstraints = false,
+    this.disable = false,
     super.key,
   });
   final FormControl<T>? formControl;
@@ -44,6 +45,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
   final String? hintText;
   final bool setSuffixIconConstraints;
   final void Function(FormControl<T>)? onTap;
+  final bool disable;
 
   @override
   Widget build(BuildContext context) {
@@ -56,28 +58,31 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
           PrimaryText(
             label!,
           ).verticalPadding(5),
-        ReactiveTextField<T>(
-          formControl: formControl,
-          formControlName: formControlName,
-          readOnly: readOnly,
-          obscureText: obscureText,
-          controller: controller,
-          onTap: onTap,
-          style: TextStyle(
-            color: ligth ? Colors.white : Colors.black,
-            fontSize: fontSize,
-            fontWeight: fontWeight,
-          ),
-          cursorColor: ligth ? Colors.white : Colors.black,
-          keyboardType: keyboardType,
-          validationMessages: validationMessage(l10n),
-          inputFormatters: inputFormatters,
-          decoration: primaryInputDecoration(
-            light: ligth,
-            hintText: hintText ?? '${l10n.escriba}...',
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
-            setSuffixIconConstraints: setSuffixIconConstraints,
+        AbsorbPointer(
+          absorbing: disable,
+          child: ReactiveTextField<T>(
+            formControl: formControl,
+            formControlName: formControlName,
+            readOnly: readOnly,
+            obscureText: obscureText,
+            controller: controller,
+            onTap: onTap,
+            style: TextStyle(
+              color: ligth ? Colors.white : Colors.black,
+              fontSize: fontSize,
+              fontWeight: fontWeight,
+            ),
+            cursorColor: ligth ? Colors.white : Colors.black,
+            keyboardType: keyboardType,
+            validationMessages: validationMessage(l10n),
+            inputFormatters: inputFormatters,
+            decoration: primaryInputDecoration(
+              light: ligth,
+              hintText: hintText ?? '${l10n.escriba}...',
+              prefixIcon: prefixIcon,
+              suffixIcon: suffixIcon,
+              setSuffixIconConstraints: setSuffixIconConstraints,
+            ),
           ),
         ),
       ],
