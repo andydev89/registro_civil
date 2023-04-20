@@ -110,22 +110,26 @@ const _OffersModelsimpleCertificateEnumValueMap = {
   'marriage': 1,
   'factorUnion': 2,
   'death': 3,
-  'identity': 4,
-  'copyMarriageRegistrationCertificate': 5,
-  'copyRegistrationCertificateGenderRegistration': 6,
-  'copyFactoUnionRegistrationCertificate': 7,
-  'copyBirthRegistrationCertificate': 8,
+  'gender': 4,
+  'identity': 5,
+  'copyMarriageRegistrationCertificate': 6,
+  'copyRegistrationCertificateGenderRegistration': 7,
+  'copyRegistrationRecordDeath': 8,
+  'copyFactoUnionRegistrationCertificate': 9,
+  'copyBirthRegistrationCertificate': 10,
 };
 const _OffersModelsimpleCertificateValueEnumMap = {
   0: TypeSimpleCertificateEnum.birth,
   1: TypeSimpleCertificateEnum.marriage,
   2: TypeSimpleCertificateEnum.factorUnion,
   3: TypeSimpleCertificateEnum.death,
-  4: TypeSimpleCertificateEnum.identity,
-  5: TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate,
-  6: TypeSimpleCertificateEnum.copyRegistrationCertificateGenderRegistration,
-  7: TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate,
-  8: TypeSimpleCertificateEnum.copyBirthRegistrationCertificate,
+  4: TypeSimpleCertificateEnum.gender,
+  5: TypeSimpleCertificateEnum.identity,
+  6: TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate,
+  7: TypeSimpleCertificateEnum.copyRegistrationCertificateGenderRegistration,
+  8: TypeSimpleCertificateEnum.copyRegistrationRecordDeath,
+  9: TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate,
+  10: TypeSimpleCertificateEnum.copyBirthRegistrationCertificate,
 };
 
 Id _offersModelGetId(OffersModel object) {
@@ -572,9 +576,17 @@ const _$TypeSimpleCertificateEnumEnumMap = {
   TypeSimpleCertificateEnum.marriage: 'SERVICE_CERTIFICADO_MATRIMONIO',
   TypeSimpleCertificateEnum.factorUnion: 'SERVICE_CERTIFICADO_UNION_HECHO',
   TypeSimpleCertificateEnum.death: 'SERVICE_CERTIFICADO_DEFUNCION',
-  TypeSimpleCertificateEnum.identity: '',
-  TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate: '',
-  TypeSimpleCertificateEnum.copyRegistrationCertificateGenderRegistration: '',
-  TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate: '',
-  TypeSimpleCertificateEnum.copyBirthRegistrationCertificate: '',
+  TypeSimpleCertificateEnum.gender: 'SERVICE_CERTIFICADO_GENERO',
+  TypeSimpleCertificateEnum.identity:
+      'SERVICE_CERTIFICADO_IDENTIDAD_ESTADO_CIVIL',
+  TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
+      'SERVICE_ACTA_REGISTRAL_MATRIMONIO',
+  TypeSimpleCertificateEnum.copyRegistrationCertificateGenderRegistration:
+      'SERVICE_ACTA_REGISTRAL_GENERO',
+  TypeSimpleCertificateEnum.copyRegistrationRecordDeath:
+      'SERVICE_ACTA_REGISTRAL_DEFUNCION',
+  TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate:
+      'SERVICE_ACTA_REGISTRAL_UNION_HECHO',
+  TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
+      'SERVICE_ACTA_REGISTRAL_NACIMIENTO',
 };

@@ -13,21 +13,25 @@ enum TypeSimpleCertificateEnum implements Translatable {
   factorUnion,
   @JsonValue('SERVICE_CERTIFICADO_DEFUNCION')
   death,
-  @JsonValue('')
+  @JsonValue('SERVICE_CERTIFICADO_GENERO')
+  gender,
+  @JsonValue('SERVICE_CERTIFICADO_IDENTIDAD_ESTADO_CIVIL')
   identity,
-  @JsonValue('')
+  @JsonValue('SERVICE_ACTA_REGISTRAL_MATRIMONIO')
   copyMarriageRegistrationCertificate,
-  @JsonValue('')
+  @JsonValue('SERVICE_ACTA_REGISTRAL_GENERO')
   copyRegistrationCertificateGenderRegistration,
-  @JsonValue('')
+  @JsonValue('SERVICE_ACTA_REGISTRAL_DEFUNCION')
+  copyRegistrationRecordDeath,
+  @JsonValue('SERVICE_ACTA_REGISTRAL_UNION_HECHO')
   copyFactoUnionRegistrationCertificate,
-  @JsonValue('')
+  @JsonValue('SERVICE_ACTA_REGISTRAL_NACIMIENTO')
   copyBirthRegistrationCertificate;
 
   @override
   String translate(BuildContext context) {
     final l10n = context.l10n;
-     switch (this) {
+    switch (this) {
       case TypeSimpleCertificateEnum.factorUnion:
         return l10n.certificadoUniHec;
       case TypeSimpleCertificateEnum.marriage:
@@ -38,6 +42,8 @@ enum TypeSimpleCertificateEnum implements Translatable {
         return l10n.certificadoIden;
       case TypeSimpleCertificateEnum.birth:
         return l10n.certificadoNac;
+      case TypeSimpleCertificateEnum.gender:
+        return l10n.certificadoGen;
       case TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
         return l10n.copiaActRegMat;
       case TypeSimpleCertificateEnum
@@ -47,12 +53,13 @@ enum TypeSimpleCertificateEnum implements Translatable {
         return l10n.copiaActRegUniHec;
       case TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
         return l10n.copiaActRegNac;
+      case TypeSimpleCertificateEnum.copyRegistrationRecordDeath:
+        return l10n.copiaActRegDef;
     }
   }
 }
 
 extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
-
   String description(AppLocalizations l10n) {
     switch (this) {
       case TypeSimpleCertificateEnum.factorUnion:
@@ -67,6 +74,9 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
         return l10n.certificadoNacDes;
       case TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
         return l10n.copiaActRegMatDes;
+      case TypeSimpleCertificateEnum.gender:
+        // TODO(jang): Handle this case.
+        return '';
       case TypeSimpleCertificateEnum
           .copyRegistrationCertificateGenderRegistration:
         return l10n.copiaActRegRegGenDes;
@@ -74,6 +84,9 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
         return l10n.copiaActRegUniHecDes;
       case TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
         return l10n.copiaActRegNacDes;
+      case TypeSimpleCertificateEnum.copyRegistrationRecordDeath:
+        // TODO(jang): Handle this case.
+        return '';
     }
   }
 
@@ -103,6 +116,8 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
         return Assets.png.certificadoIdentidad;
       case TypeSimpleCertificateEnum.birth:
         return Assets.png.certificadoNacimiento;
+      case TypeSimpleCertificateEnum.gender:
+        return Assets.png.certificadoGenero;
       case TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
         return Assets.png.certificadoMatrimonio;
       case TypeSimpleCertificateEnum
@@ -112,6 +127,8 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
         return Assets.png.certificadoUnionHecho;
       case TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
         return Assets.png.certificadoNacimiento;
+      case TypeSimpleCertificateEnum.copyRegistrationRecordDeath:
+        return Assets.png.certificadoDefuncion;
     }
   }
 
@@ -127,6 +144,8 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
         return 0;
       case TypeSimpleCertificateEnum.birth:
         return 0;
+      case TypeSimpleCertificateEnum.gender:
+        return 0;
       case TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
         return 0;
       case TypeSimpleCertificateEnum
@@ -135,6 +154,8 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
       case TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate:
         return 0;
       case TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
+        return 0;
+      case TypeSimpleCertificateEnum.copyRegistrationRecordDeath:
         return 0;
     }
   }
@@ -151,6 +172,8 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
         return 0;
       case TypeSimpleCertificateEnum.birth:
         return 0;
+      case TypeSimpleCertificateEnum.gender:
+        return 0;
       case TypeSimpleCertificateEnum.copyMarriageRegistrationCertificate:
         return 0;
       case TypeSimpleCertificateEnum
@@ -159,6 +182,8 @@ extension TypeCertificateEnumExtension on TypeSimpleCertificateEnum {
       case TypeSimpleCertificateEnum.copyFactoUnionRegistrationCertificate:
         return 0;
       case TypeSimpleCertificateEnum.copyBirthRegistrationCertificate:
+        return 0;
+      case TypeSimpleCertificateEnum.copyRegistrationRecordDeath:
         return 0;
     }
   }

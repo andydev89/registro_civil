@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
+import 'package:registro_civil_apk/data/enum/services/services_type.dart';
 part 'offers_model.g.dart';
 
 @collection
