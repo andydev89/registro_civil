@@ -7,7 +7,7 @@ part of 'schedule_provider.dart';
 // **************************************************************************
 
 String _$availableSchedulesHash() =>
-    r'4671d4e9c76aec6b5049e40aff8e91f5ff5d00f7';
+    r'956e1374ad8da8e1ddfc334f3ac5d1f868a05e89';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -47,11 +47,13 @@ class AvailableSchedulesFamily
   AvailableSchedulesProvider call(
     DateTime startDate,
     DateTime endDate,
+    String agency,
     int typeOfService,
   ) {
     return AvailableSchedulesProvider(
       startDate,
       endDate,
+      agency,
       typeOfService,
     );
   }
@@ -63,6 +65,7 @@ class AvailableSchedulesFamily
     return call(
       provider.startDate,
       provider.endDate,
+      provider.agency,
       provider.typeOfService,
     );
   }
@@ -89,12 +92,14 @@ class AvailableSchedulesProvider
   AvailableSchedulesProvider(
     this.startDate,
     this.endDate,
+    this.agency,
     this.typeOfService,
   ) : super.internal(
           (ref) => availableSchedules(
             ref,
             startDate,
             endDate,
+            agency,
             typeOfService,
           ),
           from: availableSchedulesProvider,
@@ -110,6 +115,7 @@ class AvailableSchedulesProvider
 
   final DateTime startDate;
   final DateTime endDate;
+  final String agency;
   final int typeOfService;
 
   @override
@@ -117,6 +123,7 @@ class AvailableSchedulesProvider
     return other is AvailableSchedulesProvider &&
         other.startDate == startDate &&
         other.endDate == endDate &&
+        other.agency == agency &&
         other.typeOfService == typeOfService;
   }
 
@@ -125,6 +132,7 @@ class AvailableSchedulesProvider
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, startDate.hashCode);
     hash = _SystemHash.combine(hash, endDate.hashCode);
+    hash = _SystemHash.combine(hash, agency.hashCode);
     hash = _SystemHash.combine(hash, typeOfService.hashCode);
 
     return _SystemHash.finish(hash);
