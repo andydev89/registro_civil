@@ -57,7 +57,7 @@ class ResponseModelPagination<T> {
   final String timestamp;
   final StatusCode status;
   final String message;
-  final String? errors;
+  final List<String>? errors;
   final T? data;
   final int? totalPages;
   final int? totalElements;
