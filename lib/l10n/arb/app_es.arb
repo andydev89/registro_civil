@@ -298,5 +298,12 @@
   "numeroDeDepartamento": "Número de departamento",
   "tipoDeResidencia": "Tipo de residencia",
   "annadirResidencia": "Añadir residencia",
-  "verCertificado": "Ver certificado"
+  "verCertificado": "Ver certificado",
+  "lunes": "Lunes",
+  "martes": "Martes",
+  "miercoles": "Miercoles",
+  "jueves": "Jueves",
+  "viernes": "viernes",
+  "sabado": "Sabado",
+  "domingo": "Domingo"
 }

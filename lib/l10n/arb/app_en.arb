@@ -298,5 +298,12 @@
   "numeroDeDepartamento": "Department number",
   "tipoDeResidencia": "Residence type",
   "annadirResidencia": "Add residence",
-  "verCertificado": "See certificate"
+  "verCertificado": "See certificate",
+  "lunes": "Monday",
+  "martes": "Tuesday",
+  "miercoles": "Wednesday",
+  "jueves": "Thursday",
+  "viernes": "Friday",
+  "sabado": "Saturday",
+  "domingo": "Sunday"
 }
