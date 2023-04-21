@@ -54,11 +54,18 @@ Future<Result<List<AgencyModel>, StatusCode>> agencies(
 
 @riverpod
 Future<Result<List<TypeOfServiceModel>, StatusCode>> services(
-  ServicesRef ref,
-) async {
+  ServicesRef ref, {
+  bool? bookable,
+}) async {
   final api = ref.watch(apiProvider);
   final response = await api.services(0, 100);
   return response.success
-      ? Result.ok(response.data!)
+      ? Result.ok(
+          bookable != null
+              ? response.data!
+                  .where((element) => element.schedule == bookable)
+                  .toList()
+              : response.data!,
+        )
       : Result.err(response.status);
 }

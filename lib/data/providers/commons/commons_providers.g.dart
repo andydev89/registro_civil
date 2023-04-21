@@ -70,20 +70,109 @@ final agenciesProvider =
 
 typedef AgenciesRef
     = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
-String _$servicesHash() => r'2efe780260fcb04d133259c4954f969a8212e8a1';
+String _$servicesHash() => r'c09796232154885828acdcaf429d156e0227c6de';
 
-/// See also [services].
-@ProviderFor(services)
-final servicesProvider = AutoDisposeFutureProvider<
-    Result<List<TypeOfServiceModel>, StatusCode>>.internal(
-  services,
-  name: r'servicesProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$servicesHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
+
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
+
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
 
 typedef ServicesRef = AutoDisposeFutureProviderRef<
     Result<List<TypeOfServiceModel>, StatusCode>>;
+
+/// See also [services].
+@ProviderFor(services)
+const servicesProvider = ServicesFamily();
+
+/// See also [services].
+class ServicesFamily
+    extends Family<AsyncValue<Result<List<TypeOfServiceModel>, StatusCode>>> {
+  /// See also [services].
+  const ServicesFamily();
+
+  /// See also [services].
+  ServicesProvider call({
+    bool? bookable,
+  }) {
+    return ServicesProvider(
+      bookable: bookable,
+    );
+  }
+
+  @override
+  ServicesProvider getProviderOverride(
+    covariant ServicesProvider provider,
+  ) {
+    return call(
+      bookable: provider.bookable,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'servicesProvider';
+}
+
+/// See also [services].
+class ServicesProvider extends AutoDisposeFutureProvider<
+    Result<List<TypeOfServiceModel>, StatusCode>> {
+  /// See also [services].
+  ServicesProvider({
+    this.bookable,
+  }) : super.internal(
+          (ref) => services(
+            ref,
+            bookable: bookable,
+          ),
+          from: servicesProvider,
+          name: r'servicesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$servicesHash,
+          dependencies: ServicesFamily._dependencies,
+          allTransitiveDependencies: ServicesFamily._allTransitiveDependencies,
+        );
+
+  final bool? bookable;
+
+  @override
+  bool operator ==(Object other) {
+    return other is ServicesProvider && other.bookable == bookable;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, bookable.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

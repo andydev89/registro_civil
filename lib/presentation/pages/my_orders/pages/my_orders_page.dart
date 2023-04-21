@@ -60,6 +60,7 @@ class MyOrdersPage extends ConsumerWidget {
                                 publishWeb: false,
                                 publishMovil: true,
                                 type: 'typeService',
+                                schedule: true,
                               ),
                             ),
                           ).verticalPadding(10),
