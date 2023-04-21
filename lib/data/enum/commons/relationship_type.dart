@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
+//TODO corregir los enums con json value
 enum RelationshipType implements Translatable {
   ///Conyugue o conviviente
   spouseOrCohabitant,

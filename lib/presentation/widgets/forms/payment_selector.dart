@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:power_ups/extensions/iterable_extension.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class PaymentSelector extends HookWidget {
