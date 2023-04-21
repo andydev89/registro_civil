@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/relationship_type.dart';
+import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/commons/relationship_type.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
