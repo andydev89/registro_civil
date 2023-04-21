@@ -44,7 +44,7 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
     return PrimaryReactiveTextField(
       label: label,
       readOnly: true,
-      disable: disable,
+      disable: disable || isLoading,
       hintText: hasError
           ? l10n.errorAlObtenerLosDatos
           : isLoading
