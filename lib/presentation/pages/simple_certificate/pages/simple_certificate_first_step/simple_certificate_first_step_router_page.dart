@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:registro_civil_apk/data/enum/services/services_type.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/simple_certificate_radio_type_enum.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_radio_list_tile.dart';
@@ -13,7 +14,7 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
     required this.typeSimpleCertificate,
     super.key,
   });
-  final TypeSimpleCertificateEnum typeSimpleCertificate;
+  final TypeServiceModel typeSimpleCertificate;
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +47,8 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
                     ),
                   ),
                   Visibility(
-                    visible: typeSimpleCertificate !=
-                        TypeSimpleCertificateEnum.death,
+                    visible: typeSimpleCertificate.type !=
+                        TypeService.death,
                     child: Expanded(
                       child: PrimaryRadioListTile(
                         value: SimpleCertificateRadioTypeEnum.personal,

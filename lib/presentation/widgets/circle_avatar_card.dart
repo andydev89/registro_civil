@@ -12,7 +12,7 @@ class CircleAvatarCardWidget extends StatelessWidget {
     super.key,
   });
   final String title;
-  final Image image;
+  final Widget image;
   final void Function()? onPressedCheck;
   final void Function()? onPressedView;
 
@@ -82,20 +82,7 @@ class CircleAvatarCardWidget extends StatelessWidget {
             ],
           ),
         ),
-        AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: image.image,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
+        image,
       ],
     );
   }

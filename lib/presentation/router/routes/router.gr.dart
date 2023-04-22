@@ -1341,7 +1341,7 @@ class ScheduleTurnFirstStepFamiliarRoute extends PageRouteInfo<void> {
 class SimpleCertificateFirstStepRouterRoute
     extends PageRouteInfo<SimpleCertificateFirstStepRouterRouteArgs> {
   SimpleCertificateFirstStepRouterRoute({
-    required TypeSimpleCertificateEnum typeSimpleCertificate,
+    required TypeServiceModel typeSimpleCertificate,
     Key? key,
     List<PageRouteInfo>? children,
   }) : super(
@@ -1363,7 +1363,7 @@ class SimpleCertificateFirstStepRouterRouteArgs {
     this.key,
   });
 
-  final TypeSimpleCertificateEnum typeSimpleCertificate;
+  final TypeServiceModel typeSimpleCertificate;
 
   final Key? key;
 
@@ -1413,7 +1413,7 @@ class SimpleCertificateSecondStepRouteArgs {
 class SimpleCertificateFirstStepFamiliarRoute
     extends PageRouteInfo<SimpleCertificateFirstStepFamiliarRouteArgs> {
   SimpleCertificateFirstStepFamiliarRoute({
-    required TypeSimpleCertificateEnum typeSimpleCertificate,
+    required TypeServiceModel typeSimpleCertificate,
     Key? key,
   }) : super(
           SimpleCertificateFirstStepFamiliarRoute.name,
@@ -1433,7 +1433,7 @@ class SimpleCertificateFirstStepFamiliarRouteArgs {
     this.key,
   });
 
-  final TypeSimpleCertificateEnum typeSimpleCertificate;
+  final TypeServiceModel typeSimpleCertificate;
 
   final Key? key;
 
@@ -1448,7 +1448,7 @@ class SimpleCertificateFirstStepFamiliarRouteArgs {
 class SimpleCertificateFirstStepPersonalRoute
     extends PageRouteInfo<SimpleCertificateFirstStepPersonalRouteArgs> {
   SimpleCertificateFirstStepPersonalRoute({
-    required TypeSimpleCertificateEnum typeSimpleCertificate,
+    required TypeServiceModel typeSimpleCertificate,
     Key? key,
   }) : super(
           SimpleCertificateFirstStepPersonalRoute.name,
@@ -1468,7 +1468,7 @@ class SimpleCertificateFirstStepPersonalRouteArgs {
     this.key,
   });
 
-  final TypeSimpleCertificateEnum typeSimpleCertificate;
+  final TypeServiceModel typeSimpleCertificate;
 
   final Key? key;
 

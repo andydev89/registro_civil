@@ -333,6 +333,49 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModelPagination<List<TypeServiceModel>>> typeServices(
+    pageNo,
+    pageSize,
+    filter,
+    sortBy,
+    sortType,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+      r'filter': filter,
+      r'sortBy': sortBy,
+      r'sortType': sortType,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<TypeServiceModel>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/type/service',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModelPagination<List<TypeServiceModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<TypeServiceModel>(
+                  (i) => TypeServiceModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModelPagination<List<LocationModel>?>> provinces(
     pageNo,
     pageSize,

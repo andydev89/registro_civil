@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/services/services_state_enum.dart';
+import 'package:registro_civil_apk/data/enum/services/services_type.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/refecting_reason_enum.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_enum.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
 part 'simple_certificate_model.gform.dart';
@@ -86,7 +86,7 @@ class SimpleCertificateModel {
 
   factory SimpleCertificateModel.fromJson(Map<String, dynamic> json) =>
       _$SimpleCertificateModelFromJson(json);
-  final TypeSimpleCertificateEnum type;
+  final TypeService type;
   final String userNui;
   final bool isFamily;
   final RelationshipSimpleCertificateEnum typeFamily;

@@ -13,34 +13,35 @@ class ProceduresPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final filter = ref.watch(searchHomeProvider);
-    return CircleAvatarCardGrid(
-      filter: filter,
-      elements: [
-        CircleAvatarCardModel(
-          image: Assets.png.certificadoIdentidad.image(),
-          title: l10n.duplicadoCed,
-          onPressedCheck: () {},
-          onPressedView: () {},
-        ),
-        CircleAvatarCardModel(
-          image: Assets.png.certificadoIdentidad.image(),
-          title: l10n.cedulacionExtPriVez,
-          onPressedCheck: () {},
-          onPressedView: () {},
-        ),
-        CircleAvatarCardModel(
-          image: Assets.png.certificadoMatrimonio.image(),
-          title: l10n.celebracionMat,
-          onPressedCheck: () {},
-          onPressedView: () {},
-        ),
-        CircleAvatarCardModel(
-          image: Assets.png.certificadoNacimiento.image(),
-          title: l10n.registroNacExt,
-          onPressedCheck: () {},
-          onPressedView: () {},
-        ),
-      ],
-    );
+    return Container();
+    // return CircleAvatarCardGrid(
+    //   filter: filter,
+    //   elements: [
+    //     CircleAvatarCardModel(
+    //       image: Assets.png.certificadoIdentidad.image(),
+    //       title: l10n.duplicadoCed,
+    //       onPressedCheck: () {},
+    //       onPressedView: () {},
+    //     ),
+    //     CircleAvatarCardModel(
+    //       image: Assets.png.certificadoIdentidad.image(),
+    //       title: l10n.cedulacionExtPriVez,
+    //       onPressedCheck: () {},
+    //       onPressedView: () {},
+    //     ),
+    //     CircleAvatarCardModel(
+    //       image: Assets.png.certificadoMatrimonio.image(),
+    //       title: l10n.celebracionMat,
+    //       onPressedCheck: () {},
+    //       onPressedView: () {},
+    //     ),
+    //     CircleAvatarCardModel(
+    //       image: Assets.png.certificadoNacimiento.image(),
+    //       title: l10n.registroNacExt,
+    //       onPressedCheck: () {},
+    //       onPressedView: () {},
+    //     ),
+    //   ],
+    // );
   }
 }

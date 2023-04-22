@@ -39,3 +39,13 @@ Future<File> createPdfFileFromBase64(String base64Pdf) async {
   await pdfFile.writeAsBytes(bytes, flush: true);
   return pdfFile;
 }
+
+// create image from base64
+
+Future<File> createImageFileFromBase64(String base64Image) async {
+  final bytes = base64Decode(base64Image);
+  final directory = await getTemporaryDirectory();
+  final imageFile = File('${directory.path}/tempImage.jpg');
+  await imageFile.writeAsBytes(bytes, flush: true);
+  return imageFile;
+}

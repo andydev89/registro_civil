@@ -1,6 +1,6 @@
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/services/services_state_enum.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
+import 'package:registro_civil_apk/data/enum/services/services_type.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
@@ -18,7 +18,7 @@ class SimpleCertificate extends _$SimpleCertificate {
   Future<Result<SimpleCertificateResponse, StatusCode>>
       simpleCertificateFamiliar({
     required SimpleCertificateFirstStepFamiliarModel familiarModel,
-    required TypeSimpleCertificateEnum type,
+    required TypeService type,
   }) async {
     final api = ref.watch(apiProvider);
     final user = await api.me();
@@ -41,7 +41,7 @@ class SimpleCertificate extends _$SimpleCertificate {
   Future<Result<SimpleCertificateResponse, StatusCode>>
       simpleCertificatePersonal({
     required NuiModel model,
-    required TypeSimpleCertificateEnum type,
+    required TypeService type,
   }) async {
     final api = ref.watch(apiProvider);
     final response = await api.simpleCertificate(
