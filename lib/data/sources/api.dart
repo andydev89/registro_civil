@@ -67,7 +67,7 @@ abstract class Api {
   Future<ResponseModel<ProcessResponse>> process(
     @Body() ProcessModel processModel,
   );
-  
+
   @PUT('/service/api/service/cancel')
   Future<ResponseModel<ProcessResponse>> cancel(
     @Body() CancelModel cancelModel,
@@ -99,6 +99,13 @@ abstract class Api {
 
   @GET('/identity/api/agency')
   Future<ResponseModelPagination<List<AgencyModel>?>> agencies(
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
+
+  @GET('/identity/api/agency/by')
+  Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByProvince(
+    @Query('province') String province,
     @Query('pageNo') int pageNo,
     @Query('pageSize') int pageSize,
   );

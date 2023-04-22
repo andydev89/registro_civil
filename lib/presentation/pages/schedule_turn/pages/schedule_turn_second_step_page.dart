@@ -40,17 +40,21 @@ class ScheduleTurnSecondPage extends StatelessWidget {
                   label: l10n.provincia,
                   provider: provincesProvider,
                 ),
-                SelectElementFromApi(
-                  formControl: formModel.agencyControl,
-                  label: l10n.agencia,
-                  provider: agenciesProvider,
-                ),
                 ReactiveScheduleTurnSecondStepModelFormConsumer(
                   builder: (context, formModel, child) {
                     return Column(
                       children: [
+                        SelectElementFromApi(
+                          readOnly: !formModel.provinceControl.valid,
+                          formControl: formModel.agencyControl,
+                          label: l10n.agencia,
+                          provider: agenciesByProvinceProvider(
+                            provinceId:
+                                formModel.provinceControl.value?.id ?? '',
+                          ),
+                        ),
                         ScheduleDatePicker(
-                          disable: !formModel.agencyControl.valid,
+                          readOnly: !formModel.agencyControl.valid,
                           label: l10n.fechaParaTurno,
                           formControl: formModel.dateControl,
                           initialTime: formModel.initialTimeControl,

@@ -33,8 +33,19 @@ class TypeOfServiceModel implements Translatable {
   final bool publishMovil;
   final bool publishWeb;
   final String state;
+  // @JsonKey(readValue: readTypeOfService)
   final String type;
   final bool schedule;
+
+  // static String readTypeOfService(Map<dynamic, dynamic> map, String key) {
+  //   if (map['typeService'] != null) {
+  //     return 'typeService';
+  //   } else if (map['type'] != null) {
+  //     return 'type';
+  //   } else {
+  //     return key;
+  //   }
+  // }
 
   Map<String, dynamic> toJson() => _$TypeOfServiceModelToJson(this);
 

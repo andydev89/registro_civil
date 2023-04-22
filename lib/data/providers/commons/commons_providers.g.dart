@@ -70,7 +70,8 @@ final agenciesProvider =
 
 typedef AgenciesRef
     = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
-String _$servicesHash() => r'c09796232154885828acdcaf429d156e0227c6de';
+String _$agenciesByProvinceHash() =>
+    r'f89c498948bc9d1ba4ef86acce27e40179117e40';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -93,6 +94,92 @@ class _SystemHash {
   }
 }
 
+typedef AgenciesByProvinceRef
+    = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
+
+/// See also [agenciesByProvince].
+@ProviderFor(agenciesByProvince)
+const agenciesByProvinceProvider = AgenciesByProvinceFamily();
+
+/// See also [agenciesByProvince].
+class AgenciesByProvinceFamily
+    extends Family<AsyncValue<Result<List<AgencyModel>, StatusCode>>> {
+  /// See also [agenciesByProvince].
+  const AgenciesByProvinceFamily();
+
+  /// See also [agenciesByProvince].
+  AgenciesByProvinceProvider call({
+    required String provinceId,
+  }) {
+    return AgenciesByProvinceProvider(
+      provinceId: provinceId,
+    );
+  }
+
+  @override
+  AgenciesByProvinceProvider getProviderOverride(
+    covariant AgenciesByProvinceProvider provider,
+  ) {
+    return call(
+      provinceId: provider.provinceId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'agenciesByProvinceProvider';
+}
+
+/// See also [agenciesByProvince].
+class AgenciesByProvinceProvider
+    extends AutoDisposeFutureProvider<Result<List<AgencyModel>, StatusCode>> {
+  /// See also [agenciesByProvince].
+  AgenciesByProvinceProvider({
+    required this.provinceId,
+  }) : super.internal(
+          (ref) => agenciesByProvince(
+            ref,
+            provinceId: provinceId,
+          ),
+          from: agenciesByProvinceProvider,
+          name: r'agenciesByProvinceProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$agenciesByProvinceHash,
+          dependencies: AgenciesByProvinceFamily._dependencies,
+          allTransitiveDependencies:
+              AgenciesByProvinceFamily._allTransitiveDependencies,
+        );
+
+  final String provinceId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is AgenciesByProvinceProvider &&
+        other.provinceId == provinceId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, provinceId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$servicesHash() => r'c09796232154885828acdcaf429d156e0227c6de';
 typedef ServicesRef = AutoDisposeFutureProviderRef<
     Result<List<TypeOfServiceModel>, StatusCode>>;
 

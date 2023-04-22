@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/json_converters/time_of_day_converter.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
-import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/schedule_type_of_service_model.dart';
 part 'schedule_model.g.dart';
 
 @JsonSerializable()
@@ -30,7 +30,7 @@ class ScheduleModel {
   final TimeOfDay startTime;
 
   final int stock;
-  final TypeOfServiceModel typeOfService;
+  final ScheduleTypeOfServiceModel typeOfService;
 
   Map<String, dynamic> toJson() => _$ScheduleModelToJson(this);
 }

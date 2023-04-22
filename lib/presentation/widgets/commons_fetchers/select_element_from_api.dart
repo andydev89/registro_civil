@@ -16,6 +16,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
     this.light = false,
     this.hintText,
     this.prefixIcon,
+    this.readOnly = false,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
@@ -24,11 +25,13 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   final bool light;
   final String? hintText;
   final Widget? prefixIcon;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final elements = ref.watch(provider);
     return PrimaryReactiveDropdown(
+      readOnly: readOnly || elements.isLoading,
       formControlName: formControlName,
       formControl: formControl,
       light: light,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/schedule_type_of_service_model.dart';
 
 class MyTurnExpandableCardModel {
   MyTurnExpandableCardModel({
@@ -12,7 +12,7 @@ class MyTurnExpandableCardModel {
   });
 
   final String id;
-  final TypeOfServiceModel typeOfService;
+  final ScheduleTypeOfServiceModel typeOfService;
   final DateTime date;
   final TimeOfDay time;
   final String city;
