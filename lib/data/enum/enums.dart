@@ -5,7 +5,7 @@ export 'home_enum/agendar_turnos_enum.dart';
 export 'home_enum/detalles_turno_enum.dart';
 export 'notification_enum/notification_type.dart';
 export 'payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts_enum.dart';
+export 'services/services_type.dart';
 export 'simple_certificate/relationship_simple_certificate_enum.dart';
 export 'simple_certificate/simple_certificate_radio_type_enum.dart';
-export 'simple_certificate/type_simple_certificate._enum.dart';
 export 'validators/validations_message_enum.dart';

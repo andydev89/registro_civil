@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/type_simple_certificate._enum.dart';
 import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
+import 'package:registro_civil_apk/data/utils/methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/modify_cant.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
@@ -24,7 +24,19 @@ class CertificateDetail extends ConsumerWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Flexible(child: offer.simpleCertificate.image.image()),
+        Flexible(
+          child: FutureBuilder(
+            future:
+                createImageFileFromBase64(offer.simpleCertificate.iconoMovil),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Image.file(snapshot.data!);
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        ),
         const SizedBox(width: width),
         Expanded(
           child: Column(
@@ -34,7 +46,7 @@ class CertificateDetail extends ConsumerWidget {
                 children: [
                   Flexible(
                     child: PrimaryText(
-                      offer.simpleCertificate.translate(context),
+                      offer.simpleCertificate.name,
                       fontWeight: FontWeight.bold,
                       textAlign: TextAlign.start,
                       maxLines: 3,

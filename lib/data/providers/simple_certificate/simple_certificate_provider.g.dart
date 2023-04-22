@@ -6,7 +6,7 @@ part of 'simple_certificate_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$simpleCertificateHash() => r'6229b7f433a6d454be2ee82d1af804bab7778ffe';
+String _$simpleCertificateHash() => r'b1a19ddcb4dadf159c2b33e0739f5aef446a4452';
 
 /// See also [SimpleCertificate].
 @ProviderFor(SimpleCertificate)
