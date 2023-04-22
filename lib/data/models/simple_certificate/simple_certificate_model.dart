@@ -86,7 +86,7 @@ class SimpleCertificateModel {
 
   factory SimpleCertificateModel.fromJson(Map<String, dynamic> json) =>
       _$SimpleCertificateModelFromJson(json);
-  final TypeSimpleCertificateEnum type;
+  final TypeService type;
   final String userNui;
   final bool isFamily;
   final RelationshipSimpleCertificateEnum typeFamily;

@@ -18,7 +18,7 @@ class SimpleCertificate extends _$SimpleCertificate {
   Future<Result<SimpleCertificateResponse, StatusCode>>
       simpleCertificateFamiliar({
     required SimpleCertificateFirstStepFamiliarModel familiarModel,
-    required TypeSimpleCertificateEnum type,
+    required TypeService type,
   }) async {
     final api = ref.watch(apiProvider);
     final user = await api.me();
@@ -41,7 +41,7 @@ class SimpleCertificate extends _$SimpleCertificate {
   Future<Result<SimpleCertificateResponse, StatusCode>>
       simpleCertificatePersonal({
     required NuiModel model,
-    required TypeSimpleCertificateEnum type,
+    required TypeService type,
   }) async {
     final api = ref.watch(apiProvider);
     final response = await api.simpleCertificate(

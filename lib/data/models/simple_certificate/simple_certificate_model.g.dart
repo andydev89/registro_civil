@@ -9,7 +9,7 @@ part of 'simple_certificate_model.dart';
 SimpleCertificateModel _$SimpleCertificateModelFromJson(
         Map<String, dynamic> json) =>
     SimpleCertificateModel(
-      type: json['type'],
+      type: $enumDecode(_$TypeServiceEnumMap, json['type']),
       userNui: json['userNui'] as String,
       isFamily: json['isFamily'] as bool,
       typeFamily: $enumDecode(
@@ -22,7 +22,7 @@ SimpleCertificateModel _$SimpleCertificateModelFromJson(
 Map<String, dynamic> _$SimpleCertificateModelToJson(
         SimpleCertificateModel instance) =>
     <String, dynamic>{
-      'type': instance.type,
+      'type': _$TypeServiceEnumMap[instance.type]!,
       'userNui': instance.userNui,
       'isFamily': instance.isFamily,
       'typeFamily':
@@ -31,6 +31,25 @@ Map<String, dynamic> _$SimpleCertificateModelToJson(
       'isConadis': instance.isConadis,
       'nuiConadis': instance.nuiConadis,
     };
+
+const _$TypeServiceEnumMap = {
+  TypeService.birth: 'SERVICE_CERTIFICADO_NACIMIENTO',
+  TypeService.marriage: 'SERVICE_CERTIFICADO_MATRIMONIO',
+  TypeService.factorUnion: 'SERVICE_CERTIFICADO_UNION_HECHO',
+  TypeService.death: 'SERVICE_CERTIFICADO_DEFUNCION',
+  TypeService.gender: 'SERVICE_CERTIFICADO_GENERO',
+  TypeService.identity: 'SERVICE_CERTIFICADO_IDENTIDAD_ESTADO_CIVIL',
+  TypeService.copyBirthRegistrationCertificate:
+      'SERVICE_ACTA_REGISTRAL_NACIMIENTO',
+  TypeService.copyMarriageRegistrationCertificate:
+      'SERVICE_ACTA_REGISTRAL_MATRIMONIO',
+  TypeService.copyFactoUnionRegistrationCertificate:
+      'SERVICE_ACTA_REGISTRAL_UNION_HECHO',
+  TypeService.copyRegistrationRecordDeath: 'SERVICE_ACTA_REGISTRAL_DEFUNCION',
+  TypeService.copyRegistrationCertificateGenderRegistration:
+      'SERVICE_ACTA_REGISTRAL_GENERO',
+  TypeService.schedule: 'SERVICE_AGENDAR_TURNO',
+};
 
 const _$RelationshipSimpleCertificateEnumEnumMap = {
   RelationshipSimpleCertificateEnum.fatherMotherDeceased:

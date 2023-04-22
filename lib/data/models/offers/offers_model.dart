@@ -1,9 +1,7 @@
-import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:registro_civil_apk/data/enum/services/services_type.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 part 'offers_model.g.dart';
 
-@collection
 @JsonSerializable()
 class OffersModel {
   OffersModel({
@@ -15,9 +13,7 @@ class OffersModel {
   factory OffersModel.fromJson(Map<String, dynamic> json) =>
       _$OffersModelFromJson(json);
 
-  Id id = Isar.autoIncrement;
-  @enumerated
-  late TypeSimpleCertificateEnum simpleCertificate;
+  late TypeServiceModel simpleCertificate;
   late int cant;
   late bool discountConadis;
 
@@ -26,7 +22,7 @@ class OffersModel {
       simpleCertificate: simpleCertificate,
       cant: cant,
       discountConadis: discountConadis,
-    )..id = id;
+    );
     return updatedOffer;
   }
 

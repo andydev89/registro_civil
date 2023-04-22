@@ -298,5 +298,6 @@
   "numeroDeDepartamento": "Número de departamento",
   "tipoDeResidencia": "Tipo de residencia",
   "annadirResidencia": "Añadir residencia",
-  "verCertificado": "Ver certificado"
+  "verCertificado": "Ver certificado",
+  "recargar": "Recargar"
 }

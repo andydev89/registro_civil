@@ -298,5 +298,6 @@
   "numeroDeDepartamento": "Department number",
   "tipoDeResidencia": "Residence type",
   "annadirResidencia": "Add residence",
-  "verCertificado": "See certificate"
+  "verCertificado": "See certificate",
+  "recargar": "Reload"
 }

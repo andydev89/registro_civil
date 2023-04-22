@@ -5,9 +5,9 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/services/services_type.dart';
 import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_enum.dart';
 import 'package:registro_civil_apk/data/enum/validators/validations_message_enum.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
 import 'package:registro_civil_apk/data/providers/simple_certificate/simple_certificate_provider.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
@@ -26,7 +26,7 @@ class SimpleCertificateFirstStepFamiliarPage extends ConsumerWidget {
     required this.typeSimpleCertificate,
     super.key,
   });
-  final TypeSimpleCertificateEnum typeSimpleCertificate;
+  final TypeServiceModel typeSimpleCertificate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -121,7 +121,7 @@ class SimpleCertificateFirstStepFamiliarPage extends ConsumerWidget {
                       .read(simpleCertificateProvider.notifier)
                       .simpleCertificateFamiliar(
                         familiarModel: formModel.model,
-                        type: typeSimpleCertificate,
+                        type: typeSimpleCertificate.type,
                       )
                       .when(
                         ok: (response) => context.navigateTo(
