@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_status.dart';
-import 'package:registro_civil_apk/data/enum/commons/preocedure_status.dart';
+import 'package:registro_civil_apk/data/enum/commons/procedure_status.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';

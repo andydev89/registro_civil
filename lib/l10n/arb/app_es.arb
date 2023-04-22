@@ -299,5 +299,12 @@
   "tipoDeResidencia": "Tipo de residencia",
   "annadirResidencia": "Añadir residencia",
   "verCertificado": "Ver certificado",
-  "recargar": "Recargar"
+  "recargar": "Recargar",
+  "lunes": "Lunes",
+  "martes": "Martes",
+  "miercoles": "Miercoles",
+  "jueves": "Jueves",
+  "viernes": "viernes",
+  "sabado": "Sabado",
+  "domingo": "Domingo"
 }

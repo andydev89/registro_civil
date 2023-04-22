@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';

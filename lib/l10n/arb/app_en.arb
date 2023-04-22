@@ -299,5 +299,12 @@
   "tipoDeResidencia": "Residence type",
   "annadirResidencia": "Add residence",
   "verCertificado": "See certificate",
-  "recargar": "Reload"
+  "recargar": "Reload",
+  "lunes": "Monday",
+  "martes": "Tuesday",
+  "miercoles": "Wednesday",
+  "jueves": "Thursday",
+  "viernes": "Friday",
+  "sabado": "Saturday",
+  "domingo": "Sunday"
 }

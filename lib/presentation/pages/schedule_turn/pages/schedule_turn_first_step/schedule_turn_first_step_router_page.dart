@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:registro_civil_apk/data/enum/schedule_turn/schedule_shift_type.dart';
+import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_radio_list_tile.dart';
@@ -13,7 +13,7 @@ class ScheduleTurnFirstStepRouterPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final selectedRadio = useState(ScheduleShiftType.personal);
+    final selectedRadio = useState(ProcedureType.personal);
     return PrimaryScaffold(
       title: l10n.obtengaSuTurno,
       subtitle: l10n.completeInformacionSolicitada,
@@ -26,11 +26,11 @@ class ScheduleTurnFirstStepRouterPage extends HookWidget {
                 children: [
                   Expanded(
                     child: PrimaryRadioListTile(
-                      value: ScheduleShiftType.personal,
+                      value: ProcedureType.personal,
                       groupValue: selectedRadio.value,
                       title: l10n.personal,
                       onChanged: (value) {
-                        selectedRadio.value = ScheduleShiftType.personal;
+                        selectedRadio.value = ProcedureType.personal;
                         context.replaceRoute(
                           const ScheduleTurnFirstStepPersonalRoute(),
                         );
@@ -39,11 +39,11 @@ class ScheduleTurnFirstStepRouterPage extends HookWidget {
                   ),
                   Expanded(
                     child: PrimaryRadioListTile(
-                      value: ScheduleShiftType.familiar,
+                      value: ProcedureType.familiar,
                       groupValue: selectedRadio.value,
                       title: l10n.familiar,
                       onChanged: (value) {
-                        selectedRadio.value = ScheduleShiftType.familiar;
+                        selectedRadio.value = ProcedureType.familiar;
                         context.replaceRoute(
                           const ScheduleTurnFirstStepFamiliarRoute(),
                         );

@@ -1,9 +1,12 @@
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 
 enum PaymentMethodType {
   ///Pago corresponsal
+  @JsonValue('CORRESPONDENT')
   correspondentPayment('Pago corresponsal'),
+  @JsonValue('PLACE_TO_PAY')
   placeToPay('Place to pay');
 
   const PaymentMethodType(this.toText);
@@ -11,24 +14,6 @@ enum PaymentMethodType {
 }
 
 extension PaymentMethodTypeExtension on PaymentMethodType {
-  // PageRouteInfo getRoute(
-  //   int requestNumber,
-  //   double totalToPay,
-  // ) {
-  //   switch (this) {
-  //     case PaymentMethodType.correspondentPayment:
-  //       return CodeRoute(
-  //         requestNumber: requestNumber,
-  //         totalToPay: totalToPay,
-  //       );
-  //     case PaymentMethodType.placeToPay:
-  //       return SelectPaymentRoute(
-  //         requestNumber: requestNumber,
-  //         totalToPay: totalToPay,
-  //       );
-  //   }
-  // }
-
   SvgPicture getIcon() {
     switch (this) {
       case PaymentMethodType.correspondentPayment:
