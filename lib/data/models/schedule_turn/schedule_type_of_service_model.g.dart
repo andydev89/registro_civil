@@ -25,15 +25,15 @@ ScheduleTypeOfServiceModel _$ScheduleTypeOfServiceModelFromJson(
 Map<String, dynamic> _$ScheduleTypeOfServiceModelToJson(
         ScheduleTypeOfServiceModel instance) =>
     <String, dynamic>{
+      'discount': instance.discount,
+      'iconoMovil': instance.iconoMovil,
+      'iconoWeb': instance.iconoWeb,
       'id': instance.id,
+      'iva': instance.iva,
       'name': instance.name,
       'price': instance.price,
-      'iva': instance.iva,
-      'discount': instance.discount,
-      'state': instance.state,
-      'publishWeb': instance.publishWeb,
       'publishMovil': instance.publishMovil,
-      'iconoWeb': instance.iconoWeb,
-      'iconoMovil': instance.iconoMovil,
+      'publishWeb': instance.publishWeb,
+      'state': instance.state,
       'typeService': instance.typeService,
     };
