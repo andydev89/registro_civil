@@ -19,6 +19,7 @@ TypeOfServiceModel _$TypeOfServiceModelFromJson(Map<String, dynamic> json) =>
       iconoWeb: json['iconoWeb'] as String?,
       iconoMovil: json['iconoMovil'] as String?,
       type: json['type'] as String,
+      schedule: json['schedule'] as bool,
     );
 
 Map<String, dynamic> _$TypeOfServiceModelToJson(TypeOfServiceModel instance) =>
@@ -34,4 +35,5 @@ Map<String, dynamic> _$TypeOfServiceModelToJson(TypeOfServiceModel instance) =>
       'publishWeb': instance.publishWeb,
       'state': instance.state,
       'type': instance.type,
+      'schedule': instance.schedule,
     };

@@ -20,13 +20,13 @@ ReceiptModel _$ReceiptModelFromJson(Map<String, dynamic> json) => ReceiptModel(
 
 Map<String, dynamic> _$ReceiptModelToJson(ReceiptModel instance) =>
     <String, dynamic>{
-      'user': instance.userId,
-      'type': _$ProcedureTypeEnumMap[instance.procedureType]!,
       'includeMe': instance.includeMe,
-      'relatives': instance.relatives,
       'paymentType': _$PaymentMethodTypeEnumMap[instance.paymentType]!,
+      'type': _$ProcedureTypeEnumMap[instance.procedureType]!,
+      'relatives': instance.relatives,
       'schedule': instance.scheduleId,
       'time': const TimeOfDayConverter().toJson(instance.time),
+      'user': instance.userId,
     };
 
 const _$ProcedureTypeEnumMap = {
@@ -47,8 +47,8 @@ RelativeModel _$RelativeModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$RelativeModelToJson(RelativeModel instance) =>
     <String, dynamic>{
-      'identification': instance.identification,
       'familiarKin': _$RelationshipTypeEnumMap[instance.familiarKin]!,
+      'identification': instance.identification,
     };
 
 const _$RelationshipTypeEnumMap = {

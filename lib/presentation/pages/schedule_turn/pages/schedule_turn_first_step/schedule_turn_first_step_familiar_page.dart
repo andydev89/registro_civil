@@ -100,7 +100,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                               SelectElementFromApi(
                                 formControlName: '$key.service',
                                 label: l10n.tipoServicio,
-                                provider: servicesProvider,
+                                provider: servicesProvider(bookable: true),
                               ).horizontalPadding(20),
                             ],
                           ),

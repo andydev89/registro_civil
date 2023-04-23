@@ -70,20 +70,196 @@ final agenciesProvider =
 
 typedef AgenciesRef
     = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
-String _$servicesHash() => r'2efe780260fcb04d133259c4954f969a8212e8a1';
+String _$agenciesByProvinceHash() =>
+    r'f89c498948bc9d1ba4ef86acce27e40179117e40';
+
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
+
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
+
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
+
+typedef AgenciesByProvinceRef
+    = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
+
+/// See also [agenciesByProvince].
+@ProviderFor(agenciesByProvince)
+const agenciesByProvinceProvider = AgenciesByProvinceFamily();
+
+/// See also [agenciesByProvince].
+class AgenciesByProvinceFamily
+    extends Family<AsyncValue<Result<List<AgencyModel>, StatusCode>>> {
+  /// See also [agenciesByProvince].
+  const AgenciesByProvinceFamily();
+
+  /// See also [agenciesByProvince].
+  AgenciesByProvinceProvider call({
+    required String provinceId,
+  }) {
+    return AgenciesByProvinceProvider(
+      provinceId: provinceId,
+    );
+  }
+
+  @override
+  AgenciesByProvinceProvider getProviderOverride(
+    covariant AgenciesByProvinceProvider provider,
+  ) {
+    return call(
+      provinceId: provider.provinceId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'agenciesByProvinceProvider';
+}
+
+/// See also [agenciesByProvince].
+class AgenciesByProvinceProvider
+    extends AutoDisposeFutureProvider<Result<List<AgencyModel>, StatusCode>> {
+  /// See also [agenciesByProvince].
+  AgenciesByProvinceProvider({
+    required this.provinceId,
+  }) : super.internal(
+          (ref) => agenciesByProvince(
+            ref,
+            provinceId: provinceId,
+          ),
+          from: agenciesByProvinceProvider,
+          name: r'agenciesByProvinceProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$agenciesByProvinceHash,
+          dependencies: AgenciesByProvinceFamily._dependencies,
+          allTransitiveDependencies:
+              AgenciesByProvinceFamily._allTransitiveDependencies,
+        );
+
+  final String provinceId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is AgenciesByProvinceProvider &&
+        other.provinceId == provinceId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, provinceId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$servicesHash() => r'c09796232154885828acdcaf429d156e0227c6de';
+typedef ServicesRef = AutoDisposeFutureProviderRef<
+    Result<List<TypeOfServiceModel>, StatusCode>>;
 
 /// See also [services].
 @ProviderFor(services)
-final servicesProvider = AutoDisposeFutureProvider<
-    Result<List<TypeOfServiceModel>, StatusCode>>.internal(
-  services,
-  name: r'servicesProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$servicesHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const servicesProvider = ServicesFamily();
 
-typedef ServicesRef = AutoDisposeFutureProviderRef<
-    Result<List<TypeOfServiceModel>, StatusCode>>;
+/// See also [services].
+class ServicesFamily
+    extends Family<AsyncValue<Result<List<TypeOfServiceModel>, StatusCode>>> {
+  /// See also [services].
+  const ServicesFamily();
+
+  /// See also [services].
+  ServicesProvider call({
+    bool? bookable,
+  }) {
+    return ServicesProvider(
+      bookable: bookable,
+    );
+  }
+
+  @override
+  ServicesProvider getProviderOverride(
+    covariant ServicesProvider provider,
+  ) {
+    return call(
+      bookable: provider.bookable,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'servicesProvider';
+}
+
+/// See also [services].
+class ServicesProvider extends AutoDisposeFutureProvider<
+    Result<List<TypeOfServiceModel>, StatusCode>> {
+  /// See also [services].
+  ServicesProvider({
+    this.bookable,
+  }) : super.internal(
+          (ref) => services(
+            ref,
+            bookable: bookable,
+          ),
+          from: servicesProvider,
+          name: r'servicesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$servicesHash,
+          dependencies: ServicesFamily._dependencies,
+          allTransitiveDependencies: ServicesFamily._allTransitiveDependencies,
+        );
+
+  final bool? bookable;
+
+  @override
+  bool operator ==(Object other) {
+    return other is ServicesProvider && other.bookable == bookable;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, bookable.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

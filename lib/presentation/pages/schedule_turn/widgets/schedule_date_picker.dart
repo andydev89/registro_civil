@@ -17,7 +17,7 @@ class ScheduleDatePicker extends ConsumerWidget {
     required this.starDate,
     required this.initialTime,
     required this.endTime,
-    this.disable = false,
+    this.readOnly = false,
   });
 
   final FormControl<DateTime> formControl;
@@ -27,7 +27,7 @@ class ScheduleDatePicker extends ConsumerWidget {
   final TypeOfServiceModel typeOfServiceModel;
   final FormControl<AgencyModel> agency;
   final DateTime starDate;
-  final bool disable;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,7 +53,7 @@ class ScheduleDatePicker extends ConsumerWidget {
     });
     return PrimaryReactiveDatePicker(
       formControl: formControl,
-      disable: disable,
+      readOnly: readOnly,
       label: label,
       availablesDate: schedules.asData?.value.when(
             ok: (data) => data.map((e) => e.date).toList(),
