@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/providers/home_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
@@ -48,11 +47,7 @@ class HomeRouterPage extends StatelessWidget {
                   ).symmetricPadding(20, 25),
                   Consumer(
                     builder: (_, ref, __) {
-                      return PrimarySearch(
-                        filter: ref.watch(searchHomeProvider),
-                        onChanged: (p0) =>
-                            ref.read(searchHomeProvider.notifier).state = p0,
-                      ).symmetricPadding(10, 40);
+                      return const PrimarySearch().symmetricPadding(10, 40);
                     },
                   ),
                 ],
