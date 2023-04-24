@@ -26,7 +26,7 @@ class ScheduleTurnFirstStepPersonalPage extends StatelessWidget {
               SelectElementFromApi<TypeOfServiceModel>(
                 formControl: formModel.serviceControl,
                 label: l10n.tipoServicio,
-                provider: servicesProvider,
+                provider: servicesProvider(bookable: true),
               ).horizontalPadding(20),
               PaymentSelector(
                 label: l10n.seleccioneMetodoPago,

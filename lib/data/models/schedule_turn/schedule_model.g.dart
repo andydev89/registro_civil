@@ -16,7 +16,7 @@ ScheduleModel _$ScheduleModelFromJson(Map<String, dynamic> json) =>
       endingTime:
           const TimeOfDayConverter().fromJson(json['endingTime'] as String),
       agency: AgencyModel.fromJson(json['agency'] as Map<String, dynamic>),
-      typeOfService: TypeOfServiceModel.fromJson(
+      typeOfService: ScheduleTypeOfServiceModel.fromJson(
           json['typeOfService'] as Map<String, dynamic>),
     );
 

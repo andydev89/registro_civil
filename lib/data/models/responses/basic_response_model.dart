@@ -20,7 +20,7 @@ class ResponseModel<T> {
   final String timestamp;
   final StatusCode status;
   final String message;
-  final String? errors;
+  final dynamic errors;
   final T? data;
   bool get success =>
       status == StatusCode.s200 ||
@@ -57,7 +57,7 @@ class ResponseModelPagination<T> {
   final String timestamp;
   final StatusCode status;
   final String message;
-  final String? errors;
+  final dynamic errors;
   final T? data;
   final int? totalPages;
   final int? totalElements;

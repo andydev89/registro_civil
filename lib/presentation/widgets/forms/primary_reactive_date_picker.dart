@@ -24,7 +24,7 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
     this.hintText,
     this.onPageChanged,
     this.onDaySelected,
-    this.disable = false,
+    this.readOnly = false,
   });
 
   final FormControl<DateTime> formControl;
@@ -36,49 +36,51 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
   final String? hintText;
   final void Function(DateTime)? onPageChanged;
   final void Function(DateTime)? onDaySelected;
-  final bool disable;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return PrimaryReactiveTextField(
-      label: label,
-      readOnly: true,
-      disable: disable,
-      hintText: hasError
-          ? l10n.errorAlObtenerLosDatos
-          : isLoading
-              ? l10n.cargando
-              : hintText ?? '${l10n.seleccione}...',
-      suffixIcon: hasError
-          ? RefreshStatus(onRefresh: onError)
-          : isLoading
-              ? const LoadingStatus()
-              : Assets.svg.calendar.svg(),
-      onTap: (control) => !disable
-          ? showDialog<Widget>(
-              context: context,
-              builder: (context) => Dialog(
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CustomCalendar(
-                      formControl: formControl,
-                      availablesDate: availablesDate,
-                      onPageChanged: onPageChanged,
-                      onDaySelected: onDaySelected,
-                    ).horizontalPadding(5),
-                  ],
-                ),
-              ).withRevealAnimation,
-            )
-          : null,
-      formControl: formControl,
-      setSuffixIconConstraints: true,
+    return AbsorbPointer(
+      absorbing: readOnly || isLoading,
+      child: PrimaryReactiveTextField(
+        label: label,
+        readOnly: readOnly || isLoading,
+        hintText: hasError
+            ? l10n.errorAlObtenerLosDatos
+            : isLoading
+                ? l10n.cargando
+                : hintText ?? '${l10n.seleccione}...',
+        suffixIcon: hasError
+            ? RefreshStatus(onRefresh: onError)
+            : isLoading
+                ? const LoadingStatus()
+                : Assets.svg.calendar.svg(),
+        onTap: (control) => !readOnly || isLoading
+            ? showDialog<Widget>(
+                context: context,
+                builder: (context) => Dialog(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomCalendar(
+                        formControl: formControl,
+                        availablesDate: availablesDate,
+                        onPageChanged: onPageChanged,
+                        onDaySelected: onDaySelected,
+                      ).horizontalPadding(5),
+                    ],
+                  ),
+                ).withRevealAnimation,
+              )
+            : null,
+        formControl: formControl,
+        setSuffixIconConstraints: true,
+      ),
     );
   }
 }

@@ -113,6 +113,13 @@ abstract class Api {
     @Query('pageSize') int pageSize,
   );
 
+  @GET('/identity/api/agency/by')
+  Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByProvince(
+    @Query('province') String province,
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
+
   @GET('/service/api/type/service')
   Future<ResponseModelPagination<List<TypeOfServiceModel>?>> services(
     @Query('pageNo') int pageNo,
