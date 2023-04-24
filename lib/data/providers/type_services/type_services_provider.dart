@@ -1,5 +1,4 @@
-import 'package:registro_civil_apk/data/enum/sort/sort_type_enum.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
+import 'package:registro_civil_apk/data/models/commons/querys_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -7,14 +6,27 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'type_services_provider.g.dart';
 
 @riverpod
-Future<ResponseModelPagination<List<TypeServiceModel>>> typeServices(
-  TypeServicesRef ref, {
-  int pageNo = 0,
-  int pageSize = 20,
-  String filter = '',
-  String sortBy = 'name',
-  SortType sortType = SortType.asc,
-}) async {
+class TypeServicesFilter extends _$TypeServicesFilter {
+  @override
+  QueryTypeService build() {
+    return QueryTypeService();
+  }
+
+  void setFilter(String filter) {
+    state = state.copyWith(filter: filter);
+  }
+}
+
+@riverpod
+Future<List<TypeServiceModel>> typeServices(TypeServicesRef ref) async {
+  final query = ref.watch(typeServicesFilterProvider);
   final api = ref.watch(apiProvider);
-  return api.typeServices(pageNo, pageSize, filter, sortBy, sortType.toJson);
+  return (await api.typeServices(
+    query.pageNo,
+    query.pageSize,
+    query.filter,
+    query.sortBy,
+    query.sortType.toJson,
+  ))
+      .data!;
 }

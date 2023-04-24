@@ -23,14 +23,13 @@ class SimpleCertificateResponse {
 @JsonSerializable()
 class ProcessResponse {
   ProcessResponse({
-    required this.idMap,
+    required this.id,
     required this.command,
   });
 
   factory ProcessResponse.fromJson(Map<String, dynamic> json) =>
       _$ProcessResponseFromJson(json);
-  @JsonKey(name: 'id')
-  final Map<String, int> idMap;
+  final int id;
   final String command;
 
   Map<String, dynamic> toJson() => _$ProcessResponseToJson(this);

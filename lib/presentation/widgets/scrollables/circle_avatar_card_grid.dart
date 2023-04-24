@@ -19,6 +19,8 @@ class CircleAvatarCardGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final newElements =
+        elements.where((element) => element.publishMovil).toList();
     return GridView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -26,10 +28,10 @@ class CircleAvatarCardGrid extends StatelessWidget {
         childAspectRatio: 0.55,
         crossAxisSpacing: 20,
       ),
-      itemCount: elements.length,
+      itemCount: newElements.length,
       itemBuilder: (context, index) => CircleAvatarCardWidget(
         image: FutureBuilder(
-          future: createImageFileFromBase64(elements[index].iconoMovil),
+          future: createImageFileFromBase64(newElements[index].iconoMovil),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return AspectRatio(
@@ -47,18 +49,18 @@ class CircleAvatarCardGrid extends StatelessWidget {
                 ),
               );
             } else {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),
-        title: elements[index].name,
-        onPressedCheck: () => elements[index].state == Status.active
-            ? context.navigateTo(getRoute(elements[index]))
+        title: newElements[index].name,
+        onPressedCheck: () => newElements[index].state == Status.active
+            ? context.navigateTo(getRoute(newElements[index]))
             : () {},
         onPressedView: () => showContentDialog(
           context,
           content: CertificateDescription(
-            typeSimpleCertificate: elements[index],
+            typeSimpleCertificate: newElements[index],
           ),
         ),
       ),
