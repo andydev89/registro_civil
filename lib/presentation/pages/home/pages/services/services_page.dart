@@ -12,10 +12,10 @@ class ServicesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final typeServices = ref.watch(TypeServicesProvider());
+    final typeServices = ref.watch(typeServicesProvider);
     return typeServices.when(
       skipLoadingOnRefresh: false,
-      data: (data) => CircleAvatarCardGrid(elements: data.data!),
+      data: (data) => CircleAvatarCardGrid(elements: data),
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Center(
         child: Column(
@@ -24,7 +24,7 @@ class ServicesPage extends ConsumerWidget {
             PrimaryText(error.toString(), maxLines: 10),
             PrimaryButton(
               title: l10n.recargar,
-              onPressed: () => ref.refresh(TypeServicesProvider()),
+              onPressed: () => ref.refresh(typeServicesProvider),
             ),
           ],
         ),
