@@ -69,7 +69,9 @@ class MyTurnExpandableCard extends StatelessWidget {
         context,
         title: l10n.confirmacion,
         message: l10n.seguroCancelarTurno,
-        onAccept: () {},
+        onAccept: () {
+          //TODO cancelar
+        },
       ),
     );
   }

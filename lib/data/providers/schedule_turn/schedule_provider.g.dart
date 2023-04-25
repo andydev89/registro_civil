@@ -155,6 +155,23 @@ final schedulesProvider =
 
 typedef SchedulesRef
     = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCode>>;
+String _$schedulesByUserHash() => r'5ec5339555d8cd5af449fa0aa14c4b2808195fba';
+
+/// See also [schedulesByUser].
+@ProviderFor(schedulesByUser)
+final schedulesByUserProvider = AutoDisposeFutureProvider<
+    Result<List<UserScheduleModel>, StatusCode>>.internal(
+  schedulesByUser,
+  name: r'schedulesByUserProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$schedulesByUserHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SchedulesByUserRef
+    = AutoDisposeFutureProviderRef<Result<List<UserScheduleModel>, StatusCode>>;
 String _$confirmScheduleHash() => r'2fc651dea63b9a07e1bb10f776fb378537e9695b';
 typedef ConfirmScheduleRef
     = AutoDisposeFutureProviderRef<Result<BookedReceiptModel, StatusCode>>;

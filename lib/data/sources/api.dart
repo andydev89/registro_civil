@@ -8,6 +8,7 @@ import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dar
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_model.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/user_schedule_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response.dart';
@@ -142,6 +143,13 @@ abstract class Api {
   Future<ResponseModelPagination<List<ScheduleModel>?>> schedules(
     @Query('pageNo') int pageNo,
     @Query('pageSize') int pageSize,
+  );
+
+  @GET('/schedule/api/receipt/byuser')
+  Future<ResponseModelPagination<List<UserScheduleModel>?>> schedulesByUser(
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+    @Query('user') String userId,
   );
 
   @POST('/schedule/api/receipt')

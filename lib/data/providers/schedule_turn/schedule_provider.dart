@@ -3,6 +3,8 @@ import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum
 import 'package:registro_civil_apk/data/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_model.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/user_schedule_model.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'schedule_provider.g.dart';
@@ -37,6 +39,19 @@ Future<Result<List<ScheduleModel>, StatusCode>> schedules(
   final api = ref.watch(apiProvider);
   //TODO hacer paginado
   final response = await api.schedules(0, 20);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+@riverpod
+Future<Result<List<UserScheduleModel>, StatusCode>> schedulesByUser(
+  SchedulesByUserRef ref,
+) async {
+  final api = ref.watch(apiProvider);
+  final user = await ref.watch(meProvider.future);
+  //TODO hacer paginado
+  final response = await api.schedulesByUser(0, 20, user.id);
   return response.success
       ? Result.ok(response.data!)
       : Result.err(response.status);
