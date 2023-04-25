@@ -199,8 +199,31 @@ Map<String, dynamic>? conadisNumberValidatorGroup(
   if (!_validateConadisNumber(conadisNumber)) {
     (conadisModel as FormGroup)
         .controls['conadisNumber']!
-        .setErrors({'invalidConadisNumber': true});
+        .setErrors({ValidationsMessageEnum.invalidConadisNumber.toText: true});
     return {ValidationsMessageEnum.invalidConadisNumber.toText: true};
+  }
+  return null; // Devuelve null si la validación es exitosa
+}
+
+Map<String, dynamic>? childrenRelationshipValidatorGroup(
+  AbstractControl<dynamic> partnerModel,
+) {
+  final children = partnerModel.value as Map<String, dynamic>;
+  final hasChildren = children['hasChildren'] as bool? ?? false;
+  final childrenRelationship =
+      children['childrenRelationship'] as String? ?? '';
+  if (!hasChildren) {
+    (partnerModel as FormGroup).controls['childrenRelationship']!
+      ..removeError(ValidationMessage.required)
+      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText);
+    return null;
+  }
+
+  if (hasChildren && childrenRelationship.isEmpty) {
+    (partnerModel as FormGroup)
+        .controls['childrenRelationship']!
+        .setErrors({ValidationMessage.required: true});
+    return {ValidationMessage.required: true};
   }
   return null; // Devuelve null si la validación es exitosa
 }
@@ -214,7 +237,8 @@ bool _validateConadisNumber(String conadisNumber) {
 }
 
 Map<String, dynamic>? atLeastOneElementValidator(
-    AbstractControl<dynamic> control) {
+  AbstractControl<dynamic> control,
+) {
   final value = control.value as List<bool?>;
   var hasTrueElement = false;
   for (final element in value) {

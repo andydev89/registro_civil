@@ -376,6 +376,67 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModel<CommandModel>> marriage(model) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(model.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/marriage/api/marriage',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandModel>.fromJson(
+      _result.data!,
+      (json) => CommandModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<DocumentResponse>> marriageDocuments(
+    maritalStatus,
+    childrenRelationship, {
+    required hasChildren,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'maritalStatus': maritalStatus,
+      r'childrenRelationship': childrenRelationship,
+      r'hasChildren': hasChildren,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<DocumentResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/marriage/api/marriage/documentation/documents',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<DocumentResponse>.fromJson(
+      _result.data!,
+      (json) => DocumentResponse.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModelPagination<List<LocationModel>?>> provinces(
     pageNo,
     pageSize,

@@ -186,6 +186,12 @@ class _$AppRouter extends RootStackRouter {
         child: const SimpleCertificateRouterPage(),
       );
     },
+    MarriageCelebrationRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationRouterPage(),
+      );
+    },
     ResidenceRegistrationRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -367,6 +373,12 @@ class _$AppRouter extends RootStackRouter {
           typeSimpleCertificate: args.typeSimpleCertificate,
           key: args.key,
         ),
+      );
+    },
+    MarriageCelebrationFirstStepRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationFirstStepRouterPage(),
       );
     },
     RequestInformationFirstStepRoute.name: (routeData) {
@@ -562,6 +574,26 @@ class _$AppRouter extends RootStackRouter {
                   path: 'simple-certificate-second-step-page',
                   parent: SimpleCertificateRouterRoute.name,
                 ),
+              ],
+            ),
+            RouteConfig(
+              MarriageCelebrationRouterRoute.name,
+              path: 'marriage-celebration-router-page',
+              parent: RootRouterRoute.name,
+              guards: [authGuard],
+              children: [
+                RouteConfig(
+                  MarriageCelebrationFirstStepRouterRoute.name,
+                  path: '',
+                  parent: MarriageCelebrationRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      SimpleCertificateFirstStepFamiliarRoute.name,
+                      path: '',
+                      parent: MarriageCelebrationFirstStepRouterRoute.name,
+                    )
+                  ],
+                )
               ],
             ),
             RouteConfig(
@@ -919,6 +951,19 @@ class SimpleCertificateRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SimpleCertificateRouterRoute';
+}
+
+/// generated route for
+/// [MarriageCelebrationRouterPage]
+class MarriageCelebrationRouterRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          MarriageCelebrationRouterRoute.name,
+          path: 'marriage-celebration-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'MarriageCelebrationRouterRoute';
 }
 
 /// generated route for
@@ -1476,6 +1521,19 @@ class SimpleCertificateFirstStepPersonalRouteArgs {
   String toString() {
     return 'SimpleCertificateFirstStepPersonalRouteArgs{typeSimpleCertificate: $typeSimpleCertificate, key: $key}';
   }
+}
+
+/// generated route for
+/// [MarriageCelebrationFirstStepRouterPage]
+class MarriageCelebrationFirstStepRouterRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationFirstStepRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          MarriageCelebrationFirstStepRouterRoute.name,
+          path: '',
+          initialChildren: children,
+        );
+
+  static const String name = 'MarriageCelebrationFirstStepRouterRoute';
 }
 
 /// generated route for

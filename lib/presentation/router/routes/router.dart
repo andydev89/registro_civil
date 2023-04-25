@@ -21,6 +21,8 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.
 import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/services/services_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/first_step/marriage_celebration_first_step_route.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/marriage_celebration_route_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_orders/pages/my_order_rejecting_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/pages/my_turns_page.dart';
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
@@ -201,8 +203,28 @@ part 'router.gr.dart';
             CupertinoRoute(
               page: SimpleCertificateSecondStepPage,
             ),
+          ],
+        ), // MARRIAGE CELEBRATION
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: MarriageCelebrationRouterPage,
+          children: [
+            CupertinoRoute(
+              page: MarriageCelebrationFirstStepRouterPage,
+              initial: true,
+              children: [
+                CustomRoute(
+                  page: SimpleCertificateFirstStepFamiliarPage,
+                  initial: true,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                // CupertinoRoute(
+                //   page: SimpleCertificateFirstStepPersonalPage,
+                // ),
+              ],
+            ),
             // CupertinoRoute(
-            //   page: SimpleCertificateErrorPage,
+            //   page: SimpleCertificateSecondStepPage,
             // ),
           ],
         ),

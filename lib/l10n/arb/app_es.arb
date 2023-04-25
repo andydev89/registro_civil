@@ -306,5 +306,7 @@
   "jueves": "Jueves",
   "viernes": "viernes",
   "sabado": "Sabado",
-  "domingo": "Domingo"
+  "domingo": "Domingo",
+  "apoderado": "Apoderado",
+  "contrayente": "Contrayente"
 }

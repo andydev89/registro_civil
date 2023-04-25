@@ -306,5 +306,7 @@
   "jueves": "Thursday",
   "viernes": "Friday",
   "sabado": "Saturday",
-  "domingo": "Sunday"
+  "domingo": "Sunday",
+  "apoderado": "Attorney",
+  "contrayente": "Contracting party"
 }
