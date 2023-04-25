@@ -276,7 +276,10 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: CodePage(
           key: args.key,
-          typeOfServiceModel: args.typeOfServiceModel,
+          typeOfService: args.typeOfService,
+          includMe: args.includMe,
+          procedureType: args.procedureType,
+          relatives: args.relatives,
         ),
       );
     },
@@ -287,7 +290,10 @@ class _$AppRouter extends RootStackRouter {
         child: ScheduleTurnSecondPage(
           key: args.key,
           paymentMethod: args.paymentMethod,
-          typeOfServiceModel: args.typeOfServiceModel,
+          typeOfService: args.typeOfService,
+          includMe: args.includMe,
+          procedureType: args.procedureType,
+          relatives: args.relatives,
         ),
       );
     },
@@ -303,8 +309,8 @@ class _$AppRouter extends RootStackRouter {
           date: args.date,
           time: args.time,
           paymentMethod: args.paymentMethod,
-          requestNumber: args.requestNumber,
           totalToPay: args.totalToPay,
+          receipt: args.receipt,
         ),
       );
     },
@@ -1032,7 +1038,7 @@ class MyOrderRejectingRoute extends PageRouteInfo<void> {
 class SelectPaymentRoute extends PageRouteInfo<SelectPaymentRouteArgs> {
   SelectPaymentRoute({
     Key? key,
-    required int requestNumber,
+    required String requestNumber,
     required double totalToPay,
   }) : super(
           SelectPaymentRoute.name,
@@ -1056,7 +1062,7 @@ class SelectPaymentRouteArgs {
 
   final Key? key;
 
-  final int requestNumber;
+  final String requestNumber;
 
   final double totalToPay;
 
@@ -1071,7 +1077,7 @@ class SelectPaymentRouteArgs {
 class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
   MakePaymentRoute({
     Key? key,
-    required int requestNumber,
+    required String requestNumber,
     required double totalToPay,
     required String buttonText,
     void Function(BuildContext)? onTapSuccessPayment,
@@ -1104,7 +1110,7 @@ class MakePaymentRouteArgs {
 
   final Key? key;
 
-  final int requestNumber;
+  final String requestNumber;
 
   final double totalToPay;
 
@@ -1174,13 +1180,19 @@ class ScheduleTurnFirstStepRouterRoute extends PageRouteInfo<void> {
 class CodeRoute extends PageRouteInfo<CodeRouteArgs> {
   CodeRoute({
     Key? key,
-    required TypeOfServiceModel typeOfServiceModel,
+    required TypeOfServiceModel typeOfService,
+    required bool includMe,
+    required ProcedureType procedureType,
+    required List<RelativeModel> relatives,
   }) : super(
           CodeRoute.name,
           path: 'code-page',
           args: CodeRouteArgs(
             key: key,
-            typeOfServiceModel: typeOfServiceModel,
+            typeOfService: typeOfService,
+            includMe: includMe,
+            procedureType: procedureType,
+            relatives: relatives,
           ),
         );
 
@@ -1190,16 +1202,25 @@ class CodeRoute extends PageRouteInfo<CodeRouteArgs> {
 class CodeRouteArgs {
   const CodeRouteArgs({
     this.key,
-    required this.typeOfServiceModel,
+    required this.typeOfService,
+    required this.includMe,
+    required this.procedureType,
+    required this.relatives,
   });
 
   final Key? key;
 
-  final TypeOfServiceModel typeOfServiceModel;
+  final TypeOfServiceModel typeOfService;
+
+  final bool includMe;
+
+  final ProcedureType procedureType;
+
+  final List<RelativeModel> relatives;
 
   @override
   String toString() {
-    return 'CodeRouteArgs{key: $key, typeOfServiceModel: $typeOfServiceModel}';
+    return 'CodeRouteArgs{key: $key, typeOfService: $typeOfService, includMe: $includMe, procedureType: $procedureType, relatives: $relatives}';
   }
 }
 
@@ -1210,14 +1231,20 @@ class ScheduleTurnSecondRoute
   ScheduleTurnSecondRoute({
     Key? key,
     required PaymentMethodType paymentMethod,
-    required TypeOfServiceModel typeOfServiceModel,
+    required TypeOfServiceModel typeOfService,
+    required bool includMe,
+    required ProcedureType procedureType,
+    required List<RelativeModel> relatives,
   }) : super(
           ScheduleTurnSecondRoute.name,
           path: 'schedule-turn-second-page',
           args: ScheduleTurnSecondRouteArgs(
             key: key,
             paymentMethod: paymentMethod,
-            typeOfServiceModel: typeOfServiceModel,
+            typeOfService: typeOfService,
+            includMe: includMe,
+            procedureType: procedureType,
+            relatives: relatives,
           ),
         );
 
@@ -1228,18 +1255,27 @@ class ScheduleTurnSecondRouteArgs {
   const ScheduleTurnSecondRouteArgs({
     this.key,
     required this.paymentMethod,
-    required this.typeOfServiceModel,
+    required this.typeOfService,
+    required this.includMe,
+    required this.procedureType,
+    required this.relatives,
   });
 
   final Key? key;
 
   final PaymentMethodType paymentMethod;
 
-  final TypeOfServiceModel typeOfServiceModel;
+  final TypeOfServiceModel typeOfService;
+
+  final bool includMe;
+
+  final ProcedureType procedureType;
+
+  final List<RelativeModel> relatives;
 
   @override
   String toString() {
-    return 'ScheduleTurnSecondRouteArgs{key: $key, paymentMethod: $paymentMethod, typeOfServiceModel: $typeOfServiceModel}';
+    return 'ScheduleTurnSecondRouteArgs{key: $key, paymentMethod: $paymentMethod, typeOfService: $typeOfService, includMe: $includMe, procedureType: $procedureType, relatives: $relatives}';
   }
 }
 
@@ -1254,8 +1290,8 @@ class TurnDetailsRoute extends PageRouteInfo<TurnDetailsRouteArgs> {
     required DateTime date,
     required TimeOfDay time,
     required PaymentMethodType paymentMethod,
-    required int requestNumber,
     required double totalToPay,
+    required ReceiptModel receipt,
   }) : super(
           TurnDetailsRoute.name,
           path: 'turn-details-page',
@@ -1267,8 +1303,8 @@ class TurnDetailsRoute extends PageRouteInfo<TurnDetailsRouteArgs> {
             date: date,
             time: time,
             paymentMethod: paymentMethod,
-            requestNumber: requestNumber,
             totalToPay: totalToPay,
+            receipt: receipt,
           ),
         );
 
@@ -1284,8 +1320,8 @@ class TurnDetailsRouteArgs {
     required this.date,
     required this.time,
     required this.paymentMethod,
-    required this.requestNumber,
     required this.totalToPay,
+    required this.receipt,
   });
 
   final Key? key;
@@ -1302,13 +1338,13 @@ class TurnDetailsRouteArgs {
 
   final PaymentMethodType paymentMethod;
 
-  final int requestNumber;
-
   final double totalToPay;
+
+  final ReceiptModel receipt;
 
   @override
   String toString() {
-    return 'TurnDetailsRouteArgs{key: $key, city: $city, agency: $agency, typeOfService: $typeOfService, date: $date, time: $time, paymentMethod: $paymentMethod, requestNumber: $requestNumber, totalToPay: $totalToPay}';
+    return 'TurnDetailsRouteArgs{key: $key, city: $city, agency: $agency, typeOfService: $typeOfService, date: $date, time: $time, paymentMethod: $paymentMethod, totalToPay: $totalToPay, receipt: $receipt}';
   }
 }
 

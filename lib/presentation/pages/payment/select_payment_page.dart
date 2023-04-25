@@ -13,7 +13,7 @@ class SelectPaymentPage extends StatelessWidget {
     required this.requestNumber,
     required this.totalToPay,
   });
-  final int requestNumber;
+  final String requestNumber;
   final double totalToPay;
 
   @override

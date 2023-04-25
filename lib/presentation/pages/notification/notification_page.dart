@@ -3,7 +3,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 // import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
@@ -52,7 +52,10 @@ class NotificationPage extends StatelessWidget {
                   if (bottonTitle != null)
                     Padding(
                       padding: const EdgeInsets.only(
-                          bottom: 20, left: 20, right: 20,),
+                        bottom: 20,
+                        left: 20,
+                        right: 20,
+                      ),
                       child: PrimaryText(
                         bottonTitle!,
                       ),
@@ -63,10 +66,10 @@ class NotificationPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: PrimaryButton(
+      bottomNavigationBar: PrimaryAsyncButton(
         title: buttonText,
         onPressed: () {
-          onTap?.call(context);
+          return Future(() => onTap?.call(context));
         },
       ).symmetricPadding(10, 30),
     );

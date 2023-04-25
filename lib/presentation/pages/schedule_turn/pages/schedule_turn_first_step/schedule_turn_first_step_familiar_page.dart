@@ -4,7 +4,9 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
 import 'package:registro_civil_apk/data/enum/commons/relationship_type.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -57,6 +59,11 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                   ],
                 ),
               ),
+              SelectElementFromApi(
+                formControl: formModel.serviceControl,
+                label: l10n.tipoServicio,
+                provider: servicesProvider(bookable: true),
+              ).horizontalPadding(20),
               ReactiveFormArray(
                 formArray: formModel.familyControl,
                 builder: (context, formArray, child) => Column(
@@ -92,16 +99,13 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                                     ),
                                     PrimaryIconButton(
                                       icon: Assets.svg.starCheck.svg(),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        //TODO algo en el parentezco
+                                      },
                                     ).verticalPadding(15),
                                   ],
                                 ),
                               ),
-                              SelectElementFromApi(
-                                formControlName: '$key.service',
-                                label: l10n.tipoServicio,
-                                provider: servicesProvider(bookable: true),
-                              ).horizontalPadding(20),
                             ],
                           ),
                         ),
@@ -128,17 +132,34 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                         PaymentMethodType.correspondentPayment) {
                       context.navigateTo(
                         CodeRoute(
-                          typeOfServiceModel:
-                              formModel.model.family.first.service!,
+                          typeOfService: formModel.model.service!,
+                          includMe: formModel.model.scheduleForMe,
+                          procedureType: ProcedureType.familiar,
+                          relatives: formModel.model.family
+                              .map(
+                                (e) => RelativeModel(
+                                  identification: e.identificationNumber!,
+                                  familiarKin: e.relationship!,
+                                ),
+                              )
+                              .toList(),
                         ),
                       );
                     } else {
                       context.navigateTo(
                         ScheduleTurnSecondRoute(
                           paymentMethod: formModel.model.paymentMethod,
-                          //TODO revisar xq pueden ser varios servicios
-                          typeOfServiceModel:
-                              formModel.model.family.first.service!,
+                          typeOfService: formModel.model.service!,
+                          includMe: formModel.model.scheduleForMe,
+                          procedureType: ProcedureType.familiar,
+                          relatives: formModel.model.family
+                              .map(
+                                (e) => RelativeModel(
+                                  identification: e.identificationNumber!,
+                                  familiarKin: e.relationship!,
+                                ),
+                              )
+                              .toList(),
                         ),
                       );
                     }

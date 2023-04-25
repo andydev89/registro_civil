@@ -155,4 +155,88 @@ final schedulesProvider =
 
 typedef SchedulesRef
     = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCode>>;
+String _$confirmScheduleHash() => r'2fc651dea63b9a07e1bb10f776fb378537e9695b';
+typedef ConfirmScheduleRef
+    = AutoDisposeFutureProviderRef<Result<BookedReceiptModel, StatusCode>>;
+
+/// See also [confirmSchedule].
+@ProviderFor(confirmSchedule)
+const confirmScheduleProvider = ConfirmScheduleFamily();
+
+/// See also [confirmSchedule].
+class ConfirmScheduleFamily
+    extends Family<AsyncValue<Result<BookedReceiptModel, StatusCode>>> {
+  /// See also [confirmSchedule].
+  const ConfirmScheduleFamily();
+
+  /// See also [confirmSchedule].
+  ConfirmScheduleProvider call({
+    required ReceiptModel recipt,
+  }) {
+    return ConfirmScheduleProvider(
+      recipt: recipt,
+    );
+  }
+
+  @override
+  ConfirmScheduleProvider getProviderOverride(
+    covariant ConfirmScheduleProvider provider,
+  ) {
+    return call(
+      recipt: provider.recipt,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'confirmScheduleProvider';
+}
+
+/// See also [confirmSchedule].
+class ConfirmScheduleProvider
+    extends AutoDisposeFutureProvider<Result<BookedReceiptModel, StatusCode>> {
+  /// See also [confirmSchedule].
+  ConfirmScheduleProvider({
+    required this.recipt,
+  }) : super.internal(
+          (ref) => confirmSchedule(
+            ref,
+            recipt: recipt,
+          ),
+          from: confirmScheduleProvider,
+          name: r'confirmScheduleProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$confirmScheduleHash,
+          dependencies: ConfirmScheduleFamily._dependencies,
+          allTransitiveDependencies:
+              ConfirmScheduleFamily._allTransitiveDependencies,
+        );
+
+  final ReceiptModel recipt;
+
+  @override
+  bool operator ==(Object other) {
+    return other is ConfirmScheduleProvider && other.recipt == recipt;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, recipt.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

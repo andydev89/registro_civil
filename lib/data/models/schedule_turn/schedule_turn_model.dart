@@ -27,12 +27,14 @@ class ScheduleTurnFirstStepFamiliarModel {
     @FormControlAnnotation(validators: [requiredValidator])
         required this.paymentMethod,
     @FormControlAnnotation<dynamic>() this.scheduleForMe = false,
+    @FormControlAnnotation(validators: [requiredValidator]) this.service,
     @FormArrayAnnotation<dynamic>(validators: [requiredValidator])
         this.family = const [],
   });
 
   final PaymentMethodType paymentMethod;
   final bool scheduleForMe;
+  final TypeOfServiceModel? service;
   final List<FamiliarFormModel> family;
 }
 
@@ -48,15 +50,12 @@ class FamiliarFormModel {
     )
         this.identificationNumber,
     @FormControlAnnotation(validators: [requiredValidator])
-        this.service,
-    @FormControlAnnotation(validators: [requiredValidator])
         this.relationship,
   });
 
   ///Cedula
   final String? identificationNumber;
   final RelationshipType? relationship;
-  final TypeOfServiceModel? service;
 }
 
 @ReactiveFormAnnotation()
@@ -67,6 +66,8 @@ class ScheduleTurnSecondStepModel {
     @FormControlAnnotation(validators: [requiredValidator])
         required this.agency,
     @FormControlAnnotation(validators: [requiredValidator]) required this.date,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.scheduleId,
     @FormControlAnnotation(validators: [requiredValidator]) required this.time,
     @FormControlAnnotation<dynamic>() this.initialTime,
     @FormControlAnnotation<dynamic>() this.endTime,
@@ -75,6 +76,7 @@ class ScheduleTurnSecondStepModel {
   final LocationModel province;
   final AgencyModel agency;
   final DateTime date;
+  final String scheduleId;
   final TimeOfDay time;
   final TimeOfDay? initialTime;
   final TimeOfDay? endTime;

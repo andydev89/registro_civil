@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/models/payment/code_model.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -13,9 +15,15 @@ import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffo
 class CodePage extends StatelessWidget {
   const CodePage({
     super.key,
-    required this.typeOfServiceModel,
+    required this.typeOfService,
+    required this.includMe,
+    required this.procedureType,
+    required this.relatives,
   });
-  final TypeOfServiceModel typeOfServiceModel;
+  final TypeOfServiceModel typeOfService;
+  final bool includMe;
+  final List<RelativeModel> relatives;
+  final ProcedureType procedureType;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +45,10 @@ class CodePage extends StatelessWidget {
                 ? () => context.navigateTo(
                       ScheduleTurnSecondRoute(
                         paymentMethod: PaymentMethodType.correspondentPayment,
-                        typeOfServiceModel: typeOfServiceModel,
+                        typeOfService: typeOfService,
+                        includMe: includMe,
+                        procedureType: procedureType,
+                        relatives: relatives,
                       ),
                     )
                 : null,

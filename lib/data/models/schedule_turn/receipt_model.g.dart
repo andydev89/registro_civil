@@ -36,7 +36,7 @@ const _$ProcedureTypeEnumMap = {
 
 const _$PaymentMethodTypeEnumMap = {
   PaymentMethodType.correspondentPayment: 'CORRESPONDENT',
-  PaymentMethodType.placeToPay: 'PLACE_TO_PAY',
+  PaymentMethodType.placeToPay: 'PLACETOPAY',
 };
 
 RelativeModel _$RelativeModelFromJson(Map<String, dynamic> json) =>
@@ -58,3 +58,15 @@ const _$RelationshipTypeEnumMap = {
   RelationshipType.father: 'father',
   RelationshipType.mother: 'mother',
 };
+
+BookedReceiptModel _$BookedReceiptModelFromJson(Map<String, dynamic> json) =>
+    BookedReceiptModel(
+      id: (json['id'] as List<dynamic>).map((e) => e as String).toList(),
+      transactionCode: json['transactionCode'] as String,
+    );
+
+Map<String, dynamic> _$BookedReceiptModelToJson(BookedReceiptModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'transactionCode': instance.transactionCode,
+    };

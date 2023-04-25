@@ -45,15 +45,17 @@ class PrimaryScaffold extends StatelessWidget {
               ),
             ),
           ),
-          body: Column(
-            children: [
-              if (subtitle != null)
-                PrimaryText(
-                  subtitle!,
-                ).symmetricPadding(10, 30),
-              body,
-            ],
-          ).horizontalPadding(horizontalPadding),
+          body: Center(
+            child: Column(
+              children: [
+                if (subtitle != null)
+                  PrimaryText(
+                    subtitle!,
+                  ).symmetricPadding(10, 30),
+                body,
+              ],
+            ).horizontalPadding(horizontalPadding),
+          ),
           bottomNavigationBar:
               bottomNavigationBar == null ? null : bottomNavigationBar!,
         ),
