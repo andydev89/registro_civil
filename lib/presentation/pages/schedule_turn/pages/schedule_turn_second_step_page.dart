@@ -1,9 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/widgets/schedule_date_picker.dart';
@@ -13,17 +17,23 @@ import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.d
 import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
-class ScheduleTurnSecondPage extends StatelessWidget {
+class ScheduleTurnSecondPage extends ConsumerWidget {
   const ScheduleTurnSecondPage({
     super.key,
     required this.paymentMethod,
-    required this.typeOfServiceModel,
+    required this.typeOfService,
+    required this.includMe,
+    required this.procedureType,
+    required this.relatives,
   });
   final PaymentMethodType paymentMethod;
-  final TypeOfServiceModel typeOfServiceModel;
+  final TypeOfServiceModel typeOfService;
+  final bool includMe;
+  final ProcedureType procedureType;
+  final List<RelativeModel> relatives;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return ScheduleTurnSecondStepModelFormBuilder(
       builder: (context, formModel, child) => PrimaryScaffold(
@@ -57,10 +67,11 @@ class ScheduleTurnSecondPage extends StatelessWidget {
                           readOnly: !formModel.agencyControl.valid,
                           label: l10n.fechaParaTurno,
                           formControl: formModel.dateControl,
+                          scheduleId: formModel.scheduleIdControl,
                           initialTime: formModel.initialTimeControl,
                           endTime: formModel.endTimeControl,
                           agency: formModel.agencyControl,
-                          typeOfServiceModel: typeOfServiceModel,
+                          typeOfServiceModel: typeOfService,
                           starDate: DateTime.now(),
                         ),
                         Visibility(
@@ -85,18 +96,30 @@ class ScheduleTurnSecondPage extends StatelessWidget {
           builder: (context, formModel, child) => PrimaryButton(
             title: l10n.ageTurno,
             onPressed: formModel.form.valid
-                ? () => context.navigateTo(
-                      TurnDetailsRoute(
-                        city: formModel.model.province.name,
-                        agency: formModel.model.agency.name,
-                        typeOfService: typeOfServiceModel,
-                        date: formModel.model.date,
-                        time: formModel.model.time,
-                        paymentMethod: paymentMethod,
-                        requestNumber: 12569,
-                        totalToPay: 15,
-                      ),
-                    )
+                ? () {
+                    ref.read(meProvider.future).then((value) {
+                      context.navigateTo(
+                        TurnDetailsRoute(
+                          city: formModel.model.province.name,
+                          agency: formModel.model.agency.name,
+                          typeOfService: typeOfService,
+                          date: formModel.model.date,
+                          time: formModel.model.time,
+                          paymentMethod: paymentMethod,
+                          totalToPay: typeOfService.price,
+                          receipt: ReceiptModel(
+                            paymentType: paymentMethod,
+                            time: formModel.model.time,
+                            scheduleId: formModel.model.scheduleId,
+                            userId: value.id,
+                            includeMe: includMe,
+                            procedureType: procedureType,
+                            relatives: relatives,
+                          ),
+                        ),
+                      );
+                    });
+                  }
                 : null,
           ).symmetricPadding(10, 30),
         ),

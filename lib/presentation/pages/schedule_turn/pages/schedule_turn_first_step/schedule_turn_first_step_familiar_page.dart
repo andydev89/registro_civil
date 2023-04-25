@@ -4,7 +4,9 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
 import 'package:registro_civil_apk/data/enum/commons/relationship_type.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -128,8 +130,18 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                         PaymentMethodType.correspondentPayment) {
                       context.navigateTo(
                         CodeRoute(
-                          typeOfServiceModel:
-                              formModel.model.family.first.service!,
+                          //TODO revisar xq pueden ser varios servicios
+                          typeOfService: formModel.model.family.first.service!,
+                          includMe: formModel.model.scheduleForMe,
+                          procedureType: ProcedureType.familiar,
+                          relatives: formModel.model.family
+                              .map(
+                                (e) => RelativeModel(
+                                  identification: e.identificationNumber!,
+                                  familiarKin: e.relationship!,
+                                ),
+                              )
+                              .toList(),
                         ),
                       );
                     } else {
@@ -137,8 +149,17 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                         ScheduleTurnSecondRoute(
                           paymentMethod: formModel.model.paymentMethod,
                           //TODO revisar xq pueden ser varios servicios
-                          typeOfServiceModel:
-                              formModel.model.family.first.service!,
+                          typeOfService: formModel.model.family.first.service!,
+                          includMe: formModel.model.scheduleForMe,
+                          procedureType: ProcedureType.familiar,
+                          relatives: formModel.model.family
+                              .map(
+                                (e) => RelativeModel(
+                                  identification: e.identificationNumber!,
+                                  familiarKin: e.relationship!,
+                                ),
+                              )
+                              .toList(),
                         ),
                       );
                     }

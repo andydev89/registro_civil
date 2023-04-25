@@ -1838,6 +1838,8 @@ class ScheduleTurnSecondStepModelForm
 
   static String dateControlName = "date";
 
+  static String scheduleIdControlName = "scheduleId";
+
   static String timeControlName = "time";
 
   static String initialTimeControlName = "initialTime";
@@ -1853,12 +1855,14 @@ class ScheduleTurnSecondStepModelForm
   String provinceControlPath() => pathBuilder(provinceControlName);
   String agencyControlPath() => pathBuilder(agencyControlName);
   String dateControlPath() => pathBuilder(dateControlName);
+  String scheduleIdControlPath() => pathBuilder(scheduleIdControlName);
   String timeControlPath() => pathBuilder(timeControlName);
   String initialTimeControlPath() => pathBuilder(initialTimeControlName);
   String endTimeControlPath() => pathBuilder(endTimeControlName);
   LocationModel get _provinceValue => provinceControl.value as LocationModel;
   AgencyModel get _agencyValue => agencyControl.value as AgencyModel;
   DateTime get _dateValue => dateControl.value as DateTime;
+  String get _scheduleIdValue => scheduleIdControl.value as String;
   TimeOfDay get _timeValue => timeControl.value as TimeOfDay;
   TimeOfDay? get _initialTimeValue => initialTimeControl?.value;
   TimeOfDay? get _endTimeValue => endTimeControl?.value;
@@ -1883,6 +1887,15 @@ class ScheduleTurnSecondStepModelForm
   bool get containsDate {
     try {
       form.control(dateControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsScheduleId {
+    try {
+      form.control(scheduleIdControlPath());
       return true;
     } catch (e) {
       return false;
@@ -1919,12 +1932,14 @@ class ScheduleTurnSecondStepModelForm
   Object? get provinceErrors => provinceControl.errors;
   Object? get agencyErrors => agencyControl.errors;
   Object? get dateErrors => dateControl.errors;
+  Object? get scheduleIdErrors => scheduleIdControl.errors;
   Object? get timeErrors => timeControl.errors;
   Object? get initialTimeErrors => initialTimeControl?.errors;
   Object? get endTimeErrors => endTimeControl?.errors;
   void get provinceFocus => form.focus(provinceControlPath());
   void get agencyFocus => form.focus(agencyControlPath());
   void get dateFocus => form.focus(dateControlPath());
+  void get scheduleIdFocus => form.focus(scheduleIdControlPath());
   void get timeFocus => form.focus(timeControlPath());
   void get initialTimeFocus => form.focus(initialTimeControlPath());
   void get endTimeFocus => form.focus(endTimeControlPath());
@@ -2007,6 +2022,15 @@ class ScheduleTurnSecondStepModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void scheduleIdValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    scheduleIdControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void timeValueUpdate(
     TimeOfDay value, {
     bool updateParent = true,
@@ -2058,6 +2082,15 @@ class ScheduleTurnSecondStepModelForm
     bool emitEvent = true,
   }) {
     dateControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void scheduleIdValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    scheduleIdControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -2115,6 +2148,15 @@ class ScheduleTurnSecondStepModelForm
   }) =>
       dateControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void scheduleIdValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      scheduleIdControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void timeValueReset(
     TimeOfDay value, {
     bool updateParent = true,
@@ -2148,6 +2190,8 @@ class ScheduleTurnSecondStepModelForm
       form.control(agencyControlPath()) as FormControl<AgencyModel>;
   FormControl<DateTime> get dateControl =>
       form.control(dateControlPath()) as FormControl<DateTime>;
+  FormControl<String> get scheduleIdControl =>
+      form.control(scheduleIdControlPath()) as FormControl<String>;
   FormControl<TimeOfDay> get timeControl =>
       form.control(timeControlPath()) as FormControl<TimeOfDay>;
   FormControl<TimeOfDay>? get initialTimeControl => containsInitialTime
@@ -2204,6 +2248,24 @@ class ScheduleTurnSecondStepModelForm
       );
     } else {
       dateControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void scheduleIdSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      scheduleIdControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      scheduleIdControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -2275,6 +2337,7 @@ class ScheduleTurnSecondStepModelForm
         province: _provinceValue,
         agency: _agencyValue,
         date: _dateValue,
+        scheduleId: _scheduleIdValue,
         time: _timeValue,
         initialTime: _initialTimeValue,
         endTime: _endTimeValue);
@@ -2337,6 +2400,13 @@ class ScheduleTurnSecondStepModelForm
             touched: false),
         dateControlName: FormControl<DateTime>(
             value: scheduleTurnSecondStepModel?.date,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        scheduleIdControlName: FormControl<String>(
+            value: scheduleTurnSecondStepModel?.scheduleId,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

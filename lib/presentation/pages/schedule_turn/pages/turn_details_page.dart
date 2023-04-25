@@ -1,19 +1,25 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
+import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
+import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class TurnDetailsPage extends StatelessWidget {
+class TurnDetailsPage extends ConsumerWidget {
   const TurnDetailsPage({
     super.key,
     required this.city,
@@ -22,20 +28,21 @@ class TurnDetailsPage extends StatelessWidget {
     required this.date,
     required this.time,
     required this.paymentMethod,
-    required this.requestNumber,
     required this.totalToPay,
+    required this.receipt,
   });
-  final String city;
+
   final String agency;
-  final TypeOfServiceModel typeOfService;
+  final String city;
   final DateTime date;
-  final TimeOfDay time;
   final PaymentMethodType paymentMethod;
-  final int requestNumber;
+  final ReceiptModel receipt;
+  final TimeOfDay time;
   final double totalToPay;
+  final TypeOfServiceModel typeOfService;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final now = DateTime.now();
     return PrimaryScaffold(
@@ -104,41 +111,44 @@ class TurnDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: PrimaryButton(
+      bottomNavigationBar: PrimaryAsyncButton(
         title: l10n.confirmar,
-        onPressed: () {
-          if (paymentMethod == PaymentMethodType.correspondentPayment) {
-            //Navegar a la vista de mostrar la confirmacion y luego a mis turnos
-            context.replaceRoute(
-              NotificationRoute(
-                notificationType: NotificationType.succes,
-                message: l10n.turnoReservadoMensajeFormal,
-                bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
-                buttonText: l10n.misTurnos,
-                onTap: (cxt) => cxt.replaceRoute(const MyTurnsRoute()),
+        onPressed: () => ref
+            .read(confirmScheduleProvider(recipt: receipt).future)
+            .when(
+              ok: (value) => paymentMethod ==
+                      PaymentMethodType.correspondentPayment
+                  ? context.replaceRoute(
+                      NotificationRoute(
+                        notificationType: NotificationType.succes,
+                        message: l10n.turnoReservadoMensajeFormal,
+                        bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
+                        buttonText: l10n.misTurnos,
+                        onTap: (cxt) => cxt.replaceRoute(const MyTurnsRoute()),
+                      ),
+                    )
+                  : context.replaceRoute(
+                      MakePaymentRoute(
+                        requestNumber: value.transactionCode,
+                        totalToPay: totalToPay,
+                        buttonText: l10n.continuar,
+                        onTapSuccessPayment: (cxt) => context.replaceRoute(
+                          NotificationRoute(
+                            notificationType: NotificationType.succes,
+                            message: l10n.turnoReservadoMensajeFormal,
+                            bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
+                            buttonText: l10n.misTurnos,
+                            onTap: (cxt) =>
+                                cxt.replaceRoute(const MyTurnsRoute()),
+                          ),
+                        ),
+                      ),
+                    ),
+              err: (error) => showAlert(
+                error.translate(context),
+                TypeAlert.error,
               ),
-            );
-          } else {
-            //Navegar a la vista de hacer el pago
-            context.replaceRoute(
-              MakePaymentRoute(
-                requestNumber: requestNumber,
-                totalToPay: totalToPay,
-                buttonText: l10n.continuar,
-                onTapSuccessPayment: (cxt) => cxt.replaceRoute(
-                  NotificationRoute(
-                    buttonText: l10n.misTurnos,
-                    message: l10n.turnoReservadoMensajeFormal,
-                    bottonTitle: l10n.envNotCorElectronicoDetallesDeSolicitud,
-                    notificationType: NotificationType.succes,
-                    onTap: (context) =>
-                        context.replaceRoute(const MyTurnsRoute()),
-                  ),
-                ),
-              ),
-            );
-          }
-        },
+            ),
       ).symmetricPadding(10, 30),
     );
   }
@@ -150,6 +160,7 @@ class RowLabel extends StatelessWidget {
     required this.boldLabel,
     required this.simpleLabel,
   });
+
   final String boldLabel;
   final String simpleLabel;
 

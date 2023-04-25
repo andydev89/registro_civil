@@ -16,7 +16,7 @@ class TimeOfDayConverter implements JsonConverter<TimeOfDay, String> {
 
   @override
   String toJson(TimeOfDay object) {
-    return '${object.hour.toString().padLeft(2)}.'
-    '${object.minute.toString().padLeft(2)}';
+    return '${object.hour.toString().padLeft(2, '0')}:'
+        '${object.minute.toString().padLeft(2, '0')}';
   }
 }

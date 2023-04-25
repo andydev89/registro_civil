@@ -12,6 +12,7 @@ class ScheduleDatePicker extends ConsumerWidget {
     super.key,
     required this.label,
     required this.formControl,
+    required this.scheduleId,
     required this.typeOfServiceModel,
     required this.agency,
     required this.starDate,
@@ -21,6 +22,7 @@ class ScheduleDatePicker extends ConsumerWidget {
   });
 
   final FormControl<DateTime> formControl;
+  final FormControl<String> scheduleId;
   final FormControl<TimeOfDay>? initialTime;
   final FormControl<TimeOfDay>? endTime;
   final String label;
@@ -78,6 +80,7 @@ class ScheduleDatePicker extends ConsumerWidget {
             );
             initialTime?.updateValue(selectedSchedue.startTime);
             endTime?.updateValue(selectedSchedue.endingTime);
+            scheduleId.updateValue(selectedSchedue.id);
           },
           err: (error) => null,
         );
