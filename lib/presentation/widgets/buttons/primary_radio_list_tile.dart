@@ -25,6 +25,7 @@ class PrimaryRadioListTile<T> extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       controlAffinity: ListTileControlAffinity.leading,
       groupValue: groupValue,
+      shape: const StadiumBorder(),
       title: PrimaryText(
         title,
         color: titleColor,
