@@ -6,7 +6,7 @@ import 'package:registro_civil_apk/data/models/payment/client_data_to_pay_model.
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_email_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
@@ -22,7 +22,7 @@ class MakePaymentPage extends StatelessWidget {
     this.onTapSuccessPayment,
     this.onTapFailedPayment,
   });
-  final int requestNumber;
+  final String requestNumber;
   final double totalToPay;
   final String buttonText;
   final void Function(BuildContext context)? onTapSuccessPayment;
@@ -41,12 +41,22 @@ class MakePaymentPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  PrimaryText('${l10n.solicitud} # $requestNumber'),
-                  PrimaryText(
-                    '${l10n.totalPagar} \$ ${totalToPay.toStringAsFixed(2)}',
+                  Flexible(
+                    child: PrimaryText(
+                      '${l10n.solicitud} # $requestNumber',
+                      color: blue,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Flexible(
+                    child: PrimaryText(
+                      '${l10n.totalPagar} \$ ${totalToPay.toStringAsFixed(2)}',
+                      color: blue,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ],
-              ).horizontalPadding(20),
+              ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -72,7 +82,7 @@ class MakePaymentPage extends StatelessWidget {
                         label: l10n.ciudad,
                         formControl: formModel.cityControl,
                       ),
-                      // TODO(alejandro): crear un componente 
+                      // TODO(alejandro): crear un componente
                       //reactivo para los telefonos
                       PrimaryReactiveTextField(
                         label: l10n.telefonoCel,
@@ -98,14 +108,14 @@ class MakePaymentPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       )
                     ],
-                  ).horizontalPadding(40),
+                  ).horizontalPadding(20),
                 ),
               ),
             ],
           ),
         ),
         bottomNavigationBar: ReactiveClientDataToPayModelFormConsumer(
-          builder: (context, formModel, child) => PrimaryButton(
+          builder: (context, formModel, child) => PrimaryAsyncButton(
             title: l10n.confirmarPago,
             onPressed: formModel.form.valid
                 // TODO(alejandro): aqui hacer la logica de pagar

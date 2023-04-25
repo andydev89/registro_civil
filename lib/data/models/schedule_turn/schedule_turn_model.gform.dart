@@ -728,6 +728,8 @@ class ScheduleTurnFirstStepFamiliarModelForm
 
   static String scheduleForMeControlName = "scheduleForMe";
 
+  static String serviceControlName = "service";
+
   static String familyControlName = "family";
 
   final ScheduleTurnFirstStepFamiliarModel? scheduleTurnFirstStepFamiliarModel;
@@ -740,10 +742,12 @@ class ScheduleTurnFirstStepFamiliarModelForm
 
   String paymentMethodControlPath() => pathBuilder(paymentMethodControlName);
   String scheduleForMeControlPath() => pathBuilder(scheduleForMeControlName);
+  String serviceControlPath() => pathBuilder(serviceControlName);
   String familyControlPath() => pathBuilder(familyControlName);
   PaymentMethodType get _paymentMethodValue =>
       paymentMethodControl.value as PaymentMethodType;
   bool get _scheduleForMeValue => scheduleForMeControl.value as bool;
+  TypeOfServiceModel? get _serviceValue => serviceControl?.value;
   List<FamiliarFormModel> get _familyValue => familyFamiliarFormModelForm
       .asMap()
       .map(
@@ -776,6 +780,15 @@ class ScheduleTurnFirstStepFamiliarModelForm
     }
   }
 
+  bool get containsService {
+    try {
+      form.control(serviceControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsFamily {
     try {
       form.control(familyControlPath());
@@ -787,10 +800,38 @@ class ScheduleTurnFirstStepFamiliarModelForm
 
   Object? get paymentMethodErrors => paymentMethodControl.errors;
   Object? get scheduleForMeErrors => scheduleForMeControl.errors;
+  Object? get serviceErrors => serviceControl?.errors;
   Object? get familyErrors => familyControl.errors;
   void get paymentMethodFocus => form.focus(paymentMethodControlPath());
   void get scheduleForMeFocus => form.focus(scheduleForMeControlPath());
+  void get serviceFocus => form.focus(serviceControlPath());
   void get familyFocus => form.focus(familyControlPath());
+  void serviceRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsService) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          serviceControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            serviceControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void paymentMethodValueUpdate(
     PaymentMethodType value, {
     bool updateParent = true,
@@ -806,6 +847,15 @@ class ScheduleTurnFirstStepFamiliarModelForm
     bool emitEvent = true,
   }) {
     scheduleForMeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void serviceValueUpdate(
+    TypeOfServiceModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    serviceControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -922,6 +972,15 @@ class ScheduleTurnFirstStepFamiliarModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void serviceValuePatch(
+    TypeOfServiceModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    serviceControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void familyValuePatch(
     List<FamiliarFormModel> value, {
     bool updateParent = true,
@@ -965,6 +1024,15 @@ class ScheduleTurnFirstStepFamiliarModelForm
   }) =>
       scheduleForMeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void serviceValueReset(
+    TypeOfServiceModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      serviceControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void familyValueReset(
     List<FamiliarFormModel> value, {
     bool updateParent = true,
@@ -985,6 +1053,9 @@ class ScheduleTurnFirstStepFamiliarModelForm
           as FormControl<PaymentMethodType>;
   FormControl<bool> get scheduleForMeControl =>
       form.control(scheduleForMeControlPath()) as FormControl<bool>;
+  FormControl<TypeOfServiceModel>? get serviceControl => containsService
+      ? form.control(serviceControlPath()) as FormControl<TypeOfServiceModel>?
+      : null;
   FormArray<Map<String, Object?>> get familyControl =>
       form.control(familyControlPath()) as FormArray<Map<String, Object?>>;
   void paymentMethodSetDisabled(
@@ -1017,6 +1088,24 @@ class ScheduleTurnFirstStepFamiliarModelForm
       );
     } else {
       scheduleForMeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void serviceSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      serviceControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      serviceControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1082,6 +1171,7 @@ class ScheduleTurnFirstStepFamiliarModelForm
     return ScheduleTurnFirstStepFamiliarModel(
         paymentMethod: _paymentMethodValue,
         scheduleForMe: _scheduleForMeValue,
+        service: _serviceValue,
         family: _familyValue);
   }
 
@@ -1141,6 +1231,13 @@ class ScheduleTurnFirstStepFamiliarModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
+        serviceControlName: FormControl<TypeOfServiceModel>(
+            value: scheduleTurnFirstStepFamiliarModel?.service,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         familyControlName: FormArray(
             familyFamiliarFormModelForm.map((e) => e.formElements()).toList(),
             validators: [requiredValidator],
@@ -1163,8 +1260,6 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
 
   static String identificationNumberControlName = "identificationNumber";
 
-  static String serviceControlName = "service";
-
   static String relationshipControlName = "relationship";
 
   final FamiliarFormModel? familiarFormModel;
@@ -1175,23 +1270,12 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
 
   String identificationNumberControlPath() =>
       pathBuilder(identificationNumberControlName);
-  String serviceControlPath() => pathBuilder(serviceControlName);
   String relationshipControlPath() => pathBuilder(relationshipControlName);
   String? get _identificationNumberValue => identificationNumberControl?.value;
-  TypeOfServiceModel? get _serviceValue => serviceControl?.value;
   RelationshipType? get _relationshipValue => relationshipControl?.value;
   bool get containsIdentificationNumber {
     try {
       form.control(identificationNumberControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsService {
-    try {
-      form.control(serviceControlPath());
       return true;
     } catch (e) {
       return false;
@@ -1208,11 +1292,9 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   }
 
   Object? get identificationNumberErrors => identificationNumberControl?.errors;
-  Object? get serviceErrors => serviceControl?.errors;
   Object? get relationshipErrors => relationshipControl?.errors;
   void get identificationNumberFocus =>
       form.focus(identificationNumberControlPath());
-  void get serviceFocus => form.focus(serviceControlPath());
   void get relationshipFocus => form.focus(relationshipControlPath());
   void identificationNumberRemove({
     bool updateParent = true,
@@ -1232,32 +1314,6 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
         if (formGroup is FormGroup) {
           formGroup.removeControl(
             identificationNumberControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
-  void serviceRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsService) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          serviceControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            serviceControlName,
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -1301,15 +1357,6 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void serviceValueUpdate(
-    TypeOfServiceModel? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    serviceControl?.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
   void relationshipValueUpdate(
     RelationshipType? value, {
     bool updateParent = true,
@@ -1325,15 +1372,6 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
     bool emitEvent = true,
   }) {
     identificationNumberControl?.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void serviceValuePatch(
-    TypeOfServiceModel? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    serviceControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1355,15 +1393,6 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   }) =>
       identificationNumberControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void serviceValueReset(
-    TypeOfServiceModel? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      serviceControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void relationshipValueReset(
     RelationshipType? value, {
     bool updateParent = true,
@@ -1378,9 +1407,6 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
           ? form.control(identificationNumberControlPath())
               as FormControl<String>?
           : null;
-  FormControl<TypeOfServiceModel>? get serviceControl => containsService
-      ? form.control(serviceControlPath()) as FormControl<TypeOfServiceModel>?
-      : null;
   FormControl<RelationshipType>? get relationshipControl => containsRelationship
       ? form.control(relationshipControlPath())
           as FormControl<RelationshipType>?
@@ -1397,24 +1423,6 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
       );
     } else {
       identificationNumberControl?.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void serviceSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      serviceControl?.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      serviceControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1448,7 +1456,6 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
     }
     return FamiliarFormModel(
         identificationNumber: _identificationNumberValue,
-        service: _serviceValue,
         relationship: _relationshipValue);
   }
 
@@ -1499,13 +1506,6 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
               ecuadorDniValidator,
               length10Validator
             ],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        serviceControlName: FormControl<TypeOfServiceModel>(
-            value: familiarFormModel?.service,
-            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -1838,6 +1838,8 @@ class ScheduleTurnSecondStepModelForm
 
   static String dateControlName = "date";
 
+  static String scheduleIdControlName = "scheduleId";
+
   static String timeControlName = "time";
 
   static String initialTimeControlName = "initialTime";
@@ -1853,12 +1855,14 @@ class ScheduleTurnSecondStepModelForm
   String provinceControlPath() => pathBuilder(provinceControlName);
   String agencyControlPath() => pathBuilder(agencyControlName);
   String dateControlPath() => pathBuilder(dateControlName);
+  String scheduleIdControlPath() => pathBuilder(scheduleIdControlName);
   String timeControlPath() => pathBuilder(timeControlName);
   String initialTimeControlPath() => pathBuilder(initialTimeControlName);
   String endTimeControlPath() => pathBuilder(endTimeControlName);
   LocationModel get _provinceValue => provinceControl.value as LocationModel;
   AgencyModel get _agencyValue => agencyControl.value as AgencyModel;
   DateTime get _dateValue => dateControl.value as DateTime;
+  String get _scheduleIdValue => scheduleIdControl.value as String;
   TimeOfDay get _timeValue => timeControl.value as TimeOfDay;
   TimeOfDay? get _initialTimeValue => initialTimeControl?.value;
   TimeOfDay? get _endTimeValue => endTimeControl?.value;
@@ -1883,6 +1887,15 @@ class ScheduleTurnSecondStepModelForm
   bool get containsDate {
     try {
       form.control(dateControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsScheduleId {
+    try {
+      form.control(scheduleIdControlPath());
       return true;
     } catch (e) {
       return false;
@@ -1919,12 +1932,14 @@ class ScheduleTurnSecondStepModelForm
   Object? get provinceErrors => provinceControl.errors;
   Object? get agencyErrors => agencyControl.errors;
   Object? get dateErrors => dateControl.errors;
+  Object? get scheduleIdErrors => scheduleIdControl.errors;
   Object? get timeErrors => timeControl.errors;
   Object? get initialTimeErrors => initialTimeControl?.errors;
   Object? get endTimeErrors => endTimeControl?.errors;
   void get provinceFocus => form.focus(provinceControlPath());
   void get agencyFocus => form.focus(agencyControlPath());
   void get dateFocus => form.focus(dateControlPath());
+  void get scheduleIdFocus => form.focus(scheduleIdControlPath());
   void get timeFocus => form.focus(timeControlPath());
   void get initialTimeFocus => form.focus(initialTimeControlPath());
   void get endTimeFocus => form.focus(endTimeControlPath());
@@ -2007,6 +2022,15 @@ class ScheduleTurnSecondStepModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void scheduleIdValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    scheduleIdControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void timeValueUpdate(
     TimeOfDay value, {
     bool updateParent = true,
@@ -2058,6 +2082,15 @@ class ScheduleTurnSecondStepModelForm
     bool emitEvent = true,
   }) {
     dateControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void scheduleIdValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    scheduleIdControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -2115,6 +2148,15 @@ class ScheduleTurnSecondStepModelForm
   }) =>
       dateControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void scheduleIdValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      scheduleIdControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void timeValueReset(
     TimeOfDay value, {
     bool updateParent = true,
@@ -2148,6 +2190,8 @@ class ScheduleTurnSecondStepModelForm
       form.control(agencyControlPath()) as FormControl<AgencyModel>;
   FormControl<DateTime> get dateControl =>
       form.control(dateControlPath()) as FormControl<DateTime>;
+  FormControl<String> get scheduleIdControl =>
+      form.control(scheduleIdControlPath()) as FormControl<String>;
   FormControl<TimeOfDay> get timeControl =>
       form.control(timeControlPath()) as FormControl<TimeOfDay>;
   FormControl<TimeOfDay>? get initialTimeControl => containsInitialTime
@@ -2204,6 +2248,24 @@ class ScheduleTurnSecondStepModelForm
       );
     } else {
       dateControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void scheduleIdSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      scheduleIdControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      scheduleIdControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -2275,6 +2337,7 @@ class ScheduleTurnSecondStepModelForm
         province: _provinceValue,
         agency: _agencyValue,
         date: _dateValue,
+        scheduleId: _scheduleIdValue,
         time: _timeValue,
         initialTime: _initialTimeValue,
         endTime: _endTimeValue);
@@ -2337,6 +2400,13 @@ class ScheduleTurnSecondStepModelForm
             touched: false),
         dateControlName: FormControl<DateTime>(
             value: scheduleTurnSecondStepModel?.date,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        scheduleIdControlName: FormControl<String>(
+            value: scheduleTurnSecondStepModel?.scheduleId,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

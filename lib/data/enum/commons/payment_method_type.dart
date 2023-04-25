@@ -6,7 +6,7 @@ enum PaymentMethodType {
   ///Pago corresponsal
   @JsonValue('CORRESPONDENT')
   correspondentPayment('Pago corresponsal'),
-  @JsonValue('PLACE_TO_PAY')
+  @JsonValue('PLACETOPAY')
   placeToPay('Place to pay');
 
   const PaymentMethodType(this.toText);
