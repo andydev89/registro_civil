@@ -53,58 +53,61 @@ class TurnDetailsPage extends ConsumerWidget {
           PrimaryCard(
             child: Row(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RowLabel(
-                      boldLabel: l10n.provincia,
-                      simpleLabel: city,
-                    ),
-                    RowLabel(
-                      boldLabel: l10n.agencia,
-                      simpleLabel: agency,
-                    ),
-                    RowLabel(
-                      boldLabel: l10n.servicio,
-                      simpleLabel: typeOfService.translate(context),
-                    ),
-                    Row(
-                      children: [
-                        Assets.svg.calendar3.svg(),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        PrimaryText(
-                          DateFormat('dd-MM-yyyy').format(date),
-                        ),
-                      ],
-                    ).verticalPadding(5),
-                    Row(
-                      children: [
-                        Assets.svg.clock.svg(),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        PrimaryText(
-                          DateFormat.jm().format(
-                            DateTime(
-                              now.year,
-                              now.month,
-                              now.day,
-                              time.hour,
-                              time.minute,
+                Flexible(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RowLabel(
+                        boldLabel: l10n.provincia,
+                        simpleLabel: city,
+                      ),
+                      RowLabel(
+                        boldLabel: l10n.agencia,
+                        simpleLabel: agency,
+                      ),
+                      RowLabel(
+                        boldLabel: l10n.servicio,
+                        simpleLabel: typeOfService.translate(context),
+                      ),
+                      Row(
+                        children: [
+                          Assets.svg.calendar3.svg(),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          PrimaryText(
+                            DateFormat('dd-MM-yyyy').format(date),
+                          ),
+                        ],
+                      ).verticalPadding(5),
+                      Row(
+                        children: [
+                          Assets.svg.clock.svg(),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          PrimaryText(
+                            DateFormat.jm().format(
+                              DateTime(
+                                now.year,
+                                now.month,
+                                now.day,
+                                time.hour,
+                                time.minute,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ).verticalPadding(5),
-                  ],
+                        ],
+                      ).verticalPadding(5),
+                    ],
+                  ),
                 ),
                 Expanded(
                   child: AspectRatio(
                     aspectRatio: 1,
-                    child: Assets.svg.qrCode.svg().symmetricPadding(10, 10),
-                  ).symmetricPadding(30, 30),
+                    child: Assets.svg.qrCode.svg(),
+                  ),
                 ),
               ],
             ),
@@ -167,16 +170,21 @@ class RowLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PrimaryText(
-          '$boldLabel:',
-          fontWeight: FontWeight.bold,
+        SizedBox(
+          width: 90,
+          child: PrimaryText(
+            '$boldLabel:',
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.start,
+          ),
         ),
-        const SizedBox(
-          width: 10,
-        ),
-        PrimaryText(
-          simpleLabel,
+        Flexible(
+          child: PrimaryText(
+            simpleLabel,
+            textAlign: TextAlign.start,
+          ),
         ),
       ],
     ).verticalPadding(5);
