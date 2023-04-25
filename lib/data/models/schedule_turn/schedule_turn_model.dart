@@ -27,12 +27,14 @@ class ScheduleTurnFirstStepFamiliarModel {
     @FormControlAnnotation(validators: [requiredValidator])
         required this.paymentMethod,
     @FormControlAnnotation<dynamic>() this.scheduleForMe = false,
+    @FormControlAnnotation(validators: [requiredValidator]) this.service,
     @FormArrayAnnotation<dynamic>(validators: [requiredValidator])
         this.family = const [],
   });
 
   final PaymentMethodType paymentMethod;
   final bool scheduleForMe;
+  final TypeOfServiceModel? service;
   final List<FamiliarFormModel> family;
 }
 
@@ -48,15 +50,12 @@ class FamiliarFormModel {
     )
         this.identificationNumber,
     @FormControlAnnotation(validators: [requiredValidator])
-        this.service,
-    @FormControlAnnotation(validators: [requiredValidator])
         this.relationship,
   });
 
   ///Cedula
   final String? identificationNumber;
   final RelationshipType? relationship;
-  final TypeOfServiceModel? service;
 }
 
 @ReactiveFormAnnotation()

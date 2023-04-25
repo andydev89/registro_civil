@@ -59,6 +59,11 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                   ],
                 ),
               ),
+              SelectElementFromApi(
+                formControl: formModel.serviceControl,
+                label: l10n.tipoServicio,
+                provider: servicesProvider(bookable: true),
+              ).horizontalPadding(20),
               ReactiveFormArray(
                 formArray: formModel.familyControl,
                 builder: (context, formArray, child) => Column(
@@ -94,16 +99,13 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                                     ),
                                     PrimaryIconButton(
                                       icon: Assets.svg.starCheck.svg(),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        //TODO algo en el parentezco
+                                      },
                                     ).verticalPadding(15),
                                   ],
                                 ),
                               ),
-                              SelectElementFromApi(
-                                formControlName: '$key.service',
-                                label: l10n.tipoServicio,
-                                provider: servicesProvider(bookable: true),
-                              ).horizontalPadding(20),
                             ],
                           ),
                         ),
@@ -130,8 +132,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                         PaymentMethodType.correspondentPayment) {
                       context.navigateTo(
                         CodeRoute(
-                          //TODO revisar xq pueden ser varios servicios
-                          typeOfService: formModel.model.family.first.service!,
+                          typeOfService: formModel.model.service!,
                           includMe: formModel.model.scheduleForMe,
                           procedureType: ProcedureType.familiar,
                           relatives: formModel.model.family
@@ -148,8 +149,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                       context.navigateTo(
                         ScheduleTurnSecondRoute(
                           paymentMethod: formModel.model.paymentMethod,
-                          //TODO revisar xq pueden ser varios servicios
-                          typeOfService: formModel.model.family.first.service!,
+                          typeOfService: formModel.model.service!,
                           includMe: formModel.model.scheduleForMe,
                           procedureType: ProcedureType.familiar,
                           relatives: formModel.model.family
