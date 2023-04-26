@@ -239,8 +239,8 @@ class _$AppRouter extends RootStackRouter {
         child: MakePaymentPage(
           key: args.key,
           requestNumber: args.requestNumber,
-          totalToPay: args.totalToPay,
           buttonText: args.buttonText,
+          service: args.service,
           onTapSuccessPayment: args.onTapSuccessPayment,
           onTapFailedPayment: args.onTapFailedPayment,
         ),
@@ -1078,8 +1078,8 @@ class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
   MakePaymentRoute({
     Key? key,
     required String requestNumber,
-    required double totalToPay,
     required String buttonText,
+    required TypeOfServiceModel service,
     void Function(BuildContext)? onTapSuccessPayment,
     void Function(BuildContext)? onTapFailedPayment,
   }) : super(
@@ -1088,8 +1088,8 @@ class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
           args: MakePaymentRouteArgs(
             key: key,
             requestNumber: requestNumber,
-            totalToPay: totalToPay,
             buttonText: buttonText,
+            service: service,
             onTapSuccessPayment: onTapSuccessPayment,
             onTapFailedPayment: onTapFailedPayment,
           ),
@@ -1102,8 +1102,8 @@ class MakePaymentRouteArgs {
   const MakePaymentRouteArgs({
     this.key,
     required this.requestNumber,
-    required this.totalToPay,
     required this.buttonText,
+    required this.service,
     this.onTapSuccessPayment,
     this.onTapFailedPayment,
   });
@@ -1112,9 +1112,9 @@ class MakePaymentRouteArgs {
 
   final String requestNumber;
 
-  final double totalToPay;
-
   final String buttonText;
+
+  final TypeOfServiceModel service;
 
   final void Function(BuildContext)? onTapSuccessPayment;
 
@@ -1122,7 +1122,7 @@ class MakePaymentRouteArgs {
 
   @override
   String toString() {
-    return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, totalToPay: $totalToPay, buttonText: $buttonText, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment}';
+    return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, buttonText: $buttonText, service: $service, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment}';
   }
 }
 

@@ -133,8 +133,8 @@ class TurnDetailsPage extends ConsumerWidget {
                   : context.replaceRoute(
                       MakePaymentRoute(
                         requestNumber: value.transactionCode,
-                        totalToPay: totalToPay,
                         buttonText: l10n.continuar,
+                        service: typeOfService,
                         onTapSuccessPayment: (cxt) => context.replaceRoute(
                           NotificationRoute(
                             notificationType: NotificationType.succes,

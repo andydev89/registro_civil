@@ -1,8 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:fk_user_agent/fk_user_agent.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
+import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/models/payment/client_data_to_pay_model.dart';
+import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
+import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
+import 'package:registro_civil_apk/data/providers/payment/payment_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
@@ -13,23 +20,23 @@ import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffo
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class MakePaymentPage extends StatelessWidget {
+class MakePaymentPage extends ConsumerWidget {
   const MakePaymentPage({
     super.key,
     required this.requestNumber,
-    required this.totalToPay,
     required this.buttonText,
+    required this.service,
     this.onTapSuccessPayment,
     this.onTapFailedPayment,
   });
   final String requestNumber;
-  final double totalToPay;
   final String buttonText;
+  final TypeOfServiceModel service;
   final void Function(BuildContext context)? onTapSuccessPayment;
   final void Function(BuildContext context)? onTapFailedPayment;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return ClientDataToPayModelFormBuilder(
       builder: (context, formModel, child) => PrimaryScaffold(
@@ -50,7 +57,7 @@ class MakePaymentPage extends StatelessWidget {
                   ),
                   Flexible(
                     child: PrimaryText(
-                      '${l10n.totalPagar} \$ ${totalToPay.toStringAsFixed(2)}',
+                      '${l10n.totalPagar} \$ ${service.total.toStringAsFixed(2)}',
                       color: blue,
                       fontWeight: FontWeight.w500,
                     ),
@@ -118,28 +125,80 @@ class MakePaymentPage extends StatelessWidget {
           builder: (context, formModel, child) => PrimaryAsyncButton(
             title: l10n.confirmarPago,
             onPressed: formModel.form.valid
-                // TODO(alejandro): aqui hacer la logica de pagar
-                //mostrar el cargando y luego la respuesta
-                ? () => context.replaceRoute(
-                      NotificationRoute(
-                        buttonText: buttonText,
-                        message: l10n.pagoRealizadoConExito,
-                        notificationType: NotificationType.succes,
-                        title: l10n.confirmacionDePago,
-                        onTap: onTapSuccessPayment,
-                        description: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            PrimaryCaption(
-                              'Pagado: \$${totalToPay.toStringAsFixed(2)}',
-                            ),
-                            const PrimaryCaption(
-                              'Número de transacción: NKV00023',
+                ? () async {
+                    final user = await ref.read(meProvider.future);
+                    final buyerAndShipping = Buyer(
+                      address: Address(
+                        city: formModel.model.city,
+                        country: 'ECUADOR',
+                        estate: formModel.model.province,
+                        phone: formModel.model.phone,
+                        postalCode: formModel.model.postalCode.toString(),
+                        street: formModel.model.address,
+                      ),
+                      name: formModel.model.name,
+                      surname: formModel.model.lastName,
+                      mobile: formModel.model.phone,
+                      email: formModel.model.email,
+                      cedula: user.identification,
+                    );
+                    final deviceIp = await ref.read(deviceIpProvider.future);
+                    final placeToPay = PlaceToPayModel(
+                      buyer: buyerAndShipping,
+                      payment: Payment(
+                        amount: Amount(
+                          taxes: [
+                            Taxes(
+                              iva: service.iva,
+                              productPrice: service.price,
                             ),
                           ],
+                          total: service.total,
                         ),
+                        shipping: buyerAndShipping,
+                        description: service.name,
+                        serviceType: service.type,
                       ),
-                    )
+                      userAgent: FkUserAgent.userAgent!,
+                      ipAddress: deviceIp.ip,
+                      expiration: DateTime.now()
+                          .add(const Duration(minutes: 15))
+                          .toString(),
+                      returnUrl: '',
+                      cancelUrl: '',
+                    );
+                    ref
+                        .read(
+                          createPlaceToPayTransactionProvider(
+                            placeToPayModel: placeToPay,
+                          ),
+                        )
+                        .whenData(
+                          (value) => value.when(
+                            ok: (data) => context.replaceRoute(
+                              NotificationRoute(
+                                buttonText: buttonText,
+                                message: l10n.pagoRealizadoConExito,
+                                notificationType: NotificationType.succes,
+                                title: l10n.confirmacionDePago,
+                                onTap: onTapSuccessPayment,
+                                description: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    PrimaryCaption(
+                                      'Pagado: \$${service.total.toStringAsFixed(2)}',
+                                    ),
+                                    const PrimaryCaption(
+                                      'Número de transacción: NKV00023',
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            err: (error) => print(error.toString()),
+                          ),
+                        );
+                  }
                 : null,
           ).symmetricPadding(10, 30),
         ),

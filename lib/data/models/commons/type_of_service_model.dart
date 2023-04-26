@@ -37,6 +37,8 @@ class TypeOfServiceModel implements Translatable {
   final String type;
   final bool schedule;
 
+  double get total => (price * iva / 100) - discount;
+
   // static String readTypeOfService(Map<dynamic, dynamic> map, String key) {
   //   if (map['typeService'] != null) {
   //     return 'typeService';

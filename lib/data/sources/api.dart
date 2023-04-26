@@ -3,8 +3,10 @@ import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
+import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
+import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_model.dart';
@@ -19,6 +21,9 @@ part 'api.g.dart';
 @RestApi()
 abstract class Api {
   factory Api(Dio dio, {String baseUrl}) = _Api;
+
+  @GET('https://api.ipify.org/?format=json')
+  Future<DeviceIpModel> getDeviceIp();
 
   //AUTH
   @POST('/api/user/validate/citizen')
@@ -155,5 +160,11 @@ abstract class Api {
   @POST('/schedule/api/receipt')
   Future<ResponseModel<BookedReceiptModel>> confirmSchedule(
     @Body() ReceiptModel receiptModel,
+  );
+
+  //PLACE TO PAY PAYMENT
+  @POST('/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions')
+  Future<ResponseModel<BookedReceiptModel>> createPlaceToPayTransaction(
+    @Body() PlaceToPayModel placeToPayModel,
   );
 }

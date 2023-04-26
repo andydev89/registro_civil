@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:fk_user_agent/fk_user_agent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,6 +27,7 @@ StatusCode _getStatusCode(StatusCode statusCode) {
 
 Future<void> initMethod() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FkUserAgent.init();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
