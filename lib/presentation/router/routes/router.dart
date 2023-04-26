@@ -23,8 +23,10 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.
 import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/services/services_page.dart';
-import 'package:registro_civil_apk/presentation/pages/marriage_celebration/first_step/marriage_celebration_first_step_route.dart';
-import 'package:registro_civil_apk/presentation/pages/marriage_celebration/marriage_celebration_route_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/attorney/first_step_attorney_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/contracting_party/first_step_contracting_party_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/marriage_celebration_first_step_route.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/marriage_celebration_route_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_orders/pages/my_order_rejecting_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/pages/my_turns_page.dart';
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
@@ -216,13 +218,13 @@ part 'router.gr.dart';
               initial: true,
               children: [
                 CustomRoute(
-                  page: SimpleCertificateFirstStepFamiliarPage,
+                  page: FirstStepAttorneyPage,
                   initial: true,
                   transitionsBuilder: TransitionsBuilders.slideRight,
                 ),
-                // CupertinoRoute(
-                //   page: SimpleCertificateFirstStepPersonalPage,
-                // ),
+                CupertinoRoute(
+                  page: FirstStepContractingPartyPage,
+                ),
               ],
             ),
             // CupertinoRoute(

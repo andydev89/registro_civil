@@ -387,6 +387,21 @@ class _$AppRouter extends RootStackRouter {
         child: const MarriageCelebrationFirstStepRouterPage(),
       );
     },
+    FirstStepAttorneyRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const FirstStepAttorneyPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    FirstStepContractingPartyRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const FirstStepContractingPartyPage(),
+      );
+    },
     RequestInformationFirstStepRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -594,10 +609,15 @@ class _$AppRouter extends RootStackRouter {
                   parent: MarriageCelebrationRouterRoute.name,
                   children: [
                     RouteConfig(
-                      SimpleCertificateFirstStepFamiliarRoute.name,
+                      FirstStepAttorneyRoute.name,
                       path: '',
                       parent: MarriageCelebrationFirstStepRouterRoute.name,
-                    )
+                    ),
+                    RouteConfig(
+                      FirstStepContractingPartyRoute.name,
+                      path: 'first-step-contracting-party-page',
+                      parent: MarriageCelebrationFirstStepRouterRoute.name,
+                    ),
                   ],
                 )
               ],
@@ -1570,6 +1590,30 @@ class MarriageCelebrationFirstStepRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MarriageCelebrationFirstStepRouterRoute';
+}
+
+/// generated route for
+/// [FirstStepAttorneyPage]
+class FirstStepAttorneyRoute extends PageRouteInfo<void> {
+  const FirstStepAttorneyRoute()
+      : super(
+          FirstStepAttorneyRoute.name,
+          path: '',
+        );
+
+  static const String name = 'FirstStepAttorneyRoute';
+}
+
+/// generated route for
+/// [FirstStepContractingPartyPage]
+class FirstStepContractingPartyRoute extends PageRouteInfo<void> {
+  const FirstStepContractingPartyRoute()
+      : super(
+          FirstStepContractingPartyRoute.name,
+          path: 'first-step-contracting-party-page',
+        );
+
+  static const String name = 'FirstStepContractingPartyRoute';
 }
 
 /// generated route for

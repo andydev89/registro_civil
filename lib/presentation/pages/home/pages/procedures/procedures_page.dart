@@ -4,7 +4,6 @@ import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/providers/home_provider.dart';
 import 'package:registro_civil_apk/presentation/widgets/scrollables/circle_avatar_card_grid.dart';
 
 class ProceduresPage extends ConsumerWidget {
@@ -13,7 +12,6 @@ class ProceduresPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final filter = ref.watch(searchHomeProvider);
     // return CircleAvatarCardGrid(
     //   filter: filter,
     //   elements: [
@@ -59,7 +57,7 @@ class ProceduresPage extends ConsumerWidget {
           publishMovil: true,
           iconoWeb: icon,
           iconoMovil: icon,
-          type: TypeService.death,
+          type: TypeService.marriageCelebration,
           schedule: false,
         ),
       ],

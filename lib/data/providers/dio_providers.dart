@@ -14,7 +14,8 @@ Dio dio(DioRef ref) {
   return Dio()
     ..options.baseUrl = baseUrl
     ..options.validateStatus = (status) {
-      //TODO esto cambiarlo cuando el back corrija el error de devolver 500 en autenticacion incorrecta
+      //TODO esto cambiarlo cuando el back corrija el error 
+      //de devolver 500 en autenticacion incorrecta
       return true;
     }
     ..interceptors.add(fresh)

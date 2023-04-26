@@ -406,7 +406,7 @@ class _Api implements Api {
   Future<ResponseModel<DocumentResponse>> marriageDocuments(
     maritalStatus,
     childrenRelationship, {
-    required hasChildren,
+    hasChildren = false,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{

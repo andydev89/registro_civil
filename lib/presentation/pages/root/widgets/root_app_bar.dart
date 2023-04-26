@@ -45,7 +45,8 @@ class RootAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: Badge(
                     alignment: const AlignmentDirectional(20, 5),
                     label: const PrimaryLabel(
-                      //TODO mostrar el numero de notificaciones sin leer
+                      // TODO(alguien): mostrar el numero de 
+                      //notificaciones sin leer
                       '2',
                       fontSize: 10,
                       color: Colors.white,

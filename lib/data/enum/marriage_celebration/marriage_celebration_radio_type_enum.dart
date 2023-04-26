@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
-enum MarriageCelebrationRadioTypeEnum implements Translatable {
+enum MarriageCelebrationType implements Translatable {
+  @JsonValue('REPRESENTATIVE')
   attorney,
+  @JsonValue('FIRST_PARTNER')
   contractingParty;
 
   @override
   String translate(BuildContext context){
     final l10n = context.l10n;
     switch (this) {
-      case MarriageCelebrationRadioTypeEnum.attorney:
+      case MarriageCelebrationType.attorney:
         return l10n.apoderado;
-      case MarriageCelebrationRadioTypeEnum.contractingParty:
+      case MarriageCelebrationType.contractingParty:
         return l10n.contrayente;
     }
   }

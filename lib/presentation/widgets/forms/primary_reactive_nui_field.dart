@@ -63,7 +63,7 @@ class PrimaryReactiveNuiField<T> extends ConsumerWidget {
         ReactiveTextField<T>(
           formControl: formControl,
           formControlName: formControlName,
-          readOnly: init || readOnly,
+          readOnly: readOnly,
           obscureText: obscureText,
           controller: controller,
           onTap: onTap,
@@ -74,7 +74,7 @@ class PrimaryReactiveNuiField<T> extends ConsumerWidget {
           ),
           cursorColor: ligth ? Colors.white : Colors.black,
           keyboardType: TextInputType.number,
-          validationMessages: validationMessage(l10n),
+          validationMessages: validationMessage(context),
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(10),

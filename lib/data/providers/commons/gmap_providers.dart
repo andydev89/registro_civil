@@ -1,6 +1,5 @@
 import 'package:google_geocoding_api/google_geocoding_api.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:oxidized/oxidized.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'gmap_providers.g.dart';

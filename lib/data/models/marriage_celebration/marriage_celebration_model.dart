@@ -1,5 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
+import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
 part 'marriage_celebration_model.g.dart';
@@ -9,34 +13,41 @@ part 'marriage_celebration_model.gform.dart';
 @JsonSerializable(explicitToJson: true)
 class MarriageCelebrationModel {
   MarriageCelebrationModel({
-    required this.requestOwnerType,
-    required this.agencyId,
-    required this.requestOwner,
-    required this.isOutside,
-    required this.outside,
-    required this.firstWitness,
-    required this.secondWitness,
-    required this.firstPartner,
-    required this.secondPartner,
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.requestOwnerType,
+    @FormControlAnnotation(validators: [requiredValidator]) this.agency,
+    @FormControlAnnotation(validators: [requiredValidator]) this.requestOwner,
+    @FormControlAnnotation(validators: [requiredValidator]) this.firstWitness,
+    @FormControlAnnotation(validators: [requiredValidator]) this.secondWitness,
+    this.firstPartner,
+    this.secondPartner,
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.isOutside = false,
+    this.outside,
   });
 
   factory MarriageCelebrationModel.fromJson(Map<String, dynamic> json) =>
       _$MarriageCelebrationModelFromJson(json);
-  final String requestOwnerType;
-  final String agencyId;
-  final RequestOwner requestOwner;
+  final MarriageCelebrationType? requestOwnerType;
+  @JsonKey(toJson: _agencyToJson, name: 'agencyId')
+  final Agency? agency;
+  final RequestOwner? requestOwner;
   final bool isOutside;
   final Outside? outside;
-  final Witness firstWitness;
-  final Witness secondWitness;
-  final Partner firstPartner;
-  final Partner secondPartner;
+  final Witness? firstWitness;
+  final Witness? secondWitness;
+  final Partner? firstPartner;
+  final Partner? secondPartner;
+
+  static String _agencyToJson(Agency? agency) {
+    return agency?.id ?? '';
+  }
 
   Map<String, dynamic> toJson() => _$MarriageCelebrationModelToJson(this);
 
   MarriageCelebrationModel copyWith({
-    String? requestOwnerType,
-    String? agencyId,
+    MarriageCelebrationType? requestOwnerType,
+    Agency? agency,
     RequestOwner? requestOwner,
     bool? isOutside,
     Outside? outside,
@@ -47,7 +58,7 @@ class MarriageCelebrationModel {
   }) {
     return MarriageCelebrationModel(
       requestOwnerType: requestOwnerType ?? this.requestOwnerType,
-      agencyId: agencyId ?? this.agencyId,
+      agency: agency ?? this.agency,
       requestOwner: requestOwner ?? this.requestOwner,
       isOutside: isOutside ?? this.isOutside,
       outside: outside ?? this.outside,
@@ -71,18 +82,31 @@ class RequestOwner {
       ],
     )
         required this.nui,
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(validators: [requiredValidator, nameValidator])
         required this.name,
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(
+      validators: [requiredValidator, length10Validator],
+      asyncValidators: [phoneNumberEcuadorValidation],
+    )
         required this.phone,
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(validators: [requiredValidator, emailValidator])
         required this.email,
-    this.identityCard,
-    this.powerOfAttorney,
+    @FormControlAnnotation<String>()
+        this.identityCard,
+    @FormControlAnnotation<String>()
+        this.powerOfAttorney,
   });
 
   factory RequestOwner.fromJson(Map<String, dynamic> json) =>
       _$RequestOwnerFromJson(json);
+
+  factory RequestOwner.fromMe(MeModel model) => RequestOwner(
+        nui: model.identification,
+        name: '${model.firstName} ${model.lastName}',
+        phone: '',
+        email: model.email,
+      );
+
   final String nui;
   final String name;
   final String phone;
@@ -153,8 +177,10 @@ class Partner {
         required this.maritalStatus,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.hasChildren,
-    required this.childrenRelationship,
-    required this.conadis,
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.childrenRelationship,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.conadis,
     this.conadisNumber,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.documents,
@@ -164,9 +190,9 @@ class Partner {
       _$PartnerFromJson(json);
   final String nui;
   final String name;
-  final String maritalStatus;
+  final MaritalStatus maritalStatus;
   final bool hasChildren;
-  final String childrenRelationship;
+  final ChildrenRelationShip? childrenRelationship;
   @JsonKey(name: 'hasConadis')
   final bool conadis;
   @JsonKey(name: 'conadisNui')

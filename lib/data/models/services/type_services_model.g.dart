@@ -64,4 +64,5 @@ const _$TypeServiceEnumMap = {
   TypeService.copyRegistrationCertificateGenderRegistration:
       'SERVICE_ACTA_REGISTRAL_GENERO',
   TypeService.schedule: 'SERVICE_AGENDAR_TURNO',
+  TypeService.marriageCelebration: 'PRUEBA_MARRIAGE_CELEBRATION',
 };

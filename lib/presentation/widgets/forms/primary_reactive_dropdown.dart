@@ -102,7 +102,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
                 ),
               )
               .toList(),
-          validationMessages: validationMessage(l10n),
+          validationMessages: validationMessage(context),
         ),
       ],
     ).verticalPadding(10);

@@ -97,14 +97,14 @@ class ReactiveMarriageCelebrationModelForm extends StatelessWidget {
 class MarriageCelebrationModelFormBuilder extends StatefulWidget {
   const MarriageCelebrationModelFormBuilder({
     Key? key,
-    required this.model,
+    this.model,
     this.child,
     this.onWillPop,
     required this.builder,
     this.initState,
   }) : super(key: key);
 
-  final MarriageCelebrationModel model;
+  final MarriageCelebrationModel? model;
 
   final Widget? child;
 
@@ -191,30 +191,110 @@ class MarriageCelebrationModelForm
     this.form,
     this.path,
   ) {
-    firstPartnerForm = PartnerForm(marriageCelebrationModel.firstPartner, form,
+    firstPartnerForm = PartnerForm(marriageCelebrationModel?.firstPartner, form,
         pathBuilder('firstPartner'));
-    secondPartnerForm = PartnerForm(marriageCelebrationModel.secondPartner,
+    secondPartnerForm = PartnerForm(marriageCelebrationModel?.secondPartner,
         form, pathBuilder('secondPartner'));
   }
+
+  static String requestOwnerTypeControlName = "requestOwnerType";
+
+  static String agencyControlName = "agency";
+
+  static String requestOwnerControlName = "requestOwner";
+
+  static String firstWitnessControlName = "firstWitness";
+
+  static String secondWitnessControlName = "secondWitness";
 
   static String firstPartnerControlName = "firstPartner";
 
   static String secondPartnerControlName = "secondPartner";
 
+  static String isOutsideControlName = "isOutside";
+
   late PartnerForm firstPartnerForm;
 
   late PartnerForm secondPartnerForm;
 
-  final MarriageCelebrationModel marriageCelebrationModel;
+  final MarriageCelebrationModel? marriageCelebrationModel;
 
   final FormGroup form;
 
   final String? path;
 
+  String requestOwnerTypeControlPath() =>
+      pathBuilder(requestOwnerTypeControlName);
+  String agencyControlPath() => pathBuilder(agencyControlName);
+  String requestOwnerControlPath() => pathBuilder(requestOwnerControlName);
+  String firstWitnessControlPath() => pathBuilder(firstWitnessControlName);
+  String secondWitnessControlPath() => pathBuilder(secondWitnessControlName);
+  String isOutsideControlPath() => pathBuilder(isOutsideControlName);
   String firstPartnerControlPath() => pathBuilder(firstPartnerControlName);
   String secondPartnerControlPath() => pathBuilder(secondPartnerControlName);
-  Partner get _firstPartnerValue => firstPartnerForm.model;
-  Partner get _secondPartnerValue => secondPartnerForm.model;
+  MarriageCelebrationType? get _requestOwnerTypeValue =>
+      requestOwnerTypeControl?.value;
+  Agency? get _agencyValue => agencyControl?.value;
+  RequestOwner? get _requestOwnerValue => requestOwnerControl?.value;
+  Witness? get _firstWitnessValue => firstWitnessControl?.value;
+  Witness? get _secondWitnessValue => secondWitnessControl?.value;
+  bool get _isOutsideValue => isOutsideControl.value as bool;
+  Partner? get _firstPartnerValue => firstPartnerForm.model;
+  Partner? get _secondPartnerValue => secondPartnerForm.model;
+  bool get containsRequestOwnerType {
+    try {
+      form.control(requestOwnerTypeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsAgency {
+    try {
+      form.control(agencyControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsRequestOwner {
+    try {
+      form.control(requestOwnerControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsFirstWitness {
+    try {
+      form.control(firstWitnessControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsSecondWitness {
+    try {
+      form.control(secondWitnessControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsIsOutside {
+    try {
+      form.control(isOutsideControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsFirstPartner {
     try {
       form.control(firstPartnerControlPath());
@@ -233,94 +313,579 @@ class MarriageCelebrationModelForm
     }
   }
 
-  Object? get firstPartnerErrors => firstPartnerControl.errors;
-  Object? get secondPartnerErrors => secondPartnerControl.errors;
+  Object? get requestOwnerTypeErrors => requestOwnerTypeControl?.errors;
+  Object? get agencyErrors => agencyControl?.errors;
+  Object? get requestOwnerErrors => requestOwnerControl?.errors;
+  Object? get firstWitnessErrors => firstWitnessControl?.errors;
+  Object? get secondWitnessErrors => secondWitnessControl?.errors;
+  Object? get isOutsideErrors => isOutsideControl.errors;
+  Object? get firstPartnerErrors => firstPartnerControl?.errors;
+  Object? get secondPartnerErrors => secondPartnerControl?.errors;
+  void get requestOwnerTypeFocus => form.focus(requestOwnerTypeControlPath());
+  void get agencyFocus => form.focus(agencyControlPath());
+  void get requestOwnerFocus => form.focus(requestOwnerControlPath());
+  void get firstWitnessFocus => form.focus(firstWitnessControlPath());
+  void get secondWitnessFocus => form.focus(secondWitnessControlPath());
+  void get isOutsideFocus => form.focus(isOutsideControlPath());
   void get firstPartnerFocus => form.focus(firstPartnerControlPath());
   void get secondPartnerFocus => form.focus(secondPartnerControlPath());
-  void firstPartnerValueUpdate(
-    Partner value, {
+  void requestOwnerTypeRemove({
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    firstPartnerControl.updateValue(
+    if (containsRequestOwnerType) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          requestOwnerTypeControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            requestOwnerTypeControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void agencyRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsAgency) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          agencyControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            agencyControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void requestOwnerRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsRequestOwner) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          requestOwnerControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            requestOwnerControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void firstWitnessRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsFirstWitness) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          firstWitnessControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            firstWitnessControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void secondWitnessRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsSecondWitness) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          secondWitnessControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            secondWitnessControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void firstPartnerRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsFirstPartner) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          firstPartnerControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            firstPartnerControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void secondPartnerRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsSecondPartner) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          secondPartnerControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            secondPartnerControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void requestOwnerTypeValueUpdate(
+    MarriageCelebrationType? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    requestOwnerTypeControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void agencyValueUpdate(
+    Agency? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    agencyControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void requestOwnerValueUpdate(
+    RequestOwner? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    requestOwnerControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void firstWitnessValueUpdate(
+    Witness? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    firstWitnessControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void secondWitnessValueUpdate(
+    Witness? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    secondWitnessControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void isOutsideValueUpdate(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    isOutsideControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void firstPartnerValueUpdate(
+    Partner? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    firstPartnerControl?.updateValue(
         PartnerForm(value, FormGroup({}), null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
   void secondPartnerValueUpdate(
-    Partner value, {
+    Partner? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    secondPartnerControl.updateValue(
+    secondPartnerControl?.updateValue(
         PartnerForm(value, FormGroup({}), null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
-  void firstPartnerValuePatch(
-    Partner value, {
+  void requestOwnerTypeValuePatch(
+    MarriageCelebrationType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    firstPartnerControl.updateValue(
+    requestOwnerTypeControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void agencyValuePatch(
+    Agency? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    agencyControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void requestOwnerValuePatch(
+    RequestOwner? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    requestOwnerControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void firstWitnessValuePatch(
+    Witness? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    firstWitnessControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void secondWitnessValuePatch(
+    Witness? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    secondWitnessControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void isOutsideValuePatch(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    isOutsideControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void firstPartnerValuePatch(
+    Partner? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    firstPartnerControl?.updateValue(
         PartnerForm(value, form, null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
   void secondPartnerValuePatch(
-    Partner value, {
+    Partner? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    secondPartnerControl.updateValue(
+    secondPartnerControl?.updateValue(
         PartnerForm(value, form, null).formElements().rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
 
-  void firstPartnerValueReset(
-    Partner value, {
+  void requestOwnerTypeValueReset(
+    MarriageCelebrationType? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      firstPartnerControl.reset(
+      requestOwnerTypeControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void agencyValueReset(
+    Agency? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      agencyControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void requestOwnerValueReset(
+    RequestOwner? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      requestOwnerControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void firstWitnessValueReset(
+    Witness? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      firstWitnessControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void secondWitnessValueReset(
+    Witness? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      secondWitnessControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void isOutsideValueReset(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      isOutsideControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void firstPartnerValueReset(
+    Partner? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      firstPartnerControl?.reset(
           value:
               PartnerForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void secondPartnerValueReset(
-    Partner value, {
+    Partner? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      secondPartnerControl.reset(
+      secondPartnerControl?.reset(
           value:
               PartnerForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  FormGroup get firstPartnerControl =>
-      form.control(firstPartnerControlPath()) as FormGroup;
-  FormGroup get secondPartnerControl =>
-      form.control(secondPartnerControlPath()) as FormGroup;
+  FormControl<MarriageCelebrationType>? get requestOwnerTypeControl =>
+      containsRequestOwnerType
+          ? form.control(requestOwnerTypeControlPath())
+              as FormControl<MarriageCelebrationType>?
+          : null;
+  FormControl<Agency>? get agencyControl => containsAgency
+      ? form.control(agencyControlPath()) as FormControl<Agency>?
+      : null;
+  FormControl<RequestOwner>? get requestOwnerControl => containsRequestOwner
+      ? form.control(requestOwnerControlPath()) as FormControl<RequestOwner>?
+      : null;
+  FormControl<Witness>? get firstWitnessControl => containsFirstWitness
+      ? form.control(firstWitnessControlPath()) as FormControl<Witness>?
+      : null;
+  FormControl<Witness>? get secondWitnessControl => containsSecondWitness
+      ? form.control(secondWitnessControlPath()) as FormControl<Witness>?
+      : null;
+  FormControl<bool> get isOutsideControl =>
+      form.control(isOutsideControlPath()) as FormControl<bool>;
+  FormGroup? get firstPartnerControl => containsFirstPartner
+      ? form.control(firstPartnerControlPath()) as FormGroup?
+      : null;
+  FormGroup? get secondPartnerControl => containsSecondPartner
+      ? form.control(secondPartnerControlPath()) as FormGroup?
+      : null;
+  void requestOwnerTypeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      requestOwnerTypeControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      requestOwnerTypeControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void agencySetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      agencyControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      agencyControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void requestOwnerSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      requestOwnerControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      requestOwnerControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void firstWitnessSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      firstWitnessControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      firstWitnessControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void secondWitnessSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      secondWitnessControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      secondWitnessControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void isOutsideSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      isOutsideControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      isOutsideControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void firstPartnerSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      firstPartnerControl.markAsDisabled(
+      firstPartnerControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      firstPartnerControl.markAsEnabled(
+      firstPartnerControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -333,12 +898,12 @@ class MarriageCelebrationModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      secondPartnerControl.markAsDisabled(
+      secondPartnerControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      secondPartnerControl.markAsEnabled(
+      secondPartnerControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -353,15 +918,15 @@ class MarriageCelebrationModelForm
       );
     }
     return MarriageCelebrationModel(
-        requestOwnerType: marriageCelebrationModel.requestOwnerType,
-        agencyId: marriageCelebrationModel.agencyId,
-        requestOwner: marriageCelebrationModel.requestOwner,
-        isOutside: marriageCelebrationModel.isOutside,
-        outside: marriageCelebrationModel.outside,
-        firstWitness: marriageCelebrationModel.firstWitness,
-        secondWitness: marriageCelebrationModel.secondWitness,
+        requestOwnerType: _requestOwnerTypeValue,
+        agency: _agencyValue,
+        requestOwner: _requestOwnerValue,
+        firstWitness: _firstWitnessValue,
+        secondWitness: _secondWitnessValue,
         firstPartner: _firstPartnerValue,
-        secondPartner: _secondPartnerValue);
+        secondPartner: _secondPartnerValue,
+        isOutside: _isOutsideValue,
+        outside: marriageCelebrationModel?.outside);
   }
 
   MarriageCelebrationModelForm copyWithPath(String? path) {
@@ -404,6 +969,48 @@ class MarriageCelebrationModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
+        requestOwnerTypeControlName: FormControl<MarriageCelebrationType>(
+            value: marriageCelebrationModel?.requestOwnerType,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        agencyControlName: FormControl<Agency>(
+            value: marriageCelebrationModel?.agency,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        requestOwnerControlName: FormControl<RequestOwner>(
+            value: marriageCelebrationModel?.requestOwner,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        firstWitnessControlName: FormControl<Witness>(
+            value: marriageCelebrationModel?.firstWitness,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        secondWitnessControlName: FormControl<Witness>(
+            value: marriageCelebrationModel?.secondWitness,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        isOutsideControlName: FormControl<bool>(
+            value: marriageCelebrationModel?.isOutside,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         firstPartnerControlName: firstPartnerForm.formElements(),
         secondPartnerControlName: secondPartnerForm.formElements()
       },
@@ -428,6 +1035,10 @@ class PartnerForm implements FormModel<Partner> {
 
   static String hasChildrenControlName = "hasChildren";
 
+  static String childrenRelationshipControlName = "childrenRelationship";
+
+  static String conadisControlName = "conadis";
+
   static String documentsControlName = "documents";
 
   final Partner? partner;
@@ -440,11 +1051,18 @@ class PartnerForm implements FormModel<Partner> {
   String nameControlPath() => pathBuilder(nameControlName);
   String maritalStatusControlPath() => pathBuilder(maritalStatusControlName);
   String hasChildrenControlPath() => pathBuilder(hasChildrenControlName);
+  String childrenRelationshipControlPath() =>
+      pathBuilder(childrenRelationshipControlName);
+  String conadisControlPath() => pathBuilder(conadisControlName);
   String documentsControlPath() => pathBuilder(documentsControlName);
   String get _nuiValue => nuiControl.value as String;
   String get _nameValue => nameControl.value as String;
-  String get _maritalStatusValue => maritalStatusControl.value as String;
+  MaritalStatus get _maritalStatusValue =>
+      maritalStatusControl.value as MaritalStatus;
   bool get _hasChildrenValue => hasChildrenControl.value as bool;
+  ChildrenRelationShip? get _childrenRelationshipValue =>
+      childrenRelationshipControl?.value;
+  bool get _conadisValue => conadisControl.value as bool;
   List<Document> get _documentsValue =>
       documentsControl.value as List<Document>;
   bool get containsNui {
@@ -483,6 +1101,24 @@ class PartnerForm implements FormModel<Partner> {
     }
   }
 
+  bool get containsChildrenRelationship {
+    try {
+      form.control(childrenRelationshipControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsConadis {
+    try {
+      form.control(conadisControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsDocuments {
     try {
       form.control(documentsControlPath());
@@ -496,12 +1132,43 @@ class PartnerForm implements FormModel<Partner> {
   Object? get nameErrors => nameControl.errors;
   Object? get maritalStatusErrors => maritalStatusControl.errors;
   Object? get hasChildrenErrors => hasChildrenControl.errors;
+  Object? get childrenRelationshipErrors => childrenRelationshipControl?.errors;
+  Object? get conadisErrors => conadisControl.errors;
   Object? get documentsErrors => documentsControl.errors;
   void get nuiFocus => form.focus(nuiControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get maritalStatusFocus => form.focus(maritalStatusControlPath());
   void get hasChildrenFocus => form.focus(hasChildrenControlPath());
+  void get childrenRelationshipFocus =>
+      form.focus(childrenRelationshipControlPath());
+  void get conadisFocus => form.focus(conadisControlPath());
   void get documentsFocus => form.focus(documentsControlPath());
+  void childrenRelationshipRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsChildrenRelationship) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          childrenRelationshipControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            childrenRelationshipControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void nuiValueUpdate(
     String value, {
     bool updateParent = true,
@@ -521,7 +1188,7 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValueUpdate(
-    String value, {
+    MaritalStatus value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -535,6 +1202,24 @@ class PartnerForm implements FormModel<Partner> {
     bool emitEvent = true,
   }) {
     hasChildrenControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void childrenRelationshipValueUpdate(
+    ChildrenRelationShip? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    childrenRelationshipControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void conadisValueUpdate(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    conadisControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -566,7 +1251,7 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValuePatch(
-    String value, {
+    MaritalStatus value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -580,6 +1265,24 @@ class PartnerForm implements FormModel<Partner> {
     bool emitEvent = true,
   }) {
     hasChildrenControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void childrenRelationshipValuePatch(
+    ChildrenRelationShip? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    childrenRelationshipControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void conadisValuePatch(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    conadisControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -611,7 +1314,7 @@ class PartnerForm implements FormModel<Partner> {
       nameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void maritalStatusValueReset(
-    String value, {
+    MaritalStatus value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -628,6 +1331,24 @@ class PartnerForm implements FormModel<Partner> {
   }) =>
       hasChildrenControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void childrenRelationshipValueReset(
+    ChildrenRelationShip? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      childrenRelationshipControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void conadisValueReset(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      conadisControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void documentsValueReset(
     List<Document> value, {
     bool updateParent = true,
@@ -641,10 +1362,17 @@ class PartnerForm implements FormModel<Partner> {
       form.control(nuiControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
-  FormControl<String> get maritalStatusControl =>
-      form.control(maritalStatusControlPath()) as FormControl<String>;
+  FormControl<MaritalStatus> get maritalStatusControl =>
+      form.control(maritalStatusControlPath()) as FormControl<MaritalStatus>;
   FormControl<bool> get hasChildrenControl =>
       form.control(hasChildrenControlPath()) as FormControl<bool>;
+  FormControl<ChildrenRelationShip>? get childrenRelationshipControl =>
+      containsChildrenRelationship
+          ? form.control(childrenRelationshipControlPath())
+              as FormControl<ChildrenRelationShip>?
+          : null;
+  FormControl<bool> get conadisControl =>
+      form.control(conadisControlPath()) as FormControl<bool>;
   FormControl<List<Document>> get documentsControl =>
       form.control(documentsControlPath()) as FormControl<List<Document>>;
   void nuiSetDisabled(
@@ -719,6 +1447,42 @@ class PartnerForm implements FormModel<Partner> {
     }
   }
 
+  void childrenRelationshipSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      childrenRelationshipControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      childrenRelationshipControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void conadisSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      conadisControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      conadisControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void documentsSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -749,9 +1513,9 @@ class PartnerForm implements FormModel<Partner> {
         name: _nameValue,
         maritalStatus: _maritalStatusValue,
         hasChildren: _hasChildrenValue,
-        childrenRelationship: partner.childrenRelationship,
-        conadis: partner.conadis,
-        conadisNumber: partner.conadisNumber,
+        childrenRelationship: _childrenRelationshipValue,
+        conadis: _conadisValue,
+        conadisNumber: partner?.conadisNumber,
         documents: _documentsValue);
   }
 
@@ -761,7 +1525,7 @@ class PartnerForm implements FormModel<Partner> {
 
   @override
   void updateValue(
-    Partner value, {
+    Partner? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -771,7 +1535,7 @@ class PartnerForm implements FormModel<Partner> {
           emitEvent: emitEvent);
   @override
   void resetValue(
-    Partner value, {
+    Partner? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -810,7 +1574,7 @@ class PartnerForm implements FormModel<Partner> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        maritalStatusControlName: FormControl<String>(
+        maritalStatusControlName: FormControl<MaritalStatus>(
             value: partner?.maritalStatus,
             validators: [requiredValidator],
             asyncValidators: [],
@@ -819,6 +1583,20 @@ class PartnerForm implements FormModel<Partner> {
             touched: false),
         hasChildrenControlName: FormControl<bool>(
             value: partner?.hasChildren,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        childrenRelationshipControlName: FormControl<ChildrenRelationShip>(
+            value: partner?.childrenRelationship,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        conadisControlName: FormControl<bool>(
+            value: partner?.conadis,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -1148,6 +1926,10 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
 
   static String emailControlName = "email";
 
+  static String identityCardControlName = "identityCard";
+
+  static String powerOfAttorneyControlName = "powerOfAttorney";
+
   final RequestOwner? requestOwner;
 
   final FormGroup form;
@@ -1158,10 +1940,15 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
   String nameControlPath() => pathBuilder(nameControlName);
   String phoneControlPath() => pathBuilder(phoneControlName);
   String emailControlPath() => pathBuilder(emailControlName);
+  String identityCardControlPath() => pathBuilder(identityCardControlName);
+  String powerOfAttorneyControlPath() =>
+      pathBuilder(powerOfAttorneyControlName);
   String get _nuiValue => nuiControl.value as String;
   String get _nameValue => nameControl.value as String;
   String get _phoneValue => phoneControl.value as String;
   String get _emailValue => emailControl.value as String;
+  String? get _identityCardValue => identityCardControl?.value;
+  String? get _powerOfAttorneyValue => powerOfAttorneyControl?.value;
   bool get containsNui {
     try {
       form.control(nuiControlPath());
@@ -1198,14 +1985,88 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     }
   }
 
+  bool get containsIdentityCard {
+    try {
+      form.control(identityCardControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPowerOfAttorney {
+    try {
+      form.control(powerOfAttorneyControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get nuiErrors => nuiControl.errors;
   Object? get nameErrors => nameControl.errors;
   Object? get phoneErrors => phoneControl.errors;
   Object? get emailErrors => emailControl.errors;
+  Object? get identityCardErrors => identityCardControl?.errors;
+  Object? get powerOfAttorneyErrors => powerOfAttorneyControl?.errors;
   void get nuiFocus => form.focus(nuiControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get phoneFocus => form.focus(phoneControlPath());
   void get emailFocus => form.focus(emailControlPath());
+  void get identityCardFocus => form.focus(identityCardControlPath());
+  void get powerOfAttorneyFocus => form.focus(powerOfAttorneyControlPath());
+  void identityCardRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsIdentityCard) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          identityCardControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            identityCardControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void powerOfAttorneyRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsPowerOfAttorney) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          powerOfAttorneyControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            powerOfAttorneyControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void nuiValueUpdate(
     String value, {
     bool updateParent = true,
@@ -1239,6 +2100,24 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     bool emitEvent = true,
   }) {
     emailControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void identityCardValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identityCardControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void powerOfAttorneyValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    powerOfAttorneyControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1278,6 +2157,24 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void identityCardValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identityCardControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void powerOfAttorneyValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    powerOfAttorneyControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nuiValueReset(
     String value, {
     bool updateParent = true,
@@ -1314,6 +2211,24 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
   }) =>
       emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void identityCardValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      identityCardControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void powerOfAttorneyValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      powerOfAttorneyControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get nuiControl =>
       form.control(nuiControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
@@ -1322,6 +2237,12 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
       form.control(phoneControlPath()) as FormControl<String>;
   FormControl<String> get emailControl =>
       form.control(emailControlPath()) as FormControl<String>;
+  FormControl<String>? get identityCardControl => containsIdentityCard
+      ? form.control(identityCardControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get powerOfAttorneyControl => containsPowerOfAttorney
+      ? form.control(powerOfAttorneyControlPath()) as FormControl<String>?
+      : null;
   void nuiSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1394,6 +2315,42 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     }
   }
 
+  void identityCardSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      identityCardControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      identityCardControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void powerOfAttorneySetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      powerOfAttorneyControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      powerOfAttorneyControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   RequestOwner get model {
     if (!form.valid) {
@@ -1406,8 +2363,8 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
         name: _nameValue,
         phone: _phoneValue,
         email: _emailValue,
-        identityCard: requestOwner?.identityCard,
-        powerOfAttorney: requestOwner?.powerOfAttorney);
+        identityCard: _identityCardValue,
+        powerOfAttorney: _powerOfAttorneyValue);
   }
 
   RequestOwnerForm copyWithPath(String? path) {
@@ -1461,21 +2418,35 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
             touched: false),
         nameControlName: FormControl<String>(
             value: requestOwner?.name,
-            validators: [requiredValidator],
+            validators: [requiredValidator, nameValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         phoneControlName: FormControl<String>(
             value: requestOwner?.phone,
-            validators: [requiredValidator],
-            asyncValidators: [],
+            validators: [requiredValidator, length10Validator],
+            asyncValidators: [phoneNumberEcuadorValidation],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         emailControlName: FormControl<String>(
             value: requestOwner?.email,
-            validators: [requiredValidator],
+            validators: [requiredValidator, emailValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        identityCardControlName: FormControl<String>(
+            value: requestOwner?.identityCard,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        powerOfAttorneyControlName: FormControl<String>(
+            value: requestOwner?.powerOfAttorney,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

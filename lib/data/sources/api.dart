@@ -101,7 +101,7 @@ abstract class Api {
   Future<ResponseModel<DocumentResponse>> marriageDocuments(
     @Query('maritalStatus') String maritalStatus,
     @Query('childrenRelationship') String childrenRelationship, {
-    @Query('hasChildren') bool hasChildren,
+    @Query('hasChildren') bool hasChildren = false,
   });
 
   //COMMONS
