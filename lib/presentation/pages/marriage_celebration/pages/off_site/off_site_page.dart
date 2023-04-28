@@ -6,8 +6,10 @@ import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third%20step/third_step_contracting_party_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/utils/marriage_celebration_util.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/widgets/input_decorator_widget.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/secondary_svg_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
@@ -91,6 +93,9 @@ class OffSitePage extends ConsumerWidget {
                             .setOutsider(
                               formModel.model,
                             );
+                        context.navigateTo(
+                          const MarriageCelebrationThirdStepRouterRoute(),
+                        );
                       }
                     : null,
               ),

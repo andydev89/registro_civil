@@ -76,12 +76,12 @@ class WitnessPage extends ConsumerWidget {
                             final model =
                                 ref.watch(marriageCelebrationProvider);
                             if (model.isOutside) {
-                              context
-                                  .navigateTo(const OffSiteRoute());
+                              context.navigateTo(const OffSiteRoute());
                               return;
                             }
-                            //  context
-                            //       .navigateTo(const SecondStepOffSiteRoute());
+                            context.navigateTo(
+                              const MarriageCelebrationThirdStepRouterRoute(),
+                            );
                           }
                         : null,
                   ),

@@ -399,6 +399,12 @@ class _$AppRouter extends RootStackRouter {
         child: const OffSitePage(),
       );
     },
+    MarriageCelebrationThirdStepRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationThirdStepRouterPage(),
+      );
+    },
     FirstStepAttorneyRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -430,6 +436,19 @@ class _$AppRouter extends RootStackRouter {
         child: WitnessPage(
           key: args.key,
           indexWitness: args.indexWitness,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ContractingPartyRoute.name: (routeData) {
+      final args = routeData.argsAs<ContractingPartyRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ContractingPartyPage(
+          key: args.key,
+          indexContractingParty: args.indexContractingParty,
         ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
@@ -677,6 +696,18 @@ class _$AppRouter extends RootStackRouter {
                   OffSiteRoute.name,
                   path: 'off-site-page',
                   parent: MarriageCelebrationRouterRoute.name,
+                ),
+                RouteConfig(
+                  MarriageCelebrationThirdStepRouterRoute.name,
+                  path: 'marriage-celebration-third-step-router-page',
+                  parent: MarriageCelebrationRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      ContractingPartyRoute.name,
+                      path: '',
+                      parent: MarriageCelebrationThirdStepRouterRoute.name,
+                    )
+                  ],
                 ),
               ],
             ),
@@ -1677,6 +1708,19 @@ class OffSiteRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MarriageCelebrationThirdStepRouterPage]
+class MarriageCelebrationThirdStepRouterRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationThirdStepRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          MarriageCelebrationThirdStepRouterRoute.name,
+          path: 'marriage-celebration-third-step-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'MarriageCelebrationThirdStepRouterRoute';
+}
+
+/// generated route for
 /// [FirstStepAttorneyPage]
 class FirstStepAttorneyRoute extends PageRouteInfo<void> {
   const FirstStepAttorneyRoute()
@@ -1744,6 +1788,40 @@ class WitnessRouteArgs {
   @override
   String toString() {
     return 'WitnessRouteArgs{key: $key, indexWitness: $indexWitness}';
+  }
+}
+
+/// generated route for
+/// [ContractingPartyPage]
+class ContractingPartyRoute extends PageRouteInfo<ContractingPartyRouteArgs> {
+  ContractingPartyRoute({
+    Key? key,
+    required int indexContractingParty,
+  }) : super(
+          ContractingPartyRoute.name,
+          path: '',
+          args: ContractingPartyRouteArgs(
+            key: key,
+            indexContractingParty: indexContractingParty,
+          ),
+        );
+
+  static const String name = 'ContractingPartyRoute';
+}
+
+class ContractingPartyRouteArgs {
+  const ContractingPartyRouteArgs({
+    this.key,
+    required this.indexContractingParty,
+  });
+
+  final Key? key;
+
+  final int indexContractingParty;
+
+  @override
+  String toString() {
+    return 'ContractingPartyRouteArgs{key: $key, indexContractingParty: $indexContractingParty}';
   }
 }
 

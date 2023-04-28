@@ -13,12 +13,12 @@ import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_n
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class WitnessPage extends ConsumerWidget {
-  const WitnessPage({
+class ContractingPartyPage extends ConsumerWidget {
+  const ContractingPartyPage({
     super.key,
-    required this.indexWitness,
+    required this.indexContractingParty,
   });
-  final int indexWitness;
+  final int indexContractingParty;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,20 +26,20 @@ class WitnessPage extends ConsumerWidget {
     final witness1 = ref.watch(witness1Provider);
     final witness2 = ref.watch(witness2Provider);
     return WitnessFormBuilder(
-      model: indexWitness == 0 ? witness1 : witness2,
+      model: indexContractingParty == 0 ? witness1 : witness2,
       builder: (context, form, child) {
         form.nuiControl.valueChanges.listen((event) {
           updateWitness(
             ref: ref,
             witness: form.model,
-            index: indexWitness,
+            index: indexContractingParty,
           );
         });
         form.nameControl.valueChanges.listen((event) {
           updateWitness(
             ref: ref,
             witness: form.model,
-            index: indexWitness,
+            index: indexContractingParty,
           );
         });
         return Scaffold(

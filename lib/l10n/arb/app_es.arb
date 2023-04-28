@@ -337,5 +337,6 @@
   "dondeReaMat":"¿Dónde desean realizar el matrimonio?",
   "solicitudCelMat":"Solicitud de celebración para matrimonio",
   "latitud":"Latitud",
-  "longitud":"Longitud"
+  "longitud":"Longitud",
+  "informacionCon": "Información de los contrayentes"
 }

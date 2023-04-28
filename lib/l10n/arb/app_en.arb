@@ -282,7 +282,7 @@
   "paymentServiceJudgmentsNotarialActsField6": "Registration of separation or termination of the de facto union in the registration certificate of de facto union and update of the civil status",
   "pagoSerIngSenActNot": "Payment of the service by Entry of Judgments or Notarial Acts",
   "debeSelAlMenUnElem": "You must select at least one item",
-  "sesionExp":"Sorry, your session has expired. Please log in again to continue.",
+  "sesionExp": "Sorry, your session has expired. Please log in again to continue.",
   "operador": "Operator",
   "invalidCode": "Invalid code",
   "cuentaConMedidorDeLuzElectrica": "Do you have an electricity meter?",
@@ -334,8 +334,9 @@
   "informacionTes": "Information of the applicant",
   "testigo1": "Witness 1",
   "testigo2": "Witness 2",
-  "dondeReaMat":"Where do you want to get married?",
-  "solicitudCelMat":"Celebration request for marriage",
-  "latitud":"Latitude",
-  "longitud":"Longitude"
+  "dondeReaMat": "Where do you want to get married?",
+  "solicitudCelMat": "Celebration request for marriage",
+  "latitud": "Latitude",
+  "longitud": "Longitude",
+  "informacionCon": "Information of the contracting parties"
 }

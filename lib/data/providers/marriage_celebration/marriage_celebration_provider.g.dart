@@ -7,7 +7,7 @@ part of 'marriage_celebration_provider.dart';
 // **************************************************************************
 
 String _$marriageCelebrationHash() =>
-    r'92617a62839be6b16a30d7a0085abccbba9201e6';
+    r'd5c89bdcf5f3e7ccf5a7c615fc96fb76df405627';
 
 /// See also [MarriageCelebration].
 @ProviderFor(MarriageCelebration)

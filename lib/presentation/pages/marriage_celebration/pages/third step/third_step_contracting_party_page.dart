@@ -5,8 +5,8 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/toggle_switch_widget.dart';
 
-class SecondStepAtHeadquarterPage extends StatelessWidget {
-  const SecondStepAtHeadquarterPage({super.key});
+class ThirdStepContractingPartyPage extends StatelessWidget {
+  const ThirdStepContractingPartyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
