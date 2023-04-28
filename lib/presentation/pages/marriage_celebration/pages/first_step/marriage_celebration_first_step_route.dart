@@ -17,7 +17,7 @@ class MarriageCelebrationFirstStepRouterPage extends HookWidget {
     final l10n = context.l10n;
     final selectedRadio = useState(MarriageCelebrationType.attorney);
     return PrimaryScaffold(
-      title: l10n.informacionSer,
+      title: l10n.solicitudCelMat,
       subtitle: l10n.ingreseInfSol,
       body: Expanded(
         child: AutoRouter(

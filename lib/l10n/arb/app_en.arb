@@ -328,5 +328,14 @@
   "cedulaIde": "Identity card",
   "poderEsp": "Special power",
   "archivoMayor5MB": "The file must be less than 5MB",
-  "debeSelArc": "You must select a file"
+  "debeSelArc": "You must select a file",
+  "atHeadquarters": "At headquarters",
+  "offSite": "Off-site",
+  "informacionTes": "Information of the applicant",
+  "testigo1": "Witness 1",
+  "testigo2": "Witness 2",
+  "dondeReaMat":"Where do you want to get married?",
+  "solicitudCelMat":"Celebration request for marriage",
+  "latitud":"Latitude",
+  "longitud":"Longitude"
 }

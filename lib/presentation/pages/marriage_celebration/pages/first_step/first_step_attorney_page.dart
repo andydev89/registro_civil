@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
@@ -6,6 +7,7 @@ import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/utils/marriage_celebration_util.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/widgets/first_step_form.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 
@@ -15,7 +17,9 @@ class FirstStepAttorneyPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final provider = ref.watch(marriageCelebrationProvider);
     return RequestOwnerFormBuilder(
+      model: provider.requestOwner,
       initState: (context, formModel) {
         setErrorFile(formModel.identityCardControl);
         setErrorFile(formModel.powerOfAttorneyControl);
@@ -49,8 +53,14 @@ class FirstStepAttorneyPage extends ConsumerWidget {
                           ref
                               .read(marriageCelebrationProvider.notifier)
                               .setFirstStep(formModel.model);
-                          Navigator.of(context).pushNamed(
-                            '/marriage-celebration/second-step',
+                          context.navigateTo(
+                            MarriageCelebrationSecondStepRouterRoute(
+                              children: [
+                                SecondStepAtHeadquarterRoute(
+                                  children: [WitnessRoute(indexWitness: 0)],
+                                ),
+                              ],
+                            ),
                           );
                         }
                       : null,
@@ -58,7 +68,7 @@ class FirstStepAttorneyPage extends ConsumerWidget {
                 const SizedBox(height: 10),
                 PrimaryButton(
                   title: l10n.cancelar,
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () => context.navigateBack(),
                 ),
               ],
             ),

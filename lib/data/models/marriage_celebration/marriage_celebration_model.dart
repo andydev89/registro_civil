@@ -61,7 +61,7 @@ class MarriageCelebrationModel {
       agency: agency ?? this.agency,
       requestOwner: requestOwner ?? this.requestOwner,
       isOutside: isOutside ?? this.isOutside,
-      outside: outside ?? this.outside,
+      outside: outside,
       firstWitness: firstWitness ?? this.firstWitness,
       secondWitness: secondWitness ?? this.secondWitness,
       firstPartner: firstPartner ?? this.firstPartner,
@@ -145,14 +145,43 @@ class Outside {
 @JsonSerializable()
 class Witness {
   Witness({
-    @FormControlAnnotation(validators: [requiredValidator]) required this.nui,
-    @FormControlAnnotation(validators: [requiredValidator]) required this.name,
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        ecuadorDniValidator,
+        length10Validator,
+      ],
+    )
+        this.nui = '',
+    @FormControlAnnotation(validators: [requiredValidator, nameValidator])
+        this.name = '',
   });
 
   factory Witness.fromJson(Map<String, dynamic> json) =>
       _$WitnessFromJson(json);
   final String nui;
   final String name;
+
+  @JsonKey(includeToJson: false)
+  bool get isValid => FormGroup(
+        {
+          'nui': FormControl<String>(
+            value: nui,
+            validators: [
+              requiredValidator,
+              ecuadorDniValidator,
+              length10Validator,
+            ],
+          ),
+          'name': FormControl<String>(
+            value: name,
+            validators: [
+              requiredValidator,
+              nameValidator,
+            ],
+          ),
+        },
+      ).valid;
 
   Map<String, dynamic> toJson() => _$WitnessToJson(this);
 }

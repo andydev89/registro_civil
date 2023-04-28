@@ -328,5 +328,14 @@
   "cedulaIde": "Cédula de identidad",
   "poderEsp": "Poder especial",
   "archivoMayor5MB": "El archivo no puede ser mayor a 5MB",
-  "debeSelArc": "Debe seleccionar un archivo"
+  "debeSelArc": "Debe seleccionar un archivo",
+  "atHeadquarters": "En sede",
+  "offSite": "Fuera de sede",
+  "informacionTes": "Información de los testigos",
+  "testigo1": "Testigo 1",
+  "testigo2": "Testigo 2",
+  "dondeReaMat":"¿Dónde desean realizar el matrimonio?",
+  "solicitudCelMat":"Solicitud de celebración para matrimonio",
+  "latitud":"Latitud",
+  "longitud":"Longitud"
 }

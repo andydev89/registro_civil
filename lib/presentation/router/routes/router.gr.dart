@@ -387,6 +387,18 @@ class _$AppRouter extends RootStackRouter {
         child: const MarriageCelebrationFirstStepRouterPage(),
       );
     },
+    MarriageCelebrationSecondStepRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationSecondStepRouterPage(),
+      );
+    },
+    OffSiteRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const OffSitePage(),
+      );
+    },
     FirstStepAttorneyRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -400,6 +412,28 @@ class _$AppRouter extends RootStackRouter {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: const FirstStepContractingPartyPage(),
+      );
+    },
+    SecondStepAtHeadquarterRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const SecondStepAtHeadquarterPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    WitnessRoute.name: (routeData) {
+      final args = routeData.argsAs<WitnessRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: WitnessPage(
+          key: args.key,
+          indexWitness: args.indexWitness,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
       );
     },
     RequestInformationFirstStepRoute.name: (routeData) {
@@ -619,7 +653,31 @@ class _$AppRouter extends RootStackRouter {
                       parent: MarriageCelebrationFirstStepRouterRoute.name,
                     ),
                   ],
-                )
+                ),
+                RouteConfig(
+                  MarriageCelebrationSecondStepRouterRoute.name,
+                  path: 'marriage-celebration-second-step-router-page',
+                  parent: MarriageCelebrationRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      SecondStepAtHeadquarterRoute.name,
+                      path: '',
+                      parent: MarriageCelebrationSecondStepRouterRoute.name,
+                      children: [
+                        RouteConfig(
+                          WitnessRoute.name,
+                          path: '',
+                          parent: SecondStepAtHeadquarterRoute.name,
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                RouteConfig(
+                  OffSiteRoute.name,
+                  path: 'off-site-page',
+                  parent: MarriageCelebrationRouterRoute.name,
+                ),
               ],
             ),
             RouteConfig(
@@ -1593,6 +1651,32 @@ class MarriageCelebrationFirstStepRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MarriageCelebrationSecondStepRouterPage]
+class MarriageCelebrationSecondStepRouterRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationSecondStepRouterRoute(
+      {List<PageRouteInfo>? children})
+      : super(
+          MarriageCelebrationSecondStepRouterRoute.name,
+          path: 'marriage-celebration-second-step-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'MarriageCelebrationSecondStepRouterRoute';
+}
+
+/// generated route for
+/// [OffSitePage]
+class OffSiteRoute extends PageRouteInfo<void> {
+  const OffSiteRoute()
+      : super(
+          OffSiteRoute.name,
+          path: 'off-site-page',
+        );
+
+  static const String name = 'OffSiteRoute';
+}
+
+/// generated route for
 /// [FirstStepAttorneyPage]
 class FirstStepAttorneyRoute extends PageRouteInfo<void> {
   const FirstStepAttorneyRoute()
@@ -1614,6 +1698,53 @@ class FirstStepContractingPartyRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'FirstStepContractingPartyRoute';
+}
+
+/// generated route for
+/// [SecondStepAtHeadquarterPage]
+class SecondStepAtHeadquarterRoute extends PageRouteInfo<void> {
+  const SecondStepAtHeadquarterRoute({List<PageRouteInfo>? children})
+      : super(
+          SecondStepAtHeadquarterRoute.name,
+          path: '',
+          initialChildren: children,
+        );
+
+  static const String name = 'SecondStepAtHeadquarterRoute';
+}
+
+/// generated route for
+/// [WitnessPage]
+class WitnessRoute extends PageRouteInfo<WitnessRouteArgs> {
+  WitnessRoute({
+    Key? key,
+    required int indexWitness,
+  }) : super(
+          WitnessRoute.name,
+          path: '',
+          args: WitnessRouteArgs(
+            key: key,
+            indexWitness: indexWitness,
+          ),
+        );
+
+  static const String name = 'WitnessRoute';
+}
+
+class WitnessRouteArgs {
+  const WitnessRouteArgs({
+    this.key,
+    required this.indexWitness,
+  });
+
+  final Key? key;
+
+  final int indexWitness;
+
+  @override
+  String toString() {
+    return 'WitnessRouteArgs{key: $key, indexWitness: $indexWitness}';
+  }
 }
 
 /// generated route for

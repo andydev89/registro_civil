@@ -3404,8 +3404,8 @@ class WitnessForm implements FormModel<Witness> {
 
   String nuiControlPath() => pathBuilder(nuiControlName);
   String nameControlPath() => pathBuilder(nameControlName);
-  String get _nuiValue => nuiControl.value as String;
-  String get _nameValue => nameControl.value as String;
+  String get _nuiValue => nuiControl.value ?? "";
+  String get _nameValue => nameControl.value ?? "";
   bool get containsNui {
     try {
       form.control(nuiControlPath());
@@ -3571,14 +3571,18 @@ class WitnessForm implements FormModel<Witness> {
   FormGroup formElements() => FormGroup({
         nuiControlName: FormControl<String>(
             value: witness?.nui,
-            validators: [requiredValidator],
+            validators: [
+              requiredValidator,
+              ecuadorDniValidator,
+              length10Validator
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         nameControlName: FormControl<String>(
             value: witness?.name,
-            validators: [requiredValidator],
+            validators: [requiredValidator, nameValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

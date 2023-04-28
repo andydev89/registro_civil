@@ -89,8 +89,8 @@ Map<String, dynamic> _$OutsideToJson(Outside instance) => <String, dynamic>{
     };
 
 Witness _$WitnessFromJson(Map<String, dynamic> json) => Witness(
-      nui: json['nui'] as String,
-      name: json['name'] as String,
+      nui: json['nui'] as String? ?? '',
+      name: json['name'] as String? ?? '',
     );
 
 Map<String, dynamic> _$WitnessToJson(Witness instance) => <String, dynamic>{
