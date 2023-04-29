@@ -27,12 +27,13 @@ import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/first_step_contracting_party_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/marriage_celebration_first_step_route.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/marriage_celebration_route_page.dart';
-import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/off_site/off_site_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/marriage_celebration_second_step_route.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/second_step_at_headquarter_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/second_step_off_site_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/witness_page.dart';
-import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third%20step/contracting_party_page.dart';
-import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third%20step/marriage_celebration_third_step_route.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third_step/contracting_party_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third_step/marriage_celebration_third_step_route.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third_step/third_step_contracting_party_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_orders/pages/my_order_rejecting_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/pages/my_turns_page.dart';
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
@@ -228,8 +229,9 @@ part 'router.gr.dart';
                   initial: true,
                   transitionsBuilder: TransitionsBuilders.slideRight,
                 ),
-                CupertinoRoute(
+                CustomRoute(
                   page: FirstStepContractingPartyPage,
+                  transitionsBuilder: TransitionsBuilders.slideLeft,
                 ),
               ],
             ),
@@ -248,19 +250,26 @@ part 'router.gr.dart';
                     ),
                   ],
                 ),
+                CustomRoute(
+                  page: SecondStepOffSitePage,
+                  transitionsBuilder: TransitionsBuilders.slideLeft,
+                ),
               ],
-            ),
-            CupertinoRoute(
-              page: OffSitePage,
             ),
             CupertinoRoute(
               page: MarriageCelebrationThirdStepRouterPage,
               children: [
                 CustomRoute(
-                  page: ContractingPartyPage,
-                  initial: true,
-                  transitionsBuilder: TransitionsBuilders.slideRight,
-                ),
+                    initial: true,
+                    page: ThirdStepContractingPartyPage,
+                    transitionsBuilder: TransitionsBuilders.slideRight,
+                    children: [
+                      CustomRoute(
+                        page: ContractingPartyPage,
+                        initial: true,
+                        transitionsBuilder: TransitionsBuilders.slideRight,
+                      ),
+                    ]),
               ],
             ),
           ],

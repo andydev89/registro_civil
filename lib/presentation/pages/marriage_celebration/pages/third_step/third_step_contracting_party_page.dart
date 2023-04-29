@@ -17,8 +17,8 @@ class ThirdStepContractingPartyPage extends StatelessWidget {
           children: [
             ToggleSwitchWidget(
               labels: [
-                l10n.testigo1,
-                l10n.testigo2,
+                '${l10n.contrayente}1',
+                '${l10n.contrayente}2',
               ],
               totalSwitches: 2,
               onToggle: (index) {

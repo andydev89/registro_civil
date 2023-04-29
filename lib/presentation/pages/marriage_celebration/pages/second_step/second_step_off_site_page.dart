@@ -6,7 +6,6 @@ import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third%20step/third_step_contracting_party_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/utils/marriage_celebration_util.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/widgets/input_decorator_widget.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -14,71 +13,74 @@ import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.d
 import 'package:registro_civil_apk/presentation/widgets/buttons/secondary_svg_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class OffSitePage extends ConsumerWidget {
-  const OffSitePage({super.key});
+class SecondStepOffSitePage extends ConsumerWidget {
+  const SecondStepOffSitePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return OutsideFormBuilder(
-      builder: (_, formModel, __) => PrimaryScaffold(
-        title: l10n.solicitudCelMat,
-        subtitle: l10n.ingreseInfSol,
-        body: Expanded(
-          child: ScrollableContent(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                PrimaryText(l10n.latitud),
-                InputDecorationWidget(
-                  formControl: formModel.latitudeControl,
-                  suffixIcon: SecondarySvgIconButton(
-                    svgIcon: Assets.svg.mapMarker.svg(),
-                    onPressed: () => selectLocation(
-                      context: context,
-                      formControl: formModel,
-                      ref: ref,
-                    ),
-                  ),
-                  onTap: () => selectLocation(
+      builder: (_, formModel, __) => Scaffold(
+        backgroundColor: Colors.transparent,
+        body: ScrollableContent(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  PrimaryText(l10n.dondeReaMat),
+                ],
+              ),
+              const SizedBox(height: 10),
+              PrimaryText(l10n.latitud),
+              InputDecorationWidget(
+                formControl: formModel.latitudeControl,
+                suffixIcon: SecondarySvgIconButton(
+                  svgIcon: Assets.svg.mapMarker.svg(),
+                  onPressed: () => selectLocation(
                     context: context,
                     formControl: formModel,
                     ref: ref,
                   ),
                 ),
-                PrimaryText(l10n.longitud),
-                InputDecorationWidget(
-                  formControl: formModel.longitudeControl,
-                  suffixIcon: SecondarySvgIconButton(
-                    svgIcon: Assets.svg.mapMarker.svg(),
-                    onPressed: () => selectLocation(
-                      context: context,
-                      formControl: formModel,
-                      ref: ref,
-                    ),
-                  ),
-                  onTap: () => selectLocation(
+                onTap: () => selectLocation(
+                  context: context,
+                  formControl: formModel,
+                  ref: ref,
+                ),
+              ),
+              PrimaryText(l10n.longitud),
+              InputDecorationWidget(
+                formControl: formModel.longitudeControl,
+                suffixIcon: SecondarySvgIconButton(
+                  svgIcon: Assets.svg.mapMarker.svg(),
+                  onPressed: () => selectLocation(
                     context: context,
                     formControl: formModel,
                     ref: ref,
                   ),
                 ),
-                PrimaryText(l10n.callePrincipal),
-                PrimaryReactiveTextField(
-                  formControl: formModel.principalStreetControl,
-                  textCapitalization: TextCapitalization.words,
+                onTap: () => selectLocation(
+                  context: context,
+                  formControl: formModel,
+                  ref: ref,
                 ),
-                PrimaryText(l10n.calleSecundaria),
-                PrimaryReactiveTextField(
-                  formControl: formModel.secondaryStreetControl,
-                  textCapitalization: TextCapitalization.words,
-                ),
-              ],
-            ).symmetricPadding(10, 20),
-          ),
+              ),
+              PrimaryText(l10n.callePrincipal),
+              PrimaryReactiveTextField(
+                formControl: formModel.principalStreetControl,
+                textCapitalization: TextCapitalization.words,
+              ),
+              PrimaryText(l10n.calleSecundaria),
+              PrimaryReactiveTextField(
+                formControl: formModel.secondaryStreetControl,
+                textCapitalization: TextCapitalization.words,
+              ),
+            ],
+          ).symmetricPadding(10, 20),
         ),
         bottomNavigationBar: ReactiveOutsideFormConsumer(
           builder: (_, formModel, __) => Column(
@@ -94,7 +96,13 @@ class OffSitePage extends ConsumerWidget {
                               formModel.model,
                             );
                         context.navigateTo(
-                          const MarriageCelebrationThirdStepRouterRoute(),
+                          MarriageCelebrationSecondStepRouterRoute(
+                            children: [
+                              SecondStepAtHeadquarterRoute(
+                                children: [WitnessRoute(indexWitness: 0)],
+                              ),
+                            ],
+                          ),
                         );
                       }
                     : null,

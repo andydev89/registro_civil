@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/toggle_switch_widget.dart';
 
 class SecondStepAtHeadquarterPage extends StatelessWidget {
@@ -15,10 +16,11 @@ class SecondStepAtHeadquarterPage extends StatelessWidget {
       builder: (context, child) {
         return Column(
           children: [
+            PrimaryText(l10n.informacionTes),
             ToggleSwitchWidget(
               labels: [
-                l10n.testigo1,
-                l10n.testigo2,
+                '${l10n.testigo}1',
+                '${l10n.testigo}2',
               ],
               totalSwitches: 2,
               onToggle: (index) {

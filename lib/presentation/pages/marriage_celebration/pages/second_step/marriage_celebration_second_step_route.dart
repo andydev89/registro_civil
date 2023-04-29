@@ -6,6 +6,7 @@ import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/outside_enum.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_radio_list_tile.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
@@ -40,6 +41,11 @@ class MarriageCelebrationSecondStepRouterPage extends HookWidget {
                             ref
                                 .read(marriageCelebrationProvider.notifier)
                                 .setIsOutside(isOutside: false);
+                            context.replaceRoute(
+                              SecondStepAtHeadquarterRoute(
+                                children: [WitnessRoute(indexWitness: 0)],
+                              ),
+                            );
                           },
                         ),
                       ),
@@ -53,6 +59,9 @@ class MarriageCelebrationSecondStepRouterPage extends HookWidget {
                             ref
                                 .read(marriageCelebrationProvider.notifier)
                                 .setIsOutside(isOutside: true);
+                            context.replaceRoute(
+                              const SecondStepOffSiteRoute(),
+                            );
                           },
                         ),
                       ),
@@ -60,7 +69,6 @@ class MarriageCelebrationSecondStepRouterPage extends HookWidget {
                   );
                 },
               ),
-              PrimaryText(l10n.informacionTes),
               Expanded(child: content),
             ],
           ),
