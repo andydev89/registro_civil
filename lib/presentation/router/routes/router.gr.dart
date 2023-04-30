@@ -246,6 +246,16 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    WebviewPaymentRoute.name: (routeData) {
+      final args = routeData.argsAs<WebviewPaymentRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: WebviewPaymentPage(
+          key: args.key,
+          url: args.url,
+        ),
+      );
+    },
     PaymentServiceJudgmentsNotarialActsRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -617,6 +627,11 @@ class _$AppRouter extends RootStackRouter {
             RouteConfig(
               MakePaymentRoute.name,
               path: 'make-payment-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
+              WebviewPaymentRoute.name,
+              path: 'webview-payment-page',
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
@@ -1123,6 +1138,40 @@ class MakePaymentRouteArgs {
   @override
   String toString() {
     return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, buttonText: $buttonText, service: $service, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment}';
+  }
+}
+
+/// generated route for
+/// [WebviewPaymentPage]
+class WebviewPaymentRoute extends PageRouteInfo<WebviewPaymentRouteArgs> {
+  WebviewPaymentRoute({
+    Key? key,
+    required String url,
+  }) : super(
+          WebviewPaymentRoute.name,
+          path: 'webview-payment-page',
+          args: WebviewPaymentRouteArgs(
+            key: key,
+            url: url,
+          ),
+        );
+
+  static const String name = 'WebviewPaymentRoute';
+}
+
+class WebviewPaymentRouteArgs {
+  const WebviewPaymentRouteArgs({
+    this.key,
+    required this.url,
+  });
+
+  final Key? key;
+
+  final String url;
+
+  @override
+  String toString() {
+    return 'WebviewPaymentRouteArgs{key: $key, url: $url}';
   }
 }
 

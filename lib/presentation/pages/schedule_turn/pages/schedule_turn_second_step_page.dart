@@ -75,13 +75,15 @@ class ScheduleTurnSecondPage extends ConsumerWidget {
                           starDate: DateTime.now(),
                         ),
                         Visibility(
-                          visible: formModel.dateControl.valid,
+                          visible: formModel.dateControl.valid &&
+                              formModel.initialTimeControl != null &&
+                              formModel.endTimeControl != null,
                           child: ScheduleTimeSelector(
                             formControl: formModel.timeControl,
                             initialTime: formModel.initialTimeControl?.value ??
-                                TimeOfDay.now(),
+                                const TimeOfDay(hour: 0, minute: 0),
                             endTime: formModel.endTimeControl?.value ??
-                                TimeOfDay.now(),
+                                const TimeOfDay(hour: 0, minute: 0),
                           ),
                         ),
                       ],

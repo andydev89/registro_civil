@@ -28,6 +28,7 @@ import 'package:registro_civil_apk/presentation/pages/my_turns/pages/my_turns_pa
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/select_payment_page.dart';
+import 'package:registro_civil_apk/presentation/pages/payment/webview_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/request_information_firts_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/request_information_second_step_page.dart';
@@ -244,6 +245,9 @@ part 'router.gr.dart';
         ),
         CupertinoRoute(
           page: MakePaymentPage,
+        ),
+        CupertinoRoute(
+          page: WebviewPaymentPage,
         ),
         // PaymentServiceJudgmentsNotarialActsPage
         CupertinoRoute(

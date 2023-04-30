@@ -42,6 +42,7 @@ const _$StatusCodeEnumMap = {
   StatusCode.s406: 406,
   StatusCode.s408: 408,
   StatusCode.s409: 409,
+  StatusCode.s412: 412,
   StatusCode.s500: 500,
   StatusCode.s501: 501,
   StatusCode.s502: 502,
@@ -138,4 +139,26 @@ Map<String, dynamic> _$ResponseModelPaginationToJson<T>(
       'pageElements': instance.pageElements,
       'pageLimit': instance.pageLimit,
       'pageNumbers': instance.pageNumbers,
+    };
+
+PlaceToPayResponseModel<T> _$PlaceToPayResponseModelFromJson<T>(
+  Map<String, dynamic> json,
+  T Function(Object? json) fromJsonT,
+) =>
+    PlaceToPayResponseModel<T>(
+      status: $enumDecodeNullable(_$StatusCodeEnumMap, json['Code']),
+      message: json['Message'] as String?,
+      details: json['Details'] as String?,
+      data: _$nullableGenericFromJson(json['data'], fromJsonT),
+    );
+
+Map<String, dynamic> _$PlaceToPayResponseModelToJson<T>(
+  PlaceToPayResponseModel<T> instance,
+  Object? Function(T value) toJsonT,
+) =>
+    <String, dynamic>{
+      'Code': _$StatusCodeEnumMap[instance.status],
+      'Message': instance.message,
+      'Details': instance.details,
+      'data': _$nullableGenericToJson(instance.data, toJsonT),
     };

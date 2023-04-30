@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:fk_user_agent/fk_user_agent.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
@@ -10,6 +13,7 @@ import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/data/providers/payment/payment_providers.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
@@ -164,40 +168,42 @@ class MakePaymentPage extends ConsumerWidget {
                       expiration: DateTime.now()
                           .add(const Duration(minutes: 15))
                           .toString(),
-                      returnUrl: '',
-                      cancelUrl: '',
+                      returnUrl: 'https://localhost.com',
+                      cancelUrl: 'https://localhost.com',
                     );
-                    ref
-                        .read(
-                          createPlaceToPayTransactionProvider(
-                            placeToPayModel: placeToPay,
-                          ),
-                        )
-                        .whenData(
-                          (value) => value.when(
-                            ok: (data) => context.replaceRoute(
-                              NotificationRoute(
-                                buttonText: buttonText,
-                                message: l10n.pagoRealizadoConExito,
-                                notificationType: NotificationType.succes,
-                                title: l10n.confirmacionDePago,
-                                onTap: onTapSuccessPayment,
-                                description: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PrimaryCaption(
-                                      'Pagado: \$${service.total.toStringAsFixed(2)}',
-                                    ),
-                                    const PrimaryCaption(
-                                      'Número de transacción: NKV00023',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            err: (error) => print(error.toString()),
-                          ),
-                        );
+                    final result = await ref.read(
+                      createPlaceToPayTransactionProvider(
+                        placeToPayModel: placeToPay,
+                      ).future,
+                    );
+                    result.when(
+                      ok: (data) => context.replaceRoute(
+                        WebviewPaymentRoute(url: data.processUrl),
+                        // NotificationRoute(
+                        //   buttonText: buttonText,
+                        //   message: l10n.pagoRealizadoConExito,
+                        //   notificationType: NotificationType.succes,
+                        //   title: l10n.confirmacionDePago,
+                        //   onTap: onTapSuccessPayment,
+                        //   description: Column(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     //TODO traducir los textos
+                        //     children: [
+                        //       PrimaryCaption(
+                        //         'Pagado: \$${service.total.toStringAsFixed(2)}',
+                        //       ),
+                        //       PrimaryCaption(
+                        //         'Número de transacción: ${data.paymentGatewayReference}',
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                      ),
+                      err: (error) => showAlert(
+                        error.translate(context),
+                        TypeAlert.error,
+                      ),
+                    );
                   }
                 : null,
           ).symmetricPadding(10, 30),

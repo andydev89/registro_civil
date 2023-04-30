@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:registro_civil_apk/data/providers/payment/payment_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/observer/router_observer.dart';
 import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
@@ -21,6 +24,7 @@ class _AppState extends ConsumerState<App> {
   @override
   void initState() {
     super.initState();
+    ref.read(executeCheckingPendingTransactionsProvider);
     appRouter = AppRouter(authGuard: AuthGuard(ref));
   }
 

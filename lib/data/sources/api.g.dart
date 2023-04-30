@@ -630,8 +630,9 @@ class _Api implements Api {
     from,
     to,
     agency,
-    typeOfService,
-  ) async {
+    typeOfService, {
+    required special,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'pageNo': pageNo,
@@ -640,6 +641,7 @@ class _Api implements Api {
       r'to': to,
       r'agency': agency,
       r'typeOfService': typeOfService,
+      r'special': special,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
@@ -774,7 +776,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<BookedReceiptModel>> createPlaceToPayTransaction(
+  Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
       placeToPayModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -782,22 +784,45 @@ class _Api implements Api {
     final _data = <String, dynamic>{};
     _data.addAll(placeToPayModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<BookedReceiptModel>>(Options(
+        _setStreamType<PlaceToPayReferenceModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
+              'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<BookedReceiptModel>.fromJson(
-      _result.data!,
-      (json) => BookedReceiptModel.fromJson(json as Map<String, dynamic>),
-    );
+    final value = PlaceToPayReferenceModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
+      reference) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>?>(
+        _setStreamType<PlaceToPayTransactionDetailsModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/${reference}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data == null
+        ? null
+        : PlaceToPayTransactionDetailsModel.fromJson(_result.data!);
     return value;
   }
 

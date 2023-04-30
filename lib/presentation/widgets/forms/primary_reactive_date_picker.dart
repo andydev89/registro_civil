@@ -34,7 +34,7 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
   final bool hasError;
   final void Function()? onError;
   final String? hintText;
-  final void Function(DateTime)? onPageChanged;
+  final Future<List<DateTime>> Function(DateTime)? onPageChanged;
   final void Function(DateTime)? onDaySelected;
   final bool readOnly;
 
@@ -95,7 +95,7 @@ class CustomCalendar extends StatefulWidget {
   });
   final FormControl<DateTime> formControl;
   final List<DateTime> availablesDate;
-  final void Function(DateTime)? onPageChanged;
+  final Future<List<DateTime>> Function(DateTime)? onPageChanged;
   final void Function(DateTime)? onDaySelected;
 
   @override
@@ -103,7 +103,7 @@ class CustomCalendar extends StatefulWidget {
 }
 
 class _CustomCalendarState extends State<CustomCalendar> {
-  final DateTime _focusedDay = DateTime.now();
+  DateTime _focusedDay = DateTime.now();
   // final Set<DateTime> _selectedDays = LinkedHashSet<DateTime>(
   //   equals: isSameDay,
   //   hashCode: _getHashCode,
@@ -143,7 +143,15 @@ class _CustomCalendarState extends State<CustomCalendar> {
     return TableCalendar(
       firstDay: DateTime.now(),
       lastDay: DateTime.now().add(const Duration(days: 365 * 30)),
-      onPageChanged: widget.onPageChanged,
+      onPageChanged: (focusedDay) async {
+        final availablesDays =
+            await widget.onPageChanged?.call(focusedDay) ?? [];
+        setState(() {
+          widget.availablesDate.clear();
+          widget.availablesDate.addAll(availablesDays);
+          _focusedDay = focusedDay;
+        });
+      },
       focusedDay: _focusedDay,
       // selectedDayPredicate: (day) =>  _selectedDays.contains(day)
       selectedDayPredicate: (day) {

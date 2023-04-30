@@ -7,5 +7,4 @@ const gradienteApp = [
   Color.fromRGBO(0, 78, 146, 0.8),
 ];
 
-
-const String baseUrl = 'http://api.registro-civil.ddns.net/';
+const String baseUrl = 'https://api.registro-civil.ddns.net/';

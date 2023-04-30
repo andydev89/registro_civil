@@ -11,12 +11,13 @@ part 'schedule_provider.g.dart';
 
 @riverpod
 Future<Result<List<ScheduleModel>, StatusCode>> availableSchedules(
-  AvailableSchedulesRef ref,
-  DateTime startDate,
-  DateTime endDate,
-  String agency,
-  int typeOfService,
-) async {
+  AvailableSchedulesRef ref, {
+  required DateTime startDate,
+  required DateTime endDate,
+  required String agency,
+  required int typeOfService,
+  required bool special,
+}) async {
   final api = ref.watch(apiProvider);
   //No hace falta paginado porque el maximo es un mes
   final response = await api.availableSchedules(
@@ -26,6 +27,7 @@ Future<Result<List<ScheduleModel>, StatusCode>> availableSchedules(
     endDate.onlyDate,
     agency,
     typeOfService,
+    special: special,
   );
   return response.success
       ? Result.ok(response.data!)

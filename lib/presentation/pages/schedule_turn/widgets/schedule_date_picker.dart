@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
@@ -35,20 +36,23 @@ class ScheduleDatePicker extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final schedules = ref.watch(
       availableSchedulesProvider(
-        starDate,
-        starDate.lastDateOfMonth,
-        agency.value?.id ?? '',
-        typeOfServiceModel.id,
+        startDate: starDate,
+        endDate: starDate.lastDateOfMonth,
+        agency: agency.value?.id ?? '',
+        typeOfService: typeOfServiceModel.id,
+        special: false,
       ),
     );
     agency.statusChanged.listen((event) {
       if (agency.valid) {
+        formControl.reset();
         return ref.refresh(
           availableSchedulesProvider(
-            starDate,
-            starDate.lastDateOfMonth,
-            agency.value?.id ?? '',
-            typeOfServiceModel.id,
+            startDate: starDate,
+            endDate: starDate.lastDateOfMonth,
+            agency: agency.value?.id ?? '',
+            typeOfService: typeOfServiceModel.id,
+            special: false,
           ),
         );
       }
@@ -66,14 +70,24 @@ class ScheduleDatePicker extends ConsumerWidget {
       hasError: schedules.hasError,
       onError: () => ref.refresh(
         availableSchedulesProvider(
-          starDate,
-          starDate.lastDateOfMonth,
-          agency.value?.id ?? '',
-          typeOfServiceModel.id,
+          startDate: starDate,
+          endDate: starDate.lastDateOfMonth,
+          agency: agency.value?.id ?? '',
+          typeOfService: typeOfServiceModel.id,
+          special: false,
         ),
       ),
-      onDaySelected: (selectedDay) {
-        schedules.asData?.value.when(
+      onDaySelected: (selectedDay) async {
+        final result = await ref.read(
+          availableSchedulesProvider(
+            startDate: selectedDay.copyWith(day: 1),
+            endDate: selectedDay.lastDateOfMonth,
+            agency: agency.value?.id ?? '',
+            typeOfService: typeOfServiceModel.id,
+            special: false,
+          ).future,
+        );
+        result.when(
           ok: (data) {
             final selectedSchedue = data.firstWhere(
               (element) => element.date.onlyDate == selectedDay.onlyDate,
@@ -85,14 +99,22 @@ class ScheduleDatePicker extends ConsumerWidget {
           err: (error) => null,
         );
       },
-      onPageChanged: (date) => ref.refresh(
-        availableSchedulesProvider(
-          date,
-          date.lastDateOfMonth,
-          agency.value?.id ?? '',
-          typeOfServiceModel.id,
-        ),
-      ),
+      onPageChanged: (date) async {
+        final result = await ref.refresh(
+          availableSchedulesProvider(
+            startDate: date,
+            endDate: date.lastDateOfMonth,
+            agency: agency.value?.id ?? '',
+            typeOfService: typeOfServiceModel.id,
+            special: false,
+          ).future,
+        );
+        final dates = result.when(
+          ok: (data) => data.map((e) => e.date).toList(),
+          err: (error) => <DateTime>[],
+        );
+        return dates;
+      },
     );
   }
 }

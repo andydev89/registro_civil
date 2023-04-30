@@ -23,6 +23,7 @@ Dio dio(DioRef ref) {
         requestHeader: true,
         requestBody: true,
         responseHeader: true,
+        compact: false,
       ),
     );
 }
