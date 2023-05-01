@@ -27,10 +27,13 @@ enum TypeService implements Translatable {
   copyRegistrationRecordDeath('SERVICE_ACTA_REGISTRAL_DEFUNCION'),
   @JsonValue('SERVICE_ACTA_REGISTRAL_GENERO')
   copyRegistrationCertificateGenderRegistration(
-      'SERVICE_ACTA_REGISTRAL_GENERO',),
+    'SERVICE_ACTA_REGISTRAL_GENERO',
+  ),
   // End service acta registral
   @JsonValue('SERVICE_AGENDAR_TURNO')
   schedule('SERVICE_AGENDAR_TURNO'),
+  @JsonValue('NULL')
+  none('NULL'),
   // TODO(jang): temp
   @JsonValue('PRUEBA_MARRIAGE_CELEBRATION')
   marriageCelebration('PRUEBA_MARRIAGE_CELEBRATION');
@@ -84,6 +87,8 @@ enum TypeService implements Translatable {
       case TypeService.schedule:
         return l10n.ageTurno;
       case TypeService.marriageCelebration:
+        return '';
+      case TypeService.none:
         return '';
     }
   }
