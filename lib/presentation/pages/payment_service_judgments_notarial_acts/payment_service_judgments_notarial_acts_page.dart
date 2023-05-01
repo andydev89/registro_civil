@@ -56,6 +56,7 @@ class PaymentServiceJudgmentsNotarialActsPage extends StatelessWidget {
                   ],
                 ),
               ).verticalPadding(20),
+              // ignore: lines_longer_than_80_chars
               bottomNavigationBar: ReactivePaymentServiceJudgmentsNotarialActsModelFormConsumer(
               builder: (context, formModel, child) => Column(
                 mainAxisSize: MainAxisSize.min,

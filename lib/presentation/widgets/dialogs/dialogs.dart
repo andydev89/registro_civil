@@ -98,8 +98,9 @@ Future<void> showOffersDialog(
 
 Future<void> showMapPickerDialog(
   BuildContext context,
-  void Function(LatLng latLng)? onPicked,
-) {
+  void Function(LatLng latLng)? onPicked, {
+  bool automaticClose = false,
+}) {
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -124,7 +125,10 @@ Future<void> showMapPickerDialog(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: GMap(
-                    onPicked: onPicked,
+                    onPicked: (latLng) {
+                      onPicked?.call(latLng);
+                      if (automaticClose) context.popRoute();
+                    },
                   ),
                 ),
               ),

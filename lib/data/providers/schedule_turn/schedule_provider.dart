@@ -35,7 +35,7 @@ Future<Result<List<ScheduleModel>, StatusCode>> schedules(
   SchedulesRef ref,
 ) async {
   final api = ref.watch(apiProvider);
-  //TODO hacer paginado
+  // TODO(alejandro): hacer paginado
   final response = await api.schedules(0, 20);
   return response.success
       ? Result.ok(response.data!)

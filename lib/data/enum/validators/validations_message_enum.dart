@@ -12,6 +12,8 @@ enum ValidationsMessageEnum implements Translatable {
   invalidConadisNumber('invalidConadisNumber'),
   atLeastOneElement('atLeastOneElement'),
   invalidCode('invalidCode'),
+  invalidNombreApellido('introduceNombreApellido'),
+  seleccionarArchivo('seleccionarArchivo'),
   ;
 
   const ValidationsMessageEnum(this.toText);
@@ -39,6 +41,10 @@ enum ValidationsMessageEnum implements Translatable {
         return l10n.debeSelAlMenUnElem;
       case ValidationsMessageEnum.invalidCode:
         return l10n.invalidCode;
+      case ValidationsMessageEnum.invalidNombreApellido:
+        return l10n.escribaNomApe;
+      case ValidationsMessageEnum.seleccionarArchivo:
+        return l10n.debeSelArc;
     }
   }
 }

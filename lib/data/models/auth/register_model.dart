@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
+import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 part 'register_model.g.dart';
 part 'register_model.gform.dart';
@@ -162,7 +164,7 @@ class MeModel {
     this.identification = '',
     this.email = '',
     this.type = '',
-    this.state = '',
+    this.state = Status.active,
     this.profile = const [],
     this.agency = const [],
     this.aplication = const [],
@@ -176,9 +178,9 @@ class MeModel {
   final String identification;
   final String email;
   final String type;
-  final String state;
+  final Status state;
   final List<Profile> profile;
-  final List<Agency> agency;
+  final List<AgencyModel> agency;
   final List<Aplication> aplication;
 
   Map<String, dynamic> toJson() => _$MeModelToJson(this);
@@ -190,9 +192,9 @@ class MeModel {
     String? identification,
     String? email,
     String? type,
-    String? state,
+    Status? state,
     List<Profile>? profile,
-    List<Agency>? agency,
+    List<AgencyModel>? agency,
     List<Aplication>? aplication,
   }) {
     return MeModel(
@@ -228,7 +230,7 @@ class Profile {
   final String? name;
   final String? description;
   final String? state;
-  final Agency? agency;
+  final AgencyModel? agency;
   final List<Access>? access;
 
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
@@ -238,7 +240,7 @@ class Profile {
     String? name,
     String? description,
     String? state,
-    Agency? agency,
+    AgencyModel? agency,
     List<Access>? access,
   }) {
     return Profile(
@@ -253,65 +255,65 @@ class Profile {
 }
 
 // @embedded
-@JsonSerializable()
-class Agency {
-  Agency({
-    this.id,
-    this.name,
-    this.description,
-    this.country,
-    this.province,
-    this.canton,
-    this.parroquia,
-    this.region,
-    this.latitude,
-    this.longitude,
-    this.state,
-  });
+// @JsonSerializable()
+// class Agency {
+//   Agency({
+//     this.id,
+//     this.name,
+//     this.description,
+//     this.country,
+//     this.province,
+//     this.canton,
+//     this.parroquia,
+//     this.region,
+//     this.latitude,
+//     this.longitude,
+//     this.state,
+//   });
 
-  factory Agency.fromJson(Map<String, dynamic> json) => _$AgencyFromJson(json);
-  final String? id;
-  final String? name;
-  final String? description;
-  final Territory? country;
-  final Territory? province;
-  final Territory? canton;
-  final Territory? parroquia;
-  final String? region;
-  final String? latitude;
-  final String? longitude;
-  final String? state;
+//   factory Agency.fromJson(Map<String, dynamic> json) => _$AgencyFromJson(json);
+//   final String? id;
+//   final String? name;
+//   final String? description;
+//   final Territory? country;
+//   final Territory? province;
+//   final Territory? canton;
+//   final Territory? parroquia;
+//   final String? region;
+//   final String? latitude;
+//   final String? longitude;
+//   final String? state;
 
-  Map<String, dynamic> toJson() => _$AgencyToJson(this);
+//   Map<String, dynamic> toJson() => _$AgencyToJson(this);
 
-  Agency copyWith({
-    String? id,
-    String? name,
-    String? description,
-    Territory? country,
-    Territory? province,
-    Territory? canton,
-    Territory? parroquia,
-    String? region,
-    String? latitude,
-    String? longitude,
-    String? state,
-  }) {
-    return Agency(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      description: description ?? this.description,
-      country: country ?? this.country,
-      province: province ?? this.province,
-      canton: canton ?? this.canton,
-      parroquia: parroquia ?? this.parroquia,
-      region: region ?? this.region,
-      latitude: latitude ?? this.latitude,
-      longitude: longitude ?? this.longitude,
-      state: state ?? this.state,
-    );
-  }
-}
+//   Agency copyWith({
+//     String? id,
+//     String? name,
+//     String? description,
+//     Territory? country,
+//     Territory? province,
+//     Territory? canton,
+//     Territory? parroquia,
+//     String? region,
+//     String? latitude,
+//     String? longitude,
+//     String? state,
+//   }) {
+//     return Agency(
+//       id: id ?? this.id,
+//       name: name ?? this.name,
+//       description: description ?? this.description,
+//       country: country ?? this.country,
+//       province: province ?? this.province,
+//       canton: canton ?? this.canton,
+//       parroquia: parroquia ?? this.parroquia,
+//       region: region ?? this.region,
+//       latitude: latitude ?? this.latitude,
+//       longitude: longitude ?? this.longitude,
+//       state: state ?? this.state,
+//     );
+//   }
+// }
 
 // @embedded
 @JsonSerializable()

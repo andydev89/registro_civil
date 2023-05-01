@@ -31,7 +31,7 @@ class RadioTimeSelector extends StatelessWidget {
         Visibility(
           visible: times.isNotEmpty,
           replacement:
-              //TODO traducir
+              // TODO(alejandro): traducir
               const Center(child: PrimaryText('No hay horarios disponibles')),
           child: GridView.count(
             shrinkWrap: true,

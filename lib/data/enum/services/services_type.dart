@@ -29,7 +29,10 @@ enum TypeService implements Translatable {
   copyRegistrationCertificateGenderRegistration,
   // End service acta registral
   @JsonValue('SERVICE_AGENDAR_TURNO')
-  schedule;
+  schedule,
+  // TODO(jang): temp
+  @JsonValue('PRUEBA_MARRIAGE_CELEBRATION')
+  marriageCelebration;
 
   bool get isSimpleCertificate =>
       this == birth ||
@@ -39,9 +42,10 @@ enum TypeService implements Translatable {
       this == gender ||
       this == identity;
 
-  bool get isActaRegistral => !isSimpleCertificate && this != schedule;   
+  bool get isActaRegistral =>
+      !isSimpleCertificate && this != schedule && this != marriageCelebration;
 
-  bool get isSchedule => this == schedule; 
+  bool get isSchedule => this == schedule;
 
   @override
   String translate(BuildContext context) {
@@ -71,6 +75,8 @@ enum TypeService implements Translatable {
         return l10n.copiaActRegDef;
       case TypeService.schedule:
         return l10n.ageTurno;
+      case TypeService.marriageCelebration:
+        return '';
     }
   }
 }

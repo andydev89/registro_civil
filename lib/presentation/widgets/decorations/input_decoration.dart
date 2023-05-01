@@ -10,6 +10,7 @@ InputDecoration primaryInputDecoration({
   FontWeight? fontWeight,
   String? hintText,
   bool readOnly = false,
+  String? errorText,
 
   ///Esto es para establecer el tamano del suffix icon
   bool setSuffixIconConstraints = false,
@@ -27,6 +28,7 @@ InputDecoration primaryInputDecoration({
       fontSize: fontSize,
       fontWeight: fontWeight,
     ),
+    errorText: errorText,
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(
         width: 0.5,

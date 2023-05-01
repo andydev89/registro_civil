@@ -1,13 +1,37 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:libphonenumber/libphonenumber.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
 import 'package:registro_civil_apk/data/enum/validators/validations_message_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
   return Validators.required(control);
+}
+
+Map<String, dynamic>? documentFileRequiredValidator(
+  AbstractControl<dynamic> control,
+) {
+  final document = control.value as Document?;
+  if (document == null || document.file.isEmpty) {
+    return {ValidationMessage.required: true};
+  }
+  return null;
+}
+
+// validate que tenga 1 nombre y 2 apellidos minimo
+Map<String, dynamic>? nameValidator(AbstractControl<dynamic> control) {
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) return null;
+  final names = value.trim().split(' ');
+  if (names.length < 3) {
+    return {ValidationsMessageEnum.invalidNombreApellido.toText: true};
+  }
+  return null;
 }
 
 Map<String, dynamic>? ecuadorDniValidator(AbstractControl<dynamic> control) {
@@ -185,7 +209,8 @@ Map<String, dynamic>? conadisNumberValidatorGroup(
   if (!isConadis) {
     (conadisModel as FormGroup).controls['conadisNumber']!
       ..removeError(ValidationMessage.required)
-      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText);
+      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText)
+      ..value = '';
     return null;
   }
 
@@ -199,8 +224,32 @@ Map<String, dynamic>? conadisNumberValidatorGroup(
   if (!_validateConadisNumber(conadisNumber)) {
     (conadisModel as FormGroup)
         .controls['conadisNumber']!
-        .setErrors({'invalidConadisNumber': true});
+        .setErrors({ValidationsMessageEnum.invalidConadisNumber.toText: true});
     return {ValidationsMessageEnum.invalidConadisNumber.toText: true};
+  }
+  return null; // Devuelve null si la validación es exitosa
+}
+
+Map<String, dynamic>? childrenRelationshipValidatorGroup(
+  AbstractControl<dynamic> partnerModel,
+) {
+  final children = partnerModel.value as Map<String, dynamic>;
+  final hasChildren = children['hasChildren'] as Binary? ?? Binary.no;
+  final childrenRelationship =
+      children['childrenRelationship'] as ChildrenRelationShip?;
+  if (hasChildren == Binary.no) {
+    (partnerModel as FormGroup).controls['childrenRelationship']!
+      ..removeError(ValidationMessage.required)
+      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText)
+      ..value = null;
+    return null;
+  }
+
+  if (hasChildren == Binary.yes && childrenRelationship == null) {
+    (partnerModel as FormGroup)
+        .controls['childrenRelationship']!
+        .setErrors({ValidationMessage.required: true});
+    return {ValidationMessage.required: true};
   }
   return null; // Devuelve null si la validación es exitosa
 }
@@ -214,7 +263,8 @@ bool _validateConadisNumber(String conadisNumber) {
 }
 
 Map<String, dynamic>? atLeastOneElementValidator(
-    AbstractControl<dynamic> control) {
+  AbstractControl<dynamic> control,
+) {
   final value = control.value as List<bool?>;
   var hasTrueElement = false;
   for (final element in value) {
@@ -231,27 +281,16 @@ Map<String, dynamic>? atLeastOneElementValidator(
 }
 
 Map<String, String Function(dynamic error)> validationMessage(
-  AppLocalizations l10n,
-) =>
-    {
-      ValidationMessage.required: (error) => l10n.campoReq,
-      ValidationMessage.email: (error) => l10n.intrudcirCorrVal,
-      ValidationMessage.mustMatch: (error) => l10n.passwordCoi,
-      ValidationsMessageEnum.invalidDni.toText: (error) =>
-          l10n.intrducirNumIdeVal,
-      ValidationsMessageEnum.length10Error.toText: (error) =>
-          l10n.introducirNum10Dig,
-      ValidationsMessageEnum.invalidProvinceCode.toText: (error) =>
-          l10n.introducirCodProVal,
-      ValidationsMessageEnum.invalidPassword.toText: (error) =>
-          l10n.password8Car,
-      ValidationsMessageEnum.invalidPhoneNumber.toText: (error) =>
-          l10n.intrudcirNumTelVal,
-      ValidationsMessageEnum.length6Error.toText: (error) =>
-          l10n.introducirNum6Dig,
-      ValidationsMessageEnum.invalidConadisNumber.toText: (error) =>
-          l10n.introducirNum6Dig,
-      ValidationsMessageEnum.atLeastOneElement.toText: (error) =>
-          l10n.debeSelAlMenUnElem,
-      ValidationsMessageEnum.invalidCode.toText: (error) => l10n.invalidCode,
-    };
+  BuildContext context,
+) {
+  final l10n = context.l10n;
+  return {
+    ValidationMessage.required: (error) => l10n.campoReq,
+    ValidationMessage.email: (error) => l10n.intrudcirCorrVal,
+    ValidationMessage.mustMatch: (error) => l10n.passwordCoi,
+    ValidationsMessageEnum.invalidCode.toText: (error) => l10n.invalidCode,
+  }..addEntries(
+      ValidationsMessageEnum.values
+          .map((e) => MapEntry(e.toText, (_) => e.translate(context))),
+    );
+}

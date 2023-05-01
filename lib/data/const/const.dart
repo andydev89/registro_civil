@@ -8,4 +8,4 @@ const gradienteApp = [
 ];
 
 
-const String baseUrl = 'http://api.registro-civil.ddns.net/';
+const String baseUrl = 'https://api.registro-civil.ddns.net/';

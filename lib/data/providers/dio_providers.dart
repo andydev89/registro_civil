@@ -14,7 +14,8 @@ Dio dio(DioRef ref) {
   return Dio()
     ..options.baseUrl = baseUrl
     ..options.validateStatus = (status) {
-      //TODO esto cambiarlo cuando el back corrija el error de devolver 500 en autenticacion incorrecta
+      // TODO(alejandro): esto cambiarlo cuando el back corrija el error 
+      //de devolver 500 en autenticacion incorrecta
       return true;
     }
     ..interceptors.add(fresh)
@@ -39,6 +40,7 @@ Fresh<OAuth2Token> fresh(FreshRef ref) {
     tokenStorage: SSTokenStorage(),
     shouldRefresh: (response) {
       // final uri = response?.realUri;
+      // ignore: avoid_dynamic_calls
       final status = response?.data['status'];
       // final shouldRefresh = status == 401 &&
       //     (uri!.path.contains('identity/api/auth/refresh') == false);

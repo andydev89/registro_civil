@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 // import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -19,6 +17,7 @@ class NotificationPage extends StatelessWidget {
     required this.notificationType,
     this.onTap,
     this.description,
+    this.bottomText,
   });
   final String? title;
   final String? subtitle;
@@ -28,6 +27,7 @@ class NotificationPage extends StatelessWidget {
   final NotificationType notificationType;
   final void Function(BuildContext context)? onTap;
   final Widget? description;
+  final String? bottomText;
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +39,11 @@ class NotificationPage extends StatelessWidget {
         child: Column(
           children: [
             notificationType.image,
+            if (message != null) PrimaryText(message!),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  if (message != null)
-                    PrimaryLabel(
-                      message!,
-                      color: primaryColor,
-                    ),
                   if (description != null) description!,
                   if (bottonTitle != null)
                     Padding(
@@ -66,11 +62,21 @@ class NotificationPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: PrimaryAsyncButton(
-        title: buttonText,
-        onPressed: () {
-          return Future(() => onTap?.call(context));
-        },
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          PrimaryAsyncButton(
+            title: buttonText,
+            onPressed: () {
+              return Future(() => onTap?.call(context));
+            },
+          ),
+          if (bottomText != null)
+            PrimaryText(
+              bottomText!,
+              maxLines: 3,
+            ).verticalPadding(5),
+        ],
       ).symmetricPadding(10, 30),
     );
   }
