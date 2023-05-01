@@ -14,7 +14,8 @@ Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
 }
 
 Map<String, dynamic>? documentFileRequiredValidator(
-    AbstractControl<dynamic> control) {
+  AbstractControl<dynamic> control,
+) {
   final document = control.value as Document?;
   if (document == null || document.file.isEmpty) {
     return {ValidationMessage.required: true};

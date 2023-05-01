@@ -130,8 +130,90 @@ class MarriageDocumentsProvider
   }
 }
 
+String _$marriageHash() => r'98a2ff051ae4775a25258fa172615ae70018498f';
+typedef MarriageRef = AutoDisposeFutureProviderRef<Result<bool, StatusCode>>;
+
+/// See also [marriage].
+@ProviderFor(marriage)
+const marriageProvider = MarriageFamily();
+
+/// See also [marriage].
+class MarriageFamily extends Family<AsyncValue<Result<bool, StatusCode>>> {
+  /// See also [marriage].
+  const MarriageFamily();
+
+  /// See also [marriage].
+  MarriageProvider call(
+    MarriageCelebrationModel model,
+  ) {
+    return MarriageProvider(
+      model,
+    );
+  }
+
+  @override
+  MarriageProvider getProviderOverride(
+    covariant MarriageProvider provider,
+  ) {
+    return call(
+      provider.model,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'marriageProvider';
+}
+
+/// See also [marriage].
+class MarriageProvider
+    extends AutoDisposeFutureProvider<Result<bool, StatusCode>> {
+  /// See also [marriage].
+  MarriageProvider(
+    this.model,
+  ) : super.internal(
+          (ref) => marriage(
+            ref,
+            model,
+          ),
+          from: marriageProvider,
+          name: r'marriageProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$marriageHash,
+          dependencies: MarriageFamily._dependencies,
+          allTransitiveDependencies: MarriageFamily._allTransitiveDependencies,
+        );
+
+  final MarriageCelebrationModel model;
+
+  @override
+  bool operator ==(Object other) {
+    return other is MarriageProvider && other.model == model;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, model.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$marriageCelebrationHash() =>
-    r'9b73e6b0302f2ca8e225a110e13f2c59567c4267';
+    r'ff193a5ee83230f6b1aa78cb06147542f482f1b0';
 
 /// See also [MarriageCelebration].
 @ProviderFor(MarriageCelebration)

@@ -17,9 +17,9 @@ AgencyModel _$AgencyModelFromJson(Map<String, dynamic> json) => AgencyModel(
       parroquia:
           LocationModel.fromJson(json['parroquia'] as Map<String, dynamic>),
       region: json['region'] as String,
+      state: json['state'] as String,
       latitude: json['latitude'] as String?,
       longitude: json['longitude'] as String?,
-      state: json['state'] as String,
     );
 
 Map<String, dynamic> _$AgencyModelToJson(AgencyModel instance) =>

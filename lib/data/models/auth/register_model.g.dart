@@ -99,7 +99,7 @@ MeModel _$MeModelFromJson(Map<String, dynamic> json) => MeModel(
               .toList() ??
           const [],
       agency: (json['agency'] as List<dynamic>?)
-              ?.map((e) => Agency.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => AgencyModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       aplication: (json['aplication'] as List<dynamic>?)
@@ -133,7 +133,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       state: json['state'] as String?,
       agency: json['agency'] == null
           ? null
-          : Agency.fromJson(json['agency'] as Map<String, dynamic>),
+          : AgencyModel.fromJson(json['agency'] as Map<String, dynamic>),
       access: (json['access'] as List<dynamic>?)
           ?.map((e) => Access.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -146,42 +146,6 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'state': instance.state,
       'agency': instance.agency,
       'access': instance.access,
-    };
-
-Agency _$AgencyFromJson(Map<String, dynamic> json) => Agency(
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-      description: json['description'] as String?,
-      country: json['country'] == null
-          ? null
-          : Territory.fromJson(json['country'] as Map<String, dynamic>),
-      province: json['province'] == null
-          ? null
-          : Territory.fromJson(json['province'] as Map<String, dynamic>),
-      canton: json['canton'] == null
-          ? null
-          : Territory.fromJson(json['canton'] as Map<String, dynamic>),
-      parroquia: json['parroquia'] == null
-          ? null
-          : Territory.fromJson(json['parroquia'] as Map<String, dynamic>),
-      region: json['region'] as String?,
-      latitude: json['latitude'] as String?,
-      longitude: json['longitude'] as String?,
-      state: json['state'] as String?,
-    );
-
-Map<String, dynamic> _$AgencyToJson(Agency instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'description': instance.description,
-      'country': instance.country,
-      'province': instance.province,
-      'canton': instance.canton,
-      'parroquia': instance.parroquia,
-      'region': instance.region,
-      'latitude': instance.latitude,
-      'longitude': instance.longitude,
-      'state': instance.state,
     };
 
 Aplication _$AplicationFromJson(Map<String, dynamic> json) => Aplication(

@@ -234,7 +234,7 @@ class MarriageCelebrationModelForm
   String secondPartnerControlPath() => pathBuilder(secondPartnerControlName);
   MarriageCelebrationType? get _requestOwnerTypeValue =>
       requestOwnerTypeControl?.value;
-  Agency? get _agencyValue => agencyControl?.value;
+  AgencyModel? get _agencyValue => agencyControl?.value;
   RequestOwner? get _requestOwnerValue => requestOwnerControl?.value;
   Witness? get _firstWitnessValue => firstWitnessControl?.value;
   Witness? get _secondWitnessValue => secondWitnessControl?.value;
@@ -521,7 +521,7 @@ class MarriageCelebrationModelForm
   }
 
   void agencyValueUpdate(
-    Agency? value, {
+    AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -597,7 +597,7 @@ class MarriageCelebrationModelForm
   }
 
   void agencyValuePatch(
-    Agency? value, {
+    AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -673,7 +673,7 @@ class MarriageCelebrationModelForm
       requestOwnerTypeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void agencyValueReset(
-    Agency? value, {
+    AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -746,8 +746,8 @@ class MarriageCelebrationModelForm
           ? form.control(requestOwnerTypeControlPath())
               as FormControl<MarriageCelebrationType>?
           : null;
-  FormControl<Agency>? get agencyControl => containsAgency
-      ? form.control(agencyControlPath()) as FormControl<Agency>?
+  FormControl<AgencyModel>? get agencyControl => containsAgency
+      ? form.control(agencyControlPath()) as FormControl<AgencyModel>?
       : null;
   FormControl<RequestOwner>? get requestOwnerControl => containsRequestOwner
       ? form.control(requestOwnerControlPath()) as FormControl<RequestOwner>?
@@ -976,7 +976,7 @@ class MarriageCelebrationModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        agencyControlName: FormControl<Agency>(
+        agencyControlName: FormControl<AgencyModel>(
             value: marriageCelebrationModel?.agency,
             validators: [],
             asyncValidators: [],
@@ -1775,9 +1775,7 @@ class PartnerForm implements FormModel<Partner> {
                         ))
                     .toList() ??
                 [],
-            validators: [
-              (control) => requiredValidator(control as FormArray<Document>)
-            ],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false)

@@ -46,11 +46,11 @@ class FirstStepForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               PrimaryText(l10n.cedulaIde),
-              PrimaryFilePicker(
+              PrimaryFilePicker<String>(
                 formControl: formModel.identityCardControl,
               ),
               PrimaryText(l10n.poderEsp),
-              PrimaryFilePicker(
+              PrimaryFilePicker<String>(
                 formControl: formModel.powerOfAttorneyControl,
               ),
             ],

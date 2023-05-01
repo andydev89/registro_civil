@@ -13,7 +13,7 @@ MarriageCelebrationModel _$MarriageCelebrationModelFromJson(
           _$MarriageCelebrationTypeEnumMap, json['requestOwnerType']),
       agency: json['agencyId'] == null
           ? null
-          : Agency.fromJson(json['agencyId'] as Map<String, dynamic>),
+          : AgencyModel.fromJson(json['agencyId'] as Map<String, dynamic>),
       requestOwner: json['requestOwner'] == null
           ? null
           : RequestOwner.fromJson(json['requestOwner'] as Map<String, dynamic>),

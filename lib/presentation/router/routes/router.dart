@@ -23,6 +23,7 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.
 import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/services/services_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/agency_step/marriage_celebration_agency_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/first_step_attorney_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/first_step_contracting_party_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/marriage_celebration_first_step_route.dart';
@@ -38,6 +39,7 @@ import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages
 import 'package:registro_civil_apk/presentation/pages/my_orders/pages/my_order_rejecting_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/pages/my_turns_page.dart';
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
+import 'package:registro_civil_apk/presentation/pages/notification/request_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/select_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts_page.dart';
@@ -59,6 +61,7 @@ import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/s
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_second_step/simple_certificate_second_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/simple_certificate_router_page.dart';
 import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.gr.dart';
 
@@ -236,6 +239,10 @@ part 'router.gr.dart';
                 ),
               ],
             ),
+            CustomRoute(
+              page: MarriageCelebrationAgencyPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
             CupertinoRoute(
               page: MarriageCelebrationSecondStepRouterPage,
               children: [
@@ -309,6 +316,10 @@ part 'router.gr.dart';
         // My OODERS
         CupertinoRoute(
           page: MyOrderRejectingPage,
+        ),
+        // REQUEST
+        CupertinoRoute(
+          page: RequestPage,
         ),
         //PAYMENT
         CupertinoRoute(

@@ -344,5 +344,12 @@
   "tusHiSon": "Your children are",
   "documentosContrayente": "Documents of the contracting party",
   "archivo": "File",
-  "comentario": "Comment"
+  "comentario": "Comment",
+  "obligatorio": "Required",
+  "noObligatorio": "Optional",
+  "nohayDocALLenar": "There are no documents to fill out",
+  "confirmacionMarriageCelebration": "Remember that on the day of the marriage celebration you must physically present the documentation that was attached to the virtual agency. In the event that the documents that have been uploaded to the system are not complete or are adulterated, the marriage will be suspended and cannot be celebrated.",
+  "confirmacionSol": "Application Confirmation",
+  "solicitudExi": "Your application was successful!",
+  "lugarTra": "Place where you want to carry out the procedure"
 }

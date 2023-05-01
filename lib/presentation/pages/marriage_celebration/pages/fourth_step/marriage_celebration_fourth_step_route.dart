@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,9 +9,11 @@ import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_cel
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/widgets/modal_confirmation.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_file_picker.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
@@ -45,113 +49,124 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
             child: documents
                 .when(
                   skipLoadingOnRefresh: false,
-                  data: (data) => ScrollableContent(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            PrimaryText(
-                              '${l10n.documentosContrayente}'
-                              ' ${firstContractParty ? 1 : 2}',
-                            ),
-                          ],
-                        ).verticalPadding(10),
-                        PartnerFormBuilder(
-                          model: formModel.model,
-                          initState: (_, __) {
-                            for (final element in data) {
-                              final actual = FormControl<Document>(
-                                value: Document(
-                                  referenceId: element.id,
-                                ),
-                                // validators:
-                                //     element.required ? [requiredValidator] : [],
-                                validators: [documentFileRequiredValidator],
-                              );
-                              formModel.documentsControl.add(
-                                actual,
-                              );
-                            }
-                          },
-                          builder: (_, __, ___) => Column(
+                  data: (data) => data.isNotEmpty
+                      ? ScrollableContent(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              ReactivePartnerFormArrayBuilder(
-                                formControl: formModel.documentsControl,
-                                itemBuilder: (_, index, value, __) {
-                                  return DocumentFormBuilder(
-                                    model: formModel.documentsControl.controls
-                                        .elementAt(index).value,
-                                    builder: (_, form, __) => Card(
-                                      color: Colors.white,
-                                      elevation: 4,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          10,
-                                        ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  PrimaryText(
+                                    '${l10n.documentosContrayente}'
+                                    ' ${firstContractParty ? 1 : 2}',
+                                  ),
+                                ],
+                              ).verticalPadding(10),
+                              PartnerFormBuilder(
+                                model: formModel.model,
+                                initState: (_, __) {
+                                  for (final element in data) {
+                                    final actual = FormControl<Document>(
+                                      value: Document(
+                                        referenceId: element.id,
                                       ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              PrimaryText(
-                                                data
-                                                    .elementAt(index)
-                                                    .documentName,
-                                                maxLines: 3,
-                                              ),
-                                            ],
-                                          ).verticalPadding(10),
-                                          PrimaryText(l10n.archivo),
-                                          PrimaryFilePicker<String>(
-                                            formControl: form.fileControl,
+                                      validators: element.required
+                                          ? [documentFileRequiredValidator]
+                                          : [],
+                                    );
+                                    formModel.documentsControl.add(
+                                      actual,
+                                    );
+                                  }
+                                },
+                                builder: (_, __, ___) => Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ReactivePartnerFormArrayBuilder(
+                                      formControl: formModel.documentsControl,
+                                      itemBuilder: (_, index, value, __) {
+                                        return Card(
+                                          color: Colors.white,
+                                          elevation: 4,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              10,
+                                            ),
                                           ),
-                                          Row(
+                                          child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Flexible(
-                                                child: PrimaryText(
-                                                  '${l10n.comentario}: '
-                                                  ' ${data.elementAt(index).documentNote}',
-                                                  overFlow:
-                                                      TextOverflow.visible,
-                                                  textAlign: TextAlign.start,
-                                                ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  PrimaryText(
+                                                    data
+                                                        .elementAt(index)
+                                                        .documentName,
+                                                    maxLines: 3,
+                                                  ),
+                                                ],
+                                              ).verticalPadding(10),
+                                              PrimaryText(l10n.archivo),
+                                              PrimaryFilePicker<Document>(
+                                                formControl:
+                                                    formModel.documentsControl
+                                                            .controls
+                                                            .elementAt(index)
+                                                        as FormControl<
+                                                            Document>,
+                                                onFileSelected:
+                                                    (document, p0) => formModel
+                                                            .documentsControl
+                                                            .controls
+                                                            .elementAt(index)
+                                                            .value =
+                                                        document!
+                                                            .copyWith(file: p0),
                                               ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Flexible(
+                                                    child: PrimaryText(
+                                                      '${l10n.comentario}: '
+                                                      ' ${data.elementAt(index).documentNote}',
+                                                      overFlow:
+                                                          TextOverflow.visible,
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ).verticalPadding(5),
+                                              Row(
+                                                children: [
+                                                  PrimaryText(
+                                                    '${l10n.estado}: '
+                                                    '${data.elementAt(index).required ? l10n.obligatorio : l10n.noObligatorio}',
+                                                    maxLines: 2,
+                                                  ),
+                                                ],
+                                              ).verticalPadding(5),
                                             ],
-                                          ).verticalPadding(5),
-                                          Row(
-                                            children: [
-                                              PrimaryText(
-                                                '${l10n.estado}:',
-                                              ),
-                                              PrimaryText(
-                                                data
-                                                    .elementAt(index)
-                                                    .required
-                                                    .toString(),
-                                              ),
-                                            ],
-                                          ).verticalPadding(5),
-                                        ],
-                                      ).symmetricPadding(10, 30),
+                                          ).symmetricPadding(10, 30),
+                                        );
+                                      },
                                     ),
-                                  );
-                                },
+                                  ],
+                                ),
                               ),
                             ],
                           ),
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [PrimaryText(l10n.nohayDocALLenar)],
                         ),
-                      ],
-                    ),
-                  ),
                   error: (error, _) => Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -176,36 +191,44 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
           ),
           bottomNavigationBar: ReactivePartnerFormConsumer(
             builder: (_, form, __) {
-              print('////');
-              print('1${form.form.hasErrors}');
-              print(
-                  '2${form.documentsControl.controls.every((element) => element.hasErrors)}');
-              print('3${form.documentsControl.hasErrors}');
-              print('4${form.form.valid}');
-              print('5${form.documentsControl.valid}');
-              print('////');
-
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   PrimaryButton(
                     title: l10n.siguiente,
-                    onPressed: !form.documentsControl.controls
-                            .every((element) => element.hasErrors)
+                    onPressed: form.form.valid && !documents.isLoading
                         ? () {
                             if (firstContractParty) {
+                              ref
+                                  .read(marriageCelebrationProvider.notifier)
+                                  .setPartner(form.model, 0);
                               context.navigateTo(
                                 MarriageCelebrationFourthStepRouterRoute(
                                   firstContractParty: false,
+                                  key: const ValueKey('secondContractParty'),
                                 ),
                               );
                               return;
                             }
-                            // context.router.push(
-                            //   MarriageCelebrationFourthStepRoute(
-                            //     firstContractParty: firstContractParty,
-                            //   ),
-                            // );
+                            ref
+                                .read(marriageCelebrationProvider.notifier)
+                                .setPartner(form.model, 1);
+                            showContentDialog(
+                              context,
+                              content: ModalConfirmation(
+                                onConfirm: () => context.replaceRoute(
+                                  RequestRoute(
+                                    title: l10n.confirmacionSol,
+                                    subtitle: l10n.solicitudExi,
+                                    state: ref.watch(
+                                      MarriageProvider(
+                                        marriageCelebrationModel,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
                           }
                         : null,
                   ),

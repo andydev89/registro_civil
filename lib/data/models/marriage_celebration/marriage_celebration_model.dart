@@ -5,6 +5,7 @@ import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relat
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
 part 'marriage_celebration_model.g.dart';
@@ -15,7 +16,7 @@ part 'marriage_celebration_model.gform.dart';
 class MarriageCelebrationModel {
   MarriageCelebrationModel({
     @FormControlAnnotation<MarriageCelebrationType>() this.requestOwnerType,
-    @FormControlAnnotation<Agency>() this.agency,
+    @FormControlAnnotation<AgencyModel>() this.agency,
     @FormControlAnnotation<RequestOwner>() this.requestOwner,
     @FormControlAnnotation<Witness>() this.firstWitness,
     @FormControlAnnotation<Witness>() this.secondWitness,
@@ -29,7 +30,7 @@ class MarriageCelebrationModel {
       _$MarriageCelebrationModelFromJson(json);
   final MarriageCelebrationType? requestOwnerType;
   @JsonKey(toJson: _agencyToJson, name: 'agencyId')
-  final Agency? agency;
+  final AgencyModel? agency;
   final RequestOwner? requestOwner;
   final bool isOutside;
   final Outside? outside;
@@ -38,7 +39,7 @@ class MarriageCelebrationModel {
   final Partner? firstPartner;
   final Partner? secondPartner;
 
-  static String _agencyToJson(Agency? agency) {
+  static String _agencyToJson(AgencyModel? agency) {
     return agency?.id ?? '';
   }
 
@@ -46,7 +47,7 @@ class MarriageCelebrationModel {
 
   MarriageCelebrationModel copyWith({
     MarriageCelebrationType? requestOwnerType,
-    Agency? agency,
+    AgencyModel? agency,
     RequestOwner? requestOwner,
     bool? isOutside,
     Outside? outside,
@@ -191,7 +192,7 @@ class Partner {
         this.conadis = false,
     @FormControlAnnotation<String>()
         this.conadisNumber = '',
-    @FormArrayAnnotation<Document>(validators: [requiredValidator])
+    @FormArrayAnnotation<Document>()
         this.documents = const [],
   });
 
@@ -252,6 +253,15 @@ class Document {
       _$DocumentFromJson(json);
   final String referenceId;
   final String file;
+
+  Document copyWith({
+    String? referenceId,
+    String? file,
+  }) =>
+      Document(
+        referenceId: referenceId ?? this.referenceId,
+        file: file ?? this.file,
+      );
 
   Map<String, dynamic> toJson() => _$DocumentToJson(this);
 }

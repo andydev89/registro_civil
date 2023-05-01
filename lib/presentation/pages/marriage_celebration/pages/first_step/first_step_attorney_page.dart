@@ -54,13 +54,7 @@ class FirstStepAttorneyPage extends ConsumerWidget {
                               .read(marriageCelebrationProvider.notifier)
                               .setFirstStep(formModel.model);
                           context.navigateTo(
-                            MarriageCelebrationSecondStepRouterRoute(
-                              children: [
-                                SecondStepAtHeadquarterRoute(
-                                  children: [WitnessRoute(indexWitness: 0)],
-                                ),
-                              ],
-                            ),
+                            const MarriageCelebrationAgencyRoute(),
                           );
                         }
                       : null,

@@ -1,7 +1,12 @@
+import 'dart:convert';
+
+import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
+import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
+import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
@@ -27,6 +32,11 @@ class MarriageCelebration extends _$MarriageCelebration {
     state = MarriageCelebrationModel(
       requestOwnerType: MarriageCelebrationType.contractingParty,
     );
+  }
+
+  // AGENCY
+  void setAgency(AgencyModel? agency) {
+    state = state.copyWith(agency: agency);
   }
 
   // FIRST STEP
@@ -65,10 +75,6 @@ class MarriageCelebration extends _$MarriageCelebration {
   void setOutsider(Outside outside) {
     state = state.copyWith(outside: outside);
   }
-
-  // void setDocuments(List<Document> documents,) {
-  //   state = state.copyWith(documents: documents);
-  // }
 }
 
 @riverpod
@@ -131,4 +137,21 @@ Future<List<DocumentResponse>> marriageDocuments(
       ))
           .data ??
       [];
+}
+
+@riverpod
+Future<Result<bool, StatusCode>> marriage(
+  MarriageRef ref,
+  MarriageCelebrationModel model,
+) async {
+  final api = ref.watch(apiProvider);
+  print(model.toJson());
+  String prettyJsonString =
+      JsonEncoder.withIndent('  ').convert(model.toJson());
+  print(prettyJsonString);
+  final result = await api.marriage(model);
+  if (result.success) {
+    return const Result.ok(true);
+  }
+  return Result.err(result.status);
 }

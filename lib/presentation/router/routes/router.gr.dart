@@ -227,6 +227,18 @@ class _$AppRouter extends RootStackRouter {
         child: const MyOrderRejectingPage(),
       );
     },
+    RequestRoute.name: (routeData) {
+      final args = routeData.argsAs<RequestRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: RequestPage(
+          key: args.key,
+          title: args.title,
+          subtitle: args.subtitle,
+          state: args.state,
+        ),
+      );
+    },
     SelectPaymentRoute.name: (routeData) {
       final args = routeData.argsAs<SelectPaymentRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -385,6 +397,15 @@ class _$AppRouter extends RootStackRouter {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: const MarriageCelebrationFirstStepRouterPage(),
+      );
+    },
+    MarriageCelebrationAgencyRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationAgencyPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
       );
     },
     MarriageCelebrationSecondStepRouterRoute.name: (routeData) {
@@ -705,6 +726,11 @@ class _$AppRouter extends RootStackRouter {
                   ],
                 ),
                 RouteConfig(
+                  MarriageCelebrationAgencyRoute.name,
+                  path: 'marriage-celebration-agency-page',
+                  parent: MarriageCelebrationRouterRoute.name,
+                ),
+                RouteConfig(
                   MarriageCelebrationSecondStepRouterRoute.name,
                   path: 'marriage-celebration-second-step-router-page',
                   parent: MarriageCelebrationRouterRoute.name,
@@ -791,6 +817,11 @@ class _$AppRouter extends RootStackRouter {
             RouteConfig(
               MyOrderRejectingRoute.name,
               path: 'my-order-rejecting-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
+              RequestRoute.name,
+              path: 'request-page',
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
@@ -1228,6 +1259,50 @@ class MyOrderRejectingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MyOrderRejectingRoute';
+}
+
+/// generated route for
+/// [RequestPage]
+class RequestRoute extends PageRouteInfo<RequestRouteArgs> {
+  RequestRoute({
+    Key? key,
+    required String title,
+    required String subtitle,
+    required AsyncValue<dynamic> state,
+  }) : super(
+          RequestRoute.name,
+          path: 'request-page',
+          args: RequestRouteArgs(
+            key: key,
+            title: title,
+            subtitle: subtitle,
+            state: state,
+          ),
+        );
+
+  static const String name = 'RequestRoute';
+}
+
+class RequestRouteArgs {
+  const RequestRouteArgs({
+    this.key,
+    required this.title,
+    required this.subtitle,
+    required this.state,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final String subtitle;
+
+  final AsyncValue<dynamic> state;
+
+  @override
+  String toString() {
+    return 'RequestRouteArgs{key: $key, title: $title, subtitle: $subtitle, state: $state}';
+  }
 }
 
 /// generated route for
@@ -1722,6 +1797,18 @@ class MarriageCelebrationFirstStepRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MarriageCelebrationFirstStepRouterRoute';
+}
+
+/// generated route for
+/// [MarriageCelebrationAgencyPage]
+class MarriageCelebrationAgencyRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationAgencyRoute()
+      : super(
+          MarriageCelebrationAgencyRoute.name,
+          path: 'marriage-celebration-agency-page',
+        );
+
+  static const String name = 'MarriageCelebrationAgencyRoute';
 }
 
 /// generated route for

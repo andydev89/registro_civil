@@ -15,26 +15,28 @@ import 'package:registro_civil_apk/presentation/widgets/decorations/input_decora
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class PrimaryFilePicker<String> extends StatelessWidget {
+class PrimaryFilePicker<T> extends StatelessWidget {
   const PrimaryFilePicker({
     super.key,
-   required this.formControl,
+    required this.formControl,
     this.allowedExtensions = const [FileExtensions.pdf],
     this.maxFileSizeMB = 5,
+    this.onFileSelected,
   }) : assert(
           maxFileSizeMB <= 5 && maxFileSizeMB > 0,
           'El tamaño debe ser entre 1 y 5 MB',
         );
-  final FormControl<String>? formControl;
+  final FormControl<T>? formControl;
   final List<FileExtensions> allowedExtensions;
   final int maxFileSizeMB;
+  final void Function(T?,String)? onFileSelected;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final select = ValueNotifier(false);
     var name = '-';
-    return ReactiveFormField(
+    return ReactiveFormField<T, T>(
       formControl: formControl,
       builder: (field) {
         return InkWell(
@@ -60,8 +62,11 @@ class PrimaryFilePicker<String> extends StatelessWidget {
                       final pdfBytes = pdfFile.readAsBytesSync();
                       final base64Pdf =
                           'data:application/pdf;base64,${base64Encode(pdfBytes)}';
-                      field.didChange(base64Pdf);
-                      formControl?.updateValue(base64Pdf as String);
+                      if (base64Pdf is T) {
+                        field.didChange(base64Pdf as T);
+                      } else {
+                        onFileSelected?.call(field.control.value,base64Pdf);
+                      }
                       name = result.files.single.name;
                       select.value = true;
                     } catch (e) {
