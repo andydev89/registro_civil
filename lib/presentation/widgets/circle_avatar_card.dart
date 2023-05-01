@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:popover/popover.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
@@ -51,9 +52,21 @@ class CircleAvatarCardWidget extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 2.5),
-                child: PrimaryText(
-                  title,
-                  fontWeight: FontWeight.bold,
+                child: GestureDetector(
+                  onTap: () => showPopover(
+                    context: context,
+                    bodyBuilder: (context) => PrimaryText(
+                      title,
+                      maxLines: 5,
+                      fontWeight: FontWeight.bold,
+                    ).symmetricPadding(20, 20),
+                  ),
+                  child: PrimaryText(
+                    title,
+                    fontWeight: FontWeight.bold,
+                    maxLines: 2,
+                    overFlow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
               Row(
@@ -78,7 +91,7 @@ class CircleAvatarCardWidget extends StatelessWidget {
                     onPressed: onPressedView,
                   ),
                 ],
-              ).verticalPadding(8),
+              ).verticalPadding(25),
             ],
           ),
         ),
