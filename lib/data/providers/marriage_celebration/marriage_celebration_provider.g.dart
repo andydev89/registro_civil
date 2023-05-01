@@ -130,90 +130,8 @@ class MarriageDocumentsProvider
   }
 }
 
-String _$marriageHash() => r'98a2ff051ae4775a25258fa172615ae70018498f';
-typedef MarriageRef = AutoDisposeFutureProviderRef<Result<bool, StatusCode>>;
-
-/// See also [marriage].
-@ProviderFor(marriage)
-const marriageProvider = MarriageFamily();
-
-/// See also [marriage].
-class MarriageFamily extends Family<AsyncValue<Result<bool, StatusCode>>> {
-  /// See also [marriage].
-  const MarriageFamily();
-
-  /// See also [marriage].
-  MarriageProvider call(
-    MarriageCelebrationModel model,
-  ) {
-    return MarriageProvider(
-      model,
-    );
-  }
-
-  @override
-  MarriageProvider getProviderOverride(
-    covariant MarriageProvider provider,
-  ) {
-    return call(
-      provider.model,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'marriageProvider';
-}
-
-/// See also [marriage].
-class MarriageProvider
-    extends AutoDisposeFutureProvider<Result<bool, StatusCode>> {
-  /// See also [marriage].
-  MarriageProvider(
-    this.model,
-  ) : super.internal(
-          (ref) => marriage(
-            ref,
-            model,
-          ),
-          from: marriageProvider,
-          name: r'marriageProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$marriageHash,
-          dependencies: MarriageFamily._dependencies,
-          allTransitiveDependencies: MarriageFamily._allTransitiveDependencies,
-        );
-
-  final MarriageCelebrationModel model;
-
-  @override
-  bool operator ==(Object other) {
-    return other is MarriageProvider && other.model == model;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, model.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
 String _$marriageCelebrationHash() =>
-    r'ff193a5ee83230f6b1aa78cb06147542f482f1b0';
+    r'dd6758d657c84910a0254293011f70e3a6a22f2a';
 
 /// See also [MarriageCelebration].
 @ProviderFor(MarriageCelebration)
@@ -433,4 +351,19 @@ class PartnersProvider
     );
   }
 }
+
+String _$marriageHash() => r'b260fa2b711a32a59cb3ee73013eba85d311eaa8';
+
+/// See also [Marriage].
+@ProviderFor(Marriage)
+final marriageProvider = AutoDisposeNotifierProvider<Marriage, void>.internal(
+  Marriage.new,
+  name: r'marriageProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$marriageHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Marriage = AutoDisposeNotifier<void>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

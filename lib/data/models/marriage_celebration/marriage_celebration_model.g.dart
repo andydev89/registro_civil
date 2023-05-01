@@ -10,7 +10,8 @@ MarriageCelebrationModel _$MarriageCelebrationModelFromJson(
         Map<String, dynamic> json) =>
     MarriageCelebrationModel(
       requestOwnerType: $enumDecodeNullable(
-          _$MarriageCelebrationTypeEnumMap, json['requestOwnerType']),
+              _$MarriageCelebrationTypeEnumMap, json['requestOwnerType']) ??
+          MarriageCelebrationType.attorney,
       agency: json['agencyId'] == null
           ? null
           : AgencyModel.fromJson(json['agencyId'] as Map<String, dynamic>),
@@ -39,7 +40,7 @@ Map<String, dynamic> _$MarriageCelebrationModelToJson(
         MarriageCelebrationModel instance) =>
     <String, dynamic>{
       'requestOwnerType':
-          _$MarriageCelebrationTypeEnumMap[instance.requestOwnerType],
+          MarriageCelebrationType.toJson(instance.requestOwnerType),
       'agencyId': MarriageCelebrationModel._agencyToJson(instance.agency),
       'requestOwner': instance.requestOwner?.toJson(),
       'isOutside': instance.isOutside,
@@ -51,8 +52,8 @@ Map<String, dynamic> _$MarriageCelebrationModelToJson(
     };
 
 const _$MarriageCelebrationTypeEnumMap = {
-  MarriageCelebrationType.attorney: 'REPRESENTATIVE',
-  MarriageCelebrationType.contractingParty: 'FIRST_PARTNER',
+  MarriageCelebrationType.attorney: 'attorney',
+  MarriageCelebrationType.contractingParty: 'contractingParty',
 };
 
 RequestOwner _$RequestOwnerFromJson(Map<String, dynamic> json) => RequestOwner(
@@ -75,10 +76,10 @@ Map<String, dynamic> _$RequestOwnerToJson(RequestOwner instance) =>
     };
 
 Outside _$OutsideFromJson(Map<String, dynamic> json) => Outside(
-      latitude: json['latitude'] as String,
-      longitude: json['longitude'] as String,
-      principalStreet: json['principalStreet'] as String,
-      secondaryStreet: json['secondaryStreet'] as String,
+      latitude: json['latitude'] as String? ?? '',
+      longitude: json['longitude'] as String? ?? '',
+      principalStreet: json['principalStreet'] as String? ?? '',
+      secondaryStreet: json['secondaryStreet'] as String? ?? '',
     );
 
 Map<String, dynamic> _$OutsideToJson(Outside instance) => <String, dynamic>{
@@ -117,10 +118,10 @@ Partner _$PartnerFromJson(Map<String, dynamic> json) => Partner(
 Map<String, dynamic> _$PartnerToJson(Partner instance) => <String, dynamic>{
       'nui': instance.nui,
       'name': instance.name,
-      'maritalStatus': _$MaritalStatusEnumMap[instance.maritalStatus],
+      'maritalStatus': MaritalStatus.toJson(instance.maritalStatus),
       'hasChildren': Binary.toJson(instance.hasChildren),
       'childrenRelationship':
-          _$ChildrenRelationShipEnumMap[instance.childrenRelationship],
+          ChildrenRelationShip.toJson(instance.childrenRelationship),
       'hasConadis': instance.conadis,
       'conadisNui': instance.conadisNumber,
       'documents': instance.documents.map((e) => e.toJson()).toList(),

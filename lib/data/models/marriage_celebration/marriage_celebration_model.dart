@@ -6,6 +6,7 @@ import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
+import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
 part 'marriage_celebration_model.g.dart';
@@ -15,7 +16,8 @@ part 'marriage_celebration_model.gform.dart';
 @JsonSerializable(explicitToJson: true)
 class MarriageCelebrationModel {
   MarriageCelebrationModel({
-    @FormControlAnnotation<MarriageCelebrationType>() this.requestOwnerType,
+    @FormControlAnnotation<MarriageCelebrationType>()
+        this.requestOwnerType = MarriageCelebrationType.attorney,
     @FormControlAnnotation<AgencyModel>() this.agency,
     @FormControlAnnotation<RequestOwner>() this.requestOwner,
     @FormControlAnnotation<Witness>() this.firstWitness,
@@ -28,7 +30,9 @@ class MarriageCelebrationModel {
 
   factory MarriageCelebrationModel.fromJson(Map<String, dynamic> json) =>
       _$MarriageCelebrationModelFromJson(json);
-  final MarriageCelebrationType? requestOwnerType;
+
+  @JsonKey(toJson: MarriageCelebrationType.toJson)
+  final MarriageCelebrationType requestOwnerType;
   @JsonKey(toJson: _agencyToJson, name: 'agencyId')
   final AgencyModel? agency;
   final RequestOwner? requestOwner;
@@ -61,7 +65,7 @@ class MarriageCelebrationModel {
       agency: agency ?? this.agency,
       requestOwner: requestOwner ?? this.requestOwner,
       isOutside: isOutside ?? this.isOutside,
-      outside: outside,
+      outside: outside ?? this.outside,
       firstWitness: firstWitness ?? this.firstWitness,
       secondWitness: secondWitness ?? this.secondWitness,
       firstPartner: firstPartner ?? this.firstPartner,
@@ -121,14 +125,12 @@ class RequestOwner {
 @JsonSerializable()
 class Outside {
   Outside({
+    @FormControlAnnotation(validators: [requiredValidator]) this.latitude = '',
+    @FormControlAnnotation(validators: [requiredValidator]) this.longitude = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.latitude,
+        this.principalStreet = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.longitude,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.principalStreet,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.secondaryStreet,
+        this.secondaryStreet = '',
   });
 
   factory Outside.fromJson(Map<String, dynamic> json) =>
@@ -201,9 +203,11 @@ class Partner {
 
   final String nui;
   final String name;
+  @JsonKey(toJson: MaritalStatus.toJson)
   final MaritalStatus? maritalStatus;
   @JsonKey(toJson: Binary.toJson)
   final Binary? hasChildren;
+  @JsonKey(toJson: ChildrenRelationShip.toJson)
   final ChildrenRelationShip? childrenRelationship;
   @JsonKey(name: 'hasConadis')
   final bool conadis;
@@ -264,4 +268,20 @@ class Document {
       );
 
   Map<String, dynamic> toJson() => _$DocumentToJson(this);
+}
+
+@ReactiveFormAnnotation()
+class SelectAgency {
+  SelectAgency({
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.province,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.canton,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.agency,
+  });
+
+  final LocationModel province;
+  final LocationModel canton;
+  final AgencyModel agency;
 }

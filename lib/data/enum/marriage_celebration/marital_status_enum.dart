@@ -5,12 +5,15 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 enum MaritalStatus implements Translatable {
   single('SINGLE'),
   divorced('DIVORCED'),
-  widowed('WIDOWED'),
+  widower('WIDOWER'),
   commonLawMarriage('COMMON_LAW_MARRIAGE'),
   nonResidentPartner('NON_RESIDENT_PARTNER');
 
   const MaritalStatus(this.toText);
   final String toText;
+
+  static String toJson(MaritalStatus? maritalStatus) =>
+      maritalStatus?.toText ?? '';
 
   @override
   String translate(BuildContext context) {
@@ -20,7 +23,7 @@ enum MaritalStatus implements Translatable {
         return l10n.single;
       case MaritalStatus.divorced:
         return l10n.divorced;
-      case MaritalStatus.widowed:
+      case MaritalStatus.widower:
         return l10n.widowed;
       case MaritalStatus.commonLawMarriage:
         return l10n.commonLawMarriage;

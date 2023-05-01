@@ -19,9 +19,7 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final model = ref.watch(marriageCelebrationProvider);
-    return MarriageCelebrationModelFormBuilder(
-      model: model,
+    return SelectAgencyFormBuilder(
       builder: (_, formModel, __) => PrimaryScaffold(
         title: l10n.solicitudCelMat,
         subtitle: l10n.ingreseInfSol,
@@ -29,16 +27,16 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
           child: ScrollableContent(
             child: Column(
               children: [
-                // SelectElementFromApi(
-                //   formControlName: 'province',
-                //   label: l10n.provincia,
-                //   provider: provincesProvider,
-                // ).horizontalPadding(20),
-                // SelectElementFromApi(
-                //   formControlName: 'canton',
-                //   label: l10n.canton,
-                //   provider: cantonProvider,
-                // ).horizontalPadding(20),
+                SelectElementFromApi(
+                  formControl: formModel.provinceControl,
+                  label: l10n.provincia,
+                  provider: provincesProvider,
+                ).horizontalPadding(20),
+                SelectElementFromApi(
+                  formControl: formModel.cantonControl,
+                  label: l10n.canton,
+                  provider: cantonProvider,
+                ).horizontalPadding(20),
                 SelectElementFromApi(
                   formControl: formModel.agencyControl,
                   label: l10n.agencia,
@@ -46,20 +44,20 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
                 ).horizontalPadding(20),
               ],
             ),
-          ) .symmetricPadding(10, 20),
+          ).symmetricPadding(10, 20),
         ),
-        bottomNavigationBar: ReactiveMarriageCelebrationModelFormConsumer(
+        bottomNavigationBar: ReactiveSelectAgencyFormConsumer(
           builder: (_, formModel, __) {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 PrimaryButton(
                   title: l10n.siguiente,
-                  onPressed: formModel.agencyControl?.valid ?? false
+                  onPressed: formModel.form.valid
                       ? () {
                           ref
                               .read(marriageCelebrationProvider.notifier)
-                              .setAgency(formModel.agencyControl?.value);
+                              .setAgency(formModel.agencyControl.value);
                           context.navigateTo(
                             MarriageCelebrationSecondStepRouterRoute(
                               children: [

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
@@ -18,18 +16,18 @@ part 'marriage_celebration_provider.g.dart';
 class MarriageCelebration extends _$MarriageCelebration {
   @override
   MarriageCelebrationModel build() {
-    return MarriageCelebrationModel();
+    return MarriageCelebrationModel(outside: Outside());
   }
 
 // INIT
   void setAttorney() {
-    state = MarriageCelebrationModel(
+    state = state.copyWith(
       requestOwnerType: MarriageCelebrationType.attorney,
     );
   }
 
   void setContractingParty() {
-    state = MarriageCelebrationModel(
+    state = state.copyWith(
       requestOwnerType: MarriageCelebrationType.contractingParty,
     );
   }
@@ -140,18 +138,20 @@ Future<List<DocumentResponse>> marriageDocuments(
 }
 
 @riverpod
-Future<Result<bool, StatusCode>> marriage(
-  MarriageRef ref,
-  MarriageCelebrationModel model,
-) async {
-  final api = ref.watch(apiProvider);
-  print(model.toJson());
-  String prettyJsonString =
-      JsonEncoder.withIndent('  ').convert(model.toJson());
-  print(prettyJsonString);
-  final result = await api.marriage(model);
-  if (result.success) {
-    return const Result.ok(true);
+class Marriage extends _$Marriage {
+  @override
+  void build() {
+    return;
   }
-  return Result.err(result.status);
+
+  Future<Result<bool, StatusCode>> marriage(
+    MarriageCelebrationModel model,
+  ) async {
+    final api = ref.watch(apiProvider);
+    final result = await api.marriage(model);
+    if (result.success) {
+      return const Result.ok(true);
+    }
+    return Result.err(result.status);
+  }
 }

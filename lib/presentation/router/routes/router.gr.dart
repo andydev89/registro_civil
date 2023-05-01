@@ -212,6 +212,7 @@ class _$AppRouter extends RootStackRouter {
           notificationType: args.notificationType,
           onTap: args.onTap,
           description: args.description,
+          bottomText: args.bottomText,
         ),
       );
     },
@@ -225,18 +226,6 @@ class _$AppRouter extends RootStackRouter {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: const MyOrderRejectingPage(),
-      );
-    },
-    RequestRoute.name: (routeData) {
-      final args = routeData.argsAs<RequestRouteArgs>();
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: RequestPage(
-          key: args.key,
-          title: args.title,
-          subtitle: args.subtitle,
-          state: args.state,
-        ),
       );
     },
     SelectPaymentRoute.name: (routeData) {
@@ -820,11 +809,6 @@ class _$AppRouter extends RootStackRouter {
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
-              RequestRoute.name,
-              path: 'request-page',
-              parent: RootRouterRoute.name,
-            ),
-            RouteConfig(
               SelectPaymentRoute.name,
               path: 'select-payment-page',
               parent: RootRouterRoute.name,
@@ -1181,6 +1165,7 @@ class NotificationRoute extends PageRouteInfo<NotificationRouteArgs> {
     required NotificationType notificationType,
     void Function(BuildContext)? onTap,
     Widget? description,
+    String? bottomText,
   }) : super(
           NotificationRoute.name,
           path: 'notification-page',
@@ -1194,6 +1179,7 @@ class NotificationRoute extends PageRouteInfo<NotificationRouteArgs> {
             notificationType: notificationType,
             onTap: onTap,
             description: description,
+            bottomText: bottomText,
           ),
         );
 
@@ -1211,6 +1197,7 @@ class NotificationRouteArgs {
     required this.notificationType,
     this.onTap,
     this.description,
+    this.bottomText,
   });
 
   final Key? key;
@@ -1231,9 +1218,11 @@ class NotificationRouteArgs {
 
   final Widget? description;
 
+  final String? bottomText;
+
   @override
   String toString() {
-    return 'NotificationRouteArgs{key: $key, title: $title, subtitle: $subtitle, message: $message, bottonTitle: $bottonTitle, buttonText: $buttonText, notificationType: $notificationType, onTap: $onTap, description: $description}';
+    return 'NotificationRouteArgs{key: $key, title: $title, subtitle: $subtitle, message: $message, bottonTitle: $bottonTitle, buttonText: $buttonText, notificationType: $notificationType, onTap: $onTap, description: $description, bottomText: $bottomText}';
   }
 }
 
@@ -1259,50 +1248,6 @@ class MyOrderRejectingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MyOrderRejectingRoute';
-}
-
-/// generated route for
-/// [RequestPage]
-class RequestRoute extends PageRouteInfo<RequestRouteArgs> {
-  RequestRoute({
-    Key? key,
-    required String title,
-    required String subtitle,
-    required AsyncValue<dynamic> state,
-  }) : super(
-          RequestRoute.name,
-          path: 'request-page',
-          args: RequestRouteArgs(
-            key: key,
-            title: title,
-            subtitle: subtitle,
-            state: state,
-          ),
-        );
-
-  static const String name = 'RequestRoute';
-}
-
-class RequestRouteArgs {
-  const RequestRouteArgs({
-    this.key,
-    required this.title,
-    required this.subtitle,
-    required this.state,
-  });
-
-  final Key? key;
-
-  final String title;
-
-  final String subtitle;
-
-  final AsyncValue<dynamic> state;
-
-  @override
-  String toString() {
-    return 'RequestRouteArgs{key: $key, title: $title, subtitle: $subtitle, state: $state}';
-  }
 }
 
 /// generated route for

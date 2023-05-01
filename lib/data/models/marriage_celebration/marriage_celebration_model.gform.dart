@@ -232,8 +232,8 @@ class MarriageCelebrationModelForm
   String isOutsideControlPath() => pathBuilder(isOutsideControlName);
   String firstPartnerControlPath() => pathBuilder(firstPartnerControlName);
   String secondPartnerControlPath() => pathBuilder(secondPartnerControlName);
-  MarriageCelebrationType? get _requestOwnerTypeValue =>
-      requestOwnerTypeControl?.value;
+  MarriageCelebrationType get _requestOwnerTypeValue =>
+      requestOwnerTypeControl.value as MarriageCelebrationType;
   AgencyModel? get _agencyValue => agencyControl?.value;
   RequestOwner? get _requestOwnerValue => requestOwnerControl?.value;
   Witness? get _firstWitnessValue => firstWitnessControl?.value;
@@ -313,7 +313,7 @@ class MarriageCelebrationModelForm
     }
   }
 
-  Object? get requestOwnerTypeErrors => requestOwnerTypeControl?.errors;
+  Object? get requestOwnerTypeErrors => requestOwnerTypeControl.errors;
   Object? get agencyErrors => agencyControl?.errors;
   Object? get requestOwnerErrors => requestOwnerControl?.errors;
   Object? get firstWitnessErrors => firstWitnessControl?.errors;
@@ -329,32 +329,6 @@ class MarriageCelebrationModelForm
   void get isOutsideFocus => form.focus(isOutsideControlPath());
   void get firstPartnerFocus => form.focus(firstPartnerControlPath());
   void get secondPartnerFocus => form.focus(secondPartnerControlPath());
-  void requestOwnerTypeRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsRequestOwnerType) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          requestOwnerTypeControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            requestOwnerTypeControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
   void agencyRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -512,11 +486,11 @@ class MarriageCelebrationModelForm
   }
 
   void requestOwnerTypeValueUpdate(
-    MarriageCelebrationType? value, {
+    MarriageCelebrationType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    requestOwnerTypeControl?.updateValue(value,
+    requestOwnerTypeControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -588,11 +562,11 @@ class MarriageCelebrationModelForm
   }
 
   void requestOwnerTypeValuePatch(
-    MarriageCelebrationType? value, {
+    MarriageCelebrationType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    requestOwnerTypeControl?.patchValue(value,
+    requestOwnerTypeControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -664,13 +638,13 @@ class MarriageCelebrationModelForm
   }
 
   void requestOwnerTypeValueReset(
-    MarriageCelebrationType? value, {
+    MarriageCelebrationType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      requestOwnerTypeControl?.reset(
+      requestOwnerTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void agencyValueReset(
     AgencyModel? value, {
@@ -741,11 +715,9 @@ class MarriageCelebrationModelForm
               PartnerForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
-  FormControl<MarriageCelebrationType>? get requestOwnerTypeControl =>
-      containsRequestOwnerType
-          ? form.control(requestOwnerTypeControlPath())
-              as FormControl<MarriageCelebrationType>?
-          : null;
+  FormControl<MarriageCelebrationType> get requestOwnerTypeControl =>
+      form.control(requestOwnerTypeControlPath())
+          as FormControl<MarriageCelebrationType>;
   FormControl<AgencyModel>? get agencyControl => containsAgency
       ? form.control(agencyControlPath()) as FormControl<AgencyModel>?
       : null;
@@ -772,12 +744,12 @@ class MarriageCelebrationModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      requestOwnerTypeControl?.markAsDisabled(
+      requestOwnerTypeControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      requestOwnerTypeControl?.markAsEnabled(
+      requestOwnerTypeControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -2944,10 +2916,10 @@ class OutsideForm implements FormModel<Outside> {
       pathBuilder(principalStreetControlName);
   String secondaryStreetControlPath() =>
       pathBuilder(secondaryStreetControlName);
-  String get _latitudeValue => latitudeControl.value as String;
-  String get _longitudeValue => longitudeControl.value as String;
-  String get _principalStreetValue => principalStreetControl.value as String;
-  String get _secondaryStreetValue => secondaryStreetControl.value as String;
+  String get _latitudeValue => latitudeControl.value ?? "";
+  String get _longitudeValue => longitudeControl.value ?? "";
+  String get _principalStreetValue => principalStreetControl.value ?? "";
+  String get _secondaryStreetValue => secondaryStreetControl.value ?? "";
   bool get containsLatitude {
     try {
       form.control(latitudeControlPath());
@@ -4633,6 +4605,574 @@ class ReactiveDocumentFormFormGroupArrayBuilder<V> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formModel = ReactiveDocumentForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveSelectAgencyFormConsumer extends StatelessWidget {
+  const ReactiveSelectAgencyFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
+
+  final Widget? child;
+
+  final Widget Function(
+      BuildContext context, SelectAgencyForm formModel, Widget? child) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveSelectAgencyForm.of(context);
+
+    if (formModel is! SelectAgencyForm) {
+      throw FormControlParentNotFoundException(this);
+    }
+    return builder(context, formModel, child);
+  }
+}
+
+class SelectAgencyFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const SelectAgencyFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
+
+  final SelectAgencyForm form;
+}
+
+class ReactiveSelectAgencyForm extends StatelessWidget {
+  const ReactiveSelectAgencyForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
+
+  final Widget child;
+
+  final SelectAgencyForm form;
+
+  final WillPopCallback? onWillPop;
+
+  static SelectAgencyForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
+    if (listen) {
+      return context
+          .dependOnInheritedWidgetOfExactType<
+              SelectAgencyFormInheritedStreamer>()
+          ?.form;
+    }
+
+    final element = context.getElementForInheritedWidgetOfExactType<
+        SelectAgencyFormInheritedStreamer>();
+    return element == null
+        ? null
+        : (element.widget as SelectAgencyFormInheritedStreamer).form;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SelectAgencyFormInheritedStreamer(
+      form: form,
+      stream: form.form.statusChanged,
+      child: WillPopScope(
+        onWillPop: onWillPop,
+        child: child,
+      ),
+    );
+  }
+}
+
+class SelectAgencyFormBuilder extends StatefulWidget {
+  const SelectAgencyFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final SelectAgency? model;
+
+  final Widget? child;
+
+  final WillPopCallback? onWillPop;
+
+  final Widget Function(
+      BuildContext context, SelectAgencyForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, SelectAgencyForm formModel)?
+      initState;
+
+  @override
+  _SelectAgencyFormBuilderState createState() =>
+      _SelectAgencyFormBuilderState();
+}
+
+class _SelectAgencyFormBuilderState extends State<SelectAgencyFormBuilder> {
+  late FormGroup _form;
+
+  late SelectAgencyForm _formModel;
+
+  @override
+  void initState() {
+    _form = FormGroup({});
+    _formModel = SelectAgencyForm(widget.model, _form, null);
+
+    final elements = _formModel.formElements();
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    if (elements.disabled) {
+      _form.markAsDisabled();
+    }
+
+    _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant SelectAgencyFormBuilder oldWidget) {
+    if (widget.model != oldWidget.model) {
+      _formModel = SelectAgencyForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
+
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveSelectAgencyForm(
+      form: _formModel,
+      onWillPop: widget.onWillPop,
+      child: ReactiveFormBuilder(
+        form: () => _form,
+        onWillPop: widget.onWillPop,
+        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class SelectAgencyForm implements FormModel<SelectAgency> {
+  SelectAgencyForm(
+    this.selectAgency,
+    this.form,
+    this.path,
+  ) {}
+
+  static String provinceControlName = "province";
+
+  static String cantonControlName = "canton";
+
+  static String agencyControlName = "agency";
+
+  final SelectAgency? selectAgency;
+
+  final FormGroup form;
+
+  final String? path;
+
+  String provinceControlPath() => pathBuilder(provinceControlName);
+  String cantonControlPath() => pathBuilder(cantonControlName);
+  String agencyControlPath() => pathBuilder(agencyControlName);
+  LocationModel get _provinceValue => provinceControl.value as LocationModel;
+  LocationModel get _cantonValue => cantonControl.value as LocationModel;
+  AgencyModel get _agencyValue => agencyControl.value as AgencyModel;
+  bool get containsProvince {
+    try {
+      form.control(provinceControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsCanton {
+    try {
+      form.control(cantonControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsAgency {
+    try {
+      form.control(agencyControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get provinceErrors => provinceControl.errors;
+  Object? get cantonErrors => cantonControl.errors;
+  Object? get agencyErrors => agencyControl.errors;
+  void get provinceFocus => form.focus(provinceControlPath());
+  void get cantonFocus => form.focus(cantonControlPath());
+  void get agencyFocus => form.focus(agencyControlPath());
+  void provinceValueUpdate(
+    LocationModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    provinceControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void cantonValueUpdate(
+    LocationModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    cantonControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void agencyValueUpdate(
+    AgencyModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    agencyControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void provinceValuePatch(
+    LocationModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    provinceControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void cantonValuePatch(
+    LocationModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    cantonControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void agencyValuePatch(
+    AgencyModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    agencyControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void provinceValueReset(
+    LocationModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      provinceControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void cantonValueReset(
+    LocationModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      cantonControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void agencyValueReset(
+    AgencyModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      agencyControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<LocationModel> get provinceControl =>
+      form.control(provinceControlPath()) as FormControl<LocationModel>;
+  FormControl<LocationModel> get cantonControl =>
+      form.control(cantonControlPath()) as FormControl<LocationModel>;
+  FormControl<AgencyModel> get agencyControl =>
+      form.control(agencyControlPath()) as FormControl<AgencyModel>;
+  void provinceSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      provinceControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      provinceControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void cantonSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      cantonControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      cantonControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void agencySetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      agencyControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      agencyControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  @override
+  SelectAgency get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return SelectAgency(
+        province: _provinceValue, canton: _cantonValue, agency: _agencyValue);
+  }
+
+  SelectAgencyForm copyWithPath(String? path) {
+    return SelectAgencyForm(selectAgency, form, path);
+  }
+
+  @override
+  void updateValue(
+    SelectAgency value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.updateValue(
+          SelectAgencyForm(value, FormGroup({}), null).formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void resetValue(
+    SelectAgency value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: SelectAgencyForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+  FormGroup formElements() => FormGroup({
+        provinceControlName: FormControl<LocationModel>(
+            value: selectAgency?.province,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        cantonControlName: FormControl<LocationModel>(
+            value: selectAgency?.canton,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        agencyControlName: FormControl<AgencyModel>(
+            value: selectAgency?.agency,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+class ReactiveSelectAgencyFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveSelectAgencyFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(SelectAgencyForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      SelectAgencyForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, T? item, SelectAgencyForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveSelectAgencyForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveSelectAgencyFormFormGroupArrayBuilder<V> extends StatelessWidget {
+  const ReactiveSelectAgencyFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      SelectAgencyForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      SelectAgencyForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, V? item, SelectAgencyForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveSelectAgencyForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
