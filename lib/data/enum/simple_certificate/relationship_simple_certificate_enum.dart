@@ -5,17 +5,24 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 
 enum RelationshipSimpleCertificateEnum implements Translatable {
   @JsonValue('FATHER_MOTHER_DEATHED')
-  fatherMotherDeceased,
+  fatherMotherDeceased('FATHER_MOTHER_DEATHED'),
   @JsonValue('SON')
-  son,
+  son('SON'),
   @JsonValue('SPOUSE')
-  spouse,
+  spouse('SPOUSE'),
   @JsonValue('COEXISTENT')
-  coexistent,
+  coexistent('COEXISTENT'),
   @JsonValue('STAFF')
-  staff;
+  staff('STAFF');
 
- static List<RelationshipSimpleCertificateEnum> get list => [
+  const RelationshipSimpleCertificateEnum(this.toText);
+  final String toText;
+
+  static String? toJson(RelationshipSimpleCertificateEnum? type) {
+    return type?.toText;
+  }
+
+  static List<RelationshipSimpleCertificateEnum> get list => [
         RelationshipSimpleCertificateEnum.fatherMotherDeceased,
         RelationshipSimpleCertificateEnum.son,
         RelationshipSimpleCertificateEnum.spouse,

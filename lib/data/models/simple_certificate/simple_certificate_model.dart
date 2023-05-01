@@ -54,7 +54,7 @@ class RejectInformation {
   final String rejectDescription;
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class SimpleCertificateModel {
   SimpleCertificateModel({
     required this.type,
@@ -86,9 +86,11 @@ class SimpleCertificateModel {
 
   factory SimpleCertificateModel.fromJson(Map<String, dynamic> json) =>
       _$SimpleCertificateModelFromJson(json);
+  @JsonKey(toJson: TypeService.toJson)
   final TypeService type;
   final String userNui;
   final bool isFamily;
+  @JsonKey(toJson: RelationshipSimpleCertificateEnum.toJson)
   final RelationshipSimpleCertificateEnum typeFamily;
   final String nuiFamily;
   final bool isConadis;

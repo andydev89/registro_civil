@@ -38,6 +38,7 @@ class TypeServiceModel {
   final String? path;
   final String iconoWeb;
   final String iconoMovil;
+  @JsonKey(toJson: TypeService.toJson)
   final TypeService type;
   final bool schedule;
 

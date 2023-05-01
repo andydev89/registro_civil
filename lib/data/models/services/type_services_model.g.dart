@@ -38,7 +38,7 @@ Map<String, dynamic> _$TypeServiceModelToJson(TypeServiceModel instance) =>
       'path': instance.path,
       'iconoWeb': instance.iconoWeb,
       'iconoMovil': instance.iconoMovil,
-      'type': _$TypeServiceEnumMap[instance.type]!,
+      'type': TypeService.toJson(instance.type),
       'schedule': instance.schedule,
     };
 
