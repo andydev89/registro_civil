@@ -130,7 +130,7 @@ Map<String, dynamic> _$PartnerToJson(Partner instance) => <String, dynamic>{
 const _$MaritalStatusEnumMap = {
   MaritalStatus.single: 'single',
   MaritalStatus.divorced: 'divorced',
-  MaritalStatus.widowed: 'widowed',
+  MaritalStatus.widower: 'widower',
   MaritalStatus.commonLawMarriage: 'commonLawMarriage',
   MaritalStatus.nonResidentPartner: 'nonResidentPartner',
 };

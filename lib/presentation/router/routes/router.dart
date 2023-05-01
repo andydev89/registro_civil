@@ -60,7 +60,6 @@ import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/s
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_second_step/simple_certificate_second_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/simple_certificate_router_page.dart';
 import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.gr.dart';
 

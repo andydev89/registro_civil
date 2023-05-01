@@ -4,7 +4,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
@@ -220,30 +219,32 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                             showContentDialog(
                               context,
                               content: ModalConfirmation(
-                                onConfirm: () => ref
-                                    .read(marriageProvider.notifier)
-                                    .marriage(marriageCelebrationModel)
-                                    .when(
-                                      ok: (_) {
-                                        Navigator.pop(context);
-                                        context.replaceRoute(
-                                          NotificationRoute(
-                                            title: l10n.confirmacionSol,
-                                            message: l10n.solicitudExi,
-                                            buttonText: l10n.misPedidos,
-                                            bottomText: l10n
-                                                .envNotCorElectronicoReservarTurno,
-                                            notificationType:
-                                                NotificationType.succes,
-                                            onTap: (context) {},
-                                          ),
-                                        );
-                                      },
-                                      err: (err) => showAlert(
-                                        err.toString(),
-                                        TypeAlert.error,
-                                      ),
+                                onConfirm: () async {
+                                  final result = await ref
+                                      .read(marriageProvider.notifier)
+                                      .marriage(marriageCelebrationModel);
+                                  result.when(
+                                    ok: (_) {
+                                      Navigator.pop(context);
+                                      context.replaceRoute(
+                                        NotificationRoute(
+                                          title: l10n.confirmacionSol,
+                                          message: l10n.solicitudExi,
+                                          buttonText: l10n.misPedidos,
+                                          bottomText: l10n
+                                              .envNotCorElectronicoReservarTurno,
+                                          notificationType:
+                                              NotificationType.succes,
+                                          onTap: (context) {},
+                                        ),
+                                      );
+                                    },
+                                    err: (err) => showAlert(
+                                      err.toString(),
+                                      TypeAlert.error,
                                     ),
+                                  );
+                                },
                               ),
                             );
                           }
