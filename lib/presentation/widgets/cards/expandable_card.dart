@@ -36,8 +36,8 @@ class ExpandableCard extends StatelessWidget {
     final l10n = context.l10n;
     return PrimaryCard(
       child: ExpandedTile(
+        contentseparator: 0,
         title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -112,7 +112,10 @@ class DescriptionRow extends StatelessWidget {
             title: text,
             color: coloredUpperCaseColor,
           ),
-          child: PrimaryCaption(text),
+          child: PrimaryCaption(
+            text,
+            textAlign: TextAlign.right,
+          ),
         ),
       ],
     ).verticalPadding(5);

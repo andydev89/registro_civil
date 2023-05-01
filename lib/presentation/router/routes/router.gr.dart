@@ -246,10 +246,21 @@ class _$AppRouter extends RootStackRouter {
         child: MakePaymentPage(
           key: args.key,
           requestNumber: args.requestNumber,
-          totalToPay: args.totalToPay,
           buttonText: args.buttonText,
+          service: args.service,
           onTapSuccessPayment: args.onTapSuccessPayment,
           onTapFailedPayment: args.onTapFailedPayment,
+        ),
+      );
+    },
+    WebviewPaymentRoute.name: (routeData) {
+      final args = routeData.argsAs<WebviewPaymentRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: WebviewPaymentPage(
+          key: args.key,
+          url: args.url,
+          onPageFinished: args.onPageFinished,
         ),
       );
     },
@@ -819,6 +830,11 @@ class _$AppRouter extends RootStackRouter {
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
+              WebviewPaymentRoute.name,
+              path: 'webview-payment-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
               PaymentServiceJudgmentsNotarialActsRoute.name,
               path: 'payment-service-judgments-notarial-acts-page',
               parent: RootRouterRoute.name,
@@ -1295,8 +1311,8 @@ class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
   MakePaymentRoute({
     Key? key,
     required String requestNumber,
-    required double totalToPay,
     required String buttonText,
+    required TypeOfServiceModel service,
     void Function(BuildContext)? onTapSuccessPayment,
     void Function(BuildContext)? onTapFailedPayment,
   }) : super(
@@ -1305,8 +1321,8 @@ class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
           args: MakePaymentRouteArgs(
             key: key,
             requestNumber: requestNumber,
-            totalToPay: totalToPay,
             buttonText: buttonText,
+            service: service,
             onTapSuccessPayment: onTapSuccessPayment,
             onTapFailedPayment: onTapFailedPayment,
           ),
@@ -1319,8 +1335,8 @@ class MakePaymentRouteArgs {
   const MakePaymentRouteArgs({
     this.key,
     required this.requestNumber,
-    required this.totalToPay,
     required this.buttonText,
+    required this.service,
     this.onTapSuccessPayment,
     this.onTapFailedPayment,
   });
@@ -1329,9 +1345,9 @@ class MakePaymentRouteArgs {
 
   final String requestNumber;
 
-  final double totalToPay;
-
   final String buttonText;
+
+  final TypeOfServiceModel service;
 
   final void Function(BuildContext)? onTapSuccessPayment;
 
@@ -1339,7 +1355,46 @@ class MakePaymentRouteArgs {
 
   @override
   String toString() {
-    return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, totalToPay: $totalToPay, buttonText: $buttonText, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment}';
+    return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, buttonText: $buttonText, service: $service, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment}';
+  }
+}
+
+/// generated route for
+/// [WebviewPaymentPage]
+class WebviewPaymentRoute extends PageRouteInfo<WebviewPaymentRouteArgs> {
+  WebviewPaymentRoute({
+    Key? key,
+    required String url,
+    void Function()? onPageFinished,
+  }) : super(
+          WebviewPaymentRoute.name,
+          path: 'webview-payment-page',
+          args: WebviewPaymentRouteArgs(
+            key: key,
+            url: url,
+            onPageFinished: onPageFinished,
+          ),
+        );
+
+  static const String name = 'WebviewPaymentRoute';
+}
+
+class WebviewPaymentRouteArgs {
+  const WebviewPaymentRouteArgs({
+    this.key,
+    required this.url,
+    this.onPageFinished,
+  });
+
+  final Key? key;
+
+  final String url;
+
+  final void Function()? onPageFinished;
+
+  @override
+  String toString() {
+    return 'WebviewPaymentRouteArgs{key: $key, url: $url, onPageFinished: $onPageFinished}';
   }
 }
 

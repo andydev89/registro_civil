@@ -19,6 +19,29 @@ class _Api implements Api {
   String? baseUrl;
 
   @override
+  Future<DeviceIpModel> getDeviceIp() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<DeviceIpModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'https://api.ipify.org/?format=json',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = DeviceIpModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<ResponseModel<RegisterCitizenModel>> registerValidateNui(
       nuiModel) async {
     const _extra = <String, dynamic>{};
@@ -673,8 +696,9 @@ class _Api implements Api {
     from,
     to,
     agency,
-    typeOfService,
-  ) async {
+    typeOfService, {
+    required special,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'pageNo': pageNo,
@@ -683,6 +707,7 @@ class _Api implements Api {
       r'to': to,
       r'agency': agency,
       r'typeOfService': typeOfService,
+      r'special': special,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
@@ -749,6 +774,46 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModelPagination<List<UserScheduleModel>?>> schedulesByUser(
+    pageNo,
+    pageSize,
+    userId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+      r'user': userId,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<UserScheduleModel>>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/schedule/api/receipt/byuser',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModelPagination<List<UserScheduleModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<UserScheduleModel>(
+                  (i) => UserScheduleModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModel<BookedReceiptModel>> confirmSchedule(
       receiptModel) async {
     const _extra = <String, dynamic>{};
@@ -773,6 +838,57 @@ class _Api implements Api {
       _result.data!,
       (json) => BookedReceiptModel.fromJson(json as Map<String, dynamic>),
     );
+    return value;
+  }
+
+  @override
+  Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
+      placeToPayModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(placeToPayModel.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PlaceToPayReferenceModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PlaceToPayReferenceModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
+      reference) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>?>(
+        _setStreamType<PlaceToPayTransactionDetailsModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/${reference}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data == null
+        ? null
+        : PlaceToPayTransactionDetailsModel.fromJson(_result.data!);
     return value;
   }
 

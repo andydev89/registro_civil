@@ -16,7 +16,7 @@ class MyTurnsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final myTurns = ref.watch(schedulesProvider);
+    final myTurns = ref.watch(schedulesByUserProvider);
     return PrimaryScaffold(
       horizontalPadding: 15,
       title: l10n.misTurnos,
@@ -27,6 +27,7 @@ class MyTurnsPage extends ConsumerWidget {
               PrimarySearch(
                 showFilter: true,
                 onPressed: () {
+                  //todo buscar turno reservado
                   // print('asd');
                 },
               ).verticalPadding(20),
@@ -38,11 +39,11 @@ class MyTurnsPage extends ConsumerWidget {
                           (e) => MyTurnExpandableCard(
                             data: MyTurnExpandableCardModel(
                               id: e.id,
-                              agency: e.agency.name,
-                              city: e.agency.region,
-                              date: e.date,
-                              typeOfService: e.typeOfService,
-                              time: e.startTime,
+                              agency: e.schedule.agency.name,
+                              city: e.schedule.agency.region,
+                              date: e.schedule.date,
+                              typeOfService: e.schedule.typeOfService,
+                              time: e.schedule.startTime,
                             ),
                           ).verticalPadding(10),
                         )

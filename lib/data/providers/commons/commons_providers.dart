@@ -1,6 +1,7 @@
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
+import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
@@ -54,7 +55,7 @@ Future<Result<List<AgencyModel>, StatusCode>> agencies(
 
 @riverpod
 Future<Result<List<AgencyModel>, StatusCode>> agenciesByProvince(
-  AgenciesByProvinceRef ref,{
+  AgenciesByProvinceRef ref, {
   required String provinceId,
 }) async {
   final api = ref.watch(apiProvider);
@@ -80,4 +81,15 @@ Future<Result<List<TypeOfServiceModel>, StatusCode>> services(
               : response.data!,
         )
       : Result.err(response.status);
+}
+
+@riverpod
+Future<DeviceIpModel> deviceIp(DeviceIpRef ref) async {
+  final api = ref.watch(apiProvider);
+  try {
+    final response = await api.getDeviceIp();
+    return response;
+  } on Exception catch (e) {
+    return DeviceIpModel(ip: '');
+  }
 }

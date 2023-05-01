@@ -22,15 +22,15 @@ class SelectPaymentPage extends StatelessWidget {
     return PrimaryScaffold(
       title: l10n.realizarPago,
       subtitle: l10n.seleccioneMetodoPago,
-      // TODO(alejandro): cambiar este gesture detector por Bounceble
       body: GestureDetector(
-        onTap: () => context.navigateTo(
-          MakePaymentRoute(
-            requestNumber: requestNumber,
-            totalToPay: totalToPay,
-            buttonText: l10n.continuar,
-          ),
-        ),
+        // onTap: () => context.navigateTo(
+        //   MakePaymentRoute(
+        //     requestNumber: requestNumber,
+        //     totalToPay: totalToPay,
+        //     buttonText: l10n.continuar,
+        //     // service: PaymentMethodType.placeToPay,
+        //   ),
+        // ),
         child: DecoratedBox(
           decoration: ShapeDecoration(
             color: Colors.white,
