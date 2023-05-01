@@ -262,4 +262,19 @@ class ServicesProvider extends AutoDisposeFutureProvider<
     return _SystemHash.finish(hash);
   }
 }
+
+String _$deviceIpHash() => r'7c730168548fc69e3c9bd912c1f1f8f7ad9e82ca';
+
+/// See also [deviceIp].
+@ProviderFor(deviceIp)
+final deviceIpProvider = AutoDisposeFutureProvider<DeviceIpModel>.internal(
+  deviceIp,
+  name: r'deviceIpProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$deviceIpHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef DeviceIpRef = AutoDisposeFutureProviderRef<DeviceIpModel>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

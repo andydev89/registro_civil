@@ -74,3 +74,36 @@ class ResponseModelPagination<T> {
   ) =>
       _$ResponseModelPaginationToJson(this, toJsonT);
 }
+
+@JsonSerializable(genericArgumentFactories: true)
+class PlaceToPayResponseModel<T> {
+  PlaceToPayResponseModel({
+    required this.status,
+    required this.message,
+    required this.details,
+    required this.data,
+  });
+
+  factory PlaceToPayResponseModel.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object? json) fromJsonT,
+  ) =>
+      _$PlaceToPayResponseModelFromJson(json, fromJsonT);
+  @JsonKey(name: 'Code')
+  final StatusCode? status;
+  @JsonKey(name: 'Message')
+  final String? message;
+  @JsonKey(name: 'Details')
+  final String? details;
+  final T? data;
+  bool get success =>
+      status == StatusCode.s200 ||
+      status == StatusCode.s201 ||
+      status == StatusCode.s202 ||
+      status == null;
+
+  Map<String, dynamic> toJson(
+    Object? Function(T value) toJsonT,
+  ) =>
+      _$PlaceToPayResponseModelToJson(this, toJsonT);
+}

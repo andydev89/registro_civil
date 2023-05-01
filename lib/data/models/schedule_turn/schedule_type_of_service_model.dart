@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'schedule_type_of_service_model.g.dart';
 
 @JsonSerializable()
-class ScheduleTypeOfServiceModel {
-  ScheduleTypeOfServiceModel({
+class ScheduleTypeOfServiceModel extends Equatable {
+  const ScheduleTypeOfServiceModel({
     required this.id,
     required this.name,
     required this.price,
@@ -33,4 +34,7 @@ class ScheduleTypeOfServiceModel {
   final String typeService;
 
   Map<String, dynamic> toJson() => _$ScheduleTypeOfServiceModelToJson(this);
+  
+  @override
+  List<Object?> get props => [id];
 }

@@ -22,11 +22,16 @@ class ScheduleTimeSelector extends ConsumerWidget {
       formControl: formControl,
       label: l10n.horDisponibles,
       times: List.generate(
-        endTime.hour - initialTime.hour,
-        (index) => TimeOfDay(
-          hour: initialTime.hour + index,
-          minute: initialTime.minute,
-        ),
+        (endTime.hour - initialTime.hour) + 1,
+        (index) {
+          print(index);
+          print(initialTime);
+          print(endTime);
+          return TimeOfDay(
+            hour: initialTime.hour + index,
+            minute: initialTime.minute,
+          );
+        },
       ),
     );
   }

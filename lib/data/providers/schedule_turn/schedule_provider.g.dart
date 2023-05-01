@@ -7,7 +7,7 @@ part of 'schedule_provider.dart';
 // **************************************************************************
 
 String _$availableSchedulesHash() =>
-    r'956e1374ad8da8e1ddfc334f3ac5d1f868a05e89';
+    r'a29d3e1f5e1a336c60e77bb2fc17a51873b2e484';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -44,17 +44,19 @@ class AvailableSchedulesFamily
   const AvailableSchedulesFamily();
 
   /// See also [availableSchedules].
-  AvailableSchedulesProvider call(
-    DateTime startDate,
-    DateTime endDate,
-    String agency,
-    int typeOfService,
-  ) {
+  AvailableSchedulesProvider call({
+    required DateTime startDate,
+    required DateTime endDate,
+    required String agency,
+    required int typeOfService,
+    required bool special,
+  }) {
     return AvailableSchedulesProvider(
-      startDate,
-      endDate,
-      agency,
-      typeOfService,
+      startDate: startDate,
+      endDate: endDate,
+      agency: agency,
+      typeOfService: typeOfService,
+      special: special,
     );
   }
 
@@ -63,10 +65,11 @@ class AvailableSchedulesFamily
     covariant AvailableSchedulesProvider provider,
   ) {
     return call(
-      provider.startDate,
-      provider.endDate,
-      provider.agency,
-      provider.typeOfService,
+      startDate: provider.startDate,
+      endDate: provider.endDate,
+      agency: provider.agency,
+      typeOfService: provider.typeOfService,
+      special: provider.special,
     );
   }
 
@@ -89,18 +92,20 @@ class AvailableSchedulesFamily
 class AvailableSchedulesProvider
     extends AutoDisposeFutureProvider<Result<List<ScheduleModel>, StatusCode>> {
   /// See also [availableSchedules].
-  AvailableSchedulesProvider(
-    this.startDate,
-    this.endDate,
-    this.agency,
-    this.typeOfService,
-  ) : super.internal(
+  AvailableSchedulesProvider({
+    required this.startDate,
+    required this.endDate,
+    required this.agency,
+    required this.typeOfService,
+    required this.special,
+  }) : super.internal(
           (ref) => availableSchedules(
             ref,
-            startDate,
-            endDate,
-            agency,
-            typeOfService,
+            startDate: startDate,
+            endDate: endDate,
+            agency: agency,
+            typeOfService: typeOfService,
+            special: special,
           ),
           from: availableSchedulesProvider,
           name: r'availableSchedulesProvider',
@@ -117,6 +122,7 @@ class AvailableSchedulesProvider
   final DateTime endDate;
   final String agency;
   final int typeOfService;
+  final bool special;
 
   @override
   bool operator ==(Object other) {
@@ -124,7 +130,8 @@ class AvailableSchedulesProvider
         other.startDate == startDate &&
         other.endDate == endDate &&
         other.agency == agency &&
-        other.typeOfService == typeOfService;
+        other.typeOfService == typeOfService &&
+        other.special == special;
   }
 
   @override
@@ -134,6 +141,7 @@ class AvailableSchedulesProvider
     hash = _SystemHash.combine(hash, endDate.hashCode);
     hash = _SystemHash.combine(hash, agency.hashCode);
     hash = _SystemHash.combine(hash, typeOfService.hashCode);
+    hash = _SystemHash.combine(hash, special.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -155,6 +163,23 @@ final schedulesProvider =
 
 typedef SchedulesRef
     = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCode>>;
+String _$schedulesByUserHash() => r'5ec5339555d8cd5af449fa0aa14c4b2808195fba';
+
+/// See also [schedulesByUser].
+@ProviderFor(schedulesByUser)
+final schedulesByUserProvider = AutoDisposeFutureProvider<
+    Result<List<UserScheduleModel>, StatusCode>>.internal(
+  schedulesByUser,
+  name: r'schedulesByUserProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$schedulesByUserHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SchedulesByUserRef
+    = AutoDisposeFutureProviderRef<Result<List<UserScheduleModel>, StatusCode>>;
 String _$confirmScheduleHash() => r'2fc651dea63b9a07e1bb10f776fb378537e9695b';
 typedef ConfirmScheduleRef
     = AutoDisposeFutureProviderRef<Result<BookedReceiptModel, StatusCode>>;

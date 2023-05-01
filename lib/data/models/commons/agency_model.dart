@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
@@ -6,8 +7,8 @@ import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 part 'agency_model.g.dart';
 
 @JsonSerializable()
-class AgencyModel implements Translatable {
-  AgencyModel({
+class AgencyModel extends Equatable implements Translatable {
+  const AgencyModel({
     required this.id,
     required this.name,
     required this.description,
@@ -43,4 +44,7 @@ class AgencyModel implements Translatable {
 
   @override
   String translate(BuildContext context) => name;
+
+  @override
+  List<Object?> get props => [id];
 }
