@@ -18,6 +18,7 @@ class PrimaryTextField extends StatelessWidget {
     this.ligth = false,
     this.onTap,
     this.onChanged,
+    this.readOnly = false,
   });
 
   final TextEditingController? controller;
@@ -32,6 +33,7 @@ class PrimaryTextField extends StatelessWidget {
   final bool ligth;
   final void Function()? onTap;
   final void Function(String)? onChanged;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class PrimaryTextField extends StatelessWidget {
           key: key,
           keyboardType: textInputType,
           onTap: onTap,
+          readOnly: readOnly,
           onChanged: onChanged,
           controller: controller,
           style: TextStyle(

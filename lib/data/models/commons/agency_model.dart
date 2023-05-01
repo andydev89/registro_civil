@@ -17,9 +17,9 @@ class AgencyModel extends Equatable implements Translatable {
     required this.canton,
     required this.parroquia,
     required this.region,
+    required this.state,
     this.latitude,
     this.longitude,
-    required this.state,
   });
 
   factory AgencyModel.fromJson(Map<String, dynamic> json) =>

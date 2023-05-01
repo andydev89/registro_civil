@@ -26,6 +26,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
     this.hintText,
     this.onTap,
     this.setSuffixIconConstraints = false,
+    this.textCapitalization = TextCapitalization.none,
     super.key,
   });
   final FormControl<T>? formControl;
@@ -44,6 +45,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
   final String? hintText;
   final bool setSuffixIconConstraints;
   final void Function(FormControl<T>)? onTap;
+  final TextCapitalization textCapitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +65,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
           obscureText: obscureText,
           controller: controller,
           onTap: onTap,
+          textCapitalization: textCapitalization,
           style: TextStyle(
             color: ligth ? Colors.white : Colors.black,
             fontSize: fontSize,
@@ -70,7 +73,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
           ),
           cursorColor: ligth ? Colors.white : Colors.black,
           keyboardType: keyboardType,
-          validationMessages: validationMessage(l10n),
+          validationMessages: validationMessage(context),
           inputFormatters: inputFormatters,
           decoration: primaryInputDecoration(
             light: ligth,

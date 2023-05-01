@@ -98,6 +98,9 @@ class $AssetsPngGen {
   AssetGenImage get pagoServicioIngresosSentencias =>
       const AssetGenImage('assets/png/pago_servicio_ingresos_sentencias.png');
 
+  /// File path: assets/png/pdf.png
+  AssetGenImage get pdf => const AssetGenImage('assets/png/pdf.png');
+
   /// File path: assets/png/qr.png
   AssetGenImage get qr => const AssetGenImage('assets/png/qr.png');
 
@@ -151,6 +154,7 @@ class $AssetsPngGen {
         logo,
         pagoConvalidacionDocumentos,
         pagoServicioIngresosSentencias,
+        pdf,
         qr,
         registroResidencia,
         reverso,
@@ -491,7 +495,7 @@ class SvgGenImage {
       colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      clipBehavior: clipBehavior,
+      // clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

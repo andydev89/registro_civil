@@ -6,6 +6,8 @@ import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
+import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
+import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
 import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
@@ -94,6 +96,19 @@ abstract class Api {
   // Future<ResponseModel<RegisterCitizenModel>> validateNui(
   //   @Body() NuiModel nuiModel,
   // );
+
+  // MARRIAGE CELEBRATION
+  @POST('/marriage/api/marriage')
+  Future<ResponseModel<CommandModel>> marriage(
+    @Body() MarriageCelebrationModel model,
+  );
+
+  @GET('/marriage/api/marriage/documentation/documents')
+  Future<ResponseModel<List<DocumentResponse>>> marriageDocuments(
+    @Query('maritalStatus') String maritalStatus,
+    @Query('childrenRelationship') String childrenRelationship, {
+    @Query('hasChildren') bool hasChildren = false,
+  });
 
   //COMMONS
   @GET('/identity/api/location/province')

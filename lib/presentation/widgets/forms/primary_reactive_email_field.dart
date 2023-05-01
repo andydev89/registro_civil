@@ -68,7 +68,7 @@ class PrimaryReactiveEmailField extends StatelessWidget {
           ),          
           cursorColor: ligth ? Colors.white : Colors.black,
           keyboardType: TextInputType.emailAddress,
-          validationMessages: validationMessage(l10n),
+          validationMessages: validationMessage(context),
           inputFormatters: inputFormatters,
           decoration: primaryInputDecoration(
             light: ligth,

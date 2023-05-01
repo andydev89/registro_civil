@@ -92,13 +92,14 @@ MeModel _$MeModelFromJson(Map<String, dynamic> json) => MeModel(
       identification: json['identification'] as String? ?? '',
       email: json['email'] as String? ?? '',
       type: json['type'] as String? ?? '',
-      state: json['state'] as String? ?? '',
+      state:
+          $enumDecodeNullable(_$StatusEnumMap, json['state']) ?? Status.active,
       profile: (json['profile'] as List<dynamic>?)
               ?.map((e) => Profile.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       agency: (json['agency'] as List<dynamic>?)
-              ?.map((e) => Agency.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => AgencyModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       aplication: (json['aplication'] as List<dynamic>?)
@@ -114,11 +115,16 @@ Map<String, dynamic> _$MeModelToJson(MeModel instance) => <String, dynamic>{
       'identification': instance.identification,
       'email': instance.email,
       'type': instance.type,
-      'state': instance.state,
+      'state': _$StatusEnumMap[instance.state]!,
       'profile': instance.profile,
       'agency': instance.agency,
       'aplication': instance.aplication,
     };
+
+const _$StatusEnumMap = {
+  Status.active: 'ACTIVE',
+  Status.inactive: 'INACTIVE',
+};
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       id: json['id'] as String?,
@@ -127,7 +133,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       state: json['state'] as String?,
       agency: json['agency'] == null
           ? null
-          : Agency.fromJson(json['agency'] as Map<String, dynamic>),
+          : AgencyModel.fromJson(json['agency'] as Map<String, dynamic>),
       access: (json['access'] as List<dynamic>?)
           ?.map((e) => Access.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -140,42 +146,6 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'state': instance.state,
       'agency': instance.agency,
       'access': instance.access,
-    };
-
-Agency _$AgencyFromJson(Map<String, dynamic> json) => Agency(
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-      description: json['description'] as String?,
-      country: json['country'] == null
-          ? null
-          : Territory.fromJson(json['country'] as Map<String, dynamic>),
-      province: json['province'] == null
-          ? null
-          : Territory.fromJson(json['province'] as Map<String, dynamic>),
-      canton: json['canton'] == null
-          ? null
-          : Territory.fromJson(json['canton'] as Map<String, dynamic>),
-      parroquia: json['parroquia'] == null
-          ? null
-          : Territory.fromJson(json['parroquia'] as Map<String, dynamic>),
-      region: json['region'] as String?,
-      latitude: json['latitude'] as String?,
-      longitude: json['longitude'] as String?,
-      state: json['state'] as String?,
-    );
-
-Map<String, dynamic> _$AgencyToJson(Agency instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'description': instance.description,
-      'country': instance.country,
-      'province': instance.province,
-      'canton': instance.canton,
-      'parroquia': instance.parroquia,
-      'region': instance.region,
-      'latitude': instance.latitude,
-      'longitude': instance.longitude,
-      'state': instance.state,
     };
 
 Aplication _$AplicationFromJson(Map<String, dynamic> json) => Aplication(

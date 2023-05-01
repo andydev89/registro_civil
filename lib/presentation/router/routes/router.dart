@@ -23,6 +23,19 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.
 import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/services/services_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/agency_step/marriage_celebration_agency_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/first_step_attorney_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/first_step_contracting_party_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/marriage_celebration_first_step_route.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/fourth_step/marriage_celebration_fourth_step_route.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/marriage_celebration_route_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/marriage_celebration_second_step_route.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/second_step_at_headquarter_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/second_step_off_site_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/witness_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third_step/contracting_party_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third_step/marriage_celebration_third_step_route.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third_step/third_step_contracting_party_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_orders/pages/my_order_rejecting_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/pages/my_turns_page.dart';
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
@@ -204,9 +217,73 @@ part 'router.gr.dart';
             CupertinoRoute(
               page: SimpleCertificateSecondStepPage,
             ),
-            // CupertinoRoute(
-            //   page: SimpleCertificateErrorPage,
-            // ),
+          ],
+        ), // MARRIAGE CELEBRATION
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: MarriageCelebrationRouterPage,
+          children: [
+            CupertinoRoute(
+              page: MarriageCelebrationFirstStepRouterPage,
+              initial: true,
+              children: [
+                CustomRoute(
+                  page: FirstStepAttorneyPage,
+                  initial: true,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                CustomRoute(
+                  page: FirstStepContractingPartyPage,
+                  transitionsBuilder: TransitionsBuilders.slideLeft,
+                ),
+              ],
+            ),
+            CustomRoute(
+              page: MarriageCelebrationAgencyPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+            CupertinoRoute(
+              page: MarriageCelebrationSecondStepRouterPage,
+              children: [
+                CustomRoute(
+                  page: SecondStepAtHeadquarterPage,
+                  initial: true,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                  children: [
+                    CustomRoute(
+                      page: WitnessPage,
+                      initial: true,
+                      transitionsBuilder: TransitionsBuilders.slideRight,
+                    ),
+                  ],
+                ),
+                CustomRoute(
+                  page: SecondStepOffSitePage,
+                  transitionsBuilder: TransitionsBuilders.slideLeft,
+                ),
+              ],
+            ),
+            CupertinoRoute(
+              page: MarriageCelebrationThirdStepRouterPage,
+              children: [
+                CustomRoute(
+                  initial: true,
+                  page: ThirdStepContractingPartyPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                  children: [
+                    CustomRoute(
+                      page: ContractingPartyPage,
+                      initial: true,
+                      transitionsBuilder: TransitionsBuilders.slideRight,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            CustomRoute(
+              page: MarriageCelebrationFourthStepRouterPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
           ],
         ),
         //RESIDENT REGISTRATION

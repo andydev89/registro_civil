@@ -69,7 +69,7 @@ class PrimaryReactiveTextAreaField<T> extends StatelessWidget {
           keyboardType: TextInputType.multiline,
           maxLines: null,
           minLines: minLines,
-          validationMessages: validationMessage(l10n),
+          validationMessages: validationMessage(context),
           inputFormatters: inputFormatters,
           decoration: primaryInputDecoration(
             light: ligth,
