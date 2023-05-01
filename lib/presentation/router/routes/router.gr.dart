@@ -399,6 +399,22 @@ class _$AppRouter extends RootStackRouter {
         child: const MarriageCelebrationThirdStepRouterPage(),
       );
     },
+    MarriageCelebrationFourthStepRouterRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<MarriageCelebrationFourthStepRouterRouteArgs>(
+              orElse: () =>
+                  const MarriageCelebrationFourthStepRouterRouteArgs());
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: MarriageCelebrationFourthStepRouterPage(
+          key: args.key,
+          firstContractParty: args.firstContractParty,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     FirstStepAttorneyRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -730,6 +746,11 @@ class _$AppRouter extends RootStackRouter {
                       ],
                     )
                   ],
+                ),
+                RouteConfig(
+                  MarriageCelebrationFourthStepRouterRoute.name,
+                  path: 'marriage-celebration-fourth-step-router-page',
+                  parent: MarriageCelebrationRouterRoute.name,
                 ),
               ],
             ),
@@ -1728,6 +1749,41 @@ class MarriageCelebrationThirdStepRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MarriageCelebrationThirdStepRouterRoute';
+}
+
+/// generated route for
+/// [MarriageCelebrationFourthStepRouterPage]
+class MarriageCelebrationFourthStepRouterRoute
+    extends PageRouteInfo<MarriageCelebrationFourthStepRouterRouteArgs> {
+  MarriageCelebrationFourthStepRouterRoute({
+    Key? key,
+    bool firstContractParty = true,
+  }) : super(
+          MarriageCelebrationFourthStepRouterRoute.name,
+          path: 'marriage-celebration-fourth-step-router-page',
+          args: MarriageCelebrationFourthStepRouterRouteArgs(
+            key: key,
+            firstContractParty: firstContractParty,
+          ),
+        );
+
+  static const String name = 'MarriageCelebrationFourthStepRouterRoute';
+}
+
+class MarriageCelebrationFourthStepRouterRouteArgs {
+  const MarriageCelebrationFourthStepRouterRouteArgs({
+    this.key,
+    this.firstContractParty = true,
+  });
+
+  final Key? key;
+
+  final bool firstContractParty;
+
+  @override
+  String toString() {
+    return 'MarriageCelebrationFourthStepRouterRouteArgs{key: $key, firstContractParty: $firstContractParty}';
+  }
 }
 
 /// generated route for

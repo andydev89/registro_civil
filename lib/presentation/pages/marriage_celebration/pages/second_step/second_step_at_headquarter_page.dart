@@ -19,8 +19,8 @@ class SecondStepAtHeadquarterPage extends StatelessWidget {
             PrimaryText(l10n.informacionTes),
             ToggleSwitchWidget(
               labels: [
-                '${l10n.testigo}1',
-                '${l10n.testigo}2',
+                '${l10n.testigo} 1',
+                '${l10n.testigo} 2',
               ],
               totalSwitches: 2,
               onToggle: (index) {

@@ -15,17 +15,17 @@ import 'package:registro_civil_apk/presentation/widgets/decorations/input_decora
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class PrimaryFilePicker<T> extends StatelessWidget {
+class PrimaryFilePicker<String> extends StatelessWidget {
   const PrimaryFilePicker({
     super.key,
-    required this.formControl,
+   required this.formControl,
     this.allowedExtensions = const [FileExtensions.pdf],
     this.maxFileSizeMB = 5,
   }) : assert(
           maxFileSizeMB <= 5 && maxFileSizeMB > 0,
           'El tamaño debe ser entre 1 y 5 MB',
         );
-  final FormControl<T>? formControl;
+  final FormControl<String>? formControl;
   final List<FileExtensions> allowedExtensions;
   final int maxFileSizeMB;
 
@@ -33,7 +33,7 @@ class PrimaryFilePicker<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final select = ValueNotifier(false);
-    String? name;
+    var name = '-';
     return ReactiveFormField(
       formControl: formControl,
       builder: (field) {
@@ -47,7 +47,6 @@ class PrimaryFilePicker<T> extends StatelessWidget {
                         ? FileType.any
                         : FileType.custom,
                   );
-
                   if (result != null) {
                     try {
                       final pdfFile = File(result.files.single.path!);
@@ -62,6 +61,7 @@ class PrimaryFilePicker<T> extends StatelessWidget {
                       final base64Pdf =
                           'data:application/pdf;base64,${base64Encode(pdfBytes)}';
                       field.didChange(base64Pdf);
+                      formControl?.updateValue(base64Pdf as String);
                       name = result.files.single.name;
                       select.value = true;
                     } catch (e) {
@@ -96,7 +96,7 @@ class PrimaryFilePicker<T> extends StatelessWidget {
                       const SizedBox(width: 10),
                       Expanded(
                         child: PrimaryText(
-                          name ?? '-',
+                          name,
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -119,7 +119,8 @@ class PrimaryFilePicker<T> extends StatelessWidget {
                     ),
                   ),
                   child: PrimaryCaption(
-                    '${allowedExtensions.join(', ')} (${maxFileSizeMB}MB)',
+                    '${allowedExtensions.map((e) => e.value).join(', ')} '
+                    '(${maxFileSizeMB}MB)',
                     isToUpperCase: true,
                     textAlign: TextAlign.start,
                   ),

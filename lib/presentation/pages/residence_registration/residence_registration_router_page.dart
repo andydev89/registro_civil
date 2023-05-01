@@ -11,7 +11,7 @@ class ResidenceRegistrationRouterPage extends StatelessWidget {
     final l10n = context.l10n;
     return PrimaryScaffold(
       title: l10n.registroRes,
-      subtitle: 'Ingrese la infromación solicitada',
+      subtitle: l10n.ingreseInfSol,
       body: const Expanded(
         child: AutoRouter(),
       ),

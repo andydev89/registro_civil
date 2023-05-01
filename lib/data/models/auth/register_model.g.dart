@@ -92,7 +92,8 @@ MeModel _$MeModelFromJson(Map<String, dynamic> json) => MeModel(
       identification: json['identification'] as String? ?? '',
       email: json['email'] as String? ?? '',
       type: json['type'] as String? ?? '',
-      state: json['state'] as String? ?? '',
+      state:
+          $enumDecodeNullable(_$StatusEnumMap, json['state']) ?? Status.active,
       profile: (json['profile'] as List<dynamic>?)
               ?.map((e) => Profile.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -114,11 +115,16 @@ Map<String, dynamic> _$MeModelToJson(MeModel instance) => <String, dynamic>{
       'identification': instance.identification,
       'email': instance.email,
       'type': instance.type,
-      'state': instance.state,
+      'state': _$StatusEnumMap[instance.state]!,
       'profile': instance.profile,
       'agency': instance.agency,
       'aplication': instance.aplication,
     };
+
+const _$StatusEnumMap = {
+  Status.active: 'ACTIVE',
+  Status.inactive: 'INACTIVE',
+};
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       id: json['id'] as String?,

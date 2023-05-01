@@ -1,14 +1,25 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:libphonenumber/libphonenumber.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
 import 'package:registro_civil_apk/data/enum/validators/validations_message_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
   return Validators.required(control);
+}
+
+Map<String, dynamic>? documentFileRequiredValidator(
+    AbstractControl<dynamic> control) {
+  final document = control.value as Document?;
+  if (document == null || document.file.isEmpty) {
+    return {ValidationMessage.required: true};
+  }
+  return null;
 }
 
 // validate que tenga 1 nombre y 2 apellidos minimo
@@ -197,7 +208,8 @@ Map<String, dynamic>? conadisNumberValidatorGroup(
   if (!isConadis) {
     (conadisModel as FormGroup).controls['conadisNumber']!
       ..removeError(ValidationMessage.required)
-      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText);
+      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText)
+      ..value = '';
     return null;
   }
 
@@ -221,17 +233,18 @@ Map<String, dynamic>? childrenRelationshipValidatorGroup(
   AbstractControl<dynamic> partnerModel,
 ) {
   final children = partnerModel.value as Map<String, dynamic>;
-  final hasChildren = children['hasChildren'] as bool? ?? false;
+  final hasChildren = children['hasChildren'] as Binary? ?? Binary.no;
   final childrenRelationship =
       children['childrenRelationship'] as ChildrenRelationShip?;
-  if (!hasChildren) {
+  if (hasChildren == Binary.no) {
     (partnerModel as FormGroup).controls['childrenRelationship']!
       ..removeError(ValidationMessage.required)
-      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText);
+      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText)
+      ..value = null;
     return null;
   }
 
-  if (hasChildren && childrenRelationship == null) {
+  if (hasChildren == Binary.yes && childrenRelationship == null) {
     (partnerModel as FormGroup)
         .controls['childrenRelationship']!
         .setErrors({ValidationMessage.required: true});

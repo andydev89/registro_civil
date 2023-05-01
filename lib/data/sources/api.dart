@@ -98,7 +98,7 @@ abstract class Api {
   );
 
   @GET('/marriage/api/marriage/documentation/documents')
-  Future<ResponseModel<DocumentResponse>> marriageDocuments(
+  Future<ResponseModel<List<DocumentResponse>>> marriageDocuments(
     @Query('maritalStatus') String maritalStatus,
     @Query('childrenRelationship') String childrenRelationship, {
     @Query('hasChildren') bool hasChildren = false,

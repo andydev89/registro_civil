@@ -12,6 +12,7 @@ dependencies:
   async_button_builder: ^3.0.0+1
   auto_route: ^5.0.4
   badges: ^3.0.2
+  collection: ^1.17.0
   dio: ^5.0.2
   extended_nested_scroll_view: ^6.0.0
   file_picker: ^5.2.11

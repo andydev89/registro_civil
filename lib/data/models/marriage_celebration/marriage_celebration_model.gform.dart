@@ -971,42 +971,42 @@ class MarriageCelebrationModelForm
   FormGroup formElements() => FormGroup({
         requestOwnerTypeControlName: FormControl<MarriageCelebrationType>(
             value: marriageCelebrationModel?.requestOwnerType,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         agencyControlName: FormControl<Agency>(
             value: marriageCelebrationModel?.agency,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         requestOwnerControlName: FormControl<RequestOwner>(
             value: marriageCelebrationModel?.requestOwner,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         firstWitnessControlName: FormControl<Witness>(
             value: marriageCelebrationModel?.firstWitness,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         secondWitnessControlName: FormControl<Witness>(
             value: marriageCelebrationModel?.secondWitness,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         isOutsideControlName: FormControl<bool>(
             value: marriageCelebrationModel?.isOutside,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -1039,6 +1039,8 @@ class PartnerForm implements FormModel<Partner> {
 
   static String conadisControlName = "conadis";
 
+  static String conadisNumberControlName = "conadisNumber";
+
   static String documentsControlName = "documents";
 
   final Partner? partner;
@@ -1054,17 +1056,18 @@ class PartnerForm implements FormModel<Partner> {
   String childrenRelationshipControlPath() =>
       pathBuilder(childrenRelationshipControlName);
   String conadisControlPath() => pathBuilder(conadisControlName);
+  String conadisNumberControlPath() => pathBuilder(conadisNumberControlName);
   String documentsControlPath() => pathBuilder(documentsControlName);
-  String get _nuiValue => nuiControl.value as String;
-  String get _nameValue => nameControl.value as String;
-  MaritalStatus get _maritalStatusValue =>
-      maritalStatusControl.value as MaritalStatus;
-  bool get _hasChildrenValue => hasChildrenControl.value as bool;
+  String get _nuiValue => nuiControl.value ?? "";
+  String get _nameValue => nameControl.value ?? "";
+  MaritalStatus? get _maritalStatusValue => maritalStatusControl?.value;
+  Binary? get _hasChildrenValue => hasChildrenControl?.value;
   ChildrenRelationShip? get _childrenRelationshipValue =>
       childrenRelationshipControl?.value;
   bool get _conadisValue => conadisControl.value as bool;
+  String get _conadisNumberValue => conadisNumberControl.value ?? "";
   List<Document> get _documentsValue =>
-      documentsControl.value as List<Document>;
+      documentsControl.value?.whereType<Document>().toList() ?? [];
   bool get containsNui {
     try {
       form.control(nuiControlPath());
@@ -1119,6 +1122,15 @@ class PartnerForm implements FormModel<Partner> {
     }
   }
 
+  bool get containsConadisNumber {
+    try {
+      form.control(conadisNumberControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsDocuments {
     try {
       form.control(documentsControlPath());
@@ -1130,10 +1142,11 @@ class PartnerForm implements FormModel<Partner> {
 
   Object? get nuiErrors => nuiControl.errors;
   Object? get nameErrors => nameControl.errors;
-  Object? get maritalStatusErrors => maritalStatusControl.errors;
-  Object? get hasChildrenErrors => hasChildrenControl.errors;
+  Object? get maritalStatusErrors => maritalStatusControl?.errors;
+  Object? get hasChildrenErrors => hasChildrenControl?.errors;
   Object? get childrenRelationshipErrors => childrenRelationshipControl?.errors;
   Object? get conadisErrors => conadisControl.errors;
+  Object? get conadisNumberErrors => conadisNumberControl.errors;
   Object? get documentsErrors => documentsControl.errors;
   void get nuiFocus => form.focus(nuiControlPath());
   void get nameFocus => form.focus(nameControlPath());
@@ -1142,7 +1155,60 @@ class PartnerForm implements FormModel<Partner> {
   void get childrenRelationshipFocus =>
       form.focus(childrenRelationshipControlPath());
   void get conadisFocus => form.focus(conadisControlPath());
+  void get conadisNumberFocus => form.focus(conadisNumberControlPath());
   void get documentsFocus => form.focus(documentsControlPath());
+  void maritalStatusRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMaritalStatus) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          maritalStatusControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            maritalStatusControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void hasChildrenRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsHasChildren) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          hasChildrenControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            hasChildrenControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void childrenRelationshipRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1188,20 +1254,20 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValueUpdate(
-    MaritalStatus value, {
+    MaritalStatus? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    maritalStatusControl.updateValue(value,
+    maritalStatusControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void hasChildrenValueUpdate(
-    bool value, {
+    Binary? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    hasChildrenControl.updateValue(value,
+    hasChildrenControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1220,6 +1286,15 @@ class PartnerForm implements FormModel<Partner> {
     bool emitEvent = true,
   }) {
     conadisControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void conadisNumberValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    conadisNumberControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1251,20 +1326,20 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValuePatch(
-    MaritalStatus value, {
+    MaritalStatus? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    maritalStatusControl.patchValue(value,
+    maritalStatusControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void hasChildrenValuePatch(
-    bool value, {
+    Binary? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    hasChildrenControl.patchValue(value,
+    hasChildrenControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1283,6 +1358,15 @@ class PartnerForm implements FormModel<Partner> {
     bool emitEvent = true,
   }) {
     conadisControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void conadisNumberValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    conadisNumberControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1314,22 +1398,22 @@ class PartnerForm implements FormModel<Partner> {
       nameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void maritalStatusValueReset(
-    MaritalStatus value, {
+    MaritalStatus? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      maritalStatusControl.reset(
+      maritalStatusControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void hasChildrenValueReset(
-    bool value, {
+    Binary? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      hasChildrenControl.reset(
+      hasChildrenControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void childrenRelationshipValueReset(
     ChildrenRelationShip? value, {
@@ -1349,6 +1433,15 @@ class PartnerForm implements FormModel<Partner> {
   }) =>
       conadisControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void conadisNumberValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      conadisNumberControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void documentsValueReset(
     List<Document> value, {
     bool updateParent = true,
@@ -1362,10 +1455,12 @@ class PartnerForm implements FormModel<Partner> {
       form.control(nuiControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
-  FormControl<MaritalStatus> get maritalStatusControl =>
-      form.control(maritalStatusControlPath()) as FormControl<MaritalStatus>;
-  FormControl<bool> get hasChildrenControl =>
-      form.control(hasChildrenControlPath()) as FormControl<bool>;
+  FormControl<MaritalStatus>? get maritalStatusControl => containsMaritalStatus
+      ? form.control(maritalStatusControlPath()) as FormControl<MaritalStatus>?
+      : null;
+  FormControl<Binary>? get hasChildrenControl => containsHasChildren
+      ? form.control(hasChildrenControlPath()) as FormControl<Binary>?
+      : null;
   FormControl<ChildrenRelationShip>? get childrenRelationshipControl =>
       containsChildrenRelationship
           ? form.control(childrenRelationshipControlPath())
@@ -1373,8 +1468,10 @@ class PartnerForm implements FormModel<Partner> {
           : null;
   FormControl<bool> get conadisControl =>
       form.control(conadisControlPath()) as FormControl<bool>;
-  FormControl<List<Document>> get documentsControl =>
-      form.control(documentsControlPath()) as FormControl<List<Document>>;
+  FormControl<String> get conadisNumberControl =>
+      form.control(conadisNumberControlPath()) as FormControl<String>;
+  FormArray<Document> get documentsControl =>
+      form.control(documentsControlPath()) as FormArray<Document>;
   void nuiSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1417,12 +1514,12 @@ class PartnerForm implements FormModel<Partner> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      maritalStatusControl.markAsDisabled(
+      maritalStatusControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      maritalStatusControl.markAsEnabled(
+      maritalStatusControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1435,12 +1532,12 @@ class PartnerForm implements FormModel<Partner> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      hasChildrenControl.markAsDisabled(
+      hasChildrenControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      hasChildrenControl.markAsEnabled(
+      hasChildrenControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1483,6 +1580,24 @@ class PartnerForm implements FormModel<Partner> {
     }
   }
 
+  void conadisNumberSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      conadisNumberControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      conadisNumberControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void documentsSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1501,6 +1616,46 @@ class PartnerForm implements FormModel<Partner> {
     }
   }
 
+  void addDocumentsItem(
+    Document value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
+          resultingAsyncValidators.addAll(asyncValidators);
+        }
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) {
+          resultingValidators = validators;
+        }
+
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
+        break;
+    }
+
+    documentsControl.add(FormControl<Document>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
   @override
   Partner get model {
     if (!form.valid) {
@@ -1515,7 +1670,7 @@ class PartnerForm implements FormModel<Partner> {
         hasChildren: _hasChildrenValue,
         childrenRelationship: _childrenRelationshipValue,
         conadis: _conadisValue,
-        conadisNumber: partner?.conadisNumber,
+        conadisNumber: _conadisNumberValue,
         documents: _documentsValue);
   }
 
@@ -1569,7 +1724,7 @@ class PartnerForm implements FormModel<Partner> {
             touched: false),
         nameControlName: FormControl<String>(
             value: partner?.name,
-            validators: [requiredValidator],
+            validators: [requiredValidator, nameValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -1581,7 +1736,7 @@ class PartnerForm implements FormModel<Partner> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        hasChildrenControlName: FormControl<bool>(
+        hasChildrenControlName: FormControl<Binary>(
             value: partner?.hasChildren,
             validators: [requiredValidator],
             asyncValidators: [],
@@ -1590,7 +1745,7 @@ class PartnerForm implements FormModel<Partner> {
             touched: false),
         childrenRelationshipControlName: FormControl<ChildrenRelationShip>(
             value: partner?.childrenRelationship,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -1602,13 +1757,30 @@ class PartnerForm implements FormModel<Partner> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        documentsControlName: FormControl<List<Document>>(
-            value: partner?.documents,
-            validators: [requiredValidator],
+        conadisNumberControlName: FormControl<String>(
+            value: partner?.conadisNumber,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
+            touched: false),
+        documentsControlName: FormArray<Document>(
+            partner?.documents
+                    .map((e) => FormControl<Document>(
+                          value: e,
+                          validators: [],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
+                    .toList() ??
+                [],
+            validators: [
+              (control) => requiredValidator(control as FormArray<Document>)
+            ],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false)
       },
           validators: [
             conadisNumberValidatorGroup,
@@ -3715,6 +3887,295 @@ class ReactiveWitnessFormFormGroupArrayBuilder<V> extends StatelessWidget {
   }
 }
 
+class ReactivePartnerFormConsumer extends StatelessWidget {
+  const ReactivePartnerFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
+
+  final Widget? child;
+
+  final Widget Function(
+      BuildContext context, PartnerForm formModel, Widget? child) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactivePartnerForm.of(context);
+
+    if (formModel is! PartnerForm) {
+      throw FormControlParentNotFoundException(this);
+    }
+    return builder(context, formModel, child);
+  }
+}
+
+class PartnerFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const PartnerFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
+
+  final PartnerForm form;
+}
+
+class ReactivePartnerForm extends StatelessWidget {
+  const ReactivePartnerForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
+
+  final Widget child;
+
+  final PartnerForm form;
+
+  final WillPopCallback? onWillPop;
+
+  static PartnerForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
+    if (listen) {
+      return context
+          .dependOnInheritedWidgetOfExactType<PartnerFormInheritedStreamer>()
+          ?.form;
+    }
+
+    final element = context.getElementForInheritedWidgetOfExactType<
+        PartnerFormInheritedStreamer>();
+    return element == null
+        ? null
+        : (element.widget as PartnerFormInheritedStreamer).form;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PartnerFormInheritedStreamer(
+      form: form,
+      stream: form.form.statusChanged,
+      child: WillPopScope(
+        onWillPop: onWillPop,
+        child: child,
+      ),
+    );
+  }
+}
+
+class PartnerFormBuilder extends StatefulWidget {
+  const PartnerFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final Partner? model;
+
+  final Widget? child;
+
+  final WillPopCallback? onWillPop;
+
+  final Widget Function(
+      BuildContext context, PartnerForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, PartnerForm formModel)? initState;
+
+  @override
+  _PartnerFormBuilderState createState() => _PartnerFormBuilderState();
+}
+
+class _PartnerFormBuilderState extends State<PartnerFormBuilder> {
+  late FormGroup _form;
+
+  late PartnerForm _formModel;
+
+  @override
+  void initState() {
+    _form = FormGroup({});
+    _formModel = PartnerForm(widget.model, _form, null);
+
+    final elements = _formModel.formElements();
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    if (elements.disabled) {
+      _form.markAsDisabled();
+    }
+
+    _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant PartnerFormBuilder oldWidget) {
+    if (widget.model != oldWidget.model) {
+      _formModel = PartnerForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
+
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactivePartnerForm(
+      form: _formModel,
+      onWillPop: widget.onWillPop,
+      child: ReactiveFormBuilder(
+        form: () => _form,
+        onWillPop: widget.onWillPop,
+        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class ReactivePartnerFormArrayBuilder<T> extends StatelessWidget {
+  const ReactivePartnerFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(PartnerForm formModel)? control;
+
+  final Widget Function(
+          BuildContext context, List<Widget> itemList, PartnerForm formModel)?
+      builder;
+
+  final Widget Function(
+      BuildContext context, int i, T? item, PartnerForm formModel) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactivePartnerForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactivePartnerFormFormGroupArrayBuilder<V> extends StatelessWidget {
+  const ReactivePartnerFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      PartnerForm formModel)? getExtended;
+
+  final Widget Function(
+          BuildContext context, List<Widget> itemList, PartnerForm formModel)?
+      builder;
+
+  final Widget Function(
+      BuildContext context, int i, V? item, PartnerForm formModel) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactivePartnerForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
 class ReactiveDocumentFormConsumer extends StatelessWidget {
   const ReactiveDocumentFormConsumer({
     Key? key,
@@ -3903,7 +4364,7 @@ class DocumentForm implements FormModel<Document> {
   String referenceIdControlPath() => pathBuilder(referenceIdControlName);
   String fileControlPath() => pathBuilder(fileControlName);
   String get _referenceIdValue => referenceIdControl.value as String;
-  String get _fileValue => fileControl.value as String;
+  String get _fileValue => fileControl.value ?? "";
   bool get containsReferenceId {
     try {
       form.control(referenceIdControlPath());
@@ -4076,7 +4537,7 @@ class DocumentForm implements FormModel<Document> {
             touched: false),
         fileControlName: FormControl<String>(
             value: document?.file,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

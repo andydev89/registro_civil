@@ -337,5 +337,12 @@
   "solicitudCelMat":"Solicitud de celebración para matrimonio",
   "latitud":"Latitud",
   "longitud":"Longitud",
-  "informacionCon": "Información de los contrayentes"
+  "informacionCon": "Información de los contrayentes",
+  "estadoCiv": "Estado civil",
+  "tieneHij": "Tiene hijos",
+  "si": "Si",
+  "tusHiSon": "Tus hijos son",
+  "documentosContrayente": "Documentos contrayente",
+  "archivo": "Archivo",
+  "comentario": "Comentario"
 }

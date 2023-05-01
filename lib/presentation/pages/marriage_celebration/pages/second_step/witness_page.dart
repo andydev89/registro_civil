@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
@@ -23,83 +24,80 @@ class WitnessPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final witness1 = ref.watch(witness1Provider);
-    final witness2 = ref.watch(witness2Provider);
+    final witness1 = ref.watch(WitnesssProvider(0));
+    final witness2 = ref.watch(WitnesssProvider(1));
     return WitnessFormBuilder(
       model: indexWitness == 0 ? witness1 : witness2,
-      builder: (context, form, child) {
-        form.nuiControl.valueChanges.listen((event) {
-          updateWitness(
-            ref: ref,
-            witness: form.model,
-            index: indexWitness,
-          );
-        });
-        form.nameControl.valueChanges.listen((event) {
-          updateWitness(
-            ref: ref,
-            witness: form.model,
-            index: indexWitness,
-          );
-        });
-        return Scaffold(
-          backgroundColor: Colors.transparent,
-          body: ScrollableContent(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                PrimaryText(l10n.numCedula),
-                PrimaryReactiveNuiField(
-                  formControl: form.nuiControl,
-                ),
-                PrimaryText(l10n.nombreApe),
-                PrimaryReactiveTextField(
-                  formControl: form.nameControl,
-                  textCapitalization: TextCapitalization.words,
-                ),
-              ],
-            ).horizontalPadding(20),
+      initState: (_, formModel) => formModel.form.valueChanges
+          .distinct(
+            (prev, curr) => const DeepCollectionEquality().equals(prev, curr),
+          )
+          .listen(
+            (event) => updateWitness(
+              ref: ref,
+              witness: formModel.model,
+              index: indexWitness,
+            ),
           ),
-          bottomNavigationBar: ReactiveWitnessFormConsumer(
-            builder: (_, form, __) {
-              final valid = witness1.isValid && witness2.isValid;
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  PrimaryButton(
-                    title: l10n.siguiente,
-                    onPressed: valid
-                        ? () {
-                            ref.read(marriageCelebrationProvider.notifier)
-                              ..setWitness(witness1, 0)
-                              ..setWitness(witness2, 1);
-                            context.navigateTo(
-                              MarriageCelebrationThirdStepRouterRoute(
-                                children: [
-                                  ThirdStepContractingPartyRoute(
-                                    children: [
-                                      ContractingPartyRoute(
-                                        indexContractingParty: 0,
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          }
-                        : null,
-                  ),
-                  const SizedBox(height: 10),
-                  PrimaryButton(
-                    title: l10n.cancelar,
-                    onPressed: () => context.navigateBack(),
-                  )
-                ],
-              );
-            },
-          ).symmetricPadding(10, 30),
-        );
-      },
+      builder: (context, form, child) => Scaffold(
+        backgroundColor: Colors.transparent,
+        body: ScrollableContent(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PrimaryText(l10n.numCedula),
+              PrimaryReactiveNuiField(
+                formControl: form.nuiControl,
+              ),
+              PrimaryText(l10n.nombreApe),
+              PrimaryReactiveTextField(
+                formControl: form.nameControl,
+                textCapitalization: TextCapitalization.words,
+              ),
+            ],
+          ).horizontalPadding(20),
+        ),
+        bottomNavigationBar: ReactiveWitnessFormConsumer(
+          builder: (_, form, __) {
+            final form1 = createWitnessFormGroup(witness1);
+            final form2 = createWitnessFormGroup(witness2);
+            final valid = form1.valid && form2.valid;
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                PrimaryButton(
+                  title: l10n.siguiente,
+                  onPressed: valid
+                      ? () {
+                          ref.read(marriageCelebrationProvider.notifier)
+                            ..setWitness(witness1, 0)
+                            ..setWitness(witness2, 1);
+                          context.navigateTo(
+                            MarriageCelebrationThirdStepRouterRoute(
+                              children: [
+                                ThirdStepContractingPartyRoute(
+                                  children: [
+                                    ContractingPartyRoute(
+                                      indexContractingParty: 0,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      : null,
+                ),
+                const SizedBox(height: 10),
+                PrimaryButton(
+                  title: l10n.cancelar,
+                  onPressed: () => context.navigateBack(),
+                )
+              ],
+            );
+          },
+        ).symmetricPadding(10, 30),
+      ),
     );
   }
 }

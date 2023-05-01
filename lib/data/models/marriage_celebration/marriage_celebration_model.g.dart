@@ -99,24 +99,26 @@ Map<String, dynamic> _$WitnessToJson(Witness instance) => <String, dynamic>{
     };
 
 Partner _$PartnerFromJson(Map<String, dynamic> json) => Partner(
-      nui: json['nui'] as String,
-      name: json['name'] as String,
-      maritalStatus: $enumDecode(_$MaritalStatusEnumMap, json['maritalStatus']),
-      hasChildren: json['hasChildren'] as bool,
+      nui: json['nui'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      maritalStatus:
+          $enumDecodeNullable(_$MaritalStatusEnumMap, json['maritalStatus']),
+      hasChildren: $enumDecodeNullable(_$BinaryEnumMap, json['hasChildren']),
       childrenRelationship: $enumDecodeNullable(
           _$ChildrenRelationShipEnumMap, json['childrenRelationship']),
-      conadis: json['hasConadis'] as bool,
-      conadisNumber: json['conadisNui'] as String?,
-      documents: (json['documents'] as List<dynamic>)
-          .map((e) => Document.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      conadis: json['hasConadis'] as bool? ?? false,
+      conadisNumber: json['conadisNui'] as String? ?? '',
+      documents: (json['documents'] as List<dynamic>?)
+              ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$PartnerToJson(Partner instance) => <String, dynamic>{
       'nui': instance.nui,
       'name': instance.name,
-      'maritalStatus': _$MaritalStatusEnumMap[instance.maritalStatus]!,
-      'hasChildren': instance.hasChildren,
+      'maritalStatus': _$MaritalStatusEnumMap[instance.maritalStatus],
+      'hasChildren': Binary.toJson(instance.hasChildren),
       'childrenRelationship':
           _$ChildrenRelationShipEnumMap[instance.childrenRelationship],
       'hasConadis': instance.conadis,
@@ -125,28 +127,33 @@ Map<String, dynamic> _$PartnerToJson(Partner instance) => <String, dynamic>{
     };
 
 const _$MaritalStatusEnumMap = {
-  MaritalStatus.single: 'SINGLE',
-  MaritalStatus.divorced: 'DIVORCED',
-  MaritalStatus.widowed: 'WIDOWED',
-  MaritalStatus.commonLawMarriage: 'COMMON_LAW_MARRIAGE',
-  MaritalStatus.nonResidentPartner: 'NON_RESIDENT_PARTNER',
+  MaritalStatus.single: 'single',
+  MaritalStatus.divorced: 'divorced',
+  MaritalStatus.widowed: 'widowed',
+  MaritalStatus.commonLawMarriage: 'commonLawMarriage',
+  MaritalStatus.nonResidentPartner: 'nonResidentPartner',
+};
+
+const _$BinaryEnumMap = {
+  Binary.yes: 'yes',
+  Binary.no: 'no',
 };
 
 const _$ChildrenRelationShipEnumMap = {
-  ChildrenRelationShip.anotherMarriage: 'ANOTHER_MARRIAGE',
-  ChildrenRelationShip.inCommon: 'IN_COMMON',
-  ChildrenRelationShip.inCommonToBeRecognized: 'IN_COMMON_TO_BE_RECOGNIZED',
+  ChildrenRelationShip.anotherMarriage: 'anotherMarriage',
+  ChildrenRelationShip.inCommon: 'inCommon',
+  ChildrenRelationShip.inCommonToBeRecognized: 'inCommonToBeRecognized',
   ChildrenRelationShip.foreignersWithoutDigercicRegistration:
-      'FOREIGNERS_WITHOUT_DIGERCIC_REGISTRATION',
-  ChildrenRelationShip.adults: 'ADULTS',
-  ChildrenRelationShip.ecuadoriansInCommon: 'ECUADORIANS_IN_COMMON',
+      'foreignersWithoutDigercicRegistration',
+  ChildrenRelationShip.adults: 'adults',
+  ChildrenRelationShip.ecuadoriansInCommon: 'ecuadoriansInCommon',
   ChildrenRelationShip.ecuadoriansInCommonToBeRecognized:
-      'ECUADORIANS_IN_COMMON_TO_BE_RECOGNIZED',
+      'ecuadoriansInCommonToBeRecognized',
 };
 
 Document _$DocumentFromJson(Map<String, dynamic> json) => Document(
       referenceId: json['referenceId'] as String,
-      file: json['file'] as String,
+      file: json['file'] as String? ?? '',
     );
 
 Map<String, dynamic> _$DocumentToJson(Document instance) => <String, dynamic>{

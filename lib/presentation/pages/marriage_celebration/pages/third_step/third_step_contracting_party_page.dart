@@ -17,14 +17,14 @@ class ThirdStepContractingPartyPage extends StatelessWidget {
           children: [
             ToggleSwitchWidget(
               labels: [
-                '${l10n.contrayente}1',
-                '${l10n.contrayente}2',
+                '${l10n.contrayente} 1',
+                '${l10n.contrayente} 2',
               ],
               totalSwitches: 2,
               onToggle: (index) {
                 context.replaceRoute(
-                  WitnessRoute(
-                    indexWitness: index!,
+                  ContractingPartyRoute(
+                    indexContractingParty: index!,
                     key: Key(index.toString()),
                   ),
                 );

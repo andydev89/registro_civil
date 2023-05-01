@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 part 'register_model.g.dart';
@@ -162,7 +163,7 @@ class MeModel {
     this.identification = '',
     this.email = '',
     this.type = '',
-    this.state = '',
+    this.state = Status.active,
     this.profile = const [],
     this.agency = const [],
     this.aplication = const [],
@@ -176,7 +177,7 @@ class MeModel {
   final String identification;
   final String email;
   final String type;
-  final String state;
+  final Status state;
   final List<Profile> profile;
   final List<Agency> agency;
   final List<Aplication> aplication;
@@ -190,7 +191,7 @@ class MeModel {
     String? identification,
     String? email,
     String? type,
-    String? state,
+    Status? state,
     List<Profile>? profile,
     List<Agency>? agency,
     List<Aplication>? aplication,

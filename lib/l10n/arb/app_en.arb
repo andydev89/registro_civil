@@ -337,5 +337,12 @@
   "solicitudCelMat": "Celebration request for marriage",
   "latitud": "Latitude",
   "longitud": "Longitude",
-  "informacionCon": "Information of the contracting parties"
+  "informacionCon": "Information of the contracting parties",
+  "estadoCiv": "Marital status",
+  "tieneHij": "Do you have children",
+  "si": "Yes",
+  "tusHiSon": "Your children are",
+  "documentosContrayente": "Documents of the contracting party",
+  "archivo": "File",
+  "comentario": "Comment"
 }

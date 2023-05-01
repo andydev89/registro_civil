@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 enum MaritalStatus implements Translatable {
-  @JsonValue('SINGLE')
-  single,
-  @JsonValue('DIVORCED')
-  divorced,
-  @JsonValue('WIDOWED')
-  widowed,
-  @JsonValue('COMMON_LAW_MARRIAGE')
-  commonLawMarriage,
-  @JsonValue('NON_RESIDENT_PARTNER')
-  nonResidentPartner;
+  single('SINGLE'),
+  divorced('DIVORCED'),
+  widowed('WIDOWED'),
+  commonLawMarriage('COMMON_LAW_MARRIAGE'),
+  nonResidentPartner('NON_RESIDENT_PARTNER');
+
+  const MaritalStatus(this.toText);
+  final String toText;
 
   @override
   String translate(BuildContext context) {

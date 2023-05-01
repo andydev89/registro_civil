@@ -26,6 +26,7 @@ import 'package:registro_civil_apk/presentation/pages/home/pages/services/servic
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/first_step_attorney_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/first_step_contracting_party_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/marriage_celebration_first_step_route.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/fourth_step/marriage_celebration_fourth_step_route.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/marriage_celebration_route_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/marriage_celebration_second_step_route.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/second_step_at_headquarter_page.dart';
@@ -260,17 +261,22 @@ part 'router.gr.dart';
               page: MarriageCelebrationThirdStepRouterPage,
               children: [
                 CustomRoute(
-                    initial: true,
-                    page: ThirdStepContractingPartyPage,
-                    transitionsBuilder: TransitionsBuilders.slideRight,
-                    children: [
-                      CustomRoute(
-                        page: ContractingPartyPage,
-                        initial: true,
-                        transitionsBuilder: TransitionsBuilders.slideRight,
-                      ),
-                    ]),
+                  initial: true,
+                  page: ThirdStepContractingPartyPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                  children: [
+                    CustomRoute(
+                      page: ContractingPartyPage,
+                      initial: true,
+                      transitionsBuilder: TransitionsBuilders.slideRight,
+                    ),
+                  ],
+                ),
               ],
+            ),
+            CustomRoute(
+              page: MarriageCelebrationFourthStepRouterPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
             ),
           ],
         ),

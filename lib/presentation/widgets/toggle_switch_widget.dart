@@ -46,9 +46,10 @@ class _ToggleSwitchWidgetState extends State<ToggleSwitchWidget> {
           inactiveFgColor: Colors.white,
           totalSwitches: widget.totalSwitches,
           labels: widget.labels,
+          multiLineText: true,
           onToggle: (value) {
             if (value == null || value == actual) return;
-            initial.value = value!;
+            initial.value = value;
             widget.onToggle?.call(value);
           },
         );

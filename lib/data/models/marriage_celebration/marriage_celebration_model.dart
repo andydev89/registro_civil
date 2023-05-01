@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
@@ -13,16 +14,14 @@ part 'marriage_celebration_model.gform.dart';
 @JsonSerializable(explicitToJson: true)
 class MarriageCelebrationModel {
   MarriageCelebrationModel({
-    @FormControlAnnotation(validators: [requiredValidator])
-        this.requestOwnerType,
-    @FormControlAnnotation(validators: [requiredValidator]) this.agency,
-    @FormControlAnnotation(validators: [requiredValidator]) this.requestOwner,
-    @FormControlAnnotation(validators: [requiredValidator]) this.firstWitness,
-    @FormControlAnnotation(validators: [requiredValidator]) this.secondWitness,
+    @FormControlAnnotation<MarriageCelebrationType>() this.requestOwnerType,
+    @FormControlAnnotation<Agency>() this.agency,
+    @FormControlAnnotation<RequestOwner>() this.requestOwner,
+    @FormControlAnnotation<Witness>() this.firstWitness,
+    @FormControlAnnotation<Witness>() this.secondWitness,
     this.firstPartner,
     this.secondPartner,
-    @FormControlAnnotation(validators: [requiredValidator])
-        this.isOutside = false,
+    @FormControlAnnotation<bool>() this.isOutside = false,
     this.outside,
   });
 
@@ -162,33 +161,13 @@ class Witness {
   final String nui;
   final String name;
 
-  @JsonKey(includeToJson: false)
-  bool get isValid => FormGroup(
-        {
-          'nui': FormControl<String>(
-            value: nui,
-            validators: [
-              requiredValidator,
-              ecuadorDniValidator,
-              length10Validator,
-            ],
-          ),
-          'name': FormControl<String>(
-            value: name,
-            validators: [
-              requiredValidator,
-              nameValidator,
-            ],
-          ),
-        },
-      ).valid;
-
   Map<String, dynamic> toJson() => _$WitnessToJson(this);
 }
 
 @FormGroupAnnotation<Partner>(
   validators: [conadisNumberValidatorGroup, childrenRelationshipValidatorGroup],
 )
+@ReactiveFormAnnotation()
 @JsonSerializable(explicitToJson: true)
 class Partner {
   Partner({
@@ -199,34 +178,63 @@ class Partner {
         length10Validator,
       ],
     )
-        required this.nui,
+        this.nui = '',
+    @FormControlAnnotation(validators: [requiredValidator, nameValidator])
+        this.name = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.name,
+        this.maritalStatus,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.maritalStatus,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.hasChildren,
-    @FormControlAnnotation(validators: [requiredValidator])
+        this.hasChildren,
+    @FormControlAnnotation<ChildrenRelationShip>()
         this.childrenRelationship,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.conadis,
-    this.conadisNumber,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.documents,
+        this.conadis = false,
+    @FormControlAnnotation<String>()
+        this.conadisNumber = '',
+    @FormArrayAnnotation<Document>(validators: [requiredValidator])
+        this.documents = const [],
   });
 
   factory Partner.fromJson(Map<String, dynamic> json) =>
       _$PartnerFromJson(json);
+
   final String nui;
   final String name;
-  final MaritalStatus maritalStatus;
-  final bool hasChildren;
+  final MaritalStatus? maritalStatus;
+  @JsonKey(toJson: Binary.toJson)
+  final Binary? hasChildren;
   final ChildrenRelationShip? childrenRelationship;
   @JsonKey(name: 'hasConadis')
   final bool conadis;
   @JsonKey(name: 'conadisNui')
-  final String? conadisNumber;
+  final String conadisNumber;
   final List<Document> documents;
+
+  Partner copyWith({
+    String? nui,
+    String? name,
+    MaritalStatus? maritalStatus,
+    Binary? hasChildren,
+    ChildrenRelationShip? childrenRelationship,
+    bool? conadis,
+    String? conadisNumber,
+    List<Document>? documents,
+  }) =>
+      Partner(
+        nui: nui ?? this.nui,
+        name: name ?? this.name,
+        maritalStatus: maritalStatus ?? this.maritalStatus,
+        hasChildren: hasChildren ?? this.hasChildren,
+        childrenRelationship: childrenRelationship ?? this.childrenRelationship,
+        conadis: conadis ?? this.conadis,
+        conadisNumber: conadisNumber ?? this.conadisNumber,
+        documents: documents ?? this.documents,
+      );
+
+  Partner updateFromWitness(Witness? witness) => copyWith(
+        nui: witness?.nui,
+        name: witness?.name,
+      );
 
   Map<String, dynamic> toJson() => _$PartnerToJson(this);
 }
@@ -237,7 +245,7 @@ class Document {
   Document({
     @FormControlAnnotation(validators: [requiredValidator])
         required this.referenceId,
-    @FormControlAnnotation(validators: [requiredValidator]) required this.file,
+    @FormControlAnnotation<String>() this.file = '',
   });
 
   factory Document.fromJson(Map<String, dynamic> json) =>

@@ -403,7 +403,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<DocumentResponse>> marriageDocuments(
+  Future<ResponseModel<List<DocumentResponse>>> marriageDocuments(
     maritalStatus,
     childrenRelationship, {
     hasChildren = false,
@@ -417,7 +417,7 @@ class _Api implements Api {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<DocumentResponse>>(Options(
+        _setStreamType<ResponseModel<List<DocumentResponse>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -429,9 +429,14 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<DocumentResponse>.fromJson(
+    final value = ResponseModel<List<DocumentResponse>>.fromJson(
       _result.data!,
-      (json) => DocumentResponse.fromJson(json as Map<String, dynamic>),
+      (json) => json is List<dynamic>
+          ? json
+              .map<DocumentResponse>(
+                  (i) => DocumentResponse.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
     );
     return value;
   }

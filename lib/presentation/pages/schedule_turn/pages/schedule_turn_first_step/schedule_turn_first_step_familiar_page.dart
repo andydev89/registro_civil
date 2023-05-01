@@ -100,7 +100,8 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                                     PrimaryIconButton(
                                       icon: Assets.svg.starCheck.svg(),
                                       onPressed: () {
-                                        //TODO algo en el parentezco
+                                        // TODO(alejandro): 
+                                        //algo en el parentezco
                                       },
                                     ).verticalPadding(15),
                                   ],

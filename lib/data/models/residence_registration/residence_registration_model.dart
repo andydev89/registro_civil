@@ -65,12 +65,12 @@ class ResidenceRegistrationThirdStepModel {
   });
 
   final String houseType;
-  //TODO: hacerlo un enum
+  // TODO(alejandro): hacerlo un enum
   ///Tenencia
   final String tenure;
   final String villageOrBuildingNumber;
   final String floorNumber;
   final String appartmentNumber;
-  //TODO: hacerlo un enum
+  // TODO(alejandro): hacerlo un enum
   final String residenceType;
 }
