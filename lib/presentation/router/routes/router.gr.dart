@@ -253,6 +253,7 @@ class _$AppRouter extends RootStackRouter {
         child: WebviewPaymentPage(
           key: args.key,
           url: args.url,
+          onPageFinished: args.onPageFinished,
         ),
       );
     },
@@ -1147,12 +1148,14 @@ class WebviewPaymentRoute extends PageRouteInfo<WebviewPaymentRouteArgs> {
   WebviewPaymentRoute({
     Key? key,
     required String url,
+    void Function()? onPageFinished,
   }) : super(
           WebviewPaymentRoute.name,
           path: 'webview-payment-page',
           args: WebviewPaymentRouteArgs(
             key: key,
             url: url,
+            onPageFinished: onPageFinished,
           ),
         );
 
@@ -1163,15 +1166,18 @@ class WebviewPaymentRouteArgs {
   const WebviewPaymentRouteArgs({
     this.key,
     required this.url,
+    this.onPageFinished,
   });
 
   final Key? key;
 
   final String url;
 
+  final void Function()? onPageFinished;
+
   @override
   String toString() {
-    return 'WebviewPaymentRouteArgs{key: $key, url: $url}';
+    return 'WebviewPaymentRouteArgs{key: $key, url: $url, onPageFinished: $onPageFinished}';
   }
 }
 

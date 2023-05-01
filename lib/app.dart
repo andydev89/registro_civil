@@ -10,6 +10,7 @@ import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/sliding_dialog.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class App extends ConsumerStatefulWidget {
   const App({super.key});

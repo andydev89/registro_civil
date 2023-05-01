@@ -30,7 +30,7 @@ class RootRouterPage extends ConsumerWidget {
                       LoginRoute(
                         onLogin: (context, result) {
                           if (result) {
-                            context.navigateTo(const HomeRouterRoute());
+                            context.navigateBack();
                           }
                         },
                       ),

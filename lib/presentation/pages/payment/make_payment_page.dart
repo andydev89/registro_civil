@@ -178,26 +178,28 @@ class MakePaymentPage extends ConsumerWidget {
                     );
                     result.when(
                       ok: (data) => context.replaceRoute(
-                        WebviewPaymentRoute(url: data.processUrl),
-                        // NotificationRoute(
-                        //   buttonText: buttonText,
-                        //   message: l10n.pagoRealizadoConExito,
-                        //   notificationType: NotificationType.succes,
-                        //   title: l10n.confirmacionDePago,
-                        //   onTap: onTapSuccessPayment,
-                        //   description: Column(
-                        //     crossAxisAlignment: CrossAxisAlignment.start,
-                        //     //TODO traducir los textos
-                        //     children: [
-                        //       PrimaryCaption(
-                        //         'Pagado: \$${service.total.toStringAsFixed(2)}',
-                        //       ),
-                        //       PrimaryCaption(
-                        //         'Número de transacción: ${data.paymentGatewayReference}',
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
+                        WebviewPaymentRoute(
+                          url: data.processUrl,
+                          onPageFinished: () => NotificationRoute(
+                            buttonText: buttonText,
+                            message: l10n.pagoRealizadoConExito,
+                            notificationType: NotificationType.succes,
+                            title: l10n.confirmacionDePago,
+                            onTap: onTapSuccessPayment,
+                            description: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              //TODO traducir los textos
+                              children: [
+                                PrimaryCaption(
+                                  'Pagado: \$${service.total.toStringAsFixed(2)}',
+                                ),
+                                PrimaryCaption(
+                                  'Número de transacción: ${data.paymentGatewayReference}',
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                       err: (error) => showAlert(
                         error.translate(context),
