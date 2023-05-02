@@ -15,7 +15,7 @@ class ServicesPage extends ConsumerWidget {
     final typeServices = ref.watch(typeServicesProvider);
     return typeServices.when(
       skipLoadingOnRefresh: false,
-      data: (data) => CircleAvatarCardGrid(elements: data),
+      data: (data) => CircleAvatarCardGrid(data: data),
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Center(
         child: Column(

@@ -6,12 +6,12 @@ part of 'type_services_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$typeServicesHash() => r'8a5db4bfe834c27fb939692af4815b876e532733';
+String _$typeServicesHash() => r'63e7dc1c281cb351ed62898481f06a61e6cbb5ef';
 
 /// See also [typeServices].
 @ProviderFor(typeServices)
-final typeServicesProvider =
-    AutoDisposeFutureProvider<List<TypeServiceModel>>.internal(
+final typeServicesProvider = AutoDisposeFutureProvider<
+    ResponseModelPagination<List<TypeServiceModel>>>.internal(
   typeServices,
   name: r'typeServicesProvider',
   debugGetCreateSourceHash:
@@ -20,9 +20,10 @@ final typeServicesProvider =
   allTransitiveDependencies: null,
 );
 
-typedef TypeServicesRef = AutoDisposeFutureProviderRef<List<TypeServiceModel>>;
+typedef TypeServicesRef = AutoDisposeFutureProviderRef<
+    ResponseModelPagination<List<TypeServiceModel>>>;
 String _$typeServicesFilterHash() =>
-    r'35077bacdb19c97ace44a4bb320fd3ba0b216513';
+    r'966ac5554a15e513687585d413eea12ad9a267b9';
 
 /// See also [TypeServicesFilter].
 @ProviderFor(TypeServicesFilter)

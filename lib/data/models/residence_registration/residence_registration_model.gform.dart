@@ -626,8 +626,8 @@ class ResidenceRegistrationFirstStepModelForm
             touched: false),
         phoneNumberControlName: FormControl<String>(
             value: residenceRegistrationFirstStepModel?.phoneNumber,
-            validators: [requiredValidator],
-            asyncValidators: [],
+            validators: [requiredValidator, length10Validator],
+            asyncValidators: [phoneNumberEcuadorValidation],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
@@ -1724,13 +1724,14 @@ class ResidenceRegistrationThirdStepModelForm
   String appartmentNumberControlPath() =>
       pathBuilder(appartmentNumberControlName);
   String residenceTypeControlPath() => pathBuilder(residenceTypeControlName);
-  String get _houseTypeValue => houseTypeControl.value as String;
-  String get _tenureValue => tenureControl.value as String;
+  TypeHousing get _houseTypeValue => houseTypeControl.value as TypeHousing;
+  Tenure get _tenureValue => tenureControl.value as Tenure;
   String get _villageOrBuildingNumberValue =>
       villageOrBuildingNumberControl.value as String;
   String get _floorNumberValue => floorNumberControl.value as String;
   String get _appartmentNumberValue => appartmentNumberControl.value as String;
-  String get _residenceTypeValue => residenceTypeControl.value as String;
+  ResidenceType get _residenceTypeValue =>
+      residenceTypeControl.value as ResidenceType;
   bool get containsHouseType {
     try {
       form.control(houseTypeControlPath());
@@ -1800,7 +1801,7 @@ class ResidenceRegistrationThirdStepModelForm
   void get appartmentNumberFocus => form.focus(appartmentNumberControlPath());
   void get residenceTypeFocus => form.focus(residenceTypeControlPath());
   void houseTypeValueUpdate(
-    String value, {
+    TypeHousing value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1809,7 +1810,7 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   void tenureValueUpdate(
-    String value, {
+    Tenure value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1845,7 +1846,7 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   void residenceTypeValueUpdate(
-    String value, {
+    ResidenceType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1854,7 +1855,7 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   void houseTypeValuePatch(
-    String value, {
+    TypeHousing value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1863,7 +1864,7 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   void tenureValuePatch(
-    String value, {
+    Tenure value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1899,7 +1900,7 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   void residenceTypeValuePatch(
-    String value, {
+    ResidenceType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1908,7 +1909,7 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   void houseTypeValueReset(
-    String value, {
+    TypeHousing value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1917,7 +1918,7 @@ class ResidenceRegistrationThirdStepModelForm
       houseTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void tenureValueReset(
-    String value, {
+    Tenure value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1953,7 +1954,7 @@ class ResidenceRegistrationThirdStepModelForm
       appartmentNumberControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void residenceTypeValueReset(
-    String value, {
+    ResidenceType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1961,18 +1962,18 @@ class ResidenceRegistrationThirdStepModelForm
   }) =>
       residenceTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get houseTypeControl =>
-      form.control(houseTypeControlPath()) as FormControl<String>;
-  FormControl<String> get tenureControl =>
-      form.control(tenureControlPath()) as FormControl<String>;
+  FormControl<TypeHousing> get houseTypeControl =>
+      form.control(houseTypeControlPath()) as FormControl<TypeHousing>;
+  FormControl<Tenure> get tenureControl =>
+      form.control(tenureControlPath()) as FormControl<Tenure>;
   FormControl<String> get villageOrBuildingNumberControl =>
       form.control(villageOrBuildingNumberControlPath()) as FormControl<String>;
   FormControl<String> get floorNumberControl =>
       form.control(floorNumberControlPath()) as FormControl<String>;
   FormControl<String> get appartmentNumberControl =>
       form.control(appartmentNumberControlPath()) as FormControl<String>;
-  FormControl<String> get residenceTypeControl =>
-      form.control(residenceTypeControlPath()) as FormControl<String>;
+  FormControl<ResidenceType> get residenceTypeControl =>
+      form.control(residenceTypeControlPath()) as FormControl<ResidenceType>;
   void houseTypeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2139,14 +2140,14 @@ class ResidenceRegistrationThirdStepModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        houseTypeControlName: FormControl<String>(
+        houseTypeControlName: FormControl<TypeHousing>(
             value: residenceRegistrationThirdStepModel?.houseType,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        tenureControlName: FormControl<String>(
+        tenureControlName: FormControl<Tenure>(
             value: residenceRegistrationThirdStepModel?.tenure,
             validators: [requiredValidator],
             asyncValidators: [],
@@ -2174,7 +2175,7 @@ class ResidenceRegistrationThirdStepModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        residenceTypeControlName: FormControl<String>(
+        residenceTypeControlName: FormControl<ResidenceType>(
             value: residenceRegistrationThirdStepModel?.residenceType,
             validators: [requiredValidator],
             asyncValidators: [],

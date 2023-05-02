@@ -36,16 +36,16 @@ class ResponseModel<T> {
 @JsonSerializable(genericArgumentFactories: true)
 class ResponseModelPagination<T> {
   ResponseModelPagination({
-    required this.timestamp,
-    required this.status,
-    required this.message,
-    required this.errors,
-    required this.data,
-    required this.totalPages,
-    required this.totalElements,
-    required this.pageElements,
-    required this.pageLimit,
-    required this.pageNumbers,
+     this.timestamp = '',
+     this.status = StatusCode.s200,
+     this.message = '',
+     this.errors,
+     this.data,
+     this.totalPages,
+     this.totalElements,
+     this.pageElements,
+     this.pageLimit,
+     this.pageNumbers,
   });
 
   factory ResponseModelPagination.fromJson(
