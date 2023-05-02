@@ -3,7 +3,7 @@ import 'package:registro_civil_apk/data/enum/sort/sort_type_enum.dart';
 class QueryTypeService {
   QueryTypeService({
     this.pageNo = 0,
-    this.pageSize = 20,
+    this.pageSize = 4,
     this.filter = '',
     this.sortBy = 'name',
     this.sortType = SortType.asc,

@@ -104,7 +104,7 @@ enum StatusCode implements Translatable {
       case StatusCode.s409:
         return l10n.s409;
       case StatusCode.s412:
-        //TODO traducir
+        // TODO(alejandro): traducir
         return 'Error al realizar el pago';
       // server errors
       case StatusCode.s500:

@@ -356,13 +356,13 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModelPagination<List<TypeServiceModel>>> typeServices(
-    pageNo,
-    pageSize,
-    filter,
-    sortBy,
-    sortType,
-  ) async {
+  Future<ResponseModelPagination<List<TypeServiceModel>>> typeServices({
+    pageNo = 0,
+    pageSize = 4,
+    filter = '',
+    sortBy = 'name',
+    sortType = 'asc',
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'pageNo': pageNo,
