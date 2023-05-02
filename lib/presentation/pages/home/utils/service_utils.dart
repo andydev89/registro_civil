@@ -94,7 +94,7 @@ Future<void> fetchPage(
   try {
     final api = ref.read(apiProvider);
     final newItems = await api.typeServices(pageNo: pageKey);
-    final isLastPage = newItems.totalPages! <= pageKey+1;
+    final isLastPage = newItems.totalPages! <= pageKey + 1;
     if (isLastPage) {
       pagingController.appendLastPage(newItems.data!);
     } else {

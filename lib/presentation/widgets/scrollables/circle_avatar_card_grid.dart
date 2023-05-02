@@ -35,7 +35,7 @@ class _CircleAvatarCardGridState extends ConsumerState<CircleAvatarCardGrid> {
   void initState() {
     super.initState();
     _pagingController = PagingController(firstPageKey: 1);
-  final  elements =
+    final elements =
         widget.data.data?.where((element) => element.publishMovil).toList() ??
             [];
     if ((widget.data.pageNumbers ?? 0) + 1 < (widget.data.totalPages ?? 1)) {
@@ -68,6 +68,7 @@ class _CircleAvatarCardGridState extends ConsumerState<CircleAvatarCardGrid> {
         childAspectRatio: 0.60,
         crossAxisSpacing: 30,
       ),
+      addAutomaticKeepAlives: false,
       showNewPageProgressIndicatorAsGridChild: false,
       builderDelegate: PagedChildBuilderDelegate<TypeServiceModel>(
         animateTransitions: true,
