@@ -351,5 +351,21 @@
   "confirmacionMarriageCelebration": "Recuerde que el día de la celebración de matrimonio debe presentar físicamente la documentación que se adjuntó en la agencia virtual. En caso de que, los documentos que hayan sido cargados al sistema no estén completos o estén adulterados, el matrimonio será suspendido y no podrá ser celebrado.",
   "confirmacionSol": "Confirmación de solicitud",
   "solicitudExi": "¡Su solicitud se realizó con éxito!",
-  "lugarTra":"Lugar donde se desea realizar el trámite"
+  "lugarTra":"Lugar donde se desea realizar el trámite",
+  "principal": "Principal",
+  "secundaria": "Secundaria",
+  "apartamento": "Apartamento",
+  "estudio": "Estudio",
+  "aticos": "Áticos",
+  "pisos": "Pisos",
+  "bajosJardin": "Bajos con jardín",
+  "propiaTotPag": "Propia totalmente pagada",
+  "propiaYEnPag": "Propia y en pago",
+  "propia": "Propia",
+  "prestadaCedida": "Prestada o cedida",
+  "porServicios": "Por servicios",
+  "arrendada": "Arrendada",
+  "duplex": "Dúplex",
+  "noHayElementosMostrar": "No hay elementos para mostrar",
+  "errorCargarElementos": "Error al cargar los elementos"
 }

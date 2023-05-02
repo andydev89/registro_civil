@@ -1,4 +1,7 @@
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
+import 'package:registro_civil_apk/data/enum/residence_registration/tenure.dart';
+import 'package:registro_civil_apk/data/enum/residence_registration/type_housing.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
@@ -9,8 +12,12 @@ class ResidenceRegistrationFirstStepModel {
   ResidenceRegistrationFirstStepModel({
     @FormControlAnnotation(validators: [requiredValidator])
         this.nationalElectricUnicCode,
-    @FormControlAnnotation<dynamic>() this.haveElectricLightMeter = false,
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation<dynamic>()
+        this.haveElectricLightMeter = false,
+    @FormControlAnnotation(
+      validators: [requiredValidator, length10Validator],
+      asyncValidators: [phoneNumberEcuadorValidation],
+    )
         required this.phoneNumber,
     @FormControlAnnotation(validators: [requiredValidator, emailValidator])
         required this.emailAddress,
@@ -64,13 +71,10 @@ class ResidenceRegistrationThirdStepModel {
         required this.residenceType,
   });
 
-  final String houseType;
-  // TODO(alejandro): hacerlo un enum
-  ///Tenencia
-  final String tenure;
+  final TypeHousing houseType;
+  final Tenure tenure;
   final String villageOrBuildingNumber;
   final String floorNumber;
   final String appartmentNumber;
-  // TODO(alejandro): hacerlo un enum
-  final String residenceType;
+  final ResidenceType residenceType;
 }

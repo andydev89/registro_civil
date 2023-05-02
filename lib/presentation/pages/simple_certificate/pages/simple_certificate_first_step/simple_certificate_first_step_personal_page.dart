@@ -11,6 +11,7 @@ import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 
 class SimpleCertificateFirstStepPersonalPage extends ConsumerWidget {
@@ -27,7 +28,7 @@ class SimpleCertificateFirstStepPersonalPage extends ConsumerWidget {
       builder: (context, formModel, child) => Scaffold(
         backgroundColor: Colors.transparent,
         body: LayoutBuilder(
-          builder: (context, constraints) => SingleChildScrollView(
+          builder: (context, constraints) => ScrollableContent(
             child: Container(
               constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: Column(

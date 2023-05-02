@@ -4,7 +4,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/providers/type_services/type_services_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_text_field.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_debounced_text_field.dart';
 
 class PrimarySearch extends StatefulWidget {
   const PrimarySearch({
@@ -32,6 +32,12 @@ class _PrimarySearchState extends State<PrimarySearch> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Row(
@@ -41,7 +47,7 @@ class _PrimarySearchState extends State<PrimarySearch> {
         Flexible(
           child: Consumer(
             builder: (_, ref, __) {
-              return PrimaryTextField(
+              return PrimaryDebouncedTextField(
                 hintText: l10n.buscar,
                 controller: controller,
                 padding: 15,

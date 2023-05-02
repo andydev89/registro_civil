@@ -24,7 +24,7 @@ enum MaritalStatus implements Translatable {
       case MaritalStatus.divorced:
         return l10n.divorced;
       case MaritalStatus.widower:
-        return l10n.widowed;
+        return l10n.widower;
       case MaritalStatus.commonLawMarriage:
         return l10n.commonLawMarriage;
       case MaritalStatus.nonResidentPartner:

@@ -1,4 +1,5 @@
 import 'package:registro_civil_apk/data/models/commons/querys_model.dart';
+import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -15,18 +16,23 @@ class TypeServicesFilter extends _$TypeServicesFilter {
   void setFilter(String filter) {
     state = state.copyWith(filter: filter);
   }
+
+  void setPageNo(int pageNo, {int pageSize = 4}) {
+    state = state.copyWith(pageNo: pageNo, pageSize: pageSize);
+  }
 }
 
 @riverpod
-Future<List<TypeServiceModel>> typeServices(TypeServicesRef ref) async {
+Future<ResponseModelPagination<List<TypeServiceModel>>> typeServices(
+  TypeServicesRef ref,
+) async {
   final query = ref.watch(typeServicesFilterProvider);
   final api = ref.watch(apiProvider);
-  return (await api.typeServices(
-    query.pageNo,
-    query.pageSize,
-    query.filter,
-    query.sortBy,
-    query.sortType.toJson,
-  ))
-      .data!;
+  return api.typeServices(
+    pageNo: query.pageNo,
+    pageSize: query.pageSize,
+    filter: query.filter,
+    sortBy: query.sortBy,
+    sortType: query.sortType.toJson,
+  );
 }

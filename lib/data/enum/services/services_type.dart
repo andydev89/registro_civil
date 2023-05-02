@@ -5,34 +5,45 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 
 enum TypeService implements Translatable {
   @JsonValue('SERVICE_CERTIFICADO_NACIMIENTO')
-  birth,
+  birth('SERVICE_CERTIFICADO_NACIMIENTO'),
   @JsonValue('SERVICE_CERTIFICADO_MATRIMONIO')
-  marriage,
+  marriage('SERVICE_CERTIFICADO_MATRIMONIO'),
   @JsonValue('SERVICE_CERTIFICADO_UNION_HECHO')
-  factorUnion,
+  factorUnion('SERVICE_CERTIFICADO_UNION_HECHO'),
   @JsonValue('SERVICE_CERTIFICADO_DEFUNCION')
-  death,
+  death('SERVICE_CERTIFICADO_DEFUNCION'),
   @JsonValue('SERVICE_CERTIFICADO_GENERO')
-  gender,
+  gender('SERVICE_CERTIFICADO_GENERO'),
   @JsonValue('SERVICE_CERTIFICADO_IDENTIDAD_ESTADO_CIVIL')
-  identity,
+  identity('SERVICE_CERTIFICADO_IDENTIDAD_ESTADO_CIVIL'),
   // End simple certificate
   @JsonValue('SERVICE_ACTA_REGISTRAL_NACIMIENTO')
-  copyBirthRegistrationCertificate,
+  copyBirthRegistrationCertificate('SERVICE_ACTA_REGISTRAL_NACIMIENTO'),
   @JsonValue('SERVICE_ACTA_REGISTRAL_MATRIMONIO')
-  copyMarriageRegistrationCertificate,
+  copyMarriageRegistrationCertificate('SERVICE_ACTA_REGISTRAL_MATRIMONIO'),
   @JsonValue('SERVICE_ACTA_REGISTRAL_UNION_HECHO')
-  copyFactoUnionRegistrationCertificate,
+  copyFactoUnionRegistrationCertificate('SERVICE_ACTA_REGISTRAL_UNION_HECHO'),
   @JsonValue('SERVICE_ACTA_REGISTRAL_DEFUNCION')
-  copyRegistrationRecordDeath,
+  copyRegistrationRecordDeath('SERVICE_ACTA_REGISTRAL_DEFUNCION'),
   @JsonValue('SERVICE_ACTA_REGISTRAL_GENERO')
-  copyRegistrationCertificateGenderRegistration,
+  copyRegistrationCertificateGenderRegistration(
+    'SERVICE_ACTA_REGISTRAL_GENERO',
+  ),
   // End service acta registral
   @JsonValue('SERVICE_AGENDAR_TURNO')
-  schedule,
+  schedule('SERVICE_AGENDAR_TURNO'),
+  @JsonValue('NULL')
+  none('NULL'),
   // TODO(jang): temp
   @JsonValue('PRUEBA_MARRIAGE_CELEBRATION')
-  marriageCelebration;
+  marriageCelebration('PRUEBA_MARRIAGE_CELEBRATION');
+
+  const TypeService(this.toText);
+  final String toText;
+
+  static String? toJson(TypeService? type) {
+    return type?.toText;
+  }
 
   bool get isSimpleCertificate =>
       this == birth ||
@@ -76,6 +87,8 @@ enum TypeService implements Translatable {
       case TypeService.schedule:
         return l10n.ageTurno;
       case TypeService.marriageCelebration:
+        return '';
+      case TypeService.none:
         return '';
     }
   }

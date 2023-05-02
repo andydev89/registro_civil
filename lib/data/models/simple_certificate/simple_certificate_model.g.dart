@@ -22,11 +22,11 @@ SimpleCertificateModel _$SimpleCertificateModelFromJson(
 Map<String, dynamic> _$SimpleCertificateModelToJson(
         SimpleCertificateModel instance) =>
     <String, dynamic>{
-      'type': _$TypeServiceEnumMap[instance.type]!,
+      'type': TypeService.toJson(instance.type),
       'userNui': instance.userNui,
       'isFamily': instance.isFamily,
       'typeFamily':
-          _$RelationshipSimpleCertificateEnumEnumMap[instance.typeFamily]!,
+          RelationshipSimpleCertificateEnum.toJson(instance.typeFamily),
       'nuiFamily': instance.nuiFamily,
       'isConadis': instance.isConadis,
       'nuiConadis': instance.nuiConadis,
@@ -49,6 +49,7 @@ const _$TypeServiceEnumMap = {
   TypeService.copyRegistrationCertificateGenderRegistration:
       'SERVICE_ACTA_REGISTRAL_GENERO',
   TypeService.schedule: 'SERVICE_AGENDAR_TURNO',
+  TypeService.none: 'NULL',
   TypeService.marriageCelebration: 'PRUEBA_MARRIAGE_CELEBRATION',
 };
 

@@ -17,6 +17,7 @@ class PrimaryLabel extends StatelessWidget {
     super.key,
     this.shadows,
     this.underlining = false,
+    this.overFlow,
   });
   final String title;
   final Color? color;
@@ -29,6 +30,7 @@ class PrimaryLabel extends StatelessWidget {
   final TextAlign? textAlign;
   final List<Shadow>? shadows;
   final bool underlining;
+  final TextOverflow? overFlow;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class PrimaryLabel extends StatelessWidget {
       shadows: shadows,
       maxLines: maxlines,
       textAlign: textAlign,
+      overFlow: overFlow,
     );
   }
 }
