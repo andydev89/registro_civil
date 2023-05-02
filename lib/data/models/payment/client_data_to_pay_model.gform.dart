@@ -222,8 +222,8 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
   String get _nameValue => nameControl.value as String;
   String get _lastNameValue => lastNameControl.value as String;
   String get _addressValue => addressControl.value as String;
-  String get _provinceValue => provinceControl.value as String;
-  String get _cityValue => cityControl.value as String;
+  LocationModel get _provinceValue => provinceControl.value as LocationModel;
+  LocationModel get _cityValue => cityControl.value as LocationModel;
   String get _phoneValue => phoneControl.value as String;
   String get _emailValue => emailControl.value as String;
   int get _postalCodeValue => postalCodeControl.value as int;
@@ -343,7 +343,7 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
   }
 
   void provinceValueUpdate(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -352,7 +352,7 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
   }
 
   void cityValueUpdate(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -415,7 +415,7 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
   }
 
   void provinceValuePatch(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -424,7 +424,7 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
   }
 
   void cityValuePatch(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -487,7 +487,7 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
       addressControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void provinceValueReset(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -496,7 +496,7 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
       provinceControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void cityValueReset(
-    String value, {
+    LocationModel value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -537,10 +537,10 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
       form.control(lastNameControlPath()) as FormControl<String>;
   FormControl<String> get addressControl =>
       form.control(addressControlPath()) as FormControl<String>;
-  FormControl<String> get provinceControl =>
-      form.control(provinceControlPath()) as FormControl<String>;
-  FormControl<String> get cityControl =>
-      form.control(cityControlPath()) as FormControl<String>;
+  FormControl<LocationModel> get provinceControl =>
+      form.control(provinceControlPath()) as FormControl<LocationModel>;
+  FormControl<LocationModel> get cityControl =>
+      form.control(cityControlPath()) as FormControl<LocationModel>;
   FormControl<String> get phoneControl =>
       form.control(phoneControlPath()) as FormControl<String>;
   FormControl<String> get emailControl =>
@@ -770,14 +770,14 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        provinceControlName: FormControl<String>(
+        provinceControlName: FormControl<LocationModel>(
             value: clientDataToPayModel?.province,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        cityControlName: FormControl<String>(
+        cityControlName: FormControl<LocationModel>(
             value: clientDataToPayModel?.city,
             validators: [requiredValidator],
             asyncValidators: [],

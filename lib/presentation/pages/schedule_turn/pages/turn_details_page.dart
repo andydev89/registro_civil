@@ -103,6 +103,7 @@ class TurnDetailsPage extends ConsumerWidget {
                     ],
                   ),
                 ),
+                const SizedBox(width: 10),
                 Expanded(
                   child: AspectRatio(
                     aspectRatio: 1,
