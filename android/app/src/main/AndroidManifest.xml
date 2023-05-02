@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.verygoodcore.registro_civil_apk">
    <application
-        android:label="${appName}"
+        android:label="Agencia Virtual"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyAqz_cUzlJ-PB9MMF4stEclAXOD8EFFkBQ"/>
