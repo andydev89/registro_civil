@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class ErrorStatus extends StatelessWidget {
   const ErrorStatus({
@@ -9,6 +10,6 @@ class ErrorStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(messagge);
+    return PrimaryText(messagge);
   }
 }

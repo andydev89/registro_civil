@@ -786,14 +786,14 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
             touched: false),
         phoneControlName: FormControl<String>(
             value: clientDataToPayModel?.phone,
-            validators: [requiredValidator],
-            asyncValidators: [],
+            validators: [requiredValidator, length10Validator],
+            asyncValidators: [phoneNumberEcuadorValidation],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         emailControlName: FormControl<String>(
             value: clientDataToPayModel?.email,
-            validators: [requiredValidator],
+            validators: [requiredValidator, emailValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

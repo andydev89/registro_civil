@@ -76,14 +76,6 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
             ),
           );
         },
-        // successWidget: const Icon(
-        //   Icons.check,
-        //   color: Colors.white,
-        // ),
-        // errorWidget: const Icon(
-        //   Icons.error,
-        //   color: Colors.red,
-        // ),
         showSuccess: false,
         showError: false,
         successPadding: EdgeInsets.zero,

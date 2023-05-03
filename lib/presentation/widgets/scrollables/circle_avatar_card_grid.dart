@@ -72,11 +72,8 @@ class _CircleAvatarCardGridState extends ConsumerState<CircleAvatarCardGrid> {
       showNewPageProgressIndicatorAsGridChild: false,
       builderDelegate: PagedChildBuilderDelegate<TypeServiceModel>(
         animateTransitions: true,
-        newPageProgressIndicatorBuilder: (context) => const Padding(
-          padding: EdgeInsets.only(top: 20),
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
+        newPageProgressIndicatorBuilder: (context) => Center(
+          child: const CircularProgressIndicator().verticalPadding(10),
         ),
         noItemsFoundIndicatorBuilder: (context) => Center(
           child: PrimaryText(l10n.noHayElementosMostrar),

@@ -36,7 +36,11 @@ class ModalConfirmation extends StatelessWidget {
           children: [
             PrimaryAsyncButton(
               title: l10n.siguiente,
-              onPressed: onConfirm,
+              onPressed: () async {
+                final newContext = Navigator.of(context);
+                await onConfirm.call();
+                newContext.pop();
+              },
             ),
             const SizedBox(height: 10),
             PrimaryButton(
