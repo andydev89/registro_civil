@@ -13,7 +13,7 @@ class SimpleCertificateResponse {
   factory SimpleCertificateResponse.fromJson(Map<String, dynamic> json) =>
       _$SimpleCertificateResponseFromJson(json);
 
-  final int serviceId;
+  final String serviceId;
   final String command;
   final String document;
 

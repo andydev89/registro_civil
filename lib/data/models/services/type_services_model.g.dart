@@ -8,7 +8,7 @@ part of 'type_services_model.dart';
 
 TypeServiceModel _$TypeServiceModelFromJson(Map<String, dynamic> json) =>
     TypeServiceModel(
-      id: json['id'] as int,
+      id: json['id'] as String,
       name: json['name'] as String,
       description: json['description'] as String,
       price: (json['price'] as num).toDouble(),

@@ -22,7 +22,7 @@ final simpleCertificateProvider =
 );
 
 typedef _$SimpleCertificate = AutoDisposeNotifier<void>;
-String _$processHash() => r'a229f78cabae474ecdc04614f1d9ac36825c8744';
+String _$processHash() => r'3889662c64b959de992b90f90ba2e87720cd104a';
 
 /// See also [Process].
 @ProviderFor(Process)
@@ -36,7 +36,7 @@ final processProvider = AutoDisposeNotifierProvider<Process, void>.internal(
 );
 
 typedef _$Process = AutoDisposeNotifier<void>;
-String _$cancelHash() => r'63e16486d303adb5f538f7c458545df20e9f062c';
+String _$cancelHash() => r'adb9dff13fb00e88d983f166da40a9fe740a9981';
 
 /// See also [Cancel].
 @ProviderFor(Cancel)

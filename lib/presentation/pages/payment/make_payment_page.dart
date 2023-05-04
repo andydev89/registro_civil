@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:fk_user_agent/fk_user_agent.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
@@ -18,7 +17,9 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_email_field.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_phone_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
@@ -61,7 +62,8 @@ class MakePaymentPage extends ConsumerWidget {
                   ),
                   Flexible(
                     child: PrimaryText(
-                      '${l10n.totalPagar} \$ ${service.total.toStringAsFixed(2)}',
+                      '${l10n.totalPagar} \$'
+                      '${service.total.toStringAsFixed(2)}',
                       color: blue,
                       fontWeight: FontWeight.w500,
                     ),
@@ -76,26 +78,28 @@ class MakePaymentPage extends ConsumerWidget {
                       PrimaryReactiveTextField(
                         label: l10n.nombre,
                         formControl: formModel.nameControl,
+                        textCapitalization: TextCapitalization.words,
                       ),
                       PrimaryReactiveTextField(
                         label: l10n.apellidos,
                         formControl: formModel.lastNameControl,
+                        textCapitalization: TextCapitalization.words,
                       ),
                       PrimaryReactiveTextField(
                         label: l10n.direccion,
                         formControl: formModel.addressControl,
                       ),
-                      PrimaryReactiveTextField(
-                        label: l10n.provincia,
+                      SelectElementFromApi(
                         formControl: formModel.provinceControl,
+                        label: l10n.provincia,
+                        provider: provincesProvider,
                       ),
-                      PrimaryReactiveTextField(
-                        label: l10n.ciudad,
+                      SelectElementFromApi(
                         formControl: formModel.cityControl,
+                        label: l10n.ciudad,
+                        provider: cantonProvider,
                       ),
-                      // TODO(alejandro): crear un componente
-                      //reactivo para los telefonos
-                      PrimaryReactiveTextField(
+                      PrimaryReactivePhoneField(
                         label: l10n.telefonoCel,
                         formControl: formModel.phoneControl,
                       ),
@@ -106,6 +110,10 @@ class MakePaymentPage extends ConsumerWidget {
                       PrimaryReactiveTextField(
                         label: l10n.codigoPostal,
                         formControl: formModel.postalCodeControl,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        keyboardType: TextInputType.number,
                       ),
                       PrimaryCaption(
                         l10n.enCasoDeTenerProblemasEscribanosA,
@@ -133,9 +141,9 @@ class MakePaymentPage extends ConsumerWidget {
                     final user = await ref.read(meProvider.future);
                     final buyerAndShipping = Buyer(
                       address: Address(
-                        city: formModel.model.city,
+                        city: formModel.model.city.name,
                         country: 'ECUADOR',
-                        estate: formModel.model.province,
+                        estate: formModel.model.province.name,
                         phone: formModel.model.phone,
                         postalCode: formModel.model.postalCode.toString(),
                         street: formModel.model.address,
@@ -183,7 +191,7 @@ class MakePaymentPage extends ConsumerWidget {
                           onPageFinished: () => NotificationRoute(
                             buttonText: buttonText,
                             message: l10n.pagoRealizadoConExito,
-                            notificationType: NotificationType.succes,
+                            notificationType: NotificationType.success,
                             title: l10n.confirmacionDePago,
                             onTap: onTapSuccessPayment,
                             description: Column(
@@ -194,7 +202,8 @@ class MakePaymentPage extends ConsumerWidget {
                                   'Pagado: \$${service.total.toStringAsFixed(2)}',
                                 ),
                                 PrimaryCaption(
-                                  'Número de transacción: ${data.paymentGatewayReference}',
+                                  'Número de transacción:'
+                                  ' ${data.paymentGatewayReference}',
                                 ),
                               ],
                             ),

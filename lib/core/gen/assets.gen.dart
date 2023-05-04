@@ -14,12 +14,15 @@ import 'package:flutter/services.dart';
 class $AssetsJpgGen {
   const $AssetsJpgGen();
 
+  /// File path: assets/jpg/empty.jpg
+  AssetGenImage get empty => const AssetGenImage('assets/jpg/empty.jpg');
+
   /// File path: assets/jpg/primary_app_bar_background.jpg
   AssetGenImage get primaryAppBarBackground =>
       const AssetGenImage('assets/jpg/primary_app_bar_background.jpg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [primaryAppBarBackground];
+  List<AssetGenImage> get values => [empty, primaryAppBarBackground];
 }
 
 class $AssetsPngGen {

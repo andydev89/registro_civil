@@ -8,6 +8,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/loading_status_adaptative.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/refresh_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
@@ -58,7 +59,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
           icon: hasError
               ? RefreshStatus(onRefresh: onError)
               : isLoading
-                  ? const LoadingStatus()
+                  ? const LoadingStatusAdaptative()
                   : null,
           borderRadius: BorderRadius.circular(10),
           decoration: primaryInputDecoration(

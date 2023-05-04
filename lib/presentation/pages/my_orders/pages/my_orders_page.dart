@@ -51,7 +51,7 @@ class MyOrdersPage extends ConsumerWidget {
                               total: 2,
                               unitaryValue: 2,
                               typeOfService: TypeOfServiceModel(
-                                id: 2,
+                                id: '2',
                                 name: 'name',
                                 price: 2,
                                 iva: 2,
