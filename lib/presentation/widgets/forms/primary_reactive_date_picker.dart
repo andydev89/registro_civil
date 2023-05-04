@@ -7,7 +7,6 @@ import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/loading_status_adaptative.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/refresh_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
@@ -145,13 +144,15 @@ class _CustomCalendarState extends State<CustomCalendar> {
       firstDay: DateTime.now(),
       lastDay: DateTime.now().add(const Duration(days: 365 * 30)),
       onPageChanged: (focusedDay) async {
-        final availablesDays =
-            await widget.onPageChanged?.call(focusedDay) ?? [];
-        setState(() {
-          widget.availablesDate.clear();
-          widget.availablesDate.addAll(availablesDays);
-          _focusedDay = focusedDay;
-        });
+        _focusedDay = focusedDay;
+        if (mounted) {
+          final availablesDays =
+              await widget.onPageChanged?.call(focusedDay) ?? [];
+          setState(() {
+            widget.availablesDate.clear();
+            widget.availablesDate.addAll(availablesDays);
+          });
+        }
       },
       focusedDay: _focusedDay,
       // selectedDayPredicate: (day) =>  _selectedDays.contains(day)
