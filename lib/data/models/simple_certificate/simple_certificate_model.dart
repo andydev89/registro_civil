@@ -109,7 +109,7 @@ class ProcessModel {
 
   factory ProcessModel.fromJson(Map<String, dynamic> json) =>
       _$ProcessModelFromJson(json);
-  final int id;
+  final String id;
   final ServicesState state;
   final String observations;
 
@@ -125,7 +125,7 @@ class CancelModel {
 
   factory CancelModel.fromJson(Map<String, dynamic> json) =>
       _$CancelModelFromJson(json);
-  final int id;
+  final String id;
   final String observations;
 
   Map<String, dynamic> toJson() => _$CancelModelToJson(this);

@@ -63,7 +63,7 @@ const _$RelationshipSimpleCertificateEnumEnumMap = {
 };
 
 ProcessModel _$ProcessModelFromJson(Map<String, dynamic> json) => ProcessModel(
-      id: json['id'] as int,
+      id: json['id'] as String,
       state: $enumDecode(_$ServicesStateEnumMap, json['state']),
       observations: json['observations'] as String,
     );
@@ -84,7 +84,7 @@ const _$ServicesStateEnumMap = {
 };
 
 CancelModel _$CancelModelFromJson(Map<String, dynamic> json) => CancelModel(
-      id: json['id'] as int,
+      id: json['id'] as String,
       observations: json['observations'] as String,
     );
 

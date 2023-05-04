@@ -156,7 +156,7 @@ abstract class Api {
     @Query('from') String from,
     @Query('to') String to,
     @Query('agency') String agency,
-    @Query('typeOfService') int typeOfService, {
+    @Query('typeOfService') String typeOfService, {
     @Query('special') required bool special,
   });
 

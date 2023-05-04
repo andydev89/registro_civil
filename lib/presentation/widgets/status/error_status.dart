@@ -5,11 +5,25 @@ class ErrorStatus extends StatelessWidget {
   const ErrorStatus({
     super.key,
     required this.messagge,
+    this.onPressed,
   });
   final String messagge;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return PrimaryText(messagge);
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          PrimaryText(messagge),
+          if (onPressed != null)
+            IconButton(
+              onPressed: onPressed,
+              icon: const Icon(Icons.refresh),
+            )
+        ],
+      ),
+    );
   }
 }
