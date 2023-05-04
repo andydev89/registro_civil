@@ -63,7 +63,7 @@ class Process extends _$Process {
   void build() {}
 
   Future<Result<ProcessResponse, StatusCode>> processSimpleCertificate({
-    required int id,
+    required String id,
     String observations = '',
     ServicesState? state,
   }) async {
@@ -88,7 +88,7 @@ class Cancel extends _$Cancel {
   void build() {}
 
   Future<Result<ProcessResponse, StatusCode>> cancelSimpleCertificate({
-    required int id,
+    required String id,
     String observations = '',
   }) async {
     final api = ref.watch(apiProvider);

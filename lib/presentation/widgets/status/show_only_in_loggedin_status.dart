@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/loading_status_adaptative.dart';
 
 class ShowOnlyInLoggedInStatus extends ConsumerWidget {
   const ShowOnlyInLoggedInStatus({
@@ -22,7 +22,7 @@ class ShowOnlyInLoggedInStatus extends ConsumerWidget {
         child: child,
       ),
       error: (error, stackTrace) => ErrorStatus(messagge: error.toString()),
-      loading: () => const LoadingStatus(),
+      loading: () => const LoadingStatusAdaptative(),
     );
   }
 }

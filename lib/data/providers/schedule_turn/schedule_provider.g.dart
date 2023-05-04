@@ -7,7 +7,7 @@ part of 'schedule_provider.dart';
 // **************************************************************************
 
 String _$availableSchedulesHash() =>
-    r'a29d3e1f5e1a336c60e77bb2fc17a51873b2e484';
+    r'a3a8002172f14409bf84b7467082ec37d587fe9a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -48,7 +48,7 @@ class AvailableSchedulesFamily
     required DateTime startDate,
     required DateTime endDate,
     required String agency,
-    required int typeOfService,
+    required String typeOfService,
     required bool special,
   }) {
     return AvailableSchedulesProvider(
@@ -121,7 +121,7 @@ class AvailableSchedulesProvider
   final DateTime startDate;
   final DateTime endDate;
   final String agency;
-  final int typeOfService;
+  final String typeOfService;
   final bool special;
 
   @override

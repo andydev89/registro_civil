@@ -255,67 +255,6 @@ class Profile {
 }
 
 // @embedded
-// @JsonSerializable()
-// class Agency {
-//   Agency({
-//     this.id,
-//     this.name,
-//     this.description,
-//     this.country,
-//     this.province,
-//     this.canton,
-//     this.parroquia,
-//     this.region,
-//     this.latitude,
-//     this.longitude,
-//     this.state,
-//   });
-
-//   factory Agency.fromJson(Map<String, dynamic> json) => _$AgencyFromJson(json);
-//   final String? id;
-//   final String? name;
-//   final String? description;
-//   final Territory? country;
-//   final Territory? province;
-//   final Territory? canton;
-//   final Territory? parroquia;
-//   final String? region;
-//   final String? latitude;
-//   final String? longitude;
-//   final String? state;
-
-//   Map<String, dynamic> toJson() => _$AgencyToJson(this);
-
-//   Agency copyWith({
-//     String? id,
-//     String? name,
-//     String? description,
-//     Territory? country,
-//     Territory? province,
-//     Territory? canton,
-//     Territory? parroquia,
-//     String? region,
-//     String? latitude,
-//     String? longitude,
-//     String? state,
-//   }) {
-//     return Agency(
-//       id: id ?? this.id,
-//       name: name ?? this.name,
-//       description: description ?? this.description,
-//       country: country ?? this.country,
-//       province: province ?? this.province,
-//       canton: canton ?? this.canton,
-//       parroquia: parroquia ?? this.parroquia,
-//       region: region ?? this.region,
-//       latitude: latitude ?? this.latitude,
-//       longitude: longitude ?? this.longitude,
-//       state: state ?? this.state,
-//     );
-//   }
-// }
-
-// @embedded
 @JsonSerializable()
 class Aplication {
   Aplication({

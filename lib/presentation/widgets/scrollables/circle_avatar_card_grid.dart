@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
@@ -70,13 +71,11 @@ class _CircleAvatarCardGridState extends ConsumerState<CircleAvatarCardGrid> {
       ),
       addAutomaticKeepAlives: false,
       showNewPageProgressIndicatorAsGridChild: false,
+      showNewPageErrorIndicatorAsGridChild: false,
       builderDelegate: PagedChildBuilderDelegate<TypeServiceModel>(
         animateTransitions: true,
-        newPageProgressIndicatorBuilder: (context) => const Padding(
-          padding: EdgeInsets.only(top: 20),
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
+        newPageProgressIndicatorBuilder: (context) => Center(
+          child: const CircularProgressIndicator().verticalPadding(10),
         ),
         noItemsFoundIndicatorBuilder: (context) => Center(
           child: PrimaryText(l10n.noHayElementosMostrar),
@@ -85,9 +84,8 @@ class _CircleAvatarCardGridState extends ConsumerState<CircleAvatarCardGrid> {
           children: [
             const SizedBox(height: 20),
             PrimaryText(l10n.errorCargarElementos),
-            const SizedBox(height: 20),
             IconButton(
-              onPressed: () => _pagingController.refresh(),
+              onPressed: () => _pagingController.retryLastFailedRequest(),
               icon: const Icon(Icons.refresh),
             ),
           ],
@@ -108,6 +106,10 @@ class _CircleAvatarCardGridState extends ConsumerState<CircleAvatarCardGrid> {
                         image: Image.file(snapshot.data!).image,
                         fit: BoxFit.cover,
                       ),
+                      // image: DecorationImage(
+                      //   image: Assets.jpg.empty.image().image,
+                      //   fit: BoxFit.cover,
+                      // ),
                     ),
                   ),
                 );

@@ -9,7 +9,7 @@ part of 'simple_certificate_response.dart';
 SimpleCertificateResponse _$SimpleCertificateResponseFromJson(
         Map<String, dynamic> json) =>
     SimpleCertificateResponse(
-      serviceId: json['serviceId'] as int,
+      serviceId: json['serviceId'] as String,
       command: json['command'] as String,
       document: json['document'] as String,
     );

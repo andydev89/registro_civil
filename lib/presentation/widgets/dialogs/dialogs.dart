@@ -68,7 +68,7 @@ Future<void> showContentDialog(
 }) {
   return showDialog(
     context: context,
-    builder: (BuildContext context) {
+    builder: (_) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),

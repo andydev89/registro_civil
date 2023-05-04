@@ -48,7 +48,7 @@ class ProceduresPage extends ConsumerWidget {
       data: ResponseModelPagination(
         data: [
           TypeServiceModel(
-            id: 93943,
+            id: '93943',
             name: 'Celebración de Matrimonio',
             description: 'Celebración de Matrimonio',
             price: 23,

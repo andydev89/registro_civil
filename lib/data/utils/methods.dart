@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:fk_user_agent/fk_user_agent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image/image.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/providers/isar_providers.dart';
@@ -47,9 +49,27 @@ Future<File> createPdfFileFromBase64(String base64Pdf) async {
 // create image from base64
 
 Future<File> createImageFileFromBase64(String base64Image) async {
-  final bytes = base64Decode(base64Image);
+  Uint8List bytes;
+  if (isValidBase64Image(base64Image)) {
+    bytes = base64Decode(base64Image);
+  } else {
+    // Carga la imagen predeterminada de los activos
+    final byteData = await rootBundle.load(Assets.jpg.empty.path);
+    bytes = byteData.buffer.asUint8List();
+  }
+
   final directory = await getTemporaryDirectory();
   final imageFile = File('${directory.path}/${base64Image.hashCode}.jpg');
   await imageFile.writeAsBytes(bytes, flush: true);
   return imageFile;
+}
+
+bool isValidBase64Image(String base64Image) {
+  try {
+    final bytes = base64Decode(base64Image);
+    final image = decodeImage(bytes);
+    return image != null;
+  } catch (e) {
+    return false;
+  }
 }
