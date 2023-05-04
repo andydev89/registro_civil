@@ -87,6 +87,14 @@ class $AssetsPngGen {
   /// File path: assets/png/footer.png
   AssetGenImage get footer => const AssetGenImage('assets/png/footer.png');
 
+  /// File path: assets/png/icono_app.jpg
+  AssetGenImage get iconoAppJpg =>
+      const AssetGenImage('assets/png/icono_app.jpg');
+
+  /// File path: assets/png/icono_app.png
+  AssetGenImage get iconoAppPng =>
+      const AssetGenImage('assets/png/icono_app.png');
+
   /// File path: assets/png/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/png/logo.png');
 
@@ -151,6 +159,8 @@ class $AssetsPngGen {
         certificadoUnionHecho,
         fingerPrint,
         footer,
+        iconoAppJpg,
+        iconoAppPng,
         logo,
         pagoConvalidacionDocumentos,
         pagoServicioIngresosSentencias,
