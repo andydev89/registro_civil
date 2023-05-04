@@ -191,7 +191,7 @@ class MakePaymentPage extends ConsumerWidget {
                           onPageFinished: () => NotificationRoute(
                             buttonText: buttonText,
                             message: l10n.pagoRealizadoConExito,
-                            notificationType: NotificationType.succes,
+                            notificationType: NotificationType.success,
                             title: l10n.confirmacionDePago,
                             onTap: onTapSuccessPayment,
                             description: Column(

@@ -194,7 +194,7 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                 .symmetricPadding(10, 20),
           ),
           bottomNavigationBar: ReactivePartnerFormConsumer(
-            builder: (_, form, __) {
+            builder: (context, form, __) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -214,28 +214,35 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                               );
                               return;
                             }
+                            final ok = ValueNotifier<bool>(false);
                             ref
                                 .read(marriageCelebrationProvider.notifier)
                                 .setPartner(form.model, 1);
                             showContentDialog(
                               context,
                               content: ModalConfirmation(
+                                ok: ok,
                                 onConfirm: () => ref
                                     .read(marriageProvider.notifier)
                                     .marriage(marriageCelebrationModel)
                                     .when(
-                                      ok: (_) => context.replaceRoute(
-                                        NotificationRoute(
-                                          title: l10n.confirmacionSol,
-                                          message: l10n.solicitudExi,
-                                          buttonText: l10n.misPedidos,
-                                          bottomText: l10n
-                                              .envNotCorElectronicoReservarTurno,
-                                          notificationType:
-                                              NotificationType.succes,
-                                          onTap: (context) {},
-                                        ),
-                                      ),
+                                      ok: (_) {
+                                        ok.value = true;
+                                        context.replaceRoute(
+                                          NotificationRoute(
+                                            title: l10n.confirmacionSol,
+                                            message: l10n.solicitudExi,
+                                            buttonText: l10n.misPedidos,
+                                            bottomText: l10n
+                                                .envNotCorElectronicoReservarTurno,
+                                            notificationType:
+                                                NotificationType.success,
+                                            onTap: (context) {
+                                              // TODOjang(): Navigate to my orders
+                                            },
+                                          ),
+                                        );
+                                      },
                                       err: (err) => showAlert(
                                         err.toString(),
                                         TypeAlert.error,

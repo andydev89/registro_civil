@@ -10,11 +10,18 @@ class ModalConfirmation extends StatelessWidget {
   const ModalConfirmation({
     super.key,
     required this.onConfirm,
+    required this.ok,
   });
   final Future<void> Function() onConfirm;
+  final ValueNotifier<bool> ok;
 
   @override
   Widget build(BuildContext context) {
+    ok.addListener(() {
+      if (ok.value) {
+        Navigator.pop(context);
+      }
+    });
     final l10n = context.l10n;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -36,11 +43,7 @@ class ModalConfirmation extends StatelessWidget {
           children: [
             PrimaryAsyncButton(
               title: l10n.siguiente,
-              onPressed: () async {
-                final newContext = Navigator.of(context);
-                await onConfirm.call();
-                newContext.pop();
-              },
+              onPressed: onConfirm,
             ),
             const SizedBox(height: 10),
             PrimaryButton(

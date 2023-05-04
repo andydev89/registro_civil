@@ -124,7 +124,7 @@ class TurnDetailsPage extends ConsumerWidget {
                       PaymentMethodType.correspondentPayment
                   ? context.replaceRoute(
                       NotificationRoute(
-                        notificationType: NotificationType.succes,
+                        notificationType: NotificationType.success,
                         message: l10n.turnoReservadoMensajeFormal,
                         bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
                         buttonText: l10n.misTurnos,
@@ -138,7 +138,7 @@ class TurnDetailsPage extends ConsumerWidget {
                         service: typeOfService,
                         onTapSuccessPayment: (cxt) => context.replaceRoute(
                           NotificationRoute(
-                            notificationType: NotificationType.succes,
+                            notificationType: NotificationType.success,
                             message: l10n.turnoReservadoMensajeFormal,
                             bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
                             buttonText: l10n.misTurnos,

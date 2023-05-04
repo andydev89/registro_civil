@@ -180,13 +180,15 @@ abstract class Api {
 
   //PLACE TO PAY PAYMENT
   @POST(
-      'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions')
+    'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
+  )
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
     @Body() PlaceToPayModel placeToPayModel,
   );
 
   @GET(
-      'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/{reference}')
+    'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/{reference}',
+  )
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
     @Path('reference') String reference,
   );
