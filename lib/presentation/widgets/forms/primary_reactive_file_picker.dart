@@ -15,8 +15,8 @@ import 'package:registro_civil_apk/presentation/widgets/decorations/input_decora
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class PrimaryFilePicker<T> extends StatelessWidget {
-  const PrimaryFilePicker({
+class PrimaryReactiveFilePicker<T> extends StatelessWidget {
+  const PrimaryReactiveFilePicker({
     super.key,
     required this.formControl,
     this.allowedExtensions = const [FileExtensions.pdf],
@@ -29,7 +29,7 @@ class PrimaryFilePicker<T> extends StatelessWidget {
   final FormControl<T>? formControl;
   final List<FileExtensions> allowedExtensions;
   final int maxFileSizeMB;
-  final void Function(T?,String)? onFileSelected;
+  final void Function(T?, String)? onFileSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -65,12 +65,13 @@ class PrimaryFilePicker<T> extends StatelessWidget {
                       if (base64Pdf is T) {
                         field.didChange(base64Pdf as T);
                       } else {
-                        onFileSelected?.call(field.control.value,base64Pdf);
+                        onFileSelected?.call(field.control.value, base64Pdf);
                       }
                       name = result.files.single.name;
                       select.value = true;
                     } catch (e) {
                       field.didChange(null);
+                      select.value = false;
                       showAlert(e.toString(), TypeAlert.error);
                     }
                   }

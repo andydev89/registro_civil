@@ -36,7 +36,9 @@ enum TypeService implements Translatable {
   none('NULL'),
   // TODO(jang): temp
   @JsonValue('PRUEBA_MARRIAGE_CELEBRATION')
-  marriageCelebration('PRUEBA_MARRIAGE_CELEBRATION');
+  marriageCelebration('PRUEBA_MARRIAGE_CELEBRATION'),
+  @JsonValue('SERVICE_RESIDENCY_REGISTRATION')
+  residencyRegistration('SERVICE_RESIDENCY_REGISTRATION');
 
   const TypeService(this.toText);
   final String toText;
@@ -61,9 +63,15 @@ enum TypeService implements Translatable {
       this == identity;
 
   bool get isActaRegistral =>
-      !isSimpleCertificate && this != schedule && this != marriageCelebration;
+      this == copyBirthRegistrationCertificate ||
+      this == copyMarriageRegistrationCertificate ||
+      this == copyFactoUnionRegistrationCertificate ||
+      this == copyRegistrationRecordDeath ||
+      this == copyRegistrationCertificateGenderRegistration;
 
   bool get isSchedule => this == schedule;
+
+  bool get isResidencyRegistration => this == residencyRegistration;
 
   @override
   String translate(BuildContext context) {
@@ -96,6 +104,8 @@ enum TypeService implements Translatable {
       case TypeService.marriageCelebration:
         return '';
       case TypeService.none:
+        return '';
+      case TypeService.residencyRegistration:
         return '';
     }
   }

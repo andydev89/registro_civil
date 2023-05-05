@@ -367,5 +367,9 @@
   "arrendada": "Leased",
   "duplex": "Duplex",
   "noHayElementosMostrar": "There are no items to show",
-  "errorCargarElementos": "Error loading items"
+  "errorCargarElementos": "Error loading items",
+  "hijoMenorEdad": "Minor child",
+  "discapacitado": "Disabled",
+  "terceraEdad": "Elderly",
+  "none": "None"
 }

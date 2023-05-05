@@ -57,8 +57,8 @@ class SimpleCertificateSecondStepPage extends ConsumerWidget {
                     )
                     .when(
                       ok: (_) {
-                        showOffersDialog(context);
                         context.navigateTo(const HomeRouterRoute());
+                        showOffersDialog(context);
                       },
                       err: (error) => showAlert(
                         error.translate(context),

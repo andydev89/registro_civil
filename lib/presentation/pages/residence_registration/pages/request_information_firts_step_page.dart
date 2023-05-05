@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/buttons_group/rigth_left_buttons.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_check_box.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_area_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
@@ -19,42 +18,56 @@ class RequestInformationFirstStepPage extends StatelessWidget {
       initState: (context, formModel) {
         formModel.haveElectricLightMeterControl.updateValue(false);
       },
-      builder: (context, formModel, child) => SingleChildScrollView(
-        child: Column(
-          children: [
-            PrimaryReactiveCheckBox(
-              formControl: formModel.haveElectricLightMeterControl,
-              label: l10n.cuentaConMedidorDeLuzElectrica,
-            ),
-            ReactiveResidenceRegistrationFirstStepModelFormConsumer(
-              builder: (context, formModel, child) => Visibility(
-                visible: formModel.haveElectricLightMeterControl.value!,
-                child: PrimaryReactiveTextField(
-                  formControl: formModel.nationalElectricUnicCodeControl,
-                  label: l10n.codigoUnicoElectricoNacional,
-                ).withRevealAnimation,
+      builder: (context, formModel, child) => Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              PrimaryReactiveCheckBox(
+                formControl: formModel.haveElectricLightMeterControl,
+                label: l10n.cuentaConMedidorDeLuzElectrica,
               ),
-            ),
-            PrimaryReactiveTextField(
-              formControl: formModel.phoneNumberControl,
-              label: l10n.telefonoCel,
-            ),
-            PrimaryReactiveTextField(
-              formControl: formModel.emailAddressControl,
-              label: l10n.correoE,
-            ),
-            PrimaryReactiveTextAreaField(
-              formControl: formModel.observationsControl,
-              label: l10n.observaciones,
-            ),
-            RigthLeftButtons(
-              rigthButtonTitle: l10n.siguiente,
-              onRigth: () =>
-                  context.navigateTo(const RequestInformationSecondStepRoute()),
-              onLeft: () => context.navigateTo(const HomeRouterRoute()),
-            ).verticalPadding(10),
-          ],
+              ReactiveResidenceRegistrationFirstStepModelFormConsumer(
+                builder: (context, formModel, child) => Visibility(
+                  visible: formModel.haveElectricLightMeterControl.value!,
+                  child: PrimaryReactiveTextField(
+                    formControl: formModel.nationalElectricUnicCodeControl,
+                    label: l10n.codigoUnicoElectricoNacional,
+                  ).withRevealAnimation,
+                ),
+              ),
+              PrimaryReactiveTextField(
+                formControl: formModel.phoneNumberControl,
+                label: l10n.telefonoCel,
+              ),
+              PrimaryReactiveTextField(
+                formControl: formModel.emailAddressControl,
+                label: l10n.correoE,
+              ),
+              PrimaryReactiveTextAreaField(
+                formControl: formModel.observationsControl,
+                label: l10n.observaciones,
+              ),
+            ],
+          ).horizontalPadding(20),
         ),
+        bottomNavigationBar:
+            ReactiveResidenceRegistrationFirstStepModelFormConsumer(
+          builder: (_, formModel, __) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              PrimaryButton(
+                title: l10n.siguiente,
+                onPressed: formModel.form.valid ? () {} : null,
+              ),
+              const SizedBox(height: 10),
+              PrimaryButton(
+                title: l10n.siguiente,
+                onPressed: () => context.navigateBack(),
+              ),
+            ],
+          ),
+        ).symmetricPadding(10, 30),
       ),
     );
   }

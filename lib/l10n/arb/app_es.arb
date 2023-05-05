@@ -367,5 +367,9 @@
   "arrendada": "Arrendada",
   "duplex": "Dúplex",
   "noHayElementosMostrar": "No hay elementos para mostrar",
-  "errorCargarElementos": "Error al cargar los elementos"
+  "errorCargarElementos": "Error al cargar los elementos",
+  "hijoMenorEdad": "Hijo menor de edad",
+  "discapacitado": "Discapacitado",
+  "terceraEdad": "Tercera edad",
+  "none": "Ninguno"
 }

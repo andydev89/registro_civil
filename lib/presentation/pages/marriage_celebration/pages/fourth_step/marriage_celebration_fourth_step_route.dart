@@ -18,7 +18,7 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_file_picker.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_file_picker.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
@@ -115,7 +115,7 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                                                 ],
                                               ).verticalPadding(10),
                                               PrimaryText(l10n.archivo),
-                                              PrimaryFilePicker<Document>(
+                                              PrimaryReactiveFilePicker<Document>(
                                                 formControl:
                                                     formModel.documentsControl
                                                             .controls
