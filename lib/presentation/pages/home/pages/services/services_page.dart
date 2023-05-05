@@ -20,7 +20,7 @@ class ServicesPage extends ConsumerWidget {
         totalPages: data.totalPages,
         firstElements: data.data!,
         firstPage: 1,
-        fetch: (p0) => ref.read(apiProvider).services(p0, 4),
+        fetch: (p0) => ref.read(apiProvider).typeServices(pageNo: p0),
       ),
     );
   }
