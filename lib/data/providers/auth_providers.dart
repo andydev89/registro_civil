@@ -1,8 +1,6 @@
-import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/core/models/alert_model.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
