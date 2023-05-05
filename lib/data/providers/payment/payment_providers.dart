@@ -30,17 +30,15 @@ Future<Result<PlaceToPayReferenceModel, StatusCode>>
 }
 
 @riverpod
-Future<Result<bool, StatusCode>> isPlaceToPayTransactionApproved(
-  IsPlaceToPayTransactionApprovedRef ref, {
+Future<Result<bool, StatusCode>> isPlaceToPayTransactionCompleted(
+  IsPlaceToPayTransactionCompletedRef ref, {
   required PlaceToPayReferenceModel placeToPayReference,
 }) async {
   final api = ref.watch(apiProvider);
   final response = await api
       .checkPlaceToPayTransaction(placeToPayReference.paymentGatewayReference);
-  return response != null &&
-          response.currentStatus != null &&
-          response.currentStatus == TransactionStatus.approved
-      ? const Result.ok(true)
+  return response != null && response.currentStatus != null
+      ? Result.ok(response.currentStatus == TransactionStatus.approved)
       : const Result.err(StatusCode.s400);
 }
 
@@ -52,12 +50,12 @@ Future<void> checkPendingTransactions(
   final transactions = isar.placeToPayReferenceModels.where().findAllSync();
   for (final element in transactions) {
     final status = await ref.watch(
-      isPlaceToPayTransactionApprovedProvider(placeToPayReference: element)
+      isPlaceToPayTransactionCompletedProvider(placeToPayReference: element)
           .future,
     );
     status.when(
-      ok: (transactionAproved) {
-        if (transactionAproved) {
+      ok: (transactionCompleted) {
+        if (transactionCompleted) {
           isar.placeToPayReferenceModels.deleteSync(element.id!);
           ref.read(transactionsStatusProvider.notifier).addTransaction(element);
         }

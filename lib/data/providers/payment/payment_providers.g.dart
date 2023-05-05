@@ -115,34 +115,34 @@ class CreatePlaceToPayTransactionProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$isPlaceToPayTransactionApprovedHash() =>
-    r'5ae51b8c120d4c06f68089c194b1fde8ad2425ff';
-typedef IsPlaceToPayTransactionApprovedRef
+String _$isPlaceToPayTransactionCompletedHash() =>
+    r'f38b2e85715db71d42bc5caa6f83d84171495a50';
+typedef IsPlaceToPayTransactionCompletedRef
     = AutoDisposeFutureProviderRef<Result<bool, StatusCode>>;
 
-/// See also [isPlaceToPayTransactionApproved].
-@ProviderFor(isPlaceToPayTransactionApproved)
-const isPlaceToPayTransactionApprovedProvider =
-    IsPlaceToPayTransactionApprovedFamily();
+/// See also [isPlaceToPayTransactionCompleted].
+@ProviderFor(isPlaceToPayTransactionCompleted)
+const isPlaceToPayTransactionCompletedProvider =
+    IsPlaceToPayTransactionCompletedFamily();
 
-/// See also [isPlaceToPayTransactionApproved].
-class IsPlaceToPayTransactionApprovedFamily
+/// See also [isPlaceToPayTransactionCompleted].
+class IsPlaceToPayTransactionCompletedFamily
     extends Family<AsyncValue<Result<bool, StatusCode>>> {
-  /// See also [isPlaceToPayTransactionApproved].
-  const IsPlaceToPayTransactionApprovedFamily();
+  /// See also [isPlaceToPayTransactionCompleted].
+  const IsPlaceToPayTransactionCompletedFamily();
 
-  /// See also [isPlaceToPayTransactionApproved].
-  IsPlaceToPayTransactionApprovedProvider call({
+  /// See also [isPlaceToPayTransactionCompleted].
+  IsPlaceToPayTransactionCompletedProvider call({
     required PlaceToPayReferenceModel placeToPayReference,
   }) {
-    return IsPlaceToPayTransactionApprovedProvider(
+    return IsPlaceToPayTransactionCompletedProvider(
       placeToPayReference: placeToPayReference,
     );
   }
 
   @override
-  IsPlaceToPayTransactionApprovedProvider getProviderOverride(
-    covariant IsPlaceToPayTransactionApprovedProvider provider,
+  IsPlaceToPayTransactionCompletedProvider getProviderOverride(
+    covariant IsPlaceToPayTransactionCompletedProvider provider,
   ) {
     return call(
       placeToPayReference: provider.placeToPayReference,
@@ -161,36 +161,36 @@ class IsPlaceToPayTransactionApprovedFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'isPlaceToPayTransactionApprovedProvider';
+  String? get name => r'isPlaceToPayTransactionCompletedProvider';
 }
 
-/// See also [isPlaceToPayTransactionApproved].
-class IsPlaceToPayTransactionApprovedProvider
+/// See also [isPlaceToPayTransactionCompleted].
+class IsPlaceToPayTransactionCompletedProvider
     extends AutoDisposeFutureProvider<Result<bool, StatusCode>> {
-  /// See also [isPlaceToPayTransactionApproved].
-  IsPlaceToPayTransactionApprovedProvider({
+  /// See also [isPlaceToPayTransactionCompleted].
+  IsPlaceToPayTransactionCompletedProvider({
     required this.placeToPayReference,
   }) : super.internal(
-          (ref) => isPlaceToPayTransactionApproved(
+          (ref) => isPlaceToPayTransactionCompleted(
             ref,
             placeToPayReference: placeToPayReference,
           ),
-          from: isPlaceToPayTransactionApprovedProvider,
-          name: r'isPlaceToPayTransactionApprovedProvider',
+          from: isPlaceToPayTransactionCompletedProvider,
+          name: r'isPlaceToPayTransactionCompletedProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$isPlaceToPayTransactionApprovedHash,
-          dependencies: IsPlaceToPayTransactionApprovedFamily._dependencies,
+                  : _$isPlaceToPayTransactionCompletedHash,
+          dependencies: IsPlaceToPayTransactionCompletedFamily._dependencies,
           allTransitiveDependencies:
-              IsPlaceToPayTransactionApprovedFamily._allTransitiveDependencies,
+              IsPlaceToPayTransactionCompletedFamily._allTransitiveDependencies,
         );
 
   final PlaceToPayReferenceModel placeToPayReference;
 
   @override
   bool operator ==(Object other) {
-    return other is IsPlaceToPayTransactionApprovedProvider &&
+    return other is IsPlaceToPayTransactionCompletedProvider &&
         other.placeToPayReference == placeToPayReference;
   }
 
