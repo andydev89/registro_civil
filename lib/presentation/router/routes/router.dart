@@ -36,6 +36,7 @@ import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third_step/marriage_celebration_third_step_route.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/third_step/third_step_contracting_party_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_orders/pages/my_order_rejecting_page.dart';
+import 'package:registro_civil_apk/presentation/pages/my_orders/pages/my_orders_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/pages/my_turns_page.dart';
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.dart';
@@ -311,7 +312,11 @@ part 'router.gr.dart';
           guards: [AuthGuard],
           page: MyTurnsPage,
         ),
-        // My OODERS
+        // My ORDERS
+        CupertinoRoute(
+          page: MyOrdersPage,
+        ),
+        // My ORDERS REJECTING
         CupertinoRoute(
           page: MyOrderRejectingPage,
         ),
