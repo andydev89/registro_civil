@@ -338,7 +338,8 @@ class PlaceToPayTransactionDetailsModel {
   });
 
   factory PlaceToPayTransactionDetailsModel.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       _$PlaceToPayTransactionDetailsModelFromJson(json);
 
   final String channel;

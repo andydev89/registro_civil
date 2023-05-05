@@ -8,8 +8,8 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
-import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -39,7 +39,7 @@ class TurnDetailsPage extends ConsumerWidget {
   final ReceiptModel receipt;
   final TimeOfDay time;
   final double totalToPay;
-  final TypeOfServiceModel typeOfService;
+  final TypeServiceModel typeOfService;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

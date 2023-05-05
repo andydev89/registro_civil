@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/providers/type_services/type_services_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_debounced_text_field.dart';
 
@@ -12,12 +11,12 @@ class PrimarySearch extends StatefulWidget {
     this.showFilter = false,
     this.onPressed,
     // this.filter = '',
-    // this.onChanged,
+    required this.filter,
   });
   final bool showFilter;
   // final String filter;
   final void Function()? onPressed;
-  // final void Function(String)? onChanged;
+  final void Function(String) filter;
 
   @override
   State<PrimarySearch> createState() => _PrimarySearchState();
@@ -52,9 +51,7 @@ class _PrimarySearchState extends State<PrimarySearch> {
                 controller: controller,
                 padding: 15,
                 onChanged: (value) {
-                  ref
-                      .read(typeServicesFilterProvider.notifier)
-                      .setFilter(value);
+                  widget.filter(value);
                   controller
                     ..text = value
                     ..selection = TextSelection.fromPosition(

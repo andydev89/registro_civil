@@ -6,9 +6,9 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
-import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/models/payment/client_data_to_pay_model.dart';
 import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/data/providers/payment/payment_providers.dart';
@@ -36,7 +36,7 @@ class MakePaymentPage extends ConsumerWidget {
   });
   final String requestNumber;
   final String buttonText;
-  final TypeOfServiceModel service;
+  final TypeServiceModel service;
   final void Function(BuildContext context)? onTapSuccessPayment;
   final void Function(BuildContext context)? onTapFailedPayment;
 
@@ -169,7 +169,7 @@ class MakePaymentPage extends ConsumerWidget {
                         ),
                         shipping: buyerAndShipping,
                         description: service.name,
-                        serviceType: service.type,
+                        serviceType: service.type.toText,
                       ),
                       userAgent: FkUserAgent.userAgent!,
                       ipAddress: deviceIp.ip,
@@ -196,10 +196,11 @@ class MakePaymentPage extends ConsumerWidget {
                             onTap: onTapSuccessPayment,
                             description: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              //TODO traducir los textos
+                              // TODO(alejandro): traducir los textos
                               children: [
                                 PrimaryCaption(
-                                  'Pagado: \$${service.total.toStringAsFixed(2)}',
+                                  'Pagado: \$${service.total
+                                  .toStringAsFixed(2)}',
                                 ),
                                 PrimaryCaption(
                                   'Número de transacción:'

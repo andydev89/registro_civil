@@ -5,7 +5,6 @@ import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
-import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
 import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
@@ -143,7 +142,7 @@ abstract class Api {
   );
 
   @GET('/service/api/type/service')
-  Future<ResponseModelPagination<List<TypeOfServiceModel>?>> services(
+  Future<ResponseModelPagination<List<TypeServiceModel>>> services(
     @Query('pageNo') int pageNo,
     @Query('pageSize') int pageSize,
   );
@@ -167,11 +166,16 @@ abstract class Api {
   );
 
   @GET('/schedule/api/receipt/byuser')
-  Future<ResponseModelPagination<List<UserScheduleModel>?>> schedulesByUser(
-    @Query('pageNo') int pageNo,
-    @Query('pageSize') int pageSize,
-    @Query('user') String userId,
-  );
+  Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
+    @Query('user') String userId, {
+    @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+    @Query('filter') String filter = '',
+    @Query('from') String from = '',
+    @Query('to') String to = '',
+    @Query('sortBy') String sortBy = 'time',
+    @Query('sortType') String sortType = 'asc',
+  });
 
   @POST('/schedule/api/receipt')
   Future<ResponseModel<BookedReceiptModel>> confirmSchedule(

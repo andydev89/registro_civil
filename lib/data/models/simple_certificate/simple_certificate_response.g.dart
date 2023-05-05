@@ -24,7 +24,7 @@ Map<String, dynamic> _$SimpleCertificateResponseToJson(
 
 ProcessResponse _$ProcessResponseFromJson(Map<String, dynamic> json) =>
     ProcessResponse(
-      id: json['id'] as int,
+      id: json['id'] as String,
       command: json['command'] as String,
     );
 

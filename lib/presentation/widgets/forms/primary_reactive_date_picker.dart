@@ -7,7 +7,6 @@ import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/loading_status_adaptative.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/refresh_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';

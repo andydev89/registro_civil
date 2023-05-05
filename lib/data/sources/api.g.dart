@@ -652,7 +652,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModelPagination<List<TypeOfServiceModel>?>> services(
+  Future<ResponseModelPagination<List<TypeServiceModel>>> services(
     pageNo,
     pageSize,
   ) async {
@@ -664,25 +664,24 @@ class _Api implements Api {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModelPagination<List<TypeOfServiceModel>>>(
-            Options(
+        _setStreamType<ResponseModelPagination<List<TypeServiceModel>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-                .compose(
-                  _dio.options,
-                  '/service/api/type/service',
-                  queryParameters: queryParameters,
-                  data: _data,
-                )
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModelPagination<List<TypeOfServiceModel>>.fromJson(
+            .compose(
+              _dio.options,
+              '/service/api/type/service',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModelPagination<List<TypeServiceModel>>.fromJson(
       _result.data!,
       (json) => json is List<dynamic>
           ? json
-              .map<TypeOfServiceModel>(
-                  (i) => TypeOfServiceModel.fromJson(i as Map<String, dynamic>))
+              .map<TypeServiceModel>(
+                  (i) => TypeServiceModel.fromJson(i as Map<String, dynamic>))
               .toList()
           : List.empty(),
     );
@@ -774,16 +773,26 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModelPagination<List<UserScheduleModel>?>> schedulesByUser(
-    pageNo,
-    pageSize,
-    userId,
-  ) async {
+  Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
+    userId, {
+    pageNo = 0,
+    pageSize = 20,
+    filter = '',
+    from = '',
+    to = '',
+    sortBy = 'time',
+    sortType = 'asc',
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
+      r'user': userId,
       r'pageNo': pageNo,
       r'pageSize': pageSize,
-      r'user': userId,
+      r'filter': filter,
+      r'from': from,
+      r'to': to,
+      r'sortBy': sortBy,
+      r'sortType': sortType,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;

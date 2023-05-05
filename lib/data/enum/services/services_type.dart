@@ -45,6 +45,13 @@ enum TypeService implements Translatable {
     return type?.toText;
   }
 
+  static TypeService fromJson(String? json) {
+    return TypeService.values.firstWhere(
+      (element) => element.toText == json,
+      orElse: () => TypeService.none,
+    );
+  }
+
   bool get isSimpleCertificate =>
       this == birth ||
       this == marriage ||
