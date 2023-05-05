@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class ErrorStatus extends StatelessWidget {
@@ -12,18 +13,16 @@ class ErrorStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          PrimaryText(messagge),
-          if (onPressed != null)
-            IconButton(
-              onPressed: onPressed,
-              icon: const Icon(Icons.refresh),
-            )
-        ],
-      ),
-    );
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        PrimaryText(messagge),
+        if (onPressed != null)
+          IconButton(
+            onPressed: onPressed,
+            icon: const Icon(Icons.refresh),
+          )
+      ],
+    ).verticalPadding(10);
   }
 }

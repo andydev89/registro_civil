@@ -1,6 +1,8 @@
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/extensions/extensions.dart';
+import 'package:registro_civil_apk/data/models/commons/querys_model.dart';
+import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/user_schedule_model.dart';
@@ -47,17 +49,62 @@ Future<Result<List<ScheduleModel>, StatusCode>> schedules(
 }
 
 @riverpod
-Future<Result<List<UserScheduleModel>, StatusCode>> schedulesByUser(
+class SchedulesByUserFilter extends _$SchedulesByUserFilter {
+  @override
+  QueryScheduleByUser build() {
+    return QueryScheduleByUser();
+  }
+
+  void setFilter(String filter) {
+    state = state.copyWith(filter: filter);
+  }
+
+  void setPageNo(int pageNo, {int pageSize = 20}) {
+    state = state.copyWith(pageNo: pageNo, pageSize: pageSize);
+  }
+}
+
+@riverpod
+Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
   SchedulesByUserRef ref,
+) async {
+  final query = ref.watch(schedulesByUserFilterProvider);
+  final api = ref.watch(apiProvider);
+  final user = await ref.watch(meProvider.future);
+  final response = await api.schedulesByUser(
+    user.id,
+    pageNo: query.pageNo,
+    pageSize: query.pageSize,
+    filter: query.filter,
+    sortBy: query.sortBy,
+    sortType: query.sortType.toJson,
+    from: query.from,
+    to: query.to,
+  );
+  return response;
+}
+
+
+@riverpod
+Future<ResponseModelPagination<List<UserScheduleModel>>> fetchSchedulesByUser(
+  FetchSchedulesByUserRef ref,
+  QueryScheduleByUser query,
 ) async {
   final api = ref.watch(apiProvider);
   final user = await ref.watch(meProvider.future);
-  //TODO hacer paginado
-  final response = await api.schedulesByUser(0, 20, user.id);
-  return response.success
-      ? Result.ok(response.data!)
-      : Result.err(response.status);
+  final response = await api.schedulesByUser(
+    user.id,
+    pageNo: query.pageNo,
+    pageSize: query.pageSize,
+    filter: query.filter,
+    sortBy: query.sortBy,
+    sortType: query.sortType.toJson,
+    from: query.from,
+    to: query.to,
+  );
+  return response;
 }
+
 
 @riverpod
 Future<Result<BookedReceiptModel, StatusCode>> confirmSchedule(

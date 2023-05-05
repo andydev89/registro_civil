@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +41,7 @@ class RootRouterPage extends ConsumerWidget {
       })
       ..listen(transactionsStatusProvider, (previous, next) {
         for (final element in next) {
-          //TODO traducir
+          // TODO(alejandro): traducir
           showAlert(
             'La transacción ${element.id} ha sido completada',
             TypeAlert.success,

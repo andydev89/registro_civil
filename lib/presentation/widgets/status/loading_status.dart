@@ -5,13 +5,6 @@ class LoadingStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          CircularProgressIndicator.adaptive(),
-        ],
-      ),
-    );
+    return const Center(child:  CircularProgressIndicator());
   }
 }

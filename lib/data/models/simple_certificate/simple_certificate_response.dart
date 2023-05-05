@@ -29,7 +29,7 @@ class ProcessResponse {
 
   factory ProcessResponse.fromJson(Map<String, dynamic> json) =>
       _$ProcessResponseFromJson(json);
-  final int id;
+  final String id;
   final String command;
 
   Map<String, dynamic> toJson() => _$ProcessResponseToJson(this);
