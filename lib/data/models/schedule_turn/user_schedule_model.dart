@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
 import 'package:registro_civil_apk/data/json_converters/time_of_day_converter.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_model.dart';
 part 'user_schedule_model.g.dart';
@@ -30,14 +31,13 @@ class UserScheduleModel {
   final PaymentMethodType paymentType;
   final String receiptCode;
   final ScheduleModel schedule;
-  //TODO deberia ser enum
-  final String state;
+  final Status state;
 
   @TimeOfDayConverter()
   final TimeOfDay time;
 
   final String trasactionCode;
-  //TODO deberia ser enum
+  // TODO(alejandro): deberia ser enum
   final String type;
 
   @JsonKey(name: 'user')

@@ -31,3 +31,43 @@ class QueryTypeService {
     );
   }
 }
+
+class QueryScheduleByUser {
+  QueryScheduleByUser({
+    this.pageNo = 0,
+    this.pageSize = 20,
+    this.filter = '',
+    this.sortBy = 'time',
+    this.from = '',
+    this.to = '',
+    this.sortType = SortType.asc,
+  });
+
+  final int pageNo;
+  final int pageSize;
+  final String filter;
+  final String from;
+  final String to;
+  final String sortBy;
+  final SortType sortType;
+
+  QueryScheduleByUser copyWith({
+    int? pageNo,
+    int? pageSize,
+    String? filter,
+    String? from,
+    String? to,
+    String? sortBy,
+    SortType? sortType,
+  }) {
+    return QueryScheduleByUser(
+      pageNo: pageNo ?? this.pageNo,
+      pageSize: pageSize ?? this.pageSize,
+      filter: filter ?? this.filter,
+      sortBy: sortBy ?? this.sortBy,
+      sortType: sortType ?? this.sortType,
+      from: from ?? this.from,
+      to: to ?? this.to,
+    );
+  }
+}

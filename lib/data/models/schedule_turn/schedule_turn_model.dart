@@ -4,7 +4,7 @@ import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
 import 'package:registro_civil_apk/data/enum/commons/relationship_type.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
-import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 part 'schedule_turn_model.gform.dart';
 
@@ -18,7 +18,7 @@ class ScheduleTurnFirstStepPersonalModel {
   });
 
   final PaymentMethodType paymentMethod;
-  final TypeOfServiceModel service;
+  final TypeServiceModel service;
 }
 
 @ReactiveFormAnnotation()
@@ -34,7 +34,7 @@ class ScheduleTurnFirstStepFamiliarModel {
 
   final PaymentMethodType paymentMethod;
   final bool scheduleForMe;
-  final TypeOfServiceModel? service;
+  final TypeServiceModel? service;
   final List<FamiliarFormModel> family;
 }
 

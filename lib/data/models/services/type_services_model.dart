@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/enum/services/services_type.dart';
 import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
+import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 
 part 'type_services_model.g.dart';
 
 @JsonSerializable()
-class TypeServiceModel {
+class TypeServiceModel implements Translatable {
   TypeServiceModel({
     required this.id,
     required this.name,
@@ -26,21 +28,26 @@ class TypeServiceModel {
   factory TypeServiceModel.fromJson(Map<String, dynamic> json) =>
       _$TypeServiceModelFromJson(json);
 
-  final String id;
-  final String name;
   final String description;
-  final double price;
-  final double iva;
   final double discount;
-  final Status state;
-  final bool publishWeb;
-  final bool publishMovil;
-  final String? path;
-  final String iconoWeb;
   final String iconoMovil;
-  @JsonKey(toJson: TypeService.toJson)
-  final TypeService type;
+  final String iconoWeb;
+  final String id;
+  final double iva;
+  final String name;
+  final String? path;
+  final double price;
+  final bool publishMovil;
+  final bool publishWeb;
   final bool schedule;
+  final Status state;
+  @JsonKey(toJson: TypeService.toJson, fromJson: TypeService.fromJson)
+  final TypeService type;
+
+  @override
+  String translate(BuildContext context) => name;
 
   Map<String, dynamic> toJson() => _$TypeServiceModelToJson(this);
+
+  double get total => (price * iva / 100) - discount;
 }

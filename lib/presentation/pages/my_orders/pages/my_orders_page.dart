@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_status.dart';
 import 'package:registro_civil_apk/data/enum/commons/procedure_status.dart';
-import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
+import 'package:registro_civil_apk/data/enum/services/services_type.dart';
+import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/my_orders/models/my_order_expandable_card_model.dart';
@@ -29,9 +31,7 @@ class MyOrdersPage extends ConsumerWidget {
             children: [
               PrimarySearch(
                 showFilter: true,
-                onPressed: () {
-                  // print('asd');
-                },
+                filter: (p0) {},
               ).verticalPadding(20),
               myTurns.when(
                 data: (data) => data.when(
@@ -50,17 +50,20 @@ class MyOrdersPage extends ConsumerWidget {
                               subtotal: 2,
                               total: 2,
                               unitaryValue: 2,
-                              typeOfService: TypeOfServiceModel(
+                              typeOfService: TypeServiceModel(
                                 id: '2',
                                 name: 'name',
                                 price: 2,
                                 iva: 2,
                                 discount: 2,
-                                state: 'state',
+                                state: Status.active,
                                 publishWeb: false,
                                 publishMovil: true,
-                                type: 'typeService',
+                                type: TypeService.birth,
+                                iconoMovil: '',
+                                iconoWeb: '',
                                 schedule: true,
+                                description: 'sdsdfdfd',
                               ),
                             ),
                           ).verticalPadding(10),

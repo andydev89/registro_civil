@@ -1312,7 +1312,7 @@ class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
     Key? key,
     required String requestNumber,
     required String buttonText,
-    required TypeOfServiceModel service,
+    required TypeServiceModel service,
     void Function(BuildContext)? onTapSuccessPayment,
     void Function(BuildContext)? onTapFailedPayment,
   }) : super(
@@ -1347,7 +1347,7 @@ class MakePaymentRouteArgs {
 
   final String buttonText;
 
-  final TypeOfServiceModel service;
+  final TypeServiceModel service;
 
   final void Function(BuildContext)? onTapSuccessPayment;
 
@@ -1452,7 +1452,7 @@ class ScheduleTurnFirstStepRouterRoute extends PageRouteInfo<void> {
 class CodeRoute extends PageRouteInfo<CodeRouteArgs> {
   CodeRoute({
     Key? key,
-    required TypeOfServiceModel typeOfService,
+    required TypeServiceModel typeOfService,
     required bool includMe,
     required ProcedureType procedureType,
     required List<RelativeModel> relatives,
@@ -1482,7 +1482,7 @@ class CodeRouteArgs {
 
   final Key? key;
 
-  final TypeOfServiceModel typeOfService;
+  final TypeServiceModel typeOfService;
 
   final bool includMe;
 
@@ -1503,7 +1503,7 @@ class ScheduleTurnSecondRoute
   ScheduleTurnSecondRoute({
     Key? key,
     required PaymentMethodType paymentMethod,
-    required TypeOfServiceModel typeOfService,
+    required TypeServiceModel typeOfService,
     required bool includMe,
     required ProcedureType procedureType,
     required List<RelativeModel> relatives,
@@ -1537,7 +1537,7 @@ class ScheduleTurnSecondRouteArgs {
 
   final PaymentMethodType paymentMethod;
 
-  final TypeOfServiceModel typeOfService;
+  final TypeServiceModel typeOfService;
 
   final bool includMe;
 
@@ -1558,7 +1558,7 @@ class TurnDetailsRoute extends PageRouteInfo<TurnDetailsRouteArgs> {
     Key? key,
     required String city,
     required String agency,
-    required TypeOfServiceModel typeOfService,
+    required TypeServiceModel typeOfService,
     required DateTime date,
     required TimeOfDay time,
     required PaymentMethodType paymentMethod,
@@ -1602,7 +1602,7 @@ class TurnDetailsRouteArgs {
 
   final String agency;
 
-  final TypeOfServiceModel typeOfService;
+  final TypeServiceModel typeOfService;
 
   final DateTime date;
 

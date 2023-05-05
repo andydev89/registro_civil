@@ -3,6 +3,7 @@ import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/data/providers/type_services/type_services_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
@@ -47,7 +48,11 @@ class HomeRouterPage extends StatelessWidget {
                   ).symmetricPadding(20, 25),
                   Consumer(
                     builder: (_, ref, __) {
-                      return const PrimarySearch().symmetricPadding(10, 40);
+                      return PrimarySearch(
+                        filter: (p0) => ref
+                            .read(typeServicesFilterProvider.notifier)
+                            .setFilter(p0),
+                      ).symmetricPadding(10, 40);
                     },
                   ),
                 ],

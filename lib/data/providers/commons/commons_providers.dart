@@ -3,7 +3,7 @@ import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
-import 'package:registro_civil_apk/data/models/commons/type_of_service_model.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -66,7 +66,7 @@ Future<Result<List<AgencyModel>, StatusCode>> agenciesByProvince(
 }
 
 @riverpod
-Future<Result<List<TypeOfServiceModel>, StatusCode>> services(
+Future<Result<List<TypeServiceModel>, StatusCode>> services(
   ServicesRef ref, {
   bool? bookable,
 }) async {
@@ -89,7 +89,7 @@ Future<DeviceIpModel> deviceIp(DeviceIpRef ref) async {
   try {
     final response = await api.getDeviceIp();
     return response;
-  } on Exception catch (e) {
+  } on Exception catch (_) {
     return DeviceIpModel(ip: '');
   }
 }

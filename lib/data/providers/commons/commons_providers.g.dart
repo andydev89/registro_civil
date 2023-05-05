@@ -179,9 +179,9 @@ class AgenciesByProvinceProvider
   }
 }
 
-String _$servicesHash() => r'c09796232154885828acdcaf429d156e0227c6de';
-typedef ServicesRef = AutoDisposeFutureProviderRef<
-    Result<List<TypeOfServiceModel>, StatusCode>>;
+String _$servicesHash() => r'3b3e30b328b9d103aa664002930f3d639aa4cbdc';
+typedef ServicesRef
+    = AutoDisposeFutureProviderRef<Result<List<TypeServiceModel>, StatusCode>>;
 
 /// See also [services].
 @ProviderFor(services)
@@ -189,7 +189,7 @@ const servicesProvider = ServicesFamily();
 
 /// See also [services].
 class ServicesFamily
-    extends Family<AsyncValue<Result<List<TypeOfServiceModel>, StatusCode>>> {
+    extends Family<AsyncValue<Result<List<TypeServiceModel>, StatusCode>>> {
   /// See also [services].
   const ServicesFamily();
 
@@ -228,7 +228,7 @@ class ServicesFamily
 
 /// See also [services].
 class ServicesProvider extends AutoDisposeFutureProvider<
-    Result<List<TypeOfServiceModel>, StatusCode>> {
+    Result<List<TypeServiceModel>, StatusCode>> {
   /// See also [services].
   ServicesProvider({
     this.bookable,
@@ -263,7 +263,7 @@ class ServicesProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$deviceIpHash() => r'7c730168548fc69e3c9bd912c1f1f8f7ad9e82ca';
+String _$deviceIpHash() => r'60f4718591b9394bcbb2b58e0ea540af3a79b042';
 
 /// See also [deviceIp].
 @ProviderFor(deviceIp)

@@ -24,9 +24,9 @@ class ScheduleTimeSelector extends ConsumerWidget {
       times: List.generate(
         (endTime.hour - initialTime.hour) + 1,
         (index) {
-          print(index);
-          print(initialTime);
-          print(endTime);
+          // print(index);
+          // print(initialTime);
+          // print(endTime);
           return TimeOfDay(
             hour: initialTime.hour + index,
             minute: initialTime.minute,

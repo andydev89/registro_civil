@@ -163,12 +163,12 @@ final schedulesProvider =
 
 typedef SchedulesRef
     = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCode>>;
-String _$schedulesByUserHash() => r'5ec5339555d8cd5af449fa0aa14c4b2808195fba';
+String _$schedulesByUserHash() => r'de2ebeef066a164e85b54a35fc688279c5a01f38';
 
 /// See also [schedulesByUser].
 @ProviderFor(schedulesByUser)
 final schedulesByUserProvider = AutoDisposeFutureProvider<
-    Result<List<UserScheduleModel>, StatusCode>>.internal(
+    ResponseModelPagination<List<UserScheduleModel>>>.internal(
   schedulesByUser,
   name: r'schedulesByUserProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -178,8 +178,94 @@ final schedulesByUserProvider = AutoDisposeFutureProvider<
   allTransitiveDependencies: null,
 );
 
-typedef SchedulesByUserRef
-    = AutoDisposeFutureProviderRef<Result<List<UserScheduleModel>, StatusCode>>;
+typedef SchedulesByUserRef = AutoDisposeFutureProviderRef<
+    ResponseModelPagination<List<UserScheduleModel>>>;
+String _$fetchSchedulesByUserHash() =>
+    r'65a7f0850ab9badfc14a44caaff98993f3e16b0c';
+typedef FetchSchedulesByUserRef = AutoDisposeFutureProviderRef<
+    ResponseModelPagination<List<UserScheduleModel>>>;
+
+/// See also [fetchSchedulesByUser].
+@ProviderFor(fetchSchedulesByUser)
+const fetchSchedulesByUserProvider = FetchSchedulesByUserFamily();
+
+/// See also [fetchSchedulesByUser].
+class FetchSchedulesByUserFamily extends Family<
+    AsyncValue<ResponseModelPagination<List<UserScheduleModel>>>> {
+  /// See also [fetchSchedulesByUser].
+  const FetchSchedulesByUserFamily();
+
+  /// See also [fetchSchedulesByUser].
+  FetchSchedulesByUserProvider call(
+    QueryScheduleByUser query,
+  ) {
+    return FetchSchedulesByUserProvider(
+      query,
+    );
+  }
+
+  @override
+  FetchSchedulesByUserProvider getProviderOverride(
+    covariant FetchSchedulesByUserProvider provider,
+  ) {
+    return call(
+      provider.query,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'fetchSchedulesByUserProvider';
+}
+
+/// See also [fetchSchedulesByUser].
+class FetchSchedulesByUserProvider extends AutoDisposeFutureProvider<
+    ResponseModelPagination<List<UserScheduleModel>>> {
+  /// See also [fetchSchedulesByUser].
+  FetchSchedulesByUserProvider(
+    this.query,
+  ) : super.internal(
+          (ref) => fetchSchedulesByUser(
+            ref,
+            query,
+          ),
+          from: fetchSchedulesByUserProvider,
+          name: r'fetchSchedulesByUserProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$fetchSchedulesByUserHash,
+          dependencies: FetchSchedulesByUserFamily._dependencies,
+          allTransitiveDependencies:
+              FetchSchedulesByUserFamily._allTransitiveDependencies,
+        );
+
+  final QueryScheduleByUser query;
+
+  @override
+  bool operator ==(Object other) {
+    return other is FetchSchedulesByUserProvider && other.query == query;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, query.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$confirmScheduleHash() => r'2fc651dea63b9a07e1bb10f776fb378537e9695b';
 typedef ConfirmScheduleRef
     = AutoDisposeFutureProviderRef<Result<BookedReceiptModel, StatusCode>>;
@@ -264,4 +350,22 @@ class ConfirmScheduleProvider
     return _SystemHash.finish(hash);
   }
 }
+
+String _$schedulesByUserFilterHash() =>
+    r'360e96b1199b0a18900ad73ce30f21c6790bee3c';
+
+/// See also [SchedulesByUserFilter].
+@ProviderFor(SchedulesByUserFilter)
+final schedulesByUserFilterProvider = AutoDisposeNotifierProvider<
+    SchedulesByUserFilter, QueryScheduleByUser>.internal(
+  SchedulesByUserFilter.new,
+  name: r'schedulesByUserFilterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$schedulesByUserFilterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SchedulesByUserFilter = AutoDisposeNotifier<QueryScheduleByUser>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
