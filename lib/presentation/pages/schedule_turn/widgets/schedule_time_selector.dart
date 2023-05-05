@@ -12,8 +12,8 @@ class ScheduleTimeSelector extends ConsumerWidget {
     required this.endTime,
   });
   final FormControl<TimeOfDay> formControl;
-  final TimeOfDay initialTime;
-  final TimeOfDay endTime;
+  final TimeOfDay? initialTime;
+  final TimeOfDay? endTime;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,18 +21,18 @@ class ScheduleTimeSelector extends ConsumerWidget {
     return RadioTimeSelector(
       formControl: formControl,
       label: l10n.horDisponibles,
-      times: List.generate(
-        (endTime.hour - initialTime.hour) + 1,
+      times: initialTime != null && endTime != null ? List.generate(
+        (endTime!.hour - initialTime!.hour) + 1,
         (index) {
           // print(index);
           // print(initialTime);
           // print(endTime);
           return TimeOfDay(
-            hour: initialTime.hour + index,
-            minute: initialTime.minute,
+            hour: initialTime!.hour + index,
+            minute: initialTime!.minute,
           );
         },
-      ),
+      ) : [],
     );
   }
 }
