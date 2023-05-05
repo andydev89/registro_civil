@@ -75,15 +75,11 @@ class ScheduleTurnSecondPage extends ConsumerWidget {
                           starDate: DateTime.now(),
                         ),
                         Visibility(
-                          visible: formModel.dateControl.valid &&
-                              formModel.initialTimeControl != null &&
-                              formModel.endTimeControl != null,
+                          visible: formModel.dateControl.valid,
                           child: ScheduleTimeSelector(
                             formControl: formModel.timeControl,
-                            initialTime: formModel.initialTimeControl?.value ??
-                                const TimeOfDay(hour: 0, minute: 0),
-                            endTime: formModel.endTimeControl?.value ??
-                                const TimeOfDay(hour: 0, minute: 0),
+                            initialTime: formModel.initialTimeControl?.value,
+                            endTime: formModel.endTimeControl?.value,
                           ),
                         ),
                       ],
@@ -98,8 +94,7 @@ class ScheduleTurnSecondPage extends ConsumerWidget {
           builder: (context, formModel, child) => PrimaryAsyncButton(
             title: l10n.ageTurno,
             onPressed: formModel.form.valid
-                ? () =>
-                    ref.read(meProvider.future).then((value) {
+                ? () => ref.read(meProvider.future).then((value) {
                       context.navigateTo(
                         TurnDetailsRoute(
                           city: formModel.model.province.name,

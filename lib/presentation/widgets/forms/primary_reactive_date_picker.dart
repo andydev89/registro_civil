@@ -144,13 +144,15 @@ class _CustomCalendarState extends State<CustomCalendar> {
       firstDay: DateTime.now(),
       lastDay: DateTime.now().add(const Duration(days: 365 * 30)),
       onPageChanged: (focusedDay) async {
-        final availablesDays =
-            await widget.onPageChanged?.call(focusedDay) ?? [];
-        setState(() {
-          widget.availablesDate.clear();
-          widget.availablesDate.addAll(availablesDays);
-          _focusedDay = focusedDay;
-        });
+        _focusedDay = focusedDay;
+        if (mounted) {
+          final availablesDays =
+              await widget.onPageChanged?.call(focusedDay) ?? [];
+          setState(() {
+            widget.availablesDate.clear();
+            widget.availablesDate.addAll(availablesDays);
+          });
+        }
       },
       focusedDay: _focusedDay,
       // selectedDayPredicate: (day) =>  _selectedDays.contains(day)
