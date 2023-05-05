@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
@@ -18,25 +17,7 @@ class RootRouterPage extends ConsumerWidget {
     ref
       ..listen(authenticationStatusProvider, (previous, next) {
         if (next.asData?.value == AuthenticationStatus.unauthenticated) {
-          showAlert(
-            'Token expirado, debe volver a autenticarse',
-            TypeAlert.warning,
-          );
-          context.navigateTo(const HomeRouterRoute()).then(
-                (value) => context.navigateTo(
-                  AuthRouterRoute(
-                    children: [
-                      LoginRoute(
-                        onLogin: (context, result) {
-                          if (result) {
-                            context.navigateBack();
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              );
+          context.navigateTo(const HomeRouterRoute());
         }
       })
       ..listen(transactionsStatusProvider, (previous, next) {
