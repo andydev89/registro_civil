@@ -27,13 +27,13 @@ class FirstStepAttorneyPage extends ConsumerWidget {
       builder: (_, formModel, __) {
         formModel.identityCardControl?.valueChanges.listen((event) {
           if (event == null || event.isEmpty) {
-            setErrorFile(formModel.identityCardControl);
+            return setErrorFile(formModel.identityCardControl);
           }
           return removeErrorFile(formModel.identityCardControl);
         });
         formModel.powerOfAttorneyControl?.valueChanges.listen((event) {
           if (event == null || event.isEmpty) {
-            setErrorFile(formModel.powerOfAttorneyControl);
+            return setErrorFile(formModel.powerOfAttorneyControl);
           }
           return removeErrorFile(formModel.powerOfAttorneyControl);
         });

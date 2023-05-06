@@ -35,8 +35,12 @@ PageRouteInfo<dynamic> getActaRegistral(
     );
 
 PageRouteInfo<dynamic> getSchedule() => const ScheduleTurnRouterRoute();
+
 PageRouteInfo<dynamic> getMarriageCelebration() =>
     const MarriageCelebrationRouterRoute();
+
+PageRouteInfo<dynamic> getResidencyRegistration() =>
+    const ResidenceRegistrationRouterRoute();
 
 PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   final type = typeServiceModel.type;
@@ -48,6 +52,9 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   }
   if (type.isSchedule) {
     return getSchedule();
+  }
+  if (type.isResidencyRegistration) {
+    return getResidencyRegistration();
   }
   return getMarriageCelebration();
 }

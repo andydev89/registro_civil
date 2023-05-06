@@ -2,7 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 enum Status {
   @JsonValue('ACTIVE')
-  active,
+  active('ACTIVE'),
   @JsonValue('INACTIVE')
-  inactive,
+  inactive('INACTIVE');
+
+  const Status(this.toText);
+  final String toText;
 }

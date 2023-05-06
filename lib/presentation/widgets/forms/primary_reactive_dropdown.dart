@@ -26,6 +26,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
     this.light = false,
     this.prefixIcon,
     this.readOnly = false,
+    this.onChanged,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
@@ -39,6 +40,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
   final bool light;
   final Widget? prefixIcon;
   final bool readOnly;
+  final void Function(FormControl<Object?>)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +82,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
                       : Colors.black,
             ),
           ),
+          onChanged: onChanged,
           selectedItemBuilder: (context) => items
               .map(
                 (e) => PrimaryText(

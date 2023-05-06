@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_file_picker.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_email_field.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_file_picker.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_phone_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
@@ -46,11 +46,11 @@ class FirstStepForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               PrimaryText(l10n.cedulaIde),
-              PrimaryFilePicker<String>(
+              PrimaryReactiveFilePicker<String>(
                 formControl: formModel.identityCardControl,
               ),
               PrimaryText(l10n.poderEsp),
-              PrimaryFilePicker<String>(
+              PrimaryReactiveFilePicker<String>(
                 formControl: formModel.powerOfAttorneyControl,
               ),
             ],

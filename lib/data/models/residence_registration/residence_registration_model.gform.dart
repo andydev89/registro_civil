@@ -222,8 +222,8 @@ class ResidenceRegistrationFirstStepModelForm
   String phoneNumberControlPath() => pathBuilder(phoneNumberControlName);
   String emailAddressControlPath() => pathBuilder(emailAddressControlName);
   String observationsControlPath() => pathBuilder(observationsControlName);
-  int? get _nationalElectricUnicCodeValue =>
-      nationalElectricUnicCodeControl?.value;
+  String get _nationalElectricUnicCodeValue =>
+      nationalElectricUnicCodeControl.value ?? "";
   bool get _haveElectricLightMeterValue =>
       haveElectricLightMeterControl.value as bool;
   String get _phoneNumberValue => phoneNumberControl.value as String;
@@ -275,7 +275,7 @@ class ResidenceRegistrationFirstStepModelForm
   }
 
   Object? get nationalElectricUnicCodeErrors =>
-      nationalElectricUnicCodeControl?.errors;
+      nationalElectricUnicCodeControl.errors;
   Object? get haveElectricLightMeterErrors =>
       haveElectricLightMeterControl.errors;
   Object? get phoneNumberErrors => phoneNumberControl.errors;
@@ -288,38 +288,12 @@ class ResidenceRegistrationFirstStepModelForm
   void get phoneNumberFocus => form.focus(phoneNumberControlPath());
   void get emailAddressFocus => form.focus(emailAddressControlPath());
   void get observationsFocus => form.focus(observationsControlPath());
-  void nationalElectricUnicCodeRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsNationalElectricUnicCode) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          nationalElectricUnicCodeControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            nationalElectricUnicCodeControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
   void nationalElectricUnicCodeValueUpdate(
-    int? value, {
+    String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nationalElectricUnicCodeControl?.updateValue(value,
+    nationalElectricUnicCodeControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -360,11 +334,11 @@ class ResidenceRegistrationFirstStepModelForm
   }
 
   void nationalElectricUnicCodeValuePatch(
-    int? value, {
+    String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nationalElectricUnicCodeControl?.patchValue(value,
+    nationalElectricUnicCodeControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -405,13 +379,13 @@ class ResidenceRegistrationFirstStepModelForm
   }
 
   void nationalElectricUnicCodeValueReset(
-    int? value, {
+    String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      nationalElectricUnicCodeControl?.reset(
+      nationalElectricUnicCodeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void haveElectricLightMeterValueReset(
     bool value, {
@@ -449,11 +423,9 @@ class ResidenceRegistrationFirstStepModelForm
   }) =>
       observationsControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<int>? get nationalElectricUnicCodeControl =>
-      containsNationalElectricUnicCode
-          ? form.control(nationalElectricUnicCodeControlPath())
-              as FormControl<int>?
-          : null;
+  FormControl<String> get nationalElectricUnicCodeControl =>
+      form.control(nationalElectricUnicCodeControlPath())
+          as FormControl<String>;
   FormControl<bool> get haveElectricLightMeterControl =>
       form.control(haveElectricLightMeterControlPath()) as FormControl<bool>;
   FormControl<String> get phoneNumberControl =>
@@ -468,12 +440,12 @@ class ResidenceRegistrationFirstStepModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      nationalElectricUnicCodeControl?.markAsDisabled(
+      nationalElectricUnicCodeControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      nationalElectricUnicCodeControl?.markAsEnabled(
+      nationalElectricUnicCodeControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -609,7 +581,7 @@ class ResidenceRegistrationFirstStepModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        nationalElectricUnicCodeControlName: FormControl<int>(
+        nationalElectricUnicCodeControlName: FormControl<String>(
             value:
                 residenceRegistrationFirstStepModel?.nationalElectricUnicCode,
             validators: [requiredValidator],
@@ -1724,8 +1696,10 @@ class ResidenceRegistrationThirdStepModelForm
   String appartmentNumberControlPath() =>
       pathBuilder(appartmentNumberControlName);
   String residenceTypeControlPath() => pathBuilder(residenceTypeControlName);
-  TypeHousing get _houseTypeValue => houseTypeControl.value as TypeHousing;
-  Tenure get _tenureValue => tenureControl.value as Tenure;
+  ResidentialHousingType get _houseTypeValue =>
+      houseTypeControl.value as ResidentialHousingType;
+  ResidentialTenureHousingTypeAgreemente get _tenureValue =>
+      tenureControl.value as ResidentialTenureHousingTypeAgreemente;
   String get _villageOrBuildingNumberValue =>
       villageOrBuildingNumberControl.value as String;
   String get _floorNumberValue => floorNumberControl.value as String;
@@ -1801,7 +1775,7 @@ class ResidenceRegistrationThirdStepModelForm
   void get appartmentNumberFocus => form.focus(appartmentNumberControlPath());
   void get residenceTypeFocus => form.focus(residenceTypeControlPath());
   void houseTypeValueUpdate(
-    TypeHousing value, {
+    ResidentialHousingType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1810,7 +1784,7 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   void tenureValueUpdate(
-    Tenure value, {
+    ResidentialTenureHousingTypeAgreemente value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1855,7 +1829,7 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   void houseTypeValuePatch(
-    TypeHousing value, {
+    ResidentialHousingType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1864,7 +1838,7 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   void tenureValuePatch(
-    Tenure value, {
+    ResidentialTenureHousingTypeAgreemente value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1909,7 +1883,7 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   void houseTypeValueReset(
-    TypeHousing value, {
+    ResidentialHousingType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1918,7 +1892,7 @@ class ResidenceRegistrationThirdStepModelForm
       houseTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void tenureValueReset(
-    Tenure value, {
+    ResidentialTenureHousingTypeAgreemente value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1962,10 +1936,12 @@ class ResidenceRegistrationThirdStepModelForm
   }) =>
       residenceTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<TypeHousing> get houseTypeControl =>
-      form.control(houseTypeControlPath()) as FormControl<TypeHousing>;
-  FormControl<Tenure> get tenureControl =>
-      form.control(tenureControlPath()) as FormControl<Tenure>;
+  FormControl<ResidentialHousingType> get houseTypeControl =>
+      form.control(houseTypeControlPath())
+          as FormControl<ResidentialHousingType>;
+  FormControl<ResidentialTenureHousingTypeAgreemente> get tenureControl =>
+      form.control(tenureControlPath())
+          as FormControl<ResidentialTenureHousingTypeAgreemente>;
   FormControl<String> get villageOrBuildingNumberControl =>
       form.control(villageOrBuildingNumberControlPath()) as FormControl<String>;
   FormControl<String> get floorNumberControl =>
@@ -2140,14 +2116,14 @@ class ResidenceRegistrationThirdStepModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        houseTypeControlName: FormControl<TypeHousing>(
+        houseTypeControlName: FormControl<ResidentialHousingType>(
             value: residenceRegistrationThirdStepModel?.houseType,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        tenureControlName: FormControl<Tenure>(
+        tenureControlName: FormControl<ResidentialTenureHousingTypeAgreemente>(
             value: residenceRegistrationThirdStepModel?.tenure,
             validators: [requiredValidator],
             asyncValidators: [],

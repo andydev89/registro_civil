@@ -66,6 +66,18 @@ Future<Result<List<AgencyModel>, StatusCode>> agenciesByProvince(
 }
 
 @riverpod
+Future<Result<List<LocationModel>, StatusCode>> locationByParent(
+  LocationByParentRef ref, {
+  required String parentId,
+}) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.locationByParent(parentId);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+@riverpod
 Future<Result<List<TypeServiceModel>, StatusCode>> services(
   ServicesRef ref, {
   bool? bookable,

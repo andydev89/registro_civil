@@ -20,7 +20,7 @@ class MyOrdersPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return PrimaryScaffold(
-      title: l10n.misTurnos,
+      title: l10n.misPedidos,
       horizontalPadding: 15,
       body: Expanded(
         child: Column(

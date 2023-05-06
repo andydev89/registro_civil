@@ -3,8 +3,8 @@ import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 enum ResidenceType implements Translatable {
-  principal('Principal'),
-  secundaria('Secundaria'),
+  principal('MAIN_RESIDENTIAL'),
+  secundaria('BACK_RESIDENTIAL'),
   ;
 
   const ResidenceType(this.toText);

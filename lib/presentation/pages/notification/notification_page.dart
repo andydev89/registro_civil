@@ -3,6 +3,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 // import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
@@ -18,7 +19,12 @@ class NotificationPage extends StatelessWidget {
     this.onTap,
     this.description,
     this.bottomText,
-  });
+    this.onPressed,
+  }) : assert(
+          (onTap != null && onPressed == null) ||
+              (onTap == null && onPressed != null),
+          'You must provide onTap or onPressed, but not both',
+        );
   final String? title;
   final String? subtitle;
   final String? message;
@@ -26,6 +32,7 @@ class NotificationPage extends StatelessWidget {
   final String buttonText;
   final NotificationType notificationType;
   final void Function(BuildContext context)? onTap;
+  final void Function(BuildContext context)? onPressed;
   final Widget? description;
   final String? bottomText;
 
@@ -65,12 +72,18 @@ class NotificationPage extends StatelessWidget {
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          PrimaryAsyncButton(
-            title: buttonText,
-            onPressed: () {
-              return Future(() => onTap?.call(context));
-            },
-          ),
+          if (onTap != null)
+            PrimaryAsyncButton(
+              title: buttonText,
+              onPressed: () {
+                return Future(() => onTap!.call(context));
+              },
+            ),
+          if (onPressed != null)
+            PrimaryButton(
+              title: buttonText,
+              onPressed: () => onPressed!.call(context),
+            ),
           if (bottomText != null)
             PrimaryText(
               bottomText!,
