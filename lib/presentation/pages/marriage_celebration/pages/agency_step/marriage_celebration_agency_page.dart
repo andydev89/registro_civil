@@ -60,34 +60,24 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
         ),
         bottomNavigationBar: ReactiveSelectAgencyFormConsumer(
           builder: (_, formModel, __) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                PrimaryButton(
-                  title: l10n.siguiente,
-                  onPressed: formModel.form.valid
-                      ? () {
-                          ref
-                              .read(marriageCelebrationProvider.notifier)
-                              .setAgency(formModel.agencyControl.value);
-                          context.navigateTo(
-                            MarriageCelebrationSecondStepRouterRoute(
-                              children: [
-                                SecondStepAtHeadquarterRoute(
-                                  children: [WitnessRoute(indexWitness: 0)],
-                                ),
-                              ],
+            return PrimaryButton(
+              title: l10n.siguiente,
+              onPressed: formModel.form.valid
+                  ? () {
+                      ref
+                          .read(marriageCelebrationProvider.notifier)
+                          .setAgency(formModel.agencyControl.value);
+                      context.navigateTo(
+                        MarriageCelebrationSecondStepRouterRoute(
+                          children: [
+                            SecondStepAtHeadquarterRoute(
+                              children: [WitnessRoute(indexWitness: 0)],
                             ),
-                          );
-                        }
-                      : null,
-                ),
-                const SizedBox(height: 10),
-                PrimaryButton(
-                  title: l10n.cancelar,
-                  onPressed: () => context.navigateBack(),
-                ),
-              ],
+                          ],
+                        ),
+                      );
+                    }
+                  : null,
             );
           },
         ).symmetricPadding(10, 30),

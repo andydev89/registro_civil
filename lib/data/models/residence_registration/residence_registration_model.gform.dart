@@ -584,7 +584,7 @@ class ResidenceRegistrationFirstStepModelForm
         nationalElectricUnicCodeControlName: FormControl<String>(
             value:
                 residenceRegistrationFirstStepModel?.nationalElectricUnicCode,
-            validators: [requiredValidator],
+            validators: [requiredValidator, length10Validator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

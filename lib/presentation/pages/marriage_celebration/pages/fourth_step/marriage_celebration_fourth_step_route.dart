@@ -196,71 +196,61 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
           ),
           bottomNavigationBar: ReactivePartnerFormConsumer(
             builder: (_, form, __) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  PrimaryButton(
-                    title: l10n.siguiente,
-                    onPressed: form.form.valid && !documents.isLoading
-                        ? () {
-                            if (firstContractParty) {
-                              ref
-                                  .read(marriageCelebrationProvider.notifier)
-                                  .setPartner(form.model, 0);
-                              context.navigateTo(
-                                MarriageCelebrationFourthStepRouterRoute(
-                                  firstContractParty: false,
-                                  key: const ValueKey('secondContractParty'),
-                                ),
-                              );
-                              return;
-                            }
-                            final ok = ValueNotifier<bool>(false);
-                            ref
-                                .read(marriageCelebrationProvider.notifier)
-                                .setPartner(form.model, 1);
-                            showContentDialog(
-                              context,
-                              content: ModalConfirmation(
-                                ok: ok,
-                                onConfirm: () => ref
-                                    .read(marriageProvider.notifier)
-                                    .marriage(marriageCelebrationModel)
-                                    .when(
-                                      ok: (_) {
-                                        ok.value = true;
-                                        context.replaceRoute(
-                                          NotificationRoute(
-                                            title: l10n.confirmacionSol,
-                                            message: l10n.solicitudExi,
-                                            buttonText: l10n.misPedidos,
-                                            bottomText: l10n
-                                                .envNotCorElectronicoReservarTurno,
-                                            notificationType:
-                                                NotificationType.success,
-                                            onPressed: (newContext) =>
-                                                newContext.replaceRoute(
-                                              const MyOrdersRoute(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      err: (err) => showAlert(
-                                        err.toString(),
-                                        TypeAlert.error,
+              return PrimaryButton(
+                title: l10n.siguiente,
+                onPressed: form.form.valid && !documents.isLoading
+                    ? () {
+                        if (firstContractParty) {
+                          ref
+                              .read(marriageCelebrationProvider.notifier)
+                              .setPartner(form.model, 0);
+                          context.navigateTo(
+                            MarriageCelebrationFourthStepRouterRoute(
+                              firstContractParty: false,
+                              key: const ValueKey('secondContractParty'),
+                            ),
+                          );
+                          return;
+                        }
+                        final ok = ValueNotifier<bool>(false);
+                        ref
+                            .read(marriageCelebrationProvider.notifier)
+                            .setPartner(form.model, 1);
+                        showContentDialog(
+                          context,
+                          content: ModalConfirmation(
+                            ok: ok,
+                            onConfirm: () => ref
+                                .read(marriageProvider.notifier)
+                                .marriage(marriageCelebrationModel)
+                                .when(
+                                  ok: (_) {
+                                    ok.value = true;
+                                    context.replaceRoute(
+                                      NotificationRoute(
+                                        title: l10n.confirmacionSol,
+                                        message: l10n.solicitudExi,
+                                        buttonText: l10n.misPedidos,
+                                        bottomText: l10n
+                                            .envNotCorElectronicoReservarTurno,
+                                        notificationType:
+                                            NotificationType.success,
+                                        onPressed: (newContext) =>
+                                            newContext.replaceRoute(
+                                          const MyOrdersRoute(),
+                                        ),
                                       ),
-                                    ),
-                              ),
-                            );
-                          }
-                        : null,
-                  ),
-                  const SizedBox(height: 10),
-                  PrimaryButton(
-                    title: l10n.cancelar,
-                    onPressed: () => context.navigateBack(),
-                  ),
-                ],
+                                    );
+                                  },
+                                  err: (err) => showAlert(
+                                    err.toString(),
+                                    TypeAlert.error,
+                                  ),
+                                ),
+                          ),
+                        );
+                      }
+                    : null,
               );
             },
           ).symmetricPadding(10, 30),

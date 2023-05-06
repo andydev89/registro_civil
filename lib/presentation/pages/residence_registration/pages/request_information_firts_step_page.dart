@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_check_box.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_email_field.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_phone_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_area_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 
@@ -16,7 +19,13 @@ class RequestInformationFirstStepPage extends StatelessWidget {
     final l10n = context.l10n;
     return ResidenceRegistrationFirstStepModelFormBuilder(
       initState: (context, formModel) {
-        formModel.haveElectricLightMeterControl.updateValue(false);
+        formModel.haveElectricLightMeterControl
+          ..valueChanges.listen((event) {
+            if (event == false) {
+              formModel.nationalElectricUnicCodeControl.reset();
+            }
+          })
+          ..updateValue(false);
       },
       builder: (context, formModel, child) => Scaffold(
         backgroundColor: Colors.transparent,
@@ -33,14 +42,19 @@ class RequestInformationFirstStepPage extends StatelessWidget {
                   child: PrimaryReactiveTextField(
                     formControl: formModel.nationalElectricUnicCodeControl,
                     label: l10n.codigoUnicoElectricoNacional,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(10),
+                    ],
                   ).withRevealAnimation,
                 ),
               ),
-              PrimaryReactiveTextField(
+              PrimaryReactivePhoneField(
                 formControl: formModel.phoneNumberControl,
                 label: l10n.telefonoCel,
               ),
-              PrimaryReactiveTextField(
+              PrimaryReactiveEmailField(
                 formControl: formModel.emailAddressControl,
                 label: l10n.correoE,
               ),
