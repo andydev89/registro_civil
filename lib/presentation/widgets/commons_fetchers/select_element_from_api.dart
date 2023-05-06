@@ -17,6 +17,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
     this.hintText,
     this.prefixIcon,
     this.readOnly = false,
+    this.onChanged,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
@@ -26,6 +27,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   final String? hintText;
   final Widget? prefixIcon;
   final bool readOnly;
+  final void Function(FormControl<Object?>)? onChanged;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,6 +46,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
           [],
       label: label,
       isLoading: elements.isLoading,
+      onChanged: onChanged,
       hasError: elements.hasError,
       onError: () => ref.refresh(provider),
     );

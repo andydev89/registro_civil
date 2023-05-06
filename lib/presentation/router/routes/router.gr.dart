@@ -213,6 +213,7 @@ class _$AppRouter extends RootStackRouter {
           onTap: args.onTap,
           description: args.description,
           bottomText: args.bottomText,
+          onPressed: args.onPressed,
         ),
       );
     },
@@ -1193,6 +1194,7 @@ class NotificationRoute extends PageRouteInfo<NotificationRouteArgs> {
     void Function(BuildContext)? onTap,
     Widget? description,
     String? bottomText,
+    void Function(BuildContext)? onPressed,
   }) : super(
           NotificationRoute.name,
           path: 'notification-page',
@@ -1207,6 +1209,7 @@ class NotificationRoute extends PageRouteInfo<NotificationRouteArgs> {
             onTap: onTap,
             description: description,
             bottomText: bottomText,
+            onPressed: onPressed,
           ),
         );
 
@@ -1225,6 +1228,7 @@ class NotificationRouteArgs {
     this.onTap,
     this.description,
     this.bottomText,
+    this.onPressed,
   });
 
   final Key? key;
@@ -1247,9 +1251,11 @@ class NotificationRouteArgs {
 
   final String? bottomText;
 
+  final void Function(BuildContext)? onPressed;
+
   @override
   String toString() {
-    return 'NotificationRouteArgs{key: $key, title: $title, subtitle: $subtitle, message: $message, bottonTitle: $bottonTitle, buttonText: $buttonText, notificationType: $notificationType, onTap: $onTap, description: $description, bottomText: $bottomText}';
+    return 'NotificationRouteArgs{key: $key, title: $title, subtitle: $subtitle, message: $message, bottonTitle: $bottonTitle, buttonText: $buttonText, notificationType: $notificationType, onTap: $onTap, description: $description, bottomText: $bottomText, onPressed: $onPressed}';
   }
 }
 

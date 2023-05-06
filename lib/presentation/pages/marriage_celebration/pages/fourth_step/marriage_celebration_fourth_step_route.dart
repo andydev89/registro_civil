@@ -115,7 +115,8 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                                                 ],
                                               ).verticalPadding(10),
                                               PrimaryText(l10n.archivo),
-                                              PrimaryReactiveFilePicker<Document>(
+                                              PrimaryReactiveFilePicker<
+                                                  Document>(
                                                 formControl:
                                                     formModel.documentsControl
                                                             .controls
@@ -194,7 +195,7 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                 .symmetricPadding(10, 20),
           ),
           bottomNavigationBar: ReactivePartnerFormConsumer(
-            builder: (context, form, __) {
+            builder: (_, form, __) {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -237,9 +238,10 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                                                 .envNotCorElectronicoReservarTurno,
                                             notificationType:
                                                 NotificationType.success,
-                                            onTap: (context) {
-                                              // TODOjang(): Navigate to my orders
-                                            },
+                                            onPressed: (newContext) =>
+                                                newContext.replaceRoute(
+                                              const MyOrdersRoute(),
+                                            ),
                                           ),
                                         );
                                       },

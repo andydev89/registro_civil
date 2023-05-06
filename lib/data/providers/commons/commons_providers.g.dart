@@ -179,6 +179,91 @@ class AgenciesByProvinceProvider
   }
 }
 
+String _$locationByParentHash() => r'0a48e2ed993237772bf26ea779965b5b52d04674';
+typedef LocationByParentRef
+    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCode>>;
+
+/// See also [locationByParent].
+@ProviderFor(locationByParent)
+const locationByParentProvider = LocationByParentFamily();
+
+/// See also [locationByParent].
+class LocationByParentFamily
+    extends Family<AsyncValue<Result<List<LocationModel>, StatusCode>>> {
+  /// See also [locationByParent].
+  const LocationByParentFamily();
+
+  /// See also [locationByParent].
+  LocationByParentProvider call({
+    required String parentId,
+  }) {
+    return LocationByParentProvider(
+      parentId: parentId,
+    );
+  }
+
+  @override
+  LocationByParentProvider getProviderOverride(
+    covariant LocationByParentProvider provider,
+  ) {
+    return call(
+      parentId: provider.parentId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'locationByParentProvider';
+}
+
+/// See also [locationByParent].
+class LocationByParentProvider
+    extends AutoDisposeFutureProvider<Result<List<LocationModel>, StatusCode>> {
+  /// See also [locationByParent].
+  LocationByParentProvider({
+    required this.parentId,
+  }) : super.internal(
+          (ref) => locationByParent(
+            ref,
+            parentId: parentId,
+          ),
+          from: locationByParentProvider,
+          name: r'locationByParentProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$locationByParentHash,
+          dependencies: LocationByParentFamily._dependencies,
+          allTransitiveDependencies:
+              LocationByParentFamily._allTransitiveDependencies,
+        );
+
+  final String parentId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is LocationByParentProvider && other.parentId == parentId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, parentId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$servicesHash() => r'3b3e30b328b9d103aa664002930f3d639aa4cbdc';
 typedef ServicesRef
     = AutoDisposeFutureProviderRef<Result<List<TypeServiceModel>, StatusCode>>;
