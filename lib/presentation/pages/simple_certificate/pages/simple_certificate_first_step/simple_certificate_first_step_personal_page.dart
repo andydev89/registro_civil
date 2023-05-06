@@ -27,23 +27,17 @@ class SimpleCertificateFirstStepPersonalPage extends ConsumerWidget {
     return NuiModelFormBuilder(
       builder: (context, formModel, child) => Scaffold(
         backgroundColor: Colors.transparent,
-        body: LayoutBuilder(
-          builder: (context, constraints) => ScrollableContent(
-            child: Container(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PrimaryReactiveNuiField(
-                    label: l10n.numCedula,
-                    formControl: formModel.nuiControl,
-                    hintText: '0123456789',
-                    init: true,
-                  ),
-                ],
+        body: ScrollableContent(
+          child: Column(
+            children: [
+              PrimaryReactiveNuiField(
+                label: l10n.numCedula,
+                formControl: formModel.nuiControl,
+                hintText: '0123456789',
+                init: true,
               ),
-            ).horizontalPadding(20),
-          ),
+            ],
+          ).horizontalPadding(20),
         ),
         bottomNavigationBar: ReactiveNuiModelFormConsumer(
           builder: (context, formModel, child) => PrimaryAsyncButton(

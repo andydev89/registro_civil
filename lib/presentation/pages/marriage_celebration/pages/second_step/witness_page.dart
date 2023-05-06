@@ -62,38 +62,28 @@ class WitnessPage extends ConsumerWidget {
             final form1 = createWitnessFormGroup(witness1);
             final form2 = createWitnessFormGroup(witness2);
             final valid = form1.valid && form2.valid;
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                PrimaryButton(
-                  title: l10n.siguiente,
-                  onPressed: valid
-                      ? () {
-                          ref.read(marriageCelebrationProvider.notifier)
-                            ..setWitness(witness1, 0)
-                            ..setWitness(witness2, 1);
-                          context.navigateTo(
-                            MarriageCelebrationThirdStepRouterRoute(
+            return PrimaryButton(
+              title: l10n.siguiente,
+              onPressed: valid
+                  ? () {
+                      ref.read(marriageCelebrationProvider.notifier)
+                        ..setWitness(witness1, 0)
+                        ..setWitness(witness2, 1);
+                      context.navigateTo(
+                        MarriageCelebrationThirdStepRouterRoute(
+                          children: [
+                            ThirdStepContractingPartyRoute(
                               children: [
-                                ThirdStepContractingPartyRoute(
-                                  children: [
-                                    ContractingPartyRoute(
-                                      indexContractingParty: 0,
-                                    )
-                                  ],
-                                ),
+                                ContractingPartyRoute(
+                                  indexContractingParty: 0,
+                                )
                               ],
                             ),
-                          );
-                        }
-                      : null,
-                ),
-                const SizedBox(height: 10),
-                PrimaryButton(
-                  title: l10n.cancelar,
-                  onPressed: () => context.navigateBack(),
-                )
-              ],
+                          ],
+                        ),
+                      );
+                    }
+                  : null,
             );
           },
         ).symmetricPadding(10, 30),

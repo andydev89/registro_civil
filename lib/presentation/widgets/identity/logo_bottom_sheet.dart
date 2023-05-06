@@ -13,25 +13,12 @@ class LogoBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 45,
       decoration: BoxDecoration(
         gradient: backgroundColor == null ? gradientePrincipal() : null,
         color: backgroundColor,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Assets.png.footer.image(),
-          const Flexible(
-            child: PrimaryLabel(
-              'apps.registrocivil.gob.ec',
-              color: Colors.blue,
-              fontSize: 15,
-            ),
-          ),
-        ],
-      ),
+      child: Assets.png.footer.image(),
     );
   }
 }

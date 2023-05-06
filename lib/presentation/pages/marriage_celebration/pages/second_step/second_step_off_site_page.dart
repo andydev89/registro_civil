@@ -83,36 +83,26 @@ class SecondStepOffSitePage extends ConsumerWidget {
           ).symmetricPadding(10, 20),
         ),
         bottomNavigationBar: ReactiveOutsideFormConsumer(
-          builder: (_, formModel, __) => Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              PrimaryButton(
-                title: l10n.siguiente,
-                onPressed: formModel.form.valid
-                    ? () {
-                        ref
-                            .read(marriageCelebrationProvider.notifier)
-                            .setOutsider(
-                              formModel.model,
-                            );
-                        context.navigateTo(
-                          MarriageCelebrationSecondStepRouterRoute(
-                            children: [
-                              SecondStepAtHeadquarterRoute(
-                                children: [WitnessRoute(indexWitness: 0)],
-                              ),
-                            ],
-                          ),
+          builder: (_, formModel, __) => PrimaryButton(
+            title: l10n.siguiente,
+            onPressed: formModel.form.valid
+                ? () {
+                    ref
+                        .read(marriageCelebrationProvider.notifier)
+                        .setOutsider(
+                          formModel.model,
                         );
-                      }
-                    : null,
-              ),
-              const SizedBox(height: 10),
-              PrimaryButton(
-                title: l10n.cancelar,
-                onPressed: () => context.navigateBack(),
-              ),
-            ],
+                    context.navigateTo(
+                      MarriageCelebrationSecondStepRouterRoute(
+                        children: [
+                          SecondStepAtHeadquarterRoute(
+                            children: [WitnessRoute(indexWitness: 0)],
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                : null,
           ).symmetricPadding(10, 30),
         ),
       ),
