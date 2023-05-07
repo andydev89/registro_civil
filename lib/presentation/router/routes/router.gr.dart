@@ -290,9 +290,13 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     ScheduleTurnFirstStepRouterRoute.name: (routeData) {
+      final args = routeData.argsAs<ScheduleTurnFirstStepRouterRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ScheduleTurnFirstStepRouterPage(),
+        child: ScheduleTurnFirstStepRouterPage(
+          key: args.key,
+          typeOfService: args.typeOfService,
+        ),
       );
     },
     CodeRoute.name: (routeData) {
@@ -340,18 +344,26 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     ScheduleTurnFirstStepPersonalRoute.name: (routeData) {
+      final args = routeData.argsAs<ScheduleTurnFirstStepPersonalRouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const ScheduleTurnFirstStepPersonalPage(),
+        child: ScheduleTurnFirstStepPersonalPage(
+          key: args.key,
+          typeOfService: args.typeOfService,
+        ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
       );
     },
     ScheduleTurnFirstStepFamiliarRoute.name: (routeData) {
+      final args = routeData.argsAs<ScheduleTurnFirstStepFamiliarRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ScheduleTurnFirstStepFamiliarPage(),
+        child: ScheduleTurnFirstStepFamiliarPage(
+          key: args.key,
+          typeOfService: args.typeOfService,
+        ),
       );
     },
     SimpleCertificateFirstStepRouterRoute.name: (routeData) {
@@ -1429,15 +1441,39 @@ class ProceduresRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ScheduleTurnFirstStepRouterPage]
-class ScheduleTurnFirstStepRouterRoute extends PageRouteInfo<void> {
-  const ScheduleTurnFirstStepRouterRoute({List<PageRouteInfo>? children})
-      : super(
+class ScheduleTurnFirstStepRouterRoute
+    extends PageRouteInfo<ScheduleTurnFirstStepRouterRouteArgs> {
+  ScheduleTurnFirstStepRouterRoute({
+    Key? key,
+    required TypeServiceModel typeOfService,
+    List<PageRouteInfo>? children,
+  }) : super(
           ScheduleTurnFirstStepRouterRoute.name,
           path: '',
+          args: ScheduleTurnFirstStepRouterRouteArgs(
+            key: key,
+            typeOfService: typeOfService,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ScheduleTurnFirstStepRouterRoute';
+}
+
+class ScheduleTurnFirstStepRouterRouteArgs {
+  const ScheduleTurnFirstStepRouterRouteArgs({
+    this.key,
+    required this.typeOfService,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeOfService;
+
+  @override
+  String toString() {
+    return 'ScheduleTurnFirstStepRouterRouteArgs{key: $key, typeOfService: $typeOfService}';
+  }
 }
 
 /// generated route for
@@ -1615,26 +1651,72 @@ class TurnDetailsRouteArgs {
 
 /// generated route for
 /// [ScheduleTurnFirstStepPersonalPage]
-class ScheduleTurnFirstStepPersonalRoute extends PageRouteInfo<void> {
-  const ScheduleTurnFirstStepPersonalRoute()
-      : super(
+class ScheduleTurnFirstStepPersonalRoute
+    extends PageRouteInfo<ScheduleTurnFirstStepPersonalRouteArgs> {
+  ScheduleTurnFirstStepPersonalRoute({
+    Key? key,
+    required TypeServiceModel typeOfService,
+  }) : super(
           ScheduleTurnFirstStepPersonalRoute.name,
           path: '',
+          args: ScheduleTurnFirstStepPersonalRouteArgs(
+            key: key,
+            typeOfService: typeOfService,
+          ),
         );
 
   static const String name = 'ScheduleTurnFirstStepPersonalRoute';
 }
 
+class ScheduleTurnFirstStepPersonalRouteArgs {
+  const ScheduleTurnFirstStepPersonalRouteArgs({
+    this.key,
+    required this.typeOfService,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeOfService;
+
+  @override
+  String toString() {
+    return 'ScheduleTurnFirstStepPersonalRouteArgs{key: $key, typeOfService: $typeOfService}';
+  }
+}
+
 /// generated route for
 /// [ScheduleTurnFirstStepFamiliarPage]
-class ScheduleTurnFirstStepFamiliarRoute extends PageRouteInfo<void> {
-  const ScheduleTurnFirstStepFamiliarRoute()
-      : super(
+class ScheduleTurnFirstStepFamiliarRoute
+    extends PageRouteInfo<ScheduleTurnFirstStepFamiliarRouteArgs> {
+  ScheduleTurnFirstStepFamiliarRoute({
+    Key? key,
+    required TypeServiceModel typeOfService,
+  }) : super(
           ScheduleTurnFirstStepFamiliarRoute.name,
           path: 'schedule-turn-first-step-familiar-page',
+          args: ScheduleTurnFirstStepFamiliarRouteArgs(
+            key: key,
+            typeOfService: typeOfService,
+          ),
         );
 
   static const String name = 'ScheduleTurnFirstStepFamiliarRoute';
+}
+
+class ScheduleTurnFirstStepFamiliarRouteArgs {
+  const ScheduleTurnFirstStepFamiliarRouteArgs({
+    this.key,
+    required this.typeOfService,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeOfService;
+
+  @override
+  String toString() {
+    return 'ScheduleTurnFirstStepFamiliarRouteArgs{key: $key, typeOfService: $typeOfService}';
+  }
 }
 
 /// generated route for

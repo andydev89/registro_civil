@@ -5,15 +5,17 @@ import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
 import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
-import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/payment_selector.dart';
 
 class ScheduleTurnFirstStepPersonalPage extends StatelessWidget {
-  const ScheduleTurnFirstStepPersonalPage({super.key});
+  const ScheduleTurnFirstStepPersonalPage({
+    super.key,
+    required this.typeOfService,
+  });
+  final TypeServiceModel typeOfService;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +26,6 @@ class ScheduleTurnFirstStepPersonalPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SelectElementFromApi<TypeServiceModel>(
-                formControl: formModel.serviceControl,
-                label: l10n.tipoServicio,
-                provider: servicesProvider(bookable: true),
-              ).horizontalPadding(20),
               PaymentSelector(
                 label: l10n.seleccioneMetodoPago,
                 formControl: formModel.paymentMethodControl,
@@ -47,7 +44,7 @@ class ScheduleTurnFirstStepPersonalPage extends StatelessWidget {
                         PaymentMethodType.correspondentPayment) {
                       context.navigateTo(
                         CodeRoute(
-                          typeOfService: formModel.model.service,
+                          typeOfService: typeOfService,
                           includMe: true,
                           procedureType: ProcedureType.personal,
                           relatives: const [],
@@ -57,7 +54,7 @@ class ScheduleTurnFirstStepPersonalPage extends StatelessWidget {
                       context.navigateTo(
                         ScheduleTurnSecondRoute(
                           paymentMethod: formModel.model.paymentMethod,
-                          typeOfService: formModel.model.service,
+                          typeOfService: typeOfService,
                           includMe: true,
                           procedureType: ProcedureType.personal,
                           relatives: const [],
