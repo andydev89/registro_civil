@@ -371,5 +371,6 @@
   "hijoMenorEdad": "Minor child",
   "discapacitado": "Disabled",
   "terceraEdad": "Elderly",
-  "none": "None"
+  "none": "None",
+  "guardar": "Save"
 }
