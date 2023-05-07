@@ -135,28 +135,18 @@ class ContractingPartyPage extends ConsumerWidget {
               final form1 = createPartnerFormGroup(partner1);
               final form2 = createPartnerFormGroup(partner2);
               final valid = form1.valid && form2.valid;
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  PrimaryButton(
-                    title: l10n.siguiente,
-                    onPressed: valid
-                        ? () {
-                            ref.read(marriageCelebrationProvider.notifier)
-                              ..setPartner(partner1, 0)
-                              ..setPartner(partner2, 1);
-                            context.navigateTo(
-                              MarriageCelebrationFourthStepRouterRoute(),
-                            );
-                          }
-                        : null,
-                  ),
-                  const SizedBox(height: 10),
-                  PrimaryButton(
-                    title: l10n.cancelar,
-                    onPressed: () => context.navigateBack(),
-                  )
-                ],
+              return PrimaryButton(
+                title: l10n.siguiente,
+                onPressed: valid
+                    ? () {
+                        ref.read(marriageCelebrationProvider.notifier)
+                          ..setPartner(partner1, 0)
+                          ..setPartner(partner2, 1);
+                        context.navigateTo(
+                          MarriageCelebrationFourthStepRouterRoute(),
+                        );
+                      }
+                    : null,
               );
             },
           ).symmetricPadding(10, 30),

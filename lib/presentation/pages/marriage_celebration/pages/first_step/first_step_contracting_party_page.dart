@@ -27,28 +27,18 @@ class FirstStepContractingPartyPage extends ConsumerWidget {
           child: FirstStepForm(formModel: formModel, showFilePicker: false),
         ).symmetricPadding(10, 20),
         bottomNavigationBar: ReactiveRequestOwnerFormConsumer(
-          builder: (_, formModel, __) => Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              PrimaryButton(
-                title: l10n.siguiente,
-                onPressed: formModel.form.valid
-                    ? () {
-                        ref
-                            .read(marriageCelebrationProvider.notifier)
-                            .setFirstStep(formModel.model);
-                        context.navigateTo(
-                          const MarriageCelebrationAgencyRoute(),
-                        );
-                      }
-                    : null,
-              ),
-              const SizedBox(height: 10),
-              PrimaryButton(
-                title: l10n.cancelar,
-                onPressed: () => context.navigateBack(),
-              ),
-            ],
+          builder: (_, formModel, __) => PrimaryButton(
+            title: l10n.siguiente,
+            onPressed: formModel.form.valid
+                ? () {
+                    ref
+                        .read(marriageCelebrationProvider.notifier)
+                        .setFirstStep(formModel.model);
+                    context.navigateTo(
+                      const MarriageCelebrationAgencyRoute(),
+                    );
+                  }
+                : null,
           ),
         ).symmetricPadding(10, 30),
       ),

@@ -21,7 +21,7 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
     final l10n = context.l10n;
     final selectedRadio = useState(SimpleCertificateRadioTypeEnum.familiar);
     return PrimaryScaffold(
-      title: l10n.informacionSer,
+      title: '${l10n.informacionSer}: ${typeSimpleCertificate.name}',
       subtitle: l10n.completeInformacionSolicitada,
       body: Expanded(
         child: AutoRouter(
@@ -47,8 +47,7 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
                     ),
                   ),
                   Visibility(
-                    visible: typeSimpleCertificate.type !=
-                        TypeService.death,
+                    visible: typeSimpleCertificate.type != TypeService.death,
                     child: Expanded(
                       child: PrimaryRadioListTile(
                         value: SimpleCertificateRadioTypeEnum.personal,

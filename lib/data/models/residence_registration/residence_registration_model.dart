@@ -14,7 +14,7 @@ part 'residence_registration_model.gform.dart';
 @ReactiveFormAnnotation()
 class ResidenceRegistrationFirstStepModel {
   ResidenceRegistrationFirstStepModel({
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(validators: [requiredValidator,length10Validator])
         this.nationalElectricUnicCode = '',
     @FormControlAnnotation<dynamic>()
         this.haveElectricLightMeter = false,
@@ -83,14 +83,16 @@ class ResidenceRegistrationThirdStepModel {
   final ResidenceType residenceType;
 }
 
-// model to send
+// // model to send
 
+@ReactiveFormAnnotation()
 @JsonSerializable(explicitToJson: true)
 class ResidenceRegistration {
   ResidenceRegistration({
     this.userId = '',
-    this.observations = '',
-    this.residentials = const [],
+    @FormControlAnnotation(validators: [requiredValidator])
+        this.observations = '',
+    @FormArrayAnnotation<Residential>() this.residentials = const [],
   });
 
   factory ResidenceRegistration.fromJson(Map<String, dynamic> json) =>
@@ -115,6 +117,7 @@ class ResidenceRegistration {
   }
 }
 
+@ReactiveFormAnnotation()
 @JsonSerializable()
 class Residential {
   Residential({
@@ -197,6 +200,7 @@ class Residential {
   }
 }
 
+@ReactiveFormAnnotation()
 @JsonSerializable()
 class Dependent {
   Dependent({
