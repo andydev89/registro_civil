@@ -59,11 +59,6 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SelectElementFromApi(
-                formControl: formModel.serviceControl,
-                label: l10n.tipoServicio,
-                provider: servicesProvider(bookable: true),
-              ).horizontalPadding(20),
               ReactiveFormArray(
                 formArray: formModel.familyControl,
                 builder: (context, formArray, child) => Column(
@@ -100,7 +95,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                                     PrimaryIconButton(
                                       icon: Assets.svg.starCheck.svg(),
                                       onPressed: () {
-                                        // TODO(alejandro): 
+                                        // TODO(alejandro):
                                         //algo en el parentezco
                                       },
                                     ).verticalPadding(15),

@@ -728,8 +728,6 @@ class ScheduleTurnFirstStepFamiliarModelForm
 
   static String scheduleForMeControlName = "scheduleForMe";
 
-  static String serviceControlName = "service";
-
   static String familyControlName = "family";
 
   final ScheduleTurnFirstStepFamiliarModel? scheduleTurnFirstStepFamiliarModel;
@@ -742,12 +740,10 @@ class ScheduleTurnFirstStepFamiliarModelForm
 
   String paymentMethodControlPath() => pathBuilder(paymentMethodControlName);
   String scheduleForMeControlPath() => pathBuilder(scheduleForMeControlName);
-  String serviceControlPath() => pathBuilder(serviceControlName);
   String familyControlPath() => pathBuilder(familyControlName);
   PaymentMethodType get _paymentMethodValue =>
       paymentMethodControl.value as PaymentMethodType;
   bool get _scheduleForMeValue => scheduleForMeControl.value as bool;
-  TypeServiceModel? get _serviceValue => serviceControl?.value;
   List<FamiliarFormModel> get _familyValue => familyFamiliarFormModelForm
       .asMap()
       .map(
@@ -780,15 +776,6 @@ class ScheduleTurnFirstStepFamiliarModelForm
     }
   }
 
-  bool get containsService {
-    try {
-      form.control(serviceControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
   bool get containsFamily {
     try {
       form.control(familyControlPath());
@@ -800,38 +787,10 @@ class ScheduleTurnFirstStepFamiliarModelForm
 
   Object? get paymentMethodErrors => paymentMethodControl.errors;
   Object? get scheduleForMeErrors => scheduleForMeControl.errors;
-  Object? get serviceErrors => serviceControl?.errors;
   Object? get familyErrors => familyControl.errors;
   void get paymentMethodFocus => form.focus(paymentMethodControlPath());
   void get scheduleForMeFocus => form.focus(scheduleForMeControlPath());
-  void get serviceFocus => form.focus(serviceControlPath());
   void get familyFocus => form.focus(familyControlPath());
-  void serviceRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsService) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          serviceControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            serviceControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
   void paymentMethodValueUpdate(
     PaymentMethodType value, {
     bool updateParent = true,
@@ -847,15 +806,6 @@ class ScheduleTurnFirstStepFamiliarModelForm
     bool emitEvent = true,
   }) {
     scheduleForMeControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void serviceValueUpdate(
-    TypeServiceModel? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    serviceControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -972,15 +922,6 @@ class ScheduleTurnFirstStepFamiliarModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void serviceValuePatch(
-    TypeServiceModel? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    serviceControl?.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
   void familyValuePatch(
     List<FamiliarFormModel> value, {
     bool updateParent = true,
@@ -1024,15 +965,6 @@ class ScheduleTurnFirstStepFamiliarModelForm
   }) =>
       scheduleForMeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void serviceValueReset(
-    TypeServiceModel? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      serviceControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void familyValueReset(
     List<FamiliarFormModel> value, {
     bool updateParent = true,
@@ -1053,9 +985,6 @@ class ScheduleTurnFirstStepFamiliarModelForm
           as FormControl<PaymentMethodType>;
   FormControl<bool> get scheduleForMeControl =>
       form.control(scheduleForMeControlPath()) as FormControl<bool>;
-  FormControl<TypeServiceModel>? get serviceControl => containsService
-      ? form.control(serviceControlPath()) as FormControl<TypeServiceModel>?
-      : null;
   FormArray<Map<String, Object?>> get familyControl =>
       form.control(familyControlPath()) as FormArray<Map<String, Object?>>;
   void paymentMethodSetDisabled(
@@ -1088,24 +1017,6 @@ class ScheduleTurnFirstStepFamiliarModelForm
       );
     } else {
       scheduleForMeControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void serviceSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      serviceControl?.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      serviceControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1171,7 +1082,6 @@ class ScheduleTurnFirstStepFamiliarModelForm
     return ScheduleTurnFirstStepFamiliarModel(
         paymentMethod: _paymentMethodValue,
         scheduleForMe: _scheduleForMeValue,
-        service: _serviceValue,
         family: _familyValue);
   }
 
@@ -1227,13 +1137,6 @@ class ScheduleTurnFirstStepFamiliarModelForm
         scheduleForMeControlName: FormControl<bool>(
             value: scheduleTurnFirstStepFamiliarModel?.scheduleForMe,
             validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        serviceControlName: FormControl<TypeServiceModel>(
-            value: scheduleTurnFirstStepFamiliarModel?.service,
-            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

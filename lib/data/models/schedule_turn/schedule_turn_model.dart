@@ -27,14 +27,12 @@ class ScheduleTurnFirstStepFamiliarModel {
     @FormControlAnnotation(validators: [requiredValidator])
         required this.paymentMethod,
     @FormControlAnnotation<dynamic>() this.scheduleForMe = false,
-    @FormControlAnnotation(validators: [requiredValidator]) this.service,
     @FormArrayAnnotation<dynamic>(validators: [requiredValidator])
         this.family = const [],
   });
 
   final PaymentMethodType paymentMethod;
   final bool scheduleForMe;
-  final TypeServiceModel? service;
   final List<FamiliarFormModel> family;
 }
 
