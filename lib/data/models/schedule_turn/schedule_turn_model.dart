@@ -4,7 +4,6 @@ import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
 import 'package:registro_civil_apk/data/enum/commons/relationship_type.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 part 'schedule_turn_model.gform.dart';
 
@@ -12,13 +11,10 @@ part 'schedule_turn_model.gform.dart';
 class ScheduleTurnFirstStepPersonalModel {
   ScheduleTurnFirstStepPersonalModel({
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.service,
-    @FormControlAnnotation(validators: [requiredValidator])
         required this.paymentMethod,
   });
 
   final PaymentMethodType paymentMethod;
-  final TypeServiceModel service;
 }
 
 @ReactiveFormAnnotation()

@@ -197,8 +197,6 @@ class ScheduleTurnFirstStepPersonalModelForm
     this.path,
   ) {}
 
-  static String serviceControlName = "service";
-
   static String paymentMethodControlName = "paymentMethod";
 
   final ScheduleTurnFirstStepPersonalModel? scheduleTurnFirstStepPersonalModel;
@@ -207,21 +205,9 @@ class ScheduleTurnFirstStepPersonalModelForm
 
   final String? path;
 
-  String serviceControlPath() => pathBuilder(serviceControlName);
   String paymentMethodControlPath() => pathBuilder(paymentMethodControlName);
-  TypeServiceModel get _serviceValue =>
-      serviceControl.value as TypeServiceModel;
   PaymentMethodType get _paymentMethodValue =>
       paymentMethodControl.value as PaymentMethodType;
-  bool get containsService {
-    try {
-      form.control(serviceControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
   bool get containsPaymentMethod {
     try {
       form.control(paymentMethodControlPath());
@@ -231,34 +217,14 @@ class ScheduleTurnFirstStepPersonalModelForm
     }
   }
 
-  Object? get serviceErrors => serviceControl.errors;
   Object? get paymentMethodErrors => paymentMethodControl.errors;
-  void get serviceFocus => form.focus(serviceControlPath());
   void get paymentMethodFocus => form.focus(paymentMethodControlPath());
-  void serviceValueUpdate(
-    TypeServiceModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    serviceControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
   void paymentMethodValueUpdate(
     PaymentMethodType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     paymentMethodControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void serviceValuePatch(
-    TypeServiceModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    serviceControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -271,15 +237,6 @@ class ScheduleTurnFirstStepPersonalModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void serviceValueReset(
-    TypeServiceModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      serviceControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void paymentMethodValueReset(
     PaymentMethodType value, {
     bool updateParent = true,
@@ -289,29 +246,9 @@ class ScheduleTurnFirstStepPersonalModelForm
   }) =>
       paymentMethodControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<TypeServiceModel> get serviceControl =>
-      form.control(serviceControlPath()) as FormControl<TypeServiceModel>;
   FormControl<PaymentMethodType> get paymentMethodControl =>
       form.control(paymentMethodControlPath())
           as FormControl<PaymentMethodType>;
-  void serviceSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      serviceControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      serviceControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
   void paymentMethodSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -338,7 +275,7 @@ class ScheduleTurnFirstStepPersonalModelForm
       );
     }
     return ScheduleTurnFirstStepPersonalModel(
-        service: _serviceValue, paymentMethod: _paymentMethodValue);
+        paymentMethod: _paymentMethodValue);
   }
 
   ScheduleTurnFirstStepPersonalModelForm copyWithPath(String? path) {
@@ -383,13 +320,6 @@ class ScheduleTurnFirstStepPersonalModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        serviceControlName: FormControl<TypeServiceModel>(
-            value: scheduleTurnFirstStepPersonalModel?.service,
-            validators: [requiredValidator],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
         paymentMethodControlName: FormControl<PaymentMethodType>(
             value: scheduleTurnFirstStepPersonalModel?.paymentMethod,
             validators: [requiredValidator],

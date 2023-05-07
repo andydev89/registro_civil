@@ -14,7 +14,7 @@ part 'residence_registration_model.gform.dart';
 @ReactiveFormAnnotation()
 class ResidenceRegistrationFirstStepModel {
   ResidenceRegistrationFirstStepModel({
-    @FormControlAnnotation(validators: [requiredValidator,length10Validator])
+    @FormControlAnnotation(validators: [requiredValidator, length10Validator])
         this.nationalElectricUnicCode = '',
     @FormControlAnnotation<dynamic>()
         this.haveElectricLightMeter = false,
