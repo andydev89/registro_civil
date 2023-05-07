@@ -12,87 +12,14 @@ part 'residence_registration_model.g.dart';
 part 'residence_registration_model.gform.dart';
 
 @ReactiveFormAnnotation()
-class ResidenceRegistrationFirstStepModel {
-  ResidenceRegistrationFirstStepModel({
-    @FormControlAnnotation(validators: [requiredValidator,length10Validator])
-        this.nationalElectricUnicCode = '',
-    @FormControlAnnotation<dynamic>()
-        this.haveElectricLightMeter = false,
-    @FormControlAnnotation(
-      validators: [requiredValidator, length10Validator],
-      asyncValidators: [phoneNumberEcuadorValidation],
-    )
-        required this.phoneNumber,
-    @FormControlAnnotation(validators: [requiredValidator, emailValidator])
-        required this.emailAddress,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.observations,
-  });
-
-  final String nationalElectricUnicCode;
-  final bool haveElectricLightMeter;
-  final String phoneNumber;
-  final String emailAddress;
-  final String observations;
-}
-
-@ReactiveFormAnnotation()
-class ResidenceRegistrationSecondStepModel {
-  ResidenceRegistrationSecondStepModel({
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.province,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.canton,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.parroquia,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.primaryStreet,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.secondaryStreet,
-  });
-
-  final LocationModel province;
-  final LocationModel canton;
-  final LocationModel parroquia;
-  final String primaryStreet;
-  final String secondaryStreet;
-}
-
-@ReactiveFormAnnotation()
-class ResidenceRegistrationThirdStepModel {
-  ResidenceRegistrationThirdStepModel({
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.houseType,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.tenure,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.villageOrBuildingNumber,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.floorNumber,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.appartmentNumber,
-    @FormControlAnnotation(validators: [requiredValidator])
-        required this.residenceType,
-  });
-
-  final ResidentialHousingType houseType;
-  final ResidentialTenureHousingTypeAgreemente tenure;
-  final String villageOrBuildingNumber;
-  final String floorNumber;
-  final String appartmentNumber;
-  final ResidenceType residenceType;
-}
-
-// // model to send
-
-@ReactiveFormAnnotation()
 @JsonSerializable(explicitToJson: true)
 class ResidenceRegistration {
   ResidenceRegistration({
-    this.userId = '',
+    @FormControlAnnotation(validators: [requiredValidator]) this.userId = '',
     @FormControlAnnotation(validators: [requiredValidator])
         this.observations = '',
-    @FormArrayAnnotation<Residential>() this.residentials = const [],
+    @FormArrayAnnotation<Residential>(validators: [requiredValidator])
+        this.residentials = const [],
   });
 
   factory ResidenceRegistration.fromJson(Map<String, dynamic> json) =>
@@ -121,20 +48,31 @@ class ResidenceRegistration {
 @JsonSerializable()
 class Residential {
   Residential({
-    required this.electricLightMeter,
-    required this.electricalCode,
-    required this.province,
-    required this.canton,
-    required this.parroquia,
-    required this.mainStreet,
-    required this.backStreet,
-    required this.housingType,
-    required this.tenureHousingTypeAgreement,
-    required this.numberVillaBuilding,
-    required this.floorNumber,
-    required this.departmentNumber,
-    required this.type,
-    required this.dependents,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.electricLightMeter,
+    @FormControlAnnotation<String>() required this.electricalCode,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.province,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.canton,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.parroquia,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.mainStreet,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.backStreet,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.housingType,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.tenureHousingTypeAgreement,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.numberVillaBuilding,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.floorNumber,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.departmentNumber,
+    @FormControlAnnotation(validators: [requiredValidator]) required this.type,
+    @FormArrayAnnotation<Dependent>() required this.dependents,
   });
 
   factory Residential.fromJson(Map<String, dynamic> json) =>
@@ -204,12 +142,15 @@ class Residential {
 @JsonSerializable()
 class Dependent {
   Dependent({
-    required this.nuiDependents,
-    required this.relationship,
-    required this.date,
-    required this.name,
-    required this.lastname,
-    required this.state,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.nuiDependents,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.relationship,
+    @FormControlAnnotation(validators: [requiredValidator]) required this.date,
+    @FormControlAnnotation(validators: [requiredValidator]) required this.name,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.lastname,
+    @FormControlAnnotation(validators: [requiredValidator]) required this.state,
   });
 
   factory Dependent.fromJson(Map<String, dynamic> json) =>

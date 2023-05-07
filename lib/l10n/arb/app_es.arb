@@ -371,5 +371,6 @@
   "hijoMenorEdad": "Hijo menor de edad",
   "discapacitado": "Discapacitado",
   "terceraEdad": "Tercera edad",
-  "none": "Ninguno"
+  "none": "Ninguno",
+  "guardar": "Guardar"
 }

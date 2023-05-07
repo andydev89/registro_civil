@@ -9,9 +9,8 @@ part of 'residence_registration_model.dart';
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveResidenceRegistrationFirstStepModelFormConsumer
-    extends StatelessWidget {
-  const ReactiveResidenceRegistrationFirstStepModelFormConsumer({
+class ReactiveResidenceRegistrationFormConsumer extends StatelessWidget {
+  const ReactiveResidenceRegistrationFormConsumer({
     Key? key,
     required this.builder,
     this.child,
@@ -20,23 +19,22 @@ class ReactiveResidenceRegistrationFirstStepModelFormConsumer
   final Widget? child;
 
   final Widget Function(BuildContext context,
-      ResidenceRegistrationFirstStepModelForm formModel, Widget? child) builder;
+      ResidenceRegistrationForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel =
-        ReactiveResidenceRegistrationFirstStepModelForm.of(context);
+    final formModel = ReactiveResidenceRegistrationForm.of(context);
 
-    if (formModel is! ResidenceRegistrationFirstStepModelForm) {
+    if (formModel is! ResidenceRegistrationForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class ResidenceRegistrationFirstStepModelFormInheritedStreamer
+class ResidenceRegistrationFormInheritedStreamer
     extends InheritedStreamer<dynamic> {
-  const ResidenceRegistrationFirstStepModelFormInheritedStreamer({
+  const ResidenceRegistrationFormInheritedStreamer({
     Key? key,
     required this.form,
     required Stream<dynamic> stream,
@@ -47,11 +45,11 @@ class ResidenceRegistrationFirstStepModelFormInheritedStreamer
           key: key,
         );
 
-  final ResidenceRegistrationFirstStepModelForm form;
+  final ResidenceRegistrationForm form;
 }
 
-class ReactiveResidenceRegistrationFirstStepModelForm extends StatelessWidget {
-  const ReactiveResidenceRegistrationFirstStepModelForm({
+class ReactiveResidenceRegistrationForm extends StatelessWidget {
+  const ReactiveResidenceRegistrationForm({
     Key? key,
     required this.form,
     required this.child,
@@ -60,33 +58,31 @@ class ReactiveResidenceRegistrationFirstStepModelForm extends StatelessWidget {
 
   final Widget child;
 
-  final ResidenceRegistrationFirstStepModelForm form;
+  final ResidenceRegistrationForm form;
 
   final WillPopCallback? onWillPop;
 
-  static ResidenceRegistrationFirstStepModelForm? of(
+  static ResidenceRegistrationForm? of(
     BuildContext context, {
     bool listen = true,
   }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              ResidenceRegistrationFirstStepModelFormInheritedStreamer>()
+              ResidenceRegistrationFormInheritedStreamer>()
           ?.form;
     }
 
     final element = context.getElementForInheritedWidgetOfExactType<
-        ResidenceRegistrationFirstStepModelFormInheritedStreamer>();
+        ResidenceRegistrationFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget
-                as ResidenceRegistrationFirstStepModelFormInheritedStreamer)
-            .form;
+        : (element.widget as ResidenceRegistrationFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return ResidenceRegistrationFirstStepModelFormInheritedStreamer(
+    return ResidenceRegistrationFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -97,8 +93,8 @@ class ReactiveResidenceRegistrationFirstStepModelForm extends StatelessWidget {
   }
 }
 
-class ResidenceRegistrationFirstStepModelFormBuilder extends StatefulWidget {
-  const ResidenceRegistrationFirstStepModelFormBuilder({
+class ResidenceRegistrationFormBuilder extends StatefulWidget {
+  const ResidenceRegistrationFormBuilder({
     Key? key,
     this.model,
     this.child,
@@ -107,34 +103,33 @@ class ResidenceRegistrationFirstStepModelFormBuilder extends StatefulWidget {
     this.initState,
   }) : super(key: key);
 
-  final ResidenceRegistrationFirstStepModel? model;
+  final ResidenceRegistration? model;
 
   final Widget? child;
 
   final WillPopCallback? onWillPop;
 
   final Widget Function(BuildContext context,
-      ResidenceRegistrationFirstStepModelForm formModel, Widget? child) builder;
+      ResidenceRegistrationForm formModel, Widget? child) builder;
 
-  final void Function(BuildContext context,
-      ResidenceRegistrationFirstStepModelForm formModel)? initState;
+  final void Function(
+      BuildContext context, ResidenceRegistrationForm formModel)? initState;
 
   @override
-  _ResidenceRegistrationFirstStepModelFormBuilderState createState() =>
-      _ResidenceRegistrationFirstStepModelFormBuilderState();
+  _ResidenceRegistrationFormBuilderState createState() =>
+      _ResidenceRegistrationFormBuilderState();
 }
 
-class _ResidenceRegistrationFirstStepModelFormBuilderState
-    extends State<ResidenceRegistrationFirstStepModelFormBuilder> {
+class _ResidenceRegistrationFormBuilderState
+    extends State<ResidenceRegistrationFormBuilder> {
   late FormGroup _form;
 
-  late ResidenceRegistrationFirstStepModelForm _formModel;
+  late ResidenceRegistrationForm _formModel;
 
   @override
   void initState() {
     _form = FormGroup({});
-    _formModel =
-        ResidenceRegistrationFirstStepModelForm(widget.model, _form, null);
+    _formModel = ResidenceRegistrationForm(widget.model, _form, null);
 
     final elements = _formModel.formElements();
     _form.setValidators(elements.validators);
@@ -152,11 +147,9 @@ class _ResidenceRegistrationFirstStepModelFormBuilderState
   }
 
   @override
-  void didUpdateWidget(
-      covariant ResidenceRegistrationFirstStepModelFormBuilder oldWidget) {
+  void didUpdateWidget(covariant ResidenceRegistrationFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          ResidenceRegistrationFirstStepModelForm(widget.model, _form, null);
+      _formModel = ResidenceRegistrationForm(widget.model, _form, null);
       final elements = _formModel.formElements();
 
       _form.updateValue(elements.rawValue);
@@ -175,7 +168,7 @@ class _ResidenceRegistrationFirstStepModelFormBuilderState
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveResidenceRegistrationFirstStepModelForm(
+    return ReactiveResidenceRegistrationForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
@@ -189,76 +182,35 @@ class _ResidenceRegistrationFirstStepModelFormBuilderState
   }
 }
 
-class ResidenceRegistrationFirstStepModelForm
-    implements FormModel<ResidenceRegistrationFirstStepModel> {
-  ResidenceRegistrationFirstStepModelForm(
-    this.residenceRegistrationFirstStepModel,
+class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
+  ResidenceRegistrationForm(
+    this.residenceRegistration,
     this.form,
     this.path,
   ) {}
 
-  static String nationalElectricUnicCodeControlName =
-      "nationalElectricUnicCode";
-
-  static String haveElectricLightMeterControlName = "haveElectricLightMeter";
-
-  static String phoneNumberControlName = "phoneNumber";
-
-  static String emailAddressControlName = "emailAddress";
+  static String userIdControlName = "userId";
 
   static String observationsControlName = "observations";
 
-  final ResidenceRegistrationFirstStepModel?
-      residenceRegistrationFirstStepModel;
+  static String residentialsControlName = "residentials";
+
+  final ResidenceRegistration? residenceRegistration;
 
   final FormGroup form;
 
   final String? path;
 
-  String nationalElectricUnicCodeControlPath() =>
-      pathBuilder(nationalElectricUnicCodeControlName);
-  String haveElectricLightMeterControlPath() =>
-      pathBuilder(haveElectricLightMeterControlName);
-  String phoneNumberControlPath() => pathBuilder(phoneNumberControlName);
-  String emailAddressControlPath() => pathBuilder(emailAddressControlName);
+  String userIdControlPath() => pathBuilder(userIdControlName);
   String observationsControlPath() => pathBuilder(observationsControlName);
-  String get _nationalElectricUnicCodeValue =>
-      nationalElectricUnicCodeControl.value ?? "";
-  bool get _haveElectricLightMeterValue =>
-      haveElectricLightMeterControl.value as bool;
-  String get _phoneNumberValue => phoneNumberControl.value as String;
-  String get _emailAddressValue => emailAddressControl.value as String;
-  String get _observationsValue => observationsControl.value as String;
-  bool get containsNationalElectricUnicCode {
+  String residentialsControlPath() => pathBuilder(residentialsControlName);
+  String get _userIdValue => userIdControl.value ?? "";
+  String get _observationsValue => observationsControl.value ?? "";
+  List<Residential> get _residentialsValue =>
+      residentialsControl.value?.whereType<Residential>().toList() ?? [];
+  bool get containsUserId {
     try {
-      form.control(nationalElectricUnicCodeControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsHaveElectricLightMeter {
-    try {
-      form.control(haveElectricLightMeterControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsPhoneNumber {
-    try {
-      form.control(phoneNumberControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsEmailAddress {
-    try {
-      form.control(emailAddressControlPath());
+      form.control(userIdControlPath());
       return true;
     } catch (e) {
       return false;
@@ -274,53 +226,27 @@ class ResidenceRegistrationFirstStepModelForm
     }
   }
 
-  Object? get nationalElectricUnicCodeErrors =>
-      nationalElectricUnicCodeControl.errors;
-  Object? get haveElectricLightMeterErrors =>
-      haveElectricLightMeterControl.errors;
-  Object? get phoneNumberErrors => phoneNumberControl.errors;
-  Object? get emailAddressErrors => emailAddressControl.errors;
+  bool get containsResidentials {
+    try {
+      form.control(residentialsControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get userIdErrors => userIdControl.errors;
   Object? get observationsErrors => observationsControl.errors;
-  void get nationalElectricUnicCodeFocus =>
-      form.focus(nationalElectricUnicCodeControlPath());
-  void get haveElectricLightMeterFocus =>
-      form.focus(haveElectricLightMeterControlPath());
-  void get phoneNumberFocus => form.focus(phoneNumberControlPath());
-  void get emailAddressFocus => form.focus(emailAddressControlPath());
+  Object? get residentialsErrors => residentialsControl.errors;
+  void get userIdFocus => form.focus(userIdControlPath());
   void get observationsFocus => form.focus(observationsControlPath());
-  void nationalElectricUnicCodeValueUpdate(
+  void get residentialsFocus => form.focus(residentialsControlPath());
+  void userIdValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nationalElectricUnicCodeControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void haveElectricLightMeterValueUpdate(
-    bool value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    haveElectricLightMeterControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void phoneNumberValueUpdate(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    phoneNumberControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void emailAddressValueUpdate(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    emailAddressControl.updateValue(value,
+    userIdControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -333,39 +259,21 @@ class ResidenceRegistrationFirstStepModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void nationalElectricUnicCodeValuePatch(
+  void residentialsValueUpdate(
+    List<Residential> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    residentialsControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void userIdValuePatch(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nationalElectricUnicCodeControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void haveElectricLightMeterValuePatch(
-    bool value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    haveElectricLightMeterControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void phoneNumberValuePatch(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    phoneNumberControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void emailAddressValuePatch(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    emailAddressControl.patchValue(value,
+    userIdControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -378,41 +286,23 @@ class ResidenceRegistrationFirstStepModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void nationalElectricUnicCodeValueReset(
+  void residentialsValuePatch(
+    List<Residential> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    residentialsControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void userIdValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      nationalElectricUnicCodeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void haveElectricLightMeterValueReset(
-    bool value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      haveElectricLightMeterControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void phoneNumberValueReset(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      phoneNumberControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void emailAddressValueReset(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      emailAddressControl.reset(
+      userIdControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void observationsValueReset(
     String value, {
@@ -423,83 +313,33 @@ class ResidenceRegistrationFirstStepModelForm
   }) =>
       observationsControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get nationalElectricUnicCodeControl =>
-      form.control(nationalElectricUnicCodeControlPath())
-          as FormControl<String>;
-  FormControl<bool> get haveElectricLightMeterControl =>
-      form.control(haveElectricLightMeterControlPath()) as FormControl<bool>;
-  FormControl<String> get phoneNumberControl =>
-      form.control(phoneNumberControlPath()) as FormControl<String>;
-  FormControl<String> get emailAddressControl =>
-      form.control(emailAddressControlPath()) as FormControl<String>;
+  void residentialsValueReset(
+    List<Residential> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      residentialsControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<String> get userIdControl =>
+      form.control(userIdControlPath()) as FormControl<String>;
   FormControl<String> get observationsControl =>
       form.control(observationsControlPath()) as FormControl<String>;
-  void nationalElectricUnicCodeSetDisabled(
+  FormArray<Residential> get residentialsControl =>
+      form.control(residentialsControlPath()) as FormArray<Residential>;
+  void userIdSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      nationalElectricUnicCodeControl.markAsDisabled(
+      userIdControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      nationalElectricUnicCodeControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void haveElectricLightMeterSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      haveElectricLightMeterControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      haveElectricLightMeterControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void phoneNumberSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      phoneNumberControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      phoneNumberControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void emailAddressSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      emailAddressControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      emailAddressControl.markAsEnabled(
+      userIdControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -524,47 +364,101 @@ class ResidenceRegistrationFirstStepModelForm
     }
   }
 
+  void residentialsSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      residentialsControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      residentialsControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void addResidentialsItem(
+    Residential value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
+          resultingAsyncValidators.addAll(asyncValidators);
+        }
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) {
+          resultingValidators = validators;
+        }
+
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
+        break;
+    }
+
+    residentialsControl.add(FormControl<Residential>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
   @override
-  ResidenceRegistrationFirstStepModel get model {
+  ResidenceRegistration get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return ResidenceRegistrationFirstStepModel(
-        nationalElectricUnicCode: _nationalElectricUnicCodeValue,
-        haveElectricLightMeter: _haveElectricLightMeterValue,
-        phoneNumber: _phoneNumberValue,
-        emailAddress: _emailAddressValue,
-        observations: _observationsValue);
+    return ResidenceRegistration(
+        userId: _userIdValue,
+        observations: _observationsValue,
+        residentials: _residentialsValue);
   }
 
-  ResidenceRegistrationFirstStepModelForm copyWithPath(String? path) {
-    return ResidenceRegistrationFirstStepModelForm(
-        residenceRegistrationFirstStepModel, form, path);
+  ResidenceRegistrationForm copyWithPath(String? path) {
+    return ResidenceRegistrationForm(residenceRegistration, form, path);
   }
 
   @override
   void updateValue(
-    ResidenceRegistrationFirstStepModel value, {
+    ResidenceRegistration value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          ResidenceRegistrationFirstStepModelForm(value, FormGroup({}), null)
+          ResidenceRegistrationForm(value, FormGroup({}), null)
               .formElements()
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void resetValue(
-    ResidenceRegistrationFirstStepModel value, {
+    ResidenceRegistration value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: ResidenceRegistrationFirstStepModelForm(
-                  value, FormGroup({}), null)
+          value: ResidenceRegistrationForm(value, FormGroup({}), null)
               .formElements()
               .rawValue,
           updateParent: updateParent,
@@ -581,42 +475,37 @@ class ResidenceRegistrationFirstStepModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        nationalElectricUnicCodeControlName: FormControl<String>(
-            value:
-                residenceRegistrationFirstStepModel?.nationalElectricUnicCode,
-            validators: [requiredValidator, length10Validator],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        haveElectricLightMeterControlName: FormControl<bool>(
-            value: residenceRegistrationFirstStepModel?.haveElectricLightMeter,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        phoneNumberControlName: FormControl<String>(
-            value: residenceRegistrationFirstStepModel?.phoneNumber,
-            validators: [requiredValidator, length10Validator],
-            asyncValidators: [phoneNumberEcuadorValidation],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        emailAddressControlName: FormControl<String>(
-            value: residenceRegistrationFirstStepModel?.emailAddress,
-            validators: [requiredValidator, emailValidator],
+        userIdControlName: FormControl<String>(
+            value: residenceRegistration?.userId,
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         observationsControlName: FormControl<String>(
-            value: residenceRegistrationFirstStepModel?.observations,
+            value: residenceRegistration?.observations,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
+            touched: false),
+        residentialsControlName: FormArray<Residential>(
+            residenceRegistration?.residentials
+                    .map((e) => FormControl<Residential>(
+                          value: e,
+                          validators: [],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
+                    .toList() ??
+                [],
+            validators: [
+              (control) => requiredValidator(control as FormArray<Residential>)
+            ],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false)
       },
           validators: [],
           asyncValidators: [],
@@ -624,9 +513,8 @@ class ResidenceRegistrationFirstStepModelForm
           disabled: false);
 }
 
-class ReactiveResidenceRegistrationFirstStepModelFormArrayBuilder<T>
-    extends StatelessWidget {
-  const ReactiveResidenceRegistrationFirstStepModelFormArrayBuilder({
+class ReactiveResidenceRegistrationFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveResidenceRegistrationFormArrayBuilder({
     Key? key,
     this.control,
     this.formControl,
@@ -638,19 +526,17 @@ class ReactiveResidenceRegistrationFirstStepModelFormArrayBuilder<T>
 
   final FormArray<T>? formControl;
 
-  final FormArray<T>? Function(
-      ResidenceRegistrationFirstStepModelForm formModel)? control;
+  final FormArray<T>? Function(ResidenceRegistrationForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
-      ResidenceRegistrationFirstStepModelForm formModel)? builder;
+      ResidenceRegistrationForm formModel)? builder;
 
   final Widget Function(BuildContext context, int i, T? item,
-      ResidenceRegistrationFirstStepModelForm formModel) itemBuilder;
+      ResidenceRegistrationForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel =
-        ReactiveResidenceRegistrationFirstStepModelForm.of(context);
+    final formModel = ReactiveResidenceRegistrationForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -686,9 +572,9 @@ class ReactiveResidenceRegistrationFirstStepModelFormArrayBuilder<T>
   }
 }
 
-class ReactiveResidenceRegistrationFirstStepModelFormFormGroupArrayBuilder<V>
+class ReactiveResidenceRegistrationFormFormGroupArrayBuilder<V>
     extends StatelessWidget {
-  const ReactiveResidenceRegistrationFirstStepModelFormFormGroupArrayBuilder({
+  const ReactiveResidenceRegistrationFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
@@ -701,18 +587,17 @@ class ReactiveResidenceRegistrationFirstStepModelFormFormGroupArrayBuilder<V>
   final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
 
   final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
-      ResidenceRegistrationFirstStepModelForm formModel)? getExtended;
+      ResidenceRegistrationForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
-      ResidenceRegistrationFirstStepModelForm formModel)? builder;
+      ResidenceRegistrationForm formModel)? builder;
 
   final Widget Function(BuildContext context, int i, V? item,
-      ResidenceRegistrationFirstStepModelForm formModel) itemBuilder;
+      ResidenceRegistrationForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel =
-        ReactiveResidenceRegistrationFirstStepModelForm.of(context);
+    final formModel = ReactiveResidenceRegistrationForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -748,9 +633,8 @@ class ReactiveResidenceRegistrationFirstStepModelFormFormGroupArrayBuilder<V>
   }
 }
 
-class ReactiveResidenceRegistrationSecondStepModelFormConsumer
-    extends StatelessWidget {
-  const ReactiveResidenceRegistrationSecondStepModelFormConsumer({
+class ReactiveResidentialFormConsumer extends StatelessWidget {
+  const ReactiveResidentialFormConsumer({
     Key? key,
     required this.builder,
     this.child,
@@ -759,25 +643,21 @@ class ReactiveResidenceRegistrationSecondStepModelFormConsumer
   final Widget? child;
 
   final Widget Function(
-      BuildContext context,
-      ResidenceRegistrationSecondStepModelForm formModel,
-      Widget? child) builder;
+      BuildContext context, ResidentialForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel =
-        ReactiveResidenceRegistrationSecondStepModelForm.of(context);
+    final formModel = ReactiveResidentialForm.of(context);
 
-    if (formModel is! ResidenceRegistrationSecondStepModelForm) {
+    if (formModel is! ResidentialForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class ResidenceRegistrationSecondStepModelFormInheritedStreamer
-    extends InheritedStreamer<dynamic> {
-  const ResidenceRegistrationSecondStepModelFormInheritedStreamer({
+class ResidentialFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const ResidentialFormInheritedStreamer({
     Key? key,
     required this.form,
     required Stream<dynamic> stream,
@@ -788,11 +668,11 @@ class ResidenceRegistrationSecondStepModelFormInheritedStreamer
           key: key,
         );
 
-  final ResidenceRegistrationSecondStepModelForm form;
+  final ResidentialForm form;
 }
 
-class ReactiveResidenceRegistrationSecondStepModelForm extends StatelessWidget {
-  const ReactiveResidenceRegistrationSecondStepModelForm({
+class ReactiveResidentialForm extends StatelessWidget {
+  const ReactiveResidentialForm({
     Key? key,
     required this.form,
     required this.child,
@@ -801,33 +681,31 @@ class ReactiveResidenceRegistrationSecondStepModelForm extends StatelessWidget {
 
   final Widget child;
 
-  final ResidenceRegistrationSecondStepModelForm form;
+  final ResidentialForm form;
 
   final WillPopCallback? onWillPop;
 
-  static ResidenceRegistrationSecondStepModelForm? of(
+  static ResidentialForm? of(
     BuildContext context, {
     bool listen = true,
   }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              ResidenceRegistrationSecondStepModelFormInheritedStreamer>()
+              ResidentialFormInheritedStreamer>()
           ?.form;
     }
 
     final element = context.getElementForInheritedWidgetOfExactType<
-        ResidenceRegistrationSecondStepModelFormInheritedStreamer>();
+        ResidentialFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget
-                as ResidenceRegistrationSecondStepModelFormInheritedStreamer)
-            .form;
+        : (element.widget as ResidentialFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return ResidenceRegistrationSecondStepModelFormInheritedStreamer(
+    return ResidentialFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -838,8 +716,8 @@ class ReactiveResidenceRegistrationSecondStepModelForm extends StatelessWidget {
   }
 }
 
-class ResidenceRegistrationSecondStepModelFormBuilder extends StatefulWidget {
-  const ResidenceRegistrationSecondStepModelFormBuilder({
+class ResidentialFormBuilder extends StatefulWidget {
+  const ResidentialFormBuilder({
     Key? key,
     this.model,
     this.child,
@@ -848,36 +726,31 @@ class ResidenceRegistrationSecondStepModelFormBuilder extends StatefulWidget {
     this.initState,
   }) : super(key: key);
 
-  final ResidenceRegistrationSecondStepModel? model;
+  final Residential? model;
 
   final Widget? child;
 
   final WillPopCallback? onWillPop;
 
   final Widget Function(
-      BuildContext context,
-      ResidenceRegistrationSecondStepModelForm formModel,
-      Widget? child) builder;
+      BuildContext context, ResidentialForm formModel, Widget? child) builder;
 
-  final void Function(BuildContext context,
-      ResidenceRegistrationSecondStepModelForm formModel)? initState;
+  final void Function(BuildContext context, ResidentialForm formModel)?
+      initState;
 
   @override
-  _ResidenceRegistrationSecondStepModelFormBuilderState createState() =>
-      _ResidenceRegistrationSecondStepModelFormBuilderState();
+  _ResidentialFormBuilderState createState() => _ResidentialFormBuilderState();
 }
 
-class _ResidenceRegistrationSecondStepModelFormBuilderState
-    extends State<ResidenceRegistrationSecondStepModelFormBuilder> {
+class _ResidentialFormBuilderState extends State<ResidentialFormBuilder> {
   late FormGroup _form;
 
-  late ResidenceRegistrationSecondStepModelForm _formModel;
+  late ResidentialForm _formModel;
 
   @override
   void initState() {
     _form = FormGroup({});
-    _formModel =
-        ResidenceRegistrationSecondStepModelForm(widget.model, _form, null);
+    _formModel = ResidentialForm(widget.model, _form, null);
 
     final elements = _formModel.formElements();
     _form.setValidators(elements.validators);
@@ -895,11 +768,9 @@ class _ResidenceRegistrationSecondStepModelFormBuilderState
   }
 
   @override
-  void didUpdateWidget(
-      covariant ResidenceRegistrationSecondStepModelFormBuilder oldWidget) {
+  void didUpdateWidget(covariant ResidentialFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          ResidenceRegistrationSecondStepModelForm(widget.model, _form, null);
+      _formModel = ResidentialForm(widget.model, _form, null);
       final elements = _formModel.formElements();
 
       _form.updateValue(elements.rawValue);
@@ -918,7 +789,7 @@ class _ResidenceRegistrationSecondStepModelFormBuilderState
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveResidenceRegistrationSecondStepModelForm(
+    return ReactiveResidentialForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
@@ -932,13 +803,16 @@ class _ResidenceRegistrationSecondStepModelFormBuilderState
   }
 }
 
-class ResidenceRegistrationSecondStepModelForm
-    implements FormModel<ResidenceRegistrationSecondStepModel> {
-  ResidenceRegistrationSecondStepModelForm(
-    this.residenceRegistrationSecondStepModel,
+class ResidentialForm implements FormModel<Residential> {
+  ResidentialForm(
+    this.residential,
     this.form,
     this.path,
   ) {}
+
+  static String electricLightMeterControlName = "electricLightMeter";
+
+  static String electricalCodeControlName = "electricalCode";
 
   static String provinceControlName = "province";
 
@@ -946,28 +820,86 @@ class ResidenceRegistrationSecondStepModelForm
 
   static String parroquiaControlName = "parroquia";
 
-  static String primaryStreetControlName = "primaryStreet";
+  static String mainStreetControlName = "mainStreet";
 
-  static String secondaryStreetControlName = "secondaryStreet";
+  static String backStreetControlName = "backStreet";
 
-  final ResidenceRegistrationSecondStepModel?
-      residenceRegistrationSecondStepModel;
+  static String housingTypeControlName = "housingType";
+
+  static String tenureHousingTypeAgreementControlName =
+      "tenureHousingTypeAgreement";
+
+  static String numberVillaBuildingControlName = "numberVillaBuilding";
+
+  static String floorNumberControlName = "floorNumber";
+
+  static String departmentNumberControlName = "departmentNumber";
+
+  static String typeControlName = "type";
+
+  static String dependentsControlName = "dependents";
+
+  final Residential? residential;
 
   final FormGroup form;
 
   final String? path;
 
+  String electricLightMeterControlPath() =>
+      pathBuilder(electricLightMeterControlName);
+  String electricalCodeControlPath() => pathBuilder(electricalCodeControlName);
   String provinceControlPath() => pathBuilder(provinceControlName);
   String cantonControlPath() => pathBuilder(cantonControlName);
   String parroquiaControlPath() => pathBuilder(parroquiaControlName);
-  String primaryStreetControlPath() => pathBuilder(primaryStreetControlName);
-  String secondaryStreetControlPath() =>
-      pathBuilder(secondaryStreetControlName);
+  String mainStreetControlPath() => pathBuilder(mainStreetControlName);
+  String backStreetControlPath() => pathBuilder(backStreetControlName);
+  String housingTypeControlPath() => pathBuilder(housingTypeControlName);
+  String tenureHousingTypeAgreementControlPath() =>
+      pathBuilder(tenureHousingTypeAgreementControlName);
+  String numberVillaBuildingControlPath() =>
+      pathBuilder(numberVillaBuildingControlName);
+  String floorNumberControlPath() => pathBuilder(floorNumberControlName);
+  String departmentNumberControlPath() =>
+      pathBuilder(departmentNumberControlName);
+  String typeControlPath() => pathBuilder(typeControlName);
+  String dependentsControlPath() => pathBuilder(dependentsControlName);
+  bool get _electricLightMeterValue => electricLightMeterControl.value as bool;
+  String get _electricalCodeValue => electricalCodeControl.value as String;
   LocationModel get _provinceValue => provinceControl.value as LocationModel;
   LocationModel get _cantonValue => cantonControl.value as LocationModel;
   LocationModel get _parroquiaValue => parroquiaControl.value as LocationModel;
-  String get _primaryStreetValue => primaryStreetControl.value as String;
-  String get _secondaryStreetValue => secondaryStreetControl.value as String;
+  String get _mainStreetValue => mainStreetControl.value as String;
+  String get _backStreetValue => backStreetControl.value as String;
+  ResidentialHousingType get _housingTypeValue =>
+      housingTypeControl.value as ResidentialHousingType;
+  ResidentialTenureHousingTypeAgreemente get _tenureHousingTypeAgreementValue =>
+      tenureHousingTypeAgreementControl.value
+          as ResidentialTenureHousingTypeAgreemente;
+  String get _numberVillaBuildingValue =>
+      numberVillaBuildingControl.value as String;
+  String get _floorNumberValue => floorNumberControl.value as String;
+  String get _departmentNumberValue => departmentNumberControl.value as String;
+  ResidenceType get _typeValue => typeControl.value as ResidenceType;
+  List<Dependent> get _dependentsValue =>
+      dependentsControl.value?.whereType<Dependent>().toList() ?? [];
+  bool get containsElectricLightMeter {
+    try {
+      form.control(electricLightMeterControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsElectricalCode {
+    try {
+      form.control(electricalCodeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsProvince {
     try {
       form.control(provinceControlPath());
@@ -995,34 +927,137 @@ class ResidenceRegistrationSecondStepModelForm
     }
   }
 
-  bool get containsPrimaryStreet {
+  bool get containsMainStreet {
     try {
-      form.control(primaryStreetControlPath());
+      form.control(mainStreetControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  bool get containsSecondaryStreet {
+  bool get containsBackStreet {
     try {
-      form.control(secondaryStreetControlPath());
+      form.control(backStreetControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
+  bool get containsHousingType {
+    try {
+      form.control(housingTypeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsTenureHousingTypeAgreement {
+    try {
+      form.control(tenureHousingTypeAgreementControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsNumberVillaBuilding {
+    try {
+      form.control(numberVillaBuildingControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsFloorNumber {
+    try {
+      form.control(floorNumberControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsDepartmentNumber {
+    try {
+      form.control(departmentNumberControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsType {
+    try {
+      form.control(typeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsDependents {
+    try {
+      form.control(dependentsControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get electricLightMeterErrors => electricLightMeterControl.errors;
+  Object? get electricalCodeErrors => electricalCodeControl.errors;
   Object? get provinceErrors => provinceControl.errors;
   Object? get cantonErrors => cantonControl.errors;
   Object? get parroquiaErrors => parroquiaControl.errors;
-  Object? get primaryStreetErrors => primaryStreetControl.errors;
-  Object? get secondaryStreetErrors => secondaryStreetControl.errors;
+  Object? get mainStreetErrors => mainStreetControl.errors;
+  Object? get backStreetErrors => backStreetControl.errors;
+  Object? get housingTypeErrors => housingTypeControl.errors;
+  Object? get tenureHousingTypeAgreementErrors =>
+      tenureHousingTypeAgreementControl.errors;
+  Object? get numberVillaBuildingErrors => numberVillaBuildingControl.errors;
+  Object? get floorNumberErrors => floorNumberControl.errors;
+  Object? get departmentNumberErrors => departmentNumberControl.errors;
+  Object? get typeErrors => typeControl.errors;
+  Object? get dependentsErrors => dependentsControl.errors;
+  void get electricLightMeterFocus =>
+      form.focus(electricLightMeterControlPath());
+  void get electricalCodeFocus => form.focus(electricalCodeControlPath());
   void get provinceFocus => form.focus(provinceControlPath());
   void get cantonFocus => form.focus(cantonControlPath());
   void get parroquiaFocus => form.focus(parroquiaControlPath());
-  void get primaryStreetFocus => form.focus(primaryStreetControlPath());
-  void get secondaryStreetFocus => form.focus(secondaryStreetControlPath());
+  void get mainStreetFocus => form.focus(mainStreetControlPath());
+  void get backStreetFocus => form.focus(backStreetControlPath());
+  void get housingTypeFocus => form.focus(housingTypeControlPath());
+  void get tenureHousingTypeAgreementFocus =>
+      form.focus(tenureHousingTypeAgreementControlPath());
+  void get numberVillaBuildingFocus =>
+      form.focus(numberVillaBuildingControlPath());
+  void get floorNumberFocus => form.focus(floorNumberControlPath());
+  void get departmentNumberFocus => form.focus(departmentNumberControlPath());
+  void get typeFocus => form.focus(typeControlPath());
+  void get dependentsFocus => form.focus(dependentsControlPath());
+  void electricLightMeterValueUpdate(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    electricLightMeterControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void electricalCodeValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    electricalCodeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void provinceValueUpdate(
     LocationModel value, {
     bool updateParent = true,
@@ -1050,21 +1085,102 @@ class ResidenceRegistrationSecondStepModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void primaryStreetValueUpdate(
+  void mainStreetValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    primaryStreetControl.updateValue(value,
+    mainStreetControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void secondaryStreetValueUpdate(
+  void backStreetValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    secondaryStreetControl.updateValue(value,
+    backStreetControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void housingTypeValueUpdate(
+    ResidentialHousingType value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    housingTypeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void tenureHousingTypeAgreementValueUpdate(
+    ResidentialTenureHousingTypeAgreemente value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    tenureHousingTypeAgreementControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void numberVillaBuildingValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    numberVillaBuildingControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void floorNumberValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    floorNumberControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void departmentNumberValueUpdate(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    departmentNumberControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void typeValueUpdate(
+    ResidenceType value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    typeControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void dependentsValueUpdate(
+    List<Dependent> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    dependentsControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void electricLightMeterValuePatch(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    electricLightMeterControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void electricalCodeValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    electricalCodeControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1095,24 +1211,105 @@ class ResidenceRegistrationSecondStepModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void primaryStreetValuePatch(
+  void mainStreetValuePatch(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    primaryStreetControl.patchValue(value,
+    mainStreetControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void secondaryStreetValuePatch(
+  void backStreetValuePatch(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    secondaryStreetControl.patchValue(value,
+    backStreetControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void housingTypeValuePatch(
+    ResidentialHousingType value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    housingTypeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void tenureHousingTypeAgreementValuePatch(
+    ResidentialTenureHousingTypeAgreemente value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    tenureHousingTypeAgreementControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void numberVillaBuildingValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    numberVillaBuildingControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void floorNumberValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    floorNumberControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void departmentNumberValuePatch(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    departmentNumberControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void typeValuePatch(
+    ResidenceType value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    typeControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void dependentsValuePatch(
+    List<Dependent> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    dependentsControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void electricLightMeterValueReset(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      electricLightMeterControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void electricalCodeValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      electricalCodeControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void provinceValueReset(
     LocationModel value, {
     bool updateParent = true,
@@ -1140,34 +1337,154 @@ class ResidenceRegistrationSecondStepModelForm
   }) =>
       parroquiaControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void primaryStreetValueReset(
+  void mainStreetValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      primaryStreetControl.reset(
+      mainStreetControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void secondaryStreetValueReset(
+  void backStreetValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      secondaryStreetControl.reset(
+      backStreetControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void housingTypeValueReset(
+    ResidentialHousingType value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      housingTypeControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void tenureHousingTypeAgreementValueReset(
+    ResidentialTenureHousingTypeAgreemente value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      tenureHousingTypeAgreementControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void numberVillaBuildingValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      numberVillaBuildingControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void floorNumberValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      floorNumberControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void departmentNumberValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      departmentNumberControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void typeValueReset(
+    ResidenceType value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      typeControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void dependentsValueReset(
+    List<Dependent> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      dependentsControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<bool> get electricLightMeterControl =>
+      form.control(electricLightMeterControlPath()) as FormControl<bool>;
+  FormControl<String> get electricalCodeControl =>
+      form.control(electricalCodeControlPath()) as FormControl<String>;
   FormControl<LocationModel> get provinceControl =>
       form.control(provinceControlPath()) as FormControl<LocationModel>;
   FormControl<LocationModel> get cantonControl =>
       form.control(cantonControlPath()) as FormControl<LocationModel>;
   FormControl<LocationModel> get parroquiaControl =>
       form.control(parroquiaControlPath()) as FormControl<LocationModel>;
-  FormControl<String> get primaryStreetControl =>
-      form.control(primaryStreetControlPath()) as FormControl<String>;
-  FormControl<String> get secondaryStreetControl =>
-      form.control(secondaryStreetControlPath()) as FormControl<String>;
+  FormControl<String> get mainStreetControl =>
+      form.control(mainStreetControlPath()) as FormControl<String>;
+  FormControl<String> get backStreetControl =>
+      form.control(backStreetControlPath()) as FormControl<String>;
+  FormControl<ResidentialHousingType> get housingTypeControl =>
+      form.control(housingTypeControlPath())
+          as FormControl<ResidentialHousingType>;
+  FormControl<ResidentialTenureHousingTypeAgreemente>
+      get tenureHousingTypeAgreementControl =>
+          form.control(tenureHousingTypeAgreementControlPath())
+              as FormControl<ResidentialTenureHousingTypeAgreemente>;
+  FormControl<String> get numberVillaBuildingControl =>
+      form.control(numberVillaBuildingControlPath()) as FormControl<String>;
+  FormControl<String> get floorNumberControl =>
+      form.control(floorNumberControlPath()) as FormControl<String>;
+  FormControl<String> get departmentNumberControl =>
+      form.control(departmentNumberControlPath()) as FormControl<String>;
+  FormControl<ResidenceType> get typeControl =>
+      form.control(typeControlPath()) as FormControl<ResidenceType>;
+  FormArray<Dependent> get dependentsControl =>
+      form.control(dependentsControlPath()) as FormArray<Dependent>;
+  void electricLightMeterSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      electricLightMeterControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      electricLightMeterControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void electricalCodeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      electricalCodeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      electricalCodeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void provinceSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1222,83 +1539,254 @@ class ResidenceRegistrationSecondStepModelForm
     }
   }
 
-  void primaryStreetSetDisabled(
+  void mainStreetSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      primaryStreetControl.markAsDisabled(
+      mainStreetControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      primaryStreetControl.markAsEnabled(
+      mainStreetControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     }
   }
 
-  void secondaryStreetSetDisabled(
+  void backStreetSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      secondaryStreetControl.markAsDisabled(
+      backStreetControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      secondaryStreetControl.markAsEnabled(
+      backStreetControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     }
+  }
+
+  void housingTypeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      housingTypeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      housingTypeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void tenureHousingTypeAgreementSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      tenureHousingTypeAgreementControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      tenureHousingTypeAgreementControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void numberVillaBuildingSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      numberVillaBuildingControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      numberVillaBuildingControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void floorNumberSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      floorNumberControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      floorNumberControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void departmentNumberSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      departmentNumberControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      departmentNumberControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void typeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      typeControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      typeControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void dependentsSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      dependentsControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      dependentsControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void addDependentsItem(
+    Dependent value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
+          resultingAsyncValidators.addAll(asyncValidators);
+        }
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) {
+          resultingValidators = validators;
+        }
+
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
+        break;
+    }
+
+    dependentsControl.add(FormControl<Dependent>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
   }
 
   @override
-  ResidenceRegistrationSecondStepModel get model {
+  Residential get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return ResidenceRegistrationSecondStepModel(
+    return Residential(
+        electricLightMeter: _electricLightMeterValue,
+        electricalCode: _electricalCodeValue,
         province: _provinceValue,
         canton: _cantonValue,
         parroquia: _parroquiaValue,
-        primaryStreet: _primaryStreetValue,
-        secondaryStreet: _secondaryStreetValue);
+        mainStreet: _mainStreetValue,
+        backStreet: _backStreetValue,
+        housingType: _housingTypeValue,
+        tenureHousingTypeAgreement: _tenureHousingTypeAgreementValue,
+        numberVillaBuilding: _numberVillaBuildingValue,
+        floorNumber: _floorNumberValue,
+        departmentNumber: _departmentNumberValue,
+        type: _typeValue,
+        dependents: _dependentsValue);
   }
 
-  ResidenceRegistrationSecondStepModelForm copyWithPath(String? path) {
-    return ResidenceRegistrationSecondStepModelForm(
-        residenceRegistrationSecondStepModel, form, path);
+  ResidentialForm copyWithPath(String? path) {
+    return ResidentialForm(residential, form, path);
   }
 
   @override
   void updateValue(
-    ResidenceRegistrationSecondStepModel value, {
+    Residential value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          ResidenceRegistrationSecondStepModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
+          ResidentialForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void resetValue(
-    ResidenceRegistrationSecondStepModel value, {
+    Residential value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: ResidenceRegistrationSecondStepModelForm(
-                  value, FormGroup({}), null)
+          value: ResidentialForm(value, FormGroup({}), null)
               .formElements()
               .rawValue,
           updateParent: updateParent,
@@ -1315,41 +1803,113 @@ class ResidenceRegistrationSecondStepModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
+        electricLightMeterControlName: FormControl<bool>(
+            value: residential?.electricLightMeter,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        electricalCodeControlName: FormControl<String>(
+            value: residential?.electricalCode,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         provinceControlName: FormControl<LocationModel>(
-            value: residenceRegistrationSecondStepModel?.province,
+            value: residential?.province,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         cantonControlName: FormControl<LocationModel>(
-            value: residenceRegistrationSecondStepModel?.canton,
+            value: residential?.canton,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         parroquiaControlName: FormControl<LocationModel>(
-            value: residenceRegistrationSecondStepModel?.parroquia,
+            value: residential?.parroquia,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        primaryStreetControlName: FormControl<String>(
-            value: residenceRegistrationSecondStepModel?.primaryStreet,
+        mainStreetControlName: FormControl<String>(
+            value: residential?.mainStreet,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        secondaryStreetControlName: FormControl<String>(
-            value: residenceRegistrationSecondStepModel?.secondaryStreet,
+        backStreetControlName: FormControl<String>(
+            value: residential?.backStreet,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
-            touched: false)
+            touched: false),
+        housingTypeControlName: FormControl<ResidentialHousingType>(
+            value: residential?.housingType,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        tenureHousingTypeAgreementControlName:
+            FormControl<ResidentialTenureHousingTypeAgreemente>(
+                value: residential?.tenureHousingTypeAgreement,
+                validators: [requiredValidator],
+                asyncValidators: [],
+                asyncValidatorsDebounceTime: 250,
+                disabled: false,
+                touched: false),
+        numberVillaBuildingControlName: FormControl<String>(
+            value: residential?.numberVillaBuilding,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        floorNumberControlName: FormControl<String>(
+            value: residential?.floorNumber,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        departmentNumberControlName: FormControl<String>(
+            value: residential?.departmentNumber,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        typeControlName: FormControl<ResidenceType>(
+            value: residential?.type,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        dependentsControlName: FormArray<Dependent>(
+            residential?.dependents
+                    .map((e) => FormControl<Dependent>(
+                          value: e,
+                          validators: [],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
+                    .toList() ??
+                [],
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false)
       },
           validators: [],
           asyncValidators: [],
@@ -1357,9 +1917,8 @@ class ResidenceRegistrationSecondStepModelForm
           disabled: false);
 }
 
-class ReactiveResidenceRegistrationSecondStepModelFormArrayBuilder<T>
-    extends StatelessWidget {
-  const ReactiveResidenceRegistrationSecondStepModelFormArrayBuilder({
+class ReactiveResidentialFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveResidentialFormArrayBuilder({
     Key? key,
     this.control,
     this.formControl,
@@ -1371,19 +1930,18 @@ class ReactiveResidenceRegistrationSecondStepModelFormArrayBuilder<T>
 
   final FormArray<T>? formControl;
 
-  final FormArray<T>? Function(
-      ResidenceRegistrationSecondStepModelForm formModel)? control;
+  final FormArray<T>? Function(ResidentialForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
-      ResidenceRegistrationSecondStepModelForm formModel)? builder;
+      ResidentialForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i, T? item,
-      ResidenceRegistrationSecondStepModelForm formModel) itemBuilder;
+  final Widget Function(
+          BuildContext context, int i, T? item, ResidentialForm formModel)
+      itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel =
-        ReactiveResidenceRegistrationSecondStepModelForm.of(context);
+    final formModel = ReactiveResidentialForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -1419,9 +1977,8 @@ class ReactiveResidenceRegistrationSecondStepModelFormArrayBuilder<T>
   }
 }
 
-class ReactiveResidenceRegistrationSecondStepModelFormFormGroupArrayBuilder<V>
-    extends StatelessWidget {
-  const ReactiveResidenceRegistrationSecondStepModelFormFormGroupArrayBuilder({
+class ReactiveResidentialFormFormGroupArrayBuilder<V> extends StatelessWidget {
+  const ReactiveResidentialFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
@@ -1434,18 +1991,18 @@ class ReactiveResidenceRegistrationSecondStepModelFormFormGroupArrayBuilder<V>
   final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
 
   final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
-      ResidenceRegistrationSecondStepModelForm formModel)? getExtended;
+      ResidentialForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
-      ResidenceRegistrationSecondStepModelForm formModel)? builder;
+      ResidentialForm formModel)? builder;
 
-  final Widget Function(BuildContext context, int i, V? item,
-      ResidenceRegistrationSecondStepModelForm formModel) itemBuilder;
+  final Widget Function(
+          BuildContext context, int i, V? item, ResidentialForm formModel)
+      itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel =
-        ReactiveResidenceRegistrationSecondStepModelForm.of(context);
+    final formModel = ReactiveResidentialForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -1481,9 +2038,8 @@ class ReactiveResidenceRegistrationSecondStepModelFormFormGroupArrayBuilder<V>
   }
 }
 
-class ReactiveResidenceRegistrationThirdStepModelFormConsumer
-    extends StatelessWidget {
-  const ReactiveResidenceRegistrationThirdStepModelFormConsumer({
+class ReactiveDependentFormConsumer extends StatelessWidget {
+  const ReactiveDependentFormConsumer({
     Key? key,
     required this.builder,
     this.child,
@@ -1491,24 +2047,22 @@ class ReactiveResidenceRegistrationThirdStepModelFormConsumer
 
   final Widget? child;
 
-  final Widget Function(BuildContext context,
-      ResidenceRegistrationThirdStepModelForm formModel, Widget? child) builder;
+  final Widget Function(
+      BuildContext context, DependentForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel =
-        ReactiveResidenceRegistrationThirdStepModelForm.of(context);
+    final formModel = ReactiveDependentForm.of(context);
 
-    if (formModel is! ResidenceRegistrationThirdStepModelForm) {
+    if (formModel is! DependentForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class ResidenceRegistrationThirdStepModelFormInheritedStreamer
-    extends InheritedStreamer<dynamic> {
-  const ResidenceRegistrationThirdStepModelFormInheritedStreamer({
+class DependentFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const DependentFormInheritedStreamer({
     Key? key,
     required this.form,
     required Stream<dynamic> stream,
@@ -1519,11 +2073,11 @@ class ResidenceRegistrationThirdStepModelFormInheritedStreamer
           key: key,
         );
 
-  final ResidenceRegistrationThirdStepModelForm form;
+  final DependentForm form;
 }
 
-class ReactiveResidenceRegistrationThirdStepModelForm extends StatelessWidget {
-  const ReactiveResidenceRegistrationThirdStepModelForm({
+class ReactiveDependentForm extends StatelessWidget {
+  const ReactiveDependentForm({
     Key? key,
     required this.form,
     required this.child,
@@ -1532,33 +2086,30 @@ class ReactiveResidenceRegistrationThirdStepModelForm extends StatelessWidget {
 
   final Widget child;
 
-  final ResidenceRegistrationThirdStepModelForm form;
+  final DependentForm form;
 
   final WillPopCallback? onWillPop;
 
-  static ResidenceRegistrationThirdStepModelForm? of(
+  static DependentForm? of(
     BuildContext context, {
     bool listen = true,
   }) {
     if (listen) {
       return context
-          .dependOnInheritedWidgetOfExactType<
-              ResidenceRegistrationThirdStepModelFormInheritedStreamer>()
+          .dependOnInheritedWidgetOfExactType<DependentFormInheritedStreamer>()
           ?.form;
     }
 
     final element = context.getElementForInheritedWidgetOfExactType<
-        ResidenceRegistrationThirdStepModelFormInheritedStreamer>();
+        DependentFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget
-                as ResidenceRegistrationThirdStepModelFormInheritedStreamer)
-            .form;
+        : (element.widget as DependentFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return ResidenceRegistrationThirdStepModelFormInheritedStreamer(
+    return DependentFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -1569,8 +2120,8 @@ class ReactiveResidenceRegistrationThirdStepModelForm extends StatelessWidget {
   }
 }
 
-class ResidenceRegistrationThirdStepModelFormBuilder extends StatefulWidget {
-  const ResidenceRegistrationThirdStepModelFormBuilder({
+class DependentFormBuilder extends StatefulWidget {
+  const DependentFormBuilder({
     Key? key,
     this.model,
     this.child,
@@ -1579,34 +2130,30 @@ class ResidenceRegistrationThirdStepModelFormBuilder extends StatefulWidget {
     this.initState,
   }) : super(key: key);
 
-  final ResidenceRegistrationThirdStepModel? model;
+  final Dependent? model;
 
   final Widget? child;
 
   final WillPopCallback? onWillPop;
 
-  final Widget Function(BuildContext context,
-      ResidenceRegistrationThirdStepModelForm formModel, Widget? child) builder;
+  final Widget Function(
+      BuildContext context, DependentForm formModel, Widget? child) builder;
 
-  final void Function(BuildContext context,
-      ResidenceRegistrationThirdStepModelForm formModel)? initState;
+  final void Function(BuildContext context, DependentForm formModel)? initState;
 
   @override
-  _ResidenceRegistrationThirdStepModelFormBuilderState createState() =>
-      _ResidenceRegistrationThirdStepModelFormBuilderState();
+  _DependentFormBuilderState createState() => _DependentFormBuilderState();
 }
 
-class _ResidenceRegistrationThirdStepModelFormBuilderState
-    extends State<ResidenceRegistrationThirdStepModelFormBuilder> {
+class _DependentFormBuilderState extends State<DependentFormBuilder> {
   late FormGroup _form;
 
-  late ResidenceRegistrationThirdStepModelForm _formModel;
+  late DependentForm _formModel;
 
   @override
   void initState() {
     _form = FormGroup({});
-    _formModel =
-        ResidenceRegistrationThirdStepModelForm(widget.model, _form, null);
+    _formModel = DependentForm(widget.model, _form, null);
 
     final elements = _formModel.formElements();
     _form.setValidators(elements.validators);
@@ -1624,11 +2171,9 @@ class _ResidenceRegistrationThirdStepModelFormBuilderState
   }
 
   @override
-  void didUpdateWidget(
-      covariant ResidenceRegistrationThirdStepModelFormBuilder oldWidget) {
+  void didUpdateWidget(covariant DependentFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          ResidenceRegistrationThirdStepModelForm(widget.model, _form, null);
+      _formModel = DependentForm(widget.model, _form, null);
       final elements = _formModel.formElements();
 
       _form.updateValue(elements.rawValue);
@@ -1647,7 +2192,7 @@ class _ResidenceRegistrationThirdStepModelFormBuilderState
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveResidenceRegistrationThirdStepModelForm(
+    return ReactiveDependentForm(
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
@@ -1661,397 +2206,387 @@ class _ResidenceRegistrationThirdStepModelFormBuilderState
   }
 }
 
-class ResidenceRegistrationThirdStepModelForm
-    implements FormModel<ResidenceRegistrationThirdStepModel> {
-  ResidenceRegistrationThirdStepModelForm(
-    this.residenceRegistrationThirdStepModel,
+class DependentForm implements FormModel<Dependent> {
+  DependentForm(
+    this.dependent,
     this.form,
     this.path,
   ) {}
 
-  static String houseTypeControlName = "houseType";
+  static String nuiDependentsControlName = "nuiDependents";
 
-  static String tenureControlName = "tenure";
+  static String relationshipControlName = "relationship";
 
-  static String villageOrBuildingNumberControlName = "villageOrBuildingNumber";
+  static String dateControlName = "date";
 
-  static String floorNumberControlName = "floorNumber";
+  static String nameControlName = "name";
 
-  static String appartmentNumberControlName = "appartmentNumber";
+  static String lastnameControlName = "lastname";
 
-  static String residenceTypeControlName = "residenceType";
+  static String stateControlName = "state";
 
-  final ResidenceRegistrationThirdStepModel?
-      residenceRegistrationThirdStepModel;
+  final Dependent? dependent;
 
   final FormGroup form;
 
   final String? path;
 
-  String houseTypeControlPath() => pathBuilder(houseTypeControlName);
-  String tenureControlPath() => pathBuilder(tenureControlName);
-  String villageOrBuildingNumberControlPath() =>
-      pathBuilder(villageOrBuildingNumberControlName);
-  String floorNumberControlPath() => pathBuilder(floorNumberControlName);
-  String appartmentNumberControlPath() =>
-      pathBuilder(appartmentNumberControlName);
-  String residenceTypeControlPath() => pathBuilder(residenceTypeControlName);
-  ResidentialHousingType get _houseTypeValue =>
-      houseTypeControl.value as ResidentialHousingType;
-  ResidentialTenureHousingTypeAgreemente get _tenureValue =>
-      tenureControl.value as ResidentialTenureHousingTypeAgreemente;
-  String get _villageOrBuildingNumberValue =>
-      villageOrBuildingNumberControl.value as String;
-  String get _floorNumberValue => floorNumberControl.value as String;
-  String get _appartmentNumberValue => appartmentNumberControl.value as String;
-  ResidenceType get _residenceTypeValue =>
-      residenceTypeControl.value as ResidenceType;
-  bool get containsHouseType {
+  String nuiDependentsControlPath() => pathBuilder(nuiDependentsControlName);
+  String relationshipControlPath() => pathBuilder(relationshipControlName);
+  String dateControlPath() => pathBuilder(dateControlName);
+  String nameControlPath() => pathBuilder(nameControlName);
+  String lastnameControlPath() => pathBuilder(lastnameControlName);
+  String stateControlPath() => pathBuilder(stateControlName);
+  String get _nuiDependentsValue => nuiDependentsControl.value as String;
+  ResidentialDependentRelation get _relationshipValue =>
+      relationshipControl.value as ResidentialDependentRelation;
+  String get _dateValue => dateControl.value as String;
+  String get _nameValue => nameControl.value as String;
+  String get _lastnameValue => lastnameControl.value as String;
+  Status get _stateValue => stateControl.value as Status;
+  bool get containsNuiDependents {
     try {
-      form.control(houseTypeControlPath());
+      form.control(nuiDependentsControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  bool get containsTenure {
+  bool get containsRelationship {
     try {
-      form.control(tenureControlPath());
+      form.control(relationshipControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  bool get containsVillageOrBuildingNumber {
+  bool get containsDate {
     try {
-      form.control(villageOrBuildingNumberControlPath());
+      form.control(dateControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  bool get containsFloorNumber {
+  bool get containsName {
     try {
-      form.control(floorNumberControlPath());
+      form.control(nameControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  bool get containsAppartmentNumber {
+  bool get containsLastname {
     try {
-      form.control(appartmentNumberControlPath());
+      form.control(lastnameControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  bool get containsResidenceType {
+  bool get containsState {
     try {
-      form.control(residenceTypeControlPath());
+      form.control(stateControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  Object? get houseTypeErrors => houseTypeControl.errors;
-  Object? get tenureErrors => tenureControl.errors;
-  Object? get villageOrBuildingNumberErrors =>
-      villageOrBuildingNumberControl.errors;
-  Object? get floorNumberErrors => floorNumberControl.errors;
-  Object? get appartmentNumberErrors => appartmentNumberControl.errors;
-  Object? get residenceTypeErrors => residenceTypeControl.errors;
-  void get houseTypeFocus => form.focus(houseTypeControlPath());
-  void get tenureFocus => form.focus(tenureControlPath());
-  void get villageOrBuildingNumberFocus =>
-      form.focus(villageOrBuildingNumberControlPath());
-  void get floorNumberFocus => form.focus(floorNumberControlPath());
-  void get appartmentNumberFocus => form.focus(appartmentNumberControlPath());
-  void get residenceTypeFocus => form.focus(residenceTypeControlPath());
-  void houseTypeValueUpdate(
-    ResidentialHousingType value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    houseTypeControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void tenureValueUpdate(
-    ResidentialTenureHousingTypeAgreemente value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    tenureControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void villageOrBuildingNumberValueUpdate(
+  Object? get nuiDependentsErrors => nuiDependentsControl.errors;
+  Object? get relationshipErrors => relationshipControl.errors;
+  Object? get dateErrors => dateControl.errors;
+  Object? get nameErrors => nameControl.errors;
+  Object? get lastnameErrors => lastnameControl.errors;
+  Object? get stateErrors => stateControl.errors;
+  void get nuiDependentsFocus => form.focus(nuiDependentsControlPath());
+  void get relationshipFocus => form.focus(relationshipControlPath());
+  void get dateFocus => form.focus(dateControlPath());
+  void get nameFocus => form.focus(nameControlPath());
+  void get lastnameFocus => form.focus(lastnameControlPath());
+  void get stateFocus => form.focus(stateControlPath());
+  void nuiDependentsValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    villageOrBuildingNumberControl.updateValue(value,
+    nuiDependentsControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void floorNumberValueUpdate(
+  void relationshipValueUpdate(
+    ResidentialDependentRelation value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    relationshipControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void dateValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    floorNumberControl.updateValue(value,
+    dateControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void appartmentNumberValueUpdate(
+  void nameValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    appartmentNumberControl.updateValue(value,
+    nameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void residenceTypeValueUpdate(
-    ResidenceType value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    residenceTypeControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void houseTypeValuePatch(
-    ResidentialHousingType value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    houseTypeControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void tenureValuePatch(
-    ResidentialTenureHousingTypeAgreemente value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    tenureControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void villageOrBuildingNumberValuePatch(
+  void lastnameValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    villageOrBuildingNumberControl.patchValue(value,
+    lastnameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void floorNumberValuePatch(
+  void stateValueUpdate(
+    Status value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    stateControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void nuiDependentsValuePatch(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    floorNumberControl.patchValue(value,
+    nuiDependentsControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void appartmentNumberValuePatch(
+  void relationshipValuePatch(
+    ResidentialDependentRelation value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    relationshipControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void dateValuePatch(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    appartmentNumberControl.patchValue(value,
+    dateControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void residenceTypeValuePatch(
-    ResidenceType value, {
+  void nameValuePatch(
+    String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    residenceTypeControl.patchValue(value,
+    nameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void houseTypeValueReset(
-    ResidentialHousingType value, {
+  void lastnameValuePatch(
+    String value, {
     bool updateParent = true,
     bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      houseTypeControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void tenureValueReset(
-    ResidentialTenureHousingTypeAgreemente value, {
+  }) {
+    lastnameControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void stateValuePatch(
+    Status value, {
     bool updateParent = true,
     bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      tenureControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void villageOrBuildingNumberValueReset(
+  }) {
+    stateControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void nuiDependentsValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      villageOrBuildingNumberControl.reset(
+      nuiDependentsControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void floorNumberValueReset(
+  void relationshipValueReset(
+    ResidentialDependentRelation value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      relationshipControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void dateValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      floorNumberControl.reset(
+      dateControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void appartmentNumberValueReset(
+  void nameValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      appartmentNumberControl.reset(
+      nameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void residenceTypeValueReset(
-    ResidenceType value, {
+  void lastnameValueReset(
+    String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      residenceTypeControl.reset(
+      lastnameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<ResidentialHousingType> get houseTypeControl =>
-      form.control(houseTypeControlPath())
-          as FormControl<ResidentialHousingType>;
-  FormControl<ResidentialTenureHousingTypeAgreemente> get tenureControl =>
-      form.control(tenureControlPath())
-          as FormControl<ResidentialTenureHousingTypeAgreemente>;
-  FormControl<String> get villageOrBuildingNumberControl =>
-      form.control(villageOrBuildingNumberControlPath()) as FormControl<String>;
-  FormControl<String> get floorNumberControl =>
-      form.control(floorNumberControlPath()) as FormControl<String>;
-  FormControl<String> get appartmentNumberControl =>
-      form.control(appartmentNumberControlPath()) as FormControl<String>;
-  FormControl<ResidenceType> get residenceTypeControl =>
-      form.control(residenceTypeControlPath()) as FormControl<ResidenceType>;
-  void houseTypeSetDisabled(
+  void stateValueReset(
+    Status value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      stateControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<String> get nuiDependentsControl =>
+      form.control(nuiDependentsControlPath()) as FormControl<String>;
+  FormControl<ResidentialDependentRelation> get relationshipControl =>
+      form.control(relationshipControlPath())
+          as FormControl<ResidentialDependentRelation>;
+  FormControl<String> get dateControl =>
+      form.control(dateControlPath()) as FormControl<String>;
+  FormControl<String> get nameControl =>
+      form.control(nameControlPath()) as FormControl<String>;
+  FormControl<String> get lastnameControl =>
+      form.control(lastnameControlPath()) as FormControl<String>;
+  FormControl<Status> get stateControl =>
+      form.control(stateControlPath()) as FormControl<Status>;
+  void nuiDependentsSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      houseTypeControl.markAsDisabled(
+      nuiDependentsControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      houseTypeControl.markAsEnabled(
+      nuiDependentsControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     }
   }
 
-  void tenureSetDisabled(
+  void relationshipSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      tenureControl.markAsDisabled(
+      relationshipControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      tenureControl.markAsEnabled(
+      relationshipControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     }
   }
 
-  void villageOrBuildingNumberSetDisabled(
+  void dateSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      villageOrBuildingNumberControl.markAsDisabled(
+      dateControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      villageOrBuildingNumberControl.markAsEnabled(
+      dateControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     }
   }
 
-  void floorNumberSetDisabled(
+  void nameSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      floorNumberControl.markAsDisabled(
+      nameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      floorNumberControl.markAsEnabled(
+      nameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     }
   }
 
-  void appartmentNumberSetDisabled(
+  void lastnameSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      appartmentNumberControl.markAsDisabled(
+      lastnameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      appartmentNumberControl.markAsEnabled(
+      lastnameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     }
   }
 
-  void residenceTypeSetDisabled(
+  void stateSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      residenceTypeControl.markAsDisabled(
+      stateControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      residenceTypeControl.markAsEnabled(
+      stateControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -2059,49 +2594,44 @@ class ResidenceRegistrationThirdStepModelForm
   }
 
   @override
-  ResidenceRegistrationThirdStepModel get model {
+  Dependent get model {
     if (!form.valid) {
       debugPrint(
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return ResidenceRegistrationThirdStepModel(
-        houseType: _houseTypeValue,
-        tenure: _tenureValue,
-        villageOrBuildingNumber: _villageOrBuildingNumberValue,
-        floorNumber: _floorNumberValue,
-        appartmentNumber: _appartmentNumberValue,
-        residenceType: _residenceTypeValue);
+    return Dependent(
+        nuiDependents: _nuiDependentsValue,
+        relationship: _relationshipValue,
+        date: _dateValue,
+        name: _nameValue,
+        lastname: _lastnameValue,
+        state: _stateValue);
   }
 
-  ResidenceRegistrationThirdStepModelForm copyWithPath(String? path) {
-    return ResidenceRegistrationThirdStepModelForm(
-        residenceRegistrationThirdStepModel, form, path);
+  DependentForm copyWithPath(String? path) {
+    return DependentForm(dependent, form, path);
   }
 
   @override
   void updateValue(
-    ResidenceRegistrationThirdStepModel value, {
+    Dependent value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          ResidenceRegistrationThirdStepModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
+          DependentForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void resetValue(
-    ResidenceRegistrationThirdStepModel value, {
+    Dependent value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: ResidenceRegistrationThirdStepModelForm(
-                  value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
+          value:
+              DependentForm(value, FormGroup({}), null).formElements().rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
@@ -2116,43 +2646,43 @@ class ResidenceRegistrationThirdStepModelForm
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        houseTypeControlName: FormControl<ResidentialHousingType>(
-            value: residenceRegistrationThirdStepModel?.houseType,
+        nuiDependentsControlName: FormControl<String>(
+            value: dependent?.nuiDependents,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        tenureControlName: FormControl<ResidentialTenureHousingTypeAgreemente>(
-            value: residenceRegistrationThirdStepModel?.tenure,
+        relationshipControlName: FormControl<ResidentialDependentRelation>(
+            value: dependent?.relationship,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        villageOrBuildingNumberControlName: FormControl<String>(
-            value: residenceRegistrationThirdStepModel?.villageOrBuildingNumber,
+        dateControlName: FormControl<String>(
+            value: dependent?.date,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        floorNumberControlName: FormControl<String>(
-            value: residenceRegistrationThirdStepModel?.floorNumber,
+        nameControlName: FormControl<String>(
+            value: dependent?.name,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        appartmentNumberControlName: FormControl<String>(
-            value: residenceRegistrationThirdStepModel?.appartmentNumber,
+        lastnameControlName: FormControl<String>(
+            value: dependent?.lastname,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        residenceTypeControlName: FormControl<ResidenceType>(
-            value: residenceRegistrationThirdStepModel?.residenceType,
+        stateControlName: FormControl<Status>(
+            value: dependent?.state,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -2165,9 +2695,8 @@ class ResidenceRegistrationThirdStepModelForm
           disabled: false);
 }
 
-class ReactiveResidenceRegistrationThirdStepModelFormArrayBuilder<T>
-    extends StatelessWidget {
-  const ReactiveResidenceRegistrationThirdStepModelFormArrayBuilder({
+class ReactiveDependentFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveDependentFormArrayBuilder({
     Key? key,
     this.control,
     this.formControl,
@@ -2179,19 +2708,19 @@ class ReactiveResidenceRegistrationThirdStepModelFormArrayBuilder<T>
 
   final FormArray<T>? formControl;
 
-  final FormArray<T>? Function(
-      ResidenceRegistrationThirdStepModelForm formModel)? control;
+  final FormArray<T>? Function(DependentForm formModel)? control;
 
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      ResidenceRegistrationThirdStepModelForm formModel)? builder;
+  final Widget Function(
+          BuildContext context, List<Widget> itemList, DependentForm formModel)?
+      builder;
 
-  final Widget Function(BuildContext context, int i, T? item,
-      ResidenceRegistrationThirdStepModelForm formModel) itemBuilder;
+  final Widget Function(
+          BuildContext context, int i, T? item, DependentForm formModel)
+      itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel =
-        ReactiveResidenceRegistrationThirdStepModelForm.of(context);
+    final formModel = ReactiveDependentForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -2227,9 +2756,8 @@ class ReactiveResidenceRegistrationThirdStepModelFormArrayBuilder<T>
   }
 }
 
-class ReactiveResidenceRegistrationThirdStepModelFormFormGroupArrayBuilder<V>
-    extends StatelessWidget {
-  const ReactiveResidenceRegistrationThirdStepModelFormFormGroupArrayBuilder({
+class ReactiveDependentFormFormGroupArrayBuilder<V> extends StatelessWidget {
+  const ReactiveDependentFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
@@ -2242,18 +2770,19 @@ class ReactiveResidenceRegistrationThirdStepModelFormFormGroupArrayBuilder<V>
   final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
 
   final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
-      ResidenceRegistrationThirdStepModelForm formModel)? getExtended;
+      DependentForm formModel)? getExtended;
 
-  final Widget Function(BuildContext context, List<Widget> itemList,
-      ResidenceRegistrationThirdStepModelForm formModel)? builder;
+  final Widget Function(
+          BuildContext context, List<Widget> itemList, DependentForm formModel)?
+      builder;
 
-  final Widget Function(BuildContext context, int i, V? item,
-      ResidenceRegistrationThirdStepModelForm formModel) itemBuilder;
+  final Widget Function(
+          BuildContext context, int i, V? item, DependentForm formModel)
+      itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel =
-        ReactiveResidenceRegistrationThirdStepModelForm.of(context);
+    final formModel = ReactiveDependentForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
