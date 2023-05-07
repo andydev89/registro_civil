@@ -8,19 +8,22 @@ import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
 import 'package:registro_civil_apk/data/enum/commons/relationship_type.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
-import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/payment_selector.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_check_box.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 
 class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
-  const ScheduleTurnFirstStepFamiliarPage({super.key});
+  const ScheduleTurnFirstStepFamiliarPage({
+    super.key,
+    required this.typeOfService,
+  });
+  final TypeServiceModel typeOfService;
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +62,6 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SelectElementFromApi(
-                formControl: formModel.serviceControl,
-                label: l10n.tipoServicio,
-                provider: servicesProvider(bookable: true),
-              ).horizontalPadding(20),
               ReactiveFormArray(
                 formArray: formModel.familyControl,
                 builder: (context, formArray, child) => Column(
@@ -100,7 +98,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                                     PrimaryIconButton(
                                       icon: Assets.svg.starCheck.svg(),
                                       onPressed: () {
-                                        // TODO(alejandro): 
+                                        // TODO(alejandro):
                                         //algo en el parentezco
                                       },
                                     ).verticalPadding(15),
@@ -133,7 +131,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                         PaymentMethodType.correspondentPayment) {
                       context.navigateTo(
                         CodeRoute(
-                          typeOfService: formModel.model.service!,
+                          typeOfService: typeOfService,
                           includMe: formModel.model.scheduleForMe,
                           procedureType: ProcedureType.familiar,
                           relatives: formModel.model.family
@@ -150,7 +148,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                       context.navigateTo(
                         ScheduleTurnSecondRoute(
                           paymentMethod: formModel.model.paymentMethod,
-                          typeOfService: formModel.model.service!,
+                          typeOfService: typeOfService,
                           includMe: formModel.model.scheduleForMe,
                           procedureType: ProcedureType.familiar,
                           relatives: formModel.model.family
