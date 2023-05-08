@@ -14,7 +14,7 @@ class PrimaryText extends StatelessWidget {
     super.key,
     this.shadows,
     this.underlining = false,
-    this.overFlow = TextOverflow.ellipsis,
+    this.overFlow,
   });
 
   final String title;
