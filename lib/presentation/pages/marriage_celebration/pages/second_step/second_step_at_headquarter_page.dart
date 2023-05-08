@@ -14,26 +14,32 @@ class SecondStepAtHeadquarterPage extends StatelessWidget {
     final l10n = context.l10n;
     return AutoRouter(
       builder: (context, child) {
-        return Column(
-          children: [
-            PrimaryText(l10n.informacionTes),
-            ToggleSwitchWidget(
-              labels: [
-                '${l10n.testigo} 1',
-                '${l10n.testigo} 2',
-              ],
-              totalSwitches: 2,
-              onToggle: (index) {
-                context.replaceRoute(
-                  WitnessRoute(
-                    indexWitness: index!,
-                    key: Key(index.toString()),
-                  ),
-                );
-              },
-            ).symmetricPadding(10, 20),
-            Expanded(child: child),
-          ],
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              PrimaryText(l10n.informacionTes),
+              ToggleSwitchWidget(
+                labels: [
+                  '${l10n.testigo} 1',
+                  '${l10n.testigo} 2',
+                ],
+                totalSwitches: 2,
+                onToggle: (index) {
+                  context.replaceRoute(
+                    WitnessRoute(
+                      indexWitness: index!,
+                      key: Key(index.toString()),
+                    ),
+                  );
+                },
+              ).symmetricPadding(10, 20),
+              SizedBox(
+                height: 300,
+                child: child,
+              ),
+            ],
+          ),
         );
       },
     );

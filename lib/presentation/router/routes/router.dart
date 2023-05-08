@@ -309,11 +309,11 @@ part 'router.gr.dart';
           guards: [AuthGuard],
           page: MyTurnsPage,
         ),
-        // My ORDERS
+        // MY ORDERS
         CupertinoRoute(
           page: MyOrdersPage,
         ),
-        // My ORDERS REJECTING
+        // MY ORDERS REJECTING
         CupertinoRoute(
           page: MyOrderRejectingPage,
         ),
