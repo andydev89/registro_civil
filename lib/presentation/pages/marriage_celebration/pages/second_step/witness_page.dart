@@ -9,7 +9,6 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/utils/marriage_celebration_util.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
@@ -41,22 +40,20 @@ class WitnessPage extends ConsumerWidget {
           ),
       builder: (context, form, child) => Scaffold(
         backgroundColor: Colors.transparent,
-        body: ScrollableContent(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              PrimaryText(l10n.numCedula),
-              PrimaryReactiveNuiField(
-                formControl: form.nuiControl,
-              ),
-              PrimaryText(l10n.nombreApe),
-              PrimaryReactiveTextField(
-                formControl: form.nameControl,
-                textCapitalization: TextCapitalization.words,
-              ),
-            ],
-          ).horizontalPadding(20),
-        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            PrimaryText(l10n.numCedula),
+            PrimaryReactiveNuiField(
+              formControl: form.nuiControl,
+            ),
+            PrimaryText(l10n.nombreApe),
+            PrimaryReactiveTextField(
+              formControl: form.nameControl,
+              textCapitalization: TextCapitalization.words,
+            ),
+          ],
+        ).horizontalPadding(20),
         bottomNavigationBar: ReactiveWitnessFormConsumer(
           builder: (_, form, __) {
             final form1 = createWitnessFormGroup(witness1);
