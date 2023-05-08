@@ -34,7 +34,17 @@ PageRouteInfo<dynamic> getActaRegistral(
       ],
     );
 
-PageRouteInfo<dynamic> getSchedule() => const ScheduleTurnRouterRoute();
+PageRouteInfo<dynamic> getSchedule(TypeServiceModel typeOfService) =>
+    ScheduleTurnRouterRoute(
+      children: [
+        ScheduleTurnFirstStepRouterRoute(
+          typeOfService: typeOfService,
+          children: [
+            ScheduleTurnFirstStepPersonalRoute(typeOfService: typeOfService),
+          ],
+        ),
+      ],
+    );
 
 PageRouteInfo<dynamic> getMarriageCelebration() =>
     const MarriageCelebrationRouterRoute();
@@ -51,7 +61,7 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
     return getActaRegistral(typeServiceModel);
   }
   if (type.isSchedule) {
-    return getSchedule();
+    return getSchedule(typeServiceModel);
   }
   if (type.isResidencyRegistration) {
     return getResidencyRegistration();
