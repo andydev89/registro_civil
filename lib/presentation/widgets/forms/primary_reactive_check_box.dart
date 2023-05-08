@@ -13,6 +13,8 @@ class PrimaryReactiveCheckBox extends StatelessWidget {
     this.checkColor,
     this.underlining = false,
     this.textAlign = TextAlign.start,
+    this.maxLines,
+    this.overFlow,
   }) : assert(
           formControl != null || formControlName != null,
           'formControl or formControlName must be provided',
@@ -25,6 +27,8 @@ class PrimaryReactiveCheckBox extends StatelessWidget {
   final bool underlining;
   final TextAlign? textAlign;
   final String? formControlName;
+  final int? maxLines;
+  final TextOverflow? overFlow;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,8 @@ class PrimaryReactiveCheckBox extends StatelessWidget {
         label,
         underlining: underlining,
         textAlign: textAlign,
+        maxLines: maxLines,
+        overFlow: overFlow,
       ),
       controlAffinity: ListTileControlAffinity.leading,
     );

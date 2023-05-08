@@ -25,11 +25,13 @@ class PrimaryReactiveTextAreaField<T> extends StatelessWidget {
     this.onTap,
     this.setSuffixIconConstraints = false,
     super.key,
-    this.minLines=5,
+    this.minLines = 5,
+    this.prefixIconLabel,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
   final String? label;
+  final Widget? prefixIconLabel;
   final List<TextInputFormatter>? inputFormatters;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -51,9 +53,18 @@ class PrimaryReactiveTextAreaField<T> extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (!ligth && label != null)
-          PrimaryText(
-            label!,
-          ).verticalPadding(5),
+          Row(
+            children: [
+              if (prefixIconLabel != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: prefixIconLabel,
+                ),
+              PrimaryText(
+                label!,
+              ).verticalPadding(5),
+            ],
+          ),
         ReactiveTextField<T>(
           formControl: formControl,
           formControlName: formControlName,

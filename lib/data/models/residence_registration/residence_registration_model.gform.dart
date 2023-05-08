@@ -2817,3 +2817,437 @@ class ReactiveDependentFormFormGroupArrayBuilder<V> extends StatelessWidget {
     );
   }
 }
+
+class ReactiveAceptAgreementFormConsumer extends StatelessWidget {
+  const ReactiveAceptAgreementFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
+
+  final Widget? child;
+
+  final Widget Function(
+          BuildContext context, AceptAgreementForm formModel, Widget? child)
+      builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveAceptAgreementForm.of(context);
+
+    if (formModel is! AceptAgreementForm) {
+      throw FormControlParentNotFoundException(this);
+    }
+    return builder(context, formModel, child);
+  }
+}
+
+class AceptAgreementFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const AceptAgreementFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
+
+  final AceptAgreementForm form;
+}
+
+class ReactiveAceptAgreementForm extends StatelessWidget {
+  const ReactiveAceptAgreementForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
+
+  final Widget child;
+
+  final AceptAgreementForm form;
+
+  final WillPopCallback? onWillPop;
+
+  static AceptAgreementForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
+    if (listen) {
+      return context
+          .dependOnInheritedWidgetOfExactType<
+              AceptAgreementFormInheritedStreamer>()
+          ?.form;
+    }
+
+    final element = context.getElementForInheritedWidgetOfExactType<
+        AceptAgreementFormInheritedStreamer>();
+    return element == null
+        ? null
+        : (element.widget as AceptAgreementFormInheritedStreamer).form;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AceptAgreementFormInheritedStreamer(
+      form: form,
+      stream: form.form.statusChanged,
+      child: WillPopScope(
+        onWillPop: onWillPop,
+        child: child,
+      ),
+    );
+  }
+}
+
+class AceptAgreementFormBuilder extends StatefulWidget {
+  const AceptAgreementFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final AceptAgreement? model;
+
+  final Widget? child;
+
+  final WillPopCallback? onWillPop;
+
+  final Widget Function(
+          BuildContext context, AceptAgreementForm formModel, Widget? child)
+      builder;
+
+  final void Function(BuildContext context, AceptAgreementForm formModel)?
+      initState;
+
+  @override
+  _AceptAgreementFormBuilderState createState() =>
+      _AceptAgreementFormBuilderState();
+}
+
+class _AceptAgreementFormBuilderState extends State<AceptAgreementFormBuilder> {
+  late FormGroup _form;
+
+  late AceptAgreementForm _formModel;
+
+  @override
+  void initState() {
+    _form = FormGroup({});
+    _formModel = AceptAgreementForm(widget.model, _form, null);
+
+    final elements = _formModel.formElements();
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    if (elements.disabled) {
+      _form.markAsDisabled();
+    }
+
+    _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant AceptAgreementFormBuilder oldWidget) {
+    if (widget.model != oldWidget.model) {
+      _formModel = AceptAgreementForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
+
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveAceptAgreementForm(
+      form: _formModel,
+      onWillPop: widget.onWillPop,
+      child: ReactiveFormBuilder(
+        form: () => _form,
+        onWillPop: widget.onWillPop,
+        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class AceptAgreementForm implements FormModel<AceptAgreement> {
+  AceptAgreementForm(
+    this.aceptAgreement,
+    this.form,
+    this.path,
+  ) {}
+
+  static String aceptControlName = "acept";
+
+  final AceptAgreement? aceptAgreement;
+
+  final FormGroup form;
+
+  final String? path;
+
+  String aceptControlPath() => pathBuilder(aceptControlName);
+  bool get _aceptValue => aceptControl.value as bool;
+  bool get containsAcept {
+    try {
+      form.control(aceptControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get aceptErrors => aceptControl.errors;
+  void get aceptFocus => form.focus(aceptControlPath());
+  void aceptValueUpdate(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    aceptControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void aceptValuePatch(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    aceptControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void aceptValueReset(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      aceptControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<bool> get aceptControl =>
+      form.control(aceptControlPath()) as FormControl<bool>;
+  void aceptSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      aceptControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      aceptControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  @override
+  AceptAgreement get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return AceptAgreement(acept: _aceptValue);
+  }
+
+  AceptAgreementForm copyWithPath(String? path) {
+    return AceptAgreementForm(aceptAgreement, form, path);
+  }
+
+  @override
+  void updateValue(
+    AceptAgreement value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.updateValue(
+          AceptAgreementForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void resetValue(
+    AceptAgreement value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: AceptAgreementForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+  FormGroup formElements() => FormGroup({
+        aceptControlName: FormControl<bool>(
+            value: aceptAgreement?.acept,
+            validators: [trueValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+class ReactiveAceptAgreementFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveAceptAgreementFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(AceptAgreementForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      AceptAgreementForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, T? item, AceptAgreementForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveAceptAgreementForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveAceptAgreementFormFormGroupArrayBuilder<V>
+    extends StatelessWidget {
+  const ReactiveAceptAgreementFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      AceptAgreementForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      AceptAgreementForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, V? item, AceptAgreementForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveAceptAgreementForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}

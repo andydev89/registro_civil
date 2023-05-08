@@ -98,6 +98,8 @@ class Residential {
   final ResidenceType type;
   final List<Dependent> dependents;
 
+  String get address => '$mainStreet, $backStreet #$numberVillaBuilding';
+
   Map<String, dynamic> toJson() => _$ResidentialToJson(this);
 
   static String? _locationToJson(LocationModel? model) => model?.id;
@@ -185,4 +187,13 @@ class Dependent {
   static String? _toJson(Status? status) => status?.name;
 
   Map<String, dynamic> toJson() => _$DependentToJson(this);
+}
+
+@ReactiveFormAnnotation()
+class AceptAgreement {
+  AceptAgreement({
+   @FormControlAnnotation(validators: [trueValidator]) this.acept = false,
+  });
+
+  final bool acept;
 }
