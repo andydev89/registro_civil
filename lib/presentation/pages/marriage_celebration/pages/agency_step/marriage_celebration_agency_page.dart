@@ -32,7 +32,7 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
                   label: l10n.provincia,
                   provider: provincesProvider,
                   onChanged: (p0) => formModel.cantonControl.value = null,
-                ).horizontalPadding(20),
+                ),
                 ReactiveSelectAgencyFormConsumer(
                   builder: (_, __, ___) => Column(
                     children: [
@@ -44,13 +44,13 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
                         provider: LocationByParentProvider(
                           parentId: formModel.provinceControl.value?.id ?? '',
                         ),
-                      ).horizontalPadding(20),
+                      ),
                       SelectElementFromApi(
                         readOnly: !formModel.cantonControl.valid,
                         formControl: formModel.agencyControl,
                         label: l10n.agencia,
                         provider: agenciesProvider,
-                      ).horizontalPadding(20),
+                      ),
                     ],
                   ),
                 ),

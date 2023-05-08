@@ -61,9 +61,13 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  PrimaryText(
-                                    '${l10n.documentosContrayente}'
-                                    ' ${firstContractParty ? 1 : 2}',
+                                  Flexible(
+                                    child: PrimaryText(
+                                      '${l10n.documentosContrayente}'
+                                      ' ${firstContractParty ? 1 : 2}',
+                                      maxLines: 2,
+                                      textAlign: TextAlign.start,
+                                    ),
                                   ),
                                 ],
                               ).verticalPadding(10),

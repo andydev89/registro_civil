@@ -46,7 +46,7 @@ class TurnDetailsPage extends ConsumerWidget {
     final l10n = context.l10n;
     final now = DateTime.now();
     return PrimaryScaffold(
-      title: l10n.obtengaSuTurno,
+      title: '${l10n.obtengaSuTurno}: ${typeOfService.name}',
       subtitle: l10n.detTurno,
       body: Column(
         children: [

@@ -40,7 +40,7 @@ class FirstStepContractingPartyPage extends ConsumerWidget {
                   }
                 : null,
           ),
-        ).symmetricPadding(10, 30),
+        ).symmetricPadding(10, 10),
       ),
     );
   }

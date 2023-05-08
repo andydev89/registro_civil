@@ -37,7 +37,7 @@ class ScheduleTurnSecondPage extends ConsumerWidget {
     final l10n = context.l10n;
     return ScheduleTurnSecondStepModelFormBuilder(
       builder: (context, formModel, child) => PrimaryScaffold(
-        title: l10n.obtTurno,
+        title: '${l10n.obtengaSuTurno}: ${typeOfService.name}',
         subtitle: l10n.completeInformacionSolicitada,
         body: Expanded(
           child: SingleChildScrollView(
