@@ -61,9 +61,12 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  PrimaryText(
-                                    '${l10n.documentosContrayente}'
-                                    ' ${firstContractParty ? 1 : 2}',
+                                  Flexible(
+                                    child: PrimaryText(
+                                      '${l10n.documentosContrayente}'
+                                      ' ${firstContractParty ? 1 : 2}',
+                                      textAlign: TextAlign.start,
+                                    ),
                                   ),
                                 ],
                               ).verticalPadding(10),
@@ -153,7 +156,6 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                                                   PrimaryText(
                                                     '${l10n.estado}: '
                                                     '${data.elementAt(index).required ? l10n.obligatorio : l10n.noObligatorio}',
-                                                    maxLines: 2,
                                                   ),
                                                 ],
                                               ).verticalPadding(5),

@@ -20,7 +20,7 @@ class ScheduleTurnFirstStepRouterPage extends HookWidget {
     final l10n = context.l10n;
     final selectedRadio = useState(ProcedureType.personal);
     return PrimaryScaffold(
-      title: typeOfService.name,
+      title: '${l10n.obtengaSuTurno}: ${typeOfService.name}',
       subtitle: l10n.completeInformacionSolicitada,
       body: Expanded(
         child: AutoRouter(

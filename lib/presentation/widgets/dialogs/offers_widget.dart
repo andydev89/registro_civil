@@ -97,18 +97,18 @@ class OffersWidget extends ConsumerWidget {
                   //     ),
                   //   )
                   // else
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.remove_shopping_cart_outlined,
-                            color: Colors.grey.withOpacity(0.3),
-                            size: MediaQuery.of(context).size.width * 0.5,
-                          ),
-                        ],
-                      ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.remove_shopping_cart_outlined,
+                          color: Colors.grey.withOpacity(0.3),
+                          size: MediaQuery.of(context).size.width * 0.5,
+                        ),
+                      ],
                     ),
+                  ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -167,25 +167,25 @@ class OffersWidget extends ConsumerWidget {
                       ).verticalPadding(10),
                     ],
                   ).horizontalPadding(20),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      PrimaryButton(
-                        title: l10n.pagar,
-                        onPressed:  () {},
-                      ),
-                      const SizedBox(height: 15),
-                      PrimaryButton(
-                        title: l10n.realizarSol,
-                        onPressed: () {},
-                      ),
-                    ],
-                  ).symmetricPadding(10, 20)
                 ],
               ).horizontalPadding(10),
             ),
           ],
         ),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PrimaryButton(
+              title: l10n.pagar,
+              onPressed: () {},
+            ),
+            const SizedBox(height: 10),
+            PrimaryButton(
+              title: l10n.realizarSol,
+              onPressed: () {},
+            ),
+          ],
+        ).symmetricPadding(10, 30),
       ),
     );
   }

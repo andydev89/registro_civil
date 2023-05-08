@@ -28,6 +28,7 @@ InputDecoration primaryInputDecoration({
       fontSize: fontSize,
       fontWeight: fontWeight,
     ),
+    errorMaxLines: 2,
     errorText: errorText,
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(

@@ -59,7 +59,7 @@ class SimpleCertificateFirstStepPersonalPage extends ConsumerWidget {
                           showAlert(error.translate(context), TypeAlert.error),
                     )
                 : null,
-          ).symmetricPadding(10, 30),
+          ).symmetricPadding(10, 10),
         ),
       ),
     );
