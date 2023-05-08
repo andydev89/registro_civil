@@ -165,7 +165,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                   }
                 : null,
           ),
-        )..symmetricPadding(10, 30),
+        ).symmetricPadding(10, 30),
       ),
     );
   }
