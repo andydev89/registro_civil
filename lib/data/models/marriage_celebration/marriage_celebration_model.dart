@@ -106,7 +106,9 @@ class RequestOwner {
 
   factory RequestOwner.fromMe(MeModel model) => RequestOwner(
         nui: model.identification,
-        name: '${model.firstName} ${model.lastName}',
+        name: model.firstName.isNotEmpty && model.lastName.isNotEmpty
+            ? '${model.firstName} ${model.lastName}'
+            : '',
         phone: '',
         email: model.email,
       );
