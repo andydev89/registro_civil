@@ -64,7 +64,6 @@ class CircleAvatarCardWidget extends StatelessWidget {
                   child: PrimaryText(
                     title,
                     fontWeight: FontWeight.bold,
-                    maxLines: 2,
                     overFlow: TextOverflow.ellipsis,
                   ),
                 ),

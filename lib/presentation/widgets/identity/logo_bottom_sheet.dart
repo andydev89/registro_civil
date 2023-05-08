@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
 class LogoBottomSheet extends StatelessWidget {
   const LogoBottomSheet({

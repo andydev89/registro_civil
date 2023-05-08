@@ -49,48 +49,48 @@ class SimpleCertificateSecondStepPage extends ConsumerWidget {
                 }
               },
             ),
-            bottomNavigationBar: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                PrimaryAsyncButton(
-                  title: l10n.aceptar,
-                  onPressed: () => ref
-                      .read(processProvider.notifier)
-                      .processSimpleCertificate(
-                        id: simpleCertificateResponse.serviceId,
-                      )
-                      .when(
-                        ok: (_) {
-                          context.navigateTo(const HomeRouterRoute());
-                          showOffersDialog(context);
-                        },
-                        err: (error) => showAlert(
-                          error.translate(context),
-                          TypeAlert.error,
-                        ),
-                      ),
-                ),
-                const SizedBox(height: 15),
-                PrimaryAsyncButton(
-                  title: l10n.rechazar,
-                  onPressed: () => ref
-                      .read(cancelProvider.notifier)
-                      .cancelSimpleCertificate(
-                        id: simpleCertificateResponse.serviceId,
-                      )
-                      .when(
-                        ok: (_) => context.navigateTo(const HomeRouterRoute()),
-                        err: (error) => showAlert(
-                          error.translate(context),
-                          TypeAlert.error,
-                        ),
-                      ),
-                ),
-              ],
-            ).symmetricPadding(10, 30),
           ),
         ),
+        bottomNavigationBar: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PrimaryAsyncButton(
+              title: l10n.aceptar,
+              onPressed: () => ref
+                  .read(processProvider.notifier)
+                  .processSimpleCertificate(
+                    id: simpleCertificateResponse.serviceId,
+                  )
+                  .when(
+                    ok: (_) {
+                      context.navigateTo(const HomeRouterRoute());
+                      showOffersDialog(context);
+                    },
+                    err: (error) => showAlert(
+                      error.translate(context),
+                      TypeAlert.error,
+                    ),
+                  ),
+            ),
+            const SizedBox(height: 10),
+            PrimaryAsyncButton(
+              title: l10n.rechazar,
+              onPressed: () => ref
+                  .read(cancelProvider.notifier)
+                  .cancelSimpleCertificate(
+                    id: simpleCertificateResponse.serviceId,
+                  )
+                  .when(
+                    ok: (_) => context.navigateTo(const HomeRouterRoute()),
+                    err: (error) => showAlert(
+                      error.translate(context),
+                      TypeAlert.error,
+                    ),
+                  ),
+            ),
+          ],
+        ).symmetricPadding(10, 30),
       ),
     );
   }
