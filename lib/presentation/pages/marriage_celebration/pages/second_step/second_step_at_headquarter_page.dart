@@ -31,7 +31,7 @@ class SecondStepAtHeadquarterPage extends StatelessWidget {
                   ),
                 );
               },
-            ).symmetricPadding(10, 20),
+            ).verticalPadding(10),
             Expanded(child: child),
           ],
         );

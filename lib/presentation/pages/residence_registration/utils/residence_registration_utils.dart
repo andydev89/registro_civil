@@ -46,6 +46,7 @@ Future<void> showAceptAgreement(BuildContext context) async {
                         l10n.textoIntRegMat,
                         overFlow: TextOverflow.visible,
                         textAlign: TextAlign.start,
+                        maxLines:null,
                       ),
                     ),
                   ),

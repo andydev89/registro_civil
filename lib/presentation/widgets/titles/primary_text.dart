@@ -9,7 +9,7 @@ class PrimaryText extends StatelessWidget {
     this.fontSize = fontSizeDefault,
     this.fontWeight = FontWeight.normal,
     this.isToUpperCase = false,
-    this.maxLines,
+    this.maxLines =2,
     this.textAlign = TextAlign.center,
     super.key,
     this.shadows,

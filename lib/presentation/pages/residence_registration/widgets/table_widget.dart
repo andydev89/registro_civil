@@ -23,7 +23,7 @@ class TableWidget<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final height = (totalHeight / (fields.length + 1)).floor()*1.0;
+    final height = (totalHeight / (fields.length + 1)).floor() * 1.0;
     return Table(
       border: TableBorder.all(color: Colors.grey, width: 2),
       children: [
@@ -42,13 +42,14 @@ class TableWidget<T> extends StatelessWidget {
                             child: GestureDetector(
                               onTap: () => showPopover(
                                 context: context,
-                                bodyBuilder: (context) => PrimaryText(value)
-                                    .symmetricPadding(5, 10),
+                                bodyBuilder: (context) =>
+                                    PrimaryText(value).symmetricPadding(5, 10),
                               ),
                               child: PrimaryText(
                                 value,
                                 textAlign: TextAlign.end,
                                 maxLines: 1,
+                                overFlow: TextOverflow.ellipsis,
                               ).symmetricPadding(5, 10),
                             ),
                           ),
@@ -104,6 +105,7 @@ class TableWidget<T> extends StatelessWidget {
               fontWeight: FontWeight.bold,
               textAlign: TextAlign.start,
               maxLines: 1,
+              overFlow: TextOverflow.ellipsis,
             ).symmetricPadding(5, 10),
           ),
         ],
