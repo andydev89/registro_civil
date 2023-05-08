@@ -13,6 +13,15 @@ Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
   return Validators.required(control);
 }
 
+// true validator
+Map<String, dynamic>? trueValidator(AbstractControl<dynamic> control) {
+  final value = control.value as bool?;
+  if (value == null || !value) {
+    return {ValidationMessage.requiredTrue: true};
+  }
+  return null;
+}
+
 Map<String, dynamic>? documentFileRequiredValidator(
   AbstractControl<dynamic> control,
 ) {
@@ -288,6 +297,7 @@ Map<String, String Function(dynamic error)> validationMessage(
     ValidationMessage.required: (error) => l10n.campoReq,
     ValidationMessage.email: (error) => l10n.intrudcirCorrVal,
     ValidationMessage.mustMatch: (error) => l10n.passwordCoi,
+    ValidationMessage.requiredTrue: (error) => l10n.campoReq,
     ValidationsMessageEnum.invalidCode.toText: (error) => l10n.invalidCode,
   }..addEntries(
       ValidationsMessageEnum.values
