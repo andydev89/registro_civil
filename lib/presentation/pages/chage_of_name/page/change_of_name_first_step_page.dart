@@ -5,7 +5,6 @@ class ChangeOfNameFirstStepPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //tododasd
     return Container();
   }
 }
