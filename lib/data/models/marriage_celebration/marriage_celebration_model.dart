@@ -109,7 +109,7 @@ class RequestOwner {
         name: model.firstName.isNotEmpty && model.lastName.isNotEmpty
             ? '${model.firstName} ${model.lastName}'
             : '',
-        phone: '',
+        phone: model.phone,
         email: model.email,
       );
 
