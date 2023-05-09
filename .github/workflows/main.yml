@@ -22,21 +22,17 @@ jobs:
           echo "::set-output name=messages::$(cat commit_messages.txt)"
 
       - name: Update PR Description
-        uses: appleboy/replace-text@v0.1.0
-        with:
-          files: 'PULL_REQUEST_TEMPLATE.md'
-          from: '<!-- COMMITS -->'
-          to: |
-            ## Commits
-            ${{ steps.commit_messages.outputs.messages }}
-          flags: 'g'
+        run: |
+          sed -i "s|<!-- COMMIT_LIST -->|<details><summary>Commits</summary>\n\n${{ steps.commit_messages.outputs.messages }}\n</details>|" $GITHUB_EVENT_PATH
+          jq . $GITHUB_EVENT_PATH > $GITHUB_EVENT_PATH.tmp && mv $GITHUB_EVENT_PATH.tmp $GITHUB_EVENT_PATH
 
       - name: Commit and Push Changes
         uses: EndBug/add-and-commit@v7
         with:
           message: 'Update PR Description'
-          add: '.'
+          add: $GITHUB_EVENT_PATH
           push: 'true'
           # push-via-ssh: 'false'
           # ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
 
