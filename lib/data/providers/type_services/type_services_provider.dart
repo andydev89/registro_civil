@@ -36,3 +36,14 @@ Future<ResponseModelPagination<List<TypeServiceModel>>> typeServices(
     sortType: query.sortType.toJson,
   );
 }
+
+@riverpod
+Future<ResponseModelPagination<List<TypeServiceModel>>> typeServicesFetch(
+  TypeServicesFetchRef ref,
+  int pageNo,
+) async {
+  final api = ref.watch(apiProvider);
+  return api.typeServices(
+    pageNo: pageNo,
+  );
+}

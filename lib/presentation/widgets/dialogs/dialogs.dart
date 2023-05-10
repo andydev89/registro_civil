@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -136,6 +137,55 @@ Future<void> showMapPickerDialog(
           ),
         ),
       ).withRevealAnimation;
+    },
+  );
+}
+
+// crear un delete dialog con el delete en rojo
+Future<void> showDeleteDialog(
+  BuildContext context, {
+  String? title,
+  String? message,
+  String? deleteText,
+  String? cancelText,
+  required void Function() onDelete,
+}) {
+  final l10n = context.l10n;
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: Row(
+          children: [
+            Assets.svg.error.svg(width: 24),
+            const SizedBox(width: 10),
+            PrimaryTitle(title: title ?? l10n.eliminar),
+          ],
+        ),
+        content: PrimaryText(message ?? l10n.seguroeliminarresidence),
+        actions: [
+          Column(
+            children: [
+              PrimaryButton(
+                onPressed: () {
+                  context.popRoute();
+                  onDelete.call();
+                },
+                title: deleteText ?? l10n.eliminar,
+                backgroundColor: Colors.red,
+              ),
+              const SizedBox(height: 10),
+              PrimaryButton(
+                onPressed: () => context.popRoute(),
+                title: cancelText ?? l10n.cancelar,
+              ),
+            ],
+          ).symmetricPadding(10, 30),
+        ],
+      );
     },
   );
 }

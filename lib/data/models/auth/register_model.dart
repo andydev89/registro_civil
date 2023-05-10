@@ -115,7 +115,6 @@ class RegisterModel {
   final String code;
   final String password;
 
-
   Map<String, dynamic> toJson() => _$RegisterModelToJson(this);
 }
 
@@ -168,6 +167,7 @@ class MeModel {
     this.profile = const [],
     this.agency = const [],
     this.aplication = const [],
+    this.phone = '',
   });
 
   factory MeModel.fromJson(Map<String, dynamic> json) =>
@@ -179,6 +179,7 @@ class MeModel {
   final String email;
   final String type;
   final Status state;
+  final String phone;
   final List<Profile> profile;
   final List<AgencyModel> agency;
   final List<Aplication> aplication;
@@ -193,6 +194,7 @@ class MeModel {
     String? email,
     String? type,
     Status? state,
+    String? phone,
     List<Profile>? profile,
     List<AgencyModel>? agency,
     List<Aplication>? aplication,
@@ -208,6 +210,7 @@ class MeModel {
       profile: profile ?? this.profile,
       agency: agency ?? this.agency,
       aplication: aplication ?? this.aplication,
+      phone: phone ?? this.phone,
     );
   }
 }

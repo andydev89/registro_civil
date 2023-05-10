@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/finger_print_background.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/root_app_bar.dart';
@@ -23,39 +24,41 @@ class FingerPrintScaffold extends StatelessWidget {
       data: Theme.of(context).copyWith(
         dividerColor: Colors.transparent,
       ),
-      child: Scaffold(
-        appBar: const RootAppBar(),
-        drawer: const RootDrawer(),
-        body: Stack(
-          children: [
-            const FingerPrintBackground(),
-            body,
-            ShowOnlyInLoggedInStatus(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 90),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: PrimaryIconButton(
-                    width: 30,
-                    height: 40,
-                    splashBorderRadius: const BorderRadius.horizontal(
-                      left: Radius.circular(100),
-                    ),
-                    icon: Assets.svg.checkDocument.svg(),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.horizontal(
+      child: KeyboardDismissOnTap(
+        child: Scaffold(
+          appBar: const RootAppBar(),
+          drawer: const RootDrawer(),
+          body: Stack(
+            children: [
+              const FingerPrintBackground(),
+              body,
+              ShowOnlyInLoggedInStatus(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 90),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: PrimaryIconButton(
+                      width: 30,
+                      height: 40,
+                      splashBorderRadius: const BorderRadius.horizontal(
                         left: Radius.circular(100),
                       ),
+                      icon: Assets.svg.checkDocument.svg(),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.horizontal(
+                          left: Radius.circular(100),
+                        ),
+                      ),
+                      onPressed: () => showOffersDialog(context),
                     ),
-                    onPressed: () => showOffersDialog(context),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
+          persistentFooterButtons: persistentFooterButtons,
+          bottomNavigationBar: const LogoBottomSheet(),
         ),
-        persistentFooterButtons: persistentFooterButtons,
-        bottomNavigationBar: const LogoBottomSheet(),
       ),
     );
   }

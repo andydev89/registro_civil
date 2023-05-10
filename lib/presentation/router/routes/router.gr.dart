@@ -277,6 +277,12 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ChoosePaymentMethodRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ChoosePaymentMethodPage(),
+      );
+    },
     PaymentServiceJudgmentsNotarialActsRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -530,6 +536,24 @@ class _$AppRouter extends RootStackRouter {
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
+      );
+    },
+    MainRouteResicenceRegistrationRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const MainPageResicenceRegistrationPage(),
+      );
+    },
+    FirstStepResidenceRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const FirstStepResidencePage(),
+      );
+    },
+    SecondStepResidenceRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const SecondStepResidencePage(),
       );
     },
     TermAndUsesConditionsRoute.name: (routeData) {
@@ -804,6 +828,23 @@ class _$AppRouter extends RootStackRouter {
               path: 'residence-registration-router-page',
               parent: RootRouterRoute.name,
               guards: [authGuard],
+              children: [
+                RouteConfig(
+                  MainRouteResicenceRegistrationRoute.name,
+                  path: '',
+                  parent: ResidenceRegistrationRouterRoute.name,
+                ),
+                RouteConfig(
+                  FirstStepResidenceRoute.name,
+                  path: 'first-step-residence-page',
+                  parent: ResidenceRegistrationRouterRoute.name,
+                ),
+                RouteConfig(
+                  SecondStepResidenceRoute.name,
+                  path: 'second-step-residence-page',
+                  parent: ResidenceRegistrationRouterRoute.name,
+                ),
+              ],
             ),
             RouteConfig(
               ChangeOfNameRouterRoute.name,
@@ -857,6 +898,11 @@ class _$AppRouter extends RootStackRouter {
             RouteConfig(
               WebviewPaymentRoute.name,
               path: 'webview-payment-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
+              ChoosePaymentMethodRoute.name,
+              path: 'choose-payment-method-page',
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
@@ -1183,10 +1229,11 @@ class MarriageCelebrationRouterRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ResidenceRegistrationRouterPage]
 class ResidenceRegistrationRouterRoute extends PageRouteInfo<void> {
-  const ResidenceRegistrationRouterRoute()
+  const ResidenceRegistrationRouterRoute({List<PageRouteInfo>? children})
       : super(
           ResidenceRegistrationRouterRoute.name,
           path: 'residence-registration-router-page',
+          initialChildren: children,
         );
 
   static const String name = 'ResidenceRegistrationRouterRoute';
@@ -1450,6 +1497,18 @@ class WebviewPaymentRouteArgs {
   String toString() {
     return 'WebviewPaymentRouteArgs{key: $key, url: $url, onPageFinished: $onPageFinished}';
   }
+}
+
+/// generated route for
+/// [ChoosePaymentMethodPage]
+class ChoosePaymentMethodRoute extends PageRouteInfo<void> {
+  const ChoosePaymentMethodRoute()
+      : super(
+          ChoosePaymentMethodRoute.name,
+          path: 'choose-payment-method-page',
+        );
+
+  static const String name = 'ChoosePaymentMethodRoute';
 }
 
 /// generated route for
@@ -2125,6 +2184,42 @@ class ContractingPartyRouteArgs {
   String toString() {
     return 'ContractingPartyRouteArgs{key: $key, indexContractingParty: $indexContractingParty}';
   }
+}
+
+/// generated route for
+/// [MainPageResicenceRegistrationPage]
+class MainRouteResicenceRegistrationRoute extends PageRouteInfo<void> {
+  const MainRouteResicenceRegistrationRoute()
+      : super(
+          MainRouteResicenceRegistrationRoute.name,
+          path: '',
+        );
+
+  static const String name = 'MainRouteResicenceRegistrationRoute';
+}
+
+/// generated route for
+/// [FirstStepResidencePage]
+class FirstStepResidenceRoute extends PageRouteInfo<void> {
+  const FirstStepResidenceRoute()
+      : super(
+          FirstStepResidenceRoute.name,
+          path: 'first-step-residence-page',
+        );
+
+  static const String name = 'FirstStepResidenceRoute';
+}
+
+/// generated route for
+/// [SecondStepResidencePage]
+class SecondStepResidenceRoute extends PageRouteInfo<void> {
+  const SecondStepResidenceRoute()
+      : super(
+          SecondStepResidenceRoute.name,
+          path: 'second-step-residence-page',
+        );
+
+  static const String name = 'SecondStepResidenceRoute';
 }
 
 /// generated route for

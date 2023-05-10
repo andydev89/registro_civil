@@ -65,6 +65,8 @@ class SimpleCertificateSecondStepPage extends ConsumerWidget {
                   .when(
                     ok: (_) {
                       context.navigateTo(const HomeRouterRoute());
+                      // quitar foco
+                      FocusScope.of(context).unfocus();
                       showOffersDialog(context);
                     },
                     err: (error) => showAlert(
