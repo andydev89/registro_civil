@@ -28,78 +28,80 @@ class FirstStepResidencePage extends ConsumerWidget {
         return PrimaryScaffold(
           title: l10n.registroRes,
           subtitle: l10n.ingreseInfSol,
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SelectElementFromApi(
-                  formControl: formModel.provinceControl,
-                  label: l10n.provincia,
-                  provider: provincesProvider,
-                  onChanged: (p0) => formModel.cantonControl.value = null,
-                ),
-                ReactiveFirstStepResidenceModelFormConsumer(
-                  builder: (_, __, ___) => Column(
-                    children: [
-                      SelectElementFromApi(
-                        readOnly: !formModel.provinceControl.valid,
-                        formControl: formModel.cantonControl,
-                        label: l10n.canton,
-                        onChanged: (p0) =>
-                            formModel.parroquiaControl.value = null,
-                        provider: LocationByParentProvider(
-                          parentId: formModel.provinceControl.value?.id ?? '',
-                        ),
-                      ),
-                      SelectElementFromApi(
-                        readOnly: !formModel.cantonControl.valid,
-                        formControl: formModel.parroquiaControl,
-                        label: l10n.parroquia,
-                        provider: LocationByParentProvider(
-                          parentId: formModel.cantonControl.value?.id ?? '',
-                        ),
-                      ),
-                    ],
+          body: Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SelectElementFromApi(
+                    formControl: formModel.provinceControl,
+                    label: l10n.provincia,
+                    provider: provincesProvider,
+                    onChanged: (p0) => formModel.cantonControl.value = null,
                   ),
-                ),
-                const SizedBox(height: 20),
-                PrimaryText(l10n.callePrincipal),
-                InputDecorationWidget(
-                  formControl: formModel.mainStreetControl,
-                  suffixIcon: SecondarySvgIconButton(
-                    svgIcon: Assets.svg.mapMarker.svg(),
-                    onPressed: () => selectLocationResidenceREgistration(
+                  ReactiveFirstStepResidenceModelFormConsumer(
+                    builder: (_, __, ___) => Column(
+                      children: [
+                        SelectElementFromApi(
+                          readOnly: !formModel.provinceControl.valid,
+                          formControl: formModel.cantonControl,
+                          label: l10n.canton,
+                          onChanged: (p0) =>
+                              formModel.parroquiaControl.value = null,
+                          provider: LocationByParentProvider(
+                            parentId: formModel.provinceControl.value?.id ?? '',
+                          ),
+                        ),
+                        SelectElementFromApi(
+                          readOnly: !formModel.cantonControl.valid,
+                          formControl: formModel.parroquiaControl,
+                          label: l10n.parroquia,
+                          provider: LocationByParentProvider(
+                            parentId: formModel.cantonControl.value?.id ?? '',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  PrimaryText(l10n.callePrincipal),
+                  InputDecorationWidget(
+                    formControl: formModel.mainStreetControl,
+                    suffixIcon: SecondarySvgIconButton(
+                      svgIcon: Assets.svg.mapMarker.svg(),
+                      onPressed: () => selectLocationResidenceREgistration(
+                        context: context,
+                        formControl: formModel.mainStreetControl,
+                        ref: ref,
+                      ),
+                    ),
+                    onTap: () => selectLocationResidenceREgistration(
                       context: context,
                       formControl: formModel.mainStreetControl,
                       ref: ref,
                     ),
                   ),
-                  onTap: () => selectLocationResidenceREgistration(
-                    context: context,
-                    formControl: formModel.mainStreetControl,
-                    ref: ref,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                PrimaryText(l10n.calleSecundaria),
-                InputDecorationWidget(
-                  formControl: formModel.backStreetControl,
-                  suffixIcon: SecondarySvgIconButton(
-                    svgIcon: Assets.svg.mapMarker.svg(),
-                    onPressed: () => selectLocationResidenceREgistration(
+                  const SizedBox(height: 20),
+                  PrimaryText(l10n.calleSecundaria),
+                  InputDecorationWidget(
+                    formControl: formModel.backStreetControl,
+                    suffixIcon: SecondarySvgIconButton(
+                      svgIcon: Assets.svg.mapMarker.svg(),
+                      onPressed: () => selectLocationResidenceREgistration(
+                        context: context,
+                        formControl: formModel.backStreetControl,
+                        ref: ref,
+                      ),
+                    ),
+                    onTap: () => selectLocationResidenceREgistration(
                       context: context,
                       formControl: formModel.backStreetControl,
                       ref: ref,
                     ),
                   ),
-                  onTap: () => selectLocationResidenceREgistration(
-                    context: context,
-                    formControl: formModel.backStreetControl,
-                    ref: ref,
-                  ),
-                ),
-              ],
-            ).horizontalPadding(20),
+                ],
+              ).horizontalPadding(20),
+            ),
           ),
           bottomNavigationBar: ReactiveFirstStepResidenceModelFormConsumer(
             builder: (context, formModel, child) => PrimaryButton(
