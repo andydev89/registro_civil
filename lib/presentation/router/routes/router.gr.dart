@@ -550,6 +550,18 @@ class _$AppRouter extends RootStackRouter {
         child: const SecondStepResidencePage(),
       );
     },
+    TermAndUsesConditionsRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const TermAndUsesConditionsPage(),
+      );
+    },
+    ChangeOfNameFirstStepRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ChangeOfNameFirstStepPage(),
+      );
+    },
   };
 
   @override
@@ -2149,6 +2161,42 @@ class ContractingPartyRouteArgs {
   String toString() {
     return 'ContractingPartyRouteArgs{key: $key, indexContractingParty: $indexContractingParty}';
   }
+}
+
+/// generated route for
+/// [MainPageResicenceRegistrationPage]
+class MainRouteResicenceRegistrationRoute extends PageRouteInfo<void> {
+  const MainRouteResicenceRegistrationRoute()
+      : super(
+          MainRouteResicenceRegistrationRoute.name,
+          path: '',
+        );
+
+  static const String name = 'MainRouteResicenceRegistrationRoute';
+}
+
+/// generated route for
+/// [FirstStepResidencePage]
+class FirstStepResidenceRoute extends PageRouteInfo<void> {
+  const FirstStepResidenceRoute()
+      : super(
+          FirstStepResidenceRoute.name,
+          path: 'first-step-residence-page',
+        );
+
+  static const String name = 'FirstStepResidenceRoute';
+}
+
+/// generated route for
+/// [SecondStepResidencePage]
+class SecondStepResidenceRoute extends PageRouteInfo<void> {
+  const SecondStepResidenceRoute()
+      : super(
+          SecondStepResidenceRoute.name,
+          path: 'second-step-residence-page',
+        );
+
+  static const String name = 'SecondStepResidenceRoute';
 }
 
 /// generated route for
