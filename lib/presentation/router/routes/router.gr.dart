@@ -277,6 +277,12 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ChoosePaymentMethodRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ChoosePaymentMethodPage(),
+      );
+    },
     PaymentServiceJudgmentsNotarialActsRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -895,6 +901,11 @@ class _$AppRouter extends RootStackRouter {
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
+              ChoosePaymentMethodRoute.name,
+              path: 'choose-payment-method-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
               PaymentServiceJudgmentsNotarialActsRoute.name,
               path: 'payment-service-judgments-notarial-acts-page',
               parent: RootRouterRoute.name,
@@ -1486,6 +1497,18 @@ class WebviewPaymentRouteArgs {
   String toString() {
     return 'WebviewPaymentRouteArgs{key: $key, url: $url, onPageFinished: $onPageFinished}';
   }
+}
+
+/// generated route for
+/// [ChoosePaymentMethodPage]
+class ChoosePaymentMethodRoute extends PageRouteInfo<void> {
+  const ChoosePaymentMethodRoute()
+      : super(
+          ChoosePaymentMethodRoute.name,
+          path: 'choose-payment-method-page',
+        );
+
+  static const String name = 'ChoosePaymentMethodRoute';
 }
 
 /// generated route for

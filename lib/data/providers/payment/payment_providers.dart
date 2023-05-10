@@ -56,7 +56,9 @@ Future<void> checkPendingTransactions(
     status.when(
       ok: (transactionCompleted) {
         if (transactionCompleted) {
-          isar.placeToPayReferenceModels.deleteSync(element.id!);
+          isar.writeTxnSync(
+            () => isar.placeToPayReferenceModels.deleteSync(element.id!),
+          );
           ref.read(transactionsStatusProvider.notifier).addTransaction(element);
         }
       },

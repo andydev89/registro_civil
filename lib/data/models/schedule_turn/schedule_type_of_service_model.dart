@@ -24,7 +24,7 @@ class ScheduleTypeOfServiceModel extends Equatable {
   final double discount;
   final String? iconoMovil;
   final String? iconoWeb;
-  final int id;
+  final String id;
   final double iva;
   final String name;
   final double price;

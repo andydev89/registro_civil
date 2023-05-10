@@ -9,7 +9,7 @@ part of 'schedule_type_of_service_model.dart';
 ScheduleTypeOfServiceModel _$ScheduleTypeOfServiceModelFromJson(
         Map<String, dynamic> json) =>
     ScheduleTypeOfServiceModel(
-      id: json['id'] as int,
+      id: json['id'] as String,
       name: json['name'] as String,
       price: (json['price'] as num).toDouble(),
       iva: (json['iva'] as num).toDouble(),
