@@ -379,5 +379,10 @@
   "accion": "Action",
   "textoIntRegMat" : "Article 270.- Perjury and false testimony.- Any person who, when declaring, confessing, informing or translating before or to a competent authority, fails to tell the truth under oath, commits perjury, shall be punished with imprisonment of three to five years; When she does so without oath, commits false testimony, she will be punished with deprivation of liberty from one to three years. Similarly, perjury is committed when the truth has been knowingly lacked in sworn or sworn statements of assets made before a Notary Public. If perjury is committed in criminal proceedings, it shall be punished by deprivation of liberty for seven to ten years. If the false testimony is committed in criminal proceedings, it shall be punished by deprivation of liberty for a term of five to seven years. Exceptions are cases of versions and testimony of the suspect or the accused, both in the pre-trial phase and in the criminal process.",
   "aceptoAdv" : "I accept and understand the warning",
-  "advertencia" : "Warning"
+  "advertencia" : "Warning",
+  "cuentaLuzElectrica":"Do you have an electric light meter?",
+  "codigoElecNac": "National Single Electric Code",
+  "numerovillaedi": "Villa or building number",
+  "numeroPiso": "Floor number",
+  "numeroDepartamento": "Department number"
 }

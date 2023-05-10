@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
+import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/widgets/table_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
@@ -35,6 +36,7 @@ class ListOf<T> extends StatefulWidget {
 class _ListOfState<T> extends State<ListOf<T>> {
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -54,7 +56,9 @@ class _ListOfState<T> extends State<ListOf<T>> {
             Row(
               children: [
                 PrimaryText(
-                  '${widget.actualPage + 1}/${widget.items.length}',
+                  widget.items.isNotEmpty
+                      ? '${widget.actualPage + 1}/${widget.items.length}'
+                      : '',
                 ),
                 SizedBox(
                   width: 24,
@@ -72,19 +76,23 @@ class _ListOfState<T> extends State<ListOf<T>> {
         const SizedBox(height: 8),
         SizedBox(
           height: widget.height,
-          child: PageView(
-            onPageChanged: widget.onPageChanged,
-            children: widget.items
-                .mapIndexed(
-                  (index, e) => TableWidget<T>(
-                    fields: widget.fields.call(index),
-                    totalHeight: widget.height,
-                    actions: widget.actions,
-                    element: e,
-                  ),
+          child: widget.items.isNotEmpty
+              ? PageView(
+                  onPageChanged: widget.onPageChanged,
+                  children: widget.items
+                      .mapIndexed(
+                        (index, e) => TableWidget<T>(
+                          fields: widget.fields.call(index),
+                          totalHeight: widget.height,
+                          actions: widget.actions,
+                          element: e,
+                        ),
+                      )
+                      .toList(),
                 )
-                .toList(),
-          ),
+              : Center(
+                  child: PrimaryText(l10n.noHayElementosMostrar),
+                ),
         ),
       ],
     ).verticalPadding(10);

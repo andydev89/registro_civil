@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
+import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 
 class LogoBottomSheet extends StatelessWidget {
@@ -12,7 +13,7 @@ class LogoBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 45,
+      height: heightFooter,
       decoration: BoxDecoration(
         gradient: backgroundColor == null ? gradientePrincipal() : null,
         color: backgroundColor,
