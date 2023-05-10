@@ -198,6 +198,12 @@ class _$AppRouter extends RootStackRouter {
         child: const ResidenceRegistrationRouterPage(),
       );
     },
+    ChangeOfNameRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ChangeOfNameRouterPage(),
+      );
+    },
     NotificationRoute.name: (routeData) {
       final args = routeData.argsAs<NotificationRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -823,6 +829,24 @@ class _$AppRouter extends RootStackRouter {
               ],
             ),
             RouteConfig(
+              ChangeOfNameRouterRoute.name,
+              path: 'change-of-name-router-page',
+              parent: RootRouterRoute.name,
+              guards: [authGuard],
+              children: [
+                RouteConfig(
+                  TermAndUsesConditionsRoute.name,
+                  path: '',
+                  parent: ChangeOfNameRouterRoute.name,
+                ),
+                RouteConfig(
+                  ChangeOfNameFirstStepRoute.name,
+                  path: 'change-of-name-first-step-page',
+                  parent: ChangeOfNameRouterRoute.name,
+                ),
+              ],
+            ),
+            RouteConfig(
               NotificationRoute.name,
               path: 'notification-page',
               parent: RootRouterRoute.name,
@@ -1190,6 +1214,19 @@ class ResidenceRegistrationRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ResidenceRegistrationRouterRoute';
+}
+
+/// generated route for
+/// [ChangeOfNameRouterPage]
+class ChangeOfNameRouterRoute extends PageRouteInfo<void> {
+  const ChangeOfNameRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          ChangeOfNameRouterRoute.name,
+          path: 'change-of-name-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'ChangeOfNameRouterRoute';
 }
 
 /// generated route for
@@ -2115,37 +2152,25 @@ class ContractingPartyRouteArgs {
 }
 
 /// generated route for
-/// [MainPageResicenceRegistrationPage]
-class MainRouteResicenceRegistrationRoute extends PageRouteInfo<void> {
-  const MainRouteResicenceRegistrationRoute()
+/// [TermAndUsesConditionsPage]
+class TermAndUsesConditionsRoute extends PageRouteInfo<void> {
+  const TermAndUsesConditionsRoute()
       : super(
-          MainRouteResicenceRegistrationRoute.name,
+          TermAndUsesConditionsRoute.name,
           path: '',
         );
 
-  static const String name = 'MainRouteResicenceRegistrationRoute';
+  static const String name = 'TermAndUsesConditionsRoute';
 }
 
 /// generated route for
-/// [FirstStepResidencePage]
-class FirstStepResidenceRoute extends PageRouteInfo<void> {
-  const FirstStepResidenceRoute()
+/// [ChangeOfNameFirstStepPage]
+class ChangeOfNameFirstStepRoute extends PageRouteInfo<void> {
+  const ChangeOfNameFirstStepRoute()
       : super(
-          FirstStepResidenceRoute.name,
-          path: 'first-step-residence-page',
+          ChangeOfNameFirstStepRoute.name,
+          path: 'change-of-name-first-step-page',
         );
 
-  static const String name = 'FirstStepResidenceRoute';
-}
-
-/// generated route for
-/// [SecondStepResidencePage]
-class SecondStepResidenceRoute extends PageRouteInfo<void> {
-  const SecondStepResidenceRoute()
-      : super(
-          SecondStepResidenceRoute.name,
-          path: 'second-step-residence-page',
-        );
-
-  static const String name = 'SecondStepResidenceRoute';
+  static const String name = 'ChangeOfNameFirstStepRoute';
 }

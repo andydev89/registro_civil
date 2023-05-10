@@ -52,6 +52,8 @@ PageRouteInfo<dynamic> getMarriageCelebration() =>
 PageRouteInfo<dynamic> getResidencyRegistration() =>
     const ResidenceRegistrationRouterRoute();
 
+PageRouteInfo<dynamic> getChangeOfName() => const ChangeOfNameRouterRoute();
+
 PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   final type = typeServiceModel.type;
   if (type.isSimpleCertificate) {
@@ -65,6 +67,9 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   }
   if (type.isResidencyRegistration) {
     return getResidencyRegistration();
+  }
+  if (type.isChangeOfName) {
+    return getChangeOfName();
   }
   return getMarriageCelebration();
 }

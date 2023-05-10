@@ -19,6 +19,9 @@ import 'package:registro_civil_apk/presentation/pages/auth/register/step_5_page.
 import 'package:registro_civil_apk/presentation/pages/auth/scan/scan_face_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/scan/scan_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.dart';
+import 'package:registro_civil_apk/presentation/pages/chage_of_name/chage_of_name_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/chage_of_name/page/change_of_name_first_step_page.dart';
+import 'package:registro_civil_apk/presentation/pages/chage_of_name/page/term_and_use_conditions_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/services/services_page.dart';
@@ -218,7 +221,8 @@ part 'router.gr.dart';
               page: SimpleCertificateSecondStepPage,
             ),
           ],
-        ), // MARRIAGE CELEBRATION
+        ),
+        // MARRIAGE CELEBRATION
         CupertinoRoute(
           guards: [AuthGuard],
           page: MarriageCelebrationRouterPage,
@@ -300,6 +304,20 @@ part 'router.gr.dart';
             ),
             CupertinoRoute(
               page: SecondStepResidencePage,
+            ),
+          ],
+        ),
+        //CAMBIO DE NOMBRE
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: ChangeOfNameRouterPage,
+          children: [
+            CupertinoRoute(
+              page: TermAndUsesConditionsPage,
+              initial: true,
+            ),
+            CupertinoRoute(
+              page: ChangeOfNameFirstStepPage,
             ),
           ],
         ),
