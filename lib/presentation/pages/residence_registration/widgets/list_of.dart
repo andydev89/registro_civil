@@ -18,10 +18,12 @@ class ListOf<T> extends StatefulWidget {
     required this.actions,
     required this.actualPage,
     required this.height,
+    required this.showAdd,
   });
   final Widget icon;
   final String title;
   final void Function()? add;
+  final bool showAdd;
   final List<T> items;
   final void Function(int)? onPageChanged;
   final Map<String, String> Function(int index) fields;
@@ -60,15 +62,16 @@ class _ListOfState<T> extends State<ListOf<T>> {
                       ? '${widget.actualPage + 1}/${widget.items.length}'
                       : '',
                 ),
-                SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: IconButton(
-                    onPressed: widget.add,
-                    icon: Crud.create.toIcon(context),
-                    padding: EdgeInsets.zero,
+                if (widget.showAdd)
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: IconButton(
+                      onPressed: widget.add,
+                      icon: Crud.create.toIcon(context),
+                      padding: EdgeInsets.zero,
+                    ),
                   ),
-                ),
               ],
             )
           ],

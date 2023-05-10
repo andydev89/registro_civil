@@ -4728,7 +4728,7 @@ class SecondStepResidenceModelForm
   FormGroup formElements() => FormGroup({
         electricLightMeterControlName: FormControl<bool>(
             value: secondStepResidenceModel?.electricLightMeter,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

@@ -6,7 +6,7 @@ part of 'residence_registration_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$residenceRegHash() => r'e3f238c17344f5469bc54b99d036c919037a05b5';
+String _$residenceRegHash() => r'33e9257d417006fa6b16d78e41c4324cb3ab160c';
 
 /// See also [ResidenceReg].
 @ProviderFor(ResidenceReg)
@@ -21,7 +21,7 @@ final residenceRegProvider =
 );
 
 typedef _$ResidenceReg = AutoDisposeNotifier<ResidenceRegistration>;
-String _$residentialPHash() => r'c8b0abc2abdd6a5fb2ff562fda68e19ca5c78b75';
+String _$residentialPHash() => r'327579295550f713141462d04f53d46544897a83';
 
 /// See also [ResidentialP].
 @ProviderFor(ResidentialP)

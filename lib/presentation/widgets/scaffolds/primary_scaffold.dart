@@ -56,7 +56,7 @@ class PrimaryScaffold extends StatelessWidget {
               ],
             ).horizontalPadding(horizontalPadding),
           ),
-          bottomSheet:
+          bottomNavigationBar:
               bottomNavigationBar == null ? null : bottomNavigationBar!,
         ),
       ),

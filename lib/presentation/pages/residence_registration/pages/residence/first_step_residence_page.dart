@@ -22,6 +22,7 @@ class FirstStepResidencePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    ref.watch(residentialPProvider);
     return FirstStepResidenceModelFormBuilder(
       builder: (context, formModel, snapshot) {
         return PrimaryScaffold(
@@ -107,7 +108,7 @@ class FirstStepResidencePage extends ConsumerWidget {
                       ref
                           .read(residentialPProvider.notifier)
                           .updateFirstStep(formModel.model);
-                      context.replaceRoute(const SecondStepResidenceRoute());
+                      context.navigateTo(const SecondStepResidenceRoute());
                     }
                   : null,
               title: l10n.siguiente,

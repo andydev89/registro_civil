@@ -3,19 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_dependent_relation.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_housing_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_type_agreemente.dart';
-import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
-import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
+import 'package:registro_civil_apk/data/providers/residence_registration/residence_registration_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/utils/residence_registration_utils.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/widgets/list_of.dart';
 import 'package:registro_civil_apk/presentation/providers/page_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_area_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
@@ -40,98 +36,8 @@ class _MainPageResicenceRegistrationPageState
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final itemsResidential = <Residential>[
-      // Residential(
-      //   electricLightMeter: true,
-      //   electricalCode: '1234567890',
-      //   province: LocationModel(
-      //     id: 'aadsda',
-      //     name: 'La Habana',
-      //     type: 'type',
-      //   ),
-      //   canton: LocationModel(
-      //     id: '3cdfd',
-      //     name: 'Centro Habana',
-      //     type: 'type',
-      //   ),
-      //   parroquia: LocationModel(
-      //     id: '234jsdf',
-      //     name: 'Cayo Hueso',
-      //     type: 'type',
-      //   ),
-      //   mainStreet: 'mainStreet',
-      //   backStreet: 'backStreet',
-      //   housingType: ResidentialHousingType.apartamento,
-      //   tenureHousingTypeAgreement:
-      //       ResidentialTenureHousingTypeAgreemente.propia,
-      //   numberVillaBuilding: '23',
-      //   floorNumber: '34',
-      //   departmentNumber: '23',
-      //   type: ResidenceType.principal,
-      //   dependents: [
-      //     Dependent(
-      //       nuiDependents: '1010101010',
-      //       relationship: ResidentialDependentRelation.none,
-      //       date: 'dffdf',
-      //       name: 'Jang',
-      //       lastname: 'Acuna Ferrer',
-      //       state: Status.active,
-      //     ),
-      //     Dependent(
-      //       nuiDependents: '1212121212',
-      //       relationship: ResidentialDependentRelation.none,
-      //       date: 'wjfdf',
-      //       name: 'Yinna',
-      //       lastname: 'Herrera Alfonso',
-      //       state: Status.active,
-      //     ),
-      //   ],
-      // ),
-      // Residential(
-      //   province: LocationModel(
-      //     id: 'ewsdcds',
-      //     name: 'Matanzas',
-      //     type: 'type',
-      //   ),
-      //   canton: LocationModel(
-      //     id: 'dfksf',
-      //     name: 'Pastorita',
-      //     type: 'type',
-      //   ),
-      //   parroquia: LocationModel(
-      //     id: 'asda',
-      //     name: 'Algo',
-      //     type: 'type',
-      //   ),
-      //   mainStreet: 'dfsdf',
-      //   backStreet: 'dsfsd df',
-      //   housingType: ResidentialHousingType.aticos,
-      //   tenureHousingTypeAgreement:
-      //       ResidentialTenureHousingTypeAgreemente.porServicios,
-      //   numberVillaBuilding: '23',
-      //   floorNumber: '32423',
-      //   departmentNumber: '13',
-      //   type: ResidenceType.secundaria,
-      //   dependents: [
-      //     Dependent(
-      //       nuiDependents: '1313131313',
-      //       relationship: ResidentialDependentRelation.discapacitado,
-      //       date: 'sad',
-      //       name: 'Asjd',
-      //       lastname: 'Jjdf Yjsd',
-      //       state: Status.active,
-      //     ),
-      //     Dependent(
-      //       nuiDependents: '1414141414',
-      //       relationship: ResidentialDependentRelation.terceraEdad,
-      //       date: 'kdf',
-      //       name: 'Hjsdf',
-      //       lastname: 'JKHk Wudfnd',
-      //       state: Status.active,
-      //     ),
-      //   ],
-      // ),
-    ];
+    final residence = ref.watch(residenceRegProvider);
+    final itemsResidential = residence.residentials;
     ref.listen(pageProvider(0), (previous, next) {
       if (previous != next) {
         ref.read(pageProvider(1).notifier).state = 0;
@@ -140,6 +46,7 @@ class _MainPageResicenceRegistrationPageState
     final actualPage = ref.watch(pageProvider(0));
     final actualPageDependents = ref.watch(pageProvider(1));
     final size = MediaQuery.of(context).size;
+    var maxHeight = 0.0;
     return ResidenceRegistrationFormBuilder(
       builder: (context, formModel, child) => PrimaryScaffold(
         title: l10n.registroRes,
@@ -155,6 +62,7 @@ class _MainPageResicenceRegistrationPageState
                   add: () => context.navigateTo(
                     const FirstStepResidenceRoute(),
                   ),
+                  showAdd: true,
                   onPageChanged: (p0) =>
                       ref.read(pageProvider(0).notifier).state = p0,
                   actualPage: actualPage,
@@ -162,7 +70,12 @@ class _MainPageResicenceRegistrationPageState
                   actions: {
                     Crud.update: (p0) {},
                     Crud.read: (p0) {},
-                    Crud.delete: (p0) {},
+                    Crud.delete: (p0) => showDeleteDialog(
+                          context,
+                          onDelete: () => ref
+                              .read(residenceRegProvider.notifier)
+                              .removeResidence(p0),
+                        ),
                   },
                   fields: (index) => <String, String>{
                     l10n.tipoDeVivienda:
@@ -177,6 +90,7 @@ class _MainPageResicenceRegistrationPageState
                   key: Key(actualPage.toString()),
                   icon: const Icon(Icons.groups_2),
                   title: l10n.dependientes,
+                  showAdd: itemsResidential.isNotEmpty,
                   items: itemsResidential.isNotEmpty
                       ? itemsResidential[actualPage].dependents
                       : [],

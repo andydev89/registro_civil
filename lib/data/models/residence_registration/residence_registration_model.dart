@@ -286,7 +286,7 @@ class FirstStepResidenceModel {
 @ReactiveFormAnnotation()
 class SecondStepResidenceModel {
   SecondStepResidenceModel({
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation<bool>()
         required this.electricLightMeter,
     @FormControlAnnotation<String>() required this.electricalCode,
     @FormControlAnnotation(validators: [requiredValidator])

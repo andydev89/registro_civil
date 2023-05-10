@@ -384,6 +384,8 @@
   "codigoElecNac": "Código único eléctrico nacional",
   "numerovillaedi": "Número de villa o edificio",
   "numeroPiso": "Número de piso",
-  "numeroDepartamento": "Número de departamento"
+  "numeroDepartamento": "Número de departamento",
+"eliminar": "Eliminar",
+"seguroeliminarresidence": "¿Está seguro que desea eliminar esta residencia?"
 
 }
