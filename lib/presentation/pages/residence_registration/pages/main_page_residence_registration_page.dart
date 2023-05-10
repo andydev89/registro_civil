@@ -46,7 +46,6 @@ class _MainPageResicenceRegistrationPageState
     final actualPage = ref.watch(pageProvider(0));
     final actualPageDependents = ref.watch(pageProvider(1));
     final size = MediaQuery.of(context).size;
-    var maxHeight = 0.0;
     return ResidenceRegistrationFormBuilder(
       builder: (context, formModel, child) => PrimaryScaffold(
         title: l10n.registroRes,

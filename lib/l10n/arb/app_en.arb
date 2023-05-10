@@ -386,5 +386,8 @@
   "numeroPiso": "Floor number",
   "numeroDepartamento": "Department number",
   "eliminar": "Delete",
-  "seguroeliminarresidence": "Are you sure you want to delete this residence?"
+  "seguroeliminarresidence": "Are you sure you want to delete this residence?",
+  "limpiar": "Clear",
+  "limpiarCarrito": "Clear cart",
+  "tenercuentaLimpiarCarrito": "Keep in mind that when you give clean all orders will be removed from the cart."
 }

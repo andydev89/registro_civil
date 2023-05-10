@@ -1,10 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/sliding_dialog.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
@@ -177,12 +180,21 @@ class OffersWidget extends ConsumerWidget {
           children: [
             PrimaryButton(
               title: l10n.pagar,
-              onPressed: () {},
+              onPressed: () {
+                controller.closeDialog(context);
+                context.navigateTo(const ChoosePaymentMethodRoute());
+              },
             ),
             const SizedBox(height: 10),
             PrimaryButton(
-              title: l10n.realizarSol,
-              onPressed: () {},
+              title: l10n.limpiar,
+              onPressed: () => showDeleteDialog(
+                context,
+                title: l10n.limpiarCarrito,
+                message: l10n.tenercuentaLimpiarCarrito,
+                deleteText: l10n.limpiar,
+                onDelete: () {},
+              ),
             ),
           ],
         ).symmetricPadding(10, 30),

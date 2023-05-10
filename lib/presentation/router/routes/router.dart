@@ -42,6 +42,7 @@ import 'package:registro_civil_apk/presentation/pages/my_orders/pages/my_order_r
 import 'package:registro_civil_apk/presentation/pages/my_orders/pages/my_orders_page.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/pages/my_turns_page.dart';
 import 'package:registro_civil_apk/presentation/pages/notification/notification_page.dart';
+import 'package:registro_civil_apk/presentation/pages/payment/choose_payment_method_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/select_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/webview_payment_page.dart';
@@ -347,6 +348,9 @@ part 'router.gr.dart';
         ),
         CupertinoRoute(
           page: WebviewPaymentPage,
+        ),
+        CupertinoRoute(
+          page: ChoosePaymentMethodPage,
         ),
         // PaymentServiceJudgmentsNotarialActsPage
         CupertinoRoute(

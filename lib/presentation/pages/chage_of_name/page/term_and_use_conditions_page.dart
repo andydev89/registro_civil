@@ -14,7 +14,7 @@ class TermAndUsesConditionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO traducir los textos
+    // TODO(alejandro): traducir los textos
     final l10n = context.l10n;
     return TermAndUseConditionsModelFormBuilder(
       builder: (context, formModel, child) => PrimaryScaffold(
@@ -64,7 +64,8 @@ class TermAndUsesConditionsPage extends StatelessWidget {
                 PrimaryReactiveCheckBox(
                   formControl: formModel.acceptControl,
                   label:
-                      'He leído y aceptado los términos y condiciones del trámite.',
+                      'He leído y aceptado los términos '
+                      'y condiciones del trámite.',
                 ).verticalPadding(20),
                 ReactiveTermAndUseConditionsModelFormConsumer(
                   builder: (context, formModel, child) {
