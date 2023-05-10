@@ -139,3 +139,46 @@ Future<void> showMapPickerDialog(
     },
   );
 }
+
+// crear un delete dialog con el delete en rojo
+Future<void> showDeleteDialog(
+  BuildContext context, {
+  String? title,
+  String? message,
+  String? deleteText,
+  String? cancelText,
+  required void Function() onDelete,
+}) {
+  final l10n = context.l10n;
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: PrimaryTitle(title: title ?? l10n.eliminar),
+        content: PrimaryText(message ?? l10n.seguroeliminarresidence),
+        actions: [
+          Column(
+            children: [
+              PrimaryButton(
+                onPressed: () {
+                  context.popRoute();
+                  onDelete.call();
+                },
+                title: deleteText ?? l10n.eliminar,
+                backgroundColor: Colors.red,
+              ),
+              const SizedBox(height: 10),
+              PrimaryButton(
+                onPressed: () => context.popRoute(),
+                title: cancelText ?? l10n.cancelar,
+              ),
+            ],
+          ).symmetricPadding(10, 30),
+        ],
+      );
+    },
+  );
+}

@@ -20,53 +20,54 @@ ResidenceRegistration _$ResidenceRegistrationFromJson(
 Map<String, dynamic> _$ResidenceRegistrationToJson(
         ResidenceRegistration instance) =>
     <String, dynamic>{
-      'userId': instance.userId,
       'observations': instance.observations,
       'residentials': instance.residentials.map((e) => e.toJson()).toList(),
+      'userId': instance.userId,
     };
 
 Residential _$ResidentialFromJson(Map<String, dynamic> json) => Residential(
-      electricLightMeter: json['electricLightMeter'] as bool,
-      electricalCode: json['electricalCode'] as String,
+      electricLightMeter: json['electricLightMeter'] as bool? ?? false,
+      electricalCode: json['electricalCode'] as String? ?? '',
       province:
           LocationModel.fromJson(json['province'] as Map<String, dynamic>),
       canton: LocationModel.fromJson(json['canton'] as Map<String, dynamic>),
       parroquia:
           LocationModel.fromJson(json['parroquia'] as Map<String, dynamic>),
-      mainStreet: json['mainStreet'] as String,
-      backStreet: json['backStreet'] as String,
+      mainStreet: json['mainStreet'] as String? ?? '',
+      backStreet: json['backStreet'] as String? ?? '',
       housingType:
           $enumDecode(_$ResidentialHousingTypeEnumMap, json['housingType']),
       tenureHousingTypeAgreement: $enumDecode(
           _$ResidentialTenureHousingTypeAgreementeEnumMap,
           json['tenureHousingTypeAgreement']),
-      numberVillaBuilding: json['numberVillaBuilding'] as String,
-      floorNumber: json['floorNumber'] as String,
-      departmentNumber: json['departmentNumber'] as String,
+      numberVillaBuilding: json['numberVillaBuilding'] as String? ?? '',
+      floorNumber: json['floorNumber'] as String? ?? '',
+      departmentNumber: json['departmentNumber'] as String? ?? '',
       type: $enumDecode(_$ResidenceTypeEnumMap, json['type']),
-      dependents: (json['dependents'] as List<dynamic>)
-          .map((e) => Dependent.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      dependents: (json['dependents'] as List<dynamic>?)
+              ?.map((e) => Dependent.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$ResidentialToJson(Residential instance) =>
     <String, dynamic>{
-      'electricLightMeter': instance.electricLightMeter,
       'electricalCode': instance.electricalCode,
-      'province': Residential._locationToJson(instance.province),
+      'electricLightMeter': instance.electricLightMeter,
       'canton': Residential._locationToJson(instance.canton),
-      'parroquia': Residential._locationToJson(instance.parroquia),
+      'departmentNumber': instance.departmentNumber,
+      'dependents': instance.dependents,
+      'floorNumber': instance.floorNumber,
+      'housingType': ResidentialHousingType.toJson(instance.housingType),
       'mainStreet': instance.mainStreet,
       'backStreet': instance.backStreet,
-      'housingType': ResidentialHousingType.toJson(instance.housingType),
+      'numberVillaBuilding': instance.numberVillaBuilding,
+      'parroquia': Residential._locationToJson(instance.parroquia),
+      'province': Residential._locationToJson(instance.province),
       'tenureHousingTypeAgreement':
           ResidentialTenureHousingTypeAgreemente.toJson(
               instance.tenureHousingTypeAgreement),
-      'numberVillaBuilding': instance.numberVillaBuilding,
-      'floorNumber': instance.floorNumber,
-      'departmentNumber': instance.departmentNumber,
       'type': ResidenceType.toJson(instance.type),
-      'dependents': instance.dependents,
     };
 
 const _$ResidentialHousingTypeEnumMap = {
@@ -104,12 +105,12 @@ Dependent _$DependentFromJson(Map<String, dynamic> json) => Dependent(
     );
 
 Map<String, dynamic> _$DependentToJson(Dependent instance) => <String, dynamic>{
+      'date': instance.date,
+      'lastname': instance.lastname,
+      'name': instance.name,
       'nuiDependents': instance.nuiDependents,
       'relationship':
           ResidentialDependentRelation.toJson(instance.relationship),
-      'date': instance.date,
-      'name': instance.name,
-      'lastname': instance.lastname,
       'state': Dependent._toJson(instance.state),
     };
 

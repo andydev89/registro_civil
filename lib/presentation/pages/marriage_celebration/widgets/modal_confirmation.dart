@@ -34,6 +34,7 @@ class ModalConfirmation extends StatelessWidget {
             PrimaryText(
               l10n.confirmacionMarriageCelebration,
               textAlign: TextAlign.start,
+              maxLines: null,
             ),
             const SizedBox(height: 30),
           ],

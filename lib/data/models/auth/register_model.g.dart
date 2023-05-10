@@ -106,6 +106,7 @@ MeModel _$MeModelFromJson(Map<String, dynamic> json) => MeModel(
               ?.map((e) => Aplication.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      phone: json['phone'] as String? ?? '',
     );
 
 Map<String, dynamic> _$MeModelToJson(MeModel instance) => <String, dynamic>{
@@ -116,6 +117,7 @@ Map<String, dynamic> _$MeModelToJson(MeModel instance) => <String, dynamic>{
       'email': instance.email,
       'type': instance.type,
       'state': _$StatusEnumMap[instance.state]!,
+      'phone': instance.phone,
       'profile': instance.profile,
       'agency': instance.agency,
       'aplication': instance.aplication,

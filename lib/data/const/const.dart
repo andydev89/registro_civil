@@ -7,4 +7,6 @@ const gradienteApp = [
   Color.fromRGBO(0, 78, 146, 0.8),
 ];
 
+const heightFooter = 45.0;
+
 const String baseUrl = 'https://api.registro-civil.ddns.net/';

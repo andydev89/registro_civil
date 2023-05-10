@@ -532,6 +532,24 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    MainRouteResicenceRegistrationRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const MainPageResicenceRegistrationPage(),
+      );
+    },
+    FirstStepResidenceRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const FirstStepResidencePage(),
+      );
+    },
+    SecondStepResidenceRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const SecondStepResidencePage(),
+      );
+    },
     TermAndUsesConditionsRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -804,6 +822,23 @@ class _$AppRouter extends RootStackRouter {
               path: 'residence-registration-router-page',
               parent: RootRouterRoute.name,
               guards: [authGuard],
+              children: [
+                RouteConfig(
+                  MainRouteResicenceRegistrationRoute.name,
+                  path: '',
+                  parent: ResidenceRegistrationRouterRoute.name,
+                ),
+                RouteConfig(
+                  FirstStepResidenceRoute.name,
+                  path: 'first-step-residence-page',
+                  parent: ResidenceRegistrationRouterRoute.name,
+                ),
+                RouteConfig(
+                  SecondStepResidenceRoute.name,
+                  path: 'second-step-residence-page',
+                  parent: ResidenceRegistrationRouterRoute.name,
+                ),
+              ],
             ),
             RouteConfig(
               ChangeOfNameRouterRoute.name,
@@ -1183,10 +1218,11 @@ class MarriageCelebrationRouterRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ResidenceRegistrationRouterPage]
 class ResidenceRegistrationRouterRoute extends PageRouteInfo<void> {
-  const ResidenceRegistrationRouterRoute()
+  const ResidenceRegistrationRouterRoute({List<PageRouteInfo>? children})
       : super(
           ResidenceRegistrationRouterRoute.name,
           path: 'residence-registration-router-page',
+          initialChildren: children,
         );
 
   static const String name = 'ResidenceRegistrationRouterRoute';
@@ -2125,6 +2161,42 @@ class ContractingPartyRouteArgs {
   String toString() {
     return 'ContractingPartyRouteArgs{key: $key, indexContractingParty: $indexContractingParty}';
   }
+}
+
+/// generated route for
+/// [MainPageResicenceRegistrationPage]
+class MainRouteResicenceRegistrationRoute extends PageRouteInfo<void> {
+  const MainRouteResicenceRegistrationRoute()
+      : super(
+          MainRouteResicenceRegistrationRoute.name,
+          path: '',
+        );
+
+  static const String name = 'MainRouteResicenceRegistrationRoute';
+}
+
+/// generated route for
+/// [FirstStepResidencePage]
+class FirstStepResidenceRoute extends PageRouteInfo<void> {
+  const FirstStepResidenceRoute()
+      : super(
+          FirstStepResidenceRoute.name,
+          path: 'first-step-residence-page',
+        );
+
+  static const String name = 'FirstStepResidenceRoute';
+}
+
+/// generated route for
+/// [SecondStepResidencePage]
+class SecondStepResidenceRoute extends PageRouteInfo<void> {
+  const SecondStepResidenceRoute()
+      : super(
+          SecondStepResidenceRoute.name,
+          path: 'second-step-residence-page',
+        );
+
+  static const String name = 'SecondStepResidenceRoute';
 }
 
 /// generated route for

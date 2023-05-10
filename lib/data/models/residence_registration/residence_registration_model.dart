@@ -25,9 +25,9 @@ class ResidenceRegistration {
   factory ResidenceRegistration.fromJson(Map<String, dynamic> json) =>
       _$ResidenceRegistrationFromJson(json);
 
-  final String userId;
   final String observations;
   final List<Residential> residentials;
+  final String userId;
 
   Map<String, dynamic> toJson() => _$ResidenceRegistrationToJson(this);
 
@@ -49,8 +49,8 @@ class ResidenceRegistration {
 class Residential {
   Residential({
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.electricLightMeter,
-    @FormControlAnnotation<String>() required this.electricalCode,
+        this.electricLightMeter = false,
+    @FormControlAnnotation<String>() this.electricalCode = '',
     @FormControlAnnotation(validators: [requiredValidator])
         required this.province,
     @FormControlAnnotation(validators: [requiredValidator])
@@ -58,51 +58,53 @@ class Residential {
     @FormControlAnnotation(validators: [requiredValidator])
         required this.parroquia,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.mainStreet,
+        this.mainStreet = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.backStreet,
+        this.backStreet = '',
     @FormControlAnnotation(validators: [requiredValidator])
         required this.housingType,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.tenureHousingTypeAgreement,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.numberVillaBuilding,
+        this.numberVillaBuilding = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.floorNumber,
+        this.floorNumber = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.departmentNumber,
+        this.departmentNumber = '',
     @FormControlAnnotation(validators: [requiredValidator]) required this.type,
-    @FormArrayAnnotation<Dependent>() required this.dependents,
+    @FormArrayAnnotation<Dependent>() this.dependents = const [],
   });
 
   factory Residential.fromJson(Map<String, dynamic> json) =>
       _$ResidentialFromJson(json);
-  final bool electricLightMeter;
+
   final String electricalCode;
-  @JsonKey(toJson: _locationToJson)
-  final LocationModel province;
+  final bool electricLightMeter;
   @JsonKey(toJson: _locationToJson)
   final LocationModel canton;
-  @JsonKey(toJson: _locationToJson)
-  final LocationModel parroquia;
-  final String mainStreet;
-  final String backStreet;
+  final String departmentNumber;
+  final List<Dependent> dependents;
+  final String floorNumber;
   @JsonKey(toJson: ResidentialHousingType.toJson)
   final ResidentialHousingType housingType;
+  final String mainStreet;
+  final String backStreet;
+  final String numberVillaBuilding;
+  @JsonKey(toJson: _locationToJson)
+  final LocationModel parroquia;
+
+  @JsonKey(toJson: _locationToJson)
+  final LocationModel province;
+
   @JsonKey(toJson: ResidentialTenureHousingTypeAgreemente.toJson)
   final ResidentialTenureHousingTypeAgreemente tenureHousingTypeAgreement;
-  final String numberVillaBuilding;
-  final String floorNumber;
-  final String departmentNumber;
+
   @JsonKey(toJson: ResidenceType.toJson)
   final ResidenceType type;
-  final List<Dependent> dependents;
 
   String get address => '$mainStreet, $backStreet #$numberVillaBuilding';
 
   Map<String, dynamic> toJson() => _$ResidentialToJson(this);
-
-  static String? _locationToJson(LocationModel? model) => model?.id;
 
   Residential copyWith({
     bool? electricLightMeter,
@@ -138,6 +140,51 @@ class Residential {
       dependents: dependents ?? this.dependents,
     );
   }
+
+  Residential copyWithFromFirstStepResidenceModel(
+    FirstStepResidenceModel firstStepResidenceModel,
+  ) {
+    return Residential(
+      electricLightMeter: electricLightMeter,
+      electricalCode: electricalCode,
+      province: firstStepResidenceModel.province,
+      canton: firstStepResidenceModel.canton,
+      parroquia: firstStepResidenceModel.parroquia,
+      mainStreet: firstStepResidenceModel.mainStreet,
+      backStreet: firstStepResidenceModel.backStreet,
+      housingType: housingType,
+      tenureHousingTypeAgreement: tenureHousingTypeAgreement,
+      numberVillaBuilding: numberVillaBuilding,
+      floorNumber: floorNumber,
+      departmentNumber: departmentNumber,
+      type: type,
+      dependents: dependents,
+    );
+  }
+
+  Residential copyWithFromSecondStepResidenceModel(
+    SecondStepResidenceModel secondStepResidenceModel,
+  ) {
+    return Residential(
+      electricLightMeter: secondStepResidenceModel.electricLightMeter,
+      electricalCode: secondStepResidenceModel.electricalCode,
+      province: province,
+      canton: canton,
+      parroquia: parroquia,
+      mainStreet: mainStreet,
+      backStreet: backStreet,
+      housingType: secondStepResidenceModel.housingType,
+      tenureHousingTypeAgreement:
+          secondStepResidenceModel.tenureHousingTypeAgreement,
+      numberVillaBuilding: secondStepResidenceModel.numberVillaBuilding,
+      floorNumber: secondStepResidenceModel.floorNumber,
+      departmentNumber: secondStepResidenceModel.departmentNumber,
+      type: secondStepResidenceModel.type,
+      dependents: dependents,
+    );
+  }
+
+  static String? _locationToJson(LocationModel? model) => model?.id;
 }
 
 @ReactiveFormAnnotation()
@@ -157,12 +204,14 @@ class Dependent {
 
   factory Dependent.fromJson(Map<String, dynamic> json) =>
       _$DependentFromJson(json);
+
+  final String date;
+  final String lastname;
+  final String name;
   final String nuiDependents;
   @JsonKey(toJson: ResidentialDependentRelation.toJson)
   final ResidentialDependentRelation relationship;
-  final String date;
-  final String name;
-  final String lastname;
+
   @JsonKey(toJson: _toJson)
   final Status state;
 
@@ -184,16 +233,96 @@ class Dependent {
     );
   }
 
-  static String? _toJson(Status? status) => status?.name;
-
   Map<String, dynamic> toJson() => _$DependentToJson(this);
+
+  static String? _toJson(Status? status) => status?.name;
 }
 
 @ReactiveFormAnnotation()
 class AceptAgreement {
   AceptAgreement({
-   @FormControlAnnotation(validators: [trueValidator]) this.acept = false,
+    @FormControlAnnotation(validators: [trueValidator]) this.acept = false,
   });
 
   final bool acept;
+}
+
+@ReactiveFormAnnotation()
+class FirstStepResidenceModel {
+  FirstStepResidenceModel({
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.province,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.canton,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.parroquia,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.mainStreet,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.backStreet,
+  });
+
+  FirstStepResidenceModel.fromResidential(Residential residential)
+      : province = residential.province,
+        canton = residential.canton,
+        parroquia = residential.parroquia,
+        mainStreet = residential.mainStreet,
+        backStreet = residential.backStreet;
+
+  final String backStreet;
+  @JsonKey(toJson: _locationToJson)
+  final LocationModel canton;
+
+  final String mainStreet;
+  @JsonKey(toJson: _locationToJson)
+  final LocationModel parroquia;
+
+  @JsonKey(toJson: _locationToJson)
+  final LocationModel province;
+
+  static String? _locationToJson(LocationModel? model) => model?.id;
+}
+
+@ReactiveFormAnnotation()
+class SecondStepResidenceModel {
+  SecondStepResidenceModel({
+    @FormControlAnnotation<bool>()
+        required this.electricLightMeter,
+    @FormControlAnnotation<String>() required this.electricalCode,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.housingType,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.tenureHousingTypeAgreement,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.numberVillaBuilding,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.floorNumber,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.departmentNumber,
+    @FormControlAnnotation(validators: [requiredValidator]) required this.type,
+  });
+
+  SecondStepResidenceModel.fromResidential(Residential residential)
+      : electricLightMeter = residential.electricLightMeter,
+        electricalCode = residential.electricalCode,
+        housingType = residential.housingType,
+        tenureHousingTypeAgreement = residential.tenureHousingTypeAgreement,
+        numberVillaBuilding = residential.numberVillaBuilding,
+        floorNumber = residential.floorNumber,
+        departmentNumber = residential.departmentNumber,
+        type = residential.type;
+
+  final String departmentNumber;
+  final bool electricLightMeter;
+  final String electricalCode;
+  final String floorNumber;
+  @JsonKey(toJson: ResidentialHousingType.toJson)
+  final ResidentialHousingType housingType;
+
+  final String numberVillaBuilding;
+  @JsonKey(toJson: ResidentialTenureHousingTypeAgreemente.toJson)
+  final ResidentialTenureHousingTypeAgreemente tenureHousingTypeAgreement;
+
+  @JsonKey(toJson: ResidenceType.toJson)
+  final ResidenceType type;
 }

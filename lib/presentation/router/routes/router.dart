@@ -46,6 +46,9 @@ import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.
 import 'package:registro_civil_apk/presentation/pages/payment/select_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/webview_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts_page.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/main_page_residence_registration_page.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/residence/first_step_residence_page.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/residence/second_step_residence_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/residence_registration_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/code_page.dart';
@@ -291,18 +294,18 @@ part 'router.gr.dart';
         CupertinoRoute(
           guards: [AuthGuard],
           page: ResidenceRegistrationRouterPage,
-          // children: [
-          //   CupertinoRoute(
-          //     page: RequestInformationFirstStepPage,
-          //     initial: true,
-          //   ),
-          //   CupertinoRoute(
-          //     page: RequestInformationSecondStepPage,
-          //   ),
-          //   CupertinoRoute(
-          //     page: RequestInformationThirdStepPage,
-          //   ),
-          // ],
+          children: [
+            CupertinoRoute(
+              page: MainPageResicenceRegistrationPage,
+              initial: true,
+            ),
+            CupertinoRoute(
+              page: FirstStepResidencePage,
+            ),
+            CupertinoRoute(
+              page: SecondStepResidencePage,
+            ),
+          ],
         ),
         //CAMBIO DE NOMBRE
         CupertinoRoute(
