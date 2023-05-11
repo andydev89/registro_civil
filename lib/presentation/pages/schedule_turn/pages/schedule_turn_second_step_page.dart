@@ -52,6 +52,7 @@ class ScheduleTurnSecondPage extends ConsumerWidget {
                 ),
                 ReactiveScheduleTurnSecondStepModelFormConsumer(
                   builder: (context, formModel, child) {
+                    print(formModel.agencyControl.status);
                     return Column(
                       children: [
                         SelectElementFromApi(

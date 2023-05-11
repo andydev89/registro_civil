@@ -33,7 +33,15 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final elements = ref.watch(provider);
     return PrimaryReactiveDropdown(
-      readOnly: readOnly || elements.isLoading,
+      readOnly: readOnly ||
+          elements.isLoading ||
+          (elements.value != null &&
+              elements.value!
+                  .when(
+                    ok: (data) => data,
+                    err: (error) => List<T>.empty(),
+                  )
+                  .isEmpty),
       formControlName: formControlName,
       formControl: formControl,
       light: light,
@@ -41,14 +49,19 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
       prefixIcon: prefixIcon,
       items: elements.asData?.value.when(
             ok: (data) => data,
-            err: (error) => null,
+            err: (error) => _onError(),
           ) ??
-          [],
+          _onError(),
       label: label,
       isLoading: elements.isLoading,
       onChanged: onChanged,
       hasError: elements.hasError,
       onError: () => ref.refresh(provider),
     );
+  }
+
+  List<T> _onError() {
+    formControl?.reset();
+    return List<T>.empty();
   }
 }
