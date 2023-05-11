@@ -45,4 +45,5 @@ Map<String, dynamic> _$TypeServiceModelToJson(TypeServiceModel instance) =>
 const _$StatusEnumMap = {
   Status.active: 'ACTIVE',
   Status.inactive: 'INACTIVE',
+  Status.unpaind: 'UNPAID',
 };

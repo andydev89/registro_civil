@@ -124,4 +124,5 @@ const _$ResidentialDependentRelationEnumMap = {
 const _$StatusEnumMap = {
   Status.active: 'ACTIVE',
   Status.inactive: 'INACTIVE',
+  Status.unpaind: 'UNPAID',
 };
