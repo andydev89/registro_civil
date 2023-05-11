@@ -26,6 +26,7 @@ class OffersWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final offers = ref.watch(offersProvider);
+    final data = ref.watch(offersProvider.notifier);
     return FocusScope(
       node: FocusScopeNode(canRequestFocus: false),
       child: Scaffold(
@@ -126,7 +127,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$${0.toStringAsFixed(2)}',
+                            '\$${data.subTotal.toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -139,7 +140,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '-\$${0.toStringAsFixed(2)}',
+                            '-\$${data.discount.toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -152,7 +153,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$${0.toStringAsFixed(2)}',
+                            '\$${data.iva.toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -165,7 +166,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryText(
-                            '\$${0.toStringAsFixed(2)}',
+                            '\$${data.totalPay.toStringAsFixed(2)}',
                             fontWeight: FontWeight.bold,
                             fontSize: fontSizeDefault + 3,
                           ),

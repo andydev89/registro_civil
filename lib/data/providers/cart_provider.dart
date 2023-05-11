@@ -55,7 +55,9 @@ class Offers extends _$Offers {
     );
   }
 
-  double get total => (price * iva / 100) - discount;
+  double get totalPay => price + iva- discount;
+
+  double get subTotal => price - discount;
 
   void empty() {
     state = [];
