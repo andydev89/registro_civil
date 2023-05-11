@@ -179,8 +179,10 @@ class MakePaymentPage extends ConsumerWidget {
                       expiration: DateTime.now()
                           .add(const Duration(minutes: 15))
                           .toString(),
-                      returnUrl: 'https://localhost.com',
-                      cancelUrl: 'https://localhost.com',
+                      returnUrl:
+                          'http://payment.registro-civil.ddns.net/transaction_done',
+                      cancelUrl:
+                          'http://payment.registro-civil.ddns.net/transaction_canceled',
                     );
                     final result = await ref.read(
                       createPlaceToPayTransactionProvider(
