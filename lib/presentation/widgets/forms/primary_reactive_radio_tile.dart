@@ -10,12 +10,14 @@ class PrimaryReactiveRadioTile<T> extends StatelessWidget {
     required this.value,
     this.onChanged,
     required this.formControl,
+    this.color = ligthBlue,
   });
 
   final String label;
   final T value;
-  final void Function(T)? onChanged;
+  final void Function(FormControl<T>)? onChanged;
   final FormControl<T> formControl;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +30,15 @@ class PrimaryReactiveRadioTile<T> extends StatelessWidget {
           ReactiveRadio<T>(
             value: value,
             formControl: formControl,
+            onChanged: onChanged,
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: PrimaryText(
+          Expanded(
+            child: Text(
               label,
-              color: ligthBlue,
+              style: TextStyle(
+                color: color,
+                fontSize: 17,
+              ),
             ),
           ),
         ],

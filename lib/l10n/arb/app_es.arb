@@ -393,6 +393,9 @@
   "carrito": "Carrito",
   "propietario": "Propietario",
   "fechaCreacion": "Fecha de creación",
-  "anadir": "Añadir"
-
+  "anadir": "Añadir",
+  "cambioNombrePropio": "Cambio de nombre propio",
+  "alterarOrden": "Alterar orden",
+  "suprimirUnoCuandoConsteMasDeDos": "Suprimir uno cuando conste mas de dos",
+  "aumentarCuandoConsteConUnSoloNombre": "Aumentar cuando conste con un solo nombre"
 }

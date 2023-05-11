@@ -191,7 +191,7 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
     this.path,
   ) {}
 
-  static String changeOfNametypeControlName = "changeOfNametype";
+  static String changeOfNameTypeControlName = "changeOfNameType";
 
   static String agencyControlName = "agency";
 
@@ -201,9 +201,9 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
 
   static String resultingNameControlName = "resultingName";
 
-  static String documentControlName = "document";
-
   static String observationsControlName = "observations";
+
+  static String documentControlName = "document";
 
   final ChangeOfNameModel? changeOfNameModel;
 
@@ -211,24 +211,25 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
 
   final String? path;
 
-  String changeOfNametypeControlPath() =>
-      pathBuilder(changeOfNametypeControlName);
+  String changeOfNameTypeControlPath() =>
+      pathBuilder(changeOfNameTypeControlName);
   String agencyControlPath() => pathBuilder(agencyControlName);
   String name1ControlPath() => pathBuilder(name1ControlName);
   String name2ControlPath() => pathBuilder(name2ControlName);
   String resultingNameControlPath() => pathBuilder(resultingNameControlName);
-  String documentControlPath() => pathBuilder(documentControlName);
   String observationsControlPath() => pathBuilder(observationsControlName);
-  String get _changeOfNametypeValue => changeOfNametypeControl.value as String;
+  String documentControlPath() => pathBuilder(documentControlName);
+  ChangeOfNameType get _changeOfNameTypeValue =>
+      changeOfNameTypeControl.value as ChangeOfNameType;
   AgencyModel get _agencyValue => agencyControl.value as AgencyModel;
   String get _name1Value => name1Control.value as String;
   String get _name2Value => name2Control.value as String;
   String get _resultingNameValue => resultingNameControl.value as String;
-  String get _documentValue => documentControl.value as String;
   String get _observationsValue => observationsControl.value as String;
-  bool get containsChangeOfNametype {
+  String get _documentValue => documentControl.value as String;
+  bool get containsChangeOfNameType {
     try {
-      form.control(changeOfNametypeControlPath());
+      form.control(changeOfNameTypeControlPath());
       return true;
     } catch (e) {
       return false;
@@ -271,15 +272,6 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
     }
   }
 
-  bool get containsDocument {
-    try {
-      form.control(documentControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
   bool get containsObservations {
     try {
       form.control(observationsControlPath());
@@ -289,26 +281,35 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
     }
   }
 
-  Object? get changeOfNametypeErrors => changeOfNametypeControl.errors;
+  bool get containsDocument {
+    try {
+      form.control(documentControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get changeOfNameTypeErrors => changeOfNameTypeControl.errors;
   Object? get agencyErrors => agencyControl.errors;
   Object? get name1Errors => name1Control.errors;
   Object? get name2Errors => name2Control.errors;
   Object? get resultingNameErrors => resultingNameControl.errors;
-  Object? get documentErrors => documentControl.errors;
   Object? get observationsErrors => observationsControl.errors;
-  void get changeOfNametypeFocus => form.focus(changeOfNametypeControlPath());
+  Object? get documentErrors => documentControl.errors;
+  void get changeOfNameTypeFocus => form.focus(changeOfNameTypeControlPath());
   void get agencyFocus => form.focus(agencyControlPath());
   void get name1Focus => form.focus(name1ControlPath());
   void get name2Focus => form.focus(name2ControlPath());
   void get resultingNameFocus => form.focus(resultingNameControlPath());
-  void get documentFocus => form.focus(documentControlPath());
   void get observationsFocus => form.focus(observationsControlPath());
-  void changeOfNametypeValueUpdate(
-    String value, {
+  void get documentFocus => form.focus(documentControlPath());
+  void changeOfNameTypeValueUpdate(
+    ChangeOfNameType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    changeOfNametypeControl.updateValue(value,
+    changeOfNameTypeControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -348,15 +349,6 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void documentValueUpdate(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    documentControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
   void observationsValueUpdate(
     String value, {
     bool updateParent = true,
@@ -366,12 +358,21 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void changeOfNametypeValuePatch(
+  void documentValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    changeOfNametypeControl.patchValue(value,
+    documentControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void changeOfNameTypeValuePatch(
+    ChangeOfNameType value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    changeOfNameTypeControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -411,15 +412,6 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void documentValuePatch(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    documentControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
   void observationsValuePatch(
     String value, {
     bool updateParent = true,
@@ -429,14 +421,23 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void changeOfNametypeValueReset(
+  void documentValuePatch(
     String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    documentControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void changeOfNameTypeValueReset(
+    ChangeOfNameType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      changeOfNametypeControl.reset(
+      changeOfNameTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void agencyValueReset(
     AgencyModel value, {
@@ -474,15 +475,6 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
   }) =>
       resultingNameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void documentValueReset(
-    String value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      documentControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void observationsValueReset(
     String value, {
     bool updateParent = true,
@@ -492,8 +484,18 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
   }) =>
       observationsControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get changeOfNametypeControl =>
-      form.control(changeOfNametypeControlPath()) as FormControl<String>;
+  void documentValueReset(
+    String value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      documentControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<ChangeOfNameType> get changeOfNameTypeControl =>
+      form.control(changeOfNameTypeControlPath())
+          as FormControl<ChangeOfNameType>;
   FormControl<AgencyModel> get agencyControl =>
       form.control(agencyControlPath()) as FormControl<AgencyModel>;
   FormControl<String> get name1Control =>
@@ -502,22 +504,22 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
       form.control(name2ControlPath()) as FormControl<String>;
   FormControl<String> get resultingNameControl =>
       form.control(resultingNameControlPath()) as FormControl<String>;
-  FormControl<String> get documentControl =>
-      form.control(documentControlPath()) as FormControl<String>;
   FormControl<String> get observationsControl =>
       form.control(observationsControlPath()) as FormControl<String>;
-  void changeOfNametypeSetDisabled(
+  FormControl<String> get documentControl =>
+      form.control(documentControlPath()) as FormControl<String>;
+  void changeOfNameTypeSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      changeOfNametypeControl.markAsDisabled(
+      changeOfNameTypeControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      changeOfNametypeControl.markAsEnabled(
+      changeOfNameTypeControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -596,24 +598,6 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
     }
   }
 
-  void documentSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      documentControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      documentControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
   void observationsSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -632,6 +616,24 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
     }
   }
 
+  void documentSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      documentControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      documentControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   ChangeOfNameModel get model {
     if (!form.valid) {
@@ -640,13 +642,13 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
       );
     }
     return ChangeOfNameModel(
-        changeOfNametype: _changeOfNametypeValue,
+        changeOfNameType: _changeOfNameTypeValue,
         agency: _agencyValue,
         name1: _name1Value,
         name2: _name2Value,
         resultingName: _resultingNameValue,
-        document: _documentValue,
-        observations: _observationsValue);
+        observations: _observationsValue,
+        document: _documentValue);
   }
 
   ChangeOfNameModelForm copyWithPath(String? path) {
@@ -689,8 +691,8 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        changeOfNametypeControlName: FormControl<String>(
-            value: changeOfNameModel?.changeOfNametype,
+        changeOfNameTypeControlName: FormControl<ChangeOfNameType>(
+            value: changeOfNameModel?.changeOfNameType,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -724,16 +726,18 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        documentControlName: FormControl<String>(
-            value: changeOfNameModel?.document,
-            validators: [requiredValidator],
+        observationsControlName: FormControl<String>(
+            value: changeOfNameModel?.observations,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        observationsControlName: FormControl<String>(
-            value: changeOfNameModel?.observations,
-            validators: [],
+        documentControlName: FormControl<String>(
+            value: changeOfNameModel?.document,
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
