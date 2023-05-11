@@ -19,16 +19,18 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
   const PrimaryReactiveFilePicker({
     super.key,
     required this.formControl,
-    this.allowedExtensions = const [FileExtensions.pdf],
+    this.allowedExtensions = const [FileExtension.pdf],
     this.maxFileSizeMB = 5,
     this.onFileSelected,
+    this.fileExtension = FileExtension.pdf,
   }) : assert(
           maxFileSizeMB <= 5 && maxFileSizeMB > 0,
           'El tamaño debe ser entre 1 y 5 MB',
         );
   final FormControl<T>? formControl;
-  final List<FileExtensions> allowedExtensions;
+  final List<FileExtension> allowedExtensions;
   final int maxFileSizeMB;
+  final FileExtension fileExtension;
   final void Function(T?, String)? onFileSelected;
 
   @override
@@ -61,7 +63,7 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
                       }
                       final pdfBytes = pdfFile.readAsBytesSync();
                       final base64Pdf =
-                          'data:application/pdf;base64,${base64Encode(pdfBytes)}';
+                          'data:application/${fileExtension.value};base64,${base64Encode(pdfBytes)}';
                       if (base64Pdf is T) {
                         field.didChange(base64Pdf as T);
                       } else {
