@@ -24,7 +24,7 @@ class RootRouterPage extends ConsumerWidget {
         for (final element in next) {
           // TODO(alejandro): traducir
           showAlert(
-            'La transacción ${element.id} ha sido completada',
+            'La transacción ${element.paymentGatewayReference} ha sido completada',
             TypeAlert.success,
           );
           ref
