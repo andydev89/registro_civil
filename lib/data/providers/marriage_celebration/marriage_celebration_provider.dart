@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
@@ -5,8 +6,11 @@ import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
+import 'package:registro_civil_apk/data/models/commons/querys_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
+import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -154,4 +158,46 @@ class Marriage extends _$Marriage {
     }
     return Result.err(result.status);
   }
+}
+
+@riverpod
+class MarriagesFilter extends _$MarriagesFilter {
+  @override
+  QueryMarriages build() {
+    return QueryMarriages();
+  }
+
+  void setFilter(String filter) {
+    state = state.copyWith(filter: filter);
+  }
+
+  void setPageNo(int pageNo, {int pageSize = 20}) {
+    state = state.copyWith(pageNo: pageNo, pageSize: pageSize);
+  }
+}
+
+@riverpod
+Future<ResponseModelPagination<List<ResponseMarriageModel>>> marriages(
+  MarriagesRef ref, {
+  int? pageNo,
+}) async {
+  final query = ref.watch(marriagesFilterProvider);
+  final api = ref.watch(apiProvider);
+  final user = await ref.watch(meProvider.future);
+  final response = await api.marriages(
+    user.identification,
+    pageNo: pageNo ?? query.pageNo,
+    pageSize: query.pageSize,
+    filter: query.filter,
+    agencyName: query.agencyName,
+    amountOfDays: query.amountOfDays,
+    cantonName: query.cantonName,
+    createdAt: query.createdAt,
+    interviewAt: query.interviewAt,
+    provinceName: query.provinceName,
+    state: query.state,
+    updatedAt: query.updatedAt,
+    userId: query.userId,
+  );
+  return response;
 }

@@ -161,3 +161,39 @@ Map<String, dynamic> _$DocumentToJson(Document instance) => <String, dynamic>{
       'referenceId': instance.referenceId,
       'file': instance.file,
     };
+
+ResponseMarriageModel _$ResponseMarriageModelFromJson(
+        Map<String, dynamic> json) =>
+    ResponseMarriageModel(
+      id: json['id'] as String,
+      requestOwnerNui: json['requestOwnerNui'] as String,
+      requestOwnerName: json['requestOwnerName'] as String,
+      creationDate: json['creationDate'] as String,
+      operatorName: json['operatorName'] as String,
+      interviewDate: json['interviewDate'] as String,
+      lastUpdateDate: json['lastUpdateDate'] as String,
+      amountOfDays: json['amountOfDays'] as int,
+      zoneName: json['zoneName'] as String,
+      provinceName: json['provinceName'] as String,
+      cantonName: json['cantonName'] as String,
+      agencyName: json['agencyName'] as String,
+      state: json['state'] as String,
+    );
+
+Map<String, dynamic> _$ResponseMarriageModelToJson(
+        ResponseMarriageModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'requestOwnerNui': instance.requestOwnerNui,
+      'requestOwnerName': instance.requestOwnerName,
+      'creationDate': instance.creationDate,
+      'operatorName': instance.operatorName,
+      'interviewDate': instance.interviewDate,
+      'lastUpdateDate': instance.lastUpdateDate,
+      'amountOfDays': instance.amountOfDays,
+      'zoneName': instance.zoneName,
+      'provinceName': instance.provinceName,
+      'cantonName': instance.cantonName,
+      'agencyName': instance.agencyName,
+      'state': instance.state,
+    };

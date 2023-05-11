@@ -278,9 +278,13 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     ChoosePaymentMethodRoute.name: (routeData) {
+      final args = routeData.argsAs<ChoosePaymentMethodRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ChoosePaymentMethodPage(),
+        child: ChoosePaymentMethodPage(
+          key: args.key,
+          service: args.service,
+        ),
       );
     },
     PaymentServiceJudgmentsNotarialActsRoute.name: (routeData) {
@@ -1502,14 +1506,37 @@ class WebviewPaymentRouteArgs {
 
 /// generated route for
 /// [ChoosePaymentMethodPage]
-class ChoosePaymentMethodRoute extends PageRouteInfo<void> {
-  const ChoosePaymentMethodRoute()
-      : super(
+class ChoosePaymentMethodRoute
+    extends PageRouteInfo<ChoosePaymentMethodRouteArgs> {
+  ChoosePaymentMethodRoute({
+    Key? key,
+    required TypeServiceModel service,
+  }) : super(
           ChoosePaymentMethodRoute.name,
           path: 'choose-payment-method-page',
+          args: ChoosePaymentMethodRouteArgs(
+            key: key,
+            service: service,
+          ),
         );
 
   static const String name = 'ChoosePaymentMethodRoute';
+}
+
+class ChoosePaymentMethodRouteArgs {
+  const ChoosePaymentMethodRouteArgs({
+    this.key,
+    required this.service,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel service;
+
+  @override
+  String toString() {
+    return 'ChoosePaymentMethodRouteArgs{key: $key, service: $service}';
+  }
 }
 
 /// generated route for

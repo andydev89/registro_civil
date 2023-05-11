@@ -390,5 +390,9 @@
   "limpiar": "Limpiar",
   "limpiarCarrito": "Limpiar carrito",
   "tenercuentaLimpiarCarrito": "Ten en cuenta que al dar limpiar se eliminaran todos los pedidos del carrito.",
-  "carrito": "Carrito"
+  "carrito": "Carrito",
+  "propietario": "Propietario",
+  "fechaCreacion": "Fecha de creación",
+  "anadir": "Añadir"
+
 }

@@ -284,3 +284,41 @@ class SelectAgency {
   final LocationModel province;
   final AgencyModel agency;
 }
+
+@JsonSerializable(explicitToJson: true)
+class ResponseMarriageModel {
+  ResponseMarriageModel({
+    required this.id,
+    required this.requestOwnerNui,
+    required this.requestOwnerName,
+    required this.creationDate,
+    this.operatorName,
+    this.interviewDate,
+    required this.lastUpdateDate,
+    required this.amountOfDays,
+    this.zoneName,
+    required this.provinceName,
+    required this.cantonName,
+    required this.agencyName,
+    required this.state,
+  });
+
+  factory ResponseMarriageModel.fromJson(Map<String, dynamic> json) =>
+      _$ResponseMarriageModelFromJson(json);
+
+  final String id;
+  final String requestOwnerNui;
+  final String requestOwnerName;
+  final DateTime creationDate;
+  final String? operatorName;
+  final String? interviewDate;
+  final String lastUpdateDate;
+  final int amountOfDays;
+  final String? zoneName;
+  final String provinceName;
+  final String cantonName;
+  final String agencyName;
+  final String state;
+
+  Map<String, dynamic> toJson() => _$ResponseMarriageModelToJson(this);
+}

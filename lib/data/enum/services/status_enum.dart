@@ -14,7 +14,7 @@ enum Status {
   final String toText;
 }
 
-enum StatusReceipt {
+enum StateEnum {
   @JsonValue('UNPAID')
   pending('UNPAID'),
   @JsonValue('PAID_UP')
@@ -24,18 +24,18 @@ enum StatusReceipt {
   @JsonValue('NOT_ATTENDED')
   cancelled('NOT_ATTENDED');
 
-  const StatusReceipt(this.toText);
+  const StateEnum(this.toText);
   final String toText;
 
   Color get color {
     switch (this) {
-      case StatusReceipt.pending:
+      case StateEnum.pending:
         return ligthBlue;
-      case StatusReceipt.paid:
+      case StateEnum.paid:
         return green;
-      case StatusReceipt.expired:
+      case StateEnum.expired:
         return yellow;
-      case StatusReceipt.cancelled:
+      case StateEnum.cancelled:
         return red;
     }
   }

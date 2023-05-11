@@ -187,7 +187,13 @@ class OffersWidget extends ConsumerWidget {
               onPressed: offers.isNotEmpty
                   ? () {
                       controller.closeDialog(context);
-                      context.navigateTo(const ChoosePaymentMethodRoute());
+                      context.navigateTo(
+                        ChoosePaymentMethodRoute(
+                          service: ref
+                              .read(offersProvider.notifier)
+                              .convertToTypeServiceModel(context),
+                        ),
+                      );
                     }
                   : null,
             ),

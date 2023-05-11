@@ -12,7 +12,7 @@ UserScheduleModel _$UserScheduleModelFromJson(Map<String, dynamic> json) =>
       receiptCode: json['receiptCode'] as String,
       trasactionCode: json['trasactionCode'] as String,
       type: json['type'] as String,
-      state: $enumDecode(_$StatusReceiptEnumMap, json['state']),
+      state: $enumDecode(_$StateEnumEnumMap, json['state']),
       paymentType: $enumDecode(_$PaymentMethodTypeEnumMap, json['paymentType']),
       ownerIdentification: json['ownerIdentification'] as String,
       ownerFullName: json['ownerFullName'] as String,
@@ -30,18 +30,18 @@ Map<String, dynamic> _$UserScheduleModelToJson(UserScheduleModel instance) =>
       'paymentType': _$PaymentMethodTypeEnumMap[instance.paymentType]!,
       'receiptCode': instance.receiptCode,
       'schedule': instance.schedule,
-      'state': _$StatusReceiptEnumMap[instance.state]!,
+      'state': _$StateEnumEnumMap[instance.state]!,
       'time': const TimeOfDayConverter().toJson(instance.time),
       'trasactionCode': instance.trasactionCode,
       'type': instance.type,
       'user': instance.userId,
     };
 
-const _$StatusReceiptEnumMap = {
-  StatusReceipt.pending: 'UNPAID',
-  StatusReceipt.paid: 'PAID_UP',
-  StatusReceipt.expired: 'ATTENDED',
-  StatusReceipt.cancelled: 'NOT_ATTENDED',
+const _$StateEnumEnumMap = {
+  StateEnum.pending: 'UNPAID',
+  StateEnum.paid: 'PAID_UP',
+  StateEnum.expired: 'ATTENDED',
+  StateEnum.cancelled: 'NOT_ATTENDED',
 };
 
 const _$PaymentMethodTypeEnumMap = {

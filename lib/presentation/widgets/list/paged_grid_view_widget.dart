@@ -44,7 +44,10 @@ class _PagedGridViewWidgetState<T>
 
   @override
   void initState() {
-    _pagingController = PagingController(firstPageKey: widget.firstPage);
+    _pagingController = PagingController(
+      firstPageKey: widget.firstPage,
+      invisibleItemsThreshold: 2,
+    );
     if (widget.totalPages != null) {
       if (widget.firstPage + 1 < widget.totalPages!) {
         _pagingController.appendPage(widget.firstElements, widget.firstPage);

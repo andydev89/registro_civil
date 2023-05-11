@@ -38,6 +38,9 @@ class MyOrdersPage extends ConsumerWidget {
                 data: (data) => PagedListViewWidget<UserScheduleModel>(
                   fetch: (p0) async =>
                       ref.read(schedulesByUserProvider(pageNo: p0).future),
+                  firstElements: data.data ?? [],
+                  totalPages: data.totalPages,
+                  firstPage: 1,
                   itemBuilder: (_, e, __) => MyTurnExpandableCard(
                     data: MyTurnExpandableCardModel(
                       id: e.id,

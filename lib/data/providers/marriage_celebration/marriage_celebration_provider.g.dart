@@ -130,6 +130,90 @@ class MarriageDocumentsProvider
   }
 }
 
+String _$marriagesHash() => r'b11526ed2f44037dd42108bfddf5bdb898a407f5';
+typedef MarriagesRef = AutoDisposeFutureProviderRef<
+    ResponseModelPagination<List<ResponseMarriageModel>>>;
+
+/// See also [marriages].
+@ProviderFor(marriages)
+const marriagesProvider = MarriagesFamily();
+
+/// See also [marriages].
+class MarriagesFamily extends Family<
+    AsyncValue<ResponseModelPagination<List<ResponseMarriageModel>>>> {
+  /// See also [marriages].
+  const MarriagesFamily();
+
+  /// See also [marriages].
+  MarriagesProvider call({
+    int? pageNo,
+  }) {
+    return MarriagesProvider(
+      pageNo: pageNo,
+    );
+  }
+
+  @override
+  MarriagesProvider getProviderOverride(
+    covariant MarriagesProvider provider,
+  ) {
+    return call(
+      pageNo: provider.pageNo,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'marriagesProvider';
+}
+
+/// See also [marriages].
+class MarriagesProvider extends AutoDisposeFutureProvider<
+    ResponseModelPagination<List<ResponseMarriageModel>>> {
+  /// See also [marriages].
+  MarriagesProvider({
+    this.pageNo,
+  }) : super.internal(
+          (ref) => marriages(
+            ref,
+            pageNo: pageNo,
+          ),
+          from: marriagesProvider,
+          name: r'marriagesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$marriagesHash,
+          dependencies: MarriagesFamily._dependencies,
+          allTransitiveDependencies: MarriagesFamily._allTransitiveDependencies,
+        );
+
+  final int? pageNo;
+
+  @override
+  bool operator ==(Object other) {
+    return other is MarriagesProvider && other.pageNo == pageNo;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, pageNo.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$marriageCelebrationHash() =>
     r'dd6758d657c84910a0254293011f70e3a6a22f2a';
 
@@ -366,4 +450,20 @@ final marriageProvider = AutoDisposeNotifierProvider<Marriage, void>.internal(
 );
 
 typedef _$Marriage = AutoDisposeNotifier<void>;
+String _$marriagesFilterHash() => r'508eacb2e5d7c823b73a1d489067d39ca4ce7a6f';
+
+/// See also [MarriagesFilter].
+@ProviderFor(MarriagesFilter)
+final marriagesFilterProvider =
+    AutoDisposeNotifierProvider<MarriagesFilter, QueryMarriages>.internal(
+  MarriagesFilter.new,
+  name: r'marriagesFilterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$marriagesFilterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$MarriagesFilter = AutoDisposeNotifier<QueryMarriages>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

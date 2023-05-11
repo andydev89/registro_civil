@@ -390,5 +390,8 @@
   "limpiar": "Clear",
   "limpiarCarrito": "Clear cart",
   "tenercuentaLimpiarCarrito": "Keep in mind that when you give clean all orders will be removed from the cart.",
-  "carrito": "Cart"
+  "carrito": "Cart",
+  "propietario": "Owner",
+  "fechaCreacion": "Creation date",
+  "anadir": "Add"
 }

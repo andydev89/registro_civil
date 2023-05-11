@@ -31,7 +31,7 @@ class UserScheduleModel {
   final PaymentMethodType paymentType;
   final String receiptCode;
   final ScheduleModel schedule;
-  final StatusReceipt state;
+  final StateEnum state;
 
   @TimeOfDayConverter()
   final TimeOfDay time;

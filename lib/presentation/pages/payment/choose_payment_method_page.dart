@@ -5,7 +5,7 @@ import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
 import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
-import 'package:registro_civil_apk/data/providers/cart_provider.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -13,7 +13,11 @@ import 'package:registro_civil_apk/presentation/widgets/forms/payment_selector.d
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
 class ChoosePaymentMethodPage extends ConsumerWidget {
-  const ChoosePaymentMethodPage({super.key});
+  const ChoosePaymentMethodPage({
+    super.key,
+    required this.service,
+  });
+  final TypeServiceModel service;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,9 +56,7 @@ class ChoosePaymentMethodPage extends ConsumerWidget {
                     : context.replaceRoute(
                         MakePaymentRoute(
                           buttonText: l10n.continuar,
-                          service: ref
-                              .read(offersProvider.notifier)
-                              .convertToTypeServiceModel(context),
+                          service: service,
                           onTapSuccessPayment: (cxt) => context.replaceRoute(
                             NotificationRoute(
                               notificationType: NotificationType.success,

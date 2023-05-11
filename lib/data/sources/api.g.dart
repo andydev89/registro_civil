@@ -426,6 +426,66 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModelPagination<List<ResponseMarriageModel>>> marriages({
+    pageNo = 0,
+    pageSize = 20,
+    state = '',
+    userNui = '',
+    userId = '',
+    createdAt = '',
+    updatedAt = '',
+    interviewAt = '',
+    amountOfDays = '',
+    provinceName = '',
+    cantonName = '',
+    agencyName = '',
+    filter = '',
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+      r'state': state,
+      r'userNui': userNui,
+      r'userId': userId,
+      r'createdAt': createdAt,
+      r'updatedAt': updatedAt,
+      r'interviewAt': interviewAt,
+      r'amountOfDays': amountOfDays,
+      r'provinceName': provinceName,
+      r'cantonName': cantonName,
+      r'agencyName': agencyName,
+      r'filter': filter,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<ResponseMarriageModel>>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/marriage/api/marriage',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModelPagination<List<ResponseMarriageModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<ResponseMarriageModel>((i) =>
+                  ResponseMarriageModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModel<List<DocumentResponse>>> marriageDocuments(
     maritalStatus,
     childrenRelationship, {

@@ -19,6 +19,6 @@ class MyTurnExpandableCardModel {
   final TimeOfDay time;
   final String city;
   final String agency;
-  final StatusReceipt state;
+  final StateEnum state;
   // TODO(alejandro): este estado debe ser un enum
 }
