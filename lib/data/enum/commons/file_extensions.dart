@@ -1,15 +1,23 @@
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 
-enum FileExtensions {
-  pdf('pdf');
+enum FileExtension {
+  pdf('pdf'),
+  jpeg('jpeg'),
+  jpg('jpg');
 
-  const FileExtensions(this.value);
+  const FileExtension(this.value);
   final String value;
 
   AssetGenImage get image {
     switch (this) {
-      case FileExtensions.pdf:
+      case FileExtension.pdf:
         return Assets.png.pdf;
+      case FileExtension.jpeg:
+        //TODO poner una imagen de una foto
+        return Assets.png.validacionDocumentos;
+      case FileExtension.jpg:
+        //TODO poner una imagen de una foto
+        return Assets.png.validacionDocumentos;
     }
   }
 }

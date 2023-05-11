@@ -390,5 +390,9 @@
   "limpiar": "Limpiar",
   "limpiarCarrito": "Limpiar carrito",
   "tenercuentaLimpiarCarrito": "Ten en cuenta que al dar limpiar se eliminaran todos los pedidos del carrito.",
-  "carrito": "Carrito"
+  "carrito": "Carrito",
+  "cambioNombrePropio": "Cambio de nombre propio",
+  "alterarOrden": "Alterar orden",
+  "suprimirUnoCuandoConsteMasDeDos": "Suprimir uno cuando conste mas de dos",
+  "aumentarCuandoConsteConUnSoloNombre": "Aumentar cuando conste con un solo nombre"
 }
