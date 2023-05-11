@@ -47,10 +47,12 @@ class MyOrdersPage extends ConsumerWidget {
                       typeOfService: e.schedule.typeOfService,
                       time: e.schedule.startTime,
                       // TODO(jang): Cambiar por el estado real
-                      state: Status.unpaind.toText,
+                      state: e.state,
                     ),
                   ).verticalPadding(10),
                 ),
+                onRefreshIndicatot: () =>
+                    ref.refresh(schedulesByUserProvider().future),
                 onRefresh: () => ref.refresh(schedulesByUserProvider()),
               ),
             ),

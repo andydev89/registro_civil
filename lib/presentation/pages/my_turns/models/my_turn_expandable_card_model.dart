@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_type_of_service_model.dart';
 
 class MyTurnExpandableCardModel {
@@ -18,6 +19,6 @@ class MyTurnExpandableCardModel {
   final TimeOfDay time;
   final String city;
   final String agency;
-  final String state;
+  final StatusReceipt state;
   // TODO(alejandro): este estado debe ser un enum
 }
