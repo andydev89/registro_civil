@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -23,6 +24,13 @@ class WebviewPaymentPage extends StatelessWidget {
           ..loadRequest(Uri.parse(url))
           ..setNavigationDelegate(
             NavigationDelegate(
+              onNavigationRequest: (request) {
+                if (request.url.contains('transaction_done')) {
+                  context.popRoute();
+                  return NavigationDecision.prevent;
+                }
+                return NavigationDecision.navigate;
+              },
               onPageFinished: (url) {
                 onPageFinished?.call();
               },
