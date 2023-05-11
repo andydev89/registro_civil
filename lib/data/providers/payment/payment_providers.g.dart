@@ -204,7 +204,7 @@ class IsPlaceToPayTransactionCompletedProvider
 }
 
 String _$checkPendingTransactionsHash() =>
-    r'39d3f22d258169cdaa21ee28c96dd200af94fcc9';
+    r'56a3ff2629093f94bc9ba331e72dd49856829153';
 
 /// See also [checkPendingTransactions].
 @ProviderFor(checkPendingTransactions)

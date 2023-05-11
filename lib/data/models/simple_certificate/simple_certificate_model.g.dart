@@ -50,9 +50,9 @@ const _$TypeServiceEnumMap = {
       'SERVICE_ACTA_REGISTRAL_GENERO',
   TypeService.schedule: 'SERVICE_AGENDAR_TURNO',
   TypeService.none: 'NULL',
-  TypeService.marriageCelebration: 'PRUEBA_MARRIAGE_CELEBRATION',
   TypeService.residencyRegistration: 'SERVICE_RESIDENCY_REGISTRATION',
   TypeService.changeOfName: 'SERVICE_CAMBIO_NOMBRE',
+  TypeService.marriageCelebration: 'PRUEBA_MARRIAGE_CELEBRATION',
 };
 
 const _$RelationshipSimpleCertificateEnumEnumMap = {

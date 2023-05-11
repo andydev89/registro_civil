@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
+import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/payment_selector.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
@@ -33,27 +36,35 @@ class ChoosePaymentMethodPage extends StatelessWidget {
             title: l10n.continuar,
             onPressed: formModel.form.valid
                 ? () {
-                    // if (formModel.model.paymentMethod ==
-                    //     PaymentMethodType.correspondentPayment) {
-                    //   context.navigateTo(
-                    //     CodeRoute(
-                    //       typeOfService: typeOfService,
-                    //       includMe: true,
-                    //       procedureType: ProcedureType.personal,
-                    //       relatives: const [],
-                    //     ),
-                    //   );
-                    // } else {
-                    //   context.navigateTo(
-                    //     ScheduleTurnSecondRoute(
-                    //       paymentMethod: formModel.model.paymentMethod,
-                    //       typeOfService: typeOfService,
-                    //       includMe: true,
-                    //       procedureType: ProcedureType.personal,
-                    //       relatives: const [],
-                    //     ),
-                    //   );
-                    // }
+                // formModel.model.paymentMethod ==
+                //       PaymentMethodType.correspondentPayment
+                //   ? context.replaceRoute(
+                //       NotificationRoute(
+                //         notificationType: NotificationType.success,
+                //         message: l10n.turnoReservadoMensajeFormal,
+                //         bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
+                //         buttonText: l10n.misTurnos,
+                //         onTap: (cxt) => cxt.replaceRoute(const 
+                // MyTurnsRoute()),
+                //       ),
+                //     )
+                //   : context.replaceRoute(
+                //       MakePaymentRoute(
+                //         buttonText: l10n.continuar,
+                //         service: typeOfService,
+                //         onTapSuccessPayment: (cxt) => context.replaceRoute(
+                //           NotificationRoute(
+                //             notificationType: NotificationType.success,
+                //             message: l10n.turnoReservadoMensajeFormal,
+                //             bottonTitle: l10n.
+                // turnoReservadoMensajeCorreoFormal,
+                //             buttonText: l10n.misTurnos,
+                //             onTap: (cxt) =>
+                //                 cxt.replaceRoute(const MyTurnsRoute()),
+                //           ),
+                //         ),
+                //       ),
+                //     )   // }
                   }
                 : null,
           ),

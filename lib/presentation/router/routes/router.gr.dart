@@ -395,6 +395,7 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: SimpleCertificateSecondStepPage(
           simpleCertificateResponse: args.simpleCertificateResponse,
+          model: args.model,
           key: args.key,
         ),
       );
@@ -1411,7 +1412,7 @@ class SelectPaymentRouteArgs {
 class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
   MakePaymentRoute({
     Key? key,
-    required String requestNumber,
+    String? requestNumber,
     required String buttonText,
     required TypeServiceModel service,
     void Function(BuildContext)? onTapSuccessPayment,
@@ -1435,7 +1436,7 @@ class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
 class MakePaymentRouteArgs {
   const MakePaymentRouteArgs({
     this.key,
-    required this.requestNumber,
+    this.requestNumber,
     required this.buttonText,
     required this.service,
     this.onTapSuccessPayment,
@@ -1444,7 +1445,7 @@ class MakePaymentRouteArgs {
 
   final Key? key;
 
-  final String requestNumber;
+  final String? requestNumber;
 
   final String buttonText;
 
@@ -1870,12 +1871,14 @@ class SimpleCertificateSecondStepRoute
     extends PageRouteInfo<SimpleCertificateSecondStepRouteArgs> {
   SimpleCertificateSecondStepRoute({
     required SimpleCertificateResponse simpleCertificateResponse,
+    required TypeServiceModel model,
     Key? key,
   }) : super(
           SimpleCertificateSecondStepRoute.name,
           path: 'simple-certificate-second-step-page',
           args: SimpleCertificateSecondStepRouteArgs(
             simpleCertificateResponse: simpleCertificateResponse,
+            model: model,
             key: key,
           ),
         );
@@ -1886,16 +1889,19 @@ class SimpleCertificateSecondStepRoute
 class SimpleCertificateSecondStepRouteArgs {
   const SimpleCertificateSecondStepRouteArgs({
     required this.simpleCertificateResponse,
+    required this.model,
     this.key,
   });
 
   final SimpleCertificateResponse simpleCertificateResponse;
 
+  final TypeServiceModel model;
+
   final Key? key;
 
   @override
   String toString() {
-    return 'SimpleCertificateSecondStepRouteArgs{simpleCertificateResponse: $simpleCertificateResponse, key: $key}';
+    return 'SimpleCertificateSecondStepRouteArgs{simpleCertificateResponse: $simpleCertificateResponse, model: $model, key: $key}';
   }
 }
 

@@ -141,6 +141,13 @@ abstract class Api {
     @Query('pageSize') int pageSize,
   );
 
+  @GET('/identity/api/agency/by/canton?canton={canton}')
+  Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByCanton(
+    @Path('canton') String canton,
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
+
     @GET('/identity/api/location/parent/{id}')
   Future<ResponseModelPagination<List<LocationModel>?>> locationByParent(
     @Path('id') String province,

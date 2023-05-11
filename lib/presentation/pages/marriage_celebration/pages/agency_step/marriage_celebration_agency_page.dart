@@ -49,7 +49,9 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
                         readOnly: !formModel.cantonControl.valid,
                         formControl: formModel.agencyControl,
                         label: l10n.agencia,
-                        provider: agenciesProvider,
+                        provider: AgenciesByCantonProvider(
+                          cantonId: formModel.cantonControl.value?.id ?? '',
+                        ),
                       ),
                     ],
                   ),
