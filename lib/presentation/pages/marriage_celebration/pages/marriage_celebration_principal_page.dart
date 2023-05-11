@@ -17,33 +17,34 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
     return PrimaryScaffold(
       title: l10n.celebracionMat,
       body: Expanded(
-          child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              PrimaryButton(
-                title: l10n.anadir,
-              ),
-            ],
-          ),
-          // Expanded(
-          //   child: LoadingProviderWidget<
-          //       ResponseModelPagination<List<TypeServiceModel>>>(
-          //     async: ref.watch(typeServicesProvider),
-          //     onRefreshIndicatot: () =>
-          //         ref.refresh(typeServicesProvider.future),
-          //     onRefresh: () => ref.refresh(typeServicesProvider),
-          //     data: (data) => CircleAvatarCardGrid(
-          //       totalPages: data.totalPages,
-          //       firstElements: data.data!,
-          //       firstPage: 1,
-          //       fetch: (p0) => ref.watch(typeServicesFetchProvider(p0).future),
-          //     ),
-          //   ),
-          // ),
-        ],
-      )),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                PrimaryButton(
+                  title: l10n.anadir,
+                ),
+              ],
+            ),
+            // Expanded(
+            //   child: LoadingProviderWidget<
+            //       ResponseModelPagination<List<TypeServiceModel>>>(
+            //     async: ref.watch(typeServicesProvider),
+            //     onRefreshIndicatot: () =>
+            //         ref.refresh(typeServicesProvider.future),
+            //     onRefresh: () => ref.refresh(typeServicesProvider),
+            //     data: (data) => CircleAvatarCardGrid(
+            //       totalPages: data.totalPages,
+            //       firstElements: data.data!,
+            //       firstPage: 1,
+            //       fetch: (p0) => ref.watch(typeServicesFetchProvider(p0).future),
+            //     ),
+            //   ),
+            // ),
+          ],
+        ),
+      ),
     );
   }
 }
