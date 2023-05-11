@@ -4820,8 +4820,6 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
 
   static String provinceControlName = "province";
 
-  static String cantonControlName = "canton";
-
   static String agencyControlName = "agency";
 
   final SelectAgency? selectAgency;
@@ -4831,23 +4829,12 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
   final String? path;
 
   String provinceControlPath() => pathBuilder(provinceControlName);
-  String cantonControlPath() => pathBuilder(cantonControlName);
   String agencyControlPath() => pathBuilder(agencyControlName);
   LocationModel get _provinceValue => provinceControl.value as LocationModel;
-  LocationModel get _cantonValue => cantonControl.value as LocationModel;
   AgencyModel get _agencyValue => agencyControl.value as AgencyModel;
   bool get containsProvince {
     try {
       form.control(provinceControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsCanton {
-    try {
-      form.control(cantonControlPath());
       return true;
     } catch (e) {
       return false;
@@ -4864,10 +4851,8 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
   }
 
   Object? get provinceErrors => provinceControl.errors;
-  Object? get cantonErrors => cantonControl.errors;
   Object? get agencyErrors => agencyControl.errors;
   void get provinceFocus => form.focus(provinceControlPath());
-  void get cantonFocus => form.focus(cantonControlPath());
   void get agencyFocus => form.focus(agencyControlPath());
   void provinceValueUpdate(
     LocationModel value, {
@@ -4875,15 +4860,6 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
     bool emitEvent = true,
   }) {
     provinceControl.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void cantonValueUpdate(
-    LocationModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    cantonControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -4905,15 +4881,6 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void cantonValuePatch(
-    LocationModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    cantonControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
   void agencyValuePatch(
     AgencyModel value, {
     bool updateParent = true,
@@ -4932,15 +4899,6 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
   }) =>
       provinceControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void cantonValueReset(
-    LocationModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      cantonControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void agencyValueReset(
     AgencyModel value, {
     bool updateParent = true,
@@ -4952,8 +4910,6 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<LocationModel> get provinceControl =>
       form.control(provinceControlPath()) as FormControl<LocationModel>;
-  FormControl<LocationModel> get cantonControl =>
-      form.control(cantonControlPath()) as FormControl<LocationModel>;
   FormControl<AgencyModel> get agencyControl =>
       form.control(agencyControlPath()) as FormControl<AgencyModel>;
   void provinceSetDisabled(
@@ -4968,24 +4924,6 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
       );
     } else {
       provinceControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void cantonSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      cantonControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      cantonControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -5017,8 +4955,7 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return SelectAgency(
-        province: _provinceValue, canton: _cantonValue, agency: _agencyValue);
+    return SelectAgency(province: _provinceValue, agency: _agencyValue);
   }
 
   SelectAgencyForm copyWithPath(String? path) {
@@ -5061,13 +4998,6 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
   FormGroup formElements() => FormGroup({
         provinceControlName: FormControl<LocationModel>(
             value: selectAgency?.province,
-            validators: [requiredValidator],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        cantonControlName: FormControl<LocationModel>(
-            value: selectAgency?.canton,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/user_schedule_model.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/models/my_turn_expandable_card_model.dart';
@@ -36,8 +35,9 @@ class MyTurnsPage extends ConsumerWidget {
                   ResponseModelPagination<List<UserScheduleModel>?>>(
                 async: ref.watch(schedulesByUserProvider()),
                 data: (data) => PagedListViewWidget<UserScheduleModel>(
-                  fetch: (p0) async =>
-                      ref.read(schedulesByUserProvider(pageNo: p0).future),
+                  fetch: (p0) {
+                    return ref.read(schedulesByUserProvider(pageNo: p0).future);
+                  },
                   itemBuilder: (_, e, __) => MyTurnExpandableCard(
                     data: MyTurnExpandableCardModel(
                       id: e.id,

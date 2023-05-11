@@ -177,7 +177,7 @@ abstract class Api {
     @Query('pageSize') int pageSize,
   );
 
-  @GET('/schedule/api/byuser')
+  @GET('/schedule/api/receipt')
   Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
     @Query('user') String userId, {
     @Query('pageNo') int pageNo = 0,

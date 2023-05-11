@@ -85,25 +85,6 @@ Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
   return response;
 }
 
-@riverpod
-Future<ResponseModelPagination<List<UserScheduleModel>>> fetchSchedulesByUser(
-  FetchSchedulesByUserRef ref,
-  QueryScheduleByUser query,
-) async {
-  final api = ref.watch(apiProvider);
-  final user = await ref.watch(meProvider.future);
-  final response = await api.schedulesByUser(
-    user.id,
-    pageNo: query.pageNo,
-    pageSize: query.pageSize,
-    filter: query.filter,
-    sortBy: query.sortBy,
-    sortType: query.sortType.toJson,
-    from: query.from,
-    to: query.to,
-  );
-  return response;
-}
 
 @riverpod
 Future<Result<BookedReceiptModel, StatusCode>> confirmSchedule(

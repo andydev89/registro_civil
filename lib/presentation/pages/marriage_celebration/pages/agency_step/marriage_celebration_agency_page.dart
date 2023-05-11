@@ -31,29 +31,16 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
                   formControl: formModel.provinceControl,
                   label: l10n.provincia,
                   provider: provincesProvider,
-                  onChanged: (p0) => formModel.cantonControl.value = null,
+                  onChanged: (p0) => formModel.agencyControl.value = null,
                 ),
                 ReactiveSelectAgencyFormConsumer(
-                  builder: (_, __, ___) => Column(
-                    children: [
-                      SelectElementFromApi(
-                        readOnly: !formModel.provinceControl.valid,
-                        formControl: formModel.cantonControl,
-                        label: l10n.canton,
-                        onChanged: (p0) => formModel.agencyControl.value = null,
-                        provider: LocationByParentProvider(
-                          parentId: formModel.provinceControl.value?.id ?? '',
-                        ),
-                      ),
-                      SelectElementFromApi(
-                        readOnly: !formModel.cantonControl.valid,
-                        formControl: formModel.agencyControl,
-                        label: l10n.agencia,
-                        provider: AgenciesByCantonProvider(
-                          cantonId: formModel.cantonControl.value?.id ?? '',
-                        ),
-                      ),
-                    ],
+                  builder: (_, __, ___) => SelectElementFromApi(
+                    readOnly: !formModel.provinceControl.valid,
+                    formControl: formModel.agencyControl,
+                    label: l10n.agencia,
+                    provider: AgenciesByProvinceProvider(
+                      provinceId: formModel.provinceControl.value?.id ?? '',
+                    ),
                   ),
                 ),
               ],
