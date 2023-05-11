@@ -51,6 +51,7 @@ class MyOrdersPage extends ConsumerWidget {
                       date: e.schedule.date,
                       typeOfService: e.schedule.typeOfService,
                       time: e.schedule.startTime,
+                      state: e.state,
                     ),
                   ).verticalPadding(10),
                 ),

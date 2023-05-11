@@ -389,5 +389,6 @@
   "seguroeliminarresidence": "Are you sure you want to delete this residence?",
   "limpiar": "Clear",
   "limpiarCarrito": "Clear cart",
-  "tenercuentaLimpiarCarrito": "Keep in mind that when you give clean all orders will be removed from the cart."
+  "tenercuentaLimpiarCarrito": "Keep in mind that when you give clean all orders will be removed from the cart.",
+  "carrito": "Cart"
 }

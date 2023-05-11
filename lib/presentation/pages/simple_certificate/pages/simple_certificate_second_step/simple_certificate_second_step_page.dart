@@ -35,7 +35,7 @@ class SimpleCertificateSecondStepPage extends ConsumerWidget {
         canRequestFocus: false,
       ),
       child: PrimaryScaffold(
-        title: l10n.verificarInfo,
+        title: '${l10n.verificarInfo}: ${model.name}',
         body: Expanded(
           child: Scaffold(
             body: FutureBuilder(
