@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/user_schedule_model.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/my_turns/models/my_turn_expandable_card_model.dart';
@@ -34,15 +34,10 @@ class MyOrdersPage extends ConsumerWidget {
             Expanded(
               child: LoadingProviderWidget<
                   ResponseModelPagination<List<UserScheduleModel>?>>(
-                async: ref.watch(schedulesByUserProvider),
+                async: ref.watch(schedulesByUserProvider()),
                 data: (data) => PagedListViewWidget<UserScheduleModel>(
-                  fetch: (p0) async {
-                    final me = await ref.watch(apiProvider).me();
-                    return ref.read(apiProvider).schedulesByUser(
-                          me.data?.id ?? '',
-                          pageNo: p0,
-                        );
-                  },
+                  fetch: (p0) async =>
+                      ref.read(schedulesByUserProvider(pageNo: p0).future),
                   itemBuilder: (_, e, __) => MyTurnExpandableCard(
                     data: MyTurnExpandableCardModel(
                       id: e.id,
@@ -51,10 +46,12 @@ class MyOrdersPage extends ConsumerWidget {
                       date: e.schedule.date,
                       typeOfService: e.schedule.typeOfService,
                       time: e.schedule.startTime,
+                      // TODO(jang): Cambiar por el estado real
+                      state: Status.unpaind.toText,
                     ),
                   ).verticalPadding(10),
                 ),
-                onRefresh: () => ref.refresh(schedulesByUserProvider),
+                onRefresh: () => ref.refresh(schedulesByUserProvider()),
               ),
             ),
           ],

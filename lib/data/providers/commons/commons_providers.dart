@@ -64,6 +64,17 @@ Future<Result<List<AgencyModel>, StatusCode>> agenciesByProvince(
       ? Result.ok(response.data!)
       : Result.err(response.status);
 }
+@riverpod
+Future<Result<List<AgencyModel>, StatusCode>> agenciesByCanton(
+  AgenciesByCantonRef ref, {
+  required String cantonId,
+}) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.agenciesByCanton(cantonId, 0, 100);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
 
 @riverpod
 Future<Result<List<LocationModel>, StatusCode>> locationByParent(

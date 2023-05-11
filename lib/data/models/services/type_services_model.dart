@@ -49,5 +49,5 @@ class TypeServiceModel implements Translatable {
 
   Map<String, dynamic> toJson() => _$TypeServiceModelToJson(this);
 
-  double get total => (price * iva / 100) - discount;
+  double get total => price + iva - discount;
 }

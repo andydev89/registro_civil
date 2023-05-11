@@ -5,7 +5,10 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response.dart';
+import 'package:registro_civil_apk/data/providers/cart_provider.dart';
 import 'package:registro_civil_apk/data/providers/simple_certificate/simple_certificate_provider.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/data/utils/methods.dart';
@@ -18,9 +21,11 @@ import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffo
 class SimpleCertificateSecondStepPage extends ConsumerWidget {
   const SimpleCertificateSecondStepPage({
     required this.simpleCertificateResponse,
+    required this.model,
     super.key,
   });
   final SimpleCertificateResponse simpleCertificateResponse;
+  final TypeServiceModel model;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +35,7 @@ class SimpleCertificateSecondStepPage extends ConsumerWidget {
         canRequestFocus: false,
       ),
       child: PrimaryScaffold(
-        title: l10n.verificarInfo,
+        title: '${l10n.verificarInfo}: ${model.name}',
         body: Expanded(
           child: Scaffold(
             body: FutureBuilder(
@@ -67,6 +72,9 @@ class SimpleCertificateSecondStepPage extends ConsumerWidget {
                       context.navigateTo(const HomeRouterRoute());
                       // quitar foco
                       FocusScope.of(context).unfocus();
+                      ref
+                          .read(offersProvider.notifier)
+                          .addOffer(OffersModel(simpleCertificate: model));
                       showOffersDialog(context);
                     },
                     err: (error) => showAlert(

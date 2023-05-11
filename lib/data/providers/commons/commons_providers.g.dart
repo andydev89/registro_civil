@@ -179,6 +179,91 @@ class AgenciesByProvinceProvider
   }
 }
 
+String _$agenciesByCantonHash() => r'9a2b832724d1bb3ca37ca6704275b2fe41534670';
+typedef AgenciesByCantonRef
+    = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
+
+/// See also [agenciesByCanton].
+@ProviderFor(agenciesByCanton)
+const agenciesByCantonProvider = AgenciesByCantonFamily();
+
+/// See also [agenciesByCanton].
+class AgenciesByCantonFamily
+    extends Family<AsyncValue<Result<List<AgencyModel>, StatusCode>>> {
+  /// See also [agenciesByCanton].
+  const AgenciesByCantonFamily();
+
+  /// See also [agenciesByCanton].
+  AgenciesByCantonProvider call({
+    required String cantonId,
+  }) {
+    return AgenciesByCantonProvider(
+      cantonId: cantonId,
+    );
+  }
+
+  @override
+  AgenciesByCantonProvider getProviderOverride(
+    covariant AgenciesByCantonProvider provider,
+  ) {
+    return call(
+      cantonId: provider.cantonId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'agenciesByCantonProvider';
+}
+
+/// See also [agenciesByCanton].
+class AgenciesByCantonProvider
+    extends AutoDisposeFutureProvider<Result<List<AgencyModel>, StatusCode>> {
+  /// See also [agenciesByCanton].
+  AgenciesByCantonProvider({
+    required this.cantonId,
+  }) : super.internal(
+          (ref) => agenciesByCanton(
+            ref,
+            cantonId: cantonId,
+          ),
+          from: agenciesByCantonProvider,
+          name: r'agenciesByCantonProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$agenciesByCantonHash,
+          dependencies: AgenciesByCantonFamily._dependencies,
+          allTransitiveDependencies:
+              AgenciesByCantonFamily._allTransitiveDependencies,
+        );
+
+  final String cantonId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is AgenciesByCantonProvider && other.cantonId == cantonId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, cantonId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$locationByParentHash() => r'0a48e2ed993237772bf26ea779965b5b52d04674';
 typedef LocationByParentRef
     = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCode>>;

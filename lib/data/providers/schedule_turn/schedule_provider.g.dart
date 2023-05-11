@@ -163,23 +163,91 @@ final schedulesProvider =
 
 typedef SchedulesRef
     = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCode>>;
-String _$schedulesByUserHash() => r'de2ebeef066a164e85b54a35fc688279c5a01f38';
+String _$schedulesByUserHash() => r'1c454ad1ffe8b1ed5d62b1c3325637caa5e61a33';
+typedef SchedulesByUserRef = AutoDisposeFutureProviderRef<
+    ResponseModelPagination<List<UserScheduleModel>>>;
 
 /// See also [schedulesByUser].
 @ProviderFor(schedulesByUser)
-final schedulesByUserProvider = AutoDisposeFutureProvider<
-    ResponseModelPagination<List<UserScheduleModel>>>.internal(
-  schedulesByUser,
-  name: r'schedulesByUserProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$schedulesByUserHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const schedulesByUserProvider = SchedulesByUserFamily();
 
-typedef SchedulesByUserRef = AutoDisposeFutureProviderRef<
-    ResponseModelPagination<List<UserScheduleModel>>>;
+/// See also [schedulesByUser].
+class SchedulesByUserFamily extends Family<
+    AsyncValue<ResponseModelPagination<List<UserScheduleModel>>>> {
+  /// See also [schedulesByUser].
+  const SchedulesByUserFamily();
+
+  /// See also [schedulesByUser].
+  SchedulesByUserProvider call({
+    int? pageNo,
+  }) {
+    return SchedulesByUserProvider(
+      pageNo: pageNo,
+    );
+  }
+
+  @override
+  SchedulesByUserProvider getProviderOverride(
+    covariant SchedulesByUserProvider provider,
+  ) {
+    return call(
+      pageNo: provider.pageNo,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'schedulesByUserProvider';
+}
+
+/// See also [schedulesByUser].
+class SchedulesByUserProvider extends AutoDisposeFutureProvider<
+    ResponseModelPagination<List<UserScheduleModel>>> {
+  /// See also [schedulesByUser].
+  SchedulesByUserProvider({
+    this.pageNo,
+  }) : super.internal(
+          (ref) => schedulesByUser(
+            ref,
+            pageNo: pageNo,
+          ),
+          from: schedulesByUserProvider,
+          name: r'schedulesByUserProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$schedulesByUserHash,
+          dependencies: SchedulesByUserFamily._dependencies,
+          allTransitiveDependencies:
+              SchedulesByUserFamily._allTransitiveDependencies,
+        );
+
+  final int? pageNo;
+
+  @override
+  bool operator ==(Object other) {
+    return other is SchedulesByUserProvider && other.pageNo == pageNo;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, pageNo.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$fetchSchedulesByUserHash() =>
     r'65a7f0850ab9badfc14a44caaff98993f3e16b0c';
 typedef FetchSchedulesByUserRef = AutoDisposeFutureProviderRef<

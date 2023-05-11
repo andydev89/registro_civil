@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:popover/popover.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
+import 'package:registro_civil_apk/data/providers/cart_provider.dart';
 import 'package:registro_civil_apk/data/utils/methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/modify_cant.dart';
@@ -18,7 +20,6 @@ class CertificateDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final totalPay = offer.cant * offer.simpleCertificate.price;
     const size = 40.0;
     const width = 8.0;
     return Row(
@@ -45,11 +46,21 @@ class CertificateDetail extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
-                    child: PrimaryText(
-                      offer.simpleCertificate.name,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.start,
-                      maxLines: 3,
+                    child: GestureDetector(
+                      onTap: () => showPopover(
+                        context: context,
+                        bodyBuilder: (_) => PrimaryText(
+                          offer.simpleCertificate.name,
+                          maxLines: null,
+                        ).symmetricPadding(20, 20),
+                      ),
+                      child: PrimaryText(
+                        offer.simpleCertificate.name,
+                        fontWeight: FontWeight.bold,
+                        textAlign: TextAlign.start,
+                        maxLines: 3,
+                        overFlow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
                 ],
@@ -71,7 +82,9 @@ class CertificateDetail extends ConsumerWidget {
           child: ModifyCant(
             cant: offer.cant,
             onCantChanged: (onCantChanged) {
-              // final newOffer = offer.operation(onCantChanged);
+              ref
+                  .read(offersProvider.notifier)
+                  .updateOffer(offer.operation(onCantChanged));
             },
           ),
         ),
@@ -79,7 +92,7 @@ class CertificateDetail extends ConsumerWidget {
         Column(
           children: [
             PrimaryText(
-              '\$ ${totalPay.toStringAsFixed(2)}',
+              '\$ ${offer.simpleCertificate.price.toStringAsFixed(2)}',
               fontWeight: FontWeight.bold,
             ),
             const SizedBox(height: 10),
@@ -97,7 +110,8 @@ class CertificateDetail extends ConsumerWidget {
                 ),
                 const SizedBox(width: 10),
                 PrimaryIconButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      ref.read(offersProvider.notifier).removeOffer(offer),
                   width: size,
                   height: size,
                   icon: const Icon(

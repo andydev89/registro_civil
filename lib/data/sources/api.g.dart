@@ -652,6 +652,44 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByCanton(
+    canton,
+    pageNo,
+    pageSize,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<AgencyModel>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/identity/api/agency/by/canton?canton=${canton}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModelPagination<List<AgencyModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<AgencyModel>(
+                  (i) => AgencyModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModelPagination<List<LocationModel>?>> locationByParent(
       province) async {
     const _extra = <String, dynamic>{};
@@ -837,7 +875,7 @@ class _Api implements Api {
     )
                 .compose(
                   _dio.options,
-                  '/schedule/api/receipt/byuser',
+                  '/schedule/api/byuser',
                   queryParameters: queryParameters,
                   data: _data,
                 )

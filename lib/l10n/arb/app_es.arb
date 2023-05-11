@@ -389,5 +389,6 @@
   "seguroeliminarresidence": "¿Está seguro que desea eliminar esta residencia?",
   "limpiar": "Limpiar",
   "limpiarCarrito": "Limpiar carrito",
-  "tenercuentaLimpiarCarrito": "Ten en cuenta que al dar limpiar se eliminaran todos los pedidos del carrito."
+  "tenercuentaLimpiarCarrito": "Ten en cuenta que al dar limpiar se eliminaran todos los pedidos del carrito.",
+  "carrito": "Carrito"
 }

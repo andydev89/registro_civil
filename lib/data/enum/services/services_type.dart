@@ -34,13 +34,13 @@ enum TypeService implements Translatable {
   schedule('SERVICE_AGENDAR_TURNO'),
   @JsonValue('NULL')
   none('NULL'),
-  // TODO(jang): temp
-  @JsonValue('PRUEBA_MARRIAGE_CELEBRATION')
-  marriageCelebration('PRUEBA_MARRIAGE_CELEBRATION'),
   @JsonValue('SERVICE_RESIDENCY_REGISTRATION')
   residencyRegistration('SERVICE_RESIDENCY_REGISTRATION'),
   @JsonValue('SERVICE_CAMBIO_NOMBRE')
-  changeOfName('SERVICE_CAMBIO_NOMBRE');
+  changeOfName('SERVICE_CAMBIO_NOMBRE'),
+  // TODO(jang): temp
+  @JsonValue('PRUEBA_MARRIAGE_CELEBRATION')
+  marriageCelebration('PRUEBA_MARRIAGE_CELEBRATION');
 
   const TypeService(this.toText);
   final String toText;

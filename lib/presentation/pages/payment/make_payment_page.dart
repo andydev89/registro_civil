@@ -28,13 +28,13 @@ import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart
 class MakePaymentPage extends ConsumerWidget {
   const MakePaymentPage({
     super.key,
-    required this.requestNumber,
+    this.requestNumber,
     required this.buttonText,
     required this.service,
     this.onTapSuccessPayment,
     this.onTapFailedPayment,
   });
-  final String requestNumber;
+  final String? requestNumber;
   final String buttonText;
   final TypeServiceModel service;
   final void Function(BuildContext context)? onTapSuccessPayment;
@@ -53,13 +53,16 @@ class MakePaymentPage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Flexible(
-                    child: PrimaryText(
-                      '${l10n.solicitud} # $requestNumber',
-                      color: blue,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  if (requestNumber != null)
+                    Flexible(
+                      child: PrimaryText(
+                        '${l10n.solicitud} # $requestNumber',
+                        color: blue,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  else
+                    Container(),
                   Flexible(
                     child: PrimaryText(
                       '${l10n.totalPagar} \$'
@@ -199,8 +202,8 @@ class MakePaymentPage extends ConsumerWidget {
                               // TODO(alejandro): traducir los textos
                               children: [
                                 PrimaryCaption(
-                                  'Pagado: \$${service.total
-                                  .toStringAsFixed(2)}',
+                                  'Pagado:'
+                                  ' \$${service.total.toStringAsFixed(2)}',
                                 ),
                                 PrimaryCaption(
                                   'Número de transacción:'

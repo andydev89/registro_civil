@@ -53,6 +53,7 @@ class SimpleCertificateFirstStepPersonalPage extends ConsumerWidget {
                       ok: (response) => context.navigateTo(
                         SimpleCertificateSecondStepRoute(
                           simpleCertificateResponse: response,
+                          model: typeSimpleCertificate,
                         ),
                       ),
                       err: (error) =>

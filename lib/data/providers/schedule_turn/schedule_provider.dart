@@ -66,14 +66,15 @@ class SchedulesByUserFilter extends _$SchedulesByUserFilter {
 
 @riverpod
 Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
-  SchedulesByUserRef ref,
-) async {
+  SchedulesByUserRef ref, {
+  int? pageNo,
+}) async {
   final query = ref.watch(schedulesByUserFilterProvider);
   final api = ref.watch(apiProvider);
   final user = await ref.watch(meProvider.future);
   final response = await api.schedulesByUser(
     user.id,
-    pageNo: query.pageNo,
+    pageNo: pageNo ?? query.pageNo,
     pageSize: query.pageSize,
     filter: query.filter,
     sortBy: query.sortBy,
@@ -83,7 +84,6 @@ Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
   );
   return response;
 }
-
 
 @riverpod
 Future<ResponseModelPagination<List<UserScheduleModel>>> fetchSchedulesByUser(
@@ -104,7 +104,6 @@ Future<ResponseModelPagination<List<UserScheduleModel>>> fetchSchedulesByUser(
   );
   return response;
 }
-
 
 @riverpod
 Future<Result<BookedReceiptModel, StatusCode>> confirmSchedule(
