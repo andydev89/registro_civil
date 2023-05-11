@@ -57,7 +57,7 @@ class MyTurnExpandableCard extends StatelessWidget {
           ),
           DescriptionRow(
             label: l10n.estado,
-            text: data.typeOfService.state,
+            text: data.state,
             isTextColoredUpperCase: true,
           ),
           const SizedBox(

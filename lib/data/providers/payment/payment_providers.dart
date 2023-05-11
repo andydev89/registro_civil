@@ -34,12 +34,16 @@ Future<Result<bool, StatusCode>> isPlaceToPayTransactionCompleted(
   IsPlaceToPayTransactionCompletedRef ref, {
   required PlaceToPayReferenceModel placeToPayReference,
 }) async {
-  final api = ref.watch(apiProvider);
-  final response = await api
-      .checkPlaceToPayTransaction(placeToPayReference.paymentGatewayReference);
-  return response != null && response.currentStatus != null
-      ? Result.ok(response.currentStatus == TransactionStatus.approved)
-      : const Result.err(StatusCode.s400);
+  try {
+    final api = ref.watch(apiProvider);
+    final response = await api.checkPlaceToPayTransaction(
+        placeToPayReference.paymentGatewayReference);
+    return response != null && response.currentStatus != null
+        ? Result.ok(response.currentStatus == TransactionStatus.approved)
+        : const Result.err(StatusCode.s400);
+  } catch (e) {
+    return const Result.err(StatusCode.s400);
+  }
 }
 
 @riverpod
