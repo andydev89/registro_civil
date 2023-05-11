@@ -40,6 +40,7 @@ Map<String, dynamic> _$UserScheduleModelToJson(UserScheduleModel instance) =>
 const _$StatusEnumMap = {
   Status.active: 'ACTIVE',
   Status.inactive: 'INACTIVE',
+  Status.unpaind: 'UNPAID',
 };
 
 const _$PaymentMethodTypeEnumMap = {
