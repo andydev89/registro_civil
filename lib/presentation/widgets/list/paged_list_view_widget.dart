@@ -45,12 +45,11 @@ class _PagedListViewWidgetState<T>
   @override
   void initState() {
     _pagingController = PagingController(firstPageKey: widget.firstPage);
-    if (widget.totalPages != null) {
-      if (widget.firstPage + 1 < widget.totalPages!) {
-        _pagingController.appendPage(widget.firstElements, widget.firstPage);
-      } else {
-        _pagingController.appendLastPage(widget.firstElements);
-      }
+    if (widget.totalPages != null &&
+        widget.firstPage + 1 < widget.totalPages!) {
+      _pagingController.appendPage(widget.firstElements, widget.firstPage);
+    } else {
+      _pagingController.appendLastPage(widget.firstElements);
     }
     _pagingController.addPageRequestListener(
       (pageKey) => fetchPage<T>(

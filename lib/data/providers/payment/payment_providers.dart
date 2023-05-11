@@ -37,7 +37,7 @@ Future<Result<bool, StatusCode>> isPlaceToPayTransactionCompleted(
   try {
     final api = ref.watch(apiProvider);
     final response = await api.checkPlaceToPayTransaction(
-        placeToPayReference.paymentGatewayReference);
+        placeToPayReference.paymentGatewayReference,);
     return response != null && response.currentStatus != null
         ? Result.ok(response.currentStatus == TransactionStatus.approved)
         : const Result.err(StatusCode.s400);

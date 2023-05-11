@@ -116,7 +116,7 @@ class CreatePlaceToPayTransactionProvider extends AutoDisposeFutureProvider<
 }
 
 String _$isPlaceToPayTransactionCompletedHash() =>
-    r'f38b2e85715db71d42bc5caa6f83d84171495a50';
+    r'f2151d0b8eed8c21d1f3009a9e3761840e00bd74';
 typedef IsPlaceToPayTransactionCompletedRef
     = AutoDisposeFutureProviderRef<Result<bool, StatusCode>>;
 

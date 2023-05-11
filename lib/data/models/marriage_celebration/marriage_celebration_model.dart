@@ -278,12 +278,9 @@ class SelectAgency {
     @FormControlAnnotation(validators: [requiredValidator])
         required this.province,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.canton,
-    @FormControlAnnotation(validators: [requiredValidator])
         required this.agency,
   });
 
   final LocationModel province;
-  final LocationModel canton;
   final AgencyModel agency;
 }

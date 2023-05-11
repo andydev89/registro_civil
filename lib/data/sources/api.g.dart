@@ -875,7 +875,7 @@ class _Api implements Api {
     )
                 .compose(
                   _dio.options,
-                  '/schedule/api/byuser',
+                  '/schedule/api/receipt',
                   queryParameters: queryParameters,
                   data: _data,
                 )
