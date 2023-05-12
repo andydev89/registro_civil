@@ -214,8 +214,92 @@ class MarriagesProvider extends AutoDisposeFutureProvider<
   }
 }
 
+String _$marriageByIdHash() => r'c51e48994d65498c520775f251542c8648608617';
+typedef MarriageByIdRef
+    = AutoDisposeFutureProviderRef<MarriageCelebrationModel>;
+
+/// See also [marriageById].
+@ProviderFor(marriageById)
+const marriageByIdProvider = MarriageByIdFamily();
+
+/// See also [marriageById].
+class MarriageByIdFamily extends Family<AsyncValue<MarriageCelebrationModel>> {
+  /// See also [marriageById].
+  const MarriageByIdFamily();
+
+  /// See also [marriageById].
+  MarriageByIdProvider call(
+    String id,
+  ) {
+    return MarriageByIdProvider(
+      id,
+    );
+  }
+
+  @override
+  MarriageByIdProvider getProviderOverride(
+    covariant MarriageByIdProvider provider,
+  ) {
+    return call(
+      provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'marriageByIdProvider';
+}
+
+/// See also [marriageById].
+class MarriageByIdProvider
+    extends AutoDisposeFutureProvider<MarriageCelebrationModel> {
+  /// See also [marriageById].
+  MarriageByIdProvider(
+    this.id,
+  ) : super.internal(
+          (ref) => marriageById(
+            ref,
+            id,
+          ),
+          from: marriageByIdProvider,
+          name: r'marriageByIdProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$marriageByIdHash,
+          dependencies: MarriageByIdFamily._dependencies,
+          allTransitiveDependencies:
+              MarriageByIdFamily._allTransitiveDependencies,
+        );
+
+  final String id;
+
+  @override
+  bool operator ==(Object other) {
+    return other is MarriageByIdProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$marriageCelebrationHash() =>
-    r'dd6758d657c84910a0254293011f70e3a6a22f2a';
+    r'26be304a4fbb39c082571f042e1525374ea5789e';
 
 /// See also [MarriageCelebration].
 @ProviderFor(MarriageCelebration)
@@ -436,7 +520,7 @@ class PartnersProvider
   }
 }
 
-String _$marriageHash() => r'b260fa2b711a32a59cb3ee73013eba85d311eaa8';
+String _$marriageHash() => r'f4a53f004d37ed15281b94d41a1db1d01e5b41af';
 
 /// See also [Marriage].
 @ProviderFor(Marriage)
@@ -466,4 +550,20 @@ final marriagesFilterProvider =
 );
 
 typedef _$MarriagesFilter = AutoDisposeNotifier<QueryMarriages>;
+String _$marriageUpdateHash() => r'74b1680e2f17a75f228a20a7f2c1df63e754f7a3';
+
+/// See also [MarriageUpdate].
+@ProviderFor(MarriageUpdate)
+final marriageUpdateProvider =
+    AutoDisposeNotifierProvider<MarriageUpdate, void>.internal(
+  MarriageUpdate.new,
+  name: r'marriageUpdateProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$marriageUpdateHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$MarriageUpdate = AutoDisposeNotifier<void>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

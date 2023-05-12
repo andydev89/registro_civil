@@ -16,10 +16,13 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/widgets/modal_confirmation.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_file_picker.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
+import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
@@ -37,7 +40,7 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
         ? marriageCelebrationModel.firstPartner
         : marriageCelebrationModel.secondPartner;
     final documents = ref.watch(
-      MarriageDocumentsProvider(
+      marriageDocumentsProvider(
         maritalStatus: partner!.maritalStatus!,
         hasChildren: partner.hasChildren!,
         childrenRelationShip: partner.childrenRelationship,
@@ -93,14 +96,10 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                                     ReactivePartnerFormArrayBuilder(
                                       formControl: formModel.documentsControl,
                                       itemBuilder: (_, index, value, __) {
-                                        return Card(
-                                          color: Colors.white,
-                                          elevation: 4,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              10,
-                                            ),
-                                          ),
+                                        final formControl = formModel
+                                            .documentsControl.controls
+                                            .elementAt(index);
+                                        return PrimaryCard(
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -126,12 +125,16 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                                                             .elementAt(index)
                                                         as FormControl<
                                                             Document>,
-                                                onFileSelected:
-                                                    (document, p0) => formModel
-                                                            .documentsControl
-                                                            .controls
-                                                            .elementAt(index)
-                                                            .value =
+                                                onRemove: () =>
+                                                    formControl.updateValue(
+                                                  formControl.value!
+                                                      .copyWith(file: ''),
+                                                ),
+                                                onFileSelected: (
+                                                  document,
+                                                  p0,
+                                                ) =>
+                                                    formControl.value =
                                                         document!
                                                             .copyWith(file: p0),
                                               ),
@@ -160,8 +163,8 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                                                 ],
                                               ).verticalPadding(5),
                                             ],
-                                          ).symmetricPadding(10, 30),
-                                        );
+                                          ),
+                                        ).verticalPadding(10);
                                       },
                                     ),
                                   ],
@@ -174,25 +177,17 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [PrimaryText(l10n.nohayDocALLenar)],
                         ),
-                  error: (error, _) => Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      PrimaryText(
-                        error.toString(),
-                        maxLines: 7,
+                  error: (error, _) => ErrorStatus(
+                    messagge: error.toString(),
+                    onPressed: () => ref.refresh(
+                      marriageDocumentsProvider(
+                        maritalStatus: partner.maritalStatus!,
+                        hasChildren: partner.hasChildren!,
+                        childrenRelationShip: partner.childrenRelationship,
                       ),
-                      const SizedBox(height: 10),
-                      PrimaryButton(
-                        title: l10n.recargar,
-                        onPressed: () =>
-                            ref.refresh(documents as Refreshable<void>),
-                      ),
-                    ],
+                    ),
                   ),
-                  loading: () => Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [CircularProgressIndicator()],
-                  ),
+                  loading: () => const LoadingStatus(),
                 )
                 .symmetricPadding(10, 20),
           ),
@@ -224,10 +219,13 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                             ok: ok,
                             onConfirm: () => ref
                                 .read(marriageProvider.notifier)
-                                .marriage(marriageCelebrationModel)
+                                .marriage(
+                                  ref.watch(marriageCelebrationProvider),
+                                )
                                 .when(
                                   ok: (_) {
                                     ok.value = true;
+                                    ref.invalidate(marriagesProvider());
                                     context.replaceRoute(
                                       NotificationRoute(
                                         title: l10n.confirmacionSol,

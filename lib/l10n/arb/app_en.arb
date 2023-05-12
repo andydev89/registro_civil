@@ -403,5 +403,6 @@
   "aprobado": "Approved",
   "rechazado": "Rejected",
   "finalizado": "Finished",
-  "listadoSol": "List of requests"
+  "listadoSol": "List of requests",
+  "documentosSubCor": "Successfully uploaded documents"
 }

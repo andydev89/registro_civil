@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
@@ -25,13 +24,14 @@ class MarriageCelebration extends _$MarriageCelebration {
 
 // INIT
   void setAttorney() {
-    state = state.copyWith(
-      requestOwnerType: MarriageCelebrationType.attorney,
+    state = MarriageCelebrationModel(
+      outside: Outside(),
     );
   }
 
   void setContractingParty() {
-    state = state.copyWith(
+    state = MarriageCelebrationModel(
+      outside: Outside(),
       requestOwnerType: MarriageCelebrationType.contractingParty,
     );
   }
@@ -151,6 +151,8 @@ class Marriage extends _$Marriage {
   Future<Result<bool, StatusCode>> marriage(
     MarriageCelebrationModel model,
   ) async {
+    final x = model.toJson();
+    print(x);
     final api = ref.watch(apiProvider);
     final result = await api.marriage(model);
     if (result.success) {
@@ -200,4 +202,43 @@ Future<ResponseModelPagination<List<ResponseMarriageModel>>> marriages(
     userId: query.userId,
   );
   return response;
+}
+
+@riverpod
+Future<MarriageCelebrationModel> marriageById(
+  MarriageByIdRef ref,
+  String id,
+) async {
+  final api = ref.watch(apiProvider);
+  return (await api.marriageById(id)).data!;
+}
+
+@riverpod
+class MarriageUpdate extends _$MarriageUpdate {
+  @override
+  void build() {}
+
+  Future<Result<bool, StatusCode>> updateMarriage(
+    Map<int, List<Document>> documents,
+    String id,
+  ) async {
+    final api = ref.watch(apiProvider);
+    final result =
+        await api.marriageUpdate(_convertToDocumentsRejection(documents, id));
+    if (result.success) {
+      return const Result.ok(true);
+    }
+    return Result.err(result.status);
+  }
+
+  DocumentsRejection _convertToDocumentsRejection(
+    Map<int, List<Document>> documents,
+    String id,
+  ) {
+    return DocumentsRejection(
+      id: id,
+      firstPartnerDocuments: documents[0]!,
+      secondPartnerDocuments: documents[1]!,
+    );
+  }
 }

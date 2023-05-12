@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage.dart';
 import 'package:registro_civil_apk/data/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
+import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/utils/residence_registration_utils.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/card_widget.dart';
@@ -17,11 +19,26 @@ import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class MarriageCelebrationPrincipalPage extends ConsumerWidget {
+class MarriageCelebrationPrincipalPage extends ConsumerStatefulWidget {
   const MarriageCelebrationPrincipalPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MarriageCelebrationPrincipalPage> createState() =>
+      _MarriageCelebrationPrincipalPageState();
+}
+
+class _MarriageCelebrationPrincipalPageState
+    extends ConsumerState<MarriageCelebrationPrincipalPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showAceptAgreement(context);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
     return PrimaryScaffold(
       title: l10n.celebracionMat,
@@ -29,9 +46,8 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
         child: Column(
           children: [
             PrimarySearch(
-              filter: (p0) => ref
-                  .read(marriagesFilterProvider.notifier)
-                  .setFilter(p0),
+              filter: (p0) =>
+                  ref.read(marriagesFilterProvider.notifier).setFilter(p0),
             ).verticalPadding(10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,12 +90,16 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
                     rows: {
                       l10n.fechaCreacion: '${e.creationDate.onlyDate} -'
                           ' ${e.creationDate.onlyTime}',
-                      l10n.estado: e.state.toText,
+                      l10n.estado: e.state.translate(context),
                     },
                     actions: {
-                      Crud.update: (p0) {},
+                      if (e.state == StateMarriage.inProgress)
+                        Crud.update: (p0) => context.navigateTo(
+                              RejectionStepMarriageCelebrationRoute(
+                                marriageId: p0.id,
+                              ),
+                            ),
                       Crud.read: (p0) {},
-                      Crud.delete: (p0) {},
                     },
                   ),
                 ),

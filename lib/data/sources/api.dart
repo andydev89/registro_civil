@@ -126,6 +126,16 @@ abstract class Api {
     @Query('hasChildren') bool hasChildren = false,
   });
 
+  @GET('/marriage/api/marriage/{id}')
+  Future<ResponseModel<MarriageCelebrationModel>> marriageById(
+    @Path('id') String id,
+  );
+
+  @PUT('/marriage/api/marriage')
+  Future<ResponseModel<CommandModel>> marriageUpdate(
+    @Body() DocumentsRejection model,
+  );
+
   //COMMONS
   @GET('/identity/api/location/province')
   Future<ResponseModelPagination<List<LocationModel>?>> provinces(

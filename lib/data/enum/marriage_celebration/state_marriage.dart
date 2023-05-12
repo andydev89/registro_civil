@@ -35,3 +35,24 @@ enum StateMarriage implements Translatable {
     }
   }
 }
+
+enum StateDocument implements Translatable {
+  @JsonValue('APPROVED')
+  approved('APPROVED'),
+  @JsonValue('REJECTED')
+  rejected('REJECTED');
+
+  const StateDocument(this.toText);
+  final String toText;
+
+  @override
+  String translate(BuildContext context) {
+    final l10n = context.l10n;
+    switch (this) {
+      case StateDocument.approved:
+        return l10n.aprobado;
+      case StateDocument.rejected:
+        return l10n.rechazado;
+    }
+  }
+}

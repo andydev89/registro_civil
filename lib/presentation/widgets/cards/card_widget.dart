@@ -3,6 +3,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/turn_details_page.dart';
+import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class CardWidget<T> extends StatelessWidget {
@@ -19,11 +20,7 @@ class CardWidget<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25),
-      ),
+    return PrimaryCard(
       child: Column(
         children: [
           ...rows.entries.map(
@@ -53,7 +50,7 @@ class CardWidget<T> extends StatelessWidget {
             ],
           ),
         ],
-      ).symmetricPadding(20, 20),
-    );
+      ),
+    ).verticalPadding(10);
   }
 }

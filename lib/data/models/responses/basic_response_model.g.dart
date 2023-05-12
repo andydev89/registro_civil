@@ -12,7 +12,8 @@ ResponseModel<T> _$ResponseModelFromJson<T>(
 ) =>
     ResponseModel<T>(
       timestamp: json['timestamp'] as String,
-      status: $enumDecode(_$StatusCodeEnumMap, json['status']),
+      status: $enumDecode(_$StatusCodeEnumMap, json['status'],
+          unknownValue: StatusCode.s999),
       message: json['message'] as String,
       errors: json['errors'],
       data: _$nullableGenericFromJson(json['data'], fromJsonT),
@@ -113,7 +114,8 @@ ResponseModelPagination<T> _$ResponseModelPaginationFromJson<T>(
 ) =>
     ResponseModelPagination<T>(
       timestamp: json['timestamp'] as String? ?? '',
-      status: $enumDecodeNullable(_$StatusCodeEnumMap, json['status']) ??
+      status: $enumDecodeNullable(_$StatusCodeEnumMap, json['status'],
+              unknownValue: StatusCode.s999) ??
           StatusCode.s200,
       message: json['message'] as String? ?? '',
       errors: json['errors'],

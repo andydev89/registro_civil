@@ -201,6 +201,20 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    RejectionStepMarriageCelebrationRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<RejectionStepMarriageCelebrationRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: RejectionStepMarriageCelebrationPage(
+          key: args.key,
+          marriageId: args.marriageId,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ResidenceRegistrationRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -862,6 +876,11 @@ class _$AppRouter extends RootStackRouter {
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
+              RejectionStepMarriageCelebrationRoute.name,
+              path: 'rejection-step-marriage-celebration-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
               ResidenceRegistrationRouterRoute.name,
               path: 'residence-registration-router-page',
               parent: RootRouterRoute.name,
@@ -1279,6 +1298,41 @@ class MarriageCelebrationPrincipalRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MarriageCelebrationPrincipalRoute';
+}
+
+/// generated route for
+/// [RejectionStepMarriageCelebrationPage]
+class RejectionStepMarriageCelebrationRoute
+    extends PageRouteInfo<RejectionStepMarriageCelebrationRouteArgs> {
+  RejectionStepMarriageCelebrationRoute({
+    Key? key,
+    required String marriageId,
+  }) : super(
+          RejectionStepMarriageCelebrationRoute.name,
+          path: 'rejection-step-marriage-celebration-page',
+          args: RejectionStepMarriageCelebrationRouteArgs(
+            key: key,
+            marriageId: marriageId,
+          ),
+        );
+
+  static const String name = 'RejectionStepMarriageCelebrationRoute';
+}
+
+class RejectionStepMarriageCelebrationRouteArgs {
+  const RejectionStepMarriageCelebrationRouteArgs({
+    this.key,
+    required this.marriageId,
+  });
+
+  final Key? key;
+
+  final String marriageId;
+
+  @override
+  String toString() {
+    return 'RejectionStepMarriageCelebrationRouteArgs{key: $key, marriageId: $marriageId}';
+  }
 }
 
 /// generated route for

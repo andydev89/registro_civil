@@ -25,9 +25,13 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
     this.fileExtension = FileExtension.pdf,
     this.ligth = false,
     this.label,
+    this.onRemove,
   }) : assert(
           maxFileSizeMB <= 5 && maxFileSizeMB > 0,
           'El tamaño debe ser entre 1 y 5 MB',
+        ),assert(
+         T == String || onRemove != null,
+          'Debe implementar onRemove para poder eliminar el archivo',
         );
   final FormControl<T>? formControl;
   final List<FileExtension> allowedExtensions;
@@ -36,6 +40,7 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
   final void Function(T?, String)? onFileSelected;
   final bool ligth;
   final String? label;
+  final void Function()? onRemove;
 
   @override
   Widget build(BuildContext context) {
@@ -79,12 +84,15 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
                             field.didChange(base64Pdf as T);
                           } else {
                             onFileSelected?.call(
-                                field.control.value, base64Pdf);
+                              formControl!.value,
+                              base64Pdf,
+                            );
                           }
                           name = result.files.single.name;
                           select.value = true;
                         } catch (e) {
-                          field.didChange(null);
+                          if (onRemove == null) field.didChange(null);
+                          if (onRemove != null) onRemove!.call();
                           select.value = false;
                           showAlert(e.toString(), TypeAlert.error);
                         }
@@ -122,7 +130,8 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
                           ),
                           PrimaryIconButton(
                             onPressed: () {
-                              field.didChange(null);
+                              if (onRemove == null) field.didChange(null);
+                              if (onRemove != null) onRemove!.call();
                               select.value = false;
                             },
                             icon: const Icon(Icons.delete),

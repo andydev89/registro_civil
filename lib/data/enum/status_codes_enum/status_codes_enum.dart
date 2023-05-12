@@ -70,7 +70,8 @@ enum StatusCode implements Translatable {
   s641(641),
   s642(642),
   s643(643),
-  s644(644);
+  s644(644),
+  ;
 
   const StatusCode(this.code);
   final int code;
