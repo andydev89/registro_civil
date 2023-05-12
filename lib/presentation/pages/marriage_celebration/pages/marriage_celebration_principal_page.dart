@@ -13,11 +13,13 @@ import 'package:registro_civil_apk/presentation/pages/residence_registration/uti
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/card_widget.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
 import 'package:registro_civil_apk/presentation/widgets/list/paged_list_view_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
+import 'package:registro_civil_apk/presentation/widgets/widget_from_json.dart';
 
 class MarriageCelebrationPrincipalPage extends ConsumerStatefulWidget {
   const MarriageCelebrationPrincipalPage({super.key});
@@ -99,7 +101,12 @@ class _MarriageCelebrationPrincipalPageState
                                 marriageId: p0.id,
                               ),
                             ),
-                      Crud.read: (p0) {},
+                      Crud.read: (p0) => showContentDialog(
+                            context,
+                            content: ViewFromJsonWidget(
+                              json: e.toJson(),
+                            ),
+                          ),
                     },
                   ),
                 ),
