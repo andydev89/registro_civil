@@ -130,7 +130,7 @@ class MarriageDocumentsProvider
   }
 }
 
-String _$marriagesHash() => r'b11526ed2f44037dd42108bfddf5bdb898a407f5';
+String _$marriagesHash() => r'9f1fefd5c9b6781642cb2c6823ff955f94694da9';
 typedef MarriagesRef = AutoDisposeFutureProviderRef<
     ResponseModelPagination<List<ResponseMarriageModel>>>;
 

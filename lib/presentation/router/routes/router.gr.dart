@@ -192,6 +192,15 @@ class _$AppRouter extends RootStackRouter {
         child: const MarriageCelebrationRouterPage(),
       );
     },
+    MarriageCelebrationPrincipalRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationPrincipalPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ResidenceRegistrationRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -829,6 +838,11 @@ class _$AppRouter extends RootStackRouter {
               ],
             ),
             RouteConfig(
+              MarriageCelebrationPrincipalRoute.name,
+              path: 'marriage-celebration-principal-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
               ResidenceRegistrationRouterRoute.name,
               path: 'residence-registration-router-page',
               parent: RootRouterRoute.name,
@@ -1229,6 +1243,18 @@ class MarriageCelebrationRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MarriageCelebrationRouterRoute';
+}
+
+/// generated route for
+/// [MarriageCelebrationPrincipalPage]
+class MarriageCelebrationPrincipalRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationPrincipalRoute()
+      : super(
+          MarriageCelebrationPrincipalRoute.name,
+          path: 'marriage-celebration-principal-page',
+        );
+
+  static const String name = 'MarriageCelebrationPrincipalRoute';
 }
 
 /// generated route for

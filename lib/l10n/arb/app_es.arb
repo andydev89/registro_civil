@@ -397,5 +397,11 @@
   "cambioNombrePropio": "Cambio de nombre propio",
   "alterarOrden": "Alterar orden",
   "suprimirUnoCuandoConsteMasDeDos": "Suprimir uno cuando conste mas de dos",
-  "aumentarCuandoConsteConUnSoloNombre": "Aumentar cuando conste con un solo nombre"
+  "aumentarCuandoConsteConUnSoloNombre": "Aumentar cuando conste con un solo nombre",
+  "pendiente": "Pendiente",
+  "enProceso": "En proceso",
+  "aprobado": "Aprobado",
+  "rechazado": "Rechazado",
+  "finalizado": "Finalizado",
+  "listadoSol": "Listado de solicitudes"
 }

@@ -426,11 +426,11 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModelPagination<List<ResponseMarriageModel>>> marriages({
+  Future<ResponseModelPagination<List<ResponseMarriageModel>>> marriages(
+    userNui, {
     pageNo = 0,
     pageSize = 20,
     state = '',
-    userNui = '',
     userId = '',
     createdAt = '',
     updatedAt = '',
@@ -443,10 +443,10 @@ class _Api implements Api {
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
+      r'userNui': userNui,
       r'pageNo': pageNo,
       r'pageSize': pageSize,
       r'state': state,
-      r'userNui': userNui,
       r'userId': userId,
       r'createdAt': createdAt,
       r'updatedAt': updatedAt,
