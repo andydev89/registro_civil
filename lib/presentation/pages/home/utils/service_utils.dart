@@ -52,7 +52,12 @@ PageRouteInfo<dynamic> getMarriageCelebration() =>
 PageRouteInfo<dynamic> getResidencyRegistration() =>
     const ResidenceRegistrationRouterRoute();
 
-PageRouteInfo<dynamic> getChangeOfName() => const ChangeOfNameRouterRoute();
+PageRouteInfo<dynamic> getChangeOfName(TypeServiceModel typeOfService) =>
+    ChangeOfNameRouterRoute(
+      children: [
+        TermAndUsesConditionsRoute(typeService: typeOfService),
+      ],
+    );
 
 PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   final type = typeServiceModel.type;
@@ -69,7 +74,7 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
     return getResidencyRegistration();
   }
   if (type.isChangeOfName) {
-    return getChangeOfName();
+    return getChangeOfName(typeServiceModel);
   }
   return getMarriageCelebration();
 }

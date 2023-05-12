@@ -225,7 +225,7 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
   String get _name1Value => name1Control.value as String;
   String get _name2Value => name2Control.value as String;
   String get _resultingNameValue => resultingNameControl.value as String;
-  String get _observationsValue => observationsControl.value as String;
+  String? get _observationsValue => observationsControl?.value;
   String get _documentValue => documentControl.value as String;
   bool get containsChangeOfNameType {
     try {
@@ -295,7 +295,7 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
   Object? get name1Errors => name1Control.errors;
   Object? get name2Errors => name2Control.errors;
   Object? get resultingNameErrors => resultingNameControl.errors;
-  Object? get observationsErrors => observationsControl.errors;
+  Object? get observationsErrors => observationsControl?.errors;
   Object? get documentErrors => documentControl.errors;
   void get changeOfNameTypeFocus => form.focus(changeOfNameTypeControlPath());
   void get agencyFocus => form.focus(agencyControlPath());
@@ -304,6 +304,32 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
   void get resultingNameFocus => form.focus(resultingNameControlPath());
   void get observationsFocus => form.focus(observationsControlPath());
   void get documentFocus => form.focus(documentControlPath());
+  void observationsRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsObservations) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          observationsControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            observationsControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void changeOfNameTypeValueUpdate(
     ChangeOfNameType value, {
     bool updateParent = true,
@@ -350,11 +376,11 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
   }
 
   void observationsValueUpdate(
-    String value, {
+    String? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    observationsControl.updateValue(value,
+    observationsControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -413,11 +439,11 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
   }
 
   void observationsValuePatch(
-    String value, {
+    String? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    observationsControl.patchValue(value,
+    observationsControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -476,13 +502,13 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
       resultingNameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void observationsValueReset(
-    String value, {
+    String? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      observationsControl.reset(
+      observationsControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void documentValueReset(
     String value, {
@@ -504,8 +530,9 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
       form.control(name2ControlPath()) as FormControl<String>;
   FormControl<String> get resultingNameControl =>
       form.control(resultingNameControlPath()) as FormControl<String>;
-  FormControl<String> get observationsControl =>
-      form.control(observationsControlPath()) as FormControl<String>;
+  FormControl<String>? get observationsControl => containsObservations
+      ? form.control(observationsControlPath()) as FormControl<String>?
+      : null;
   FormControl<String> get documentControl =>
       form.control(documentControlPath()) as FormControl<String>;
   void changeOfNameTypeSetDisabled(
@@ -604,12 +631,12 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      observationsControl.markAsDisabled(
+      observationsControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      observationsControl.markAsEnabled(
+      observationsControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );

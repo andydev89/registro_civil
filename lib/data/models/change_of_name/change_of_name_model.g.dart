@@ -14,7 +14,7 @@ ChangeOfNameModel _$ChangeOfNameModelFromJson(Map<String, dynamic> json) =>
       name1: json['name1'] as String,
       name2: json['name2'] as String,
       resultingName: json['resultingName'] as String,
-      observations: json['observations'] as String,
+      observations: json['observations'] as String?,
       document: json['document'] as String,
     );
 

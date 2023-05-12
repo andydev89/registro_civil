@@ -23,6 +23,8 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
     this.maxFileSizeMB = 5,
     this.onFileSelected,
     this.fileExtension = FileExtension.pdf,
+    this.ligth = false,
+    this.label,
   }) : assert(
           maxFileSizeMB <= 5 && maxFileSizeMB > 0,
           'El tamaño debe ser entre 1 y 5 MB',
@@ -32,6 +34,8 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
   final int maxFileSizeMB;
   final FileExtension fileExtension;
   final void Function(T?, String)? onFileSelected;
+  final bool ligth;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -41,102 +45,112 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
     return ReactiveFormField<T, T>(
       formControl: formControl,
       builder: (field) {
-        return InkWell(
-          onTap: !select.value
-              ? () async {
-                  final result = await FilePicker.platform.pickFiles(
-                    allowedExtensions:
-                        allowedExtensions.map((e) => e.value).toList(),
-                    type: allowedExtensions.isEmpty
-                        ? FileType.any
-                        : FileType.custom,
-                  );
-                  if (result != null) {
-                    try {
-                      final pdfFile = File(result.files.single.path!);
-                      final maxMB = maxFileSizeMB * 1024 * 1024;
-                      // Check file size
-                      if (pdfFile.lengthSync() > maxMB) {
-                        throw Exception(
-                          '${l10n.archivoMayor5MB} ${maxFileSizeMB}MB',
-                        );
-                      }
-                      final pdfBytes = pdfFile.readAsBytesSync();
-                      final base64Pdf =
-                          'data:application/${fileExtension.value};base64,${base64Encode(pdfBytes)}';
-                      if (base64Pdf is T) {
-                        field.didChange(base64Pdf as T);
-                      } else {
-                        onFileSelected?.call(field.control.value, base64Pdf);
-                      }
-                      name = result.files.single.name;
-                      select.value = true;
-                    } catch (e) {
-                      field.didChange(null);
-                      select.value = false;
-                      showAlert(e.toString(), TypeAlert.error);
-                    }
-                  }
-                }
-              : null,
-          child: ValueListenableBuilder<bool>(
-            valueListenable: select,
-            builder: (_, value, __) {
-              return Visibility(
-                visible: !value,
-                replacement: DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: borderRadius(),
-                    color: const Color.fromRGBO(217, 217, 217, 1),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.50),
-                        blurRadius: 4,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      allowedExtensions.first.image
-                          .image()
-                          .horizontalPadding(10),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: PrimaryText(
-                          name,
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      PrimaryIconButton(
-                        onPressed: () {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (!ligth && label != null)
+              PrimaryText(
+                label!,
+              ),
+            InkWell(
+              onTap: !select.value
+                  ? () async {
+                      final result = await FilePicker.platform.pickFiles(
+                        allowedExtensions:
+                            allowedExtensions.map((e) => e.value).toList(),
+                        type: allowedExtensions.isEmpty
+                            ? FileType.any
+                            : FileType.custom,
+                      );
+                      if (result != null) {
+                        try {
+                          final pdfFile = File(result.files.single.path!);
+                          final maxMB = maxFileSizeMB * 1024 * 1024;
+                          // Check file size
+                          if (pdfFile.lengthSync() > maxMB) {
+                            throw Exception(
+                              '${l10n.archivoMayor5MB} ${maxFileSizeMB}MB',
+                            );
+                          }
+                          final pdfBytes = pdfFile.readAsBytesSync();
+                          final base64Pdf =
+                              'data:application/${fileExtension.value};base64,${base64Encode(pdfBytes)}';
+                          if (base64Pdf is T) {
+                            field.didChange(base64Pdf as T);
+                          } else {
+                            onFileSelected?.call(
+                                field.control.value, base64Pdf);
+                          }
+                          name = result.files.single.name;
+                          select.value = true;
+                        } catch (e) {
                           field.didChange(null);
                           select.value = false;
-                        },
-                        icon: const Icon(Icons.delete),
+                          showAlert(e.toString(), TypeAlert.error);
+                        }
+                      }
+                    }
+                  : null,
+              child: ValueListenableBuilder<bool>(
+                valueListenable: select,
+                builder: (_, value, __) {
+                  return Visibility(
+                    visible: !value,
+                    replacement: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: borderRadius(),
+                        color: const Color.fromRGBO(217, 217, 217, 1),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.50),
+                            blurRadius: 4,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                child: InputDecorator(
-                  decoration: primaryInputDecoration(
-                    errorText: field.errorText,
-                    suffixIcon: Icon(
-                      Icons.upload_outlined,
-                      color: Theme.of(context).primaryColor,
+                      child: Row(
+                        children: [
+                          allowedExtensions.first.image
+                              .image()
+                              .horizontalPadding(10),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: PrimaryText(
+                              name,
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                          PrimaryIconButton(
+                            onPressed: () {
+                              field.didChange(null);
+                              select.value = false;
+                            },
+                            icon: const Icon(Icons.delete),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  child: PrimaryCaption(
-                    '${allowedExtensions.map((e) => e.value).join(', ')} '
-                    '(${maxFileSizeMB}MB)',
-                    isToUpperCase: true,
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-              ).verticalPadding(10);
-            },
-          ),
-        );
+                    child: InputDecorator(
+                      decoration: primaryInputDecoration(
+                        errorText: field.errorText,
+                        suffixIcon: Icon(
+                          Icons.upload_outlined,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                      child: PrimaryCaption(
+                        '${allowedExtensions.map((e) => e.value).join(', ')} '
+                        '(${maxFileSizeMB}MB)',
+                        isToUpperCase: true,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ).verticalPadding(10);
+                },
+              ),
+            ),
+          ],
+        ).verticalPadding(10);
       },
     );
   }
