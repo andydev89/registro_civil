@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/change_of_name/change_of_name_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response.dart';
@@ -22,6 +23,7 @@ import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.
 import 'package:registro_civil_apk/presentation/pages/chage_of_name/chage_of_name_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/chage_of_name/page/change_of_name_first_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/chage_of_name/page/term_and_use_conditions_page.dart';
+import 'package:registro_civil_apk/presentation/pages/chage_of_name/page/verify_information_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/services/services_page.dart';
@@ -319,6 +321,9 @@ part 'router.gr.dart';
             ),
             CupertinoRoute(
               page: ChangeOfNameFirstStepPage,
+            ),
+            CupertinoRoute(
+              page: VerifyInformationPage,
             ),
           ],
         ),

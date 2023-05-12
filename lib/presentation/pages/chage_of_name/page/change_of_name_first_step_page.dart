@@ -1,48 +1,61 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/change_of_name/change_of_name.dart';
 import 'package:registro_civil_apk/data/enum/commons/file_extensions.dart';
 import 'package:registro_civil_apk/data/models/change_of_name/change_of_name_model.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
+import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_file_picker.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_radio_group.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_area_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class ChangeOfNameFirstStepPage extends StatelessWidget {
-  const ChangeOfNameFirstStepPage({super.key});
+class ChangeOfNameFirstStepPage extends ConsumerWidget {
+  const ChangeOfNameFirstStepPage({
+    super.key,
+    required this.typeService,
+  });
+  final TypeServiceModel typeService;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return PrimaryScaffold(
-      title: 'Infiormación para el servicio',
+      title: 'Información para el cambio de nombre',
       body: ChangeOfNameModelFormBuilder(
+        initState: (context, formModel) {
+          formModel.name1Control.statusChanged.listen((event) {
+            formModel.resultingNameControl.updateValue(
+              '''${formModel.name1Control.value ?? ''} ${formModel.name2Control.value ?? ''}''',
+            );
+          });
+          formModel.name2Control.statusChanged.listen((event) {
+            formModel.resultingNameControl.updateValue(
+              '''${formModel.name1Control.value ?? ''} ${formModel.name2Control.value ?? ''}''',
+            );
+          });
+        },
         builder: (context, formModel, child) => Expanded(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const PrimaryText(
-                  'Seleccione el tipo de cambio de nombre a realizar:',
-                  fontWeight: FontWeight.bold,
-                  textAlign: TextAlign.start,
-                ).verticalPadding(10),
-                PrimaryReactiveRadioGroup(
-                  elements: ChangeOfNameType.values,
+                PrimaryReactiveDropdown(
+                  label: 'Tipo de cambio de nombre',
                   formControl: formModel.changeOfNameTypeControl,
+                  items: ChangeOfNameType.values,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const PrimaryText(
-                  'Ingrese la propuesta de nombre:',
-                  fontWeight: FontWeight.bold,
-                  textAlign: TextAlign.start,
+                SelectElementFromApi(
+                  label: 'Agencia',
+                  provider: agenciesProvider,
+                  formControl: formModel.agencyControl,
                 ),
                 PrimaryReactiveTextField(
                   formControl: formModel.name1Control,
@@ -58,10 +71,11 @@ class ChangeOfNameFirstStepPage extends StatelessWidget {
                 ),
                 PrimaryReactiveFilePicker(
                   formControl: formModel.documentControl,
-                  // allowedExtensions: const [
-                  //   FileExtension.jpg,
-                  //   FileExtension.jpeg,
-                  // ],
+                  label: 'Documento',
+                  allowedExtensions: const [
+                    FileExtension.jpg,
+                    FileExtension.jpeg,
+                  ],
                 ),
                 PrimaryReactiveTextAreaField(
                   formControl: formModel.observationsControl,
@@ -70,7 +84,14 @@ class ChangeOfNameFirstStepPage extends StatelessWidget {
                 ReactiveChangeOfNameModelFormConsumer(
                   builder: (context, formModel, child) => PrimaryButton(
                     title: l10n.aceptar,
-                    onPressed: formModel.form.valid ? () {} : null,
+                    onPressed: formModel.form.valid
+                        ? () => context.navigateTo(
+                              VerifyInformationRoute(
+                                changeOfNameModel: formModel.model,
+                                typeService: typeService,
+                              ),
+                            )
+                        : null,
                   ),
                 ),
                 PrimaryButton(

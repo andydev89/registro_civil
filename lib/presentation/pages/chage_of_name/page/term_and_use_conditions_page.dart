@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/commons/term_and_use_conditions_model.dart';
+import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -10,7 +11,11 @@ import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffo
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class TermAndUsesConditionsPage extends StatelessWidget {
-  const TermAndUsesConditionsPage({super.key});
+  const TermAndUsesConditionsPage({
+    super.key,
+    required this.typeService,
+  });
+  final TypeServiceModel typeService;
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +68,7 @@ class TermAndUsesConditionsPage extends StatelessWidget {
                 ),
                 PrimaryReactiveCheckBox(
                   formControl: formModel.acceptControl,
-                  label:
-                      'He leído y aceptado los términos '
+                  label: 'He leído y aceptado los términos '
                       'y condiciones del trámite.',
                 ).verticalPadding(20),
                 ReactiveTermAndUseConditionsModelFormConsumer(
@@ -74,7 +78,9 @@ class TermAndUsesConditionsPage extends StatelessWidget {
                       onPressed: formModel.form.valid && formModel.model.accept
                           ? () {
                               context.navigateTo(
-                                const ChangeOfNameFirstStepRoute(),
+                                ChangeOfNameFirstStepRoute(
+                                  typeService: typeService,
+                                ),
                               );
                             }
                           : null,
