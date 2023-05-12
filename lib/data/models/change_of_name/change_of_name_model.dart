@@ -18,7 +18,7 @@ class ChangeOfNameModel {
     @FormControlAnnotation(validators: [requiredValidator]) required this.name2,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.resultingName,
-    @FormControlAnnotation<String>() required this.observations,
+    @FormControlAnnotation<String>() this.observations,
     @FormControlAnnotation<String>(validators: [requiredValidator])
         required this.document,
   });
@@ -31,7 +31,7 @@ class ChangeOfNameModel {
   final String name1;
   final String name2;
   final String resultingName;
-  final String observations;
+  final String? observations;
 
   ///Document in base 64
   final String document;

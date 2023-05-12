@@ -571,15 +571,34 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     TermAndUsesConditionsRoute.name: (routeData) {
+      final args = routeData.argsAs<TermAndUsesConditionsRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const TermAndUsesConditionsPage(),
+        child: TermAndUsesConditionsPage(
+          key: args.key,
+          typeService: args.typeService,
+        ),
       );
     },
     ChangeOfNameFirstStepRoute.name: (routeData) {
+      final args = routeData.argsAs<ChangeOfNameFirstStepRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ChangeOfNameFirstStepPage(),
+        child: ChangeOfNameFirstStepPage(
+          key: args.key,
+          typeService: args.typeService,
+        ),
+      );
+    },
+    VerifyInformationRoute.name: (routeData) {
+      final args = routeData.argsAs<VerifyInformationRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: VerifyInformationPage(
+          key: args.key,
+          changeOfNameModel: args.changeOfNameModel,
+          typeService: args.typeService,
+        ),
       );
     },
   };
@@ -879,6 +898,11 @@ class _$AppRouter extends RootStackRouter {
                 RouteConfig(
                   ChangeOfNameFirstStepRoute.name,
                   path: 'change-of-name-first-step-page',
+                  parent: ChangeOfNameRouterRoute.name,
+                ),
+                RouteConfig(
+                  VerifyInformationRoute.name,
+                  path: 'verify-information-page',
                   parent: ChangeOfNameRouterRoute.name,
                 ),
               ],
@@ -2283,24 +2307,109 @@ class SecondStepResidenceRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TermAndUsesConditionsPage]
-class TermAndUsesConditionsRoute extends PageRouteInfo<void> {
-  const TermAndUsesConditionsRoute()
-      : super(
+class TermAndUsesConditionsRoute
+    extends PageRouteInfo<TermAndUsesConditionsRouteArgs> {
+  TermAndUsesConditionsRoute({
+    Key? key,
+    required TypeServiceModel typeService,
+  }) : super(
           TermAndUsesConditionsRoute.name,
           path: '',
+          args: TermAndUsesConditionsRouteArgs(
+            key: key,
+            typeService: typeService,
+          ),
         );
 
   static const String name = 'TermAndUsesConditionsRoute';
 }
 
+class TermAndUsesConditionsRouteArgs {
+  const TermAndUsesConditionsRouteArgs({
+    this.key,
+    required this.typeService,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeService;
+
+  @override
+  String toString() {
+    return 'TermAndUsesConditionsRouteArgs{key: $key, typeService: $typeService}';
+  }
+}
+
 /// generated route for
 /// [ChangeOfNameFirstStepPage]
-class ChangeOfNameFirstStepRoute extends PageRouteInfo<void> {
-  const ChangeOfNameFirstStepRoute()
-      : super(
+class ChangeOfNameFirstStepRoute
+    extends PageRouteInfo<ChangeOfNameFirstStepRouteArgs> {
+  ChangeOfNameFirstStepRoute({
+    Key? key,
+    required TypeServiceModel typeService,
+  }) : super(
           ChangeOfNameFirstStepRoute.name,
           path: 'change-of-name-first-step-page',
+          args: ChangeOfNameFirstStepRouteArgs(
+            key: key,
+            typeService: typeService,
+          ),
         );
 
   static const String name = 'ChangeOfNameFirstStepRoute';
+}
+
+class ChangeOfNameFirstStepRouteArgs {
+  const ChangeOfNameFirstStepRouteArgs({
+    this.key,
+    required this.typeService,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeService;
+
+  @override
+  String toString() {
+    return 'ChangeOfNameFirstStepRouteArgs{key: $key, typeService: $typeService}';
+  }
+}
+
+/// generated route for
+/// [VerifyInformationPage]
+class VerifyInformationRoute extends PageRouteInfo<VerifyInformationRouteArgs> {
+  VerifyInformationRoute({
+    Key? key,
+    required ChangeOfNameModel changeOfNameModel,
+    required TypeServiceModel typeService,
+  }) : super(
+          VerifyInformationRoute.name,
+          path: 'verify-information-page',
+          args: VerifyInformationRouteArgs(
+            key: key,
+            changeOfNameModel: changeOfNameModel,
+            typeService: typeService,
+          ),
+        );
+
+  static const String name = 'VerifyInformationRoute';
+}
+
+class VerifyInformationRouteArgs {
+  const VerifyInformationRouteArgs({
+    this.key,
+    required this.changeOfNameModel,
+    required this.typeService,
+  });
+
+  final Key? key;
+
+  final ChangeOfNameModel changeOfNameModel;
+
+  final TypeServiceModel typeService;
+
+  @override
+  String toString() {
+    return 'VerifyInformationRouteArgs{key: $key, changeOfNameModel: $changeOfNameModel, typeService: $typeService}';
+  }
 }
