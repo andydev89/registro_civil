@@ -5,8 +5,11 @@ import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
+import 'package:registro_civil_apk/data/models/commons/querys_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
+import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -21,13 +24,14 @@ class MarriageCelebration extends _$MarriageCelebration {
 
 // INIT
   void setAttorney() {
-    state = state.copyWith(
-      requestOwnerType: MarriageCelebrationType.attorney,
+    state = MarriageCelebrationModel(
+      outside: Outside(),
     );
   }
 
   void setContractingParty() {
-    state = state.copyWith(
+    state = MarriageCelebrationModel(
+      outside: Outside(),
       requestOwnerType: MarriageCelebrationType.contractingParty,
     );
   }
@@ -147,11 +151,94 @@ class Marriage extends _$Marriage {
   Future<Result<bool, StatusCode>> marriage(
     MarriageCelebrationModel model,
   ) async {
+    final x = model.toJson();
+    print(x);
     final api = ref.watch(apiProvider);
     final result = await api.marriage(model);
     if (result.success) {
       return const Result.ok(true);
     }
     return Result.err(result.status);
+  }
+}
+
+@riverpod
+class MarriagesFilter extends _$MarriagesFilter {
+  @override
+  QueryMarriages build() {
+    return QueryMarriages();
+  }
+
+  void setFilter(String filter) {
+    state = state.copyWith(filter: filter);
+  }
+
+  void setPageNo(int pageNo, {int pageSize = 20}) {
+    state = state.copyWith(pageNo: pageNo, pageSize: pageSize);
+  }
+}
+
+@riverpod
+Future<ResponseModelPagination<List<ResponseMarriageModel>>> marriages(
+  MarriagesRef ref, {
+  int? pageNo,
+}) async {
+  final query = ref.watch(marriagesFilterProvider);
+  final api = ref.watch(apiProvider);
+  final user = await ref.watch(meProvider.future);
+  final response = await api.marriages(
+    user.identification,
+    pageNo: pageNo ?? query.pageNo,
+    pageSize: query.pageSize,
+    filter: query.filter,
+    agencyName: query.agencyName,
+    amountOfDays: query.amountOfDays,
+    cantonName: query.cantonName,
+    createdAt: query.createdAt,
+    interviewAt: query.interviewAt,
+    provinceName: query.provinceName,
+    state: query.state,
+    updatedAt: query.updatedAt,
+    userId: query.userId,
+  );
+  return response;
+}
+
+@riverpod
+Future<MarriageCelebrationModel> marriageById(
+  MarriageByIdRef ref,
+  String id,
+) async {
+  final api = ref.watch(apiProvider);
+  return (await api.marriageById(id)).data!;
+}
+
+@riverpod
+class MarriageUpdate extends _$MarriageUpdate {
+  @override
+  void build() {}
+
+  Future<Result<bool, StatusCode>> updateMarriage(
+    Map<int, List<Document>> documents,
+    String id,
+  ) async {
+    final api = ref.watch(apiProvider);
+    final result =
+        await api.marriageUpdate(_convertToDocumentsRejection(documents, id));
+    if (result.success) {
+      return const Result.ok(true);
+    }
+    return Result.err(result.status);
+  }
+
+  DocumentsRejection _convertToDocumentsRejection(
+    Map<int, List<Document>> documents,
+    String id,
+  ) {
+    return DocumentsRejection(
+      id: id,
+      firstPartnerDocuments: documents[0]!,
+      secondPartnerDocuments: documents[1]!,
+    );
   }
 }

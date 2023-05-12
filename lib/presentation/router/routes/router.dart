@@ -32,7 +32,9 @@ import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/first_step_contracting_party_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/first_step/marriage_celebration_first_step_route.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/fourth_step/marriage_celebration_fourth_step_route.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/marriage_celebration_principal_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/marriage_celebration_route_page.dart';
+import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/rejection_step/rejection_step_marriage_celebration.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/marriage_celebration_second_step_route.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/second_step_at_headquarter_page.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/pages/second_step/second_step_off_site_page.dart';
@@ -292,6 +294,14 @@ part 'router.gr.dart';
               transitionsBuilder: TransitionsBuilders.slideRight,
             ),
           ],
+        ),
+        CustomRoute(
+          page: MarriageCelebrationPrincipalPage,
+          transitionsBuilder: TransitionsBuilders.slideRight,
+        ),
+        CustomRoute(
+          page: RejectionStepMarriageCelebrationPage,
+          transitionsBuilder: TransitionsBuilders.slideRight,
         ),
         //RESIDENT REGISTRATION
         CupertinoRoute(

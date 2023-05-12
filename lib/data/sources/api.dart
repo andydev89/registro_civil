@@ -102,12 +102,39 @@ abstract class Api {
     @Body() MarriageCelebrationModel model,
   );
 
+  @GET('/marriage/api/marriage')
+  Future<ResponseModelPagination<List<ResponseMarriageModel>>> marriages(
+    @Query('userNui') String userNui, {
+    @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+    @Query('state') String state = '',
+    @Query('userId') String userId = '',
+    @Query('createdAt') String createdAt = '',
+    @Query('updatedAt') String updatedAt = '',
+    @Query('interviewAt') String interviewAt = '',
+    @Query('amountOfDays') String amountOfDays = '',
+    @Query('provinceName') String provinceName = '',
+    @Query('cantonName') String cantonName = '',
+    @Query('agencyName') String agencyName = '',
+    @Query('filter') String filter = '',
+  });
+
   @GET('/marriage/api/marriage/documentation/documents')
   Future<ResponseModel<List<DocumentResponse>>> marriageDocuments(
     @Query('maritalStatus') String maritalStatus,
     @Query('childrenRelationship') String childrenRelationship, {
     @Query('hasChildren') bool hasChildren = false,
   });
+
+  @GET('/marriage/api/marriage/{id}')
+  Future<ResponseModel<MarriageCelebrationModel>> marriageById(
+    @Path('id') String id,
+  );
+
+  @PUT('/marriage/api/marriage')
+  Future<ResponseModel<CommandModel>> marriageUpdate(
+    @Body() DocumentsRejection model,
+  );
 
   //COMMONS
   @GET('/identity/api/location/province')
@@ -148,7 +175,7 @@ abstract class Api {
     @Query('pageSize') int pageSize,
   );
 
-    @GET('/identity/api/location/parent/{id}')
+  @GET('/identity/api/location/parent/{id}')
   Future<ResponseModelPagination<List<LocationModel>?>> locationByParent(
     @Path('id') String province,
   );

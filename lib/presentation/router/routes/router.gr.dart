@@ -192,6 +192,29 @@ class _$AppRouter extends RootStackRouter {
         child: const MarriageCelebrationRouterPage(),
       );
     },
+    MarriageCelebrationPrincipalRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationPrincipalPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    RejectionStepMarriageCelebrationRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<RejectionStepMarriageCelebrationRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: RejectionStepMarriageCelebrationPage(
+          key: args.key,
+          marriageId: args.marriageId,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ResidenceRegistrationRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -278,9 +301,13 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     ChoosePaymentMethodRoute.name: (routeData) {
+      final args = routeData.argsAs<ChoosePaymentMethodRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ChoosePaymentMethodPage(),
+        child: ChoosePaymentMethodPage(
+          key: args.key,
+          service: args.service,
+        ),
       );
     },
     PaymentServiceJudgmentsNotarialActsRoute.name: (routeData) {
@@ -844,6 +871,16 @@ class _$AppRouter extends RootStackRouter {
               ],
             ),
             RouteConfig(
+              MarriageCelebrationPrincipalRoute.name,
+              path: 'marriage-celebration-principal-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
+              RejectionStepMarriageCelebrationRoute.name,
+              path: 'rejection-step-marriage-celebration-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
               ResidenceRegistrationRouterRoute.name,
               path: 'residence-registration-router-page',
               parent: RootRouterRoute.name,
@@ -1252,6 +1289,53 @@ class MarriageCelebrationRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MarriageCelebrationPrincipalPage]
+class MarriageCelebrationPrincipalRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationPrincipalRoute()
+      : super(
+          MarriageCelebrationPrincipalRoute.name,
+          path: 'marriage-celebration-principal-page',
+        );
+
+  static const String name = 'MarriageCelebrationPrincipalRoute';
+}
+
+/// generated route for
+/// [RejectionStepMarriageCelebrationPage]
+class RejectionStepMarriageCelebrationRoute
+    extends PageRouteInfo<RejectionStepMarriageCelebrationRouteArgs> {
+  RejectionStepMarriageCelebrationRoute({
+    Key? key,
+    required String marriageId,
+  }) : super(
+          RejectionStepMarriageCelebrationRoute.name,
+          path: 'rejection-step-marriage-celebration-page',
+          args: RejectionStepMarriageCelebrationRouteArgs(
+            key: key,
+            marriageId: marriageId,
+          ),
+        );
+
+  static const String name = 'RejectionStepMarriageCelebrationRoute';
+}
+
+class RejectionStepMarriageCelebrationRouteArgs {
+  const RejectionStepMarriageCelebrationRouteArgs({
+    this.key,
+    required this.marriageId,
+  });
+
+  final Key? key;
+
+  final String marriageId;
+
+  @override
+  String toString() {
+    return 'RejectionStepMarriageCelebrationRouteArgs{key: $key, marriageId: $marriageId}';
+  }
+}
+
+/// generated route for
 /// [ResidenceRegistrationRouterPage]
 class ResidenceRegistrationRouterRoute extends PageRouteInfo<void> {
   const ResidenceRegistrationRouterRoute({List<PageRouteInfo>? children})
@@ -1526,14 +1610,37 @@ class WebviewPaymentRouteArgs {
 
 /// generated route for
 /// [ChoosePaymentMethodPage]
-class ChoosePaymentMethodRoute extends PageRouteInfo<void> {
-  const ChoosePaymentMethodRoute()
-      : super(
+class ChoosePaymentMethodRoute
+    extends PageRouteInfo<ChoosePaymentMethodRouteArgs> {
+  ChoosePaymentMethodRoute({
+    Key? key,
+    required TypeServiceModel service,
+  }) : super(
           ChoosePaymentMethodRoute.name,
           path: 'choose-payment-method-page',
+          args: ChoosePaymentMethodRouteArgs(
+            key: key,
+            service: service,
+          ),
         );
 
   static const String name = 'ChoosePaymentMethodRoute';
+}
+
+class ChoosePaymentMethodRouteArgs {
+  const ChoosePaymentMethodRouteArgs({
+    this.key,
+    required this.service,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel service;
+
+  @override
+  String toString() {
+    return 'ChoosePaymentMethodRouteArgs{key: $key, service: $service}';
+  }
 }
 
 /// generated route for

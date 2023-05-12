@@ -163,15 +163,18 @@ class RowLabel extends StatelessWidget {
     super.key,
     required this.boldLabel,
     required this.simpleLabel,
+    this.mainAxisAlignment = MainAxisAlignment.start,
   });
 
   final String boldLabel;
   final String simpleLabel;
+  final MainAxisAlignment mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: mainAxisAlignment,
       children: [
         SizedBox(
           width: 90,
