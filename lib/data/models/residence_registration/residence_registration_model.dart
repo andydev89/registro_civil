@@ -20,6 +20,8 @@ class ResidenceRegistration {
         this.observations = '',
     @FormArrayAnnotation<Residential>(validators: [requiredValidator])
         this.residentials = const [],
+        this.state,
+        this.user,
   });
 
   factory ResidenceRegistration.fromJson(Map<String, dynamic> json) =>
@@ -28,6 +30,10 @@ class ResidenceRegistration {
   final String observations;
   final List<Residential> residentials;
   final String userId;
+  @JsonKey(includeToJson: false, includeFromJson: true)
+  final Status? state;
+  @JsonKey(includeToJson: false, includeFromJson: true)
+  final UserResidence? user;
 
   Map<String, dynamic> toJson() => _$ResidenceRegistrationToJson(this);
 
@@ -42,6 +48,30 @@ class ResidenceRegistration {
       residentials: residentials ?? this.residentials,
     );
   }
+}
+
+@JsonSerializable()
+class UserResidence {
+  UserResidence({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.identification,
+    required this.email,
+    required this.phone,
+  });
+
+  factory UserResidence.fromJson(Map<String, dynamic> json) =>
+      _$UserResidenceFromJson(json);
+
+  final String id;
+  final String firstName;
+  final String lastName;
+  final String identification;
+  final String email;
+  final String phone;
+
+  Map<String, dynamic> toJson() => _$UserResidenceToJson(this);
 }
 
 @ReactiveFormAnnotation()
@@ -73,11 +103,14 @@ class Residential {
         this.departmentNumber = '',
     @FormControlAnnotation(validators: [requiredValidator]) required this.type,
     @FormArrayAnnotation<Dependent>() this.dependents = const [],
+    this.id ='',
   });
 
   factory Residential.fromJson(Map<String, dynamic> json) =>
       _$ResidentialFromJson(json);
 
+  @JsonKey(includeToJson: false, includeFromJson: true)
+  final String id;
   final String electricalCode;
   final bool electricLightMeter;
   @JsonKey(toJson: _locationToJson)
@@ -200,11 +233,14 @@ class Dependent {
     @FormControlAnnotation(validators: [requiredValidator])
         required this.lastname,
     @FormControlAnnotation(validators: [requiredValidator]) required this.state,
+    this.id = '',
   });
 
   factory Dependent.fromJson(Map<String, dynamic> json) =>
       _$DependentFromJson(json);
 
+  @JsonKey(includeToJson: false, includeFromJson: true)
+  final String id;
   final String date;
   final String lastname;
   final String name;
@@ -286,8 +322,7 @@ class FirstStepResidenceModel {
 @ReactiveFormAnnotation()
 class SecondStepResidenceModel {
   SecondStepResidenceModel({
-    @FormControlAnnotation<bool>()
-        required this.electricLightMeter,
+    @FormControlAnnotation<bool>() required this.electricLightMeter,
     @FormControlAnnotation<String>() required this.electricalCode,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.housingType,

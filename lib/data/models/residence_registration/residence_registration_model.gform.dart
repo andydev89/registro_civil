@@ -432,7 +432,9 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
     return ResidenceRegistration(
         userId: _userIdValue,
         observations: _observationsValue,
-        residentials: _residentialsValue);
+        residentials: _residentialsValue,
+        state: residenceRegistration?.state,
+        user: residenceRegistration?.user);
   }
 
   ResidenceRegistrationForm copyWithPath(String? path) {
@@ -1762,7 +1764,8 @@ class ResidentialForm implements FormModel<Residential> {
         floorNumber: _floorNumberValue,
         departmentNumber: _departmentNumberValue,
         type: _typeValue,
-        dependents: _dependentsValue);
+        dependents: _dependentsValue,
+        id: residential?.id);
   }
 
   ResidentialForm copyWithPath(String? path) {
@@ -2606,7 +2609,8 @@ class DependentForm implements FormModel<Dependent> {
         date: _dateValue,
         name: _nameValue,
         lastname: _lastnameValue,
-        state: _stateValue);
+        state: _stateValue,
+        id: dependent?.id);
   }
 
   DependentForm copyWithPath(String? path) {

@@ -6,6 +6,24 @@ part of 'residence_registration_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$residenceRegistrationHash() =>
+    r'b8b129cfab173154815b39e143108384a05069d0';
+
+/// See also [residenceRegistration].
+@ProviderFor(residenceRegistration)
+final residenceRegistrationProvider =
+    AutoDisposeFutureProvider<ResidenceRegistration>.internal(
+  residenceRegistration,
+  name: r'residenceRegistrationProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$residenceRegistrationHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ResidenceRegistrationRef
+    = AutoDisposeFutureProviderRef<ResidenceRegistration>;
 String _$residenceRegHash() => r'33e9257d417006fa6b16d78e41c4324cb3ab160c';
 
 /// See also [ResidenceReg].

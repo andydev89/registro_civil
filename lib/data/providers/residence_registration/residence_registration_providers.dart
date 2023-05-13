@@ -4,6 +4,8 @@ import 'package:registro_civil_apk/data/enum/residence_registration/residential_
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_type_agreemente.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
+import 'package:registro_civil_apk/data/providers/auth_providers.dart';
+import 'package:registro_civil_apk/data/providers/dio_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'residence_registration_providers.g.dart';
@@ -71,4 +73,12 @@ class ResidentialP extends _$ResidentialP {
     }
     ref.read(residenceRegProvider.notifier).addResidence(state);
   }
+}
+
+@riverpod
+Future<ResidenceRegistration> residenceRegistration(
+    ResidenceRegistrationRef ref) async {
+  final api = ref.watch(apiProvider);
+  final user = await ref.watch(meProvider.future);
+  return (await api.resicenceRegistrationByUser(user.id)).data!.data!.first;
 }

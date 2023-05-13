@@ -54,7 +54,7 @@ import 'package:registro_civil_apk/presentation/pages/payment_service_judgments_
 import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/main_page_residence_registration_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/residence/first_step_residence_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/residence/second_step_residence_page.dart';
-import 'package:registro_civil_apk/presentation/pages/residence_registration/residence_registration_router_page.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/residence_registration_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/code_page.dart';
 import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/schedule_turn_first_step/schedule_turn_first_step_familiar_page.dart';
