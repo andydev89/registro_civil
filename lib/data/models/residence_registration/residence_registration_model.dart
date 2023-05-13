@@ -20,8 +20,7 @@ class ResidenceRegistration {
         this.observations = '',
     @FormArrayAnnotation<Residential>(validators: [requiredValidator])
         this.residentials = const [],
-        this.state,
-        this.user,
+    @FormControlAnnotation<Status>() this.state=Status.active,
   });
 
   factory ResidenceRegistration.fromJson(Map<String, dynamic> json) =>
@@ -29,11 +28,10 @@ class ResidenceRegistration {
 
   final String observations;
   final List<Residential> residentials;
+  @JsonKey(includeToJson: false, includeFromJson: true)
   final String userId;
   @JsonKey(includeToJson: false, includeFromJson: true)
-  final Status? state;
-  @JsonKey(includeToJson: false, includeFromJson: true)
-  final UserResidence? user;
+  final Status state;
 
   Map<String, dynamic> toJson() => _$ResidenceRegistrationToJson(this);
 
@@ -46,36 +44,37 @@ class ResidenceRegistration {
       userId: userId ?? this.userId,
       observations: observations ?? this.observations,
       residentials: residentials ?? this.residentials,
+      state:state,
     );
   }
 }
 
-@JsonSerializable()
-class UserResidence {
-  UserResidence({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.identification,
-    required this.email,
-    required this.phone,
-  });
+// @JsonSerializable()
+// class UserResidence {
+//   UserResidence({
+//     required this.id,
+//     required this.firstName,
+//     required this.lastName,
+//     required this.identification,
+//     required this.email,
+//     required this.phone,
+//   });
 
-  factory UserResidence.fromJson(Map<String, dynamic> json) =>
-      _$UserResidenceFromJson(json);
+//   factory UserResidence.fromJson(Map<String, dynamic> json) =>
+//       _$UserResidenceFromJson(json);
 
-  final String id;
-  final String firstName;
-  final String lastName;
-  final String identification;
-  final String email;
-  final String phone;
+//   final String id;
+//   final String firstName;
+//   final String lastName;
+//   final String identification;
+//   final String email;
+//   final String phone;
 
-  Map<String, dynamic> toJson() => _$UserResidenceToJson(this);
-}
+//   Map<String, dynamic> toJson() => _$UserResidenceToJson(this);
+// }
 
 @ReactiveFormAnnotation()
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Residential {
   Residential({
     @FormControlAnnotation(validators: [requiredValidator])
@@ -103,7 +102,7 @@ class Residential {
         this.departmentNumber = '',
     @FormControlAnnotation(validators: [requiredValidator]) required this.type,
     @FormArrayAnnotation<Dependent>() this.dependents = const [],
-    this.id ='',
+   @FormControlAnnotation<String>() this.id='',
   });
 
   factory Residential.fromJson(Map<String, dynamic> json) =>
@@ -171,6 +170,7 @@ class Residential {
       departmentNumber: departmentNumber ?? this.departmentNumber,
       type: type ?? this.type,
       dependents: dependents ?? this.dependents,
+      id:id,
     );
   }
 
@@ -192,6 +192,7 @@ class Residential {
       departmentNumber: departmentNumber,
       type: type,
       dependents: dependents,
+      id:id,
     );
   }
 
@@ -214,6 +215,7 @@ class Residential {
       departmentNumber: secondStepResidenceModel.departmentNumber,
       type: secondStepResidenceModel.type,
       dependents: dependents,
+      id:id,
     );
   }
 
@@ -233,7 +235,7 @@ class Dependent {
     @FormControlAnnotation(validators: [requiredValidator])
         required this.lastname,
     @FormControlAnnotation(validators: [requiredValidator]) required this.state,
-    this.id = '',
+    @FormControlAnnotation<String>() this.id='',
   });
 
   factory Dependent.fromJson(Map<String, dynamic> json) =>
@@ -266,6 +268,7 @@ class Dependent {
       name: name ?? this.name,
       lastname: lastname ?? this.lastname,
       state: state ?? this.state,
+      id:id,
     );
   }
 

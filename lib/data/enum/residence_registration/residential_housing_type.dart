@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 enum ResidentialHousingType implements Translatable {
+  @JsonValue('APARTAMENTO')
   apartamento('APARTAMENTO'),
+  @JsonValue('ESTUDIO')
   estudio('ESTUDIO'),
+  @JsonValue('DUPLEX')
   duplex('DUPLEX'),
+  @JsonValue('ATICOS')
   aticos('ATICOS'),
+  @JsonValue('PISOS')
   pisos('PISOS'),
+  @JsonValue('BAJOS_CON_JARDINn')
   bajosConJardin('BAJOS_CON_JARDINn'),
   ;
 
