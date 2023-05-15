@@ -150,12 +150,13 @@ class _MainPageResicenceRegistrationPageState
                                     ),
                                     content: SingleChildScrollView(
                                       child: SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.5,
-                                          child: PDFViewWidget(
-                                              document: document)),
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.5,
+                                        child: PDFViewWidget(
+                                          document: document,
+                                        ),
+                                      ),
                                     ),
                                     actions: (navState) => [
                                       PrimaryButton(

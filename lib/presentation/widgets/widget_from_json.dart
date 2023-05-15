@@ -15,10 +15,12 @@ class ViewFromJsonWidget extends StatelessWidget {
     json.forEach((key, value) {
       if (value is Map<String, dynamic>) {
         widgets
-          ..add(PrimaryText(
-            '$key:',
-            fontWeight: FontWeight.bold,
-          ))
+          ..add(
+            PrimaryText(
+              '$key:',
+              fontWeight: FontWeight.bold,
+            ),
+          )
           ..add(Indent(child: ViewFromJsonWidget(json: value)));
       } else if (value is List) {
         widgets

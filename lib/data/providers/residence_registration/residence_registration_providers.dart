@@ -6,7 +6,6 @@ import 'package:registro_civil_apk/data/enum/residence_registration/residential_
 import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
 import 'package:registro_civil_apk/data/models/commons/document_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/providers/dio_providers.dart';

@@ -1,7 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
