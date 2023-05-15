@@ -406,6 +406,11 @@
   "listadoSol": "List of requests",
   "documentosSubCor": "Successfully uploaded documents",
   "residenciaGuardadaCor" : "Residence saved correctly",
+  "dependienteGuardadoCor" : "Dependent saved correctly",
   "residenciaEliminadaCor": "Residence successfully removed",
-  "listadoDependientes": "List of dependents"
+  "listadoDependientes": "List of dependents",
+  "dependentEliminadoCor": "Dependent successfully removed",
+  "noRepetir": "The item already exists",
+  "errorCarDoc": "Error loading document",
+  "certificado": "Certificate"
 }

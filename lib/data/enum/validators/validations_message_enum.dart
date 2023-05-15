@@ -14,6 +14,7 @@ enum ValidationsMessageEnum implements Translatable {
   invalidCode('invalidCode'),
   invalidNombreApellido('introduceNombreApellido'),
   seleccionarArchivo('seleccionarArchivo'),
+  notRepeted('notRepeted'),
   ;
 
   const ValidationsMessageEnum(this.toText);
@@ -45,6 +46,8 @@ enum ValidationsMessageEnum implements Translatable {
         return l10n.escribaNomApe;
       case ValidationsMessageEnum.seleccionarArchivo:
         return l10n.debeSelArc;
+      case ValidationsMessageEnum.notRepeted:
+        return l10n.noRepetir;
     }
   }
 }

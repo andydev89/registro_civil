@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
@@ -14,12 +13,12 @@ part 'residence_registration_model.gform.dart';
 
 @ReactiveFormAnnotation()
 @JsonSerializable(explicitToJson: true)
-class ResidenceRegistration extends Equatable{
-  const ResidenceRegistration({
-    @FormControlAnnotation(validators: [requiredValidator]) this.userId = '',
+class ResidenceRegistration {
+  ResidenceRegistration({
+    @FormControlAnnotation<String>() this.userId = '',
     @FormControlAnnotation(validators: [requiredValidator])
         this.observations = '',
-    @FormArrayAnnotation<Residential>(validators: [requiredValidator])
+    @FormArrayAnnotation<Residential>()
         this.residentials = const [],
     @FormControlAnnotation<Status>() this.state = Status.active,
   });
@@ -29,7 +28,7 @@ class ResidenceRegistration extends Equatable{
 
   final String observations;
   final List<Residential> residentials;
-  @JsonKey(includeToJson: false, includeFromJson: true)
+  @JsonKey(includeToJson: true, includeFromJson: false)
   final String userId;
   @JsonKey(includeToJson: false, includeFromJson: true)
   final Status state;
@@ -48,9 +47,6 @@ class ResidenceRegistration extends Equatable{
       state: state,
     );
   }
-  
-  @override
-  List<Object?> get props => [userId, observations, residentials, state];
 }
 
 // @JsonSerializable()
@@ -79,8 +75,8 @@ class ResidenceRegistration extends Equatable{
 
 @ReactiveFormAnnotation()
 @JsonSerializable(explicitToJson: true)
-class Residential extends Equatable{
-  const Residential({
+class Residential {
+  Residential({
     @FormControlAnnotation(validators: [requiredValidator])
         this.electricLightMeter = false,
     @FormControlAnnotation<String>() this.electricalCode = '',
@@ -138,7 +134,15 @@ class Residential extends Equatable{
   @JsonKey(toJson: ResidenceType.toJson)
   final ResidenceType type;
 
+  @JsonKey(includeToJson: false, includeFromJson: false)
   String get address => '$mainStreet, $backStreet #$numberVillaBuilding';
+
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  String get reisdentialId => '${province.id}${canton.id}${parroquia.id}'
+      '$mainStreet$backStreet$numberVillaBuilding$floorNumber$departmentNumber';
+
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  String myId = UniqueKey().toString();
 
   Map<String, dynamic> toJson() => _$ResidentialToJson(this);
 
@@ -175,7 +179,7 @@ class Residential extends Equatable{
       type: type ?? this.type,
       dependents: dependents ?? this.dependents,
       id: id,
-    );
+    )..myId = myId;
   }
 
   Residential copyWithFromFirstStepResidenceModel(
@@ -197,7 +201,7 @@ class Residential extends Equatable{
       type: type,
       dependents: dependents,
       id: id,
-    );
+    )..myId = myId;
   }
 
   Residential copyWithFromSecondStepResidenceModel(
@@ -220,45 +224,36 @@ class Residential extends Equatable{
       type: secondStepResidenceModel.type,
       dependents: dependents,
       id: id,
-    );
+    )..myId = myId;
   }
 
   static String? _locationToJson(LocationModel? model) => model?.id;
-  
-  @override
-  List<Object?> get props => [
-        electricLightMeter,
-        electricalCode,
-        province,
-        canton,
-        parroquia,
-        mainStreet,
-        backStreet,
-        housingType,
-        tenureHousingTypeAgreement,
-        numberVillaBuilding,
-        floorNumber,
-        departmentNumber,
-        type,
-        dependents,
-        id,
-      ];
 }
 
 @ReactiveFormAnnotation()
 @JsonSerializable()
-class Dependent extends Equatable{
-  const Dependent({
-    @FormControlAnnotation(validators: [requiredValidator])
+class Dependent {
+  Dependent({
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        ecuadorDniValidator,
+        length10Validator,
+      ],
+    )
         required this.nuiDependents,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.relationship,
-    @FormControlAnnotation(validators: [requiredValidator]) required this.date,
-    @FormControlAnnotation(validators: [requiredValidator]) required this.name,
+    @FormControlAnnotation<String>()
+        required this.date,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required this.name,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.lastname,
-    @FormControlAnnotation(validators: [requiredValidator]) required this.state,
-    @FormControlAnnotation<String>() this.id = '',
+    @FormControlAnnotation<Status>()
+        this.state = Status.active,
+    @FormControlAnnotation<String>()
+        this.id = '',
   });
 
   factory Dependent.fromJson(Map<String, dynamic> json) =>
@@ -279,6 +274,9 @@ class Dependent extends Equatable{
   @JsonKey(toJson: _toJson)
   final Status state;
 
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  String myId = UniqueKey().toString();
+
   Dependent copyWith({
     String? nuiDependents,
     ResidentialDependentRelation? relationship,
@@ -295,23 +293,12 @@ class Dependent extends Equatable{
       lastname: lastname ?? this.lastname,
       state: state ?? this.state,
       id: id,
-    );
+    )..myId = myId;
   }
 
   Map<String, dynamic> toJson() => _$DependentToJson(this);
 
   static String? _toJson(Status? status) => status?.name;
-  
-  @override
-  List<Object?> get props => [
-        nuiDependents,
-        relationship,
-        date,
-        name,
-        lastname,
-        state,
-        id,
-      ];
 }
 
 @ReactiveFormAnnotation()

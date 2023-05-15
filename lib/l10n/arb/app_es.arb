@@ -405,8 +405,12 @@
   "finalizado": "Finalizado",
   "listadoSol": "Listado de solicitudes",
   "documentosSubCor": "Documentos subidos correctamente",
-  "residenciaGuardadaCor" : "Residencia guardada correctamente",
+  "residenciaGuardadaCor": "Residencia guardada correctamente",
+  "dependienteGuardadoCor": "Dependiente guardado correctamente",
   "residenciaEliminadaCor": "Residencia eliminada correctamente",
-  "listadoDependientes": "Listado de dependientes"
-  
+  "dependentEliminadoCor": "Dependiente eliminado correctamente",
+  "listadoDependientes": "Listado de dependientes",
+  "noRepetir": "El elemento ya existe",
+  "errorCarDoc": "Error cargando el documento",
+  "certificado": "Certificado"
 }

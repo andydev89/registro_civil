@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
@@ -15,6 +16,10 @@ enum ResidentialDependentRelation implements Translatable {
 
   const ResidentialDependentRelation(this.toText);
   final String toText;
+
+  static List<Translatable> get items => ResidentialDependentRelation.values
+      .whereNot((element) => element == ResidentialDependentRelation.none)
+      .toList();
 
   static String? toJson(ResidentialDependentRelation? value) => value?.toText;
 

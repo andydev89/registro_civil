@@ -135,6 +135,16 @@ class SecondStepResidencePage extends ConsumerWidget {
                           .read(residentialPProvider.notifier)
                           .updateSecondStep(formModel.model);
                       final residence = ref.read(residentialPProvider);
+
+                      final existResidence =
+                          ref.watch(resRegProvider.notifier).existResidence(
+                                residence,
+                                operation,
+                              );
+                      if (existResidence) {
+                        showAlert(l10n.noRepetir, TypeAlert.error);
+                        return;
+                      }
                       if (operation.isCreate) {
                         ref
                             .read(resRegProvider.notifier)

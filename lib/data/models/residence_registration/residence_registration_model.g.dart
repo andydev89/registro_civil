@@ -9,7 +9,6 @@ part of 'residence_registration_model.dart';
 ResidenceRegistration _$ResidenceRegistrationFromJson(
         Map<String, dynamic> json) =>
     ResidenceRegistration(
-      userId: json['userId'] as String? ?? '',
       observations: json['observations'] as String? ?? '',
       residentials: (json['residentials'] as List<dynamic>?)
               ?.map((e) => Residential.fromJson(e as Map<String, dynamic>))
@@ -24,6 +23,7 @@ Map<String, dynamic> _$ResidenceRegistrationToJson(
     <String, dynamic>{
       'observations': instance.observations,
       'residentials': instance.residentials.map((e) => e.toJson()).toList(),
+      'userId': instance.userId,
     };
 
 const _$StatusEnumMap = {
@@ -109,7 +109,8 @@ Dependent _$DependentFromJson(Map<String, dynamic> json) => Dependent(
       date: json['date'] as String,
       name: json['name'] as String,
       lastname: json['lastname'] as String,
-      state: $enumDecode(_$StatusEnumMap, json['state']),
+      state:
+          $enumDecodeNullable(_$StatusEnumMap, json['state']) ?? Status.active,
       id: json['id'] as String? ?? '',
     );
 

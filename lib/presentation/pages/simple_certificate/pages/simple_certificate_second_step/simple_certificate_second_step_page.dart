@@ -16,6 +16,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/pdf_view_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
 class SimpleCertificateSecondStepPage extends ConsumerWidget {
@@ -38,22 +39,7 @@ class SimpleCertificateSecondStepPage extends ConsumerWidget {
         title: '${l10n.verificarInfo}: ${model.name}',
         body: Expanded(
           child: Scaffold(
-            body: FutureBuilder(
-              future:
-                  createPdfFileFromBase64(simpleCertificateResponse.document),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return PDFView(
-                    filePath: snapshot.data!.path,
-                    swipeHorizontal: true,
-                    fitPolicy: FitPolicy.BOTH,
-                    onError: (error) {},
-                  ).verticalPadding(20);
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
+            body: PDFViewWidget(document: simpleCertificateResponse.document),
           ),
         ),
         bottomNavigationBar: Column(

@@ -578,37 +578,87 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<ResponseModel<List<ResidenceRegistration>>>>
+  Future<ResponseModel<List<ResidenceRegistration>>>
       resicenceRegistrationByUser(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        ResponseModel<ResponseModel<List<ResidenceRegistration>>>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<List<ResidenceRegistration>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/residentialregistration/api/registration/user/${id}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value =
-        ResponseModel<ResponseModel<List<ResidenceRegistration>>>.fromJson(
+            .compose(
+              _dio.options,
+              '/residentialregistration/api/registration/user/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<List<ResidenceRegistration>>.fromJson(
       _result.data!,
-      (json) => ResponseModel<List<ResidenceRegistration>>.fromJson(
-        json as Map<String, dynamic>,
-        (json) => json is List<dynamic>
-            ? json
-                .map<ResidenceRegistration>((i) =>
-                    ResidenceRegistration.fromJson(i as Map<String, dynamic>))
-                .toList()
-            : List.empty(),
-      ),
+      (json) => json is List<dynamic>
+          ? json
+              .map<ResidenceRegistration>((i) =>
+                  ResidenceRegistration.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<DocumentModel>> residenceRegistrationPreviewByUser(
+      id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<DocumentModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/residentialregistration/api/registration/user/preview/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<DocumentModel>.fromJson(
+      _result.data!,
+      (json) => DocumentModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandModel>> residenceRegistration(model) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(model.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/residentialregistration/api/registration',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandModel>.fromJson(
+      _result.data!,
+      (json) => CommandModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
