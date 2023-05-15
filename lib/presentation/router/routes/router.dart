@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/change_of_name/change_of_name_model.dart';
+import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response.dart';
@@ -51,8 +53,12 @@ import 'package:registro_civil_apk/presentation/pages/payment/make_payment_page.
 import 'package:registro_civil_apk/presentation/pages/payment/select_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment/webview_payment_page.dart';
 import 'package:registro_civil_apk/presentation/pages/payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts_page.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/dependent/dependent_page.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/dependent/first_step_dependent.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/dependent/main_page_dependent_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/main_page_residence_registration_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/residence/first_step_residence_page.dart';
+import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/residence/residence_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/residence/second_step_residence_page.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/pages/residence_registration_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/root/root_router_page.dart';
@@ -313,10 +319,28 @@ part 'router.gr.dart';
               initial: true,
             ),
             CupertinoRoute(
-              page: FirstStepResidencePage,
+              page: ResidencePage,
+              children: [
+                CupertinoRoute(
+                  page: FirstStepResidencePage,
+                  initial: true,
+                ),
+                CupertinoRoute(
+                  page: SecondStepResidencePage,
+                ),
+              ],
             ),
             CupertinoRoute(
-              page: SecondStepResidencePage,
+              page: DependentPage,
+              children: [
+                CupertinoRoute(
+                  page: MainPageDependentPage,
+                  initial: true,
+                ),
+                CupertinoRoute(
+                  page: FirstStepDependentPage,
+                ),
+              ],
             ),
           ],
         ),

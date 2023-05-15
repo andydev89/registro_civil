@@ -14,8 +14,8 @@ enum ResidentialHousingType implements Translatable {
   aticos('ATICOS'),
   @JsonValue('PISOS')
   pisos('PISOS'),
-  @JsonValue('BAJOS_CON_JARDINn')
-  bajosConJardin('BAJOS_CON_JARDINn'),
+  @JsonValue('BAJOS_CON_JARDIN')
+  bajosConJardin('BAJOS_CON_JARDIN'),
   ;
 
   const ResidentialHousingType(this.toText);

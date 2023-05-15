@@ -404,5 +404,8 @@
   "rechazado": "Rejected",
   "finalizado": "Finished",
   "listadoSol": "List of requests",
-  "documentosSubCor": "Successfully uploaded documents"
+  "documentosSubCor": "Successfully uploaded documents",
+  "residenciaGuardadaCor" : "Residence saved correctly",
+  "residenciaEliminadaCor": "Residence successfully removed",
+  "listadoDependientes": "List of dependents"
 }

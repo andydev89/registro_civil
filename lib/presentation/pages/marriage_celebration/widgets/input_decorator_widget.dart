@@ -10,10 +10,12 @@ class InputDecorationWidget extends StatelessWidget {
     required this.formControl,
     this.onTap,
     this.suffixIcon,
+    this.readOnly =false,
   });
   final FormControl<String?>? formControl;
   final void Function()? onTap;
   final Widget? suffixIcon;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class InputDecorationWidget extends StatelessWidget {
             decoration: primaryInputDecoration(
               errorText: field.errorText,
               suffixIcon: suffixIcon,
+              readOnly: readOnly,
             ),
             child: PrimaryText(
               formControl?.value ?? '',

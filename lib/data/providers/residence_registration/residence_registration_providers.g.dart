@@ -7,7 +7,7 @@ part of 'residence_registration_providers.dart';
 // **************************************************************************
 
 String _$residenceRegistrationHash() =>
-    r'3a623a175cbb53e9647e39014cd4e6146d1de781';
+    r'58e838d6268c3f0c63f271e6bc7d3a8b45fce09c';
 
 /// See also [residenceRegistration].
 @ProviderFor(residenceRegistration)
@@ -24,7 +24,7 @@ final residenceRegistrationProvider =
 
 typedef ResidenceRegistrationRef
     = AutoDisposeFutureProviderRef<ResidenceRegistration>;
-String _$residentialPHash() => r'791c723298722eecae16a530aa0ae5f866cd923d';
+String _$residentialPHash() => r'e4f43f76796f434544b66f36846cf05ebcb57ad4';
 
 /// See also [ResidentialP].
 @ProviderFor(ResidentialP)
@@ -39,7 +39,7 @@ final residentialPProvider =
 );
 
 typedef _$ResidentialP = AutoDisposeNotifier<Residential>;
-String _$resRegHash() => r'7f53f67f4d63c6e3850ff0a685e7dbf39b2e87ba';
+String _$resRegHash() => r'afd1b14ed6d97b03f0c194812841657b3d4ec270';
 
 /// See also [ResReg].
 @ProviderFor(ResReg)
