@@ -540,7 +540,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
   FormGroup formElements() => FormGroup({
         userIdControlName: FormControl<String>(
             value: residenceRegistration?.userId,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -563,9 +563,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
                         ))
                     .toList() ??
                 [],
-            validators: [
-              (control) => requiredValidator(control as FormArray<Residential>)
-            ],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false),
@@ -2851,7 +2849,11 @@ class DependentForm implements FormModel<Dependent> {
   FormGroup formElements() => FormGroup({
         nuiDependentsControlName: FormControl<String>(
             value: dependent?.nuiDependents,
-            validators: [requiredValidator],
+            validators: [
+              requiredValidator,
+              ecuadorDniValidator,
+              length10Validator
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -2865,7 +2867,7 @@ class DependentForm implements FormModel<Dependent> {
             touched: false),
         dateControlName: FormControl<String>(
             value: dependent?.date,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -2886,7 +2888,7 @@ class DependentForm implements FormModel<Dependent> {
             touched: false),
         stateControlName: FormControl<Status>(
             value: dependent?.state,
-            validators: [requiredValidator],
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

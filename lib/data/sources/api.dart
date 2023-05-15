@@ -4,6 +4,7 @@ import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
+import 'package:registro_civil_apk/data/models/commons/document_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
@@ -139,8 +140,17 @@ abstract class Api {
 
   // RESIDENCE REGISTRATION
   @GET('/residentialregistration/api/registration/user/{id}')
-  Future<ResponseModel<ResponseModel<List<ResidenceRegistration>>>>
+  Future<ResponseModel<List<ResidenceRegistration>>>
       resicenceRegistrationByUser(@Path('id') String id);
+
+  @GET('/residentialregistration/api/registration/user/preview/{id}')
+  Future<ResponseModel<DocumentModel>>
+      residenceRegistrationPreviewByUser(@Path('id') String id);
+
+  @POST('/residentialregistration/api/registration')
+  Future<ResponseModel<CommandModel>> residenceRegistration(
+    @Body() ResidenceRegistration model,
+  );
 
   //COMMONS
   @GET('/identity/api/location/province')

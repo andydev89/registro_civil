@@ -18,7 +18,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
     this.prefixIcon,
     this.readOnly = false,
     this.onChanged,
-    this.init=false,
+    this.init = false,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
@@ -34,6 +34,17 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final elements = ref.watch(provider);
+    if (init && elements.asData?.value != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final data = elements.asData?.value.when(
+          ok: (data) => data,
+          err: (error) => _onError(),
+        );
+        if (data?.isNotEmpty ?? false) {
+          formControl?.value = data![0];
+        }
+      });
+    }
     return PrimaryReactiveDropdown(
       readOnly: readOnly ||
           elements.isLoading ||

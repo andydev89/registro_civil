@@ -15,6 +15,7 @@ class PrimaryReactiveCheckBox extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.maxLines,
     this.overFlow,
+    this.readOnly = false,
   }) : assert(
           formControl != null || formControlName != null,
           'formControl or formControlName must be provided',
@@ -29,24 +30,28 @@ class PrimaryReactiveCheckBox extends StatelessWidget {
   final String? formControlName;
   final int? maxLines;
   final TextOverflow? overFlow;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveCheckboxListTile(
-      formControlName: formControlName,
-      formControl: formControl,
-      onChanged: onChanged,
-      activeColor: activeColor,
-      checkColor: checkColor,
-      shape: const StadiumBorder(),
-      title: PrimaryText(
-        label,
-        underlining: underlining,
-        textAlign: textAlign,
-        maxLines: maxLines,
-        overFlow: overFlow,
+    return IgnorePointer(
+      ignoring: readOnly,
+      child: ReactiveCheckboxListTile(
+        formControlName: formControlName,
+        formControl: formControl,
+        onChanged:  onChanged,
+        activeColor: activeColor,
+        checkColor: checkColor,
+        shape: const StadiumBorder(),
+        title: PrimaryText(
+          label,
+          underlining: underlining,
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overFlow: overFlow,
+        ),
+        controlAffinity: ListTileControlAffinity.leading,
       ),
-      controlAffinity: ListTileControlAffinity.leading,
     );
   }
 }

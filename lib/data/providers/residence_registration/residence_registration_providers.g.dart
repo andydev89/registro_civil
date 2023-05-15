@@ -7,7 +7,7 @@ part of 'residence_registration_providers.dart';
 // **************************************************************************
 
 String _$residenceRegistrationHash() =>
-    r'58e838d6268c3f0c63f271e6bc7d3a8b45fce09c';
+    r'c73f8b56976ac47ebb75f7175744d795cc439ae6';
 
 /// See also [residenceRegistration].
 @ProviderFor(residenceRegistration)
@@ -24,6 +24,23 @@ final residenceRegistrationProvider =
 
 typedef ResidenceRegistrationRef
     = AutoDisposeFutureProviderRef<ResidenceRegistration>;
+String _$residenceRegistrationPreviewHash() =>
+    r'926d6c6feccf116fc75d9b5ede4e39eac999d4c2';
+
+/// See also [ResidenceRegistrationPreview].
+@ProviderFor(ResidenceRegistrationPreview)
+final residenceRegistrationPreviewProvider = AutoDisposeNotifierProvider<
+    ResidenceRegistrationPreview, DocumentModel>.internal(
+  ResidenceRegistrationPreview.new,
+  name: r'residenceRegistrationPreviewProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$residenceRegistrationPreviewHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ResidenceRegistrationPreview = AutoDisposeNotifier<DocumentModel>;
 String _$residentialPHash() => r'e4f43f76796f434544b66f36846cf05ebcb57ad4';
 
 /// See also [ResidentialP].
@@ -39,7 +56,7 @@ final residentialPProvider =
 );
 
 typedef _$ResidentialP = AutoDisposeNotifier<Residential>;
-String _$resRegHash() => r'afd1b14ed6d97b03f0c194812841657b3d4ec270';
+String _$resRegHash() => r'9c1078eefc213c564301038235da32798013d33e';
 
 /// See also [ResReg].
 @ProviderFor(ResReg)
