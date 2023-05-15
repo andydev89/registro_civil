@@ -9,6 +9,14 @@ enum Crud {
   const Crud(this.toText);
   final String toText;
 
+  bool get isEditOrRead => this == Crud.update || this == Crud.read;
+
+  bool get isCreateOrEdit => this == Crud.create || this == Crud.update;
+
+  bool get isCreate => this == Crud.create;
+
+  bool get isRead => this == Crud.read;
+
   Widget toIcon(BuildContext context) {
     final color = Theme.of(context).primaryColor;
     switch (this) {

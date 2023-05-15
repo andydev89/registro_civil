@@ -11,14 +11,13 @@ import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/utils/residence_registration_utils.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
+import 'package:registro_civil_apk/presentation/widgets/buttons/primary_add_item_row.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/card_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
 import 'package:registro_civil_apk/presentation/widgets/list/paged_list_view_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/widget_from_json.dart';
 
 class MarriageCelebrationPrincipalPage extends ConsumerStatefulWidget {
@@ -51,26 +50,11 @@ class _MarriageCelebrationPrincipalPageState
               filter: (p0) =>
                   ref.read(marriagesFilterProvider.notifier).setFilter(p0),
             ).verticalPadding(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.home),
-                    const SizedBox(width: 8),
-                    PrimaryText(
-                      l10n.listadoSol,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ],
-                ),
-                PrimaryIconButton(
-                  icon: const Icon(Icons.add),
-                  onPressed: () => context.navigateTo(
-                    const MarriageCelebrationRouterRoute(),
-                  ),
-                ),
-              ],
+            PrimaryAddItemRow(
+              title: l10n.listadoSol,
+              onPressed: () => context.navigateTo(
+                const MarriageCelebrationRouterRoute(),
+              ),
             ),
             Expanded(
               child: LoadingProviderWidget<

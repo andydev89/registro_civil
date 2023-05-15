@@ -6,12 +6,12 @@ enum Status {
   @JsonValue('ACTIVE')
   active('ACTIVE'),
   @JsonValue('INACTIVE')
-  inactive('INACTIVE'),
-  @JsonValue('UNPAID')
-  unpaind('UNPAID');
+  inactive('INACTIVE');
 
   const Status(this.toText);
   final String toText;
+
+  // static String? toJson(Status? status) => status?.toText;
 }
 
 enum StateEnum {

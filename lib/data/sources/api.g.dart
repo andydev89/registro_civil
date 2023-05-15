@@ -578,6 +578,42 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModel<ResponseModel<List<ResidenceRegistration>>>>
+      resicenceRegistrationByUser(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ResponseModel<ResponseModel<List<ResidenceRegistration>>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/residentialregistration/api/registration/user/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        ResponseModel<ResponseModel<List<ResidenceRegistration>>>.fromJson(
+      _result.data!,
+      (json) => ResponseModel<List<ResidenceRegistration>>.fromJson(
+        json as Map<String, dynamic>,
+        (json) => json is List<dynamic>
+            ? json
+                .map<ResidenceRegistration>((i) =>
+                    ResidenceRegistration.fromJson(i as Map<String, dynamic>))
+                .toList()
+            : List.empty(),
+      ),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModelPagination<List<LocationModel>?>> provinces(
     pageNo,
     pageSize,
