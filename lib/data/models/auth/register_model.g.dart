@@ -126,7 +126,6 @@ Map<String, dynamic> _$MeModelToJson(MeModel instance) => <String, dynamic>{
 const _$StatusEnumMap = {
   Status.active: 'ACTIVE',
   Status.inactive: 'INACTIVE',
-  Status.unpaind: 'UNPAID',
 };
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(

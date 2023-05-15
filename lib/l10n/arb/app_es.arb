@@ -391,8 +391,22 @@
   "limpiarCarrito": "Limpiar carrito",
   "tenercuentaLimpiarCarrito": "Ten en cuenta que al dar limpiar se eliminaran todos los pedidos del carrito.",
   "carrito": "Carrito",
+  "propietario": "Propietario",
+  "fechaCreacion": "Fecha de creación",
+  "anadir": "Añadir",
   "cambioNombrePropio": "Cambio de nombre propio",
   "alterarOrden": "Alterar orden",
   "suprimirUnoCuandoConsteMasDeDos": "Suprimir uno cuando conste mas de dos",
-  "aumentarCuandoConsteConUnSoloNombre": "Aumentar cuando conste con un solo nombre"
+  "aumentarCuandoConsteConUnSoloNombre": "Aumentar cuando conste con un solo nombre",
+  "pendiente": "Pendiente",
+  "enProceso": "En proceso",
+  "aprobado": "Aprobado",
+  "rechazado": "Rechazado",
+  "finalizado": "Finalizado",
+  "listadoSol": "Listado de solicitudes",
+  "documentosSubCor": "Documentos subidos correctamente",
+  "residenciaGuardadaCor" : "Residencia guardada correctamente",
+  "residenciaEliminadaCor": "Residencia eliminada correctamente",
+  "listadoDependientes": "Listado de dependientes"
+  
 }

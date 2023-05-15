@@ -426,6 +426,66 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModelPagination<List<ResponseMarriageModel>>> marriages(
+    userNui, {
+    pageNo = 0,
+    pageSize = 20,
+    state = '',
+    userId = '',
+    createdAt = '',
+    updatedAt = '',
+    interviewAt = '',
+    amountOfDays = '',
+    provinceName = '',
+    cantonName = '',
+    agencyName = '',
+    filter = '',
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'userNui': userNui,
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+      r'state': state,
+      r'userId': userId,
+      r'createdAt': createdAt,
+      r'updatedAt': updatedAt,
+      r'interviewAt': interviewAt,
+      r'amountOfDays': amountOfDays,
+      r'provinceName': provinceName,
+      r'cantonName': cantonName,
+      r'agencyName': agencyName,
+      r'filter': filter,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<ResponseMarriageModel>>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/marriage/api/marriage',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModelPagination<List<ResponseMarriageModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<ResponseMarriageModel>((i) =>
+                  ResponseMarriageModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModel<List<DocumentResponse>>> marriageDocuments(
     maritalStatus,
     childrenRelationship, {
@@ -460,6 +520,95 @@ class _Api implements Api {
                   (i) => DocumentResponse.fromJson(i as Map<String, dynamic>))
               .toList()
           : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<MarriageCelebrationModel>> marriageById(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<MarriageCelebrationModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/marriage/api/marriage/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<MarriageCelebrationModel>.fromJson(
+      _result.data!,
+      (json) => MarriageCelebrationModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandModel>> marriageUpdate(model) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(model.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandModel>>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/marriage/api/marriage',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandModel>.fromJson(
+      _result.data!,
+      (json) => CommandModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<ResponseModel<List<ResidenceRegistration>>>>
+      resicenceRegistrationByUser(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ResponseModel<ResponseModel<List<ResidenceRegistration>>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/residentialregistration/api/registration/user/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        ResponseModel<ResponseModel<List<ResidenceRegistration>>>.fromJson(
+      _result.data!,
+      (json) => ResponseModel<List<ResidenceRegistration>>.fromJson(
+        json as Map<String, dynamic>,
+        (json) => json is List<dynamic>
+            ? json
+                .map<ResidenceRegistration>((i) =>
+                    ResidenceRegistration.fromJson(i as Map<String, dynamic>))
+                .toList()
+            : List.empty(),
+      ),
     );
     return value;
   }

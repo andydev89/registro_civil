@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/user_schedule_model.dart';
 import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
@@ -38,6 +37,9 @@ class MyOrdersPage extends ConsumerWidget {
                 data: (data) => PagedListViewWidget<UserScheduleModel>(
                   fetch: (p0) async =>
                       ref.read(schedulesByUserProvider(pageNo: p0).future),
+                  firstElements: data.data ?? [],
+                  totalPages: data.totalPages,
+                  firstPage: 1,
                   itemBuilder: (_, e, __) => MyTurnExpandableCard(
                     data: MyTurnExpandableCardModel(
                       id: e.id,
@@ -47,10 +49,12 @@ class MyOrdersPage extends ConsumerWidget {
                       typeOfService: e.schedule.typeOfService,
                       time: e.schedule.startTime,
                       // TODO(jang): Cambiar por el estado real
-                      state: Status.unpaind.toText,
+                      state: e.state,
                     ),
                   ).verticalPadding(10),
                 ),
+                onRefreshIndicatot: () =>
+                    ref.refresh(schedulesByUserProvider().future),
                 onRefresh: () => ref.refresh(schedulesByUserProvider()),
               ),
             ),

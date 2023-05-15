@@ -6,4 +6,6 @@ extension DateTimeExtension on DateTime {
   DateTime get lastDateOfMonth => DateTime(year, month + 1, 0);
 
   String get onlyDate => DateFormat('yyyy-MM-dd').format(this);
+
+  String get onlyTime => DateFormat('HH:mm').format(this);
 }

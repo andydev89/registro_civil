@@ -898,7 +898,9 @@ class MarriageCelebrationModelForm
         firstPartner: _firstPartnerValue,
         secondPartner: _secondPartnerValue,
         isOutside: _isOutsideValue,
-        outside: marriageCelebrationModel?.outside);
+        outside: marriageCelebrationModel?.outside,
+        state: marriageCelebrationModel?.state,
+        id: marriageCelebrationModel?.id);
   }
 
   MarriageCelebrationModelForm copyWithPath(String? path) {
@@ -4458,7 +4460,15 @@ class DocumentForm implements FormModel<Document> {
         'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
       );
     }
-    return Document(referenceId: _referenceIdValue, file: _fileValue);
+    return Document(
+        referenceId: _referenceIdValue,
+        file: _fileValue,
+        id: document?.id,
+        name: document?.name,
+        state: document?.state,
+        comment: document?.comment,
+        documentPath: document?.documentPath,
+        rejectionTypeId: document?.rejectionTypeId);
   }
 
   DocumentForm copyWithPath(String? path) {

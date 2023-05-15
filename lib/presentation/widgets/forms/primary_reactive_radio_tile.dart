@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class PrimaryReactiveRadioTile<T> extends StatelessWidget {
   const PrimaryReactiveRadioTile({

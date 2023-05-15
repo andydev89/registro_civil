@@ -18,6 +18,7 @@ class ResponseModel<T> {
   ) =>
       _$ResponseModelFromJson(json, fromJsonT);
   final String timestamp;
+  @JsonKey(unknownEnumValue: StatusCode.s999)
   final StatusCode status;
   final String message;
   final dynamic errors;
@@ -55,6 +56,7 @@ class ResponseModelPagination<T> {
       _$ResponseModelPaginationFromJson(json, fromJsonT);
 
   final String timestamp;
+  @JsonKey(unknownEnumValue: StatusCode.s999)
   final StatusCode status;
   final String message;
   final dynamic errors;

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
+import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/data/providers/residence_registration/residence_registration_providers.dart';
@@ -17,13 +18,19 @@ import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffo
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class FirstStepResidencePage extends ConsumerWidget {
-  const FirstStepResidencePage({super.key});
+  const FirstStepResidencePage({
+    super.key,
+    this.operation = Crud.create,
+  });
+  final Crud operation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    ref.watch(residentialPProvider);
     return FirstStepResidenceModelFormBuilder(
+      model: operation.isEditOrRead
+          ? ref.watch(residentialPProvider.notifier).getFirstStep()
+          : null,
       builder: (context, formModel, snapshot) {
         return PrimaryScaffold(
           title: l10n.registroRes,
@@ -34,8 +41,10 @@ class FirstStepResidencePage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SelectElementFromApi(
+                    readOnly: operation.isRead,
                     formControl: formModel.provinceControl,
                     label: l10n.provincia,
+                    init: operation.isEditOrRead,
                     provider: provincesProvider,
                     onChanged: (p0) => formModel.cantonControl.value = null,
                   ),
@@ -43,7 +52,9 @@ class FirstStepResidencePage extends ConsumerWidget {
                     builder: (_, __, ___) => Column(
                       children: [
                         SelectElementFromApi(
-                          readOnly: !formModel.provinceControl.valid,
+                          init: operation.isEditOrRead,
+                          readOnly: !formModel.provinceControl.valid ||
+                              operation.isRead,
                           formControl: formModel.cantonControl,
                           label: l10n.canton,
                           onChanged: (p0) =>
@@ -53,7 +64,9 @@ class FirstStepResidencePage extends ConsumerWidget {
                           ),
                         ),
                         SelectElementFromApi(
-                          readOnly: !formModel.cantonControl.valid,
+                          init: operation.isEditOrRead,
+                          readOnly: !formModel.cantonControl.valid ||
+                              operation.isRead,
                           formControl: formModel.parroquiaControl,
                           label: l10n.parroquia,
                           provider: LocationByParentProvider(
@@ -66,38 +79,48 @@ class FirstStepResidencePage extends ConsumerWidget {
                   const SizedBox(height: 20),
                   PrimaryText(l10n.callePrincipal),
                   InputDecorationWidget(
+                    readOnly: operation.isRead,
                     formControl: formModel.mainStreetControl,
                     suffixIcon: SecondarySvgIconButton(
                       svgIcon: Assets.svg.mapMarker.svg(),
-                      onPressed: () => selectLocationResidenceREgistration(
-                        context: context,
-                        formControl: formModel.mainStreetControl,
-                        ref: ref,
-                      ),
+                      onPressed: operation.isRead
+                          ? null
+                          : () => selectLocationResidenceREgistration(
+                                context: context,
+                                formControl: formModel.mainStreetControl,
+                                ref: ref,
+                              ),
                     ),
-                    onTap: () => selectLocationResidenceREgistration(
-                      context: context,
-                      formControl: formModel.mainStreetControl,
-                      ref: ref,
-                    ),
+                    onTap: operation.isRead
+                        ? null
+                        : () => selectLocationResidenceREgistration(
+                              context: context,
+                              formControl: formModel.mainStreetControl,
+                              ref: ref,
+                            ),
                   ),
                   const SizedBox(height: 20),
                   PrimaryText(l10n.calleSecundaria),
                   InputDecorationWidget(
+                    readOnly: operation.isRead,
                     formControl: formModel.backStreetControl,
                     suffixIcon: SecondarySvgIconButton(
                       svgIcon: Assets.svg.mapMarker.svg(),
-                      onPressed: () => selectLocationResidenceREgistration(
-                        context: context,
-                        formControl: formModel.backStreetControl,
-                        ref: ref,
-                      ),
+                      onPressed: operation.isRead
+                          ? null
+                          : () => selectLocationResidenceREgistration(
+                                context: context,
+                                formControl: formModel.backStreetControl,
+                                ref: ref,
+                              ),
                     ),
-                    onTap: () => selectLocationResidenceREgistration(
-                      context: context,
-                      formControl: formModel.backStreetControl,
-                      ref: ref,
-                    ),
+                    onTap: operation.isRead
+                        ? null
+                        : () => selectLocationResidenceREgistration(
+                              context: context,
+                              formControl: formModel.backStreetControl,
+                              ref: ref,
+                            ),
                   ),
                 ],
               ).horizontalPadding(20),
@@ -110,7 +133,11 @@ class FirstStepResidencePage extends ConsumerWidget {
                       ref
                           .read(residentialPProvider.notifier)
                           .updateFirstStep(formModel.model);
-                      context.navigateTo(const SecondStepResidenceRoute());
+                      context.navigateTo(
+                        SecondStepResidenceRoute(
+                          operation: operation,
+                        ),
+                      );
                     }
                   : null,
               title: l10n.siguiente,

@@ -8,7 +8,9 @@ class ResidenceRegistrationRouterPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(residenceRegProvider);
+    ref
+      ..watch(residentialPProvider)
+      ..watch(resRegProvider);
     return const AutoRouter();
   }
 }
