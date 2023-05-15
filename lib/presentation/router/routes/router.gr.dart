@@ -572,16 +572,59 @@ class _$AppRouter extends RootStackRouter {
         child: const MainPageResicenceRegistrationPage(),
       );
     },
-    FirstStepResidenceRoute.name: (routeData) {
+    ResidenceRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const FirstStepResidencePage(),
+        child: const ResidencePage(),
+      );
+    },
+    DependentRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const DependentPage(),
+      );
+    },
+    FirstStepResidenceRoute.name: (routeData) {
+      final args = routeData.argsAs<FirstStepResidenceRouteArgs>(
+          orElse: () => const FirstStepResidenceRouteArgs());
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: FirstStepResidencePage(
+          key: args.key,
+          operation: args.operation,
+        ),
       );
     },
     SecondStepResidenceRoute.name: (routeData) {
+      final args = routeData.argsAs<SecondStepResidenceRouteArgs>(
+          orElse: () => const SecondStepResidenceRouteArgs());
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const SecondStepResidencePage(),
+        child: SecondStepResidencePage(
+          key: args.key,
+          operation: args.operation,
+        ),
+      );
+    },
+    MainRouteDependentRoute.name: (routeData) {
+      final args = routeData.argsAs<MainRouteDependentRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: MainPageDependentPage(
+          key: args.key,
+          residence: args.residence,
+        ),
+      );
+    },
+    FirstStepDependentRoute.name: (routeData) {
+      final args = routeData.argsAs<FirstStepDependentRouteArgs>(
+          orElse: () => const FirstStepDependentRouteArgs());
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: FirstStepDependentPage(
+          key: args.key,
+          operation: args.operation,
+        ),
       );
     },
     TermAndUsesConditionsRoute.name: (routeData) {
@@ -892,14 +935,38 @@ class _$AppRouter extends RootStackRouter {
                   parent: ResidenceRegistrationRouterRoute.name,
                 ),
                 RouteConfig(
-                  FirstStepResidenceRoute.name,
-                  path: 'first-step-residence-page',
+                  ResidenceRoute.name,
+                  path: 'residence-page',
                   parent: ResidenceRegistrationRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      FirstStepResidenceRoute.name,
+                      path: '',
+                      parent: ResidenceRoute.name,
+                    ),
+                    RouteConfig(
+                      SecondStepResidenceRoute.name,
+                      path: 'second-step-residence-page',
+                      parent: ResidenceRoute.name,
+                    ),
+                  ],
                 ),
                 RouteConfig(
-                  SecondStepResidenceRoute.name,
-                  path: 'second-step-residence-page',
+                  DependentRoute.name,
+                  path: 'dependent-page',
                   parent: ResidenceRegistrationRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      MainRouteDependentRoute.name,
+                      path: '',
+                      parent: DependentRoute.name,
+                    ),
+                    RouteConfig(
+                      FirstStepDependentRoute.name,
+                      path: 'first-step-dependent-page',
+                      parent: DependentRoute.name,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -2336,27 +2403,169 @@ class MainRouteResicenceRegistrationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [FirstStepResidencePage]
-class FirstStepResidenceRoute extends PageRouteInfo<void> {
-  const FirstStepResidenceRoute()
+/// [ResidencePage]
+class ResidenceRoute extends PageRouteInfo<void> {
+  const ResidenceRoute({List<PageRouteInfo>? children})
       : super(
+          ResidenceRoute.name,
+          path: 'residence-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'ResidenceRoute';
+}
+
+/// generated route for
+/// [DependentPage]
+class DependentRoute extends PageRouteInfo<void> {
+  const DependentRoute({List<PageRouteInfo>? children})
+      : super(
+          DependentRoute.name,
+          path: 'dependent-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'DependentRoute';
+}
+
+/// generated route for
+/// [FirstStepResidencePage]
+class FirstStepResidenceRoute
+    extends PageRouteInfo<FirstStepResidenceRouteArgs> {
+  FirstStepResidenceRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
           FirstStepResidenceRoute.name,
-          path: 'first-step-residence-page',
+          path: '',
+          args: FirstStepResidenceRouteArgs(
+            key: key,
+            operation: operation,
+          ),
         );
 
   static const String name = 'FirstStepResidenceRoute';
 }
 
+class FirstStepResidenceRouteArgs {
+  const FirstStepResidenceRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'FirstStepResidenceRouteArgs{key: $key, operation: $operation}';
+  }
+}
+
 /// generated route for
 /// [SecondStepResidencePage]
-class SecondStepResidenceRoute extends PageRouteInfo<void> {
-  const SecondStepResidenceRoute()
-      : super(
+class SecondStepResidenceRoute
+    extends PageRouteInfo<SecondStepResidenceRouteArgs> {
+  SecondStepResidenceRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
           SecondStepResidenceRoute.name,
           path: 'second-step-residence-page',
+          args: SecondStepResidenceRouteArgs(
+            key: key,
+            operation: operation,
+          ),
         );
 
   static const String name = 'SecondStepResidenceRoute';
+}
+
+class SecondStepResidenceRouteArgs {
+  const SecondStepResidenceRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'SecondStepResidenceRouteArgs{key: $key, operation: $operation}';
+  }
+}
+
+/// generated route for
+/// [MainPageDependentPage]
+class MainRouteDependentRoute
+    extends PageRouteInfo<MainRouteDependentRouteArgs> {
+  MainRouteDependentRoute({
+    Key? key,
+    required Residential residence,
+  }) : super(
+          MainRouteDependentRoute.name,
+          path: '',
+          args: MainRouteDependentRouteArgs(
+            key: key,
+            residence: residence,
+          ),
+        );
+
+  static const String name = 'MainRouteDependentRoute';
+}
+
+class MainRouteDependentRouteArgs {
+  const MainRouteDependentRouteArgs({
+    this.key,
+    required this.residence,
+  });
+
+  final Key? key;
+
+  final Residential residence;
+
+  @override
+  String toString() {
+    return 'MainRouteDependentRouteArgs{key: $key, residence: $residence}';
+  }
+}
+
+/// generated route for
+/// [FirstStepDependentPage]
+class FirstStepDependentRoute
+    extends PageRouteInfo<FirstStepDependentRouteArgs> {
+  FirstStepDependentRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
+          FirstStepDependentRoute.name,
+          path: 'first-step-dependent-page',
+          args: FirstStepDependentRouteArgs(
+            key: key,
+            operation: operation,
+          ),
+        );
+
+  static const String name = 'FirstStepDependentRoute';
+}
+
+class FirstStepDependentRouteArgs {
+  const FirstStepDependentRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation}';
+  }
 }
 
 /// generated route for

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/schedule_turn/pages/turn_details_page.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_row_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class CardWidget<T> extends StatelessWidget {
@@ -24,10 +24,11 @@ class CardWidget<T> extends StatelessWidget {
       child: Column(
         children: [
           ...rows.entries.map(
-            (e) => RowLabel(
+            (e) => PrimaryRowLabel(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               boldLabel: e.key,
               simpleLabel: e.value,
+              secondTextAlign: TextAlign.end,
             ),
           ),
           Row(
