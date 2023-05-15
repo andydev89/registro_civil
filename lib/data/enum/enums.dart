@@ -1,4 +1,5 @@
 export 'auth_enum/icono_boton_enum.dart';
+export 'commons/agreements_type.dart';
 export 'commons/payment_method_type.dart';
 export 'commons/relationship_type.dart';
 export 'home_enum/agendar_turnos_enum.dart';

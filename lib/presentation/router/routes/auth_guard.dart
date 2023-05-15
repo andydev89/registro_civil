@@ -6,7 +6,7 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 class AuthGuard extends AutoRouteGuard {
   AuthGuard(this.ref);
 
-  WidgetRef ref;
+  final WidgetRef ref;
 
   @override
   Future<void> onNavigation(

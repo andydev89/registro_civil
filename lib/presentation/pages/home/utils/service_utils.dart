@@ -55,7 +55,7 @@ PageRouteInfo<dynamic> getResidencyRegistration() =>
 PageRouteInfo<dynamic> getChangeOfName(TypeServiceModel typeOfService) =>
     ChangeOfNameRouterRoute(
       children: [
-        TermAndUsesConditionsRoute(typeService: typeOfService),
+        ChangeOfNameFirstStepRoute(typeService: typeOfService),
       ],
     );
 

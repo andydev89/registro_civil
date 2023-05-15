@@ -18,26 +18,11 @@ import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_t
 import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
-class MainPageResicenceRegistrationPage extends ConsumerStatefulWidget {
+class MainPageResicenceRegistrationPage extends ConsumerWidget {
   const MainPageResicenceRegistrationPage({super.key});
 
   @override
-  ConsumerState<MainPageResicenceRegistrationPage> createState() =>
-      _MainPageResicenceRegistrationPageState();
-}
-
-class _MainPageResicenceRegistrationPageState
-    extends ConsumerState<MainPageResicenceRegistrationPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showAceptAgreement(context);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final user = ref.watch(resRegProvider);
     return PrimaryScaffold(

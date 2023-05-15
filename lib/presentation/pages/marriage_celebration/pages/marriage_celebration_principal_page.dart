@@ -9,7 +9,6 @@ import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_cel
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/residence_registration/utils/residence_registration_utils.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_add_item_row.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/card_widget.dart';
@@ -20,26 +19,11 @@ import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/widget_from_json.dart';
 
-class MarriageCelebrationPrincipalPage extends ConsumerStatefulWidget {
+class MarriageCelebrationPrincipalPage extends ConsumerWidget {
   const MarriageCelebrationPrincipalPage({super.key});
 
   @override
-  ConsumerState<MarriageCelebrationPrincipalPage> createState() =>
-      _MarriageCelebrationPrincipalPageState();
-}
-
-class _MarriageCelebrationPrincipalPageState
-    extends ConsumerState<MarriageCelebrationPrincipalPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showAceptAgreement(context);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return PrimaryScaffold(
       title: l10n.celebracionMat,
