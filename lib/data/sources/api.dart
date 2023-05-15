@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/models/change_of_name/change_of_name_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
@@ -148,7 +149,7 @@ abstract class Api {
     @Query('pageSize') int pageSize,
   );
 
-    @GET('/identity/api/location/parent/{id}')
+  @GET('/identity/api/location/parent/{id}')
   Future<ResponseModelPagination<List<LocationModel>?>> locationByParent(
     @Path('id') String province,
   );
@@ -207,5 +208,11 @@ abstract class Api {
   )
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
     @Path('reference') String reference,
+  );
+
+  //CHANGE OF NAME
+  @POST('/changename/api/changename')
+  Future<ResponseModel<CommandModel>> changeOfName(
+    @Body() ChangeOfNameModel changeOfNameModel,
   );
 }

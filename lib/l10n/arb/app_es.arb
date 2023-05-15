@@ -184,6 +184,7 @@
   "s406": "El recurso solicitado no puede generar contenido aceptable.",
   "s408": "La solicitud ha tardado demasiado tiempo en completarse.",
   "s409": "La solicitud no se pudo completar debido a un conflicto.",
+  "s412": "Error al realizar el pago",
   "s500": "Ha ocurrido un error interno en el servidor.",
   "s501": "El servidor no puede realizar la acción solicitada.",
   "s502": "El servidor ha recibido una respuesta inválida.",
@@ -234,6 +235,14 @@
   "s642": "El teléfono celular residencial debe ser único",
   "s643": "El correo electrónico residencial debe ser único",
   "s644": "El NUI residencial debe ser único",
+  "s680": "Nombre no válido",
+  "s681": "Tamaño del nombre no válido",
+  "s682": "Prohibido actualizar un nombre de cambio inactivo",
+  "s683": "Hay un cambio de nombre en curso",
+  "s684": "Estado no válido",
+  "s685": "Pago requerido",
+  "s686": "Usuario menor de edad",
+  "s687": "Servicio de cambio de nombre no encontrado",
   "nombre": "Nombre",
   "apellidos": "Apellidos",
   "direccion": "Dirección",
@@ -394,5 +403,8 @@
   "cambioNombrePropio": "Cambio de nombre propio",
   "alterarOrden": "Alterar orden",
   "suprimirUnoCuandoConsteMasDeDos": "Suprimir uno cuando conste mas de dos",
-  "aumentarCuandoConsteConUnSoloNombre": "Aumentar cuando conste con un solo nombre"
+  "aumentarCuandoConsteConUnSoloNombre": "Aumentar cuando conste con un solo nombre",
+  "documento": "Documento",
+  "tipoDeCambioDeNombre": "Tipo de cambio de nombre",
+  "nombreResultante": "Nombre resultante"
 }

@@ -4,7 +4,7 @@ import 'package:registro_civil_apk/data/models/services/type_services_model.dart
 part 'offers_model.g.dart';
 
 @JsonSerializable()
-class OffersModel extends Equatable {
+class OffersModel {
   const OffersModel({
     required this.simpleCertificate,
     this.cant = 1,
@@ -28,13 +28,6 @@ class OffersModel extends Equatable {
   }
 
   Map<String, dynamic> toJson() => _$OffersModelToJson(this);
-
-  @override
-  List<Object?> get props => [
-        simpleCertificate,
-        cant,
-        discountConadis,
-      ];
 }
 
 enum OperationType { more, less }
