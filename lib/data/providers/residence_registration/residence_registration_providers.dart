@@ -185,7 +185,8 @@ class ResReg extends _$ResReg {
     if (operation == Crud.create) {
       return index != -1;
     } else {
-      return index != -1 && state.residentials[index] != actual;
+      return index != -1 &&
+          state.residentials[index].reisdentialId != actual.reisdentialId;
     }
   }
 

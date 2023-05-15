@@ -48,7 +48,8 @@ class SecondStepResidencePage extends ConsumerWidget {
             } else {
               formModel.electricalCodeControl
                 ..clearValidators()
-                ..value = '';
+                ..value = ''
+                ..updateValueAndValidity();
             }
           },
         );
@@ -66,12 +67,14 @@ class SecondStepResidencePage extends ConsumerWidget {
                 PrimaryReactiveCheckBox(
                   label: l10n.cuentaLuzElectrica,
                   formControl: formModel.electricLightMeterControl,
+                  readOnly: operation.isRead,
                 ),
                 ReactiveSecondStepResidenceModelFormConsumer(
                   builder: (_, __, ___) => Visibility(
                     visible: formModel.electricLightMeterControl.value ?? false,
                     child: PrimaryReactiveTextField(
                       label: l10n.codigoElecNac,
+                      readOnly: operation.isRead,
                       formControl: formModel.electricalCodeControl,
                       keyboardType: TextInputType.number,
                       inputFormatters: [
@@ -86,16 +89,19 @@ class SecondStepResidencePage extends ConsumerWidget {
                   items: ResidentialHousingType.values,
                   label: l10n.tipoDeVivienda,
                   formControl: formModel.housingTypeControl,
+                  readOnly: operation.isRead,
                 ),
                 PrimaryReactiveDropdown(
                   items: ResidentialTenureHousingTypeAgreemente.values,
                   label: l10n.tenencia,
                   formControl: formModel.tenureHousingTypeAgreementControl,
+                  readOnly: operation.isRead,
                 ),
                 PrimaryReactiveTextField(
                   label: l10n.numerovillaedi,
                   formControl: formModel.numberVillaBuildingControl,
                   keyboardType: TextInputType.number,
+                  readOnly: operation.isRead,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
                   ],
@@ -104,6 +110,7 @@ class SecondStepResidencePage extends ConsumerWidget {
                   label: l10n.numeroPiso,
                   formControl: formModel.floorNumberControl,
                   keyboardType: TextInputType.number,
+                  readOnly: operation.isRead,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
                   ],
@@ -112,6 +119,7 @@ class SecondStepResidencePage extends ConsumerWidget {
                   label: l10n.numeroDepartamento,
                   formControl: formModel.departmentNumberControl,
                   keyboardType: TextInputType.number,
+                  readOnly: operation.isRead,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
                   ],
@@ -119,6 +127,7 @@ class SecondStepResidencePage extends ConsumerWidget {
                 PrimaryReactiveDropdown(
                   items: ResidenceType.values,
                   label: l10n.tipoDeResidencia,
+                  readOnly: operation.isRead,
                   formControl: formModel.typeControl,
                 ),
               ],
@@ -134,7 +143,7 @@ class SecondStepResidencePage extends ConsumerWidget {
                       ref
                           .read(residentialPProvider.notifier)
                           .updateSecondStep(formModel.model);
-                      final residence = ref.read(residentialPProvider);
+                      final residence = ref.watch(residentialPProvider);
 
                       final existResidence =
                           ref.watch(resRegProvider.notifier).existResidence(
