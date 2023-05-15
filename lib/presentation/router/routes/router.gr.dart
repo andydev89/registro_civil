@@ -16,9 +16,12 @@ class _$AppRouter extends RootStackRouter {
   _$AppRouter({
     GlobalKey<NavigatorState>? navigatorKey,
     required this.authGuard,
+    required this.agreementGuard,
   }) : super(navigatorKey);
 
   final AuthGuard authGuard;
+
+  final AgreementGuard agreementGuard;
 
   @override
   final Map<String, PageFactory> pagesMap = {
@@ -628,16 +631,6 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    TermAndUsesConditionsRoute.name: (routeData) {
-      final args = routeData.argsAs<TermAndUsesConditionsRouteArgs>();
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: TermAndUsesConditionsPage(
-          key: args.key,
-          typeService: args.typeService,
-        ),
-      );
-    },
     ChangeOfNameFirstStepRoute.name: (routeData) {
       final args = routeData.argsAs<ChangeOfNameFirstStepRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -840,7 +833,11 @@ class _$AppRouter extends RootStackRouter {
               MarriageCelebrationRouterRoute.name,
               path: 'marriage-celebration-router-page',
               parent: RootRouterRoute.name,
-              guards: [authGuard],
+              meta: <String, dynamic>{'agreementType': 2},
+              guards: [
+                authGuard,
+                agreementGuard,
+              ],
               children: [
                 RouteConfig(
                   MarriageCelebrationFirstStepRouterRoute.name,
@@ -928,7 +925,11 @@ class _$AppRouter extends RootStackRouter {
               ResidenceRegistrationRouterRoute.name,
               path: 'residence-registration-router-page',
               parent: RootRouterRoute.name,
-              guards: [authGuard],
+              meta: <String, dynamic>{'agreementType': 1},
+              guards: [
+                authGuard,
+                agreementGuard,
+              ],
               children: [
                 RouteConfig(
                   MainRouteResicenceRegistrationRoute.name,
@@ -975,16 +976,15 @@ class _$AppRouter extends RootStackRouter {
               ChangeOfNameRouterRoute.name,
               path: 'change-of-name-router-page',
               parent: RootRouterRoute.name,
-              guards: [authGuard],
+              meta: <String, dynamic>{'agreementType': 0},
+              guards: [
+                authGuard,
+                agreementGuard,
+              ],
               children: [
                 RouteConfig(
-                  TermAndUsesConditionsRoute.name,
-                  path: '',
-                  parent: ChangeOfNameRouterRoute.name,
-                ),
-                RouteConfig(
                   ChangeOfNameFirstStepRoute.name,
-                  path: 'change-of-name-first-step-page',
+                  path: '',
                   parent: ChangeOfNameRouterRoute.name,
                 ),
                 RouteConfig(
@@ -2580,41 +2580,6 @@ class FirstStepDependentRouteArgs {
 }
 
 /// generated route for
-/// [TermAndUsesConditionsPage]
-class TermAndUsesConditionsRoute
-    extends PageRouteInfo<TermAndUsesConditionsRouteArgs> {
-  TermAndUsesConditionsRoute({
-    Key? key,
-    required TypeServiceModel typeService,
-  }) : super(
-          TermAndUsesConditionsRoute.name,
-          path: '',
-          args: TermAndUsesConditionsRouteArgs(
-            key: key,
-            typeService: typeService,
-          ),
-        );
-
-  static const String name = 'TermAndUsesConditionsRoute';
-}
-
-class TermAndUsesConditionsRouteArgs {
-  const TermAndUsesConditionsRouteArgs({
-    this.key,
-    required this.typeService,
-  });
-
-  final Key? key;
-
-  final TypeServiceModel typeService;
-
-  @override
-  String toString() {
-    return 'TermAndUsesConditionsRouteArgs{key: $key, typeService: $typeService}';
-  }
-}
-
-/// generated route for
 /// [ChangeOfNameFirstStepPage]
 class ChangeOfNameFirstStepRoute
     extends PageRouteInfo<ChangeOfNameFirstStepRouteArgs> {
@@ -2623,7 +2588,7 @@ class ChangeOfNameFirstStepRoute
     required TypeServiceModel typeService,
   }) : super(
           ChangeOfNameFirstStepRoute.name,
-          path: 'change-of-name-first-step-page',
+          path: '',
           args: ChangeOfNameFirstStepRouteArgs(
             key: key,
             typeService: typeService,

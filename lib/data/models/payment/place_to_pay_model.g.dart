@@ -994,6 +994,14 @@ const _$StatusCodeEnumMap = {
   StatusCode.s642: 642,
   StatusCode.s643: 643,
   StatusCode.s644: 644,
+  StatusCode.s680: 680,
+  StatusCode.s681: 681,
+  StatusCode.s682: 682,
+  StatusCode.s683: 683,
+  StatusCode.s684: 684,
+  StatusCode.s685: 685,
+  StatusCode.s686: 686,
+  StatusCode.s687: 687,
 };
 
 PlaceToPayTransactionDetailsModel _$PlaceToPayTransactionDetailsModelFromJson(

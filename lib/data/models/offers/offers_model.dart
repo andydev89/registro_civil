@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 part 'offers_model.g.dart';
 
 @JsonSerializable()
 class OffersModel {
-  OffersModel({
+  const OffersModel({
     required this.simpleCertificate,
     this.cant = 1,
     this.discountConadis = false,
@@ -13,9 +14,9 @@ class OffersModel {
   factory OffersModel.fromJson(Map<String, dynamic> json) =>
       _$OffersModelFromJson(json);
 
-  late TypeServiceModel simpleCertificate;
-  late int cant;
-  late bool discountConadis;
+  final TypeServiceModel simpleCertificate;
+  final int cant;
+  final bool discountConadis;
 
   OffersModel operation(int cant) {
     final updatedOffer = OffersModel(

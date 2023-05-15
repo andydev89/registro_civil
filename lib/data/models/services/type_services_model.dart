@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/enum/services/services_type.dart';
@@ -8,7 +9,7 @@ part 'type_services_model.g.dart';
 
 @JsonSerializable()
 class TypeServiceModel implements Translatable {
-  TypeServiceModel({
+  const TypeServiceModel({
     required this.id,
     required this.name,
     required this.description,
