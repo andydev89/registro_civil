@@ -15,6 +15,8 @@ ResidenceRegistration _$ResidenceRegistrationFromJson(
               ?.map((e) => Residential.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      state:
+          $enumDecodeNullable(_$StatusEnumMap, json['state']) ?? Status.active,
     );
 
 Map<String, dynamic> _$ResidenceRegistrationToJson(
@@ -22,8 +24,12 @@ Map<String, dynamic> _$ResidenceRegistrationToJson(
     <String, dynamic>{
       'observations': instance.observations,
       'residentials': instance.residentials.map((e) => e.toJson()).toList(),
-      'userId': instance.userId,
     };
+
+const _$StatusEnumMap = {
+  Status.active: 'ACTIVE',
+  Status.inactive: 'INACTIVE',
+};
 
 Residential _$ResidentialFromJson(Map<String, dynamic> json) => Residential(
       electricLightMeter: json['electricLightMeter'] as bool? ?? false,
@@ -48,6 +54,7 @@ Residential _$ResidentialFromJson(Map<String, dynamic> json) => Residential(
               ?.map((e) => Dependent.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      id: json['id'] as String? ?? '',
     );
 
 Map<String, dynamic> _$ResidentialToJson(Residential instance) =>
@@ -56,7 +63,7 @@ Map<String, dynamic> _$ResidentialToJson(Residential instance) =>
       'electricLightMeter': instance.electricLightMeter,
       'canton': Residential._locationToJson(instance.canton),
       'departmentNumber': instance.departmentNumber,
-      'dependents': instance.dependents,
+      'dependents': instance.dependents.map((e) => e.toJson()).toList(),
       'floorNumber': instance.floorNumber,
       'housingType': ResidentialHousingType.toJson(instance.housingType),
       'mainStreet': instance.mainStreet,
@@ -71,37 +78,39 @@ Map<String, dynamic> _$ResidentialToJson(Residential instance) =>
     };
 
 const _$ResidentialHousingTypeEnumMap = {
-  ResidentialHousingType.apartamento: 'apartamento',
-  ResidentialHousingType.estudio: 'estudio',
-  ResidentialHousingType.duplex: 'duplex',
-  ResidentialHousingType.aticos: 'aticos',
-  ResidentialHousingType.pisos: 'pisos',
-  ResidentialHousingType.bajosConJardin: 'bajosConJardin',
+  ResidentialHousingType.apartamento: 'APARTAMENTO',
+  ResidentialHousingType.estudio: 'ESTUDIO',
+  ResidentialHousingType.duplex: 'DUPLEX',
+  ResidentialHousingType.aticos: 'ATICOS',
+  ResidentialHousingType.pisos: 'PISOS',
+  ResidentialHousingType.bajosConJardin: 'BAJOS_CON_JARDIN',
 };
 
 const _$ResidentialTenureHousingTypeAgreementeEnumMap = {
   ResidentialTenureHousingTypeAgreemente.propiaTotalmentePagada:
-      'propiaTotalmentePagada',
-  ResidentialTenureHousingTypeAgreemente.propiaYEnPago: 'propiaYEnPago',
-  ResidentialTenureHousingTypeAgreemente.propia: 'propia',
-  ResidentialTenureHousingTypeAgreemente.prestadaCedida: 'prestadaCedida',
-  ResidentialTenureHousingTypeAgreemente.porServicios: 'porServicios',
-  ResidentialTenureHousingTypeAgreemente.arrendada: 'arrendada',
+      'PROPIA_TOTALMENTE_PAGADA',
+  ResidentialTenureHousingTypeAgreemente.propiaYEnPago: 'PROPIA_ESTA_PAGANDO',
+  ResidentialTenureHousingTypeAgreemente.propia: 'PROPIA',
+  ResidentialTenureHousingTypeAgreemente.prestadaCedida: 'PRESTADA_O_CEDIDA',
+  ResidentialTenureHousingTypeAgreemente.porServicios: 'POR_SERVICIOS',
+  ResidentialTenureHousingTypeAgreemente.arrendada: 'ARRENDADA',
 };
 
 const _$ResidenceTypeEnumMap = {
-  ResidenceType.principal: 'principal',
-  ResidenceType.secundaria: 'secundaria',
+  ResidenceType.principal: 'MAIN_RESIDENTIAL',
+  ResidenceType.secundaria: 'BACK_RESIDENTIAL',
 };
 
 Dependent _$DependentFromJson(Map<String, dynamic> json) => Dependent(
       nuiDependents: json['nuiDependents'] as String,
       relationship: $enumDecode(
-          _$ResidentialDependentRelationEnumMap, json['relationship']),
+          _$ResidentialDependentRelationEnumMap, json['relationship'],
+          unknownValue: ResidentialDependentRelation.none),
       date: json['date'] as String,
       name: json['name'] as String,
       lastname: json['lastname'] as String,
       state: $enumDecode(_$StatusEnumMap, json['state']),
+      id: json['id'] as String? ?? '',
     );
 
 Map<String, dynamic> _$DependentToJson(Dependent instance) => <String, dynamic>{
@@ -115,14 +124,8 @@ Map<String, dynamic> _$DependentToJson(Dependent instance) => <String, dynamic>{
     };
 
 const _$ResidentialDependentRelationEnumMap = {
-  ResidentialDependentRelation.hijoMenorEdad: 'hijoMenorEdad',
-  ResidentialDependentRelation.discapacitado: 'discapacitado',
-  ResidentialDependentRelation.terceraEdad: 'terceraEdad',
-  ResidentialDependentRelation.none: 'none',
-};
-
-const _$StatusEnumMap = {
-  Status.active: 'ACTIVE',
-  Status.inactive: 'INACTIVE',
-  Status.unpaind: 'UNPAID',
+  ResidentialDependentRelation.hijoMenorEdad: 'HIJO_MENOR_EDAD',
+  ResidentialDependentRelation.discapacitado: 'DISCAPACITADO',
+  ResidentialDependentRelation.terceraEdad: 'TERCERA_EDAD',
+  ResidentialDependentRelation.none: 'NULL',
 };

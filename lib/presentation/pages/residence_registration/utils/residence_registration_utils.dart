@@ -5,9 +5,11 @@ import 'package:google_geocoding_api/google_geocoding_api.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
+import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
 import 'package:registro_civil_apk/data/providers/commons/gmap_providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_check_box.dart';
@@ -118,3 +120,17 @@ void selectLocationResidenceREgistration({
     },
   );
 }
+
+Future<void> toResidence(
+  BuildContext context, {
+  Crud operation = Crud.create,
+}) =>
+    context.navigateTo(
+      ResidenceRoute(
+        children: [
+          FirstStepResidenceRoute(
+            operation: operation,
+          ),
+        ],
+      ),
+    );

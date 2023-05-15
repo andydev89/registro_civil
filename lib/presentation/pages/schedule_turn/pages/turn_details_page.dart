@@ -17,6 +17,7 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_row_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class TurnDetailsPage extends ConsumerWidget {
@@ -58,15 +59,15 @@ class TurnDetailsPage extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      RowLabel(
+                      PrimaryRowLabel(
                         boldLabel: l10n.provincia,
                         simpleLabel: city,
                       ),
-                      RowLabel(
+                      PrimaryRowLabel(
                         boldLabel: l10n.agencia,
                         simpleLabel: agency,
                       ),
-                      RowLabel(
+                      PrimaryRowLabel(
                         boldLabel: l10n.servicio,
                         simpleLabel: typeOfService.translate(context),
                       ),
@@ -155,39 +156,5 @@ class TurnDetailsPage extends ConsumerWidget {
             ),
       ).symmetricPadding(10, 30),
     );
-  }
-}
-
-class RowLabel extends StatelessWidget {
-  const RowLabel({
-    super.key,
-    required this.boldLabel,
-    required this.simpleLabel,
-  });
-
-  final String boldLabel;
-  final String simpleLabel;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: 90,
-          child: PrimaryText(
-            '$boldLabel:',
-            fontWeight: FontWeight.bold,
-            textAlign: TextAlign.start,
-          ),
-        ),
-        Flexible(
-          child: PrimaryText(
-            simpleLabel,
-            textAlign: TextAlign.start,
-          ),
-        ),
-      ],
-    ).verticalPadding(5);
   }
 }

@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_housing_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_type_agreemente.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
 import 'package:registro_civil_apk/data/providers/residence_registration/residence_registration_providers.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -17,35 +20,42 @@ import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_t
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
 class SecondStepResidencePage extends ConsumerWidget {
-  const SecondStepResidencePage({super.key});
+  const SecondStepResidencePage({
+    super.key,
+    this.operation = Crud.create,
+  });
+  final Crud operation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    ref.watch(residentialPProvider);
     return SecondStepResidenceModelFormBuilder(
       initState: (context, formModel) {
-        formModel.electricalCodeControl.value = '';
-        formModel.electricLightMeterControl
-          ..value = false
-          ..valueChanges.listen(
-            (event) {
-              if (event ?? false) {
-                formModel.electricalCodeControl
-                  ..setValidators([
-                    Validators.required,
-                    Validators.maxLength(10),
-                    Validators.minLength(10),
-                  ])
-                  ..updateValueAndValidity();
-              } else {
-                formModel.electricalCodeControl
-                  ..clearValidators()
-                  ..value = '';
-              }
-            },
-          );
+        if (operation == Crud.create) {
+          formModel.electricalCodeControl.value = '';
+          formModel.electricLightMeterControl.value = false;
+        }
+        formModel.electricLightMeterControl.valueChanges.listen(
+          (event) {
+            if (event ?? false) {
+              formModel.electricalCodeControl
+                ..setValidators([
+                  Validators.required,
+                  Validators.maxLength(10),
+                  Validators.minLength(10),
+                ])
+                ..updateValueAndValidity();
+            } else {
+              formModel.electricalCodeControl
+                ..clearValidators()
+                ..value = '';
+            }
+          },
+        );
       },
+      model: operation.isEditOrRead
+          ? ref.watch(residentialPProvider.notifier).getSecondStep()
+          : null,
       builder: (context, formModel, child) => PrimaryScaffold(
         title: l10n.registroRes,
         subtitle: l10n.ingreseInfSol,
@@ -112,17 +122,30 @@ class SecondStepResidencePage extends ConsumerWidget {
                   formControl: formModel.typeControl,
                 ),
               ],
-            ),
+            ).horizontalPadding(20),
           ),
         ),
         bottomNavigationBar: ReactiveSecondStepResidenceModelFormConsumer(
           builder: (context, formModel, child) => PrimaryButton(
-            title: l10n.siguiente,
+            title: operation.isCreateOrEdit ? l10n.guardar : l10n.aceptar,
             onPressed: formModel.form.valid
                 ? () {
-                    ref
-                        .read(residentialPProvider.notifier)
-                        .updateSecondStep(formModel.model);
+                    if (operation.isCreateOrEdit) {
+                      ref
+                          .read(residentialPProvider.notifier)
+                          .updateSecondStep(formModel.model);
+                      final residence = ref.read(residentialPProvider);
+                      if (operation.isCreate) {
+                        ref
+                            .read(resRegProvider.notifier)
+                            .addResidence(residence);
+                      } else {
+                        ref
+                            .read(resRegProvider.notifier)
+                            .editResidence(residence);
+                      }
+                      showAlert(l10n.residenciaGuardadaCor, TypeAlert.success);
+                    }
                     context
                         .navigateTo(const ResidenceRegistrationRouterRoute());
                   }

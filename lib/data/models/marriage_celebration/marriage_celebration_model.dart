@@ -4,6 +4,7 @@ import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
@@ -26,25 +27,40 @@ class MarriageCelebrationModel {
     this.secondPartner,
     @FormControlAnnotation<bool>() this.isOutside = false,
     this.outside,
+    this.state,
+    this.id,
   });
 
   factory MarriageCelebrationModel.fromJson(Map<String, dynamic> json) =>
       _$MarriageCelebrationModelFromJson(json);
 
-  @JsonKey(toJson: MarriageCelebrationType.toJson)
-  final MarriageCelebrationType requestOwnerType;
   @JsonKey(toJson: _agencyToJson, name: 'agencyId')
   final AgencyModel? agency;
-  final RequestOwner? requestOwner;
+
+  final Partner? firstPartner;
+  final Witness? firstWitness;
+  @JsonKey(includeToJson: false)
+  final String? id;
+
   final bool isOutside;
   final Outside? outside;
-  final Witness? firstWitness;
-  final Witness? secondWitness;
-  final Partner? firstPartner;
-  final Partner? secondPartner;
+  final RequestOwner? requestOwner;
+  @JsonKey(
+    includeFromJson: false,
+    includeToJson: true,
+  )
+  final MarriageCelebrationType requestOwnerType;
 
-  static String _agencyToJson(AgencyModel? agency) {
-    return agency?.id ?? '';
+  final Partner? secondPartner;
+  final Witness? secondWitness;
+  @JsonKey(includeToJson: false)
+  final StateMarriage? state;
+
+  Map<int, List<Document>> rejectingDocuments() {
+    return {
+      0: [...?firstPartner?.rejectingDocuments()],
+      1: [...?secondPartner?.rejectingDocuments()],
+    };
   }
 
   Map<String, dynamic> toJson() => _$MarriageCelebrationModelToJson(this);
@@ -71,6 +87,10 @@ class MarriageCelebrationModel {
       firstPartner: firstPartner ?? this.firstPartner,
       secondPartner: secondPartner ?? this.secondPartner,
     );
+  }
+
+  static String _agencyToJson(AgencyModel? agency) {
+    return agency?.id ?? '';
   }
 }
 
@@ -113,11 +133,11 @@ class RequestOwner {
         email: model.email,
       );
 
-  final String nui;
-  final String name;
-  final String phone;
   final String email;
   final String? identityCard;
+  final String name;
+  final String nui;
+  final String phone;
   final String? powerOfAttorney;
 
   Map<String, dynamic> toJson() => _$RequestOwnerToJson(this);
@@ -137,6 +157,7 @@ class Outside {
 
   factory Outside.fromJson(Map<String, dynamic> json) =>
       _$OutsideFromJson(json);
+
   final String latitude;
   final String longitude;
   final String principalStreet;
@@ -163,8 +184,9 @@ class Witness {
 
   factory Witness.fromJson(Map<String, dynamic> json) =>
       _$WitnessFromJson(json);
-  final String nui;
+
   final String name;
+  final String nui;
 
   Map<String, dynamic> toJson() => _$WitnessToJson(this);
 }
@@ -203,19 +225,35 @@ class Partner {
   factory Partner.fromJson(Map<String, dynamic> json) =>
       _$PartnerFromJson(json);
 
-  final String nui;
-  final String name;
+  @JsonKey(
+      includeFromJson: false,
+      includeToJson: true,
+      toJson: ChildrenRelationShip.toJson)
+  final ChildrenRelationShip? childrenRelationship;
+
+  @JsonKey(
+    name: 'hasConadis',
+    includeFromJson: false,
+    includeToJson: true,
+  )
+  final bool conadis;
+
+  @JsonKey(
+    name: 'conadisNui',
+    includeFromJson: false,
+    includeToJson: true,
+  )
+  final String conadisNumber;
+
+  final List<Document> documents;
+
+  @JsonKey(includeFromJson: false, includeToJson: true, toJson: Binary.toJson)
+  final Binary? hasChildren;
+
   @JsonKey(toJson: MaritalStatus.toJson)
   final MaritalStatus? maritalStatus;
-  @JsonKey(toJson: Binary.toJson)
-  final Binary? hasChildren;
-  @JsonKey(toJson: ChildrenRelationShip.toJson)
-  final ChildrenRelationShip? childrenRelationship;
-  @JsonKey(name: 'hasConadis')
-  final bool conadis;
-  @JsonKey(name: 'conadisNui')
-  final String conadisNumber;
-  final List<Document> documents;
+  final String name;
+  final String nui;
 
   Partner copyWith({
     String? nui,
@@ -243,22 +281,58 @@ class Partner {
         name: witness?.name,
       );
 
+  List<Document> rejectingDocuments() {
+    return documents
+        .where((element) => element.state == StateDocument.rejected)
+        .toList();
+  }
+
   Map<String, dynamic> toJson() => _$PartnerToJson(this);
 }
 
 @ReactiveFormAnnotation()
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Document {
   Document({
     @FormControlAnnotation(validators: [requiredValidator])
         required this.referenceId,
     @FormControlAnnotation<String>() this.file = '',
+    this.id,
+    this.name,
+    this.state,
+    this.comment,
+    this.documentPath,
+    this.rejectionTypeId,
   });
 
   factory Document.fromJson(Map<String, dynamic> json) =>
       _$DocumentFromJson(json);
-  final String referenceId;
+
+  @JsonKey(includeToJson: false)
+  final String? comment;
+
+  @JsonKey(includeToJson: false)
+  final String? documentPath;
+
+  @JsonKey(
+    includeFromJson: false,
+    includeToJson: true,
+  )
   final String file;
+
+  @JsonKey(includeToJson: false)
+  final String? id;
+
+  @JsonKey(includeToJson: false)
+  final String? name;
+
+  final String referenceId;
+
+  @JsonKey(includeToJson: false)
+  final String? rejectionTypeId;
+
+  @JsonKey(includeToJson: false)
+  final StateDocument? state;
 
   Document copyWith({
     String? referenceId,
@@ -267,6 +341,12 @@ class Document {
       Document(
         referenceId: referenceId ?? this.referenceId,
         file: file ?? this.file,
+        id: id,
+        name: name,
+        state: state,
+        comment: comment,
+        documentPath: documentPath,
+        rejectionTypeId: rejectionTypeId,
       );
 
   Map<String, dynamic> toJson() => _$DocumentToJson(this);
@@ -281,6 +361,24 @@ class SelectAgency {
         required this.agency,
   });
 
-  final LocationModel province;
   final AgencyModel agency;
+  final LocationModel province;
+}
+
+@JsonSerializable()
+class DocumentsRejection {
+  DocumentsRejection({
+    required this.id,
+    required this.firstPartnerDocuments,
+    required this.secondPartnerDocuments,
+  });
+
+  factory DocumentsRejection.fromJson(Map<String, dynamic> json) =>
+      _$DocumentsRejectionFromJson(json);
+
+  final List<Document> firstPartnerDocuments;
+  final String id;
+  final List<Document> secondPartnerDocuments;
+
+  Map<String, dynamic> toJson() => _$DocumentsRejectionToJson(this);
 }

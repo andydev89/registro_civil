@@ -35,9 +35,11 @@ class MyTurnsPage extends ConsumerWidget {
                   ResponseModelPagination<List<UserScheduleModel>?>>(
                 async: ref.watch(schedulesByUserProvider()),
                 data: (data) => PagedListViewWidget<UserScheduleModel>(
-                  fetch: (p0) {
-                    return ref.read(schedulesByUserProvider(pageNo: p0).future);
-                  },
+                  fetch: (p0) =>
+                      ref.read(schedulesByUserProvider(pageNo: p0).future),
+                  firstElements: data.data ?? [],
+                  totalPages: data.totalPages,
+                  firstPage: 1,
                   itemBuilder: (_, e, __) => MyTurnExpandableCard(
                     data: MyTurnExpandableCardModel(
                       id: e.id,
@@ -46,10 +48,12 @@ class MyTurnsPage extends ConsumerWidget {
                       date: e.schedule.date,
                       typeOfService: e.schedule.typeOfService,
                       time: e.schedule.startTime,
-                      state: e.state.toText,
+                      state: e.state,
                     ),
                   ).verticalPadding(10),
                 ),
+                onRefreshIndicatot: () =>
+                    ref.refresh(schedulesByUserProvider().future),
                 onRefresh: () => ref.refresh(schedulesByUserProvider()),
               ),
             ),

@@ -14,6 +14,7 @@ class ServicesPage extends ConsumerWidget {
     return LoadingProviderWidget<
         ResponseModelPagination<List<TypeServiceModel>>>(
       async: ref.watch(typeServicesProvider),
+      onRefreshIndicatot: () => ref.refresh(typeServicesProvider.future),
       onRefresh: () => ref.refresh(typeServicesProvider),
       data: (data) => CircleAvatarCardGrid(
         totalPages: data.totalPages,

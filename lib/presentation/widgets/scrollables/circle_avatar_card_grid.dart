@@ -47,7 +47,7 @@ class CircleAvatarCardGrid extends ConsumerWidget {
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.grey,
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       image: Image.file(snapshot.data!).image,

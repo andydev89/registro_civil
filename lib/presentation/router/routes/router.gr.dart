@@ -192,6 +192,29 @@ class _$AppRouter extends RootStackRouter {
         child: const MarriageCelebrationRouterPage(),
       );
     },
+    MarriageCelebrationPrincipalRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationPrincipalPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    RejectionStepMarriageCelebrationRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<RejectionStepMarriageCelebrationRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: RejectionStepMarriageCelebrationPage(
+          key: args.key,
+          marriageId: args.marriageId,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ResidenceRegistrationRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -278,9 +301,13 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     ChoosePaymentMethodRoute.name: (routeData) {
+      final args = routeData.argsAs<ChoosePaymentMethodRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ChoosePaymentMethodPage(),
+        child: ChoosePaymentMethodPage(
+          key: args.key,
+          service: args.service,
+        ),
       );
     },
     PaymentServiceJudgmentsNotarialActsRoute.name: (routeData) {
@@ -545,16 +572,59 @@ class _$AppRouter extends RootStackRouter {
         child: const MainPageResicenceRegistrationPage(),
       );
     },
-    FirstStepResidenceRoute.name: (routeData) {
+    ResidenceRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const FirstStepResidencePage(),
+        child: const ResidencePage(),
+      );
+    },
+    DependentRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const DependentPage(),
+      );
+    },
+    FirstStepResidenceRoute.name: (routeData) {
+      final args = routeData.argsAs<FirstStepResidenceRouteArgs>(
+          orElse: () => const FirstStepResidenceRouteArgs());
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: FirstStepResidencePage(
+          key: args.key,
+          operation: args.operation,
+        ),
       );
     },
     SecondStepResidenceRoute.name: (routeData) {
+      final args = routeData.argsAs<SecondStepResidenceRouteArgs>(
+          orElse: () => const SecondStepResidenceRouteArgs());
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const SecondStepResidencePage(),
+        child: SecondStepResidencePage(
+          key: args.key,
+          operation: args.operation,
+        ),
+      );
+    },
+    MainRouteDependentRoute.name: (routeData) {
+      final args = routeData.argsAs<MainRouteDependentRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: MainPageDependentPage(
+          key: args.key,
+          residence: args.residence,
+        ),
+      );
+    },
+    FirstStepDependentRoute.name: (routeData) {
+      final args = routeData.argsAs<FirstStepDependentRouteArgs>(
+          orElse: () => const FirstStepDependentRouteArgs());
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: FirstStepDependentPage(
+          key: args.key,
+          operation: args.operation,
+        ),
       );
     },
     TermAndUsesConditionsRoute.name: (routeData) {
@@ -844,6 +914,16 @@ class _$AppRouter extends RootStackRouter {
               ],
             ),
             RouteConfig(
+              MarriageCelebrationPrincipalRoute.name,
+              path: 'marriage-celebration-principal-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
+              RejectionStepMarriageCelebrationRoute.name,
+              path: 'rejection-step-marriage-celebration-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
               ResidenceRegistrationRouterRoute.name,
               path: 'residence-registration-router-page',
               parent: RootRouterRoute.name,
@@ -855,14 +935,38 @@ class _$AppRouter extends RootStackRouter {
                   parent: ResidenceRegistrationRouterRoute.name,
                 ),
                 RouteConfig(
-                  FirstStepResidenceRoute.name,
-                  path: 'first-step-residence-page',
+                  ResidenceRoute.name,
+                  path: 'residence-page',
                   parent: ResidenceRegistrationRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      FirstStepResidenceRoute.name,
+                      path: '',
+                      parent: ResidenceRoute.name,
+                    ),
+                    RouteConfig(
+                      SecondStepResidenceRoute.name,
+                      path: 'second-step-residence-page',
+                      parent: ResidenceRoute.name,
+                    ),
+                  ],
                 ),
                 RouteConfig(
-                  SecondStepResidenceRoute.name,
-                  path: 'second-step-residence-page',
+                  DependentRoute.name,
+                  path: 'dependent-page',
                   parent: ResidenceRegistrationRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      MainRouteDependentRoute.name,
+                      path: '',
+                      parent: DependentRoute.name,
+                    ),
+                    RouteConfig(
+                      FirstStepDependentRoute.name,
+                      path: 'first-step-dependent-page',
+                      parent: DependentRoute.name,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -1252,6 +1356,53 @@ class MarriageCelebrationRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MarriageCelebrationPrincipalPage]
+class MarriageCelebrationPrincipalRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationPrincipalRoute()
+      : super(
+          MarriageCelebrationPrincipalRoute.name,
+          path: 'marriage-celebration-principal-page',
+        );
+
+  static const String name = 'MarriageCelebrationPrincipalRoute';
+}
+
+/// generated route for
+/// [RejectionStepMarriageCelebrationPage]
+class RejectionStepMarriageCelebrationRoute
+    extends PageRouteInfo<RejectionStepMarriageCelebrationRouteArgs> {
+  RejectionStepMarriageCelebrationRoute({
+    Key? key,
+    required String marriageId,
+  }) : super(
+          RejectionStepMarriageCelebrationRoute.name,
+          path: 'rejection-step-marriage-celebration-page',
+          args: RejectionStepMarriageCelebrationRouteArgs(
+            key: key,
+            marriageId: marriageId,
+          ),
+        );
+
+  static const String name = 'RejectionStepMarriageCelebrationRoute';
+}
+
+class RejectionStepMarriageCelebrationRouteArgs {
+  const RejectionStepMarriageCelebrationRouteArgs({
+    this.key,
+    required this.marriageId,
+  });
+
+  final Key? key;
+
+  final String marriageId;
+
+  @override
+  String toString() {
+    return 'RejectionStepMarriageCelebrationRouteArgs{key: $key, marriageId: $marriageId}';
+  }
+}
+
+/// generated route for
 /// [ResidenceRegistrationRouterPage]
 class ResidenceRegistrationRouterRoute extends PageRouteInfo<void> {
   const ResidenceRegistrationRouterRoute({List<PageRouteInfo>? children})
@@ -1526,14 +1677,37 @@ class WebviewPaymentRouteArgs {
 
 /// generated route for
 /// [ChoosePaymentMethodPage]
-class ChoosePaymentMethodRoute extends PageRouteInfo<void> {
-  const ChoosePaymentMethodRoute()
-      : super(
+class ChoosePaymentMethodRoute
+    extends PageRouteInfo<ChoosePaymentMethodRouteArgs> {
+  ChoosePaymentMethodRoute({
+    Key? key,
+    required TypeServiceModel service,
+  }) : super(
           ChoosePaymentMethodRoute.name,
           path: 'choose-payment-method-page',
+          args: ChoosePaymentMethodRouteArgs(
+            key: key,
+            service: service,
+          ),
         );
 
   static const String name = 'ChoosePaymentMethodRoute';
+}
+
+class ChoosePaymentMethodRouteArgs {
+  const ChoosePaymentMethodRouteArgs({
+    this.key,
+    required this.service,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel service;
+
+  @override
+  String toString() {
+    return 'ChoosePaymentMethodRouteArgs{key: $key, service: $service}';
+  }
 }
 
 /// generated route for
@@ -2229,27 +2403,169 @@ class MainRouteResicenceRegistrationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [FirstStepResidencePage]
-class FirstStepResidenceRoute extends PageRouteInfo<void> {
-  const FirstStepResidenceRoute()
+/// [ResidencePage]
+class ResidenceRoute extends PageRouteInfo<void> {
+  const ResidenceRoute({List<PageRouteInfo>? children})
       : super(
+          ResidenceRoute.name,
+          path: 'residence-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'ResidenceRoute';
+}
+
+/// generated route for
+/// [DependentPage]
+class DependentRoute extends PageRouteInfo<void> {
+  const DependentRoute({List<PageRouteInfo>? children})
+      : super(
+          DependentRoute.name,
+          path: 'dependent-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'DependentRoute';
+}
+
+/// generated route for
+/// [FirstStepResidencePage]
+class FirstStepResidenceRoute
+    extends PageRouteInfo<FirstStepResidenceRouteArgs> {
+  FirstStepResidenceRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
           FirstStepResidenceRoute.name,
-          path: 'first-step-residence-page',
+          path: '',
+          args: FirstStepResidenceRouteArgs(
+            key: key,
+            operation: operation,
+          ),
         );
 
   static const String name = 'FirstStepResidenceRoute';
 }
 
+class FirstStepResidenceRouteArgs {
+  const FirstStepResidenceRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'FirstStepResidenceRouteArgs{key: $key, operation: $operation}';
+  }
+}
+
 /// generated route for
 /// [SecondStepResidencePage]
-class SecondStepResidenceRoute extends PageRouteInfo<void> {
-  const SecondStepResidenceRoute()
-      : super(
+class SecondStepResidenceRoute
+    extends PageRouteInfo<SecondStepResidenceRouteArgs> {
+  SecondStepResidenceRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
           SecondStepResidenceRoute.name,
           path: 'second-step-residence-page',
+          args: SecondStepResidenceRouteArgs(
+            key: key,
+            operation: operation,
+          ),
         );
 
   static const String name = 'SecondStepResidenceRoute';
+}
+
+class SecondStepResidenceRouteArgs {
+  const SecondStepResidenceRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'SecondStepResidenceRouteArgs{key: $key, operation: $operation}';
+  }
+}
+
+/// generated route for
+/// [MainPageDependentPage]
+class MainRouteDependentRoute
+    extends PageRouteInfo<MainRouteDependentRouteArgs> {
+  MainRouteDependentRoute({
+    Key? key,
+    required Residential residence,
+  }) : super(
+          MainRouteDependentRoute.name,
+          path: '',
+          args: MainRouteDependentRouteArgs(
+            key: key,
+            residence: residence,
+          ),
+        );
+
+  static const String name = 'MainRouteDependentRoute';
+}
+
+class MainRouteDependentRouteArgs {
+  const MainRouteDependentRouteArgs({
+    this.key,
+    required this.residence,
+  });
+
+  final Key? key;
+
+  final Residential residence;
+
+  @override
+  String toString() {
+    return 'MainRouteDependentRouteArgs{key: $key, residence: $residence}';
+  }
+}
+
+/// generated route for
+/// [FirstStepDependentPage]
+class FirstStepDependentRoute
+    extends PageRouteInfo<FirstStepDependentRouteArgs> {
+  FirstStepDependentRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
+          FirstStepDependentRoute.name,
+          path: 'first-step-dependent-page',
+          args: FirstStepDependentRouteArgs(
+            key: key,
+            operation: operation,
+          ),
+        );
+
+  static const String name = 'FirstStepDependentRoute';
+}
+
+class FirstStepDependentRouteArgs {
+  const FirstStepDependentRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation}';
+  }
 }
 
 /// generated route for

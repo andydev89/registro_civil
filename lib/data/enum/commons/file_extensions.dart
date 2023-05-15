@@ -13,10 +13,10 @@ enum FileExtension {
       case FileExtension.pdf:
         return Assets.png.pdf;
       case FileExtension.jpeg:
-        //TODO poner una imagen de una foto
+        // TODO(alejandro): poner una imagen de una foto
         return Assets.png.validacionDocumentos;
       case FileExtension.jpg:
-        //TODO poner una imagen de una foto
+        // TODO(alejandro): poner una imagen de una foto
         return Assets.png.validacionDocumentos;
     }
   }

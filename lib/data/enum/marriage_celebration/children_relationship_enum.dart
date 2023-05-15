@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 enum ChildrenRelationShip implements Translatable {
+  @JsonValue('ANOTHER_MARRIAGE')
   anotherMarriage('ANOTHER_MARRIAGE'),
+  @JsonValue('IN_COMMON')
   inCommon('IN_COMMON'),
+  @JsonValue('IN_COMMON_TO_BE_RECOGNIZED')
   inCommonToBeRecognized('IN_COMMON_TO_BE_RECOGNIZED'),
+  @JsonValue('FOREIGNERS_WITHOUT_DIGERCIC_REGISTRATION')
   foreignersWithoutDigercicRegistration(
     'FOREIGNERS_WITHOUT_DIGERCIC_REGISTRATION',
   ),
+  @JsonValue('ADULTS')
   adults('ADULTS'),
+  @JsonValue('ECUADORIANS_IN_COMMON')
   ecuadoriansInCommon('ECUADORIANS_IN_COMMON'),
+  @JsonValue('ECUADORIANS_IN_COMMON_TO_BE_RECOGNIZED')
   ecuadoriansInCommonToBeRecognized('ECUADORIANS_IN_COMMON_TO_BE_RECOGNIZED');
 
   const ChildrenRelationShip(this.toText);
