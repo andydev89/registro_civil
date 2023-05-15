@@ -228,7 +228,7 @@ class Partner {
   @JsonKey(
       includeFromJson: false,
       includeToJson: true,
-      toJson: ChildrenRelationShip.toJson)
+      toJson: ChildrenRelationShip.toJson,)
   final ChildrenRelationShip? childrenRelationship;
 
   @JsonKey(

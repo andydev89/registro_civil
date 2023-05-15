@@ -27,6 +27,8 @@ class FirstStepResidencePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    var init = operation.isEditOrRead;
+    var alreadyStarter = false;
     return FirstStepResidenceModelFormBuilder(
       model: operation.isEditOrRead
           ? ref.watch(residentialPProvider.notifier).getFirstStep()
@@ -44,27 +46,32 @@ class FirstStepResidencePage extends ConsumerWidget {
                     readOnly: operation.isRead,
                     formControl: formModel.provinceControl,
                     label: l10n.provincia,
-                    init: operation.isEditOrRead,
+                    init: init && !alreadyStarter,
                     provider: provincesProvider,
-                    onChanged: (p0) => formModel.cantonControl.value = null,
+                    onChanged: (p0) {
+                      formModel.cantonControl.value = null;
+                      alreadyStarter = true;
+                    },
                   ),
                   ReactiveFirstStepResidenceModelFormConsumer(
                     builder: (_, __, ___) => Column(
                       children: [
                         SelectElementFromApi(
-                          init: operation.isEditOrRead,
+                          init: init && !alreadyStarter,
                           readOnly: !formModel.provinceControl.valid ||
                               operation.isRead,
                           formControl: formModel.cantonControl,
                           label: l10n.canton,
-                          onChanged: (p0) =>
-                              formModel.parroquiaControl.value = null,
+                          onChanged: (p0) {
+                            formModel.parroquiaControl.value = null;
+                            alreadyStarter = true;
+                          },
                           provider: LocationByParentProvider(
                             parentId: formModel.provinceControl.value?.id ?? '',
                           ),
                         ),
                         SelectElementFromApi(
-                          init: operation.isEditOrRead,
+                          init: init && !alreadyStarter,
                           readOnly: !formModel.cantonControl.valid ||
                               operation.isRead,
                           formControl: formModel.parroquiaControl,

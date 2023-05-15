@@ -612,18 +612,19 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: MainPageDependentPage(
           key: args.key,
-          residence: args.residence,
+          residential: args.residential,
         ),
       );
     },
     FirstStepDependentRoute.name: (routeData) {
-      final args = routeData.argsAs<FirstStepDependentRouteArgs>(
-          orElse: () => const FirstStepDependentRouteArgs());
+      final args = routeData.argsAs<FirstStepDependentRouteArgs>();
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: FirstStepDependentPage(
           key: args.key,
           operation: args.operation,
+          dependent: args.dependent,
+          residenceId: args.residenceId,
         ),
       );
     },
@@ -2504,13 +2505,13 @@ class MainRouteDependentRoute
     extends PageRouteInfo<MainRouteDependentRouteArgs> {
   MainRouteDependentRoute({
     Key? key,
-    required Residential residence,
+    required Residential residential,
   }) : super(
           MainRouteDependentRoute.name,
           path: '',
           args: MainRouteDependentRouteArgs(
             key: key,
-            residence: residence,
+            residential: residential,
           ),
         );
 
@@ -2520,16 +2521,16 @@ class MainRouteDependentRoute
 class MainRouteDependentRouteArgs {
   const MainRouteDependentRouteArgs({
     this.key,
-    required this.residence,
+    required this.residential,
   });
 
   final Key? key;
 
-  final Residential residence;
+  final Residential residential;
 
   @override
   String toString() {
-    return 'MainRouteDependentRouteArgs{key: $key, residence: $residence}';
+    return 'MainRouteDependentRouteArgs{key: $key, residential: $residential}';
   }
 }
 
@@ -2540,12 +2541,16 @@ class FirstStepDependentRoute
   FirstStepDependentRoute({
     Key? key,
     Crud operation = Crud.create,
+    Dependent? dependent,
+    required String residenceId,
   }) : super(
           FirstStepDependentRoute.name,
           path: 'first-step-dependent-page',
           args: FirstStepDependentRouteArgs(
             key: key,
             operation: operation,
+            dependent: dependent,
+            residenceId: residenceId,
           ),
         );
 
@@ -2556,15 +2561,21 @@ class FirstStepDependentRouteArgs {
   const FirstStepDependentRouteArgs({
     this.key,
     this.operation = Crud.create,
+    this.dependent,
+    required this.residenceId,
   });
 
   final Key? key;
 
   final Crud operation;
 
+  final Dependent? dependent;
+
+  final String residenceId;
+
   @override
   String toString() {
-    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation}';
+    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent, residenceId: $residenceId}';
   }
 }
 

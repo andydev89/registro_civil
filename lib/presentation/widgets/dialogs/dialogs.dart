@@ -66,17 +66,21 @@ Future<void> showContentDialog(
   BuildContext context, {
   required Widget content,
   Color? backgroundColor,
+  List<Widget> Function(NavigatorState)? actions,
+  Widget? title,
 }) {
   return showDialog(
     context: context,
-    builder: (_) {
+    builder: (context) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
+        title: title,
         content: content,
         backgroundColor:
             backgroundColor ?? Theme.of(context).dialogBackgroundColor,
+        actions: actions?.call(Navigator.of(context)),
       );
     },
   );

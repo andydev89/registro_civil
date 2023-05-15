@@ -32,6 +32,18 @@ Map<String, dynamic>? documentFileRequiredValidator(
   return null;
 }
 
+Map<String, dynamic>? notRepeat(
+  AbstractControl<dynamic> control,
+  List<String> list,
+) {
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) return null;
+  if (list.contains(value)) {
+    return {ValidationsMessageEnum.notRepeted.toText: true};
+  }
+  return null;
+}
+
 // validate que tenga 1 nombre y 2 apellidos minimo
 Map<String, dynamic>? nameValidator(AbstractControl<dynamic> control) {
   final value = control.value as String?;
