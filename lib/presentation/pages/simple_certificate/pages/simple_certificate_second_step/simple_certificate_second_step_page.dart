@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
@@ -11,11 +10,11 @@ import 'package:registro_civil_apk/data/models/simple_certificate/simple_certifi
 import 'package:registro_civil_apk/data/providers/cart_provider.dart';
 import 'package:registro_civil_apk/data/providers/simple_certificate/simple_certificate_provider.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
-import 'package:registro_civil_apk/data/utils/methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/pdf_view_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
 class SimpleCertificateSecondStepPage extends ConsumerWidget {
@@ -38,22 +37,7 @@ class SimpleCertificateSecondStepPage extends ConsumerWidget {
         title: '${l10n.verificarInfo}: ${model.name}',
         body: Expanded(
           child: Scaffold(
-            body: FutureBuilder(
-              future:
-                  createPdfFileFromBase64(simpleCertificateResponse.document),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return PDFView(
-                    filePath: snapshot.data!.path,
-                    swipeHorizontal: true,
-                    fitPolicy: FitPolicy.BOTH,
-                    onError: (error) {},
-                  ).verticalPadding(20);
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
+            body: PDFViewWidget(document: simpleCertificateResponse.document),
           ),
         ),
         bottomNavigationBar: Column(

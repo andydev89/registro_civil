@@ -39,3 +39,21 @@ Future<void> toResidence(
         ],
       ),
     );
+Future<void> toDependent(
+  BuildContext context, {
+  Crud operation = Crud.create,
+  Dependent? dependent,
+  required String residenceId,
+}) =>
+    context.navigateTo(
+      DependentRoute(
+        children: [
+          FirstStepDependentRoute(
+            key: UniqueKey(),
+            operation: operation,
+            dependent: dependent,
+            residenceId: residenceId,
+          ),
+        ],
+      ),
+    );
