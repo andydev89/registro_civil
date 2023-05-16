@@ -93,7 +93,7 @@ class FirstStepDependentPage extends ConsumerWidget {
                           .addDependent(residenceId, formModel.model);
                       showAlert(l10n.dependienteGuardadoCor, TypeAlert.success);
                     }
-                    context.navigateBack();
+                    context.popRoute();
                   }
                 : null,
           ),

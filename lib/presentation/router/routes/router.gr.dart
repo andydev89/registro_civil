@@ -195,29 +195,6 @@ class _$AppRouter extends RootStackRouter {
         child: const MarriageCelebrationRouterPage(),
       );
     },
-    MarriageCelebrationPrincipalRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: const MarriageCelebrationPrincipalPage(),
-        transitionsBuilder: TransitionsBuilders.slideRight,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
-    RejectionStepMarriageCelebrationRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<RejectionStepMarriageCelebrationRouteArgs>();
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: RejectionStepMarriageCelebrationPage(
-          key: args.key,
-          marriageId: args.marriageId,
-        ),
-        transitionsBuilder: TransitionsBuilders.slideRight,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
     ResidenceRegistrationRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -453,6 +430,29 @@ class _$AppRouter extends RootStackRouter {
           typeSimpleCertificate: args.typeSimpleCertificate,
           key: args.key,
         ),
+      );
+    },
+    MarriageCelebrationPrincipalRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationPrincipalPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    RejectionStepMarriageCelebrationRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<RejectionStepMarriageCelebrationRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: RejectionStepMarriageCelebrationPage(
+          key: args.key,
+          marriageId: args.marriageId,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
       );
     },
     MarriageCelebrationFirstStepRouterRoute.name: (routeData) {
@@ -840,8 +840,18 @@ class _$AppRouter extends RootStackRouter {
               ],
               children: [
                 RouteConfig(
-                  MarriageCelebrationFirstStepRouterRoute.name,
+                  MarriageCelebrationPrincipalRoute.name,
                   path: '',
+                  parent: MarriageCelebrationRouterRoute.name,
+                ),
+                RouteConfig(
+                  RejectionStepMarriageCelebrationRoute.name,
+                  path: 'rejection-step-marriage-celebration-page',
+                  parent: MarriageCelebrationRouterRoute.name,
+                ),
+                RouteConfig(
+                  MarriageCelebrationFirstStepRouterRoute.name,
+                  path: 'marriage-celebration-first-step-router-page',
                   parent: MarriageCelebrationRouterRoute.name,
                   children: [
                     RouteConfig(
@@ -910,16 +920,6 @@ class _$AppRouter extends RootStackRouter {
                   parent: MarriageCelebrationRouterRoute.name,
                 ),
               ],
-            ),
-            RouteConfig(
-              MarriageCelebrationPrincipalRoute.name,
-              path: 'marriage-celebration-principal-page',
-              parent: RootRouterRoute.name,
-            ),
-            RouteConfig(
-              RejectionStepMarriageCelebrationRoute.name,
-              path: 'rejection-step-marriage-celebration-page',
-              parent: RootRouterRoute.name,
             ),
             RouteConfig(
               ResidenceRegistrationRouterRoute.name,
@@ -1354,53 +1354,6 @@ class MarriageCelebrationRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MarriageCelebrationRouterRoute';
-}
-
-/// generated route for
-/// [MarriageCelebrationPrincipalPage]
-class MarriageCelebrationPrincipalRoute extends PageRouteInfo<void> {
-  const MarriageCelebrationPrincipalRoute()
-      : super(
-          MarriageCelebrationPrincipalRoute.name,
-          path: 'marriage-celebration-principal-page',
-        );
-
-  static const String name = 'MarriageCelebrationPrincipalRoute';
-}
-
-/// generated route for
-/// [RejectionStepMarriageCelebrationPage]
-class RejectionStepMarriageCelebrationRoute
-    extends PageRouteInfo<RejectionStepMarriageCelebrationRouteArgs> {
-  RejectionStepMarriageCelebrationRoute({
-    Key? key,
-    required String marriageId,
-  }) : super(
-          RejectionStepMarriageCelebrationRoute.name,
-          path: 'rejection-step-marriage-celebration-page',
-          args: RejectionStepMarriageCelebrationRouteArgs(
-            key: key,
-            marriageId: marriageId,
-          ),
-        );
-
-  static const String name = 'RejectionStepMarriageCelebrationRoute';
-}
-
-class RejectionStepMarriageCelebrationRouteArgs {
-  const RejectionStepMarriageCelebrationRouteArgs({
-    this.key,
-    required this.marriageId,
-  });
-
-  final Key? key;
-
-  final String marriageId;
-
-  @override
-  String toString() {
-    return 'RejectionStepMarriageCelebrationRouteArgs{key: $key, marriageId: $marriageId}';
-  }
 }
 
 /// generated route for
@@ -2175,12 +2128,59 @@ class SimpleCertificateFirstStepPersonalRouteArgs {
 }
 
 /// generated route for
+/// [MarriageCelebrationPrincipalPage]
+class MarriageCelebrationPrincipalRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationPrincipalRoute()
+      : super(
+          MarriageCelebrationPrincipalRoute.name,
+          path: '',
+        );
+
+  static const String name = 'MarriageCelebrationPrincipalRoute';
+}
+
+/// generated route for
+/// [RejectionStepMarriageCelebrationPage]
+class RejectionStepMarriageCelebrationRoute
+    extends PageRouteInfo<RejectionStepMarriageCelebrationRouteArgs> {
+  RejectionStepMarriageCelebrationRoute({
+    Key? key,
+    required String marriageId,
+  }) : super(
+          RejectionStepMarriageCelebrationRoute.name,
+          path: 'rejection-step-marriage-celebration-page',
+          args: RejectionStepMarriageCelebrationRouteArgs(
+            key: key,
+            marriageId: marriageId,
+          ),
+        );
+
+  static const String name = 'RejectionStepMarriageCelebrationRoute';
+}
+
+class RejectionStepMarriageCelebrationRouteArgs {
+  const RejectionStepMarriageCelebrationRouteArgs({
+    this.key,
+    required this.marriageId,
+  });
+
+  final Key? key;
+
+  final String marriageId;
+
+  @override
+  String toString() {
+    return 'RejectionStepMarriageCelebrationRouteArgs{key: $key, marriageId: $marriageId}';
+  }
+}
+
+/// generated route for
 /// [MarriageCelebrationFirstStepRouterPage]
 class MarriageCelebrationFirstStepRouterRoute extends PageRouteInfo<void> {
   const MarriageCelebrationFirstStepRouterRoute({List<PageRouteInfo>? children})
       : super(
           MarriageCelebrationFirstStepRouterRoute.name,
-          path: '',
+          path: 'marriage-celebration-first-step-router-page',
           initialChildren: children,
         );
 

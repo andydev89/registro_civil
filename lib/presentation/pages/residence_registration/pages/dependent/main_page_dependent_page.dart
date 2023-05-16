@@ -23,8 +23,8 @@ class MainPageDependentPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final residence =
-        ref.watch(resRegProvider.notifier).residentialFromId(residential.myId);
+    final residences = ref.watch(resRegProvider.notifier);
+    final residence = residences.residentialFromId(residential.myId);
     return PrimaryScaffold(
       title: l10n.registroRes,
       subtitle: l10n.dependientes,
