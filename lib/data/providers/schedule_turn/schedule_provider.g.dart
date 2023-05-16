@@ -7,7 +7,7 @@ part of 'schedule_provider.dart';
 // **************************************************************************
 
 String _$availableSchedulesHash() =>
-    r'a3a8002172f14409bf84b7467082ec37d587fe9a';
+    r'a09df7c4486ef3046a3aa175e98c46934e2b8b13';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,7 +31,7 @@ class _SystemHash {
 }
 
 typedef AvailableSchedulesRef
-    = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCode>>;
+    = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCodeType>>;
 
 /// See also [availableSchedules].
 @ProviderFor(availableSchedules)
@@ -39,7 +39,7 @@ const availableSchedulesProvider = AvailableSchedulesFamily();
 
 /// See also [availableSchedules].
 class AvailableSchedulesFamily
-    extends Family<AsyncValue<Result<List<ScheduleModel>, StatusCode>>> {
+    extends Family<AsyncValue<Result<List<ScheduleModel>, StatusCodeType>>> {
   /// See also [availableSchedules].
   const AvailableSchedulesFamily();
 
@@ -89,8 +89,8 @@ class AvailableSchedulesFamily
 }
 
 /// See also [availableSchedules].
-class AvailableSchedulesProvider
-    extends AutoDisposeFutureProvider<Result<List<ScheduleModel>, StatusCode>> {
+class AvailableSchedulesProvider extends AutoDisposeFutureProvider<
+    Result<List<ScheduleModel>, StatusCodeType>> {
   /// See also [availableSchedules].
   AvailableSchedulesProvider({
     required this.startDate,
@@ -147,12 +147,12 @@ class AvailableSchedulesProvider
   }
 }
 
-String _$schedulesHash() => r'b86bcd91ba72dd28a78636b6050df71116112061';
+String _$schedulesHash() => r'f6646a889563d0fa5751fc5fa9fd8d1a521775ed';
 
 /// See also [schedules].
 @ProviderFor(schedules)
-final schedulesProvider =
-    AutoDisposeFutureProvider<Result<List<ScheduleModel>, StatusCode>>.internal(
+final schedulesProvider = AutoDisposeFutureProvider<
+    Result<List<ScheduleModel>, StatusCodeType>>.internal(
   schedules,
   name: r'schedulesProvider',
   debugGetCreateSourceHash:
@@ -162,7 +162,7 @@ final schedulesProvider =
 );
 
 typedef SchedulesRef
-    = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCode>>;
+    = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCodeType>>;
 String _$schedulesByUserHash() => r'1c454ad1ffe8b1ed5d62b1c3325637caa5e61a33';
 typedef SchedulesByUserRef = AutoDisposeFutureProviderRef<
     ResponseModelPagination<List<UserScheduleModel>>>;
@@ -248,9 +248,9 @@ class SchedulesByUserProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$confirmScheduleHash() => r'2fc651dea63b9a07e1bb10f776fb378537e9695b';
+String _$confirmScheduleHash() => r'0701f34420289ba3e7343584d8c13a8f141b989e';
 typedef ConfirmScheduleRef
-    = AutoDisposeFutureProviderRef<Result<BookedReceiptModel, StatusCode>>;
+    = AutoDisposeFutureProviderRef<Result<BookedReceiptModel, StatusCodeType>>;
 
 /// See also [confirmSchedule].
 @ProviderFor(confirmSchedule)
@@ -258,7 +258,7 @@ const confirmScheduleProvider = ConfirmScheduleFamily();
 
 /// See also [confirmSchedule].
 class ConfirmScheduleFamily
-    extends Family<AsyncValue<Result<BookedReceiptModel, StatusCode>>> {
+    extends Family<AsyncValue<Result<BookedReceiptModel, StatusCodeType>>> {
   /// See also [confirmSchedule].
   const ConfirmScheduleFamily();
 
@@ -296,8 +296,8 @@ class ConfirmScheduleFamily
 }
 
 /// See also [confirmSchedule].
-class ConfirmScheduleProvider
-    extends AutoDisposeFutureProvider<Result<BookedReceiptModel, StatusCode>> {
+class ConfirmScheduleProvider extends AutoDisposeFutureProvider<
+    Result<BookedReceiptModel, StatusCodeType>> {
   /// See also [confirmSchedule].
   ConfirmScheduleProvider({
     required this.recipt,

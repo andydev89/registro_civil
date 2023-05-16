@@ -227,8 +227,8 @@ class SimpleCertificateFirstStepFamiliarModelForm
   String relationshipControlPath() => pathBuilder(relationshipControlName);
   String conadisModelControlPath() => pathBuilder(conadisModelControlName);
   String get _nuiValue => nuiControl.value ?? "";
-  RelationshipSimpleCertificateEnum get _relationshipValue =>
-      relationshipControl.value as RelationshipSimpleCertificateEnum;
+  RelationshipSimpleCertificateType get _relationshipValue =>
+      relationshipControl.value as RelationshipSimpleCertificateType;
   ConadisModel get _conadisModelValue => conadisModelForm.model;
   bool get containsNui {
     try {
@@ -273,7 +273,7 @@ class SimpleCertificateFirstStepFamiliarModelForm
   }
 
   void relationshipValueUpdate(
-    RelationshipSimpleCertificateEnum value, {
+    RelationshipSimpleCertificateType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -302,7 +302,7 @@ class SimpleCertificateFirstStepFamiliarModelForm
   }
 
   void relationshipValuePatch(
-    RelationshipSimpleCertificateEnum value, {
+    RelationshipSimpleCertificateType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -331,7 +331,7 @@ class SimpleCertificateFirstStepFamiliarModelForm
       nuiControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void relationshipValueReset(
-    RelationshipSimpleCertificateEnum value, {
+    RelationshipSimpleCertificateType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -354,9 +354,9 @@ class SimpleCertificateFirstStepFamiliarModelForm
           emitEvent: emitEvent);
   FormControl<String> get nuiControl =>
       form.control(nuiControlPath()) as FormControl<String>;
-  FormControl<RelationshipSimpleCertificateEnum> get relationshipControl =>
+  FormControl<RelationshipSimpleCertificateType> get relationshipControl =>
       form.control(relationshipControlPath())
-          as FormControl<RelationshipSimpleCertificateEnum>;
+          as FormControl<RelationshipSimpleCertificateType>;
   FormGroup get conadisModelControl =>
       form.control(conadisModelControlPath()) as FormGroup;
   void nuiSetDisabled(
@@ -480,7 +480,7 @@ class SimpleCertificateFirstStepFamiliarModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        relationshipControlName: FormControl<RelationshipSimpleCertificateEnum>(
+        relationshipControlName: FormControl<RelationshipSimpleCertificateType>(
             value: simpleCertificateFirstStepFamiliarModel?.relationship,
             validators: [requiredValidator],
             asyncValidators: [],
@@ -1023,8 +1023,8 @@ class RejectInformationForm implements FormModel<RejectInformation> {
   String rejectReasonControlPath() => pathBuilder(rejectReasonControlName);
   String rejectDescriptionControlPath() =>
       pathBuilder(rejectDescriptionControlName);
-  OrdersRejectingReason get _rejectReasonValue =>
-      rejectReasonControl.value as OrdersRejectingReason;
+  OrdersRejectingReasonType get _rejectReasonValue =>
+      rejectReasonControl.value as OrdersRejectingReasonType;
   String get _rejectDescriptionValue =>
       rejectDescriptionControl.value as String;
   bool get containsRejectReason {
@@ -1050,7 +1050,7 @@ class RejectInformationForm implements FormModel<RejectInformation> {
   void get rejectReasonFocus => form.focus(rejectReasonControlPath());
   void get rejectDescriptionFocus => form.focus(rejectDescriptionControlPath());
   void rejectReasonValueUpdate(
-    OrdersRejectingReason value, {
+    OrdersRejectingReasonType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1068,7 +1068,7 @@ class RejectInformationForm implements FormModel<RejectInformation> {
   }
 
   void rejectReasonValuePatch(
-    OrdersRejectingReason value, {
+    OrdersRejectingReasonType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1086,7 +1086,7 @@ class RejectInformationForm implements FormModel<RejectInformation> {
   }
 
   void rejectReasonValueReset(
-    OrdersRejectingReason value, {
+    OrdersRejectingReasonType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1103,9 +1103,9 @@ class RejectInformationForm implements FormModel<RejectInformation> {
   }) =>
       rejectDescriptionControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<OrdersRejectingReason> get rejectReasonControl =>
+  FormControl<OrdersRejectingReasonType> get rejectReasonControl =>
       form.control(rejectReasonControlPath())
-          as FormControl<OrdersRejectingReason>;
+          as FormControl<OrdersRejectingReasonType>;
   FormControl<String> get rejectDescriptionControl =>
       form.control(rejectDescriptionControlPath()) as FormControl<String>;
   void rejectReasonSetDisabled(
@@ -1196,7 +1196,7 @@ class RejectInformationForm implements FormModel<RejectInformation> {
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
   FormGroup formElements() => FormGroup({
-        rejectReasonControlName: FormControl<OrdersRejectingReason>(
+        rejectReasonControlName: FormControl<OrdersRejectingReasonType>(
             value: rejectInformation?.rejectReason,
             validators: [requiredValidator],
             asyncValidators: [],

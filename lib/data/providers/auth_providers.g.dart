@@ -6,12 +6,12 @@ part of 'auth_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$operatorsHash() => r'0bb3a1683b3318fa69c9fe4069b6c2128fb6decc';
+String _$operatorsHash() => r'ff8f87308e27d7ba642dcb82aa3cf75db4fb7165';
 
 /// See also [operators].
 @ProviderFor(operators)
 final operatorsProvider = AutoDisposeFutureProvider<
-    Result<List<TelephoneOperatorModel>, StatusCode>>.internal(
+    Result<List<TelephoneOperatorModel>, StatusCodeType>>.internal(
   operators,
   name: r'operatorsProvider',
   debugGetCreateSourceHash:
@@ -21,8 +21,8 @@ final operatorsProvider = AutoDisposeFutureProvider<
 );
 
 typedef OperatorsRef = AutoDisposeFutureProviderRef<
-    Result<List<TelephoneOperatorModel>, StatusCode>>;
-String _$refreshTokenHash() => r'6134a4a0639d675edd9b3fde73031280f0be2b47';
+    Result<List<TelephoneOperatorModel>, StatusCodeType>>;
+String _$refreshTokenHash() => r'ddd53a3be89bc8f59daa47cb81125b2c685ff90d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -144,7 +144,7 @@ final authenticationStatusProvider =
 
 typedef AuthenticationStatusRef
     = AutoDisposeStreamProviderRef<AuthenticationStatus>;
-String _$meHash() => r'8f42215f5a43c795fb8f34b38d52cb17e528268b';
+String _$meHash() => r'78550005f432d5bf00a66d4017611ce705adb01c';
 
 /// See also [me].
 @ProviderFor(me)
@@ -158,7 +158,7 @@ final meProvider = AutoDisposeFutureProvider<MeModel>.internal(
 );
 
 typedef MeRef = AutoDisposeFutureProviderRef<MeModel>;
-String _$loginHash() => r'b41eee76f80ed3ff28e4dfc56ae28c2dc0c1e664';
+String _$loginHash() => r'525f84bb0aa64c1bae1bcc775c58c910ebefa194';
 
 /// See also [Login].
 @ProviderFor(Login)
@@ -173,7 +173,7 @@ final loginProvider = AutoDisposeAsyncNotifierProvider<Login, bool>.internal(
 
 typedef _$Login = AutoDisposeAsyncNotifier<bool>;
 String _$registerValidateCitizenHash() =>
-    r'c1e830d2b09262e349e5901054f6fc025d4b4d5e';
+    r'5fb76090c624b37c63b98ba98f2d96e8eb68304e';
 
 /// See also [RegisterValidateCitizen].
 @ProviderFor(RegisterValidateCitizen)
@@ -189,7 +189,7 @@ final registerValidateCitizenProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$RegisterValidateCitizen = AutoDisposeNotifier<RegisterCitizenModel?>;
-String _$registerDataHash() => r'5bcaa6f3eba8cd0be5d035ed7731618adb794153';
+String _$registerDataHash() => r'e2bbf15ab1a32d5be07b48d93ff728a205a95a73';
 
 /// See also [RegisterData].
 @ProviderFor(RegisterData)
@@ -204,7 +204,7 @@ final registerDataProvider =
 );
 
 typedef _$RegisterData = AutoDisposeNotifier<CommandModel?>;
-String _$registerCodeHash() => r'3322add17252ccc483b71434de3a13df8dfb3b44';
+String _$registerCodeHash() => r'6961c4cf38c5b39fb86ec65612a9baae223626bf';
 
 /// See also [RegisterCode].
 @ProviderFor(RegisterCode)

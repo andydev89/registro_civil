@@ -209,7 +209,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
   String residentialsControlPath() => pathBuilder(residentialsControlName);
   String get _userIdValue => userIdControl.value ?? "";
   String get _observationsValue => observationsControl.value ?? "";
-  Status get _stateValue => stateControl.value as Status;
+  StatusType get _stateValue => stateControl.value as StatusType;
   List<Residential> get _residentialsValue =>
       residentialsControl.value?.whereType<Residential>().toList() ?? [];
   bool get containsUserId {
@@ -275,7 +275,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
   }
 
   void stateValueUpdate(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -311,7 +311,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
   }
 
   void stateValuePatch(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -347,7 +347,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
       observationsControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void stateValueReset(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -368,8 +368,8 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
       form.control(userIdControlPath()) as FormControl<String>;
   FormControl<String> get observationsControl =>
       form.control(observationsControlPath()) as FormControl<String>;
-  FormControl<Status> get stateControl =>
-      form.control(stateControlPath()) as FormControl<Status>;
+  FormControl<StatusType> get stateControl =>
+      form.control(stateControlPath()) as FormControl<StatusType>;
   FormArray<Residential> get residentialsControl =>
       form.control(residentialsControlPath()) as FormArray<Residential>;
   void userIdSetDisabled(
@@ -567,7 +567,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false),
-        stateControlName: FormControl<Status>(
+        stateControlName: FormControl<StatusType>(
             value: residenceRegistration?.state,
             validators: [],
             asyncValidators: [],
@@ -943,9 +943,9 @@ class ResidentialForm implements FormModel<Residential> {
   String get _backStreetValue => backStreetControl.value ?? "";
   ResidentialHousingType get _housingTypeValue =>
       housingTypeControl.value as ResidentialHousingType;
-  ResidentialTenureHousingTypeAgreemente get _tenureHousingTypeAgreementValue =>
+  ResidentialTenureHousingAgreementeType get _tenureHousingTypeAgreementValue =>
       tenureHousingTypeAgreementControl.value
-          as ResidentialTenureHousingTypeAgreemente;
+          as ResidentialTenureHousingAgreementeType;
   String get _numberVillaBuildingValue =>
       numberVillaBuildingControl.value ?? "";
   String get _floorNumberValue => floorNumberControl.value ?? "";
@@ -1196,7 +1196,7 @@ class ResidentialForm implements FormModel<Residential> {
   }
 
   void tenureHousingTypeAgreementValueUpdate(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1331,7 +1331,7 @@ class ResidentialForm implements FormModel<Residential> {
   }
 
   void tenureHousingTypeAgreementValuePatch(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1466,7 +1466,7 @@ class ResidentialForm implements FormModel<Residential> {
       housingTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void tenureHousingTypeAgreementValueReset(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1545,10 +1545,10 @@ class ResidentialForm implements FormModel<Residential> {
   FormControl<ResidentialHousingType> get housingTypeControl =>
       form.control(housingTypeControlPath())
           as FormControl<ResidentialHousingType>;
-  FormControl<ResidentialTenureHousingTypeAgreemente>
+  FormControl<ResidentialTenureHousingAgreementeType>
       get tenureHousingTypeAgreementControl =>
           form.control(tenureHousingTypeAgreementControlPath())
-              as FormControl<ResidentialTenureHousingTypeAgreemente>;
+              as FormControl<ResidentialTenureHousingAgreementeType>;
   FormControl<String> get numberVillaBuildingControl =>
       form.control(numberVillaBuildingControlPath()) as FormControl<String>;
   FormControl<String> get floorNumberControl =>
@@ -1991,7 +1991,7 @@ class ResidentialForm implements FormModel<Residential> {
             disabled: false,
             touched: false),
         tenureHousingTypeAgreementControlName:
-            FormControl<ResidentialTenureHousingTypeAgreemente>(
+            FormControl<ResidentialTenureHousingAgreementeType>(
                 value: residential?.tenureHousingTypeAgreement,
                 validators: [requiredValidator],
                 asyncValidators: [],
@@ -2379,12 +2379,12 @@ class DependentForm implements FormModel<Dependent> {
   String stateControlPath() => pathBuilder(stateControlName);
   String idControlPath() => pathBuilder(idControlName);
   String get _nuiDependentsValue => nuiDependentsControl.value as String;
-  ResidentialDependentRelation get _relationshipValue =>
-      relationshipControl.value as ResidentialDependentRelation;
+  ResidentialDependentRelationType get _relationshipValue =>
+      relationshipControl.value as ResidentialDependentRelationType;
   String get _dateValue => dateControl.value as String;
   String get _nameValue => nameControl.value as String;
   String get _lastnameValue => lastnameControl.value as String;
-  Status get _stateValue => stateControl.value as Status;
+  StatusType get _stateValue => stateControl.value as StatusType;
   String get _idValue => idControl.value ?? "";
   bool get containsNuiDependents {
     try {
@@ -2473,7 +2473,7 @@ class DependentForm implements FormModel<Dependent> {
   }
 
   void relationshipValueUpdate(
-    ResidentialDependentRelation value, {
+    ResidentialDependentRelationType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2509,7 +2509,7 @@ class DependentForm implements FormModel<Dependent> {
   }
 
   void stateValueUpdate(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2536,7 +2536,7 @@ class DependentForm implements FormModel<Dependent> {
   }
 
   void relationshipValuePatch(
-    ResidentialDependentRelation value, {
+    ResidentialDependentRelationType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2572,7 +2572,7 @@ class DependentForm implements FormModel<Dependent> {
   }
 
   void stateValuePatch(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2599,7 +2599,7 @@ class DependentForm implements FormModel<Dependent> {
       nuiDependentsControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void relationshipValueReset(
-    ResidentialDependentRelation value, {
+    ResidentialDependentRelationType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -2635,7 +2635,7 @@ class DependentForm implements FormModel<Dependent> {
       lastnameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void stateValueReset(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -2654,17 +2654,17 @@ class DependentForm implements FormModel<Dependent> {
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get nuiDependentsControl =>
       form.control(nuiDependentsControlPath()) as FormControl<String>;
-  FormControl<ResidentialDependentRelation> get relationshipControl =>
+  FormControl<ResidentialDependentRelationType> get relationshipControl =>
       form.control(relationshipControlPath())
-          as FormControl<ResidentialDependentRelation>;
+          as FormControl<ResidentialDependentRelationType>;
   FormControl<String> get dateControl =>
       form.control(dateControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
   FormControl<String> get lastnameControl =>
       form.control(lastnameControlPath()) as FormControl<String>;
-  FormControl<Status> get stateControl =>
-      form.control(stateControlPath()) as FormControl<Status>;
+  FormControl<StatusType> get stateControl =>
+      form.control(stateControlPath()) as FormControl<StatusType>;
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
   void nuiDependentsSetDisabled(
@@ -2858,7 +2858,7 @@ class DependentForm implements FormModel<Dependent> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        relationshipControlName: FormControl<ResidentialDependentRelation>(
+        relationshipControlName: FormControl<ResidentialDependentRelationType>(
             value: dependent?.relationship,
             validators: [requiredValidator],
             asyncValidators: [],
@@ -2886,7 +2886,7 @@ class DependentForm implements FormModel<Dependent> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        stateControlName: FormControl<Status>(
+        stateControlName: FormControl<StatusType>(
             value: dependent?.state,
             validators: [],
             asyncValidators: [],
@@ -4401,9 +4401,9 @@ class SecondStepResidenceModelForm
   String get _electricalCodeValue => electricalCodeControl.value as String;
   ResidentialHousingType get _housingTypeValue =>
       housingTypeControl.value as ResidentialHousingType;
-  ResidentialTenureHousingTypeAgreemente get _tenureHousingTypeAgreementValue =>
+  ResidentialTenureHousingAgreementeType get _tenureHousingTypeAgreementValue =>
       tenureHousingTypeAgreementControl.value
-          as ResidentialTenureHousingTypeAgreemente;
+          as ResidentialTenureHousingAgreementeType;
   String get _numberVillaBuildingValue =>
       numberVillaBuildingControl.value as String;
   String get _floorNumberValue => floorNumberControl.value as String;
@@ -4529,7 +4529,7 @@ class SecondStepResidenceModelForm
   }
 
   void tenureHousingTypeAgreementValueUpdate(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -4601,7 +4601,7 @@ class SecondStepResidenceModelForm
   }
 
   void tenureHousingTypeAgreementValuePatch(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -4673,7 +4673,7 @@ class SecondStepResidenceModelForm
       housingTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void tenureHousingTypeAgreementValueReset(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -4724,10 +4724,10 @@ class SecondStepResidenceModelForm
   FormControl<ResidentialHousingType> get housingTypeControl =>
       form.control(housingTypeControlPath())
           as FormControl<ResidentialHousingType>;
-  FormControl<ResidentialTenureHousingTypeAgreemente>
+  FormControl<ResidentialTenureHousingAgreementeType>
       get tenureHousingTypeAgreementControl =>
           form.control(tenureHousingTypeAgreementControlPath())
-              as FormControl<ResidentialTenureHousingTypeAgreemente>;
+              as FormControl<ResidentialTenureHousingAgreementeType>;
   FormControl<String> get numberVillaBuildingControl =>
       form.control(numberVillaBuildingControlPath()) as FormControl<String>;
   FormControl<String> get floorNumberControl =>
@@ -4960,7 +4960,7 @@ class SecondStepResidenceModelForm
             disabled: false,
             touched: false),
         tenureHousingTypeAgreementControlName:
-            FormControl<ResidentialTenureHousingTypeAgreemente>(
+            FormControl<ResidentialTenureHousingAgreementeType>(
                 value: secondStepResidenceModel?.tenureHousingTypeAgreement,
                 validators: [requiredValidator],
                 asyncValidators: [],

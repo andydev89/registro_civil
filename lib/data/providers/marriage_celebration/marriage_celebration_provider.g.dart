@@ -6,7 +6,7 @@ part of 'marriage_celebration_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$marriageDocumentsHash() => r'd948c239a4d4426f81295b8a61641590f9fcb116';
+String _$marriageDocumentsHash() => r'e845707ec38ec26e414be86d5dd28146137cf07f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -44,9 +44,9 @@ class MarriageDocumentsFamily
 
   /// See also [marriageDocuments].
   MarriageDocumentsProvider call({
-    required MaritalStatus maritalStatus,
+    required MaritalStatusType maritalStatus,
     required Binary hasChildren,
-    ChildrenRelationShip? childrenRelationShip,
+    ChildrenRelationShipType? childrenRelationShip,
   }) {
     return MarriageDocumentsProvider(
       maritalStatus: maritalStatus,
@@ -107,9 +107,9 @@ class MarriageDocumentsProvider
               MarriageDocumentsFamily._allTransitiveDependencies,
         );
 
-  final MaritalStatus maritalStatus;
+  final MaritalStatusType maritalStatus;
   final Binary hasChildren;
-  final ChildrenRelationShip? childrenRelationShip;
+  final ChildrenRelationShipType? childrenRelationShip;
 
   @override
   bool operator ==(Object other) {
@@ -520,7 +520,7 @@ class PartnersProvider
   }
 }
 
-String _$marriageHash() => r'b260fa2b711a32a59cb3ee73013eba85d311eaa8';
+String _$marriageHash() => r'dc5cf8ad3fc4e408deeda7cd918dd8ab88cf6c03';
 
 /// See also [Marriage].
 @ProviderFor(Marriage)
@@ -550,7 +550,7 @@ final marriagesFilterProvider =
 );
 
 typedef _$MarriagesFilter = AutoDisposeNotifier<QueryMarriages>;
-String _$marriageUpdateHash() => r'74b1680e2f17a75f228a20a7f2c1df63e754f7a3';
+String _$marriageUpdateHash() => r'12bd2b1f3ff4f00d00158c4c99de004e23f8c3d7';
 
 /// See also [MarriageUpdate].
 @ProviderFor(MarriageUpdate)

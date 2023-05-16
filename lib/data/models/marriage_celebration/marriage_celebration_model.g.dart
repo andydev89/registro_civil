@@ -31,7 +31,7 @@ MarriageCelebrationModel _$MarriageCelebrationModelFromJson(
       outside: json['outside'] == null
           ? null
           : Outside.fromJson(json['outside'] as Map<String, dynamic>),
-      state: $enumDecodeNullable(_$StateMarriageEnumMap, json['state']),
+      state: $enumDecodeNullable(_$StateMarriageTypeEnumMap, json['state']),
       id: json['id'] as String?,
     );
 
@@ -50,12 +50,12 @@ Map<String, dynamic> _$MarriageCelebrationModelToJson(
       'secondWitness': instance.secondWitness?.toJson(),
     };
 
-const _$StateMarriageEnumMap = {
-  StateMarriage.pending: 'PENDING',
-  StateMarriage.inProgress: 'IN_PROGRESS',
-  StateMarriage.approved: 'APPROVED',
-  StateMarriage.rejected: 'REJECTED',
-  StateMarriage.finalized: 'FINALIZED',
+const _$StateMarriageTypeEnumMap = {
+  StateMarriageType.pending: 'PENDING',
+  StateMarriageType.inProgress: 'IN_PROGRESS',
+  StateMarriageType.approved: 'APPROVED',
+  StateMarriageType.rejected: 'REJECTED',
+  StateMarriageType.finalized: 'FINALIZED',
 };
 
 const _$MarriageCelebrationTypeEnumMap = {
@@ -109,8 +109,8 @@ Map<String, dynamic> _$WitnessToJson(Witness instance) => <String, dynamic>{
 Partner _$PartnerFromJson(Map<String, dynamic> json) => Partner(
       nui: json['nui'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      maritalStatus:
-          $enumDecodeNullable(_$MaritalStatusEnumMap, json['maritalStatus']),
+      maritalStatus: $enumDecodeNullable(
+          _$MaritalStatusTypeEnumMap, json['maritalStatus']),
       documents: (json['documents'] as List<dynamic>?)
               ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -119,22 +119,22 @@ Partner _$PartnerFromJson(Map<String, dynamic> json) => Partner(
 
 Map<String, dynamic> _$PartnerToJson(Partner instance) => <String, dynamic>{
       'childrenRelationship':
-          ChildrenRelationShip.toJson(instance.childrenRelationship),
+          ChildrenRelationShipType.toJson(instance.childrenRelationship),
       'hasConadis': instance.conadis,
       'conadisNui': instance.conadisNumber,
       'documents': instance.documents.map((e) => e.toJson()).toList(),
       'hasChildren': Binary.toJson(instance.hasChildren),
-      'maritalStatus': MaritalStatus.toJson(instance.maritalStatus),
+      'maritalStatus': MaritalStatusType.toJson(instance.maritalStatus),
       'name': instance.name,
       'nui': instance.nui,
     };
 
-const _$MaritalStatusEnumMap = {
-  MaritalStatus.single: 'SINGLE',
-  MaritalStatus.divorced: 'DIVORCED',
-  MaritalStatus.widower: 'WIDOWER',
-  MaritalStatus.commonLawMarriage: 'COMMON_LAW_MARRIAGE',
-  MaritalStatus.nonResidentPartner: 'NON_RESIDENT_PARTNER',
+const _$MaritalStatusTypeEnumMap = {
+  MaritalStatusType.single: 'SINGLE',
+  MaritalStatusType.divorced: 'DIVORCED',
+  MaritalStatusType.widower: 'WIDOWER',
+  MaritalStatusType.commonLawMarriage: 'COMMON_LAW_MARRIAGE',
+  MaritalStatusType.nonResidentPartner: 'NON_RESIDENT_PARTNER',
 };
 
 Document _$DocumentFromJson(Map<String, dynamic> json) => Document(

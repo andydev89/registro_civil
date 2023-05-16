@@ -1034,9 +1034,9 @@ class PartnerForm implements FormModel<Partner> {
   String documentsControlPath() => pathBuilder(documentsControlName);
   String get _nuiValue => nuiControl.value ?? "";
   String get _nameValue => nameControl.value ?? "";
-  MaritalStatus? get _maritalStatusValue => maritalStatusControl?.value;
+  MaritalStatusType? get _maritalStatusValue => maritalStatusControl?.value;
   Binary? get _hasChildrenValue => hasChildrenControl?.value;
-  ChildrenRelationShip? get _childrenRelationshipValue =>
+  ChildrenRelationShipType? get _childrenRelationshipValue =>
       childrenRelationshipControl?.value;
   bool get _conadisValue => conadisControl.value as bool;
   String get _conadisNumberValue => conadisNumberControl.value ?? "";
@@ -1228,7 +1228,7 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValueUpdate(
-    MaritalStatus? value, {
+    MaritalStatusType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1246,7 +1246,7 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void childrenRelationshipValueUpdate(
-    ChildrenRelationShip? value, {
+    ChildrenRelationShipType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1300,7 +1300,7 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValuePatch(
-    MaritalStatus? value, {
+    MaritalStatusType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1318,7 +1318,7 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void childrenRelationshipValuePatch(
-    ChildrenRelationShip? value, {
+    ChildrenRelationShipType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1372,7 +1372,7 @@ class PartnerForm implements FormModel<Partner> {
       nameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void maritalStatusValueReset(
-    MaritalStatus? value, {
+    MaritalStatusType? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1390,7 +1390,7 @@ class PartnerForm implements FormModel<Partner> {
       hasChildrenControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void childrenRelationshipValueReset(
-    ChildrenRelationShip? value, {
+    ChildrenRelationShipType? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1429,16 +1429,18 @@ class PartnerForm implements FormModel<Partner> {
       form.control(nuiControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
-  FormControl<MaritalStatus>? get maritalStatusControl => containsMaritalStatus
-      ? form.control(maritalStatusControlPath()) as FormControl<MaritalStatus>?
-      : null;
+  FormControl<MaritalStatusType>? get maritalStatusControl =>
+      containsMaritalStatus
+          ? form.control(maritalStatusControlPath())
+              as FormControl<MaritalStatusType>?
+          : null;
   FormControl<Binary>? get hasChildrenControl => containsHasChildren
       ? form.control(hasChildrenControlPath()) as FormControl<Binary>?
       : null;
-  FormControl<ChildrenRelationShip>? get childrenRelationshipControl =>
+  FormControl<ChildrenRelationShipType>? get childrenRelationshipControl =>
       containsChildrenRelationship
           ? form.control(childrenRelationshipControlPath())
-              as FormControl<ChildrenRelationShip>?
+              as FormControl<ChildrenRelationShipType>?
           : null;
   FormControl<bool> get conadisControl =>
       form.control(conadisControlPath()) as FormControl<bool>;
@@ -1703,7 +1705,7 @@ class PartnerForm implements FormModel<Partner> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        maritalStatusControlName: FormControl<MaritalStatus>(
+        maritalStatusControlName: FormControl<MaritalStatusType>(
             value: partner?.maritalStatus,
             validators: [requiredValidator],
             asyncValidators: [],
@@ -1717,7 +1719,7 @@ class PartnerForm implements FormModel<Partner> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        childrenRelationshipControlName: FormControl<ChildrenRelationShip>(
+        childrenRelationshipControlName: FormControl<ChildrenRelationShipType>(
             value: partner?.childrenRelationship,
             validators: [],
             asyncValidators: [],
