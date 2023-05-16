@@ -12,9 +12,6 @@ MarriageCelebrationModel _$MarriageCelebrationModelFromJson(
       agency: json['agencyId'] == null
           ? null
           : AgencyModel.fromJson(json['agencyId'] as Map<String, dynamic>),
-      requestOwner: json['requestOwner'] == null
-          ? null
-          : RequestOwner.fromJson(json['requestOwner'] as Map<String, dynamic>),
       firstWitness: json['firstWitness'] == null
           ? null
           : Witness.fromJson(json['firstWitness'] as Map<String, dynamic>),
@@ -27,6 +24,9 @@ MarriageCelebrationModel _$MarriageCelebrationModelFromJson(
       secondPartner: json['secondPartner'] == null
           ? null
           : Partner.fromJson(json['secondPartner'] as Map<String, dynamic>),
+      requestOwner: json['requestOwner'] == null
+          ? null
+          : RequestOwner.fromJson(json['requestOwner'] as Map<String, dynamic>),
       isOutside: json['isOutside'] as bool? ?? false,
       outside: json['outside'] == null
           ? null
@@ -64,10 +64,10 @@ const _$MarriageCelebrationTypeEnumMap = {
 };
 
 RequestOwner _$RequestOwnerFromJson(Map<String, dynamic> json) => RequestOwner(
-      nui: json['nui'] as String,
-      name: json['name'] as String,
-      phone: json['phone'] as String,
-      email: json['email'] as String,
+      nui: json['nui'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      phone: json['phone'] as String? ?? '',
+      email: json['email'] as String? ?? '',
       identityCard: json['identityCard'] as String?,
       powerOfAttorney: json['powerOfAttorney'] as String?,
       identityCardSate: $enumDecodeNullable(
@@ -166,22 +166,24 @@ Map<String, dynamic> _$DocumentToJson(Document instance) => <String, dynamic>{
 
 DocumentsRejection _$DocumentsRejectionFromJson(Map<String, dynamic> json) =>
     DocumentsRejection(
-      id: json['id'] as String,
+      id: json['id'] as String?,
       identityCard: json['identityCard'] as String?,
       powerOfAttorney: json['powerOfAttorney'] as String?,
-      firstPartnerDocuments: (json['firstPartnerDocuments'] as List<dynamic>)
-          .map((e) => Document.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      secondPartnerDocuments: (json['secondPartnerDocuments'] as List<dynamic>)
-          .map((e) => Document.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      firstPartnerDocuments: (json['firstPartnerDocuments'] as List<dynamic>?)
+              ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      secondPartnerDocuments: (json['secondPartnerDocuments'] as List<dynamic>?)
+              ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$DocumentsRejectionToJson(DocumentsRejection instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'identityCard': instance.identityCard,
       'powerOfAttorney': instance.powerOfAttorney,
       'firstPartnerDocuments': instance.firstPartnerDocuments,
-      'id': instance.id,
       'secondPartnerDocuments': instance.secondPartnerDocuments,
     };

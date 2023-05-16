@@ -803,11 +803,11 @@ class MarriageCelebrationModelForm
     return MarriageCelebrationModel(
         requestOwnerType: _requestOwnerTypeValue,
         agency: _agencyValue,
-        requestOwner: marriageCelebrationModel?.requestOwner,
         firstWitness: _firstWitnessValue,
         secondWitness: _secondWitnessValue,
         firstPartner: _firstPartnerValue,
         secondPartner: _secondPartnerValue,
+        requestOwner: marriageCelebrationModel?.requestOwner,
         isOutside: _isOutsideValue,
         outside: marriageCelebrationModel?.outside,
         state: marriageCelebrationModel?.state,
@@ -1999,10 +1999,10 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
       pathBuilder(identityCardSateControlName);
   String powerOfAttorneyStateControlPath() =>
       pathBuilder(powerOfAttorneyStateControlName);
-  String get _nuiValue => nuiControl.value as String;
-  String get _nameValue => nameControl.value as String;
-  String get _phoneValue => phoneControl.value as String;
-  String get _emailValue => emailControl.value as String;
+  String get _nuiValue => nuiControl.value ?? "";
+  String get _nameValue => nameControl.value ?? "";
+  String get _phoneValue => phoneControl.value ?? "";
+  String get _emailValue => emailControl.value ?? "";
   String? get _identityCardValue => identityCardControl?.value;
   String? get _powerOfAttorneyValue => powerOfAttorneyControl?.value;
   StateDocument? get _identityCardSateValue => identityCardSateControl?.value;
@@ -5219,6 +5219,811 @@ class ReactiveSelectAgencyFormFormGroupArrayBuilder<V> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formModel = ReactiveSelectAgencyForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveDocumentsRejectionFormConsumer extends StatelessWidget {
+  const ReactiveDocumentsRejectionFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
+
+  final Widget? child;
+
+  final Widget Function(
+          BuildContext context, DocumentsRejectionForm formModel, Widget? child)
+      builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveDocumentsRejectionForm.of(context);
+
+    if (formModel is! DocumentsRejectionForm) {
+      throw FormControlParentNotFoundException(this);
+    }
+    return builder(context, formModel, child);
+  }
+}
+
+class DocumentsRejectionFormInheritedStreamer
+    extends InheritedStreamer<dynamic> {
+  const DocumentsRejectionFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
+
+  final DocumentsRejectionForm form;
+}
+
+class ReactiveDocumentsRejectionForm extends StatelessWidget {
+  const ReactiveDocumentsRejectionForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
+
+  final Widget child;
+
+  final DocumentsRejectionForm form;
+
+  final WillPopCallback? onWillPop;
+
+  static DocumentsRejectionForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
+    if (listen) {
+      return context
+          .dependOnInheritedWidgetOfExactType<
+              DocumentsRejectionFormInheritedStreamer>()
+          ?.form;
+    }
+
+    final element = context.getElementForInheritedWidgetOfExactType<
+        DocumentsRejectionFormInheritedStreamer>();
+    return element == null
+        ? null
+        : (element.widget as DocumentsRejectionFormInheritedStreamer).form;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DocumentsRejectionFormInheritedStreamer(
+      form: form,
+      stream: form.form.statusChanged,
+      child: WillPopScope(
+        onWillPop: onWillPop,
+        child: child,
+      ),
+    );
+  }
+}
+
+class DocumentsRejectionFormBuilder extends StatefulWidget {
+  const DocumentsRejectionFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final DocumentsRejection? model;
+
+  final Widget? child;
+
+  final WillPopCallback? onWillPop;
+
+  final Widget Function(
+          BuildContext context, DocumentsRejectionForm formModel, Widget? child)
+      builder;
+
+  final void Function(BuildContext context, DocumentsRejectionForm formModel)?
+      initState;
+
+  @override
+  _DocumentsRejectionFormBuilderState createState() =>
+      _DocumentsRejectionFormBuilderState();
+}
+
+class _DocumentsRejectionFormBuilderState
+    extends State<DocumentsRejectionFormBuilder> {
+  late FormGroup _form;
+
+  late DocumentsRejectionForm _formModel;
+
+  @override
+  void initState() {
+    _form = FormGroup({});
+    _formModel = DocumentsRejectionForm(widget.model, _form, null);
+
+    final elements = _formModel.formElements();
+    _form.setValidators(elements.validators);
+    _form.setAsyncValidators(elements.asyncValidators);
+
+    if (elements.disabled) {
+      _form.markAsDisabled();
+    }
+
+    _form.addAll(elements.controls);
+
+    widget.initState?.call(context, _formModel);
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant DocumentsRejectionFormBuilder oldWidget) {
+    if (widget.model != oldWidget.model) {
+      _formModel = DocumentsRejectionForm(widget.model, _form, null);
+      final elements = _formModel.formElements();
+
+      _form.updateValue(elements.rawValue);
+      _form.setValidators(elements.validators);
+      _form.setAsyncValidators(elements.asyncValidators);
+    }
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _form.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveDocumentsRejectionForm(
+      form: _formModel,
+      onWillPop: widget.onWillPop,
+      child: ReactiveFormBuilder(
+        form: () => _form,
+        onWillPop: widget.onWillPop,
+        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class DocumentsRejectionForm implements FormModel<DocumentsRejection> {
+  DocumentsRejectionForm(
+    this.documentsRejection,
+    this.form,
+    this.path,
+  ) {}
+
+  static String identityCardControlName = "identityCard";
+
+  static String powerOfAttorneyControlName = "powerOfAttorney";
+
+  static String firstPartnerDocumentsControlName = "firstPartnerDocuments";
+
+  static String secondPartnerDocumentsControlName = "secondPartnerDocuments";
+
+  final DocumentsRejection? documentsRejection;
+
+  final FormGroup form;
+
+  final String? path;
+
+  String identityCardControlPath() => pathBuilder(identityCardControlName);
+  String powerOfAttorneyControlPath() =>
+      pathBuilder(powerOfAttorneyControlName);
+  String firstPartnerDocumentsControlPath() =>
+      pathBuilder(firstPartnerDocumentsControlName);
+  String secondPartnerDocumentsControlPath() =>
+      pathBuilder(secondPartnerDocumentsControlName);
+  String? get _identityCardValue => identityCardControl?.value;
+  String? get _powerOfAttorneyValue => powerOfAttorneyControl?.value;
+  List<Document> get _firstPartnerDocumentsValue =>
+      firstPartnerDocumentsControl.value?.whereType<Document>().toList() ?? [];
+  List<Document> get _secondPartnerDocumentsValue =>
+      secondPartnerDocumentsControl.value?.whereType<Document>().toList() ?? [];
+  bool get containsIdentityCard {
+    try {
+      form.control(identityCardControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPowerOfAttorney {
+    try {
+      form.control(powerOfAttorneyControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsFirstPartnerDocuments {
+    try {
+      form.control(firstPartnerDocumentsControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsSecondPartnerDocuments {
+    try {
+      form.control(secondPartnerDocumentsControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get identityCardErrors => identityCardControl?.errors;
+  Object? get powerOfAttorneyErrors => powerOfAttorneyControl?.errors;
+  Object? get firstPartnerDocumentsErrors =>
+      firstPartnerDocumentsControl.errors;
+  Object? get secondPartnerDocumentsErrors =>
+      secondPartnerDocumentsControl.errors;
+  void get identityCardFocus => form.focus(identityCardControlPath());
+  void get powerOfAttorneyFocus => form.focus(powerOfAttorneyControlPath());
+  void get firstPartnerDocumentsFocus =>
+      form.focus(firstPartnerDocumentsControlPath());
+  void get secondPartnerDocumentsFocus =>
+      form.focus(secondPartnerDocumentsControlPath());
+  void identityCardRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsIdentityCard) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          identityCardControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            identityCardControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void powerOfAttorneyRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsPowerOfAttorney) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          powerOfAttorneyControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            powerOfAttorneyControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void identityCardValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identityCardControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void powerOfAttorneyValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    powerOfAttorneyControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void firstPartnerDocumentsValueUpdate(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    firstPartnerDocumentsControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void secondPartnerDocumentsValueUpdate(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    secondPartnerDocumentsControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void identityCardValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identityCardControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void powerOfAttorneyValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    powerOfAttorneyControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void firstPartnerDocumentsValuePatch(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    firstPartnerDocumentsControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void secondPartnerDocumentsValuePatch(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    secondPartnerDocumentsControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void identityCardValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      identityCardControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void powerOfAttorneyValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      powerOfAttorneyControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void firstPartnerDocumentsValueReset(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      firstPartnerDocumentsControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void secondPartnerDocumentsValueReset(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      secondPartnerDocumentsControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<String>? get identityCardControl => containsIdentityCard
+      ? form.control(identityCardControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get powerOfAttorneyControl => containsPowerOfAttorney
+      ? form.control(powerOfAttorneyControlPath()) as FormControl<String>?
+      : null;
+  FormArray<Document> get firstPartnerDocumentsControl =>
+      form.control(firstPartnerDocumentsControlPath()) as FormArray<Document>;
+  FormArray<Document> get secondPartnerDocumentsControl =>
+      form.control(secondPartnerDocumentsControlPath()) as FormArray<Document>;
+  void identityCardSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      identityCardControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      identityCardControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void powerOfAttorneySetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      powerOfAttorneyControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      powerOfAttorneyControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void firstPartnerDocumentsSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      firstPartnerDocumentsControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      firstPartnerDocumentsControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void secondPartnerDocumentsSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      secondPartnerDocumentsControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      secondPartnerDocumentsControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void addFirstPartnerDocumentsItem(
+    Document value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
+          resultingAsyncValidators.addAll(asyncValidators);
+        }
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) {
+          resultingValidators = validators;
+        }
+
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
+        break;
+    }
+
+    firstPartnerDocumentsControl.add(FormControl<Document>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
+  void addSecondPartnerDocumentsItem(
+    Document value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
+          resultingAsyncValidators.addAll(asyncValidators);
+        }
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) {
+          resultingValidators = validators;
+        }
+
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
+        break;
+    }
+
+    secondPartnerDocumentsControl.add(FormControl<Document>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
+  @override
+  DocumentsRejection get model {
+    if (!form.valid) {
+      debugPrint(
+        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
+      );
+    }
+    return DocumentsRejection(
+        id: documentsRejection?.id,
+        identityCard: _identityCardValue,
+        powerOfAttorney: _powerOfAttorneyValue,
+        firstPartnerDocuments: _firstPartnerDocumentsValue,
+        secondPartnerDocuments: _secondPartnerDocumentsValue);
+  }
+
+  DocumentsRejectionForm copyWithPath(String? path) {
+    return DocumentsRejectionForm(documentsRejection, form, path);
+  }
+
+  @override
+  void updateValue(
+    DocumentsRejection value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.updateValue(
+          DocumentsRejectionForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void resetValue(
+    DocumentsRejection value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: DocumentsRejectionForm(value, FormGroup({}), null)
+              .formElements()
+              .rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  @override
+  void reset({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: formElements().rawValue,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+  FormGroup formElements() => FormGroup({
+        identityCardControlName: FormControl<String>(
+            value: documentsRejection?.identityCard,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        powerOfAttorneyControlName: FormControl<String>(
+            value: documentsRejection?.powerOfAttorney,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        firstPartnerDocumentsControlName: FormArray<Document>(
+            documentsRejection?.firstPartnerDocuments
+                    .map((e) => FormControl<Document>(
+                          value: e,
+                          validators: [],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
+                    .toList() ??
+                [],
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false),
+        secondPartnerDocumentsControlName: FormArray<Document>(
+            documentsRejection?.secondPartnerDocuments
+                    .map((e) => FormControl<Document>(
+                          value: e,
+                          validators: [],
+                          asyncValidators: [],
+                          asyncValidatorsDebounceTime: 250,
+                          disabled: false,
+                        ))
+                    .toList() ??
+                [],
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+class ReactiveDocumentsRejectionFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveDocumentsRejectionFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(DocumentsRejectionForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      DocumentsRejectionForm formModel)? builder;
+
+  final Widget Function(BuildContext context, int i, T? item,
+      DocumentsRejectionForm formModel) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveDocumentsRejectionForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveDocumentsRejectionFormFormGroupArrayBuilder<V>
+    extends StatelessWidget {
+  const ReactiveDocumentsRejectionFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      DocumentsRejectionForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      DocumentsRejectionForm formModel)? builder;
+
+  final Widget Function(BuildContext context, int i, V? item,
+      DocumentsRejectionForm formModel) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveDocumentsRejectionForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);

@@ -15,13 +15,13 @@ class UploadDocumentWidget extends StatelessWidget {
   });
 
   final List<Document> data;
-  final PartnerForm formModel;
+  final FormArray<Document> formModel;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return PartnerFormBuilder(
-      model: formModel.model,
+    return DocumentsRejectionFormBuilder(
+      // model: formModel.model,
       initState: (_, __) {
         for (final element in data) {
           final actual = FormControl<Document>(
@@ -30,7 +30,7 @@ class UploadDocumentWidget extends StatelessWidget {
             ),
             validators: [documentFileRequiredValidator],
           );
-          formModel.documentsControl.add(
+          formModel.add(
             actual,
           );
         }
@@ -38,10 +38,10 @@ class UploadDocumentWidget extends StatelessWidget {
       builder: (_, __, ___) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ReactivePartnerFormArrayBuilder(
-            formControl: formModel.documentsControl,
+          ReactiveDocumentsRejectionFormArrayBuilder(
+            formControl: formModel,
             itemBuilder: (_, index, value, __) {
-              final formControl = formModel.documentsControl.controls
+              final formControl = formModel.controls
                   .elementAt(index) as FormControl<Document>;
               return PrimaryCard(
                 child: Column(
