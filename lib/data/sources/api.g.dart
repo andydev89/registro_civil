@@ -43,7 +43,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<RegisterCitizenModel>> registerValidateNui(
-      nuiModel) async {
+      NuiModel nuiModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -70,7 +70,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModel>> registerData(enterDataModel) async {
+  Future<ResponseModel<CommandModel>> registerData(
+      EnterDataModel enterDataModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -97,7 +98,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<AuthCodeModel>> registerCode(enterDataModel) async {
+  Future<ResponseModel<AuthCodeModel>> registerCode(
+      RegisterModel enterDataModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -126,8 +128,8 @@ class _Api implements Api {
   @override
   Future<ResponseModelPagination<List<TelephoneOperatorModel>?>>
       telephoneOperator(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -190,7 +192,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<LoginResponseModel?>> login(loginModel) async {
+  Future<ResponseModel<LoginResponseModel?>> login(
+      LoginModel loginModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -219,7 +222,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<LoginResponseModel?>> refreshToken(token) async {
+  Future<ResponseModel<LoginResponseModel?>> refreshToken(String token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'token': token};
     final _headers = <String, dynamic>{};
@@ -247,7 +250,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<dynamic>> validateToken(token) async {
+  Future<ResponseModel<dynamic>> validateToken(String token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'token': token};
     final _headers = <String, dynamic>{};
@@ -274,7 +277,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<SimpleCertificateResponseModel>> simpleCertificate(
-      simpleCertificateModel) async {
+      SimpleCertificateModel simpleCertificateModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -302,7 +305,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<ProcessResponseModel>> process(processModel) async {
+  Future<ResponseModel<ProcessResponseModel>> process(
+      ProcessModel processModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -329,7 +333,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<ProcessResponseModel>> cancel(cancelModel) async {
+  Future<ResponseModel<ProcessResponseModel>> cancel(
+      CancelModel cancelModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -357,11 +362,11 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<TypeServiceModel>>> typeServices({
-    pageNo = 0,
-    pageSize = 4,
-    filter = '',
-    sortBy = 'name',
-    sortType = 'asc',
+    int pageNo = 0,
+    int pageSize = 4,
+    String filter = '',
+    String sortBy = 'name',
+    String sortType = 'asc',
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -399,7 +404,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModel>> marriage(model) async {
+  Future<ResponseModel<CommandModel>> marriage(
+      MarriageCelebrationModel model) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -427,19 +433,19 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<ResponseMarriageModel>>> marriages(
-    userNui, {
-    pageNo = 0,
-    pageSize = 20,
-    state = '',
-    userId = '',
-    createdAt = '',
-    updatedAt = '',
-    interviewAt = '',
-    amountOfDays = '',
-    provinceName = '',
-    cantonName = '',
-    agencyName = '',
-    filter = '',
+    String userNui, {
+    int pageNo = 0,
+    int pageSize = 20,
+    String state = '',
+    String userId = '',
+    String createdAt = '',
+    String updatedAt = '',
+    String interviewAt = '',
+    String amountOfDays = '',
+    String provinceName = '',
+    String cantonName = '',
+    String agencyName = '',
+    String filter = '',
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -487,9 +493,9 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<List<DocumentResponse>>> marriageDocuments(
-    maritalStatus,
-    childrenRelationship, {
-    hasChildren = false,
+    String maritalStatus,
+    String childrenRelationship, {
+    bool hasChildren = false,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -525,7 +531,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<MarriageCelebrationModel>> marriageById(id) async {
+  Future<ResponseModel<MarriageCelebrationModel>> marriageById(
+      String id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -551,7 +558,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModel>> marriageUpdate(model) async {
+  Future<ResponseModel<CommandModel>> marriageUpdate(
+      DocumentsRejection model) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -579,7 +587,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<List<ResidenceRegistration>>>
-      resicenceRegistrationByUser(id) async {
+      resicenceRegistrationByUser(String id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -611,7 +619,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<DocumentModel>> residenceRegistrationPreviewByUser(
-      id) async {
+      String id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -637,7 +645,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModel>> residenceRegistration(model) async {
+  Future<ResponseModel<CommandModel>> residenceRegistration(
+      ResidenceRegistration model) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -665,8 +674,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<LocationModel>?>> provinces(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -702,8 +711,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<LocationModel>?>> canton(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -739,8 +748,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<LocationModel>?>> parroquias(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -776,8 +785,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<AgencyModel>?>> agencies(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -813,9 +822,9 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByProvince(
-    province,
-    pageNo,
-    pageSize,
+    String province,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -852,9 +861,9 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByCanton(
-    canton,
-    pageNo,
-    pageSize,
+    String canton,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -890,7 +899,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<LocationModel>?>> locationByParent(
-      province) async {
+      String province) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -922,8 +931,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<TypeServiceModel>>> services(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -959,13 +968,13 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<ScheduleModel>?>> availableSchedules(
-    pageNo,
-    pageSize,
-    from,
-    to,
-    agency,
-    typeOfService, {
-    required special,
+    int pageNo,
+    int pageSize,
+    String from,
+    String to,
+    String agency,
+    String typeOfService, {
+    required bool special,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -1006,8 +1015,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<ScheduleModel>?>> schedules(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -1043,14 +1052,14 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
-    userId, {
-    pageNo = 0,
-    pageSize = 20,
-    filter = '',
-    from = '',
-    to = '',
-    sortBy = 'time',
-    sortType = 'asc',
+    String userId, {
+    int pageNo = 0,
+    int pageSize = 20,
+    String filter = '',
+    String from = '',
+    String to = '',
+    String sortBy = 'time',
+    String sortType = 'asc',
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -1093,7 +1102,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<BookedReceiptModel>> confirmSchedule(
-      receiptModel) async {
+      ReceiptModel receiptModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1121,7 +1130,7 @@ class _Api implements Api {
 
   @override
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
-      placeToPayModel) async {
+      PlaceToPayModel placeToPayModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1146,7 +1155,7 @@ class _Api implements Api {
 
   @override
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
-      reference) async {
+      String reference) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1171,7 +1180,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModel>> changeOfName(changeOfNameModel) async {
+  Future<ResponseModel<CommandModel>> changeOfName(
+      ChangeOfNameModel changeOfNameModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

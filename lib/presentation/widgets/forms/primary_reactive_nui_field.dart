@@ -61,6 +61,7 @@ class PrimaryReactiveNuiField<T> extends ConsumerWidget {
             label!,
           ).verticalPadding(5),
         ReactiveTextField<T>(
+          key: key,
           formControl: formControl,
           formControlName: formControlName,
           readOnly: readOnly,

@@ -1080,8 +1080,7 @@ class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
     required void Function(
       BuildContext,
       bool,
-    )
-        onLogin,
+    ) onLogin,
   }) : super(
           LoginRoute.name,
           path: '',

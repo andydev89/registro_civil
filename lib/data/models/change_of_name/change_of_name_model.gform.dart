@@ -124,24 +124,16 @@ class ChangeOfNameModelFormBuilder extends StatefulWidget {
 
 class _ChangeOfNameModelFormBuilderState
     extends State<ChangeOfNameModelFormBuilder> {
-  late FormGroup _form;
-
   late ChangeOfNameModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = ChangeOfNameModelForm(widget.model, _form, null);
+    _formModel = ChangeOfNameModelForm(
+        widget.model, ChangeOfNameModelForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -151,12 +143,14 @@ class _ChangeOfNameModelFormBuilderState
   @override
   void didUpdateWidget(covariant ChangeOfNameModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = ChangeOfNameModelForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = ChangeOfNameModelForm(
+          widget.model, ChangeOfNameModelForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -164,19 +158,20 @@ class _ChangeOfNameModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveChangeOfNameModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -191,19 +186,19 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
     this.path,
   ) {}
 
-  static String changeOfNameTypeControlName = "changeOfNameType";
+  static const String changeOfNameTypeControlName = "changeOfNameType";
 
-  static String agencyControlName = "agency";
+  static const String agencyControlName = "agency";
 
-  static String firstNameControlName = "firstName";
+  static const String firstNameControlName = "firstName";
 
-  static String secondNameControlName = "secondName";
+  static const String secondNameControlName = "secondName";
 
-  static String resultingNameControlName = "resultingName";
+  static const String resultingNameControlName = "resultingName";
 
-  static String observationsControlName = "observations";
+  static const String observationsControlName = "observations";
 
-  static String documentControlName = "document";
+  static const String documentControlName = "document";
 
   final ChangeOfNameModel? changeOfNameModel;
 
@@ -743,36 +738,22 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          ChangeOfNameModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    ChangeOfNameModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: ChangeOfNameModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(ChangeOfNameModelForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    ChangeOfNameModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(ChangeOfNameModel? changeOfNameModel) =>
+      FormGroup({
         changeOfNameTypeControlName: FormControl<ChangeOfNameType>(
             value: changeOfNameModel?.changeOfNameType,
             validators: [requiredValidator],

@@ -210,10 +210,6 @@ class $AssetsSvgGen {
   SvgGenImage get cardAccount =>
       const SvgGenImage('assets/svg/card_account.svg');
 
-  /// File path: assets/svg/ccorrespondent_payment_text.svg
-  SvgGenImage get ccorrespondentPaymentText =>
-      const SvgGenImage('assets/svg/ccorrespondent_payment_text.svg');
-
   /// File path: assets/svg/cedula.svg
   SvgGenImage get cedula => const SvgGenImage('assets/svg/cedula.svg');
 
@@ -238,6 +234,10 @@ class $AssetsSvgGen {
   /// File path: assets/svg/correspondent_payment.svg
   SvgGenImage get correspondentPayment =>
       const SvgGenImage('assets/svg/correspondent_payment.svg');
+
+  /// File path: assets/svg/correspondent_payment_text.svg
+  SvgGenImage get correspondentPaymentText =>
+      const SvgGenImage('assets/svg/correspondent_payment_text.svg');
 
   /// File path: assets/svg/documents.svg
   SvgGenImage get documents => const SvgGenImage('assets/svg/documents.svg');
@@ -326,6 +326,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/success2.svg
   SvgGenImage get success2 => const SvgGenImage('assets/svg/success2.svg');
 
+  /// File path: assets/svg/trash.svg
+  SvgGenImage get trash => const SvgGenImage('assets/svg/trash.svg');
+
   /// File path: assets/svg/user.svg
   SvgGenImage get user => const SvgGenImage('assets/svg/user.svg');
 
@@ -343,7 +346,6 @@ class $AssetsSvgGen {
         calendar3,
         calendar2,
         cardAccount,
-        ccorrespondentPaymentText,
         cedula,
         cedula2,
         checkDocument,
@@ -351,6 +353,7 @@ class $AssetsSvgGen {
         civilRecord,
         clock,
         correspondentPayment,
+        correspondentPaymentText,
         documents,
         error,
         exit,
@@ -378,6 +381,7 @@ class $AssetsSvgGen {
         starCheck,
         success,
         success2,
+        trash,
         user,
         validateDocs
       ];

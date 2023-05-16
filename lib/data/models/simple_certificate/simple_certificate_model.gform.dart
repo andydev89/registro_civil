@@ -132,25 +132,18 @@ class SimpleCertificateFirstStepFamiliarModelFormBuilder
 
 class _SimpleCertificateFirstStepFamiliarModelFormBuilderState
     extends State<SimpleCertificateFirstStepFamiliarModelFormBuilder> {
-  late FormGroup _form;
-
   late SimpleCertificateFirstStepFamiliarModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel =
-        SimpleCertificateFirstStepFamiliarModelForm(widget.model, _form, null);
+    _formModel = SimpleCertificateFirstStepFamiliarModelForm(
+        widget.model,
+        SimpleCertificateFirstStepFamiliarModelForm.formElements(widget.model),
+        null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -162,12 +155,16 @@ class _SimpleCertificateFirstStepFamiliarModelFormBuilderState
       covariant SimpleCertificateFirstStepFamiliarModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
       _formModel = SimpleCertificateFirstStepFamiliarModelForm(
-          widget.model, _form, null);
-      final elements = _formModel.formElements();
+          widget.model,
+          SimpleCertificateFirstStepFamiliarModelForm.formElements(
+              widget.model),
+          null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -175,19 +172,20 @@ class _SimpleCertificateFirstStepFamiliarModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveSimpleCertificateFirstStepFamiliarModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -208,11 +206,11 @@ class SimpleCertificateFirstStepFamiliarModelForm
         pathBuilder('conadisModel'));
   }
 
-  static String nuiControlName = "nui";
+  static const String nuiControlName = "nui";
 
-  static String relationshipControlName = "relationship";
+  static const String relationshipControlName = "relationship";
 
-  static String conadisModelControlName = "conadisModel";
+  static const String conadisModelControlName = "conadisModel";
 
   late ConadisModelForm conadisModelForm;
 
@@ -287,7 +285,7 @@ class SimpleCertificateFirstStepFamiliarModelForm
     bool emitEvent = true,
   }) {
     conadisModelControl.updateValue(
-        ConadisModelForm(value, FormGroup({}), null).formElements().rawValue,
+        ConadisModelForm.formElements(value).rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
@@ -316,7 +314,7 @@ class SimpleCertificateFirstStepFamiliarModelForm
     bool emitEvent = true,
   }) {
     conadisModelControl.updateValue(
-        ConadisModelForm(value, form, null).formElements().rawValue,
+        ConadisModelForm.formElements(value).rawValue,
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
@@ -347,9 +345,7 @@ class SimpleCertificateFirstStepFamiliarModelForm
     bool? disabled,
   }) =>
       conadisModelControl.reset(
-          value: ConadisModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
+          value: ConadisModelForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   FormControl<String> get nuiControl =>
@@ -438,37 +434,26 @@ class SimpleCertificateFirstStepFamiliarModelForm
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          SimpleCertificateFirstStepFamiliarModelForm(
-                  value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    SimpleCertificateFirstStepFamiliarModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: SimpleCertificateFirstStepFamiliarModelForm(
-                  value, FormGroup({}), null)
-              .formElements()
+          SimpleCertificateFirstStepFamiliarModelForm.formElements(value)
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void reset({
+    SimpleCertificateFirstStepFamiliarModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(
+          SimpleCertificateFirstStepFamiliarModel?
+              simpleCertificateFirstStepFamiliarModel) =>
+      FormGroup({
         nuiControlName: FormControl<String>(
             value: simpleCertificateFirstStepFamiliarModel?.nui,
             validators: [
@@ -487,7 +472,8 @@ class SimpleCertificateFirstStepFamiliarModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        conadisModelControlName: conadisModelForm.formElements()
+        conadisModelControlName: ConadisModelForm.formElements(
+            simpleCertificateFirstStepFamiliarModel?.conadisModel)
       },
           validators: [],
           asyncValidators: [],
@@ -502,9 +488,9 @@ class ConadisModelForm implements FormModel<ConadisModel> {
     this.path,
   ) {}
 
-  static String conadisControlName = "conadis";
+  static const String conadisControlName = "conadis";
 
-  static String conadisNumberControlName = "conadisNumber";
+  static const String conadisNumberControlName = "conadisNumber";
 
   final ConadisModel? conadisModel;
 
@@ -653,34 +639,21 @@ class ConadisModelForm implements FormModel<ConadisModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          ConadisModelForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    ConadisModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: ConadisModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(ConadisModelForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    ConadisModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(ConadisModel? conadisModel) => FormGroup({
         conadisControlName: FormControl<bool>(
             value: conadisModel?.conadis,
             validators: [],
@@ -943,24 +916,16 @@ class RejectInformationFormBuilder extends StatefulWidget {
 
 class _RejectInformationFormBuilderState
     extends State<RejectInformationFormBuilder> {
-  late FormGroup _form;
-
   late RejectInformationForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = RejectInformationForm(widget.model, _form, null);
+    _formModel = RejectInformationForm(
+        widget.model, RejectInformationForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -970,12 +935,14 @@ class _RejectInformationFormBuilderState
   @override
   void didUpdateWidget(covariant RejectInformationFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = RejectInformationForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = RejectInformationForm(
+          widget.model, RejectInformationForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -983,19 +950,20 @@ class _RejectInformationFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveRejectInformationForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -1010,9 +978,9 @@ class RejectInformationForm implements FormModel<RejectInformation> {
     this.path,
   ) {}
 
-  static String rejectReasonControlName = "rejectReason";
+  static const String rejectReasonControlName = "rejectReason";
 
-  static String rejectDescriptionControlName = "rejectDescription";
+  static const String rejectDescriptionControlName = "rejectDescription";
 
   final RejectInformation? rejectInformation;
 
@@ -1166,36 +1134,22 @@ class RejectInformationForm implements FormModel<RejectInformation> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          RejectInformationForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    RejectInformation value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: RejectInformationForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(RejectInformationForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    RejectInformation? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(RejectInformation? rejectInformation) =>
+      FormGroup({
         rejectReasonControlName: FormControl<OrdersRejectingReasonType>(
             value: rejectInformation?.rejectReason,
             validators: [requiredValidator],

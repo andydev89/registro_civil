@@ -123,24 +123,16 @@ class TermAndUseConditionsModelFormBuilder extends StatefulWidget {
 
 class _TermAndUseConditionsModelFormBuilderState
     extends State<TermAndUseConditionsModelFormBuilder> {
-  late FormGroup _form;
-
   late TermAndUseConditionsModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = TermAndUseConditionsModelForm(widget.model, _form, null);
+    _formModel = TermAndUseConditionsModelForm(widget.model,
+        TermAndUseConditionsModelForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -151,12 +143,14 @@ class _TermAndUseConditionsModelFormBuilderState
   void didUpdateWidget(
       covariant TermAndUseConditionsModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = TermAndUseConditionsModelForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = TermAndUseConditionsModelForm(widget.model,
+          TermAndUseConditionsModelForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -164,19 +158,20 @@ class _TermAndUseConditionsModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveTermAndUseConditionsModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -192,7 +187,7 @@ class TermAndUseConditionsModelForm
     this.path,
   ) {}
 
-  static String acceptControlName = "accept";
+  static const String acceptControlName = "accept";
 
   final TermAndUseConditionsModel? termAndUseConditionsModel;
 
@@ -281,35 +276,24 @@ class TermAndUseConditionsModelForm
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          TermAndUseConditionsModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    TermAndUseConditionsModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: TermAndUseConditionsModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
+          TermAndUseConditionsModelForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void reset({
+    TermAndUseConditionsModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(
+          TermAndUseConditionsModel? termAndUseConditionsModel) =>
+      FormGroup({
         acceptControlName: FormControl<bool>(
             value: termAndUseConditionsModel?.accept,
             validators: [requiredValidator],
