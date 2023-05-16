@@ -201,8 +201,6 @@ class MarriageCelebrationModelForm
 
   static String agencyControlName = "agency";
 
-  static String requestOwnerControlName = "requestOwner";
-
   static String firstWitnessControlName = "firstWitness";
 
   static String secondWitnessControlName = "secondWitness";
@@ -226,7 +224,6 @@ class MarriageCelebrationModelForm
   String requestOwnerTypeControlPath() =>
       pathBuilder(requestOwnerTypeControlName);
   String agencyControlPath() => pathBuilder(agencyControlName);
-  String requestOwnerControlPath() => pathBuilder(requestOwnerControlName);
   String firstWitnessControlPath() => pathBuilder(firstWitnessControlName);
   String secondWitnessControlPath() => pathBuilder(secondWitnessControlName);
   String isOutsideControlPath() => pathBuilder(isOutsideControlName);
@@ -235,7 +232,6 @@ class MarriageCelebrationModelForm
   MarriageCelebrationType get _requestOwnerTypeValue =>
       requestOwnerTypeControl.value as MarriageCelebrationType;
   AgencyModel? get _agencyValue => agencyControl?.value;
-  RequestOwner? get _requestOwnerValue => requestOwnerControl?.value;
   Witness? get _firstWitnessValue => firstWitnessControl?.value;
   Witness? get _secondWitnessValue => secondWitnessControl?.value;
   bool get _isOutsideValue => isOutsideControl.value as bool;
@@ -253,15 +249,6 @@ class MarriageCelebrationModelForm
   bool get containsAgency {
     try {
       form.control(agencyControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsRequestOwner {
-    try {
-      form.control(requestOwnerControlPath());
       return true;
     } catch (e) {
       return false;
@@ -315,7 +302,6 @@ class MarriageCelebrationModelForm
 
   Object? get requestOwnerTypeErrors => requestOwnerTypeControl.errors;
   Object? get agencyErrors => agencyControl?.errors;
-  Object? get requestOwnerErrors => requestOwnerControl?.errors;
   Object? get firstWitnessErrors => firstWitnessControl?.errors;
   Object? get secondWitnessErrors => secondWitnessControl?.errors;
   Object? get isOutsideErrors => isOutsideControl.errors;
@@ -323,7 +309,6 @@ class MarriageCelebrationModelForm
   Object? get secondPartnerErrors => secondPartnerControl?.errors;
   void get requestOwnerTypeFocus => form.focus(requestOwnerTypeControlPath());
   void get agencyFocus => form.focus(agencyControlPath());
-  void get requestOwnerFocus => form.focus(requestOwnerControlPath());
   void get firstWitnessFocus => form.focus(firstWitnessControlPath());
   void get secondWitnessFocus => form.focus(secondWitnessControlPath());
   void get isOutsideFocus => form.focus(isOutsideControlPath());
@@ -347,32 +332,6 @@ class MarriageCelebrationModelForm
         if (formGroup is FormGroup) {
           formGroup.removeControl(
             agencyControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
-  void requestOwnerRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsRequestOwner) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          requestOwnerControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            requestOwnerControlName,
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -503,15 +462,6 @@ class MarriageCelebrationModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void requestOwnerValueUpdate(
-    RequestOwner? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    requestOwnerControl?.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
   void firstWitnessValueUpdate(
     Witness? value, {
     bool updateParent = true,
@@ -576,15 +526,6 @@ class MarriageCelebrationModelForm
     bool emitEvent = true,
   }) {
     agencyControl?.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void requestOwnerValuePatch(
-    RequestOwner? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    requestOwnerControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -655,15 +596,6 @@ class MarriageCelebrationModelForm
   }) =>
       agencyControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void requestOwnerValueReset(
-    RequestOwner? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      requestOwnerControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void firstWitnessValueReset(
     Witness? value, {
     bool updateParent = true,
@@ -721,9 +653,6 @@ class MarriageCelebrationModelForm
   FormControl<AgencyModel>? get agencyControl => containsAgency
       ? form.control(agencyControlPath()) as FormControl<AgencyModel>?
       : null;
-  FormControl<RequestOwner>? get requestOwnerControl => containsRequestOwner
-      ? form.control(requestOwnerControlPath()) as FormControl<RequestOwner>?
-      : null;
   FormControl<Witness>? get firstWitnessControl => containsFirstWitness
       ? form.control(firstWitnessControlPath()) as FormControl<Witness>?
       : null;
@@ -768,24 +697,6 @@ class MarriageCelebrationModelForm
       );
     } else {
       agencyControl?.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void requestOwnerSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      requestOwnerControl?.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      requestOwnerControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -892,7 +803,7 @@ class MarriageCelebrationModelForm
     return MarriageCelebrationModel(
         requestOwnerType: _requestOwnerTypeValue,
         agency: _agencyValue,
-        requestOwner: _requestOwnerValue,
+        requestOwner: marriageCelebrationModel?.requestOwner,
         firstWitness: _firstWitnessValue,
         secondWitness: _secondWitnessValue,
         firstPartner: _firstPartnerValue,
@@ -952,13 +863,6 @@ class MarriageCelebrationModelForm
             touched: false),
         agencyControlName: FormControl<AgencyModel>(
             value: marriageCelebrationModel?.agency,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        requestOwnerControlName: FormControl<RequestOwner>(
-            value: marriageCelebrationModel?.requestOwner,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -2074,6 +1978,10 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
 
   static String powerOfAttorneyControlName = "powerOfAttorney";
 
+  static String identityCardSateControlName = "identityCardSate";
+
+  static String powerOfAttorneyStateControlName = "powerOfAttorneyState";
+
   final RequestOwner? requestOwner;
 
   final FormGroup form;
@@ -2087,12 +1995,19 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
   String identityCardControlPath() => pathBuilder(identityCardControlName);
   String powerOfAttorneyControlPath() =>
       pathBuilder(powerOfAttorneyControlName);
+  String identityCardSateControlPath() =>
+      pathBuilder(identityCardSateControlName);
+  String powerOfAttorneyStateControlPath() =>
+      pathBuilder(powerOfAttorneyStateControlName);
   String get _nuiValue => nuiControl.value as String;
   String get _nameValue => nameControl.value as String;
   String get _phoneValue => phoneControl.value as String;
   String get _emailValue => emailControl.value as String;
   String? get _identityCardValue => identityCardControl?.value;
   String? get _powerOfAttorneyValue => powerOfAttorneyControl?.value;
+  StateDocument? get _identityCardSateValue => identityCardSateControl?.value;
+  StateDocument? get _powerOfAttorneyStateValue =>
+      powerOfAttorneyStateControl?.value;
   bool get containsNui {
     try {
       form.control(nuiControlPath());
@@ -2147,18 +2062,41 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     }
   }
 
+  bool get containsIdentityCardSate {
+    try {
+      form.control(identityCardSateControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPowerOfAttorneyState {
+    try {
+      form.control(powerOfAttorneyStateControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get nuiErrors => nuiControl.errors;
   Object? get nameErrors => nameControl.errors;
   Object? get phoneErrors => phoneControl.errors;
   Object? get emailErrors => emailControl.errors;
   Object? get identityCardErrors => identityCardControl?.errors;
   Object? get powerOfAttorneyErrors => powerOfAttorneyControl?.errors;
+  Object? get identityCardSateErrors => identityCardSateControl?.errors;
+  Object? get powerOfAttorneyStateErrors => powerOfAttorneyStateControl?.errors;
   void get nuiFocus => form.focus(nuiControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get phoneFocus => form.focus(phoneControlPath());
   void get emailFocus => form.focus(emailControlPath());
   void get identityCardFocus => form.focus(identityCardControlPath());
   void get powerOfAttorneyFocus => form.focus(powerOfAttorneyControlPath());
+  void get identityCardSateFocus => form.focus(identityCardSateControlPath());
+  void get powerOfAttorneyStateFocus =>
+      form.focus(powerOfAttorneyStateControlPath());
   void identityCardRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -2203,6 +2141,58 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
         if (formGroup is FormGroup) {
           formGroup.removeControl(
             powerOfAttorneyControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void identityCardSateRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsIdentityCardSate) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          identityCardSateControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            identityCardSateControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void powerOfAttorneyStateRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsPowerOfAttorneyState) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          powerOfAttorneyStateControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            powerOfAttorneyStateControlName,
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -2265,6 +2255,24 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void identityCardSateValueUpdate(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identityCardSateControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void powerOfAttorneyStateValueUpdate(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    powerOfAttorneyStateControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nuiValuePatch(
     String value, {
     bool updateParent = true,
@@ -2316,6 +2324,24 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     bool emitEvent = true,
   }) {
     powerOfAttorneyControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void identityCardSateValuePatch(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identityCardSateControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void powerOfAttorneyStateValuePatch(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    powerOfAttorneyStateControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -2373,6 +2399,24 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
   }) =>
       powerOfAttorneyControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void identityCardSateValueReset(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      identityCardSateControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void powerOfAttorneyStateValueReset(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      powerOfAttorneyStateControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get nuiControl =>
       form.control(nuiControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
@@ -2387,6 +2431,16 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
   FormControl<String>? get powerOfAttorneyControl => containsPowerOfAttorney
       ? form.control(powerOfAttorneyControlPath()) as FormControl<String>?
       : null;
+  FormControl<StateDocument>? get identityCardSateControl =>
+      containsIdentityCardSate
+          ? form.control(identityCardSateControlPath())
+              as FormControl<StateDocument>?
+          : null;
+  FormControl<StateDocument>? get powerOfAttorneyStateControl =>
+      containsPowerOfAttorneyState
+          ? form.control(powerOfAttorneyStateControlPath())
+              as FormControl<StateDocument>?
+          : null;
   void nuiSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2495,6 +2549,42 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     }
   }
 
+  void identityCardSateSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      identityCardSateControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      identityCardSateControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void powerOfAttorneyStateSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      powerOfAttorneyStateControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      powerOfAttorneyStateControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   RequestOwner get model {
     if (!form.valid) {
@@ -2508,7 +2598,9 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
         phone: _phoneValue,
         email: _emailValue,
         identityCard: _identityCardValue,
-        powerOfAttorney: _powerOfAttorneyValue);
+        powerOfAttorney: _powerOfAttorneyValue,
+        identityCardSate: _identityCardSateValue,
+        powerOfAttorneyState: _powerOfAttorneyStateValue);
   }
 
   RequestOwnerForm copyWithPath(String? path) {
@@ -2590,6 +2682,20 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
             touched: false),
         powerOfAttorneyControlName: FormControl<String>(
             value: requestOwner?.powerOfAttorney,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        identityCardSateControlName: FormControl<StateDocument>(
+            value: requestOwner?.identityCardSate,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        powerOfAttorneyStateControlName: FormControl<StateDocument>(
+            value: requestOwner?.powerOfAttorneyState,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

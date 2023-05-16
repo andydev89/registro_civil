@@ -27,7 +27,7 @@ class FirstStepResidencePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    var init = operation.isEditOrRead;
+    final init = operation.isEditOrRead;
     var alreadyStarter = false;
     return FirstStepResidenceModelFormBuilder(
       model: operation.isEditOrRead

@@ -13,6 +13,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/widgets/upload_document_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
+import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_file_picker.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
@@ -46,10 +47,28 @@ class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
                   skipLoadingOnRefresh: false,
                   data: (response) {
                     final data = response.rejectingDocuments();
+                    final owner = response.rejectingDocumentsOwner();
                     return ScrollableContent(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          if (owner[0]!)
+                            PrimaryText(
+                              l10n.cedulaIde,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          // PrimaryReactiveFilePicker(
+                          //   formControl: formModel.requ,
+                          // ),
+                          if (owner[1]!)
+                            PrimaryText(
+                              l10n.poderEsp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          // UploadDocumentWidget(
+                          //   data: data[0]!,
+                          //   formModel: formModel.firstPartnerForm,
+                          // ),
                           if (data[0]!.isNotEmpty)
                             PrimaryText(
                               '${l10n.contrayente} 1',
@@ -88,13 +107,17 @@ class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
                 onPressed: form.firstPartnerForm.documentsControl.valid &&
                         form.secondPartnerForm.documentsControl.valid &&
                         !documents.isLoading
+                    // TODO(jang): ajustar los documentos
                     ? () => ref
-                        .read(marriageUpdateProvider.notifier)
-                        .updateMarriage(
-                          formModel.model.rejectingDocuments(),
+                            .read(marriageUpdateProvider.notifier)
+                            .updateMarriage(
                           marriageId,
-                        )
-                        .when(
+                          formModel.model.rejectingDocuments(),
+                          {
+                            // 0: formModel.requestOwner,
+                            // 1: formModel.requestOwnerControl.value,
+                          },
+                        ).when(
                           ok: (_) {
                             context.navigateBack();
                             ref.invalidate(marriagesProvider());

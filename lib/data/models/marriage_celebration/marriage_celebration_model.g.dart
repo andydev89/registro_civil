@@ -70,6 +70,12 @@ RequestOwner _$RequestOwnerFromJson(Map<String, dynamic> json) => RequestOwner(
       email: json['email'] as String,
       identityCard: json['identityCard'] as String?,
       powerOfAttorney: json['powerOfAttorney'] as String?,
+      identityCardSate: $enumDecodeNullable(
+          _$StateDocumentEnumMap, json['identityCardSate'],
+          unknownValue: StateDocument.pending),
+      powerOfAttorneyState: $enumDecodeNullable(
+          _$StateDocumentEnumMap, json['powerOfAttorneyState'],
+          unknownValue: StateDocument.pending),
     );
 
 Map<String, dynamic> _$RequestOwnerToJson(RequestOwner instance) =>
@@ -81,6 +87,12 @@ Map<String, dynamic> _$RequestOwnerToJson(RequestOwner instance) =>
       'phone': instance.phone,
       'powerOfAttorney': instance.powerOfAttorney,
     };
+
+const _$StateDocumentEnumMap = {
+  StateDocument.pending: 'PENDING',
+  StateDocument.approved: 'APPROVED',
+  StateDocument.rejected: 'REJECTED',
+};
 
 Outside _$OutsideFromJson(Map<String, dynamic> json) => Outside(
       latitude: json['latitude'] as String? ?? '',
@@ -152,14 +164,11 @@ Map<String, dynamic> _$DocumentToJson(Document instance) => <String, dynamic>{
       'referenceId': instance.referenceId,
     };
 
-const _$StateDocumentEnumMap = {
-  StateDocument.approved: 'APPROVED',
-  StateDocument.rejected: 'REJECTED',
-};
-
 DocumentsRejection _$DocumentsRejectionFromJson(Map<String, dynamic> json) =>
     DocumentsRejection(
       id: json['id'] as String,
+      identityCard: json['identityCard'] as String?,
+      powerOfAttorney: json['powerOfAttorney'] as String?,
       firstPartnerDocuments: (json['firstPartnerDocuments'] as List<dynamic>)
           .map((e) => Document.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -170,6 +179,8 @@ DocumentsRejection _$DocumentsRejectionFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$DocumentsRejectionToJson(DocumentsRejection instance) =>
     <String, dynamic>{
+      'identityCard': instance.identityCard,
+      'powerOfAttorney': instance.powerOfAttorney,
       'firstPartnerDocuments': instance.firstPartnerDocuments,
       'id': instance.id,
       'secondPartnerDocuments': instance.secondPartnerDocuments,

@@ -520,7 +520,7 @@ class PartnersProvider
   }
 }
 
-String _$marriageHash() => r'f4a53f004d37ed15281b94d41a1db1d01e5b41af';
+String _$marriageHash() => r'b260fa2b711a32a59cb3ee73013eba85d311eaa8';
 
 /// See also [Marriage].
 @ProviderFor(Marriage)
@@ -550,7 +550,7 @@ final marriagesFilterProvider =
 );
 
 typedef _$MarriagesFilter = AutoDisposeNotifier<QueryMarriages>;
-String _$marriageUpdateHash() => r'74b1680e2f17a75f228a20a7f2c1df63e754f7a3';
+String _$marriageUpdateHash() => r'6bd71b1e182c255448998ce2d092f0cbaec9b4d3';
 
 /// See also [MarriageUpdate].
 @ProviderFor(MarriageUpdate)

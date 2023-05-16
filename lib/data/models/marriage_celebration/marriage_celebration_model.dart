@@ -20,7 +20,7 @@ class MarriageCelebrationModel {
     @FormControlAnnotation<MarriageCelebrationType>()
         this.requestOwnerType = MarriageCelebrationType.attorney,
     @FormControlAnnotation<AgencyModel>() this.agency,
-    @FormControlAnnotation<RequestOwner>() this.requestOwner,
+    this.requestOwner,
     @FormControlAnnotation<Witness>() this.firstWitness,
     @FormControlAnnotation<Witness>() this.secondWitness,
     this.firstPartner,
@@ -63,6 +63,13 @@ class MarriageCelebrationModel {
     };
   }
 
+  Map<int, bool> rejectingDocumentsOwner() {
+    return {
+      0: requestOwner?.identityCardSate == StateDocument.rejected,
+      1: requestOwner?.powerOfAttorneyState == StateDocument.rejected,
+    };
+  }
+
   Map<String, dynamic> toJson() => _$MarriageCelebrationModelToJson(this);
 
   MarriageCelebrationModel copyWith({
@@ -95,7 +102,7 @@ class MarriageCelebrationModel {
 }
 
 @ReactiveFormAnnotation()
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class RequestOwner {
   RequestOwner({
     @FormControlAnnotation(
@@ -119,6 +126,10 @@ class RequestOwner {
         this.identityCard,
     @FormControlAnnotation<String>()
         this.powerOfAttorney,
+    @FormControlAnnotation<StateDocument>()
+        this.identityCardSate,
+    @FormControlAnnotation<StateDocument>()
+        this.powerOfAttorneyState,
   });
 
   factory RequestOwner.fromJson(Map<String, dynamic> json) =>
@@ -135,10 +146,22 @@ class RequestOwner {
 
   final String email;
   final String? identityCard;
+  @JsonKey(
+    includeToJson: false,
+    includeFromJson: true,
+    unknownEnumValue: StateDocument.pending,
+  )
+  final StateDocument? identityCardSate;
   final String name;
   final String nui;
   final String phone;
   final String? powerOfAttorney;
+  @JsonKey(
+    includeToJson: false,
+    includeFromJson: true,
+    unknownEnumValue: StateDocument.pending,
+  )
+  final StateDocument? powerOfAttorneyState;
 
   Map<String, dynamic> toJson() => _$RequestOwnerToJson(this);
 }
@@ -226,9 +249,10 @@ class Partner {
       _$PartnerFromJson(json);
 
   @JsonKey(
-      includeFromJson: false,
-      includeToJson: true,
-      toJson: ChildrenRelationShip.toJson,)
+    includeFromJson: false,
+    includeToJson: true,
+    toJson: ChildrenRelationShip.toJson,
+  )
   final ChildrenRelationShip? childrenRelationship;
 
   @JsonKey(
@@ -369,6 +393,8 @@ class SelectAgency {
 class DocumentsRejection {
   DocumentsRejection({
     required this.id,
+    this.identityCard,
+    this.powerOfAttorney,
     required this.firstPartnerDocuments,
     required this.secondPartnerDocuments,
   });
@@ -376,6 +402,8 @@ class DocumentsRejection {
   factory DocumentsRejection.fromJson(Map<String, dynamic> json) =>
       _$DocumentsRejectionFromJson(json);
 
+  final String? identityCard;
+  final String? powerOfAttorney;
   final List<Document> firstPartnerDocuments;
   final String id;
   final List<Document> secondPartnerDocuments;
