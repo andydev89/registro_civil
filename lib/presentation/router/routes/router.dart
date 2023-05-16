@@ -25,7 +25,6 @@ import 'package:registro_civil_apk/presentation/pages/auth/scan/scan_router_page
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/success_page.dart';
 import 'package:registro_civil_apk/presentation/pages/chage_of_name/chage_of_name_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/chage_of_name/page/change_of_name_first_step_page.dart';
-import 'package:registro_civil_apk/presentation/pages/chage_of_name/page/term_and_use_conditions_page.dart';
 import 'package:registro_civil_apk/presentation/pages/chage_of_name/page/verify_information_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/home_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/home/pages/procedures/procedures_page.dart';
@@ -241,9 +240,17 @@ part 'router.gr.dart';
           meta: {agreementTypeMetaName: 2},
           page: MarriageCelebrationRouterPage,
           children: [
+            CustomRoute(
+              initial: true,
+              page: MarriageCelebrationPrincipalPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+            CustomRoute(
+              page: RejectionStepMarriageCelebrationPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
             CupertinoRoute(
               page: MarriageCelebrationFirstStepRouterPage,
-              initial: true,
               children: [
                 CustomRoute(
                   page: FirstStepAttorneyPage,
@@ -303,14 +310,6 @@ part 'router.gr.dart';
               transitionsBuilder: TransitionsBuilders.slideRight,
             ),
           ],
-        ),
-        CustomRoute(
-          page: MarriageCelebrationPrincipalPage,
-          transitionsBuilder: TransitionsBuilders.slideRight,
-        ),
-        CustomRoute(
-          page: RejectionStepMarriageCelebrationPage,
-          transitionsBuilder: TransitionsBuilders.slideRight,
         ),
         //RESIDENT REGISTRATION
         CupertinoRoute(

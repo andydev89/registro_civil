@@ -4,6 +4,7 @@ import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/rejecting_enum.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
@@ -20,11 +21,11 @@ class MarriageCelebrationModel {
     @FormControlAnnotation<MarriageCelebrationType>()
         this.requestOwnerType = MarriageCelebrationType.attorney,
     @FormControlAnnotation<AgencyModel>() this.agency,
-    @FormControlAnnotation<RequestOwner>() this.requestOwner,
     @FormControlAnnotation<Witness>() this.firstWitness,
     @FormControlAnnotation<Witness>() this.secondWitness,
     this.firstPartner,
     this.secondPartner,
+    this.requestOwner,
     @FormControlAnnotation<bool>() this.isOutside = false,
     this.outside,
     this.state,
@@ -56,10 +57,23 @@ class MarriageCelebrationModel {
   @JsonKey(includeToJson: false)
   final StateMarriage? state;
 
-  Map<int, List<Document>> rejectingDocuments() {
+  Map<RejectingMarriage, List<Document>> rejectingDocuments() {
     return {
-      0: [...?firstPartner?.rejectingDocuments()],
-      1: [...?secondPartner?.rejectingDocuments()],
+      RejectingMarriage.firstPartnerDocuments: [
+        ...?firstPartner?.rejectingDocuments()
+      ],
+      RejectingMarriage.secondPartnerDocuments: [
+        ...?secondPartner?.rejectingDocuments()
+      ],
+    };
+  }
+
+  Map<RejectingMarriage, bool> rejectingDocumentsOwner() {
+    return {
+      RejectingMarriage.identityCard:
+          requestOwner?.identityCardSate == StateDocument.rejected,
+      RejectingMarriage.powerOfAttorney:
+          requestOwner?.powerOfAttorneyState == StateDocument.rejected,
     };
   }
 
@@ -95,7 +109,7 @@ class MarriageCelebrationModel {
 }
 
 @ReactiveFormAnnotation()
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class RequestOwner {
   RequestOwner({
     @FormControlAnnotation(
@@ -105,20 +119,24 @@ class RequestOwner {
         length10Validator,
       ],
     )
-        required this.nui,
+        this.nui = '',
     @FormControlAnnotation(validators: [requiredValidator, nameValidator])
-        required this.name,
+        this.name = '',
     @FormControlAnnotation(
       validators: [requiredValidator, length10Validator],
       asyncValidators: [phoneNumberEcuadorValidation],
     )
-        required this.phone,
+        this.phone = '',
     @FormControlAnnotation(validators: [requiredValidator, emailValidator])
-        required this.email,
+        this.email = '',
     @FormControlAnnotation<String>()
         this.identityCard,
     @FormControlAnnotation<String>()
         this.powerOfAttorney,
+    @FormControlAnnotation<StateDocument>()
+        this.identityCardSate,
+    @FormControlAnnotation<StateDocument>()
+        this.powerOfAttorneyState,
   });
 
   factory RequestOwner.fromJson(Map<String, dynamic> json) =>
@@ -135,10 +153,44 @@ class RequestOwner {
 
   final String email;
   final String? identityCard;
+  @JsonKey(
+    includeToJson: false,
+    includeFromJson: true,
+    unknownEnumValue: StateDocument.pending,
+  )
+  final StateDocument? identityCardSate;
   final String name;
   final String nui;
   final String phone;
   final String? powerOfAttorney;
+  @JsonKey(
+    includeToJson: false,
+    includeFromJson: true,
+    unknownEnumValue: StateDocument.pending,
+  )
+  final StateDocument? powerOfAttorneyState;
+
+  RequestOwner copyWith({
+    String? email,
+    String? identityCard,
+    StateDocument? identityCardSate,
+    String? name,
+    String? nui,
+    String? phone,
+    String? powerOfAttorney,
+    StateDocument? powerOfAttorneyState,
+  }) {
+    return RequestOwner(
+      email: email ?? this.email,
+      identityCard: identityCard ?? this.identityCard,
+      identityCardSate: identityCardSate ?? this.identityCardSate,
+      name: name ?? this.name,
+      nui: nui ?? this.nui,
+      phone: phone ?? this.phone,
+      powerOfAttorney: powerOfAttorney ?? this.powerOfAttorney,
+      powerOfAttorneyState: powerOfAttorneyState ?? this.powerOfAttorneyState,
+    );
+  }
 
   Map<String, dynamic> toJson() => _$RequestOwnerToJson(this);
 }
@@ -226,9 +278,10 @@ class Partner {
       _$PartnerFromJson(json);
 
   @JsonKey(
-      includeFromJson: false,
-      includeToJson: true,
-      toJson: ChildrenRelationShip.toJson,)
+    includeFromJson: false,
+    includeToJson: true,
+    toJson: ChildrenRelationShip.toJson,
+  )
   final ChildrenRelationShip? childrenRelationship;
 
   @JsonKey(
@@ -365,20 +418,36 @@ class SelectAgency {
   final LocationModel province;
 }
 
+@ReactiveFormAnnotation()
 @JsonSerializable()
 class DocumentsRejection {
   DocumentsRejection({
-    required this.id,
-    required this.firstPartnerDocuments,
-    required this.secondPartnerDocuments,
+    this.id,
+    @FormControlAnnotation<String>() this.identityCard,
+    @FormControlAnnotation<String>() this.powerOfAttorney,
+    @FormArrayAnnotation<Document>() this.firstPartnerDocuments = const [],
+    @FormArrayAnnotation<Document>() this.secondPartnerDocuments = const [],
   });
 
   factory DocumentsRejection.fromJson(Map<String, dynamic> json) =>
       _$DocumentsRejectionFromJson(json);
 
+  final String? id;
+  final String? identityCard;
+  final String? powerOfAttorney;
   final List<Document> firstPartnerDocuments;
-  final String id;
   final List<Document> secondPartnerDocuments;
+
+  DocumentsRejection copyWith({
+    String? id,
+  }) =>
+      DocumentsRejection(
+        id: id ?? this.id,
+        identityCard: identityCard,
+        powerOfAttorney: powerOfAttorney,
+        firstPartnerDocuments: firstPartnerDocuments,
+        secondPartnerDocuments: secondPartnerDocuments,
+      );
 
   Map<String, dynamic> toJson() => _$DocumentsRejectionToJson(this);
 }

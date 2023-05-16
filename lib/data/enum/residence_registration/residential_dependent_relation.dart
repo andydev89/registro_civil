@@ -21,8 +21,6 @@ enum ResidentialDependentRelation implements Translatable {
       .whereNot((element) => element == ResidentialDependentRelation.none)
       .toList();
 
-  static String? toJson(ResidentialDependentRelation? value) => value?.toText;
-
   @override
   String translate(BuildContext context) {
     final l10n = context.l10n;

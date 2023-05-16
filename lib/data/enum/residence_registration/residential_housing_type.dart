@@ -21,7 +21,7 @@ enum ResidentialHousingType implements Translatable {
   const ResidentialHousingType(this.toText);
   final String toText;
 
-  static String? toJson(ResidentialHousingType? value) => value?.toText;
+  // static String? toJson(ResidentialHousingType? value) => value?.toText;
 
   @override
   String translate(BuildContext context) {

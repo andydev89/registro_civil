@@ -217,26 +217,13 @@ class MarriageUpdate extends _$MarriageUpdate {
   void build() {}
 
   Future<Result<bool, StatusCode>> updateMarriage(
-    Map<int, List<Document>> documents,
-    String id,
+    DocumentsRejection documentsRejection,
   ) async {
     final api = ref.watch(apiProvider);
-    final result =
-        await api.marriageUpdate(_convertToDocumentsRejection(documents, id));
+    final result = await api.marriageUpdate(documentsRejection);
     if (result.success) {
       return const Result.ok(true);
     }
     return Result.err(result.status);
-  }
-
-  DocumentsRejection _convertToDocumentsRejection(
-    Map<int, List<Document>> documents,
-    String id,
-  ) {
-    return DocumentsRejection(
-      id: id,
-      firstPartnerDocuments: documents[0]!,
-      secondPartnerDocuments: documents[1]!,
-    );
   }
 }
