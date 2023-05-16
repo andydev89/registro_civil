@@ -13,7 +13,7 @@ enum ResidenceType implements Translatable {
   const ResidenceType(this.toText);
   final String toText;
 
-  static String? toJson(ResidenceType? value) => value?.toText;
+  // static String? toJson(ResidenceType? value) => value?.toText;
 
   @override
   String translate(BuildContext context) {

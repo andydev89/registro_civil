@@ -50,7 +50,7 @@ PageRouteInfo<dynamic> getMarriageCelebration() =>
     const MarriageCelebrationPrincipalRoute();
 
 PageRouteInfo<dynamic> getResidencyRegistration() =>
-    const ResidenceRegistrationRouterRoute();
+    ResidenceRegistrationRouterRoute();
 
 PageRouteInfo<dynamic> getChangeOfName(TypeServiceModel typeOfService) =>
     ChangeOfNameRouterRoute(

@@ -196,9 +196,19 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     ResidenceRegistrationRouterRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<ResidenceRegistrationRouterRouteArgs>(
+          orElse: () => ResidenceRegistrationRouterRouteArgs(
+                  showAgreement: queryParams.getBool(
+                'showAgreement',
+                true,
+              )));
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ResidenceRegistrationRouterPage(),
+        child: ResidenceRegistrationRouterPage(
+          key: args.key,
+          showAgreement: args.showAgreement,
+        ),
       );
     },
     ChangeOfNameRouterRoute.name: (routeData) {
@@ -595,6 +605,7 @@ class _$AppRouter extends RootStackRouter {
         child: FirstStepResidencePage(
           key: args.key,
           operation: args.operation,
+          residenceIndex: args.residenceIndex,
         ),
       );
     },
@@ -606,6 +617,7 @@ class _$AppRouter extends RootStackRouter {
         child: SecondStepResidencePage(
           key: args.key,
           operation: args.operation,
+          residenceIndex: args.residenceIndex,
         ),
       );
     },
@@ -615,7 +627,7 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: MainPageDependentPage(
           key: args.key,
-          residential: args.residential,
+          residentialIndex: args.residentialIndex,
         ),
       );
     },
@@ -627,7 +639,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           operation: args.operation,
           dependent: args.dependent,
-          residenceId: args.residenceId,
+          residentialIndex: args.residentialIndex,
         ),
       );
     },
@@ -1358,15 +1370,40 @@ class MarriageCelebrationRouterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ResidenceRegistrationRouterPage]
-class ResidenceRegistrationRouterRoute extends PageRouteInfo<void> {
-  const ResidenceRegistrationRouterRoute({List<PageRouteInfo>? children})
-      : super(
+class ResidenceRegistrationRouterRoute
+    extends PageRouteInfo<ResidenceRegistrationRouterRouteArgs> {
+  ResidenceRegistrationRouterRoute({
+    Key? key,
+    bool showAgreement = true,
+    List<PageRouteInfo>? children,
+  }) : super(
           ResidenceRegistrationRouterRoute.name,
           path: 'residence-registration-router-page',
+          args: ResidenceRegistrationRouterRouteArgs(
+            key: key,
+            showAgreement: showAgreement,
+          ),
+          rawQueryParams: {'showAgreement': showAgreement},
           initialChildren: children,
         );
 
   static const String name = 'ResidenceRegistrationRouterRoute';
+}
+
+class ResidenceRegistrationRouterRouteArgs {
+  const ResidenceRegistrationRouterRouteArgs({
+    this.key,
+    this.showAgreement = true,
+  });
+
+  final Key? key;
+
+  final bool showAgreement;
+
+  @override
+  String toString() {
+    return 'ResidenceRegistrationRouterRouteArgs{key: $key, showAgreement: $showAgreement}';
+  }
 }
 
 /// generated route for
@@ -2436,12 +2473,14 @@ class FirstStepResidenceRoute
   FirstStepResidenceRoute({
     Key? key,
     Crud operation = Crud.create,
+    int? residenceIndex,
   }) : super(
           FirstStepResidenceRoute.name,
           path: '',
           args: FirstStepResidenceRouteArgs(
             key: key,
             operation: operation,
+            residenceIndex: residenceIndex,
           ),
         );
 
@@ -2452,15 +2491,18 @@ class FirstStepResidenceRouteArgs {
   const FirstStepResidenceRouteArgs({
     this.key,
     this.operation = Crud.create,
+    this.residenceIndex,
   });
 
   final Key? key;
 
   final Crud operation;
 
+  final int? residenceIndex;
+
   @override
   String toString() {
-    return 'FirstStepResidenceRouteArgs{key: $key, operation: $operation}';
+    return 'FirstStepResidenceRouteArgs{key: $key, operation: $operation, residenceIndex: $residenceIndex}';
   }
 }
 
@@ -2471,12 +2513,14 @@ class SecondStepResidenceRoute
   SecondStepResidenceRoute({
     Key? key,
     Crud operation = Crud.create,
+    int? residenceIndex,
   }) : super(
           SecondStepResidenceRoute.name,
           path: 'second-step-residence-page',
           args: SecondStepResidenceRouteArgs(
             key: key,
             operation: operation,
+            residenceIndex: residenceIndex,
           ),
         );
 
@@ -2487,15 +2531,18 @@ class SecondStepResidenceRouteArgs {
   const SecondStepResidenceRouteArgs({
     this.key,
     this.operation = Crud.create,
+    this.residenceIndex,
   });
 
   final Key? key;
 
   final Crud operation;
 
+  final int? residenceIndex;
+
   @override
   String toString() {
-    return 'SecondStepResidenceRouteArgs{key: $key, operation: $operation}';
+    return 'SecondStepResidenceRouteArgs{key: $key, operation: $operation, residenceIndex: $residenceIndex}';
   }
 }
 
@@ -2505,13 +2552,13 @@ class MainRouteDependentRoute
     extends PageRouteInfo<MainRouteDependentRouteArgs> {
   MainRouteDependentRoute({
     Key? key,
-    required Residential residential,
+    required int residentialIndex,
   }) : super(
           MainRouteDependentRoute.name,
           path: '',
           args: MainRouteDependentRouteArgs(
             key: key,
-            residential: residential,
+            residentialIndex: residentialIndex,
           ),
         );
 
@@ -2521,16 +2568,16 @@ class MainRouteDependentRoute
 class MainRouteDependentRouteArgs {
   const MainRouteDependentRouteArgs({
     this.key,
-    required this.residential,
+    required this.residentialIndex,
   });
 
   final Key? key;
 
-  final Residential residential;
+  final int residentialIndex;
 
   @override
   String toString() {
-    return 'MainRouteDependentRouteArgs{key: $key, residential: $residential}';
+    return 'MainRouteDependentRouteArgs{key: $key, residentialIndex: $residentialIndex}';
   }
 }
 
@@ -2542,7 +2589,7 @@ class FirstStepDependentRoute
     Key? key,
     Crud operation = Crud.create,
     Dependent? dependent,
-    required String residenceId,
+    required int residentialIndex,
   }) : super(
           FirstStepDependentRoute.name,
           path: 'first-step-dependent-page',
@@ -2550,7 +2597,7 @@ class FirstStepDependentRoute
             key: key,
             operation: operation,
             dependent: dependent,
-            residenceId: residenceId,
+            residentialIndex: residentialIndex,
           ),
         );
 
@@ -2562,7 +2609,7 @@ class FirstStepDependentRouteArgs {
     this.key,
     this.operation = Crud.create,
     this.dependent,
-    required this.residenceId,
+    required this.residentialIndex,
   });
 
   final Key? key;
@@ -2571,11 +2618,11 @@ class FirstStepDependentRouteArgs {
 
   final Dependent? dependent;
 
-  final String residenceId;
+  final int residentialIndex;
 
   @override
   String toString() {
-    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent, residenceId: $residenceId}';
+    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent, residentialIndex: $residentialIndex}';
   }
 }
 

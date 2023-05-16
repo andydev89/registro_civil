@@ -22,11 +22,11 @@ class FirstStepDependentPage extends ConsumerWidget {
     super.key,
     this.operation = Crud.create,
     this.dependent,
-    required this.residenceId,
+    required this.residentialIndex,
   });
   final Crud operation;
   final Dependent? dependent;
-  final String residenceId;
+  final int residentialIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,14 +42,15 @@ class FirstStepDependentPage extends ConsumerWidget {
             (control) => notRepeat(
                   control,
                   ref.watch(resRegProvider.notifier).dependentsFromResidence(
-                        residenceId,
+                        residentialIndex,
                         actual: dependent,
                       ),
                 )
           ],
         )
         ..dateControl.value = DateTime.now().toString()
-        ..stateControl.value = Status.active,
+        ..stateControl.value = Status.active
+        ..idControl.value = '',
       builder: (context, formModel, child) => PrimaryScaffold(
         title: l10n.registroRes,
         subtitle: l10n.ingreseInfSol,
@@ -90,7 +91,7 @@ class FirstStepDependentPage extends ConsumerWidget {
                     if (operation == Crud.create) {
                       ref
                           .read(resRegProvider.notifier)
-                          .addDependent(residenceId, formModel.model);
+                          .addDependent(residentialIndex, formModel.model);
                       showAlert(l10n.dependienteGuardadoCor, TypeAlert.success);
                     }
                     context.popRoute();
