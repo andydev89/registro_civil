@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_dependent_relation.dart';
+import 'package:registro_civil_apk/data/enum/residence_registration/residential_dependent_relation_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_housing_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_type_agreemente.dart';
-import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
+import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_agreemente_type.dart';
+import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
@@ -18,9 +18,8 @@ class ResidenceRegistration {
     @FormControlAnnotation<String>() this.userId = '',
     @FormControlAnnotation(validators: [requiredValidator])
         this.observations = '',
-    @FormArrayAnnotation<Residential>()
-        this.residentials = const [],
-    @FormControlAnnotation<Status>() this.state = Status.active,
+    @FormArrayAnnotation<Residential>() this.residentials = const [],
+    @FormControlAnnotation<StatusType>() this.state = StatusType.active,
   });
 
   factory ResidenceRegistration.fromJson(Map<String, dynamic> json) =>
@@ -31,7 +30,7 @@ class ResidenceRegistration {
   @JsonKey(includeToJson: true, includeFromJson: false)
   final String userId;
   @JsonKey(includeToJson: false, includeFromJson: true)
-  final Status state;
+  final StatusType state;
 
   Map<String, dynamic> toJson() => _$ResidenceRegistrationToJson(this);
 
@@ -128,8 +127,8 @@ class Residential {
   @JsonKey(toJson: _locationToJson)
   final LocationModel province;
 
-  @JsonKey(toJson: ResidentialTenureHousingTypeAgreemente.toJson)
-  final ResidentialTenureHousingTypeAgreemente tenureHousingTypeAgreement;
+  @JsonKey(toJson: ResidentialTenureHousingAgreementeType.toJson)
+  final ResidentialTenureHousingAgreementeType tenureHousingTypeAgreement;
 
   @JsonKey(toJson: ResidenceType.toJson)
   final ResidenceType type;
@@ -155,7 +154,7 @@ class Residential {
     String? mainStreet,
     String? backStreet,
     ResidentialHousingType? housingType,
-    ResidentialTenureHousingTypeAgreemente? tenureHousingTypeAgreement,
+    ResidentialTenureHousingAgreementeType? tenureHousingTypeAgreement,
     String? numberVillaBuilding,
     String? floorNumber,
     String? departmentNumber,
@@ -250,8 +249,8 @@ class Dependent {
         required this.name,
     @FormControlAnnotation(validators: [requiredValidator])
         required this.lastname,
-    @FormControlAnnotation<Status>()
-        this.state = Status.active,
+    @FormControlAnnotation<StatusType>()
+        this.state = StatusType.active,
     @FormControlAnnotation<String>()
         this.id = '',
   });
@@ -266,24 +265,24 @@ class Dependent {
   final String name;
   final String nuiDependents;
   @JsonKey(
-    toJson: ResidentialDependentRelation.toJson,
-    unknownEnumValue: ResidentialDependentRelation.none,
+    toJson: ResidentialDependentRelationType.toJson,
+    unknownEnumValue: ResidentialDependentRelationType.none,
   )
-  final ResidentialDependentRelation relationship;
+  final ResidentialDependentRelationType relationship;
 
   @JsonKey(toJson: _toJson)
-  final Status state;
+  final StatusType state;
 
   @JsonKey(includeToJson: false, includeFromJson: false)
   String myId = UniqueKey().toString();
 
   Dependent copyWith({
     String? nuiDependents,
-    ResidentialDependentRelation? relationship,
+    ResidentialDependentRelationType? relationship,
     String? date,
     String? name,
     String? lastname,
-    Status? state,
+    StatusType? state,
   }) {
     return Dependent(
       nuiDependents: nuiDependents ?? this.nuiDependents,
@@ -298,7 +297,7 @@ class Dependent {
 
   Map<String, dynamic> toJson() => _$DependentToJson(this);
 
-  static String? _toJson(Status? status) => status?.name;
+  static String? _toJson(StatusType? status) => status?.name;
 }
 
 @ReactiveFormAnnotation()
@@ -382,8 +381,8 @@ class SecondStepResidenceModel {
   final ResidentialHousingType housingType;
 
   final String numberVillaBuilding;
-  @JsonKey(toJson: ResidentialTenureHousingTypeAgreemente.toJson)
-  final ResidentialTenureHousingTypeAgreemente tenureHousingTypeAgreement;
+  @JsonKey(toJson: ResidentialTenureHousingAgreementeType.toJson)
+  final ResidentialTenureHousingAgreementeType tenureHousingTypeAgreement;
 
   @JsonKey(toJson: ResidenceType.toJson)
   final ResidenceType type;

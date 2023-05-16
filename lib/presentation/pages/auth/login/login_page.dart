@@ -4,7 +4,7 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
+import 'package:registro_civil_apk/data/enum/auth/auth_icon_button_type.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/providers/auth_providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
@@ -83,7 +83,7 @@ class LoginPage extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButtonAuth(
-                    icon: IconoBotonEnum.faceID,
+                    icon: AuthIconButtonType.faceID,
                     onPressed: () =>
                         context.navigateTo(const ScanRouterRoute()),
                   ),

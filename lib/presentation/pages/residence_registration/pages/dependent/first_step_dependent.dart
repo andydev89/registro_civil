@@ -4,8 +4,8 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_dependent_relation.dart';
-import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
+import 'package:registro_civil_apk/data/enum/residence_registration/residential_dependent_relation_type.dart';
+import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
 import 'package:registro_civil_apk/data/providers/residence_registration/residence_registration_providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
@@ -49,7 +49,7 @@ class FirstStepDependentPage extends ConsumerWidget {
           ],
         )
         ..dateControl.value = DateTime.now().toString()
-        ..stateControl.value = Status.active,
+        ..stateControl.value = StatusType.active,
       builder: (context, formModel, child) => PrimaryScaffold(
         title: l10n.registroRes,
         subtitle: l10n.ingreseInfSol,
@@ -77,7 +77,7 @@ class FirstStepDependentPage extends ConsumerWidget {
                 readOnly: operation == Crud.read,
                 label: l10n.parentezco,
                 formControl: formModel.relationshipControl,
-                items: ResidentialDependentRelation.items,
+                items: ResidentialDependentRelationType.items,
               ),
             ],
           ).horizontalPadding(20),

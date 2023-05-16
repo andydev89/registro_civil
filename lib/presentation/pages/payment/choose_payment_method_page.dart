@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
+import 'package:registro_civil_apk/data/enum/notification/notification_type.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';

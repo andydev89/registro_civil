@@ -3,33 +3,33 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
-enum IconoBotonEnum {
+enum AuthIconButtonType {
   faceID,
-  huella,
+  fingerPrint,
   cedula,
   scanFace,
 }
 
-extension IconoBotonExtension on IconoBotonEnum {
+extension AuthIconButtonTypeExtension on AuthIconButtonType {
   SvgPicture image({
     double height = 30,
     double width = 30,
   }) {
-    if (this == IconoBotonEnum.cedula) {
+    if (this == AuthIconButtonType.cedula) {
       return Assets.svg.cedula.svg(
         height: height,
         width: width,
         fit: BoxFit.cover,
       );
     }
-    if (this == IconoBotonEnum.faceID) {
+    if (this == AuthIconButtonType.faceID) {
       return Assets.svg.faceId.svg(
         height: height,
         width: width,
         fit: BoxFit.cover,
       );
     }
-    if (this == IconoBotonEnum.huella) {
+    if (this == AuthIconButtonType.fingerPrint) {
       return Assets.svg.fingerprint.svg(
         height: height,
         width: width,
@@ -52,13 +52,13 @@ extension IconoBotonExtension on IconoBotonEnum {
 
   String label(BuildContext context) {
     final l10n = context.l10n;
-    if (this == IconoBotonEnum.cedula) {
+    if (this == AuthIconButtonType.cedula) {
       return l10n.cedula;
     }
-    if (this == IconoBotonEnum.faceID) {
+    if (this == AuthIconButtonType.faceID) {
       return l10n.facID;
     }
-    if (this == IconoBotonEnum.huella) {
+    if (this == AuthIconButtonType.fingerPrint) {
       return l10n.huella;
     }
     return '';

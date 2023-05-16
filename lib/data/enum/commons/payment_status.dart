@@ -1,4 +1,0 @@
-enum PaymentStatus {
-  payed,
-  unpayed,
-}

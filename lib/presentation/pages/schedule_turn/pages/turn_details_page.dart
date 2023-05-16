@@ -7,7 +7,7 @@ import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
+import 'package:registro_civil_apk/data/enum/notification/notification_type.dart';
 import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';

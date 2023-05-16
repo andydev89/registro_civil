@@ -1,7 +1,7 @@
 import 'package:isar/isar.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:registro_civil_apk/data/enum/commons/transaction_status.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
+import 'package:registro_civil_apk/data/enum/commons/transaction_status_type.dart';
+import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
 part 'place_to_pay_model.g.dart';
 
 @JsonSerializable()
@@ -293,7 +293,7 @@ class PlaceToPayReferenceModel {
   final DateTime validTo;
   @JsonKey(name: 'Code')
   @ignore
-  final StatusCode? status;
+  final StatusCodeType? status;
   @JsonKey(name: 'Message')
   @ignore
   final String? message;
@@ -303,9 +303,9 @@ class PlaceToPayReferenceModel {
 
   @ignore
   bool get success =>
-      status == StatusCode.s200 ||
-      status == StatusCode.s201 ||
-      status == StatusCode.s202 ||
+      status == StatusCodeType.s200 ||
+      status == StatusCodeType.s201 ||
+      status == StatusCodeType.s202 ||
       status == null;
 
   @override
@@ -346,7 +346,7 @@ class PlaceToPayTransactionDetailsModel {
   final String civilRegistrationId;
   final String clientId;
   final DateTime createdAt;
-  final TransactionStatus? currentStatus;
+  final TransactionStatusType? currentStatus;
   final DateTime expiration;
   final String id;
   final int internalReference;
@@ -360,12 +360,12 @@ class PlaceToPayTransactionDetailsModel {
   final String type;
   final DateTime updatedAt;
   @JsonKey(name: 'Code')
-  final StatusCode? status;
+  final StatusCodeType? status;
 
   bool get success =>
-      status == StatusCode.s200 ||
-      status == StatusCode.s201 ||
-      status == StatusCode.s202 ||
+      status == StatusCodeType.s200 ||
+      status == StatusCodeType.s201 ||
+      status == StatusCodeType.s202 ||
       status == null;
 
   @override

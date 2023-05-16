@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
+import 'package:registro_civil_apk/data/enum/notification/notification_type.dart';
 import 'package:registro_civil_apk/data/models/payment/client_data_to_pay_model.dart';
 import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';

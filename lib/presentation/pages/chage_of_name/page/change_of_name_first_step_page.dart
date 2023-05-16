@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/change_of_name/change_of_name.dart';
+import 'package:registro_civil_apk/data/enum/change_of_name/change_of_name_type.dart';
 import 'package:registro_civil_apk/data/enum/commons/file_extensions.dart';
 import 'package:registro_civil_apk/data/models/change_of_name/change_of_name_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';

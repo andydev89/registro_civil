@@ -3,7 +3,7 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
-enum StateMarriage implements Translatable {
+enum StateMarriageType implements Translatable {
   @JsonValue('PENDING')
   pending('PENDING'),
   @JsonValue('IN_PROGRESS')
@@ -15,22 +15,22 @@ enum StateMarriage implements Translatable {
   @JsonValue('FINALIZED')
   finalized('FINALIZED');
 
-  const StateMarriage(this.toText);
+  const StateMarriageType(this.toText);
   final String toText;
 
   @override
   String translate(BuildContext context) {
     final l10n = context.l10n;
     switch (this) {
-      case StateMarriage.pending:
+      case StateMarriageType.pending:
         return l10n.pendiente;
-      case StateMarriage.inProgress:
+      case StateMarriageType.inProgress:
         return l10n.enProceso;
-      case StateMarriage.approved:
+      case StateMarriageType.approved:
         return l10n.aprobado;
-      case StateMarriage.rejected:
+      case StateMarriageType.rejected:
         return l10n.rechazado;
-      case StateMarriage.finalized:
+      case StateMarriageType.finalized:
         return l10n.finalizado;
     }
   }

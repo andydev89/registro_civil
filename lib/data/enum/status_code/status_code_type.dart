@@ -4,7 +4,7 @@ import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 @JsonEnum(valueField: 'code')
-enum StatusCode implements Translatable {
+enum StatusCodeType implements Translatable {
   // success
   s200(200),
   s201(201),
@@ -82,7 +82,7 @@ enum StatusCode implements Translatable {
   s686(686),
   s687(687);
 
-  const StatusCode(this.code);
+  const StatusCodeType(this.code);
   final int code;
 
   @override
@@ -90,148 +90,148 @@ enum StatusCode implements Translatable {
     final l10n = context.l10n;
     switch (this) {
       // success
-      case StatusCode.s200:
+      case StatusCodeType.s200:
         return l10n.s200;
-      case StatusCode.s201:
+      case StatusCodeType.s201:
         return l10n.s201;
-      case StatusCode.s202:
+      case StatusCodeType.s202:
         return l10n.s202;
       // client errors
-      case StatusCode.s400:
+      case StatusCodeType.s400:
         return l10n.s400;
-      case StatusCode.s401:
+      case StatusCodeType.s401:
         return l10n.s401;
-      case StatusCode.s403:
+      case StatusCodeType.s403:
         return l10n.s403;
-      case StatusCode.s404:
+      case StatusCodeType.s404:
         return l10n.s404;
-      case StatusCode.s405:
+      case StatusCodeType.s405:
         return l10n.s405;
-      case StatusCode.s406:
+      case StatusCodeType.s406:
         return l10n.s406;
-      case StatusCode.s408:
+      case StatusCodeType.s408:
         return l10n.s408;
-      case StatusCode.s409:
+      case StatusCodeType.s409:
         return l10n.s409;
-      case StatusCode.s412:
+      case StatusCodeType.s412:
         return l10n.s412;
       // server errors
-      case StatusCode.s500:
+      case StatusCodeType.s500:
         return l10n.s500;
-      case StatusCode.s501:
+      case StatusCodeType.s501:
         return l10n.s501;
-      case StatusCode.s502:
+      case StatusCodeType.s502:
         return l10n.s502;
-      case StatusCode.s503:
+      case StatusCodeType.s503:
         return l10n.s503;
-      case StatusCode.s504:
+      case StatusCodeType.s504:
         return l10n.s504;
-      case StatusCode.s999:
+      case StatusCodeType.s999:
         return l10n.s999;
       // custom errors
-      case StatusCode.s601:
+      case StatusCodeType.s601:
         return l10n.s601;
-      case StatusCode.s602:
+      case StatusCodeType.s602:
         return l10n.s602;
-      case StatusCode.s603:
+      case StatusCodeType.s603:
         return l10n.s603;
-      case StatusCode.s604:
+      case StatusCodeType.s604:
         return l10n.s604;
-      case StatusCode.s605:
+      case StatusCodeType.s605:
         return l10n.s605;
-      case StatusCode.s606:
+      case StatusCodeType.s606:
         return l10n.s606;
-      case StatusCode.s607:
+      case StatusCodeType.s607:
         return l10n.s607;
-      case StatusCode.s608:
+      case StatusCodeType.s608:
         return l10n.s608;
-      case StatusCode.s609:
+      case StatusCodeType.s609:
         return l10n.s609;
-      case StatusCode.s610:
+      case StatusCodeType.s610:
         return l10n.s610;
-      case StatusCode.s611:
+      case StatusCodeType.s611:
         return l10n.s611;
-      case StatusCode.s612:
+      case StatusCodeType.s612:
         return l10n.s612;
-      case StatusCode.s613:
+      case StatusCodeType.s613:
         return l10n.s613;
-      case StatusCode.s614:
+      case StatusCodeType.s614:
         return l10n.s614;
-      case StatusCode.s615:
+      case StatusCodeType.s615:
         return l10n.s615;
-      case StatusCode.s616:
+      case StatusCodeType.s616:
         return l10n.s616;
-      case StatusCode.s617:
+      case StatusCodeType.s617:
         return l10n.s617;
-      case StatusCode.s618:
+      case StatusCodeType.s618:
         return l10n.s618;
-      case StatusCode.s619:
+      case StatusCodeType.s619:
         return l10n.s619;
-      case StatusCode.s620:
+      case StatusCodeType.s620:
         return l10n.s620;
-      case StatusCode.s621:
+      case StatusCodeType.s621:
         return l10n.s621;
-      case StatusCode.s622:
+      case StatusCodeType.s622:
         return l10n.s622;
-      case StatusCode.s623:
+      case StatusCodeType.s623:
         return l10n.s623;
-      case StatusCode.s624:
+      case StatusCodeType.s624:
         return l10n.s624;
-      case StatusCode.s625:
+      case StatusCodeType.s625:
         return l10n.s625;
-      case StatusCode.s626:
+      case StatusCodeType.s626:
         return l10n.s626;
-      case StatusCode.s627:
+      case StatusCodeType.s627:
         return l10n.s627;
-      case StatusCode.s628:
+      case StatusCodeType.s628:
         return l10n.s628;
-      case StatusCode.s629:
+      case StatusCodeType.s629:
         return l10n.s629;
-      case StatusCode.s630:
+      case StatusCodeType.s630:
         return l10n.s630;
-      case StatusCode.s631:
+      case StatusCodeType.s631:
         return l10n.s631;
-      case StatusCode.s632:
+      case StatusCodeType.s632:
         return l10n.s632;
-      case StatusCode.s633:
+      case StatusCodeType.s633:
         return l10n.s633;
-      case StatusCode.s634:
+      case StatusCodeType.s634:
         return l10n.s634;
-      case StatusCode.s635:
+      case StatusCodeType.s635:
         return l10n.s635;
-      case StatusCode.s636:
+      case StatusCodeType.s636:
         return l10n.s636;
-      case StatusCode.s637:
+      case StatusCodeType.s637:
         return l10n.s637;
-      case StatusCode.s638:
+      case StatusCodeType.s638:
         return l10n.s638;
-      case StatusCode.s639:
+      case StatusCodeType.s639:
         return l10n.s639;
-      case StatusCode.s640:
+      case StatusCodeType.s640:
         return l10n.s640;
-      case StatusCode.s641:
+      case StatusCodeType.s641:
         return l10n.s641;
-      case StatusCode.s642:
+      case StatusCodeType.s642:
         return l10n.s642;
-      case StatusCode.s643:
+      case StatusCodeType.s643:
         return l10n.s643;
-      case StatusCode.s644:
+      case StatusCodeType.s644:
         return l10n.s644;
-      case StatusCode.s680:
+      case StatusCodeType.s680:
         return l10n.s680;
-      case StatusCode.s681:
+      case StatusCodeType.s681:
         return l10n.s681;
-      case StatusCode.s682:
+      case StatusCodeType.s682:
         return l10n.s682;
-      case StatusCode.s683:
+      case StatusCodeType.s683:
         return l10n.s683;
-      case StatusCode.s684:
+      case StatusCodeType.s684:
         return l10n.s684;
-      case StatusCode.s685:
+      case StatusCodeType.s685:
         return l10n.s685;
-      case StatusCode.s686:
+      case StatusCodeType.s686:
         return l10n.s686;
-      case StatusCode.s687:
+      case StatusCodeType.s687:
         return l10n.s687;
     }
   }

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/enum/services/services_type.dart';
-import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
+import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 
 part 'type_services_model.g.dart';
@@ -41,9 +41,9 @@ class TypeServiceModel implements Translatable {
   final bool publishMovil;
   final bool publishWeb;
   final bool schedule;
-  final Status state;
-  @JsonKey(toJson: TypeService.toJson, fromJson: TypeService.fromJson)
-  final TypeService type;
+  final StatusType state;
+  @JsonKey(toJson: ServiceType.toJson, fromJson: ServiceType.fromJson)
+  final ServiceType type;
 
   @override
   String translate(BuildContext context) => name;

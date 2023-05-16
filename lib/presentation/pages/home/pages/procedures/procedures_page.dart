@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
-import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
+import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 // import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/scrollables/circle_avatar_card_grid.dart';
@@ -23,12 +23,12 @@ class ProceduresPage extends ConsumerWidget {
           price: 23,
           iva: 12,
           discount: 5,
-          state: Status.active,
+          state: StatusType.active,
           publishWeb: true,
           publishMovil: true,
           iconoWeb: icon,
           iconoMovil: icon,
-          type: TypeService.marriageCelebration,
+          type: ServiceType.marriageCelebration,
           schedule: false,
         ),
       ],

@@ -2,8 +2,8 @@ import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_housing_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_type_agreemente.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
+import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_agreemente_type.dart';
+import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
 import 'package:registro_civil_apk/data/models/commons/document_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
@@ -30,7 +30,7 @@ class ResidenceRegistrationPreview extends _$ResidenceRegistrationPreview {
     return DocumentModel(document: '');
   }
 
-  Future<Result<String, StatusCode>> certificate() async {
+  Future<Result<String, StatusCodeType>> certificate() async {
     final api = ref.watch(apiProvider);
     final user = await ref.watch(meProvider.future);
     final result = await api.residenceRegistrationPreviewByUser(user.id);
@@ -51,7 +51,7 @@ class ResidentialP extends _$ResidentialP {
       parroquia: LocationModel(id: 'id', name: 'name', type: 'type'),
       housingType: ResidentialHousingType.apartamento,
       tenureHousingTypeAgreement:
-          ResidentialTenureHousingTypeAgreemente.arrendada,
+          ResidentialTenureHousingAgreementeType.arrendada,
       type: ResidenceType.principal,
     );
   }
@@ -190,7 +190,8 @@ class ResReg extends _$ResReg {
     }
   }
 
-  Future<Result<bool, StatusCode>> save(ResidenceRegistration residence) async {
+  Future<Result<bool, StatusCodeType>> save(
+      ResidenceRegistration residence) async {
     final api = ref.watch(apiProvider);
     final user = await ref.watch(meProvider.future);
     final result = await api.residenceRegistration(

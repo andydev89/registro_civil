@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
-enum ValidationsMessageEnum implements Translatable {
+enum ValidationsMessageType implements Translatable {
   invalidDni('invalidDni'),
   length10Error('length10Error'),
   invalidProvinceCode('invalidProvinceCode'),
@@ -17,36 +17,36 @@ enum ValidationsMessageEnum implements Translatable {
   notRepeted('notRepeted'),
   ;
 
-  const ValidationsMessageEnum(this.toText);
+  const ValidationsMessageType(this.toText);
   final String toText;
 
   @override
   String translate(BuildContext context) {
     final l10n = context.l10n;
     switch (this) {
-      case ValidationsMessageEnum.invalidDni:
+      case ValidationsMessageType.invalidDni:
         return l10n.intrducirNumIdeVal;
-      case ValidationsMessageEnum.length10Error:
+      case ValidationsMessageType.length10Error:
         return l10n.introducirNum10Dig;
-      case ValidationsMessageEnum.invalidProvinceCode:
+      case ValidationsMessageType.invalidProvinceCode:
         return l10n.introducirCodProVal;
-      case ValidationsMessageEnum.invalidPassword:
+      case ValidationsMessageType.invalidPassword:
         return l10n.password8Car;
-      case ValidationsMessageEnum.invalidPhoneNumber:
+      case ValidationsMessageType.invalidPhoneNumber:
         return l10n.intrudcirNumTelVal;
-      case ValidationsMessageEnum.length6Error:
+      case ValidationsMessageType.length6Error:
         return l10n.introducirNum6Dig;
-      case ValidationsMessageEnum.invalidConadisNumber:
+      case ValidationsMessageType.invalidConadisNumber:
         return l10n.conadisNumError;
-      case ValidationsMessageEnum.atLeastOneElement:
+      case ValidationsMessageType.atLeastOneElement:
         return l10n.debeSelAlMenUnElem;
-      case ValidationsMessageEnum.invalidCode:
+      case ValidationsMessageType.invalidCode:
         return l10n.invalidCode;
-      case ValidationsMessageEnum.invalidNombreApellido:
+      case ValidationsMessageType.invalidNombreApellido:
         return l10n.escribaNomApe;
-      case ValidationsMessageEnum.seleccionarArchivo:
+      case ValidationsMessageType.seleccionarArchivo:
         return l10n.debeSelArc;
-      case ValidationsMessageEnum.notRepeted:
+      case ValidationsMessageType.notRepeted:
         return l10n.noRepetir;
     }
   }

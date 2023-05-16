@@ -80,12 +80,12 @@ class Step4Page extends ConsumerWidget {
                           form.codeControl.value = value;
                           if (value != otp) {
                             form.codeControl.setErrors(
-                              {ValidationsMessageEnum.invalidCode.toText: true},
+                              {ValidationsMessageType.invalidCode.toText: true},
                             );
                             return;
                           }
                           form.codeControl.removeError(
-                            ValidationsMessageEnum.invalidCode.toText,
+                            ValidationsMessageType.invalidCode.toText,
                           );
                         },
                         onCompleted: (pin) => form.codeControl.value = pin,

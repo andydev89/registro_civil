@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
+import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/utils/methods.dart';
@@ -18,7 +18,7 @@ class CircleAvatarCardGrid extends ConsumerWidget {
     this.crossAxisCount = 2,
     this.firstElements = const [],
     this.totalPages,
-    this.firstPage=0,
+    this.firstPage = 0,
   });
   final Future<ResponseModelPagination<List<TypeServiceModel>>> Function(int)?
       fetch;
@@ -62,7 +62,7 @@ class CircleAvatarCardGrid extends ConsumerWidget {
           },
         ),
         title: item.name,
-        onPressedCheck: () => item.state == Status.active
+        onPressedCheck: () => item.state == StatusType.active
             ? context.navigateTo(getRoute(item))
             : () {},
         onPressedView: () => showContentDialog(

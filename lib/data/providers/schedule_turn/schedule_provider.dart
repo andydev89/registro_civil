@@ -1,5 +1,5 @@
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
+import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
 import 'package:registro_civil_apk/data/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/commons/querys_model.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
@@ -12,7 +12,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'schedule_provider.g.dart';
 
 @riverpod
-Future<Result<List<ScheduleModel>, StatusCode>> availableSchedules(
+Future<Result<List<ScheduleModel>, StatusCodeType>> availableSchedules(
   AvailableSchedulesRef ref, {
   required DateTime startDate,
   required DateTime endDate,
@@ -37,7 +37,7 @@ Future<Result<List<ScheduleModel>, StatusCode>> availableSchedules(
 }
 
 @riverpod
-Future<Result<List<ScheduleModel>, StatusCode>> schedules(
+Future<Result<List<ScheduleModel>, StatusCodeType>> schedules(
   SchedulesRef ref,
 ) async {
   final api = ref.watch(apiProvider);
@@ -85,9 +85,8 @@ Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
   return response;
 }
 
-
 @riverpod
-Future<Result<BookedReceiptModel, StatusCode>> confirmSchedule(
+Future<Result<BookedReceiptModel, StatusCodeType>> confirmSchedule(
   ConfirmScheduleRef ref, {
   required ReceiptModel recipt,
 }) async {

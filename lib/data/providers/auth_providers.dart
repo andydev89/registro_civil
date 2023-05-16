@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
+import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
 import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
@@ -11,11 +11,11 @@ part 'auth_providers.g.dart';
 
 @riverpod
 class Login extends _$Login {
-  Future<Result<bool, StatusCode>> login(LoginModel loginModel) async {
+  Future<Result<bool, StatusCodeType>> login(LoginModel loginModel) async {
     final api = ref.watch(apiProvider);
     final response = await api.login(loginModel);
     final fresh = ref.watch(freshProvider);
-    if (response.status == StatusCode.s200) {
+    if (response.status == StatusCodeType.s200) {
       final oauthToken = OAuth2Token(
         accessToken: response.data!.jwtToken,
         tokenType: 'Bearer',
@@ -56,12 +56,12 @@ class RegisterValidateCitizen extends _$RegisterValidateCitizen {
     return null;
   }
 
-  Future<Result<RegisterCitizenModel, StatusCode>> registerValidateCitizen(
+  Future<Result<RegisterCitizenModel, StatusCodeType>> registerValidateCitizen(
     NuiModel model,
   ) async {
     final api = ref.watch(apiProvider);
     final response = await api.registerValidateNui(model);
-    if (response.status == StatusCode.s200) {
+    if (response.status == StatusCodeType.s200) {
       state = response.data;
       return Result.ok(state!);
     }
@@ -76,12 +76,12 @@ class RegisterData extends _$RegisterData {
     return null;
   }
 
-  Future<Result<CommandModel, StatusCode>> registerData(
+  Future<Result<CommandModel, StatusCodeType>> registerData(
     EnterDataModel model,
   ) async {
     final api = ref.watch(apiProvider);
     final response = await api.registerData(model);
-    if (response.status == StatusCode.s200) {
+    if (response.status == StatusCodeType.s200) {
       state = response.data;
       return Result.ok(state!);
     }
@@ -96,12 +96,12 @@ class RegisterCode extends _$RegisterCode {
     return false;
   }
 
-  Future<Result<bool, StatusCode>> registerCode(
+  Future<Result<bool, StatusCodeType>> registerCode(
     RegisterModel model,
   ) async {
     final api = ref.watch(apiProvider);
     final response = await api.registerCode(model);
-    if (response.status == StatusCode.s200) {
+    if (response.status == StatusCodeType.s200) {
       return const Result.ok(true);
     }
     return Result.err(response.status);
@@ -125,7 +125,7 @@ class Citizen extends _$Citizen {
 }
 
 @riverpod
-Future<Result<List<TelephoneOperatorModel>, StatusCode>> operators(
+Future<Result<List<TelephoneOperatorModel>, StatusCodeType>> operators(
   OperatorsRef ref,
 ) async {
   final api = ref.watch(apiProvider);
@@ -142,7 +142,7 @@ Future<OAuth2Token?> refreshToken(
 ) async {
   final api = ref.watch(apiProvider);
   final response = await api.refreshToken(token);
-  if (response.status == StatusCode.s200) {
+  if (response.status == StatusCodeType.s200) {
     final oauthToken = OAuth2Token(
       accessToken: response.data!.jwtToken,
       tokenType: 'Bearer',
@@ -164,7 +164,7 @@ Stream<AuthenticationStatus> authenticationStatus(AuthenticationStatusRef ref) {
 Future<MeModel> me(MeRef ref) async {
   final api = ref.watch(apiProvider);
   final response = await api.me();
-  if (response.status == StatusCode.s200) {
+  if (response.status == StatusCodeType.s200) {
     return response.data!;
   }
   return MeModel();

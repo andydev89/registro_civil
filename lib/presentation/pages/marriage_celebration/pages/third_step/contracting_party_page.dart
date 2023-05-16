@@ -5,9 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_type.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_type.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_type.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -81,7 +81,7 @@ class ContractingPartyPage extends ConsumerWidget {
                 PrimaryText(l10n.estadoCiv),
                 PrimaryReactiveDropdown(
                   formControl: form.maritalStatusControl,
-                  items: MaritalStatus.values,
+                  items: MaritalStatusType.values,
                 ),
                 PrimaryText(l10n.tieneHij),
                 PrimaryReactiveDropdown(
@@ -97,7 +97,7 @@ class ContractingPartyPage extends ConsumerWidget {
                         PrimaryText(l10n.tusHiSon),
                         PrimaryReactiveDropdown(
                           formControl: form.childrenRelationshipControl,
-                          items: ChildrenRelationShip.values,
+                          items: ChildrenRelationShipType.values,
                         ),
                       ],
                     ),

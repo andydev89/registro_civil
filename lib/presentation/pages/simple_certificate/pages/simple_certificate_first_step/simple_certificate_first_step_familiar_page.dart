@@ -5,8 +5,8 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_enum.dart';
-import 'package:registro_civil_apk/data/enum/validators/validations_message_enum.dart';
+import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_type.dart';
+import 'package:registro_civil_apk/data/enum/validators/validations_message_type.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
 import 'package:registro_civil_apk/data/providers/simple_certificate/simple_certificate_provider.dart';
@@ -43,9 +43,9 @@ class SimpleCertificateFirstStepFamiliarPage extends ConsumerWidget {
           if (success == null) return;
           success
               ? formModel.nuiControl
-                  .removeError(ValidationsMessageEnum.invalidDni.toText)
+                  .removeError(ValidationsMessageType.invalidDni.toText)
               : formModel.nuiControl
-                  .setErrors({ValidationsMessageEnum.invalidDni.toText: true});
+                  .setErrors({ValidationsMessageType.invalidDni.toText: true});
         });
         return Scaffold(
           backgroundColor: Colors.transparent,
@@ -67,9 +67,9 @@ class SimpleCertificateFirstStepFamiliarPage extends ConsumerWidget {
                         children: [
                           Flexible(
                             child: PrimaryReactiveDropdown<
-                                RelationshipSimpleCertificateEnum>(
+                                RelationshipSimpleCertificateType>(
                               formControl: formModel.relationshipControl,
-                              items: RelationshipSimpleCertificateEnum.list,
+                              items: RelationshipSimpleCertificateType.list,
                               label: l10n.parentezco,
                               hintText: '${l10n.seleccione}...',
                             ),

@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/refecting_reason_enum.dart';
+import 'package:registro_civil_apk/data/enum/simple_certificate/orders_rejecting_reason_type.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -27,7 +26,7 @@ class MyOrderRejectingPage extends StatelessWidget {
             children: [
               PrimaryReactiveDropdown(
                 formControl: form.rejectReasonControl,
-                items: OrdersRejectingReason.values,
+                items: OrdersRejectingReasonType.values,
                 label: l10n.causasRec,
               ).verticalPadding(20),
               PrimaryText(

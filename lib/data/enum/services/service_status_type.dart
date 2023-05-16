@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 
-enum Status {
+enum StatusType {
   @JsonValue('ACTIVE')
   active('ACTIVE'),
   @JsonValue('INACTIVE')
   inactive('INACTIVE');
 
-  const Status(this.toText);
+  const StatusType(this.toText);
   final String toText;
 
   // static String? toJson(Status? status) => status?.toText;

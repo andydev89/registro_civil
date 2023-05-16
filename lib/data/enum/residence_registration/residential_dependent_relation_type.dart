@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
-enum ResidentialDependentRelation implements Translatable {
+enum ResidentialDependentRelationType implements Translatable {
   @JsonValue('HIJO_MENOR_EDAD')
   hijoMenorEdad('HIJO_MENOR_EDAD'),
   @JsonValue('DISCAPACITADO')
@@ -14,26 +14,27 @@ enum ResidentialDependentRelation implements Translatable {
   @JsonValue('NULL')
   none('NULL');
 
-  const ResidentialDependentRelation(this.toText);
+  const ResidentialDependentRelationType(this.toText);
   final String toText;
 
-  static List<Translatable> get items => ResidentialDependentRelation.values
-      .whereNot((element) => element == ResidentialDependentRelation.none)
+  static List<Translatable> get items => ResidentialDependentRelationType.values
+      .whereNot((element) => element == ResidentialDependentRelationType.none)
       .toList();
 
-  static String? toJson(ResidentialDependentRelation? value) => value?.toText;
+  static String? toJson(ResidentialDependentRelationType? value) =>
+      value?.toText;
 
   @override
   String translate(BuildContext context) {
     final l10n = context.l10n;
     switch (this) {
-      case ResidentialDependentRelation.hijoMenorEdad:
+      case ResidentialDependentRelationType.hijoMenorEdad:
         return l10n.hijoMenorEdad;
-      case ResidentialDependentRelation.discapacitado:
+      case ResidentialDependentRelationType.discapacitado:
         return l10n.discapacitado;
-      case ResidentialDependentRelation.terceraEdad:
+      case ResidentialDependentRelationType.terceraEdad:
         return l10n.terceraEdad;
-      case ResidentialDependentRelation.none:
+      case ResidentialDependentRelationType.none:
         return l10n.none;
     }
   }

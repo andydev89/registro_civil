@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:registro_civil_apk/data/enum/services/services_type.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/simple_certificate_radio_type_enum.dart';
+import 'package:registro_civil_apk/data/enum/simple_certificate/simple_certificate_type.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -19,7 +19,7 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final selectedRadio = useState(SimpleCertificateRadioTypeEnum.familiar);
+    final selectedRadio = useState(SimpleCertificateType.familiar);
     return PrimaryScaffold(
       title: '${l10n.informacionSer}: ${typeSimpleCertificate.name}',
       subtitle: l10n.completeInformacionSolicitada,
@@ -32,12 +32,11 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
                 children: [
                   Expanded(
                     child: PrimaryRadioListTile(
-                      value: SimpleCertificateRadioTypeEnum.familiar,
+                      value: SimpleCertificateType.familiar,
                       groupValue: selectedRadio.value,
                       title: l10n.datosFam,
                       onChanged: (value) {
-                        selectedRadio.value =
-                            SimpleCertificateRadioTypeEnum.familiar;
+                        selectedRadio.value = SimpleCertificateType.familiar;
                         context.replaceRoute(
                           SimpleCertificateFirstStepFamiliarRoute(
                             typeSimpleCertificate: typeSimpleCertificate,
@@ -47,15 +46,14 @@ class SimpleCertificateFirstStepRouterPage extends HookWidget {
                     ),
                   ),
                   Visibility(
-                    visible: typeSimpleCertificate.type != TypeService.death,
+                    visible: typeSimpleCertificate.type != ServiceType.death,
                     child: Expanded(
                       child: PrimaryRadioListTile(
-                        value: SimpleCertificateRadioTypeEnum.personal,
+                        value: SimpleCertificateType.personal,
                         groupValue: selectedRadio.value,
                         title: l10n.datosPer,
                         onChanged: (value) {
-                          selectedRadio.value =
-                              SimpleCertificateRadioTypeEnum.personal;
+                          selectedRadio.value = SimpleCertificateType.personal;
                           context.replaceRoute(
                             SimpleCertificateFirstStepPersonalRoute(
                               typeSimpleCertificate: typeSimpleCertificate,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage_type.dart';
 import 'package:registro_civil_apk/data/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
@@ -63,7 +63,7 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
                       l10n.estado: e.state.translate(context),
                     },
                     actions: {
-                      if (e.state == StateMarriage.inProgress)
+                      if (e.state == StateMarriageType.inProgress)
                         Crud.update: (p0) => context.navigateTo(
                               RejectionStepMarriageCelebrationRoute(
                                 marriageId: p0.id,

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-enum TransactionStatus {
+enum TransactionStatusType {
   @JsonValue('PENDING')
   pending,
   @JsonValue('APPROVED')

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-enum ServicesState {
+enum ServicesStateType {
   // @JsonValue('requested')
   // requesting,
   @JsonValue('IN_PROGRESS')

@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
+import 'package:registro_civil_apk/data/enum/auth/auth_icon_button_type.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/circular_icon_auth.dart';
 import 'package:registro_civil_apk/presentation/pages/auth/widgets/icon_button_auth.dart';
@@ -42,7 +42,7 @@ class ScanFacePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButtonAuth(
-                icon: IconoBotonEnum.cedula,
+                icon: AuthIconButtonType.cedula,
                 onPressed: () => context.popRoute(),
               ),
             ],

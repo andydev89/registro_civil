@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_type.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_type.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_type.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage_type.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
@@ -54,7 +54,7 @@ class MarriageCelebrationModel {
   final Partner? secondPartner;
   final Witness? secondWitness;
   @JsonKey(includeToJson: false)
-  final StateMarriage? state;
+  final StateMarriageType? state;
 
   Map<int, List<Document>> rejectingDocuments() {
     return {
@@ -212,7 +212,7 @@ class Partner {
         this.maritalStatus,
     @FormControlAnnotation(validators: [requiredValidator])
         this.hasChildren,
-    @FormControlAnnotation<ChildrenRelationShip>()
+    @FormControlAnnotation<ChildrenRelationShipType>()
         this.childrenRelationship,
     @FormControlAnnotation(validators: [requiredValidator])
         this.conadis = false,
@@ -226,10 +226,11 @@ class Partner {
       _$PartnerFromJson(json);
 
   @JsonKey(
-      includeFromJson: false,
-      includeToJson: true,
-      toJson: ChildrenRelationShip.toJson,)
-  final ChildrenRelationShip? childrenRelationship;
+    includeFromJson: false,
+    includeToJson: true,
+    toJson: ChildrenRelationShipType.toJson,
+  )
+  final ChildrenRelationShipType? childrenRelationship;
 
   @JsonKey(
     name: 'hasConadis',
@@ -250,17 +251,17 @@ class Partner {
   @JsonKey(includeFromJson: false, includeToJson: true, toJson: Binary.toJson)
   final Binary? hasChildren;
 
-  @JsonKey(toJson: MaritalStatus.toJson)
-  final MaritalStatus? maritalStatus;
+  @JsonKey(toJson: MaritalStatusType.toJson)
+  final MaritalStatusType? maritalStatus;
   final String name;
   final String nui;
 
   Partner copyWith({
     String? nui,
     String? name,
-    MaritalStatus? maritalStatus,
+    MaritalStatusType? maritalStatus,
     Binary? hasChildren,
-    ChildrenRelationShip? childrenRelationship,
+    ChildrenRelationShipType? childrenRelationship,
     bool? conadis,
     String? conadisNumber,
     List<Document>? documents,
