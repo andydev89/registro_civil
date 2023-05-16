@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/orders_rejecting_reason_type.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_area_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class MyOrderRejectingPage extends StatelessWidget {
   const MyOrderRejectingPage({super.key});

@@ -5,7 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/providers/commons/gmap_providers.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/secondary_svg_icon_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 
 class PrimaryReactiveMap extends ConsumerWidget {

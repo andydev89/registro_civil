@@ -8,7 +8,7 @@ import 'package:registro_civil_apk/data/utils/methods.dart';
 import 'package:registro_civil_apk/presentation/pages/home/utils/service_utils.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/widgets/certificate_description.dart';
 import 'package:registro_civil_apk/presentation/widgets/circle_avatar_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/list/paged_grid_view_widget.dart';
 
 class CircleAvatarCardGrid extends ConsumerWidget {

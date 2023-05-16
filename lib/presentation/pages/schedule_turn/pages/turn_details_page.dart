@@ -6,19 +6,13 @@ import 'package:intl/intl.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/notification/notification_type.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
-import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
-import 'package:registro_civil_apk/data/utils/alert_methods.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
+import 'package:registro_civil_apk/data/utils/utils.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_row_label.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class TurnDetailsPage extends ConsumerWidget {
   const TurnDetailsPage({

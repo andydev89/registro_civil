@@ -7,7 +7,7 @@ import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/colored_uppercase.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_caption.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 

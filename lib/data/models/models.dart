@@ -1,0 +1,12 @@
+export 'auth/auth.dart';
+export 'change_of_name/change_of_name.dart';
+export 'commons/commons.dart';
+export 'marriage_celebration/marriage_celebration.dart';
+export 'offers/offers.dart';
+export 'payment/payment.dart';
+export 'payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts.dart';
+export 'residence_registration/residence_registration.dart';
+export 'responses/response.dart';
+export 'schedule_turn/schedule_turn.dart';
+export 'services/services.dart';
+export 'simple_certificate/simple_certificate.dart';

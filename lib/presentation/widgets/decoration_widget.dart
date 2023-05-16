@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/presentation/theme/theme.dart';
 
 InputDecoration decoracionAuth({
   String? texto,
@@ -50,7 +51,7 @@ InputDecoration decoracionAuth({
       borderSide: BorderSide(color: borderColor ?? Colors.white),
     ),
     labelText: texto,
-    suffixIcon:suffixIcon,
+    suffixIcon: suffixIcon,
     prefixIcon: iconoPrefix == null
         ? null
         : Icon(

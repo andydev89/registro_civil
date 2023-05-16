@@ -4,15 +4,12 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/models/auth/register_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
-import 'package:registro_civil_apk/data/providers/simple_certificate/simple_certificate_provider.dart';
-import 'package:registro_civil_apk/data/utils/alert_methods.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
+import 'package:registro_civil_apk/data/utils/utils.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class SimpleCertificateFirstStepPersonalPage extends ConsumerWidget {
   const SimpleCertificateFirstStepPersonalPage({

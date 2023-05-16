@@ -13,7 +13,10 @@ const gradient = LinearGradient(
     blue,
   ],
 );
-// const secondaryColor = Color(0x1f1f1f1f);
+const gradienteApp = [
+  Color.fromRGBO(1, 15, 56, 1),
+  Color.fromRGBO(0, 78, 146, 0.8),
+];
 
 final lightTheme = ThemeData(
   primaryColor: primaryColor,

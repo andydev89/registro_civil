@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/data/providers/cart_provider.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/sliding_dialog.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/certificate_detail.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_caption.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 

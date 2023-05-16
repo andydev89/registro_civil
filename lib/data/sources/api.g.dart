@@ -97,14 +97,14 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CodeModel>> registerCode(enterDataModel) async {
+  Future<ResponseModel<AuthCodeModel>> registerCode(enterDataModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(enterDataModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<CodeModel>>(Options(
+        _setStreamType<ResponseModel<AuthCodeModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -116,9 +116,9 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<CodeModel>.fromJson(
+    final value = ResponseModel<AuthCodeModel>.fromJson(
       _result.data!,
-      (json) => CodeModel.fromJson(json as Map<String, dynamic>),
+      (json) => AuthCodeModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
@@ -273,7 +273,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<SimpleCertificateResponse>> simpleCertificate(
+  Future<ResponseModel<SimpleCertificateResponseModel>> simpleCertificate(
       simpleCertificateModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -281,7 +281,7 @@ class _Api implements Api {
     final _data = <String, dynamic>{};
     _data.addAll(simpleCertificateModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<SimpleCertificateResponse>>(Options(
+        _setStreamType<ResponseModel<SimpleCertificateResponseModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -293,23 +293,23 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<SimpleCertificateResponse>.fromJson(
+    final value = ResponseModel<SimpleCertificateResponseModel>.fromJson(
       _result.data!,
       (json) =>
-          SimpleCertificateResponse.fromJson(json as Map<String, dynamic>),
+          SimpleCertificateResponseModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
 
   @override
-  Future<ResponseModel<ProcessResponse>> process(processModel) async {
+  Future<ResponseModel<ProcessResponseModel>> process(processModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(processModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<ProcessResponse>>(Options(
+        _setStreamType<ResponseModel<ProcessResponseModel>>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
@@ -321,22 +321,22 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<ProcessResponse>.fromJson(
+    final value = ResponseModel<ProcessResponseModel>.fromJson(
       _result.data!,
-      (json) => ProcessResponse.fromJson(json as Map<String, dynamic>),
+      (json) => ProcessResponseModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
 
   @override
-  Future<ResponseModel<ProcessResponse>> cancel(cancelModel) async {
+  Future<ResponseModel<ProcessResponseModel>> cancel(cancelModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(cancelModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<ProcessResponse>>(Options(
+        _setStreamType<ResponseModel<ProcessResponseModel>>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
@@ -348,9 +348,9 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<ProcessResponse>.fromJson(
+    final value = ResponseModel<ProcessResponseModel>.fromJson(
       _result.data!,
-      (json) => ProcessResponse.fromJson(json as Map<String, dynamic>),
+      (json) => ProcessResponseModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }

@@ -9,7 +9,7 @@ import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_cel
 import 'package:registro_civil_apk/data/providers/commons/gmap_providers.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 
 void setErrorFile(FormControl<String>? control) {
   control?.setErrors(

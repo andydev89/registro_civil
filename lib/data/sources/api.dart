@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
+import 'package:registro_civil_apk/data/models/auth/auth_model.dart';
 import 'package:registro_civil_apk/data/models/auth/login_model.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/change_of_name/change_of_name_model.dart';
@@ -17,7 +17,7 @@ import 'package:registro_civil_apk/data/models/schedule_turn/schedule_model.dart
 import 'package:registro_civil_apk/data/models/schedule_turn/user_schedule_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response.dart';
+import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api.g.dart';
@@ -41,7 +41,7 @@ abstract class Api {
   );
 
   @POST('/api/user/register/code')
-  Future<ResponseModel<CodeModel>> registerCode(
+  Future<ResponseModel<AuthCodeModel>> registerCode(
     @Body() RegisterModel enterDataModel,
   );
 
@@ -71,17 +71,17 @@ abstract class Api {
 
   // SERVICES
   @POST('/service/api/service/certification/simple')
-  Future<ResponseModel<SimpleCertificateResponse>> simpleCertificate(
+  Future<ResponseModel<SimpleCertificateResponseModel>> simpleCertificate(
     @Body() SimpleCertificateModel simpleCertificateModel,
   );
 
   @PUT('/service/api/service/process')
-  Future<ResponseModel<ProcessResponse>> process(
+  Future<ResponseModel<ProcessResponseModel>> process(
     @Body() ProcessModel processModel,
   );
 
   @PUT('/service/api/service/cancel')
-  Future<ResponseModel<ProcessResponse>> cancel(
+  Future<ResponseModel<ProcessResponseModel>> cancel(
     @Body() CancelModel cancelModel,
   );
 
@@ -145,8 +145,8 @@ abstract class Api {
       resicenceRegistrationByUser(@Path('id') String id);
 
   @GET('/residentialregistration/api/registration/user/preview/{id}')
-  Future<ResponseModel<DocumentModel>>
-      residenceRegistrationPreviewByUser(@Path('id') String id);
+  Future<ResponseModel<DocumentModel>> residenceRegistrationPreviewByUser(
+      @Path('id') String id);
 
   @POST('/residentialregistration/api/registration')
   Future<ResponseModel<CommandModel>> residenceRegistration(

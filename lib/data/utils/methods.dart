@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:image/image.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/providers/isar_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 
 StatusCodeType convertToStatusCode(Map<String, dynamic>? response) {
   if (response == null) return StatusCodeType.s999;

@@ -1,11 +1,7 @@
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/services/services_state_type.dart';
-import 'package:registro_civil_apk/data/enum/services/services_type.dart';
-import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
-import 'package:registro_civil_apk/data/models/auth/register_model.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'simple_certificate_provider.g.dart';
@@ -15,7 +11,7 @@ class SimpleCertificate extends _$SimpleCertificate {
   @override
   void build() {}
 
-  Future<Result<SimpleCertificateResponse, StatusCodeType>>
+  Future<Result<SimpleCertificateResponseModel, StatusCodeType>>
       simpleCertificateFamiliar({
     required SimpleCertificateFirstStepFamiliarModel familiarModel,
     required ServiceType type,
@@ -38,7 +34,7 @@ class SimpleCertificate extends _$SimpleCertificate {
     return Result.err(response.status);
   }
 
-  Future<Result<SimpleCertificateResponse, StatusCodeType>>
+  Future<Result<SimpleCertificateResponseModel, StatusCodeType>>
       simpleCertificatePersonal({
     required NuiModel model,
     required ServiceType type,
@@ -62,7 +58,8 @@ class Process extends _$Process {
   @override
   void build() {}
 
-  Future<Result<ProcessResponse, StatusCodeType>> processSimpleCertificate({
+  Future<Result<ProcessResponseModel, StatusCodeType>>
+      processSimpleCertificate({
     required String id,
     String observations = '',
     ServicesStateType? state,
@@ -87,7 +84,7 @@ class Cancel extends _$Cancel {
   @override
   void build() {}
 
-  Future<Result<ProcessResponse, StatusCodeType>> cancelSimpleCertificate({
+  Future<Result<ProcessResponseModel, StatusCodeType>> cancelSimpleCertificate({
     required String id,
     String observations = '',
   }) async {

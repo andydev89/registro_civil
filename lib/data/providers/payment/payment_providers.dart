@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:isar/isar.dart';
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/commons/transaction_status_type.dart';
-import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
-import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
-import 'package:registro_civil_apk/data/providers/isar_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'payment_providers.g.dart';
 

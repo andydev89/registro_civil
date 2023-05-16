@@ -1,10 +1,7 @@
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
-import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
-import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
-import 'package:registro_civil_apk/data/models/commons/location_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'commons_providers.g.dart';

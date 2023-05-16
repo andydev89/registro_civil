@@ -1,7 +1,5 @@
-import 'package:registro_civil_apk/data/models/commons/querys_model.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'type_services_provider.g.dart';

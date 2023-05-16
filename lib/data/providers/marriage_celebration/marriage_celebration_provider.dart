@@ -1,16 +1,7 @@
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_type.dart';
-import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
-import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
-import 'package:registro_civil_apk/data/models/commons/querys_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'marriage_celebration_provider.g.dart';

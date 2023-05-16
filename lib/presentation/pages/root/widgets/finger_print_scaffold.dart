@@ -5,7 +5,7 @@ import 'package:registro_civil_apk/presentation/pages/root/widgets/finger_print_
 import 'package:registro_civil_apk/presentation/pages/root/widgets/root_app_bar.dart';
 import 'package:registro_civil_apk/presentation/pages/root/widgets/root_drawer.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/identity/logo_bottom_sheet.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/show_only_in_loggedin_status.dart';
 

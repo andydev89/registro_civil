@@ -2069,7 +2069,7 @@ class SimpleCertificateFirstStepRouterRouteArgs {
 class SimpleCertificateSecondStepRoute
     extends PageRouteInfo<SimpleCertificateSecondStepRouteArgs> {
   SimpleCertificateSecondStepRoute({
-    required SimpleCertificateResponse simpleCertificateResponse,
+    required SimpleCertificateResponseModel simpleCertificateResponse,
     required TypeServiceModel model,
     Key? key,
   }) : super(
@@ -2092,7 +2092,7 @@ class SimpleCertificateSecondStepRouteArgs {
     this.key,
   });
 
-  final SimpleCertificateResponse simpleCertificateResponse;
+  final SimpleCertificateResponseModel simpleCertificateResponse;
 
   final TypeServiceModel model;
 

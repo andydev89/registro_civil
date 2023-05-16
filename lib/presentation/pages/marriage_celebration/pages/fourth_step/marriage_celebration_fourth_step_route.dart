@@ -17,7 +17,7 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_file_picker.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';

@@ -12,7 +12,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_caption.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class PrimaryReactiveFilePicker<T> extends StatelessWidget {

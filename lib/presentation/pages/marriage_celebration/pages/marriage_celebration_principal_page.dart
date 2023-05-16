@@ -12,7 +12,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_add_item_row.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/card_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
 import 'package:registro_civil_apk/presentation/widgets/list/paged_list_view_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.dart';

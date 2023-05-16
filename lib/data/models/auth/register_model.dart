@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
-import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
+import 'package:registro_civil_apk/data/models/auth/auth_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 part 'register_model.g.dart';
