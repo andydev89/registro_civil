@@ -1,40 +1,52 @@
-import 'package:json_annotation/json_annotation.dart';
+// ignore_for_file: invalid_annotation_target
+
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/change_of_name/change_of_name.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 part 'change_of_name_model.g.dart';
 part 'change_of_name_model.gform.dart';
+part 'change_of_name_model.freezed.dart';
 
 @ReactiveFormAnnotation()
-@JsonSerializable(explicitToJson: true)
-class ChangeOfNameModel {
-  ChangeOfNameModel({
+@freezed
+class ChangeOfNameModel with _$ChangeOfNameModel {
+  const factory ChangeOfNameModel({
+    String? nui,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.changeOfNameType,
+    @JsonKey(name: 'type')
+        required ChangeOfNameType changeOfNameType,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.agency,
-    @FormControlAnnotation(validators: [requiredValidator]) required this.name1,
-    @FormControlAnnotation(validators: [requiredValidator]) required this.name2,
+    @JsonKey(
+      includeFromJson: false,
+      includeToJson: false,
+    )
+        AgencyModel? agency,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.resultingName,
-    @FormControlAnnotation<String>() this.observations,
+        required String firstName,
+    @FormControlAnnotation(validators: [requiredValidator])
+        required String secondName,
+    @FormControlAnnotation(validators: [requiredValidator])
+    @JsonKey(
+      includeFromJson: false,
+      includeToJson: false,
+    )
+        String? resultingName,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'observation')
+        String? observations,
     @FormControlAnnotation<String>(validators: [requiredValidator])
-        required this.document,
-  });
+        required String document,
+  }) = _ChangeOfNameModel;
+
+  const ChangeOfNameModel._();
 
   factory ChangeOfNameModel.fromJson(Map<String, dynamic> json) =>
       _$ChangeOfNameModelFromJson(json);
 
-  final AgencyModel agency;
-  final ChangeOfNameType changeOfNameType;
-  final String name1;
-  final String name2;
-  final String resultingName;
-  final String? observations;
-
-  ///Document in base 64
-  final String document;
-
-  Map<String, dynamic> toJson() => _$ChangeOfNameModelToJson(this);
+  @JsonKey(
+    includeToJson: true,
+  )
+  String get agencyId => agency!.id;
 }

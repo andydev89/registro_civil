@@ -31,14 +31,14 @@ class ChangeOfNameFirstStepPage extends ConsumerWidget {
       title: 'Información para el cambio de nombre',
       body: ChangeOfNameModelFormBuilder(
         initState: (context, formModel) {
-          formModel.name1Control.statusChanged.listen((event) {
-            formModel.resultingNameControl.updateValue(
-              '''${formModel.name1Control.value ?? ''} ${formModel.name2Control.value ?? ''}''',
+          formModel.firstNameControl.statusChanged.listen((event) {
+            formModel.resultingNameControl?.updateValue(
+              '''${formModel.firstNameControl.value ?? ''} ${formModel.secondNameControl.value ?? ''}''',
             );
           });
-          formModel.name2Control.statusChanged.listen((event) {
-            formModel.resultingNameControl.updateValue(
-              '''${formModel.name1Control.value ?? ''} ${formModel.name2Control.value ?? ''}''',
+          formModel.secondNameControl.statusChanged.listen((event) {
+            formModel.resultingNameControl?.updateValue(
+              '''${formModel.firstNameControl.value ?? ''} ${formModel.secondNameControl.value ?? ''}''',
             );
           });
         },
@@ -48,30 +48,31 @@ class ChangeOfNameFirstStepPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PrimaryReactiveDropdown(
-                  label: 'Tipo de cambio de nombre',
+                  label: l10n.tipoDeCambioDeNombre,
                   formControl: formModel.changeOfNameTypeControl,
                   items: ChangeOfNameType.values,
                 ),
                 SelectElementFromApi(
-                  label: 'Agencia',
+                  label: l10n.agencia,
                   provider: agenciesProvider,
                   formControl: formModel.agencyControl,
                 ),
                 PrimaryReactiveTextField(
-                  formControl: formModel.name1Control,
-                  label: 'Nombre 1',
+                  formControl: formModel.firstNameControl,
+                  label: '${l10n.nombre} 1',
                 ),
                 PrimaryReactiveTextField(
-                  formControl: formModel.name2Control,
-                  label: 'Nombre 2',
+                  formControl: formModel.secondNameControl,
+                  label: '${l10n.nombre} 2',
                 ),
                 PrimaryReactiveTextField(
                   formControl: formModel.resultingNameControl,
-                  label: 'Nombre resultante',
+                  readOnly: true,
+                  label: l10n.nombreResultante,
                 ),
                 PrimaryReactiveFilePicker(
                   formControl: formModel.documentControl,
-                  label: 'Documento',
+                  label: l10n.documento,
                   allowedExtensions: const [
                     FileExtension.jpg,
                     FileExtension.jpeg,
@@ -79,7 +80,7 @@ class ChangeOfNameFirstStepPage extends ConsumerWidget {
                 ),
                 PrimaryReactiveTextAreaField(
                   formControl: formModel.observationsControl,
-                  label: 'Observaciones',
+                  label: l10n.observaciones,
                 ),
                 ReactiveChangeOfNameModelFormConsumer(
                   builder: (context, formModel, child) => PrimaryButton(

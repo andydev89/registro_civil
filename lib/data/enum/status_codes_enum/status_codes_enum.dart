@@ -71,7 +71,16 @@ enum StatusCode implements Translatable {
   s642(642),
   s643(643),
   s644(644),
-  ;
+
+  //Errores para el cambio de nombre
+  s680(680),
+  s681(681),
+  s682(682),
+  s683(683),
+  s684(684),
+  s685(685),
+  s686(686),
+  s687(687);
 
   const StatusCode(this.code);
   final int code;
@@ -105,8 +114,7 @@ enum StatusCode implements Translatable {
       case StatusCode.s409:
         return l10n.s409;
       case StatusCode.s412:
-        // TODO(alejandro): traducir
-        return 'Error al realizar el pago';
+        return l10n.s412;
       // server errors
       case StatusCode.s500:
         return l10n.s500;
@@ -209,6 +217,22 @@ enum StatusCode implements Translatable {
         return l10n.s643;
       case StatusCode.s644:
         return l10n.s644;
+      case StatusCode.s680:
+        return l10n.s680;
+      case StatusCode.s681:
+        return l10n.s681;
+      case StatusCode.s682:
+        return l10n.s682;
+      case StatusCode.s683:
+        return l10n.s683;
+      case StatusCode.s684:
+        return l10n.s684;
+      case StatusCode.s685:
+        return l10n.s685;
+      case StatusCode.s686:
+        return l10n.s686;
+      case StatusCode.s687:
+        return l10n.s687;
     }
   }
 }

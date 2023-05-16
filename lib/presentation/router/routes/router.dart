@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
@@ -74,6 +75,7 @@ import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/s
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_first_step/simple_certificate_first_step_router_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/pages/simple_certificate_second_step/simple_certificate_second_step_page.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/simple_certificate_router_page.dart';
+import 'package:registro_civil_apk/presentation/router/routes/agreement_guard.dart';
 import 'package:registro_civil_apk/presentation/router/routes/auth_guard.dart';
 
 part 'router.gr.dart';
@@ -235,7 +237,8 @@ part 'router.gr.dart';
         ),
         // MARRIAGE CELEBRATION
         CupertinoRoute(
-          guards: [AuthGuard],
+          guards: [AuthGuard, AgreementGuard],
+          meta: {agreementTypeMetaName: 2},
           page: MarriageCelebrationRouterPage,
           children: [
             CupertinoRoute(
@@ -311,7 +314,8 @@ part 'router.gr.dart';
         ),
         //RESIDENT REGISTRATION
         CupertinoRoute(
-          guards: [AuthGuard],
+          guards: [AuthGuard, AgreementGuard],
+          meta: {agreementTypeMetaName: 1},
           page: ResidenceRegistrationRouterPage,
           children: [
             CupertinoRoute(
@@ -346,15 +350,17 @@ part 'router.gr.dart';
         ),
         //CAMBIO DE NOMBRE
         CupertinoRoute(
-          guards: [AuthGuard],
+          guards: [AuthGuard, AgreementGuard],
+          meta: {agreementTypeMetaName: 0},
           page: ChangeOfNameRouterPage,
           children: [
-            CupertinoRoute(
-              page: TermAndUsesConditionsPage,
-              initial: true,
-            ),
+            // CupertinoRoute(
+            //   page: TermAndUsesConditionsPage,
+            //   initial: true,
+            // ),
             CupertinoRoute(
               page: ChangeOfNameFirstStepPage,
+              initial: true,
             ),
             CupertinoRoute(
               page: VerifyInformationPage,
@@ -406,5 +412,8 @@ part 'router.gr.dart';
 // }
 
 class AppRouter extends _$AppRouter {
-  AppRouter({required super.authGuard});
+  AppRouter({
+    required super.authGuard,
+    required super.agreementGuard,
+  });
 }
