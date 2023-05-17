@@ -34,7 +34,7 @@ class Offers extends _$Offers {
         .toList();
   }
 
-  double get price {
+  double price() {
     return state.fold<double>(
       0,
       (previousValue, element) =>
@@ -42,7 +42,7 @@ class Offers extends _$Offers {
     );
   }
 
-  double get iva {
+  double iva() {
     return state.fold<double>(
       0,
       (previousValue, element) =>
@@ -50,7 +50,7 @@ class Offers extends _$Offers {
     );
   }
 
-  double get discount {
+  double discount() {
     return state.fold<double>(
       0,
       (previousValue, element) =>
@@ -58,9 +58,9 @@ class Offers extends _$Offers {
     );
   }
 
-  double get totalPay => price + iva - discount;
+  double totalPay() => price() + iva() - discount();
 
-  double get subTotal => price - discount;
+  double subTotal() => price() - discount();
 
   void empty() {
     state = [];
@@ -71,9 +71,9 @@ class Offers extends _$Offers {
     return TypeServiceModel(
       id: '0',
       name: l10n.carrito,
-      price: price,
-      iva: iva,
-      discount: discount,
+      price: price(),
+      iva: iva(),
+      discount: discount(),
       description: '',
       iconoMovil: '',
       iconoWeb: '',

@@ -315,7 +315,7 @@ final marriageCelebrationProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$MarriageCelebration = AutoDisposeNotifier<MarriageCelebrationModel>;
-String _$witness1Hash() => r'c0cf1ddd35e4c05f617f36963f47c093c751e6f5';
+String _$witness1Hash() => r'e21bc83ef8fd3220ffeed45be77857bf3adafc33';
 
 /// See also [Witness1].
 @ProviderFor(Witness1)
@@ -330,7 +330,7 @@ final witness1Provider =
 );
 
 typedef _$Witness1 = AutoDisposeNotifier<Witness>;
-String _$witnesssHash() => r'908e8de10ba7bc31d7ecefbed8968b312e0005b5';
+String _$witnesssHash() => r'f22067c688d4169670322df0c2e0ca213409d5da';
 
 abstract class _$Witnesss extends BuildlessAutoDisposeNotifier<Witness> {
   late final int index;
@@ -425,7 +425,7 @@ class WitnesssProvider
   }
 }
 
-String _$partnersHash() => r'833d4abcb59799874f520e00fbdeb1d7580c9351';
+String _$partnersHash() => r'fb5e87c8fa25b20f1391832a4b0dd48701ca55d5';
 
 abstract class _$Partners extends BuildlessAutoDisposeNotifier<Partner> {
   late final int indexPartner;

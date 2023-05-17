@@ -455,9 +455,17 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     MarriageCelebrationFirstStepRouterRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<MarriageCelebrationFirstStepRouterRouteArgs>(
+              orElse: () =>
+                  const MarriageCelebrationFirstStepRouterRouteArgs());
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const MarriageCelebrationFirstStepRouterPage(),
+        child: MarriageCelebrationFirstStepRouterPage(
+          key: args.key,
+          operation: args.operation,
+          marriageId: args.marriageId,
+        ),
       );
     },
     MarriageCelebrationAgencyRoute.name: (routeData) {
@@ -498,18 +506,28 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     FirstStepAttorneyRoute.name: (routeData) {
+      final args = routeData.argsAs<FirstStepAttorneyRouteArgs>(
+          orElse: () => const FirstStepAttorneyRouteArgs());
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const FirstStepAttorneyPage(),
+        child: FirstStepAttorneyPage(
+          key: args.key,
+          operation: args.operation,
+        ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
       );
     },
     FirstStepContractingPartyRoute.name: (routeData) {
+      final args = routeData.argsAs<FirstStepContractingPartyRouteArgs>(
+          orElse: () => const FirstStepContractingPartyRouteArgs());
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const FirstStepContractingPartyPage(),
+        child: FirstStepContractingPartyPage(
+          key: args.key,
+          operation: args.operation,
+        ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -2157,15 +2175,44 @@ class RejectionStepMarriageCelebrationRouteArgs {
 
 /// generated route for
 /// [MarriageCelebrationFirstStepRouterPage]
-class MarriageCelebrationFirstStepRouterRoute extends PageRouteInfo<void> {
-  const MarriageCelebrationFirstStepRouterRoute({List<PageRouteInfo>? children})
-      : super(
+class MarriageCelebrationFirstStepRouterRoute
+    extends PageRouteInfo<MarriageCelebrationFirstStepRouterRouteArgs> {
+  MarriageCelebrationFirstStepRouterRoute({
+    Key? key,
+    Crud operation = Crud.create,
+    String? marriageId,
+    List<PageRouteInfo>? children,
+  }) : super(
           MarriageCelebrationFirstStepRouterRoute.name,
           path: 'marriage-celebration-first-step-router-page',
+          args: MarriageCelebrationFirstStepRouterRouteArgs(
+            key: key,
+            operation: operation,
+            marriageId: marriageId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'MarriageCelebrationFirstStepRouterRoute';
+}
+
+class MarriageCelebrationFirstStepRouterRouteArgs {
+  const MarriageCelebrationFirstStepRouterRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+    this.marriageId,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  final String? marriageId;
+
+  @override
+  String toString() {
+    return 'MarriageCelebrationFirstStepRouterRouteArgs{key: $key, operation: $operation, marriageId: $marriageId}';
+  }
 }
 
 /// generated route for
@@ -2244,26 +2291,71 @@ class MarriageCelebrationFourthStepRouterRouteArgs {
 
 /// generated route for
 /// [FirstStepAttorneyPage]
-class FirstStepAttorneyRoute extends PageRouteInfo<void> {
-  const FirstStepAttorneyRoute()
-      : super(
+class FirstStepAttorneyRoute extends PageRouteInfo<FirstStepAttorneyRouteArgs> {
+  FirstStepAttorneyRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
           FirstStepAttorneyRoute.name,
           path: '',
+          args: FirstStepAttorneyRouteArgs(
+            key: key,
+            operation: operation,
+          ),
         );
 
   static const String name = 'FirstStepAttorneyRoute';
 }
 
+class FirstStepAttorneyRouteArgs {
+  const FirstStepAttorneyRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'FirstStepAttorneyRouteArgs{key: $key, operation: $operation}';
+  }
+}
+
 /// generated route for
 /// [FirstStepContractingPartyPage]
-class FirstStepContractingPartyRoute extends PageRouteInfo<void> {
-  const FirstStepContractingPartyRoute()
-      : super(
+class FirstStepContractingPartyRoute
+    extends PageRouteInfo<FirstStepContractingPartyRouteArgs> {
+  FirstStepContractingPartyRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
           FirstStepContractingPartyRoute.name,
           path: 'first-step-contracting-party-page',
+          args: FirstStepContractingPartyRouteArgs(
+            key: key,
+            operation: operation,
+          ),
         );
 
   static const String name = 'FirstStepContractingPartyRoute';
+}
+
+class FirstStepContractingPartyRouteArgs {
+  const FirstStepContractingPartyRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'FirstStepContractingPartyRouteArgs{key: $key, operation: $operation}';
+  }
 }
 
 /// generated route for

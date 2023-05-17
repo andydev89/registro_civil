@@ -69,10 +69,14 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
                                 marriageId: p0.id,
                               ),
                             ),
-                      Crud.read: (p0) => showContentDialog(
-                            context,
-                            content: ViewFromJsonWidget(
-                              json: e.toJson(),
+                      Crud.read: (p0) => context.navigateTo(
+                            MarriageCelebrationRouterRoute(
+                              children: [
+                                MarriageCelebrationFirstStepRouterRoute(
+                                  operation: Crud.read,
+                                  marriageId: e.id,
+                                )
+                              ],
                             ),
                           ),
                     },

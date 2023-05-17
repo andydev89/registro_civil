@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
+import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -12,7 +13,11 @@ import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.d
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 
 class FirstStepAttorneyPage extends ConsumerWidget {
-  const FirstStepAttorneyPage({super.key});
+  const FirstStepAttorneyPage({
+    super.key,
+    this.operation = Crud.create,
+  });
+  final Crud operation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

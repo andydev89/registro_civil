@@ -49,11 +49,6 @@ class ResidentialP extends _$ResidentialP {
     );
   }
 
-  @override
-  set state(Residential residential) {
-    super.state = residential;
-  }
-
   FirstStepResidenceModel getFirstStep() {
     return FirstStepResidenceModel(
       province: state.province,

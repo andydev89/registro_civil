@@ -77,11 +77,6 @@ class Witness1 extends _$Witness1 {
     return Witness();
   }
 
-  @override
-  set state(Witness witness) {
-    super.state = witness;
-  }
-
   void restart() => state = Witness();
 }
 
@@ -92,11 +87,6 @@ class Witnesss extends _$Witnesss {
     return Witness();
   }
 
-  @override
-  set state(Witness witness) {
-    super.state = witness;
-  }
-
   void restart() => state = Witness();
 }
 
@@ -105,11 +95,6 @@ class Partners extends _$Partners {
   @override
   Partner build(int indexPartner) {
     return Partner();
-  }
-
-  @override
-  set state(Partner partner) {
-    super.state = partner;
   }
 
   void restart() => state = Partner();

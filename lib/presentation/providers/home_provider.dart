@@ -9,13 +9,5 @@ class SearchHome extends _$SearchHome {
     return '';
   }
 
-  @override
-  String get state;
-
-  @override
-  set state(String filter) {
-    super.state = filter;
-  }
-
   void emptyFilter() => state = '';
 }
