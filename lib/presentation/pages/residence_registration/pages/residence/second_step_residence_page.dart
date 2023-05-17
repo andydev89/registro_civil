@@ -23,8 +23,10 @@ class SecondStepResidencePage extends ConsumerWidget {
   const SecondStepResidencePage({
     super.key,
     this.operation = Crud.create,
+    this.residenceIndex,
   });
   final Crud operation;
+  final int? residenceIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -161,12 +163,13 @@ class SecondStepResidencePage extends ConsumerWidget {
                       } else {
                         ref
                             .read(resRegProvider.notifier)
-                            .editResidence(residence);
+                            .editResidence(residenceIndex!, residence);
                       }
                       showAlert(l10n.residenciaGuardadaCor, TypeAlert.success);
                     }
-                    context
-                        .navigateTo(const ResidenceRegistrationRouterRoute());
+                    context.navigateTo(
+                      ResidenceRegistrationRouterRoute(showAgreement: false),
+                    );
                   }
                 : null,
           ),

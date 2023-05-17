@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 part 'offers_model.g.dart';
@@ -29,5 +28,3 @@ class OffersModel {
 
   Map<String, dynamic> toJson() => _$OffersModelToJson(this);
 }
-
-enum OperationType { more, less }

@@ -21,13 +21,15 @@ class FirstStepResidencePage extends ConsumerWidget {
   const FirstStepResidencePage({
     super.key,
     this.operation = Crud.create,
+    this.residenceIndex,
   });
   final Crud operation;
+  final int? residenceIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    var init = operation.isEditOrRead;
+    final init = operation.isEditOrRead;
     var alreadyStarter = false;
     return FirstStepResidenceModelFormBuilder(
       model: operation.isEditOrRead
@@ -143,7 +145,8 @@ class FirstStepResidencePage extends ConsumerWidget {
                       context.navigateTo(
                         SecondStepResidenceRoute(
                           operation: operation,
-                        ),
+                          residenceIndex: residenceIndex
+                        ,),
                       );
                     }
                   : null,

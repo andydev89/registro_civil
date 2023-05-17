@@ -37,6 +37,8 @@ enum StateMarriageType implements Translatable {
 }
 
 enum StateDocument implements Translatable {
+  @JsonValue('PENDING')
+  pending('PENDING'),
   @JsonValue('APPROVED')
   approved('APPROVED'),
   @JsonValue('REJECTED')
@@ -49,6 +51,8 @@ enum StateDocument implements Translatable {
   String translate(BuildContext context) {
     final l10n = context.l10n;
     switch (this) {
+      case StateDocument.pending:
+        return l10n.pendiente;
       case StateDocument.approved:
         return l10n.aprobado;
       case StateDocument.rejected:

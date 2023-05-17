@@ -4,6 +4,7 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:power_ups/extensions/iterable_extension.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
@@ -49,15 +50,13 @@ class MainPageResicenceRegistrationPage extends ConsumerWidget {
                           title: l10n.listadoResidencias,
                           onPressed: () => toResidence(context),
                         ),
-                        ...formModel.model.residentials.map(
-                          (element) => GestureDetector(
+                        ...formModel.model.residentials.mapWithIndex(
+                          (index, element) => GestureDetector(
                             onTap: () => context.navigateTo(
                               DependentRoute(
                                 children: [
                                   MainRouteDependentRoute(
-                                    residential: ref
-                                        .watch(resRegProvider.notifier)
-                                        .residentialFromId(element.myId),
+                                    residentialIndex: index,
                                   )
                                 ],
                               ),
@@ -76,7 +75,11 @@ class MainPageResicenceRegistrationPage extends ConsumerWidget {
                                   ref
                                       .read(residentialPProvider.notifier)
                                       .state = r;
-                                  toResidence(context, operation: Crud.update);
+                                  toResidence(
+                                    context,
+                                    operation: Crud.update,
+                                    residenceIndex: index,
+                                  );
                                 },
                                 Crud.read: (r) {
                                   ref
@@ -89,7 +92,7 @@ class MainPageResicenceRegistrationPage extends ConsumerWidget {
                                       onDelete: () {
                                         ref
                                             .read(resRegProvider.notifier)
-                                            .removeResidence(element);
+                                            .removeResidence(index);
                                         showAlert(
                                           l10n.residenciaEliminadaCor,
                                           TypeAlert.success,

@@ -7,7 +7,7 @@ part of 'residence_registration_providers.dart';
 // **************************************************************************
 
 String _$residenceRegistrationHash() =>
-    r'c73f8b56976ac47ebb75f7175744d795cc439ae6';
+    r'8ab379b0c42dba5d810d1783fc7f93e0e541fcaf';
 
 /// See also [residenceRegistration].
 @ProviderFor(residenceRegistration)

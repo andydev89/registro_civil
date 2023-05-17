@@ -30,12 +30,14 @@ void selectLocationResidenceREgistration({
 Future<void> toResidence(
   BuildContext context, {
   Crud operation = Crud.create,
+  int? residenceIndex,
 }) =>
     context.navigateTo(
       ResidenceRoute(
         children: [
           FirstStepResidenceRoute(
             operation: operation,
+            residenceIndex: residenceIndex,
           ),
         ],
       ),
@@ -44,7 +46,7 @@ Future<void> toDependent(
   BuildContext context, {
   Crud operation = Crud.create,
   Dependent? dependent,
-  required String residenceId,
+  required int residentialIndex,
 }) =>
     context.navigateTo(
       DependentRoute(
@@ -53,7 +55,7 @@ Future<void> toDependent(
             key: UniqueKey(),
             operation: operation,
             dependent: dependent,
-            residenceId: residenceId,
+            residentialIndex: residentialIndex,
           ),
         ],
       ),

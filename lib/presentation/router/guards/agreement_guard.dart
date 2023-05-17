@@ -13,6 +13,12 @@ class AgreementGuard extends AutoRouteGuard {
     final agreementType = AgreementType.getByValue(
       resolver.route.meta[agreementTypeMetaName] as int,
     );
+    final queryParams = resolver.route.queryParams;
+    final showAgreeement = queryParams.get('showAgreement') as bool?;
+    if (showAgreeement == false) {
+      resolver.next();
+      return;
+    }
     final accept = await showAceptAgreement(
       context!,
       agreementType: agreementType,

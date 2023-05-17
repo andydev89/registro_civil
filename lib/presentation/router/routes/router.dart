@@ -169,9 +169,17 @@ part 'router.gr.dart';
           meta: {agreementTypeMetaName: 2},
           page: MarriageCelebrationRouterPage,
           children: [
+            CustomRoute(
+              initial: true,
+              page: MarriageCelebrationPrincipalPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+            CustomRoute(
+              page: RejectionStepMarriageCelebrationPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
             CupertinoRoute(
               page: MarriageCelebrationFirstStepRouterPage,
-              initial: true,
               children: [
                 CustomRoute(
                   page: FirstStepAttorneyPage,
@@ -231,14 +239,6 @@ part 'router.gr.dart';
               transitionsBuilder: TransitionsBuilders.slideRight,
             ),
           ],
-        ),
-        CustomRoute(
-          page: MarriageCelebrationPrincipalPage,
-          transitionsBuilder: TransitionsBuilders.slideRight,
-        ),
-        CustomRoute(
-          page: RejectionStepMarriageCelebrationPage,
-          transitionsBuilder: TransitionsBuilders.slideRight,
         ),
         //RESIDENT REGISTRATION
         CupertinoRoute(
