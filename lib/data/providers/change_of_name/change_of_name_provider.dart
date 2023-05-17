@@ -1,15 +1,13 @@
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
-import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
-import 'package:registro_civil_apk/data/models/change_of_name/change_of_name_model.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'change_of_name_provider.g.dart';
 
 @riverpod
-Future<Result<CommandModel, StatusCode>> changeOfName(
+Future<Result<CommandModel, StatusCodeType>> changeOfName(
   ChangeOfNameRef ref, {
   required ChangeOfNameModel changeOfNameModel,
 }) async {

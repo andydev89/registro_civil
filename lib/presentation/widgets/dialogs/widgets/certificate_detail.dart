@@ -3,12 +3,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:popover/popover.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
-import 'package:registro_civil_apk/data/providers/cart_provider.dart';
-import 'package:registro_civil_apk/data/utils/methods.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
+import 'package:registro_civil_apk/data/utils/utils.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/modify_cant.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_caption.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
 class CertificateDetail extends ConsumerWidget {

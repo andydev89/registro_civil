@@ -4,19 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/rejecting_enum.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
-import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/marriage_celebration/widgets/upload_document_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_file_picker.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
+import 'package:registro_civil_apk/presentation/pages/pages.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
   const RejectionStepMarriageCelebrationPage({

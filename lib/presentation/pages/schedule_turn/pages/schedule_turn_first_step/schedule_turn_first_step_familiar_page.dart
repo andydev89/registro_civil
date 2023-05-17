@@ -1,22 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
-import 'package:registro_civil_apk/data/enum/commons/relationship_type.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_icon_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/payment_selector.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_check_box.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
   const ScheduleTurnFirstStepFamiliarPage({
@@ -62,57 +52,122 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                   ],
                 ),
               ),
-              ReactiveFormArray(
-                formArray: formModel.familyControl,
-                builder: (context, formArray, child) => Column(
-                  children: formModel.familyControl.value!
-                      .asMap()
-                      .map(
-                        (key, value) => MapEntry(
-                          key,
-                          Column(
-                            children: [
-                              PrimaryReactiveNuiField<String>(
-                                formControlName: '$key.identificationNumber',
-                                label: l10n.cedula,
-                              ).horizontalPadding(20),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 20, right: 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Flexible(
-                                      child: PrimaryReactiveDropdown<
-                                          RelationshipType>(
-                                        label: l10n.parentezco,
-                                        formControlName: '$key.relationship',
-                                        items: RelationshipType.values,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    PrimaryIconButton(
-                                      icon: Assets.svg.starCheck.svg(),
-                                      onPressed: () {
-                                        // TODO(alejandro): algo en
-                                        // el parentezco
-                                      },
-                                    ).verticalPadding(15),
-                                  ],
-                                ),
-                              ),
-                            ],
+              ReactiveScheduleTurnFirstStepFamiliarModelFormFormGroupArrayBuilder(
+                extended: formModel.familyExtendedControl,
+                itemBuilder: (context, i, item, formModel) => Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          PrimaryReactiveNuiField<String>(
+                            key: Key(
+                              item!.identificationNumberControl.hashCode
+                                  .toString(),
+                            ),
+                            formControl: item.identificationNumberControl,
+                            label: l10n.cedula,
                           ),
-                        ),
-                      )
-                      .values
-                      .toList(),
+                          PrimaryReactiveDropdown<RelationshipType>(
+                            key: Key(
+                              item.relationshipControl.hashCode.toString(),
+                            ),
+                            formControl: item.relationshipControl,
+                            label: l10n.parentezco,
+                            items: RelationshipType.values,
+                          ),
+                        ],
+                      ).horizontalPadding(20),
+                    ),
+                    PrimaryIconButton(
+                      icon: Assets.svg.trash.svg(
+                        width: 20,
+                        height: 20,
+                      ),
+                      onPressed: () {
+                        formModel.removeFamilyItemAtIndex(
+                          i,
+                        );
+                      },
+                    ).verticalPadding(15),
+                  ],
                 ),
               ),
+              // ReactiveFormArray(
+              //   formArray: formModel.familyControl,
+              //   builder: (context, formArray, child) => Column(
+              //     children: formModel.familyControl.value!
+              //         .asMap()
+              //         .map(
+              //           (key, value) => MapEntry(
+              //             key,
+              //             Row(
+              //               children: [
+              //                 Expanded(
+              //                   child: Column(
+              //                     children: [
+              //                       PrimaryReactiveNuiField<String>(
+              //                         key: Key('$key.identificationNumber'),
+              //                         formControlName:
+              //                             '$key.identificationNumber',
+              //                         label: l10n.cedula,
+              //                       ),
+              //                       PrimaryReactiveDropdown<RelationshipType>(
+              //                         key: Key('$key.relationship'),
+              //                         label: l10n.parentezco,
+              //                         formControlName: '$key.relationship',
+              //                         items: RelationshipType.values,
+              //                       ),
+              //                       // Padding(
+              //                       //   padding:
+              //                       //       const EdgeInsets.only(left: 20, right: 20),
+              //                       //   child: Row(
+              //                       //     mainAxisAlignment:
+              //                       //         MainAxisAlignment.spaceBetween,
+              //                       //     crossAxisAlignment: CrossAxisAlignment.end,
+              //                       //     children: [
+              //                       //       Flexible(
+              //                       //         child: PrimaryReactiveDropdown<
+              //                       //             RelationshipType>(
+              //                       //           label: l10n.parentezco,
+              //                       //           formControlName: '$key.relationship',
+              //                       //           items: RelationshipType.values,
+              //                       //         ),
+              //                       //       ),
+              //                       //       const SizedBox(
+              //                       //         width: 5,
+              //                       //       ),
+              //                       //       PrimaryIconButton(
+              //                       //         icon: Assets.svg.starCheck.svg(),
+              //                       //         onPressed: () {
+              //                       //           // TODO(alejandro): algo en
+              //                       //           // el parentezco
+              //                       //         },
+              //                       //       ).verticalPadding(15),
+              //                       //     ],
+              //                       //   ),
+              //                       // ),
+              //                     ],
+              //                   ).horizontalPadding(20),
+              //                 ),
+              //                 PrimaryIconButton(
+              //                   icon: Assets.svg.trash.svg(
+              //                     width: 20,
+              //                     height: 20,
+              //                   ),
+              //                   onPressed: () {
+              //                     formModel.removeFamilyItemAtIndex(
+              //                       key,
+              //                     );
+              //                   },
+              //                 ).verticalPadding(15),
+              //               ],
+              //             ),
+              //           ),
+              //         )
+              //         .values
+              //         .toList(),
+              //   ),
+              // ),
               PaymentSelector(
                 label: l10n.seleccioneMetodoPago,
                 formControl: formModel.paymentMethodControl,

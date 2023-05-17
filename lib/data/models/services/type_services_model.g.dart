@@ -14,13 +14,13 @@ TypeServiceModel _$TypeServiceModelFromJson(Map<String, dynamic> json) =>
       price: (json['price'] as num).toDouble(),
       iva: (json['iva'] as num).toDouble(),
       discount: (json['discount'] as num).toDouble(),
-      state: $enumDecode(_$StatusEnumMap, json['state']),
+      state: $enumDecode(_$StatusTypeEnumMap, json['state']),
       publishWeb: json['publishWeb'] as bool,
       publishMovil: json['publishMovil'] as bool,
       path: json['path'] as String?,
       iconoWeb: json['iconoWeb'] as String,
       iconoMovil: json['iconoMovil'] as String,
-      type: TypeService.fromJson(json['type'] as String?),
+      type: ServiceType.fromJson(json['type'] as String?),
       schedule: json['schedule'] as bool,
     );
 
@@ -38,11 +38,11 @@ Map<String, dynamic> _$TypeServiceModelToJson(TypeServiceModel instance) =>
       'publishMovil': instance.publishMovil,
       'publishWeb': instance.publishWeb,
       'schedule': instance.schedule,
-      'state': _$StatusEnumMap[instance.state]!,
-      'type': TypeService.toJson(instance.type),
+      'state': _$StatusTypeEnumMap[instance.state]!,
+      'type': ServiceType.toJson(instance.type),
     };
 
-const _$StatusEnumMap = {
-  Status.active: 'ACTIVE',
-  Status.inactive: 'INACTIVE',
+const _$StatusTypeEnumMap = {
+  StatusType.active: 'ACTIVE',
+  StatusType.inactive: 'INACTIVE',
 };

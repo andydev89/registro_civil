@@ -2,23 +2,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_geocoding_api/google_geocoding_api.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
-import 'package:registro_civil_apk/data/enum/validators/validations_message_enum.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_type.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_type.dart';
+import 'package:registro_civil_apk/data/enum/validators/validations_message_type.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/commons/gmap_providers.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 
 void setErrorFile(FormControl<String>? control) {
   control?.setErrors(
-    {ValidationsMessageEnum.seleccionarArchivo.toText: true},
+    {ValidationsMessageType.seleccionarArchivo.toText: true},
   );
 }
 
 void removeErrorFile(FormControl<String>? control) {
-  control?.removeError(ValidationsMessageEnum.seleccionarArchivo.toText);
+  control?.removeError(ValidationsMessageType.seleccionarArchivo.toText);
 }
 
 void updateWitness({
@@ -92,7 +92,7 @@ FormGroup createPartnerFormGroup(Partner partner) {
         value: partner.name,
         validators: [requiredValidator, nameValidator],
       ),
-      'maritalStatus': FormControl<MaritalStatus>(
+      'maritalStatus': FormControl<MaritalStatusType>(
         value: partner.maritalStatus,
         validators: [requiredValidator],
       ),
@@ -100,7 +100,7 @@ FormGroup createPartnerFormGroup(Partner partner) {
         value: partner.hasChildren,
         validators: [requiredValidator],
       ),
-      'childrenRelationship': FormControl<ChildrenRelationShip>(
+      'childrenRelationship': FormControl<ChildrenRelationShipType>(
         value: partner.childrenRelationship,
       ),
       'conadis': FormControl<bool>(

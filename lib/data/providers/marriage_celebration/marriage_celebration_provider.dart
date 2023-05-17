@@ -1,16 +1,7 @@
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
-import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
-import 'package:registro_civil_apk/data/models/commons/querys_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'marriage_celebration_provider.g.dart';
@@ -127,9 +118,9 @@ class Partners extends _$Partners {
 @riverpod
 Future<List<DocumentResponse>> marriageDocuments(
   MarriageDocumentsRef ref, {
-  required MaritalStatus maritalStatus,
+  required MaritalStatusType maritalStatus,
   required Binary hasChildren,
-  ChildrenRelationShip? childrenRelationShip,
+  ChildrenRelationShipType? childrenRelationShip,
 }) async {
   final api = ref.watch(apiProvider);
   return (await api.marriageDocuments(
@@ -148,7 +139,7 @@ class Marriage extends _$Marriage {
     return;
   }
 
-  Future<Result<bool, StatusCode>> marriage(
+  Future<Result<bool, StatusCodeType>> marriage(
     MarriageCelebrationModel model,
   ) async {
     final api = ref.watch(apiProvider);
@@ -216,7 +207,7 @@ class MarriageUpdate extends _$MarriageUpdate {
   @override
   void build() {}
 
-  Future<Result<bool, StatusCode>> updateMarriage(
+  Future<Result<bool, StatusCodeType>> updateMarriage(
     DocumentsRejection documentsRejection,
   ) async {
     final api = ref.watch(apiProvider);

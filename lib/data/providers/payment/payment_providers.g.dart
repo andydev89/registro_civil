@@ -7,7 +7,7 @@ part of 'payment_providers.dart';
 // **************************************************************************
 
 String _$createPlaceToPayTransactionHash() =>
-    r'920f8a56c36d2f06fc930c1ed03d8c19d9b1b3e5';
+    r'4c0ae31302afd3c897bd90ddce7936c42f090f60';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,15 +31,15 @@ class _SystemHash {
 }
 
 typedef CreatePlaceToPayTransactionRef = AutoDisposeFutureProviderRef<
-    Result<PlaceToPayReferenceModel, StatusCode>>;
+    Result<PlaceToPayReferenceModel, StatusCodeType>>;
 
 /// See also [createPlaceToPayTransaction].
 @ProviderFor(createPlaceToPayTransaction)
 const createPlaceToPayTransactionProvider = CreatePlaceToPayTransactionFamily();
 
 /// See also [createPlaceToPayTransaction].
-class CreatePlaceToPayTransactionFamily
-    extends Family<AsyncValue<Result<PlaceToPayReferenceModel, StatusCode>>> {
+class CreatePlaceToPayTransactionFamily extends Family<
+    AsyncValue<Result<PlaceToPayReferenceModel, StatusCodeType>>> {
   /// See also [createPlaceToPayTransaction].
   const CreatePlaceToPayTransactionFamily();
 
@@ -78,7 +78,7 @@ class CreatePlaceToPayTransactionFamily
 
 /// See also [createPlaceToPayTransaction].
 class CreatePlaceToPayTransactionProvider extends AutoDisposeFutureProvider<
-    Result<PlaceToPayReferenceModel, StatusCode>> {
+    Result<PlaceToPayReferenceModel, StatusCodeType>> {
   /// See also [createPlaceToPayTransaction].
   CreatePlaceToPayTransactionProvider({
     required this.placeToPayModel,
@@ -116,9 +116,9 @@ class CreatePlaceToPayTransactionProvider extends AutoDisposeFutureProvider<
 }
 
 String _$isPlaceToPayTransactionCompletedHash() =>
-    r'f2151d0b8eed8c21d1f3009a9e3761840e00bd74';
+    r'3bd572b3f487e163efb8022c7705d5e8bd7885b8';
 typedef IsPlaceToPayTransactionCompletedRef
-    = AutoDisposeFutureProviderRef<Result<bool, StatusCode>>;
+    = AutoDisposeFutureProviderRef<Result<bool, StatusCodeType>>;
 
 /// See also [isPlaceToPayTransactionCompleted].
 @ProviderFor(isPlaceToPayTransactionCompleted)
@@ -127,7 +127,7 @@ const isPlaceToPayTransactionCompletedProvider =
 
 /// See also [isPlaceToPayTransactionCompleted].
 class IsPlaceToPayTransactionCompletedFamily
-    extends Family<AsyncValue<Result<bool, StatusCode>>> {
+    extends Family<AsyncValue<Result<bool, StatusCodeType>>> {
   /// See also [isPlaceToPayTransactionCompleted].
   const IsPlaceToPayTransactionCompletedFamily();
 
@@ -166,7 +166,7 @@ class IsPlaceToPayTransactionCompletedFamily
 
 /// See also [isPlaceToPayTransactionCompleted].
 class IsPlaceToPayTransactionCompletedProvider
-    extends AutoDisposeFutureProvider<Result<bool, StatusCode>> {
+    extends AutoDisposeFutureProvider<Result<bool, StatusCodeType>> {
   /// See also [isPlaceToPayTransactionCompleted].
   IsPlaceToPayTransactionCompletedProvider({
     required this.placeToPayReference,

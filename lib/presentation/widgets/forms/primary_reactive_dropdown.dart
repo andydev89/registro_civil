@@ -56,6 +56,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
             color: light ? Colors.white : primaryColor,
           ).verticalPadding(5),
         ReactiveDropdownField(
+          key: key,
           readOnly: readOnly || isLoading,
           formControl: formControl,
           formControlName: formControlName,

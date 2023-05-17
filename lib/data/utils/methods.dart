@@ -7,24 +7,24 @@ import 'package:flutter/services.dart';
 import 'package:image/image.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/providers/isar_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 
-StatusCode convertToStatusCode(Map<String, dynamic>? response) {
-  if (response == null) return StatusCode.s999;
+StatusCodeType convertToStatusCode(Map<String, dynamic>? response) {
+  if (response == null) return StatusCodeType.s999;
   try {
     final basicResponse = ResponseModel.fromJson(response, (json) => null);
     return _getStatusCode(basicResponse.status);
   } on Exception catch (_) {
-    return StatusCode.s999;
+    return StatusCodeType.s999;
   }
 }
 
-StatusCode _getStatusCode(StatusCode statusCode) {
-  return StatusCode.values.firstWhere(
+StatusCodeType _getStatusCode(StatusCodeType statusCode) {
+  return StatusCodeType.values.firstWhere(
     (e) => e.code == statusCode.code,
-    orElse: () => StatusCode.s999,
+    orElse: () => StatusCodeType.s999,
   );
 }
 

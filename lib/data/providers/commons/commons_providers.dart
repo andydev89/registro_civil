@@ -1,16 +1,13 @@
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
-import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
-import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
-import 'package:registro_civil_apk/data/models/commons/location_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'commons_providers.g.dart';
 
 @riverpod
-Future<Result<List<LocationModel>, StatusCode>> provinces(
+Future<Result<List<LocationModel>, StatusCodeType>> provinces(
   ProvincesRef ref,
 ) async {
   final api = ref.watch(apiProvider);
@@ -21,7 +18,7 @@ Future<Result<List<LocationModel>, StatusCode>> provinces(
 }
 
 @riverpod
-Future<Result<List<LocationModel>, StatusCode>> canton(
+Future<Result<List<LocationModel>, StatusCodeType>> canton(
   CantonRef ref,
 ) async {
   final api = ref.watch(apiProvider);
@@ -32,7 +29,7 @@ Future<Result<List<LocationModel>, StatusCode>> canton(
 }
 
 @riverpod
-Future<Result<List<LocationModel>, StatusCode>> parroquia(
+Future<Result<List<LocationModel>, StatusCodeType>> parroquia(
   ParroquiaRef ref,
 ) async {
   final api = ref.watch(apiProvider);
@@ -43,7 +40,7 @@ Future<Result<List<LocationModel>, StatusCode>> parroquia(
 }
 
 @riverpod
-Future<Result<List<AgencyModel>, StatusCode>> agencies(
+Future<Result<List<AgencyModel>, StatusCodeType>> agencies(
   AgenciesRef ref,
 ) async {
   final api = ref.watch(apiProvider);
@@ -54,7 +51,7 @@ Future<Result<List<AgencyModel>, StatusCode>> agencies(
 }
 
 @riverpod
-Future<Result<List<AgencyModel>, StatusCode>> agenciesByProvince(
+Future<Result<List<AgencyModel>, StatusCodeType>> agenciesByProvince(
   AgenciesByProvinceRef ref, {
   required String provinceId,
 }) async {
@@ -64,8 +61,9 @@ Future<Result<List<AgencyModel>, StatusCode>> agenciesByProvince(
       ? Result.ok(response.data!)
       : Result.err(response.status);
 }
+
 @riverpod
-Future<Result<List<AgencyModel>, StatusCode>> agenciesByCanton(
+Future<Result<List<AgencyModel>, StatusCodeType>> agenciesByCanton(
   AgenciesByCantonRef ref, {
   required String cantonId,
 }) async {
@@ -77,7 +75,7 @@ Future<Result<List<AgencyModel>, StatusCode>> agenciesByCanton(
 }
 
 @riverpod
-Future<Result<List<LocationModel>, StatusCode>> locationByParent(
+Future<Result<List<LocationModel>, StatusCodeType>> locationByParent(
   LocationByParentRef ref, {
   required String parentId,
 }) async {
@@ -89,7 +87,7 @@ Future<Result<List<LocationModel>, StatusCode>> locationByParent(
 }
 
 @riverpod
-Future<Result<List<TypeServiceModel>, StatusCode>> services(
+Future<Result<List<TypeServiceModel>, StatusCodeType>> services(
   ServicesRef ref, {
   bool? bookable,
 }) async {

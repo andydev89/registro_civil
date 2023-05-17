@@ -5,21 +5,13 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_enum.dart';
-import 'package:registro_civil_apk/data/enum/validators/validations_message_enum.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
-import 'package:registro_civil_apk/data/providers/simple_certificate/simple_certificate_provider.dart';
-import 'package:registro_civil_apk/data/utils/alert_methods.dart';
-import 'package:registro_civil_apk/data/utils/validators.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
+import 'package:registro_civil_apk/data/utils/utils.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_check_box.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_nui_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class SimpleCertificateFirstStepFamiliarPage extends ConsumerWidget {
   const SimpleCertificateFirstStepFamiliarPage({
@@ -43,9 +35,9 @@ class SimpleCertificateFirstStepFamiliarPage extends ConsumerWidget {
           if (success == null) return;
           success
               ? formModel.nuiControl
-                  .removeError(ValidationsMessageEnum.invalidDni.toText)
+                  .removeError(ValidationsMessageType.invalidDni.toText)
               : formModel.nuiControl
-                  .setErrors({ValidationsMessageEnum.invalidDni.toText: true});
+                  .setErrors({ValidationsMessageType.invalidDni.toText: true});
         });
         return Scaffold(
           backgroundColor: Colors.transparent,
@@ -67,9 +59,9 @@ class SimpleCertificateFirstStepFamiliarPage extends ConsumerWidget {
                         children: [
                           Flexible(
                             child: PrimaryReactiveDropdown<
-                                RelationshipSimpleCertificateEnum>(
+                                RelationshipSimpleCertificateType>(
                               formControl: formModel.relationshipControl,
-                              items: RelationshipSimpleCertificateEnum.list,
+                              items: RelationshipSimpleCertificateType.list,
                               label: l10n.parentezco,
                               hintText: '${l10n.seleccione}...',
                             ),

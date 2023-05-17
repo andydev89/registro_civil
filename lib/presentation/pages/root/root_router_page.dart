@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fresh_dio/fresh_dio.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
-import 'package:registro_civil_apk/data/providers/payment/payment_providers.dart';
-import 'package:registro_civil_apk/data/utils/alert_methods.dart';
-import 'package:registro_civil_apk/presentation/pages/root/widgets/finger_print_scaffold.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
+import 'package:registro_civil_apk/data/utils/utils.dart';
+import 'package:registro_civil_apk/presentation/pages/pages.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 
 class RootRouterPage extends ConsumerWidget {

@@ -1,11 +1,7 @@
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/services/services_state_enum.dart';
-import 'package:registro_civil_apk/data/enum/services/services_type.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
-import 'package:registro_civil_apk/data/models/auth/register_model.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'simple_certificate_provider.g.dart';
@@ -15,10 +11,10 @@ class SimpleCertificate extends _$SimpleCertificate {
   @override
   void build() {}
 
-  Future<Result<SimpleCertificateResponse, StatusCode>>
+  Future<Result<SimpleCertificateResponseModel, StatusCodeType>>
       simpleCertificateFamiliar({
     required SimpleCertificateFirstStepFamiliarModel familiarModel,
-    required TypeService type,
+    required ServiceType type,
   }) async {
     final api = ref.watch(apiProvider);
     final user = await api.me();
@@ -38,10 +34,10 @@ class SimpleCertificate extends _$SimpleCertificate {
     return Result.err(response.status);
   }
 
-  Future<Result<SimpleCertificateResponse, StatusCode>>
+  Future<Result<SimpleCertificateResponseModel, StatusCodeType>>
       simpleCertificatePersonal({
     required NuiModel model,
-    required TypeService type,
+    required ServiceType type,
   }) async {
     final api = ref.watch(apiProvider);
     final response = await api.simpleCertificate(
@@ -62,16 +58,17 @@ class Process extends _$Process {
   @override
   void build() {}
 
-  Future<Result<ProcessResponse, StatusCode>> processSimpleCertificate({
+  Future<Result<ProcessResponseModel, StatusCodeType>>
+      processSimpleCertificate({
     required String id,
     String observations = '',
-    ServicesState? state,
+    ServicesStateType? state,
   }) async {
     final api = ref.watch(apiProvider);
     final response = await api.process(
       ProcessModel(
         id: id,
-        state: state ?? ServicesState.approved,
+        state: state ?? ServicesStateType.approved,
         observations: observations,
       ),
     );
@@ -87,7 +84,7 @@ class Cancel extends _$Cancel {
   @override
   void build() {}
 
-  Future<Result<ProcessResponse, StatusCode>> cancelSimpleCertificate({
+  Future<Result<ProcessResponseModel, StatusCodeType>> cancelSimpleCertificate({
     required String id,
     String observations = '',
   }) async {

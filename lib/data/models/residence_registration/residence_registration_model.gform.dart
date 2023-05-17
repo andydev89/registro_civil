@@ -122,24 +122,16 @@ class ResidenceRegistrationFormBuilder extends StatefulWidget {
 
 class _ResidenceRegistrationFormBuilderState
     extends State<ResidenceRegistrationFormBuilder> {
-  late FormGroup _form;
-
   late ResidenceRegistrationForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = ResidenceRegistrationForm(widget.model, _form, null);
+    _formModel = ResidenceRegistrationForm(widget.model,
+        ResidenceRegistrationForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -149,12 +141,14 @@ class _ResidenceRegistrationFormBuilderState
   @override
   void didUpdateWidget(covariant ResidenceRegistrationFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = ResidenceRegistrationForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = ResidenceRegistrationForm(widget.model,
+          ResidenceRegistrationForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -162,19 +156,20 @@ class _ResidenceRegistrationFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveResidenceRegistrationForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -189,13 +184,13 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
     this.path,
   ) {}
 
-  static String userIdControlName = "userId";
+  static const String userIdControlName = "userId";
 
-  static String observationsControlName = "observations";
+  static const String observationsControlName = "observations";
 
-  static String residentialsControlName = "residentials";
+  static const String residentialsControlName = "residentials";
 
-  static String stateControlName = "state";
+  static const String stateControlName = "state";
 
   final ResidenceRegistration? residenceRegistration;
 
@@ -209,7 +204,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
   String residentialsControlPath() => pathBuilder(residentialsControlName);
   String get _userIdValue => userIdControl.value as String;
   String get _observationsValue => observationsControl.value as String;
-  Status get _stateValue => stateControl.value as Status;
+  StatusType get _stateValue => stateControl.value as StatusType;
   List<Residential> get _residentialsValue =>
       residentialsControl.value?.whereType<Residential>().toList() ?? [];
   bool get containsUserId {
@@ -275,7 +270,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
   }
 
   void stateValueUpdate(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -311,7 +306,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
   }
 
   void stateValuePatch(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -347,7 +342,7 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
       observationsControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void stateValueReset(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -368,8 +363,8 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
       form.control(userIdControlPath()) as FormControl<String>;
   FormControl<String> get observationsControl =>
       form.control(observationsControlPath()) as FormControl<String>;
-  FormControl<Status> get stateControl =>
-      form.control(stateControlPath()) as FormControl<Status>;
+  FormControl<StatusType> get stateControl =>
+      form.control(stateControlPath()) as FormControl<StatusType>;
   FormArray<Residential> get residentialsControl =>
       form.control(residentialsControlPath()) as FormArray<Residential>;
   void userIdSetDisabled(
@@ -508,36 +503,22 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          ResidenceRegistrationForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    ResidenceRegistration value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: ResidenceRegistrationForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(ResidenceRegistrationForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    ResidenceRegistration? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(ResidenceRegistration? residenceRegistration) =>
+      FormGroup({
         userIdControlName: FormControl<String>(
             value: residenceRegistration?.userId,
             validators: [],
@@ -553,21 +534,20 @@ class ResidenceRegistrationForm implements FormModel<ResidenceRegistration> {
             disabled: false,
             touched: false),
         residentialsControlName: FormArray<Residential>(
-            residenceRegistration?.residentials
-                    .map((e) => FormControl<Residential>(
-                          value: e,
-                          validators: [],
-                          asyncValidators: [],
-                          asyncValidatorsDebounceTime: 250,
-                          disabled: false,
-                        ))
-                    .toList() ??
-                [],
+            (residenceRegistration?.residentials ?? [])
+                .map((e) => FormControl<Residential>(
+                      value: e,
+                      validators: [],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
+                .toList(),
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false),
-        stateControlName: FormControl<Status>(
+        stateControlName: FormControl<StatusType>(
             value: residenceRegistration?.state,
             validators: [],
             asyncValidators: [],
@@ -811,24 +791,16 @@ class ResidentialFormBuilder extends StatefulWidget {
 }
 
 class _ResidentialFormBuilderState extends State<ResidentialFormBuilder> {
-  late FormGroup _form;
-
   late ResidentialForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = ResidentialForm(widget.model, _form, null);
+    _formModel = ResidentialForm(
+        widget.model, ResidentialForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -838,12 +810,14 @@ class _ResidentialFormBuilderState extends State<ResidentialFormBuilder> {
   @override
   void didUpdateWidget(covariant ResidentialFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = ResidentialForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = ResidentialForm(
+          widget.model, ResidentialForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -851,19 +825,20 @@ class _ResidentialFormBuilderState extends State<ResidentialFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveResidentialForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -878,36 +853,36 @@ class ResidentialForm implements FormModel<Residential> {
     this.path,
   ) {}
 
-  static String electricLightMeterControlName = "electricLightMeter";
+  static const String electricLightMeterControlName = "electricLightMeter";
 
-  static String electricalCodeControlName = "electricalCode";
+  static const String electricalCodeControlName = "electricalCode";
 
-  static String provinceControlName = "province";
+  static const String provinceControlName = "province";
 
-  static String cantonControlName = "canton";
+  static const String cantonControlName = "canton";
 
-  static String parroquiaControlName = "parroquia";
+  static const String parroquiaControlName = "parroquia";
 
-  static String mainStreetControlName = "mainStreet";
+  static const String mainStreetControlName = "mainStreet";
 
-  static String backStreetControlName = "backStreet";
+  static const String backStreetControlName = "backStreet";
 
-  static String housingTypeControlName = "housingType";
+  static const String housingTypeControlName = "housingType";
 
-  static String tenureHousingTypeAgreementControlName =
+  static const String tenureHousingTypeAgreementControlName =
       "tenureHousingTypeAgreement";
 
-  static String numberVillaBuildingControlName = "numberVillaBuilding";
+  static const String numberVillaBuildingControlName = "numberVillaBuilding";
 
-  static String floorNumberControlName = "floorNumber";
+  static const String floorNumberControlName = "floorNumber";
 
-  static String departmentNumberControlName = "departmentNumber";
+  static const String departmentNumberControlName = "departmentNumber";
 
-  static String typeControlName = "type";
+  static const String typeControlName = "type";
 
-  static String dependentsControlName = "dependents";
+  static const String dependentsControlName = "dependents";
 
-  static String idControlName = "id";
+  static const String idControlName = "id";
 
   final Residential? residential;
 
@@ -943,9 +918,9 @@ class ResidentialForm implements FormModel<Residential> {
   String get _backStreetValue => backStreetControl.value as String;
   ResidentialHousingType get _housingTypeValue =>
       housingTypeControl.value as ResidentialHousingType;
-  ResidentialTenureHousingTypeAgreemente get _tenureHousingTypeAgreementValue =>
+  ResidentialTenureHousingAgreementeType get _tenureHousingTypeAgreementValue =>
       tenureHousingTypeAgreementControl.value
-          as ResidentialTenureHousingTypeAgreemente;
+          as ResidentialTenureHousingAgreementeType;
   String get _numberVillaBuildingValue =>
       numberVillaBuildingControl.value as String;
   String get _floorNumberValue => floorNumberControl.value as String;
@@ -1196,7 +1171,7 @@ class ResidentialForm implements FormModel<Residential> {
   }
 
   void tenureHousingTypeAgreementValueUpdate(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1331,7 +1306,7 @@ class ResidentialForm implements FormModel<Residential> {
   }
 
   void tenureHousingTypeAgreementValuePatch(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1466,7 +1441,7 @@ class ResidentialForm implements FormModel<Residential> {
       housingTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void tenureHousingTypeAgreementValueReset(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1545,10 +1520,10 @@ class ResidentialForm implements FormModel<Residential> {
   FormControl<ResidentialHousingType> get housingTypeControl =>
       form.control(housingTypeControlPath())
           as FormControl<ResidentialHousingType>;
-  FormControl<ResidentialTenureHousingTypeAgreemente>
+  FormControl<ResidentialTenureHousingAgreementeType>
       get tenureHousingTypeAgreementControl =>
           form.control(tenureHousingTypeAgreementControlPath())
-              as FormControl<ResidentialTenureHousingTypeAgreemente>;
+              as FormControl<ResidentialTenureHousingAgreementeType>;
   FormControl<String> get numberVillaBuildingControl =>
       form.control(numberVillaBuildingControlPath()) as FormControl<String>;
   FormControl<String> get floorNumberControl =>
@@ -1906,34 +1881,21 @@ class ResidentialForm implements FormModel<Residential> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          ResidentialForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    Residential value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: ResidentialForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(ResidentialForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    Residential? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(Residential? residential) => FormGroup({
         electricLightMeterControlName: FormControl<bool>(
             value: residential?.electricLightMeter,
             validators: [requiredValidator],
@@ -1991,7 +1953,7 @@ class ResidentialForm implements FormModel<Residential> {
             disabled: false,
             touched: false),
         tenureHousingTypeAgreementControlName:
-            FormControl<ResidentialTenureHousingTypeAgreemente>(
+            FormControl<ResidentialTenureHousingAgreementeType>(
                 value: residential?.tenureHousingTypeAgreement,
                 validators: [requiredValidator],
                 asyncValidators: [],
@@ -2027,16 +1989,15 @@ class ResidentialForm implements FormModel<Residential> {
             disabled: false,
             touched: false),
         dependentsControlName: FormArray<Dependent>(
-            residential?.dependents
-                    .map((e) => FormControl<Dependent>(
-                          value: e,
-                          validators: [],
-                          asyncValidators: [],
-                          asyncValidatorsDebounceTime: 250,
-                          disabled: false,
-                        ))
-                    .toList() ??
-                [],
+            (residential?.dependents ?? [])
+                .map((e) => FormControl<Dependent>(
+                      value: e,
+                      validators: [],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
+                .toList(),
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -2284,24 +2245,16 @@ class DependentFormBuilder extends StatefulWidget {
 }
 
 class _DependentFormBuilderState extends State<DependentFormBuilder> {
-  late FormGroup _form;
-
   late DependentForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = DependentForm(widget.model, _form, null);
+    _formModel = DependentForm(
+        widget.model, DependentForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -2311,12 +2264,14 @@ class _DependentFormBuilderState extends State<DependentFormBuilder> {
   @override
   void didUpdateWidget(covariant DependentFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = DependentForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = DependentForm(
+          widget.model, DependentForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -2324,19 +2279,20 @@ class _DependentFormBuilderState extends State<DependentFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveDependentForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -2351,19 +2307,19 @@ class DependentForm implements FormModel<Dependent> {
     this.path,
   ) {}
 
-  static String nuiDependentsControlName = "nuiDependents";
+  static const String nuiDependentsControlName = "nuiDependents";
 
-  static String relationshipControlName = "relationship";
+  static const String relationshipControlName = "relationship";
 
-  static String dateControlName = "date";
+  static const String dateControlName = "date";
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String lastnameControlName = "lastname";
+  static const String lastnameControlName = "lastname";
 
-  static String stateControlName = "state";
+  static const String stateControlName = "state";
 
-  static String idControlName = "id";
+  static const String idControlName = "id";
 
   final Dependent? dependent;
 
@@ -2379,12 +2335,12 @@ class DependentForm implements FormModel<Dependent> {
   String stateControlPath() => pathBuilder(stateControlName);
   String idControlPath() => pathBuilder(idControlName);
   String get _nuiDependentsValue => nuiDependentsControl.value as String;
-  ResidentialDependentRelation get _relationshipValue =>
-      relationshipControl.value as ResidentialDependentRelation;
+  ResidentialDependentRelationType get _relationshipValue =>
+      relationshipControl.value as ResidentialDependentRelationType;
   String get _dateValue => dateControl.value as String;
   String get _nameValue => nameControl.value as String;
   String get _lastnameValue => lastnameControl.value as String;
-  Status get _stateValue => stateControl.value as Status;
+  StatusType get _stateValue => stateControl.value as StatusType;
   String get _idValue => idControl.value as String;
   bool get containsNuiDependents {
     try {
@@ -2473,7 +2429,7 @@ class DependentForm implements FormModel<Dependent> {
   }
 
   void relationshipValueUpdate(
-    ResidentialDependentRelation value, {
+    ResidentialDependentRelationType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2509,7 +2465,7 @@ class DependentForm implements FormModel<Dependent> {
   }
 
   void stateValueUpdate(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2536,7 +2492,7 @@ class DependentForm implements FormModel<Dependent> {
   }
 
   void relationshipValuePatch(
-    ResidentialDependentRelation value, {
+    ResidentialDependentRelationType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2572,7 +2528,7 @@ class DependentForm implements FormModel<Dependent> {
   }
 
   void stateValuePatch(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2599,7 +2555,7 @@ class DependentForm implements FormModel<Dependent> {
       nuiDependentsControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void relationshipValueReset(
-    ResidentialDependentRelation value, {
+    ResidentialDependentRelationType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -2635,7 +2591,7 @@ class DependentForm implements FormModel<Dependent> {
       lastnameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void stateValueReset(
-    Status value, {
+    StatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -2654,17 +2610,17 @@ class DependentForm implements FormModel<Dependent> {
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get nuiDependentsControl =>
       form.control(nuiDependentsControlPath()) as FormControl<String>;
-  FormControl<ResidentialDependentRelation> get relationshipControl =>
+  FormControl<ResidentialDependentRelationType> get relationshipControl =>
       form.control(relationshipControlPath())
-          as FormControl<ResidentialDependentRelation>;
+          as FormControl<ResidentialDependentRelationType>;
   FormControl<String> get dateControl =>
       form.control(dateControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
   FormControl<String> get lastnameControl =>
       form.control(lastnameControlPath()) as FormControl<String>;
-  FormControl<Status> get stateControl =>
-      form.control(stateControlPath()) as FormControl<Status>;
+  FormControl<StatusType> get stateControl =>
+      form.control(stateControlPath()) as FormControl<StatusType>;
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
   void nuiDependentsSetDisabled(
@@ -2820,33 +2776,21 @@ class DependentForm implements FormModel<Dependent> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          DependentForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    Dependent value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value:
-              DependentForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(DependentForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    Dependent? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(Dependent? dependent) => FormGroup({
         nuiDependentsControlName: FormControl<String>(
             value: dependent?.nuiDependents,
             validators: [
@@ -2858,7 +2802,7 @@ class DependentForm implements FormModel<Dependent> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        relationshipControlName: FormControl<ResidentialDependentRelation>(
+        relationshipControlName: FormControl<ResidentialDependentRelationType>(
             value: dependent?.relationship,
             validators: [requiredValidator],
             asyncValidators: [],
@@ -2886,7 +2830,7 @@ class DependentForm implements FormModel<Dependent> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        stateControlName: FormControl<Status>(
+        stateControlName: FormControl<StatusType>(
             value: dependent?.state,
             validators: [],
             asyncValidators: [],
@@ -3143,24 +3087,16 @@ class FirstStepResidenceModelFormBuilder extends StatefulWidget {
 
 class _FirstStepResidenceModelFormBuilderState
     extends State<FirstStepResidenceModelFormBuilder> {
-  late FormGroup _form;
-
   late FirstStepResidenceModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = FirstStepResidenceModelForm(widget.model, _form, null);
+    _formModel = FirstStepResidenceModelForm(widget.model,
+        FirstStepResidenceModelForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -3170,12 +3106,14 @@ class _FirstStepResidenceModelFormBuilderState
   @override
   void didUpdateWidget(covariant FirstStepResidenceModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = FirstStepResidenceModelForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = FirstStepResidenceModelForm(widget.model,
+          FirstStepResidenceModelForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -3183,19 +3121,20 @@ class _FirstStepResidenceModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveFirstStepResidenceModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -3211,15 +3150,15 @@ class FirstStepResidenceModelForm
     this.path,
   ) {}
 
-  static String backStreetControlName = "backStreet";
+  static const String backStreetControlName = "backStreet";
 
-  static String cantonControlName = "canton";
+  static const String cantonControlName = "canton";
 
-  static String mainStreetControlName = "mainStreet";
+  static const String mainStreetControlName = "mainStreet";
 
-  static String parroquiaControlName = "parroquia";
+  static const String parroquiaControlName = "parroquia";
 
-  static String provinceControlName = "province";
+  static const String provinceControlName = "province";
 
   final FirstStepResidenceModel? firstStepResidenceModel;
 
@@ -3552,36 +3491,23 @@ class FirstStepResidenceModelForm
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          FirstStepResidenceModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    FirstStepResidenceModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: FirstStepResidenceModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(FirstStepResidenceModelForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    FirstStepResidenceModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(
+          FirstStepResidenceModel? firstStepResidenceModel) =>
+      FormGroup({
         backStreetControlName: FormControl<String>(
             value: firstStepResidenceModel?.backStreet,
             validators: [requiredValidator],
@@ -3859,24 +3785,16 @@ class SecondStepResidenceModelFormBuilder extends StatefulWidget {
 
 class _SecondStepResidenceModelFormBuilderState
     extends State<SecondStepResidenceModelFormBuilder> {
-  late FormGroup _form;
-
   late SecondStepResidenceModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = SecondStepResidenceModelForm(widget.model, _form, null);
+    _formModel = SecondStepResidenceModelForm(widget.model,
+        SecondStepResidenceModelForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -3887,12 +3805,14 @@ class _SecondStepResidenceModelFormBuilderState
   void didUpdateWidget(
       covariant SecondStepResidenceModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = SecondStepResidenceModelForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = SecondStepResidenceModelForm(widget.model,
+          SecondStepResidenceModelForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -3900,19 +3820,20 @@ class _SecondStepResidenceModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveSecondStepResidenceModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -3928,22 +3849,22 @@ class SecondStepResidenceModelForm
     this.path,
   ) {}
 
-  static String electricLightMeterControlName = "electricLightMeter";
+  static const String electricLightMeterControlName = "electricLightMeter";
 
-  static String electricalCodeControlName = "electricalCode";
+  static const String electricalCodeControlName = "electricalCode";
 
-  static String housingTypeControlName = "housingType";
+  static const String housingTypeControlName = "housingType";
 
-  static String tenureHousingTypeAgreementControlName =
+  static const String tenureHousingTypeAgreementControlName =
       "tenureHousingTypeAgreement";
 
-  static String numberVillaBuildingControlName = "numberVillaBuilding";
+  static const String numberVillaBuildingControlName = "numberVillaBuilding";
 
-  static String floorNumberControlName = "floorNumber";
+  static const String floorNumberControlName = "floorNumber";
 
-  static String departmentNumberControlName = "departmentNumber";
+  static const String departmentNumberControlName = "departmentNumber";
 
-  static String typeControlName = "type";
+  static const String typeControlName = "type";
 
   final SecondStepResidenceModel? secondStepResidenceModel;
 
@@ -3967,9 +3888,9 @@ class SecondStepResidenceModelForm
   String get _electricalCodeValue => electricalCodeControl.value as String;
   ResidentialHousingType get _housingTypeValue =>
       housingTypeControl.value as ResidentialHousingType;
-  ResidentialTenureHousingTypeAgreemente get _tenureHousingTypeAgreementValue =>
+  ResidentialTenureHousingAgreementeType get _tenureHousingTypeAgreementValue =>
       tenureHousingTypeAgreementControl.value
-          as ResidentialTenureHousingTypeAgreemente;
+          as ResidentialTenureHousingAgreementeType;
   String get _numberVillaBuildingValue =>
       numberVillaBuildingControl.value as String;
   String get _floorNumberValue => floorNumberControl.value as String;
@@ -4095,7 +4016,7 @@ class SecondStepResidenceModelForm
   }
 
   void tenureHousingTypeAgreementValueUpdate(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -4167,7 +4088,7 @@ class SecondStepResidenceModelForm
   }
 
   void tenureHousingTypeAgreementValuePatch(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -4239,7 +4160,7 @@ class SecondStepResidenceModelForm
       housingTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void tenureHousingTypeAgreementValueReset(
-    ResidentialTenureHousingTypeAgreemente value, {
+    ResidentialTenureHousingAgreementeType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -4290,10 +4211,10 @@ class SecondStepResidenceModelForm
   FormControl<ResidentialHousingType> get housingTypeControl =>
       form.control(housingTypeControlPath())
           as FormControl<ResidentialHousingType>;
-  FormControl<ResidentialTenureHousingTypeAgreemente>
+  FormControl<ResidentialTenureHousingAgreementeType>
       get tenureHousingTypeAgreementControl =>
           form.control(tenureHousingTypeAgreementControlPath())
-              as FormControl<ResidentialTenureHousingTypeAgreemente>;
+              as FormControl<ResidentialTenureHousingAgreementeType>;
   FormControl<String> get numberVillaBuildingControl =>
       form.control(numberVillaBuildingControlPath()) as FormControl<String>;
   FormControl<String> get floorNumberControl =>
@@ -4475,35 +4396,24 @@ class SecondStepResidenceModelForm
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          SecondStepResidenceModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    SecondStepResidenceModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: SecondStepResidenceModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
+          SecondStepResidenceModelForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void reset({
+    SecondStepResidenceModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(
+          SecondStepResidenceModel? secondStepResidenceModel) =>
+      FormGroup({
         electricLightMeterControlName: FormControl<bool>(
             value: secondStepResidenceModel?.electricLightMeter,
             validators: [],
@@ -4526,7 +4436,7 @@ class SecondStepResidenceModelForm
             disabled: false,
             touched: false),
         tenureHousingTypeAgreementControlName:
-            FormControl<ResidentialTenureHousingTypeAgreemente>(
+            FormControl<ResidentialTenureHousingAgreementeType>(
                 value: secondStepResidenceModel?.tenureHousingTypeAgreement,
                 validators: [requiredValidator],
                 asyncValidators: [],

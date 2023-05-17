@@ -1,12 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:libphonenumber/libphonenumber.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
-import 'package:registro_civil_apk/data/enum/validators/validations_message_enum.dart';
-import 'package:registro_civil_apk/data/models/auth/register_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
 Map<String, dynamic>? requiredValidator(AbstractControl<dynamic> control) {
@@ -39,7 +36,7 @@ Map<String, dynamic>? notRepeat(
   final value = control.value as String?;
   if (value == null || value.isEmpty) return null;
   if (list.contains(value)) {
-    return {ValidationsMessageEnum.notRepeted.toText: true};
+    return {ValidationsMessageType.notRepeted.toText: true};
   }
   return null;
 }
@@ -50,7 +47,7 @@ Map<String, dynamic>? nameValidator(AbstractControl<dynamic> control) {
   if (value == null || value.isEmpty) return null;
   final names = value.trim().split(' ');
   if (names.length < 3) {
-    return {ValidationsMessageEnum.invalidNombreApellido.toText: true};
+    return {ValidationsMessageType.invalidNombreApellido.toText: true};
   }
   return null;
 }
@@ -61,13 +58,13 @@ Map<String, dynamic>? ecuadorDniValidator(AbstractControl<dynamic> control) {
   if (value.length != 10) return null;
   // Check that the first two digits correspond to a valid province code
   if (!_provinceCode(value)) {
-    return {ValidationsMessageEnum.invalidProvinceCode.toText: true};
+    return {ValidationsMessageType.invalidProvinceCode.toText: true};
   }
   // Calculate the verification digit
   //and compare it with the 10th digit of the ID number
 
   if (!_verificationDigit(value)) {
-    return {ValidationsMessageEnum.invalidDni.toText: true};
+    return {ValidationsMessageType.invalidDni.toText: true};
   }
   return null;
 }
@@ -132,7 +129,7 @@ Map<String, dynamic>? length10Validator(
   final value = control.value as String?;
   if (value == null || value.isEmpty) return null;
   if (value.length != 10) {
-    return {ValidationsMessageEnum.length10Error.toText: true};
+    return {ValidationsMessageType.length10Error.toText: true};
   } else {
     return null;
   }
@@ -184,7 +181,7 @@ Map<String, dynamic>? passwordValidator(AbstractControl<dynamic> control) {
   final passwordRegExp =
       RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\d\s:])([^\s]){8,20}$');
   if (!passwordRegExp.hasMatch(value)) {
-    return {ValidationsMessageEnum.invalidPassword.toText: true};
+    return {ValidationsMessageType.invalidPassword.toText: true};
   }
   return null;
 }
@@ -200,7 +197,7 @@ Future<Map<String, dynamic>?> phoneNumberEcuadorValidation(
     isoCode: 'EC', // Código ISO del país (Ecuador)
   );
   if (!isValid!) {
-    return {ValidationsMessageEnum.invalidPhoneNumber.toText: true};
+    return {ValidationsMessageType.invalidPhoneNumber.toText: true};
   }
   return null;
 }
@@ -215,7 +212,7 @@ Map<String, dynamic>? length6Validator(AbstractControl<dynamic> control) {
   final value = control.value as String?;
   if (value == null || value.isEmpty) return null;
   if (value.length != 6) {
-    return {ValidationsMessageEnum.length6Error.toText: true};
+    return {ValidationsMessageType.length6Error.toText: true};
   } else {
     return null;
   }
@@ -230,7 +227,7 @@ Map<String, dynamic>? conadisNumberValidatorGroup(
   if (!isConadis) {
     (conadisModel as FormGroup).controls['conadisNumber']!
       ..removeError(ValidationMessage.required)
-      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText)
+      ..removeError(ValidationsMessageType.invalidConadisNumber.toText)
       ..value = '';
     return null;
   }
@@ -245,8 +242,8 @@ Map<String, dynamic>? conadisNumberValidatorGroup(
   if (!_validateConadisNumber(conadisNumber)) {
     (conadisModel as FormGroup)
         .controls['conadisNumber']!
-        .setErrors({ValidationsMessageEnum.invalidConadisNumber.toText: true});
-    return {ValidationsMessageEnum.invalidConadisNumber.toText: true};
+        .setErrors({ValidationsMessageType.invalidConadisNumber.toText: true});
+    return {ValidationsMessageType.invalidConadisNumber.toText: true};
   }
   return null; // Devuelve null si la validación es exitosa
 }
@@ -257,11 +254,11 @@ Map<String, dynamic>? childrenRelationshipValidatorGroup(
   final children = partnerModel.value as Map<String, dynamic>;
   final hasChildren = children['hasChildren'] as Binary? ?? Binary.no;
   final childrenRelationship =
-      children['childrenRelationship'] as ChildrenRelationShip?;
+      children['childrenRelationship'] as ChildrenRelationShipType?;
   if (hasChildren == Binary.no) {
     (partnerModel as FormGroup).controls['childrenRelationship']!
       ..removeError(ValidationMessage.required)
-      ..removeError(ValidationsMessageEnum.invalidConadisNumber.toText)
+      ..removeError(ValidationsMessageType.invalidConadisNumber.toText)
       ..value = null;
     return null;
   }
@@ -296,7 +293,7 @@ Map<String, dynamic>? atLeastOneElementValidator(
   }
 
   if (!hasTrueElement) {
-    return {ValidationsMessageEnum.atLeastOneElement.toText: true};
+    return {ValidationsMessageType.atLeastOneElement.toText: true};
   }
   return null;
 }
@@ -310,9 +307,9 @@ Map<String, String Function(dynamic error)> validationMessage(
     ValidationMessage.email: (error) => l10n.intrudcirCorrVal,
     ValidationMessage.mustMatch: (error) => l10n.passwordCoi,
     ValidationMessage.requiredTrue: (error) => l10n.campoReq,
-    ValidationsMessageEnum.invalidCode.toText: (error) => l10n.invalidCode,
+    ValidationsMessageType.invalidCode.toText: (error) => l10n.invalidCode,
   }..addEntries(
-      ValidationsMessageEnum.values
+      ValidationsMessageType.values
           .map((e) => MapEntry(e.toText, (_) => e.translate(context))),
     );
 }

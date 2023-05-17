@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
+import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_dropdown.dart';
 
@@ -22,7 +22,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   });
   final FormControl<T>? formControl;
   final String? formControlName;
-  final AutoDisposeFutureProvider<Result<List<T>, StatusCode>> provider;
+  final AutoDisposeFutureProvider<Result<List<T>, StatusCodeType>> provider;
   final String? label;
   final bool light;
   final String? hintText;

@@ -6,7 +6,7 @@ import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
 import 'package:registro_civil_apk/data/providers/commons/gmap_providers.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 
 void selectLocationResidenceREgistration({
   required BuildContext context,

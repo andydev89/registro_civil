@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/data/enum/auth_enum/icono_boton_enum.dart';
+import 'package:registro_civil_apk/data/enum/auth/auth_icon_button_type.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
@@ -11,7 +11,7 @@ class IconButtonAuth extends StatelessWidget {
   });
 
   final void Function()? onPressed;
-  final IconoBotonEnum icon;
+  final AuthIconButtonType icon;
 
   @override
   Widget build(BuildContext context) {

@@ -126,25 +126,18 @@ class ScheduleTurnFirstStepPersonalModelFormBuilder extends StatefulWidget {
 
 class _ScheduleTurnFirstStepPersonalModelFormBuilderState
     extends State<ScheduleTurnFirstStepPersonalModelFormBuilder> {
-  late FormGroup _form;
-
   late ScheduleTurnFirstStepPersonalModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel =
-        ScheduleTurnFirstStepPersonalModelForm(widget.model, _form, null);
+    _formModel = ScheduleTurnFirstStepPersonalModelForm(
+        widget.model,
+        ScheduleTurnFirstStepPersonalModelForm.formElements(widget.model),
+        null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -155,13 +148,16 @@ class _ScheduleTurnFirstStepPersonalModelFormBuilderState
   void didUpdateWidget(
       covariant ScheduleTurnFirstStepPersonalModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          ScheduleTurnFirstStepPersonalModelForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = ScheduleTurnFirstStepPersonalModelForm(
+          widget.model,
+          ScheduleTurnFirstStepPersonalModelForm.formElements(widget.model),
+          null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -169,19 +165,20 @@ class _ScheduleTurnFirstStepPersonalModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveScheduleTurnFirstStepPersonalModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -197,7 +194,7 @@ class ScheduleTurnFirstStepPersonalModelForm
     this.path,
   ) {}
 
-  static String paymentMethodControlName = "paymentMethod";
+  static const String paymentMethodControlName = "paymentMethod";
 
   final ScheduleTurnFirstStepPersonalModel? scheduleTurnFirstStepPersonalModel;
 
@@ -290,36 +287,25 @@ class ScheduleTurnFirstStepPersonalModelForm
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          ScheduleTurnFirstStepPersonalModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    ScheduleTurnFirstStepPersonalModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value:
-              ScheduleTurnFirstStepPersonalModelForm(value, FormGroup({}), null)
-                  .formElements()
-                  .rawValue,
+          ScheduleTurnFirstStepPersonalModelForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void reset({
+    ScheduleTurnFirstStepPersonalModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(
+          ScheduleTurnFirstStepPersonalModel?
+              scheduleTurnFirstStepPersonalModel) =>
+      FormGroup({
         paymentMethodControlName: FormControl<PaymentMethodType>(
             value: scheduleTurnFirstStepPersonalModel?.paymentMethod,
             validators: [requiredValidator],
@@ -575,25 +561,18 @@ class ScheduleTurnFirstStepFamiliarModelFormBuilder extends StatefulWidget {
 
 class _ScheduleTurnFirstStepFamiliarModelFormBuilderState
     extends State<ScheduleTurnFirstStepFamiliarModelFormBuilder> {
-  late FormGroup _form;
-
   late ScheduleTurnFirstStepFamiliarModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel =
-        ScheduleTurnFirstStepFamiliarModelForm(widget.model, _form, null);
+    _formModel = ScheduleTurnFirstStepFamiliarModelForm(
+        widget.model,
+        ScheduleTurnFirstStepFamiliarModelForm.formElements(widget.model),
+        null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -604,13 +583,16 @@ class _ScheduleTurnFirstStepFamiliarModelFormBuilderState
   void didUpdateWidget(
       covariant ScheduleTurnFirstStepFamiliarModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel =
-          ScheduleTurnFirstStepFamiliarModelForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = ScheduleTurnFirstStepFamiliarModelForm(
+          widget.model,
+          ScheduleTurnFirstStepFamiliarModelForm.formElements(widget.model),
+          null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -618,19 +600,20 @@ class _ScheduleTurnFirstStepFamiliarModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveScheduleTurnFirstStepFamiliarModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -654,11 +637,11 @@ class ScheduleTurnFirstStepFamiliarModelForm
             .toList();
   }
 
-  static String paymentMethodControlName = "paymentMethod";
+  static const String paymentMethodControlName = "paymentMethod";
 
-  static String scheduleForMeControlName = "scheduleForMe";
+  static const String scheduleForMeControlName = "scheduleForMe";
 
-  static String familyControlName = "family";
+  static const String familyControlName = "family";
 
   final ScheduleTurnFirstStepFamiliarModel? scheduleTurnFirstStepFamiliarModel;
 
@@ -778,15 +761,21 @@ class ScheduleTurnFirstStepFamiliarModelForm
 
     if (toUpdate.isNotEmpty) {
       familyControl.updateValue(
-          toUpdate.map((e) => e.formElements().rawValue).toList(),
+          toUpdate
+              .map((e) =>
+                  FamiliarFormModelForm.formElements(e.familiarFormModel)
+                      .rawValue)
+              .toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
     }
 
     if (toAdd.isNotEmpty) {
       toAdd.forEach((e) {
-        familyControl.add(e.formElements(),
-            updateParent: updateParent, emitEvent: emitEvent);
+        familyControl.add(
+            FamiliarFormModelForm.formElements(e.familiarFormModel),
+            updateParent: updateParent,
+            emitEvent: emitEvent);
       });
     }
   }
@@ -820,7 +809,7 @@ class ScheduleTurnFirstStepFamiliarModelForm
 
     familyControl.insert(
       i,
-      item.formElements(),
+      FamiliarFormModelForm.formElements(value),
       updateParent: updateParent,
       emitEvent: emitEvent,
     );
@@ -872,7 +861,10 @@ class ScheduleTurnFirstStepFamiliarModelForm
     );
 
     familyControl.patchValue(
-        toPatch.map((e) => e.formElements().rawValue).toList(),
+        toPatch
+            .map((e) => FamiliarFormModelForm.formElements(e.familiarFormModel)
+                .rawValue)
+            .toList(),
         updateParent: updateParent,
         emitEvent: emitEvent);
   }
@@ -904,9 +896,7 @@ class ScheduleTurnFirstStepFamiliarModelForm
   }) =>
       familyControl.reset(
           value: value
-              .map((e) => FamiliarFormModelForm(e, FormGroup({}), null)
-                  .formElements()
-                  .rawValue)
+              .map((e) => FamiliarFormModelForm.formElements(e).rawValue)
               .toList(),
           updateParent: updateParent,
           emitEvent: emitEvent);
@@ -981,7 +971,7 @@ class ScheduleTurnFirstStepFamiliarModelForm
         pathBuilder('family.${familyFamiliarFormModelForm.length}'));
 
     familyFamiliarFormModelForm.add(formClass);
-    familyControl.add(formClass.formElements());
+    familyControl.add(FamiliarFormModelForm.formElements(value));
   }
 
   void removeFamilyItemAtIndex(int i) {
@@ -1027,36 +1017,25 @@ class ScheduleTurnFirstStepFamiliarModelForm
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          ScheduleTurnFirstStepFamiliarModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    ScheduleTurnFirstStepFamiliarModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value:
-              ScheduleTurnFirstStepFamiliarModelForm(value, FormGroup({}), null)
-                  .formElements()
-                  .rawValue,
+          ScheduleTurnFirstStepFamiliarModelForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void reset({
+    ScheduleTurnFirstStepFamiliarModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(
+          ScheduleTurnFirstStepFamiliarModel?
+              scheduleTurnFirstStepFamiliarModel) =>
+      FormGroup({
         paymentMethodControlName: FormControl<PaymentMethodType>(
             value: scheduleTurnFirstStepFamiliarModel?.paymentMethod,
             validators: [requiredValidator],
@@ -1072,7 +1051,9 @@ class ScheduleTurnFirstStepFamiliarModelForm
             disabled: false,
             touched: false),
         familyControlName: FormArray(
-            familyFamiliarFormModelForm.map((e) => e.formElements()).toList(),
+            (scheduleTurnFirstStepFamiliarModel?.family ?? [])
+                .map((e) => FamiliarFormModelForm.formElements(e))
+                .toList(),
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -1091,9 +1072,9 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
     this.path,
   ) {}
 
-  static String identificationNumberControlName = "identificationNumber";
+  static const String identificationNumberControlName = "identificationNumber";
 
-  static String relationshipControlName = "relationship";
+  static const String relationshipControlName = "relationship";
 
   final FamiliarFormModel? familiarFormModel;
 
@@ -1302,36 +1283,22 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          FamiliarFormModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    FamiliarFormModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: FamiliarFormModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(FamiliarFormModelForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    FamiliarFormModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(FamiliarFormModel? familiarFormModel) =>
+      FormGroup({
         identificationNumberControlName: FormControl<String>(
             value: familiarFormModel?.identificationNumber,
             validators: [
@@ -1596,24 +1563,16 @@ class ScheduleTurnSecondStepModelFormBuilder extends StatefulWidget {
 
 class _ScheduleTurnSecondStepModelFormBuilderState
     extends State<ScheduleTurnSecondStepModelFormBuilder> {
-  late FormGroup _form;
-
   late ScheduleTurnSecondStepModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = ScheduleTurnSecondStepModelForm(widget.model, _form, null);
+    _formModel = ScheduleTurnSecondStepModelForm(widget.model,
+        ScheduleTurnSecondStepModelForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -1624,12 +1583,14 @@ class _ScheduleTurnSecondStepModelFormBuilderState
   void didUpdateWidget(
       covariant ScheduleTurnSecondStepModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = ScheduleTurnSecondStepModelForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = ScheduleTurnSecondStepModelForm(widget.model,
+          ScheduleTurnSecondStepModelForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -1637,19 +1598,20 @@ class _ScheduleTurnSecondStepModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveScheduleTurnSecondStepModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -1665,19 +1627,19 @@ class ScheduleTurnSecondStepModelForm
     this.path,
   ) {}
 
-  static String provinceControlName = "province";
+  static const String provinceControlName = "province";
 
-  static String agencyControlName = "agency";
+  static const String agencyControlName = "agency";
 
-  static String dateControlName = "date";
+  static const String dateControlName = "date";
 
-  static String scheduleIdControlName = "scheduleId";
+  static const String scheduleIdControlName = "scheduleId";
 
-  static String timeControlName = "time";
+  static const String timeControlName = "time";
 
-  static String initialTimeControlName = "initialTime";
+  static const String initialTimeControlName = "initialTime";
 
-  static String endTimeControlName = "endTime";
+  static const String endTimeControlName = "endTime";
 
   final ScheduleTurnSecondStepModel? scheduleTurnSecondStepModel;
 
@@ -2188,35 +2150,24 @@ class ScheduleTurnSecondStepModelForm
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          ScheduleTurnSecondStepModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    ScheduleTurnSecondStepModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: ScheduleTurnSecondStepModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
+          ScheduleTurnSecondStepModelForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void reset({
+    ScheduleTurnSecondStepModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(
+          ScheduleTurnSecondStepModel? scheduleTurnSecondStepModel) =>
+      FormGroup({
         provinceControlName: FormControl<LocationModel>(
             value: scheduleTurnSecondStepModel?.province,
             validators: [requiredValidator],

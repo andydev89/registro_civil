@@ -6,7 +6,7 @@ part of 'change_of_name_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$changeOfNameHash() => r'd2cb81b71c78bc2675fe94587a062a943fd11374';
+String _$changeOfNameHash() => r'85a5f4fba19cc8f2a962f581069043dab6984fea';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,7 +30,7 @@ class _SystemHash {
 }
 
 typedef ChangeOfNameRef
-    = AutoDisposeFutureProviderRef<Result<CommandModel, StatusCode>>;
+    = AutoDisposeFutureProviderRef<Result<CommandModel, StatusCodeType>>;
 
 /// See also [changeOfName].
 @ProviderFor(changeOfName)
@@ -38,7 +38,7 @@ const changeOfNameProvider = ChangeOfNameFamily();
 
 /// See also [changeOfName].
 class ChangeOfNameFamily
-    extends Family<AsyncValue<Result<CommandModel, StatusCode>>> {
+    extends Family<AsyncValue<Result<CommandModel, StatusCodeType>>> {
   /// See also [changeOfName].
   const ChangeOfNameFamily();
 
@@ -77,7 +77,7 @@ class ChangeOfNameFamily
 
 /// See also [changeOfName].
 class ChangeOfNameProvider
-    extends AutoDisposeFutureProvider<Result<CommandModel, StatusCode>> {
+    extends AutoDisposeFutureProvider<Result<CommandModel, StatusCodeType>> {
   /// See also [changeOfName].
   ChangeOfNameProvider({
     required this.changeOfNameModel,

@@ -6,7 +6,7 @@ part of 'simple_certificate_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$simpleCertificateHash() => r'b1a19ddcb4dadf159c2b33e0739f5aef446a4452';
+String _$simpleCertificateHash() => r'7e2d91c659a51c18ac79be0ecaf9ab1993426221';
 
 /// See also [SimpleCertificate].
 @ProviderFor(SimpleCertificate)
@@ -22,7 +22,7 @@ final simpleCertificateProvider =
 );
 
 typedef _$SimpleCertificate = AutoDisposeNotifier<void>;
-String _$processHash() => r'3889662c64b959de992b90f90ba2e87720cd104a';
+String _$processHash() => r'48ec4be5c39f4b915926dce9a71b18ac3cba5ed6';
 
 /// See also [Process].
 @ProviderFor(Process)
@@ -36,7 +36,7 @@ final processProvider = AutoDisposeNotifierProvider<Process, void>.internal(
 );
 
 typedef _$Process = AutoDisposeNotifier<void>;
-String _$cancelHash() => r'adb9dff13fb00e88d983f166da40a9fe740a9981';
+String _$cancelHash() => r'52df467158727cca0d5266d90441e57fcb66abf5';
 
 /// See also [Cancel].
 @ProviderFor(Cancel)

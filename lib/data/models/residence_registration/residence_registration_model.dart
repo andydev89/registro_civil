@@ -3,10 +3,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_dependent_relation.dart';
+import 'package:registro_civil_apk/data/enum/residence_registration/residential_dependent_relation_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_housing_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_type_agreemente.dart';
-import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
+import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_agreemente_type.dart';
+import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
@@ -15,7 +15,7 @@ part 'residence_registration_model.gform.dart';
 part 'residence_registration_model.freezed.dart';
 
 @ReactiveFormAnnotation()
-@Freezed(toJson:true)
+@Freezed(toJson: true)
 class ResidenceRegistration with _$ResidenceRegistration {
   const factory ResidenceRegistration({
     @FormControlAnnotation<String>()
@@ -28,10 +28,10 @@ class ResidenceRegistration with _$ResidenceRegistration {
     @FormArrayAnnotation<Residential>()
     @Default([])
         List<Residential> residentials,
-    @Default(Status.active)
-    @FormControlAnnotation<Status>()
+    @Default(StatusType.active)
+    @FormControlAnnotation<StatusType>()
     @JsonKey(includeToJson: false, includeFromJson: true)
-        Status state,
+        StatusType state,
   }) = _ResidenceRegistration;
 
   const ResidenceRegistration._();
@@ -66,7 +66,7 @@ class Residential with _$Residential {
     @FormControlAnnotation(validators: [requiredValidator])
         required ResidentialHousingType housingType,
     @FormControlAnnotation(validators: [requiredValidator])
-        required ResidentialTenureHousingTypeAgreemente
+        required ResidentialTenureHousingAgreementeType
             tenureHousingTypeAgreement,
     @FormControlAnnotation(validators: [requiredValidator])
     @Default('')
@@ -144,7 +144,7 @@ class Residential with _$Residential {
   }
 }
 
-@Freezed(toJson:true)
+@Freezed(toJson: true)
 @ReactiveFormAnnotation()
 class Dependent with _$Dependent {
   const factory Dependent({
@@ -157,16 +157,16 @@ class Dependent with _$Dependent {
     )
         required String nuiDependents,
     @FormControlAnnotation(validators: [requiredValidator])
-        required ResidentialDependentRelation relationship,
+        required ResidentialDependentRelationType relationship,
     @FormControlAnnotation<String>()
         required String date,
     @FormControlAnnotation(validators: [requiredValidator])
         required String name,
     @FormControlAnnotation(validators: [requiredValidator])
         required String lastname,
-    @FormControlAnnotation<Status>()
-    @Default(Status.active)
-        Status state,
+    @FormControlAnnotation<StatusType>()
+    @Default(StatusType.active)
+        StatusType state,
     @JsonKey(includeToJson: false, includeFromJson: true)
     @FormControlAnnotation<String>()
     @Default('')
@@ -219,7 +219,7 @@ class SecondStepResidenceModel with _$SecondStepResidenceModel {
     @FormControlAnnotation(validators: [requiredValidator])
         required ResidentialHousingType housingType,
     @FormControlAnnotation(validators: [requiredValidator])
-        required ResidentialTenureHousingTypeAgreemente
+        required ResidentialTenureHousingAgreementeType
             tenureHousingTypeAgreement,
     @FormControlAnnotation(validators: [requiredValidator])
         required String numberVillaBuilding,
