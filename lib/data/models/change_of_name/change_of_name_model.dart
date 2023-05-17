@@ -23,11 +23,29 @@ class ChangeOfNameModel with _$ChangeOfNameModel {
       includeToJson: false,
     )
         AgencyModel? agency,
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+        no3EqualsLettersConsecutives,
+      ],
+    )
         required String firstName,
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+        no3EqualsLettersConsecutives,
+      ],
+    )
         required String secondName,
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+      ],
+    )
     @JsonKey(
       includeFromJson: false,
       includeToJson: false,

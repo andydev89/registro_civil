@@ -146,7 +146,8 @@ abstract class Api {
 
   @GET('/residentialregistration/api/registration/user/preview/{id}')
   Future<ResponseModel<DocumentModel>> residenceRegistrationPreviewByUser(
-      @Path('id') String id);
+    @Path('id') String id,
+  );
 
   @POST('/residentialregistration/api/registration')
   Future<ResponseModel<CommandModel>> residenceRegistration(

@@ -27,6 +27,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
     this.onTap,
     this.setSuffixIconConstraints = false,
     this.textCapitalization = TextCapitalization.none,
+    this.maxLength,
     super.key,
   });
   final FormControl<T>? formControl;
@@ -46,6 +47,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
   final bool setSuffixIconConstraints;
   final void Function(FormControl<T>)? onTap;
   final TextCapitalization textCapitalization;
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
             label!,
           ).verticalPadding(5),
         ReactiveTextField<T>(
+          maxLength: maxLength,
           formControl: formControl,
           formControlName: formControlName,
           readOnly: readOnly,

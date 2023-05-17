@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
-import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
-import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'cart_provider.g.dart';

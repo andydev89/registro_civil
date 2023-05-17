@@ -173,7 +173,8 @@ class ResReg extends _$ResReg {
   }
 
   Future<Result<bool, StatusCodeType>> save(
-      ResidenceRegistration residence) async {
+    ResidenceRegistration residence,
+  ) async {
     final api = ref.watch(apiProvider);
     final user = await ref.watch(meProvider.future);
     final result = await api.residenceRegistration(

@@ -135,6 +135,47 @@ Map<String, dynamic>? length10Validator(
   }
 }
 
+///Tamano maximo de 20 caracteres
+Map<String, dynamic>? lengthMax20Validator(
+  AbstractControl<dynamic> control,
+) {
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) return null;
+  if (value.length > 20) {
+    return {ValidationsMessageType.lengthMax20Error.toText: true};
+  } else {
+    return null;
+  }
+}
+
+///Tamano minimo de 2 caracteres
+Map<String, dynamic>? lengthMin2Validator(
+  AbstractControl<dynamic> control,
+) {
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) return null;
+  if (value.length < 2) {
+    return {ValidationsMessageType.lengthMin2Error.toText: true};
+  } else {
+    return null;
+  }
+}
+
+///No permitir 3 letras iguales consecutivas
+Map<String, dynamic>? no3EqualsLettersConsecutives(
+  AbstractControl<dynamic> control,
+) {
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) return null;
+  final passwordRegExp = RegExp(r'^(?:(.)?(?!\1\1))*$');
+  if (!passwordRegExp.hasMatch(value)) {
+    return {
+      ValidationsMessageType.no3EqualsLettersConsecutivesError.toText: true
+    };
+  }
+  return null;
+}
+
 Future<bool?> validateNuiAsync(
   String? nui,
   WidgetRef ref,

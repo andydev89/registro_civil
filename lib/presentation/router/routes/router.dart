@@ -314,9 +314,6 @@ part 'router.gr.dart';
         ),
         //PAYMENT
         CupertinoRoute(
-          page: SelectPaymentPage,
-        ),
-        CupertinoRoute(
           page: MakePaymentPage,
         ),
         CupertinoRoute(

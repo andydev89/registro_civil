@@ -254,17 +254,6 @@ class _$AppRouter extends RootStackRouter {
         child: const MyOrderRejectingPage(),
       );
     },
-    SelectPaymentRoute.name: (routeData) {
-      final args = routeData.argsAs<SelectPaymentRouteArgs>();
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: SelectPaymentPage(
-          key: args.key,
-          requestNumber: args.requestNumber,
-          totalToPay: args.totalToPay,
-        ),
-      );
-    },
     MakePaymentRoute.name: (routeData) {
       final args = routeData.argsAs<MakePaymentRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -1028,11 +1017,6 @@ class _$AppRouter extends RootStackRouter {
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
-              SelectPaymentRoute.name,
-              path: 'select-payment-page',
-              parent: RootRouterRoute.name,
-            ),
-            RouteConfig(
               MakePaymentRoute.name,
               path: 'make-payment-page',
               parent: RootRouterRoute.name,
@@ -1531,45 +1515,6 @@ class MyOrderRejectingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MyOrderRejectingRoute';
-}
-
-/// generated route for
-/// [SelectPaymentPage]
-class SelectPaymentRoute extends PageRouteInfo<SelectPaymentRouteArgs> {
-  SelectPaymentRoute({
-    Key? key,
-    required String requestNumber,
-    required double totalToPay,
-  }) : super(
-          SelectPaymentRoute.name,
-          path: 'select-payment-page',
-          args: SelectPaymentRouteArgs(
-            key: key,
-            requestNumber: requestNumber,
-            totalToPay: totalToPay,
-          ),
-        );
-
-  static const String name = 'SelectPaymentRoute';
-}
-
-class SelectPaymentRouteArgs {
-  const SelectPaymentRouteArgs({
-    this.key,
-    required this.requestNumber,
-    required this.totalToPay,
-  });
-
-  final Key? key;
-
-  final String requestNumber;
-
-  final double totalToPay;
-
-  @override
-  String toString() {
-    return 'SelectPaymentRouteArgs{key: $key, requestNumber: $requestNumber, totalToPay: $totalToPay}';
-  }
 }
 
 /// generated route for

@@ -26,7 +26,7 @@ class VerifyInformationPage extends ConsumerWidget {
     final user = ref.watch(meProvider);
     final l10n = context.l10n;
     return PrimaryScaffold(
-      title: 'Verificar información',
+      title: l10n.verificarInfo,
       body: Expanded(
         child: SingleChildScrollView(
           child: Column(
@@ -35,14 +35,14 @@ class VerifyInformationPage extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const PrimaryTitle(
-                      title: 'Solicitud de cambio de nombre ecuatoriano',
+                    PrimaryTitle(
+                      title: l10n.solicitudDeCambioDeNombreEcuatoriano,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    const PrimaryText(
-                      'Estimado',
+                    PrimaryText(
+                      l10n.estimado,
                       textAlign: TextAlign.left,
                     ),
                     PrimaryText(
@@ -53,8 +53,8 @@ class VerifyInformationPage extends ConsumerWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const PrimaryText(
-                      'Usted se encuentra solicitando el trámite de:',
+                    PrimaryText(
+                      '${l10n.ustedSeEncuentraSolicitandoElTramiteDe} :',
                       textAlign: TextAlign.left,
                     ),
                     PrimaryText(
@@ -65,8 +65,8 @@ class VerifyInformationPage extends ConsumerWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const PrimaryText(
-                      'La solicitud de nombre que realiza es:',
+                    PrimaryText(
+                      '${l10n.laSolicitudDeNombreQueRealizaEs} :',
                       textAlign: TextAlign.left,
                     ),
                     const SizedBox(
@@ -85,8 +85,8 @@ class VerifyInformationPage extends ConsumerWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const PrimaryText(
-                      'Obteniendo como nombre resultante:',
+                    PrimaryText(
+                      '${l10n.obteniendoComoNombreResultante} :',
                       textAlign: TextAlign.left,
                     ),
                     PrimaryText(
@@ -97,8 +97,8 @@ class VerifyInformationPage extends ConsumerWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const PrimaryText(
-                      'Observaciones:',
+                    PrimaryText(
+                      '${l10n.observaciones} :',
                       textAlign: TextAlign.left,
                     ),
                     PrimaryText(
@@ -122,13 +122,16 @@ class VerifyInformationPage extends ConsumerWidget {
                       .then(
                         (value) => value.when(
                           ok: (data) {
-                            ref.read(offersProvider.notifier).addOffer(
-                                  OffersModel(
-                                    simpleCertificate: typeService,
-                                  ),
-                                );
-                            context.popRoute();
-                            showOffersDialog(context);
+                            // ref.read(offersProvider.notifier).addOffer(
+                            //       OffersModel(
+                            //         simpleCertificate: typeService,
+                            //       ),
+                            //     );
+                            // context.navigateTo(const HomeRouterRoute());
+                            // showOffersDialog(context);
+                            context.navigateTo(
+                              ChoosePaymentMethodRoute(service: typeService),
+                            );
                           },
                           err: (error) => showAlert(
                             error.translate(context),

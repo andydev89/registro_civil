@@ -50,10 +50,14 @@ class ChangeOfNameFirstStepPage extends ConsumerWidget {
                   formControl: formModel.agencyControl,
                 ),
                 PrimaryReactiveTextField(
+                  textCapitalization: TextCapitalization.characters,
+                  maxLength: 20,
                   formControl: formModel.firstNameControl,
                   label: '${l10n.nombre} 1',
                 ),
                 PrimaryReactiveTextField(
+                  textCapitalization: TextCapitalization.characters,
+                  maxLength: 20,
                   formControl: formModel.secondNameControl,
                   label: '${l10n.nombre} 2',
                 ),
