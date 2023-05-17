@@ -52,6 +52,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                   ],
                 ),
               ),
+              // ignore: lines_longer_than_80_chars
               ReactiveScheduleTurnFirstStepFamiliarModelFormFormGroupArrayBuilder(
                 extended: formModel.familyExtendedControl,
                 itemBuilder: (context, i, item, formModel) => Row(
@@ -111,7 +112,8 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
               //                             '$key.identificationNumber',
               //                         label: l10n.cedula,
               //                       ),
-              //                       PrimaryReactiveDropdown<RelationshipType>(
+              //                       PrimaryReactiveDropdown<RelationshipType>
+              // (
               //                         key: Key('$key.relationship'),
               //                         label: l10n.parentezco,
               //                         formControlName: '$key.relationship',
@@ -139,7 +141,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
               //                       //       PrimaryIconButton(
               //                       //         icon: Assets.svg.starCheck.svg(),
               //                       //         onPressed: () {
-              //                       //           // TODO(alejandro): algo en
+              // TODO(alejandro): algo en
               //                       //           // el parentezco
               //                       //         },
               //                       //       ).verticalPadding(15),

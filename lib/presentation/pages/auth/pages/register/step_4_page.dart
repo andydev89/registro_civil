@@ -24,7 +24,7 @@ class Step4Page extends ConsumerWidget {
     final otp = command.split(':').last.trim();
     return WillPopScope(
       onWillPop: () {
-        ref.read(stepperIndexProvider.notifier).index--;
+        ref.read(stepperIndexProvider.notifier).decrement();
         return Future(() => true);
       },
       child: OtpModelFormBuilder(

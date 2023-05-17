@@ -127,7 +127,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$${data.subTotal.toStringAsFixed(2)}',
+                            '\$${data.subTotal().toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -140,7 +140,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '-\$${data.discount.toStringAsFixed(2)}',
+                            '-\$${data.discount().toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -153,7 +153,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$${data.iva.toStringAsFixed(2)}',
+                            '\$${data.iva().toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -166,7 +166,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryText(
-                            '\$${data.totalPay.toStringAsFixed(2)}',
+                            '\$${data.totalPay().toStringAsFixed(2)}',
                             fontWeight: FontWeight.bold,
                             fontSize: fontSizeDefault + 3,
                           ),

@@ -17,7 +17,7 @@ class Step2Page extends ConsumerWidget {
     final cargoData = ref.watch(authStepper2DataProvider);
     return WillPopScope(
       onWillPop: () {
-        ref.read(stepperIndexProvider.notifier).index--;
+        ref.read(stepperIndexProvider.notifier).decrement();
         return Future(() => true);
       },
       child: ScrollableContent(
@@ -77,7 +77,7 @@ class Step2Page extends ConsumerWidget {
                 PrimaryTextButton(
                   title: l10n.salPaso,
                   onPressed: () {
-                    ref.read(stepperIndexProvider.notifier).index++;
+                    ref.read(stepperIndexProvider.notifier).increment();
                     context.navigateTo(const Step3Route());
                   },
                 ),

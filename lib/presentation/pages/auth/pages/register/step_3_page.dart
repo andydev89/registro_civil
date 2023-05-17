@@ -21,14 +21,14 @@ class Step3Page extends ConsumerWidget {
     final citizen = ref.watch(citizenProvider);
     return WillPopScope(
       onWillPop: () {
-        ref.read(stepperIndexProvider.notifier).index--;
+        ref.read(stepperIndexProvider.notifier).decrement();
         return Future(() => true);
       },
       child: EnterDataModelFormBuilder(
         model: EnterDataModel(
           nui: citizen.nui,
-          firstName: citizen.firstName,
-          lastName: citizen.lastName,
+          firstName: citizen.nombres,
+          lastName: citizen.apellidos,
         ),
         builder: (_, form, __) {
           return Scaffold(
@@ -105,7 +105,8 @@ class Step3Page extends ConsumerWidget {
                           .registerData(form.model)
                           .when(
                             ok: (result) {
-                              ref.read(stepperIndexProvider.notifier).index++;
+                              ref.read(stepperIndexProvider.notifier)
+                              .increment();
                               context.navigateTo(
                                 Step4Route(command: result.command),
                               );

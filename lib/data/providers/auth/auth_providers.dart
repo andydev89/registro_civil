@@ -50,17 +50,17 @@ class Login extends _$Login {
 @riverpod
 class RegisterValidateCitizen extends _$RegisterValidateCitizen {
   @override
-  RegisterCitizenModel? build() {
+ CitizenModel? build() {
     return null;
   }
 
-  Future<Result<RegisterCitizenModel, StatusCodeType>> registerValidateCitizen(
+  Future<Result<CitizenModel, StatusCodeType>> registerValidateCitizen(
     NuiModel model,
   ) async {
     final api = ref.watch(apiProvider);
     final response = await api.registerValidateNui(model);
     if (response.status == StatusCodeType.s200) {
-      state = response.data;
+      state = response.data!.citizen;
       return Result.ok(state!);
     }
     return Result.err(response.status);
@@ -109,16 +109,12 @@ class RegisterCode extends _$RegisterCode {
 @riverpod
 class Citizen extends _$Citizen {
   @override
-  RegisterCitizenModel build() {
-    return RegisterCitizenModel();
+  CitizenModel build() {
+    return const CitizenModel();
   }
 
-  @override
-  RegisterCitizenModel get state;
-
-  @override
-  set state(RegisterCitizenModel model) {
-    super.state = model;
+  void setCitizen(CitizenModel model) {
+    state = state.copyWithFromModel(model);
   }
 }
 

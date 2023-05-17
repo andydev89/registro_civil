@@ -173,12 +173,12 @@ final loginProvider = AutoDisposeAsyncNotifierProvider<Login, bool>.internal(
 
 typedef _$Login = AutoDisposeAsyncNotifier<bool>;
 String _$registerValidateCitizenHash() =>
-    r'5fb76090c624b37c63b98ba98f2d96e8eb68304e';
+    r'650c54b2c505e433d183b04c1b5fc95af9f72f0e';
 
 /// See also [RegisterValidateCitizen].
 @ProviderFor(RegisterValidateCitizen)
 final registerValidateCitizenProvider = AutoDisposeNotifierProvider<
-    RegisterValidateCitizen, RegisterCitizenModel?>.internal(
+    RegisterValidateCitizen, CitizenModel?>.internal(
   RegisterValidateCitizen.new,
   name: r'registerValidateCitizenProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -188,7 +188,7 @@ final registerValidateCitizenProvider = AutoDisposeNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$RegisterValidateCitizen = AutoDisposeNotifier<RegisterCitizenModel?>;
+typedef _$RegisterValidateCitizen = AutoDisposeNotifier<CitizenModel?>;
 String _$registerDataHash() => r'e2bbf15ab1a32d5be07b48d93ff728a205a95a73';
 
 /// See also [RegisterData].
@@ -219,12 +219,12 @@ final registerCodeProvider =
 );
 
 typedef _$RegisterCode = AutoDisposeNotifier<bool>;
-String _$citizenHash() => r'2e0d3fbfb2012a5833ad696a5203db31f7b5af83';
+String _$citizenHash() => r'dc0b3322d18a205d93a0f631314c79f334fbf602';
 
 /// See also [Citizen].
 @ProviderFor(Citizen)
 final citizenProvider =
-    AutoDisposeNotifierProvider<Citizen, RegisterCitizenModel>.internal(
+    AutoDisposeNotifierProvider<Citizen, CitizenModel>.internal(
   Citizen.new,
   name: r'citizenProvider',
   debugGetCreateSourceHash:
@@ -233,5 +233,5 @@ final citizenProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$Citizen = AutoDisposeNotifier<RegisterCitizenModel>;
+typedef _$Citizen = AutoDisposeNotifier<CitizenModel>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

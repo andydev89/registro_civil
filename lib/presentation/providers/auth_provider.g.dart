@@ -6,7 +6,7 @@ part of 'auth_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$stepperIndexHash() => r'10a0f3ecc96410fadfa243716b9c9840cba3acb6';
+String _$stepperIndexHash() => r'ba234d23b74834853da6536edf6f84c166ea7045';
 
 /// See also [StepperIndex].
 @ProviderFor(StepperIndex)
@@ -21,7 +21,7 @@ final stepperIndexProvider =
 );
 
 typedef _$StepperIndex = AutoDisposeNotifier<int>;
-String _$authStepper2DataHash() => r'4a2e6bc3368fb1f2a357baee0dd3c21e593d9063';
+String _$authStepper2DataHash() => r'cd2a65d3badf189d3fd63932c0f65a8eb297ea4d';
 
 /// See also [AuthStepper2Data].
 @ProviderFor(AuthStepper2Data)
