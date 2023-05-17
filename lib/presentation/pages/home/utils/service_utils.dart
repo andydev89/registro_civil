@@ -47,7 +47,7 @@ PageRouteInfo<dynamic> getSchedule(TypeServiceModel typeOfService) =>
     );
 
 PageRouteInfo<dynamic> getMarriageCelebration() =>
-    const MarriageCelebrationPrincipalRoute();
+    const MarriageCelebrationRouterRoute();
 
 PageRouteInfo<dynamic> getResidencyRegistration() =>
     ResidenceRegistrationRouterRoute();
