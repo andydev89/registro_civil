@@ -550,7 +550,7 @@ final marriagesFilterProvider =
 );
 
 typedef _$MarriagesFilter = AutoDisposeNotifier<QueryMarriages>;
-String _$marriageUpdateHash() => r'ec175d136e3d6c18fd9e330ad016e4d0f9b0dd3b';
+String _$marriageUpdateHash() => r'2978e3e9451eddf03b61b574938ac79a64cf64e6';
 
 /// See also [MarriageUpdate].
 @ProviderFor(MarriageUpdate)

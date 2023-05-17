@@ -21,7 +21,7 @@ enum ResidentialDependentRelationType implements Translatable {
       .whereNot((element) => element == ResidentialDependentRelationType.none)
       .toList();
 
-  static String? toJson(ResidentialDependentRelationType? value) =>
+  static String? getText(ResidentialDependentRelationType? value) =>
       value?.toText;
 
   @override

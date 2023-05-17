@@ -8,7 +8,7 @@ import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_housing_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_agreemente_type.dart';
-import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/residence_registration/residence_registration_providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';

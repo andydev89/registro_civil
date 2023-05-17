@@ -196,8 +196,6 @@ class MarriageCelebrationModelForm
 
   static const String agencyControlName = "agency";
 
-  static const String requestOwnerControlName = "requestOwner";
-
   static const String firstWitnessControlName = "firstWitness";
 
   static const String secondWitnessControlName = "secondWitness";
@@ -1940,9 +1938,9 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
 
   static const String powerOfAttorneyControlName = "powerOfAttorney";
 
-  static String identityCardSateControlName = "identityCardSate";
+  static const String identityCardSateControlName = "identityCardSate";
 
-  static String powerOfAttorneyStateControlName = "powerOfAttorneyState";
+  static const String powerOfAttorneyStateControlName = "powerOfAttorneyState";
 
   final RequestOwner? requestOwner;
 
@@ -5244,24 +5242,16 @@ class DocumentsRejectionFormBuilder extends StatefulWidget {
 
 class _DocumentsRejectionFormBuilderState
     extends State<DocumentsRejectionFormBuilder> {
-  late FormGroup _form;
-
   late DocumentsRejectionForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = DocumentsRejectionForm(widget.model, _form, null);
+    _formModel = DocumentsRejectionForm(
+        widget.model, DocumentsRejectionForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -5271,12 +5261,14 @@ class _DocumentsRejectionFormBuilderState
   @override
   void didUpdateWidget(covariant DocumentsRejectionFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = DocumentsRejectionForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = DocumentsRejectionForm(widget.model,
+          DocumentsRejectionForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -5284,19 +5276,20 @@ class _DocumentsRejectionFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveDocumentsRejectionForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -5311,13 +5304,15 @@ class DocumentsRejectionForm implements FormModel<DocumentsRejection> {
     this.path,
   ) {}
 
-  static String identityCardControlName = "identityCard";
+  static const String identityCardControlName = "identityCard";
 
-  static String powerOfAttorneyControlName = "powerOfAttorney";
+  static const String powerOfAttorneyControlName = "powerOfAttorney";
 
-  static String firstPartnerDocumentsControlName = "firstPartnerDocuments";
+  static const String firstPartnerDocumentsControlName =
+      "firstPartnerDocuments";
 
-  static String secondPartnerDocumentsControlName = "secondPartnerDocuments";
+  static const String secondPartnerDocumentsControlName =
+      "secondPartnerDocuments";
 
   final DocumentsRejection? documentsRejection;
 
@@ -5733,36 +5728,22 @@ class DocumentsRejectionForm implements FormModel<DocumentsRejection> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          DocumentsRejectionForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    DocumentsRejection value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: DocumentsRejectionForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(DocumentsRejectionForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    DocumentsRejection? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(DocumentsRejection? documentsRejection) =>
+      FormGroup({
         identityCardControlName: FormControl<String>(
             value: documentsRejection?.identityCard,
             validators: [],
@@ -5778,31 +5759,29 @@ class DocumentsRejectionForm implements FormModel<DocumentsRejection> {
             disabled: false,
             touched: false),
         firstPartnerDocumentsControlName: FormArray<Document>(
-            documentsRejection?.firstPartnerDocuments
-                    .map((e) => FormControl<Document>(
-                          value: e,
-                          validators: [],
-                          asyncValidators: [],
-                          asyncValidatorsDebounceTime: 250,
-                          disabled: false,
-                        ))
-                    .toList() ??
-                [],
+            (documentsRejection?.firstPartnerDocuments ?? [])
+                .map((e) => FormControl<Document>(
+                      value: e,
+                      validators: [],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
+                .toList(),
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false),
         secondPartnerDocumentsControlName: FormArray<Document>(
-            documentsRejection?.secondPartnerDocuments
-                    .map((e) => FormControl<Document>(
-                          value: e,
-                          validators: [],
-                          asyncValidators: [],
-                          asyncValidatorsDebounceTime: 250,
-                          disabled: false,
-                        ))
-                    .toList() ??
-                [],
+            (documentsRejection?.secondPartnerDocuments ?? [])
+                .map((e) => FormControl<Document>(
+                      value: e,
+                      validators: [],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
+                .toList(),
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

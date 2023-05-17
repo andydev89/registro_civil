@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/commons/agreements_type.dart';
-import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
@@ -208,7 +208,7 @@ Future<bool?> showAceptAgreement(
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {
-      return AceptAgreementFormBuilder(
+      return TermAndUseConditionsModelFormBuilder(
         builder: (context, formModel, _) {
           return WillPopScope(
             onWillPop: () {
@@ -245,7 +245,7 @@ Future<bool?> showAceptAgreement(
                   const SizedBox(height: 10),
                   PrimaryReactiveCheckBox(
                     label: l10n.aceptoAdv,
-                    formControl: formModel.aceptControl,
+                    formControl: formModel.acceptControl,
                     overFlow: TextOverflow.visible,
                     maxLines: 5,
                   ),
@@ -254,7 +254,7 @@ Future<bool?> showAceptAgreement(
               actions: [
                 Column(
                   children: [
-                    ReactiveAceptAgreementFormConsumer(
+                    ReactiveTermAndUseConditionsModelFormConsumer(
                       builder: (_, formModel, __) {
                         return PrimaryButton(
                           title: l10n.aceptar,

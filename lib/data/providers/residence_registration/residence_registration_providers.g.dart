@@ -41,7 +41,7 @@ final residenceRegistrationPreviewProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$ResidenceRegistrationPreview = AutoDisposeNotifier<DocumentModel>;
-String _$residentialPHash() => r'b818aba1bed8ce3273db269428a3833286c6eb77';
+String _$residentialPHash() => r'61408fa51e4c5e53c7d965f73c16dfe0a7f28cc0';
 
 /// See also [ResidentialP].
 @ProviderFor(ResidentialP)
@@ -56,7 +56,7 @@ final residentialPProvider =
 );
 
 typedef _$ResidentialP = AutoDisposeNotifier<Residential>;
-String _$resRegHash() => r'fd87cdd5dc897dae3e7dd37619c7a608589f8fc3';
+String _$resRegHash() => r'2cacce48386bf64f42057f74b0fc7bc759c199a9';
 
 /// See also [ResReg].
 @ProviderFor(ResReg)

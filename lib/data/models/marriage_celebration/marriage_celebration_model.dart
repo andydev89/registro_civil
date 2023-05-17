@@ -4,7 +4,7 @@ import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/rejecting_enum.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/rejecting_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage_type.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';

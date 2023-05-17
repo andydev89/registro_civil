@@ -28,9 +28,9 @@ mixin _$ResidenceRegistration {
   String get observations => throw _privateConstructorUsedError;
   @FormArrayAnnotation<Residential>()
   List<Residential> get residentials => throw _privateConstructorUsedError;
-  @FormControlAnnotation<Status>()
+  @FormControlAnnotation<StatusType>()
   @JsonKey(includeToJson: false, includeFromJson: true)
-  Status get state => throw _privateConstructorUsedError;
+  StatusType get state => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,9 +52,9 @@ abstract class $ResidenceRegistrationCopyWith<$Res> {
           String observations,
       @FormArrayAnnotation<Residential>()
           List<Residential> residentials,
-      @FormControlAnnotation<Status>()
+      @FormControlAnnotation<StatusType>()
       @JsonKey(includeToJson: false, includeFromJson: true)
-          Status state});
+          StatusType state});
 }
 
 /// @nodoc
@@ -92,7 +92,7 @@ class _$ResidenceRegistrationCopyWithImpl<$Res,
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as StatusType,
     ) as $Val);
   }
 }
@@ -113,9 +113,9 @@ abstract class _$$_ResidenceRegistrationCopyWith<$Res>
           String observations,
       @FormArrayAnnotation<Residential>()
           List<Residential> residentials,
-      @FormControlAnnotation<Status>()
+      @FormControlAnnotation<StatusType>()
       @JsonKey(includeToJson: false, includeFromJson: true)
-          Status state});
+          StatusType state});
 }
 
 /// @nodoc
@@ -150,7 +150,7 @@ class __$$_ResidenceRegistrationCopyWithImpl<$Res>
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as StatusType,
     ));
   }
 }
@@ -166,9 +166,9 @@ class _$_ResidenceRegistration extends _ResidenceRegistration {
           this.observations = '',
       @FormArrayAnnotation<Residential>()
           final List<Residential> residentials = const [],
-      @FormControlAnnotation<Status>()
+      @FormControlAnnotation<StatusType>()
       @JsonKey(includeToJson: false, includeFromJson: true)
-          this.state = Status.active})
+          this.state = StatusType.active})
       : _residentials = residentials,
         super._();
 
@@ -194,9 +194,9 @@ class _$_ResidenceRegistration extends _ResidenceRegistration {
   }
 
   @override
-  @FormControlAnnotation<Status>()
+  @FormControlAnnotation<StatusType>()
   @JsonKey(includeToJson: false, includeFromJson: true)
-  final Status state;
+  final StatusType state;
 
   @override
   String toString() {
@@ -245,9 +245,9 @@ abstract class _ResidenceRegistration extends ResidenceRegistration {
           final String observations,
       @FormArrayAnnotation<Residential>()
           final List<Residential> residentials,
-      @FormControlAnnotation<Status>()
+      @FormControlAnnotation<StatusType>()
       @JsonKey(includeToJson: false, includeFromJson: true)
-          final Status state}) = _$_ResidenceRegistration;
+          final StatusType state}) = _$_ResidenceRegistration;
   const _ResidenceRegistration._() : super._();
 
   factory _ResidenceRegistration.fromJson(Map<String, dynamic> json) =
@@ -264,9 +264,9 @@ abstract class _ResidenceRegistration extends ResidenceRegistration {
   @FormArrayAnnotation<Residential>()
   List<Residential> get residentials;
   @override
-  @FormControlAnnotation<Status>()
+  @FormControlAnnotation<StatusType>()
   @JsonKey(includeToJson: false, includeFromJson: true)
-  Status get state;
+  StatusType get state;
   @override
   @JsonKey(ignore: true)
   _$$_ResidenceRegistrationCopyWith<_$_ResidenceRegistration> get copyWith =>
@@ -299,7 +299,7 @@ mixin _$Residential {
   @FormControlAnnotation(validators: [requiredValidator])
   ResidentialHousingType get housingType => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
-  ResidentialTenureHousingTypeAgreemente get tenureHousingTypeAgreement =>
+  ResidentialTenureHousingAgreementeType get tenureHousingTypeAgreement =>
       throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   String get numberVillaBuilding => throw _privateConstructorUsedError;
@@ -348,7 +348,7 @@ abstract class $ResidentialCopyWith<$Res> {
       @FormControlAnnotation(validators: [requiredValidator])
           ResidentialHousingType housingType,
       @FormControlAnnotation(validators: [requiredValidator])
-          ResidentialTenureHousingTypeAgreemente tenureHousingTypeAgreement,
+          ResidentialTenureHousingAgreementeType tenureHousingTypeAgreement,
       @FormControlAnnotation(validators: [requiredValidator])
           String numberVillaBuilding,
       @FormControlAnnotation(validators: [requiredValidator])
@@ -433,7 +433,7 @@ class _$ResidentialCopyWithImpl<$Res, $Val extends Residential>
       tenureHousingTypeAgreement: null == tenureHousingTypeAgreement
           ? _value.tenureHousingTypeAgreement
           : tenureHousingTypeAgreement // ignore: cast_nullable_to_non_nullable
-              as ResidentialTenureHousingTypeAgreemente,
+              as ResidentialTenureHousingAgreementeType,
       numberVillaBuilding: null == numberVillaBuilding
           ? _value.numberVillaBuilding
           : numberVillaBuilding // ignore: cast_nullable_to_non_nullable
@@ -515,7 +515,7 @@ abstract class _$$_ResidentialCopyWith<$Res>
       @FormControlAnnotation(validators: [requiredValidator])
           ResidentialHousingType housingType,
       @FormControlAnnotation(validators: [requiredValidator])
-          ResidentialTenureHousingTypeAgreemente tenureHousingTypeAgreement,
+          ResidentialTenureHousingAgreementeType tenureHousingTypeAgreement,
       @FormControlAnnotation(validators: [requiredValidator])
           String numberVillaBuilding,
       @FormControlAnnotation(validators: [requiredValidator])
@@ -601,7 +601,7 @@ class __$$_ResidentialCopyWithImpl<$Res>
       tenureHousingTypeAgreement: null == tenureHousingTypeAgreement
           ? _value.tenureHousingTypeAgreement
           : tenureHousingTypeAgreement // ignore: cast_nullable_to_non_nullable
-              as ResidentialTenureHousingTypeAgreemente,
+              as ResidentialTenureHousingAgreementeType,
       numberVillaBuilding: null == numberVillaBuilding
           ? _value.numberVillaBuilding
           : numberVillaBuilding // ignore: cast_nullable_to_non_nullable
@@ -707,7 +707,7 @@ class _$_Residential extends _Residential {
   final ResidentialHousingType housingType;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  final ResidentialTenureHousingTypeAgreemente tenureHousingTypeAgreement;
+  final ResidentialTenureHousingAgreementeType tenureHousingTypeAgreement;
   @override
   @JsonKey()
   @FormControlAnnotation(validators: [requiredValidator])
@@ -835,7 +835,7 @@ abstract class _Residential extends Residential {
       @FormControlAnnotation(validators: [requiredValidator])
           required final ResidentialHousingType housingType,
       @FormControlAnnotation(validators: [requiredValidator])
-          required final ResidentialTenureHousingTypeAgreemente
+          required final ResidentialTenureHousingAgreementeType
               tenureHousingTypeAgreement,
       @FormControlAnnotation(validators: [requiredValidator])
           final String numberVillaBuilding,
@@ -884,7 +884,7 @@ abstract class _Residential extends Residential {
   ResidentialHousingType get housingType;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  ResidentialTenureHousingTypeAgreemente get tenureHousingTypeAgreement;
+  ResidentialTenureHousingAgreementeType get tenureHousingTypeAgreement;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   String get numberVillaBuilding;
@@ -920,7 +920,7 @@ mixin _$Dependent {
       validators: [requiredValidator, ecuadorDniValidator, length10Validator])
   String get nuiDependents => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
-  ResidentialDependentRelation get relationship =>
+  ResidentialDependentRelationType get relationship =>
       throw _privateConstructorUsedError;
   @FormControlAnnotation<String>()
   String get date => throw _privateConstructorUsedError;
@@ -928,8 +928,8 @@ mixin _$Dependent {
   String get name => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   String get lastname => throw _privateConstructorUsedError;
-  @FormControlAnnotation<Status>()
-  Status get state => throw _privateConstructorUsedError;
+  @FormControlAnnotation<StatusType>()
+  StatusType get state => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: true)
   @FormControlAnnotation<String>()
   String get id => throw _privateConstructorUsedError;
@@ -953,15 +953,15 @@ abstract class $DependentCopyWith<$Res> {
       ])
           String nuiDependents,
       @FormControlAnnotation(validators: [requiredValidator])
-          ResidentialDependentRelation relationship,
+          ResidentialDependentRelationType relationship,
       @FormControlAnnotation<String>()
           String date,
       @FormControlAnnotation(validators: [requiredValidator])
           String name,
       @FormControlAnnotation(validators: [requiredValidator])
           String lastname,
-      @FormControlAnnotation<Status>()
-          Status state,
+      @FormControlAnnotation<StatusType>()
+          StatusType state,
       @JsonKey(includeToJson: false, includeFromJson: true)
       @FormControlAnnotation<String>()
           String id});
@@ -996,7 +996,7 @@ class _$DependentCopyWithImpl<$Res, $Val extends Dependent>
       relationship: null == relationship
           ? _value.relationship
           : relationship // ignore: cast_nullable_to_non_nullable
-              as ResidentialDependentRelation,
+              as ResidentialDependentRelationType,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -1012,7 +1012,7 @@ class _$DependentCopyWithImpl<$Res, $Val extends Dependent>
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as StatusType,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1036,15 +1036,15 @@ abstract class _$$_DependentCopyWith<$Res> implements $DependentCopyWith<$Res> {
       ])
           String nuiDependents,
       @FormControlAnnotation(validators: [requiredValidator])
-          ResidentialDependentRelation relationship,
+          ResidentialDependentRelationType relationship,
       @FormControlAnnotation<String>()
           String date,
       @FormControlAnnotation(validators: [requiredValidator])
           String name,
       @FormControlAnnotation(validators: [requiredValidator])
           String lastname,
-      @FormControlAnnotation<Status>()
-          Status state,
+      @FormControlAnnotation<StatusType>()
+          StatusType state,
       @JsonKey(includeToJson: false, includeFromJson: true)
       @FormControlAnnotation<String>()
           String id});
@@ -1077,7 +1077,7 @@ class __$$_DependentCopyWithImpl<$Res>
       relationship: null == relationship
           ? _value.relationship
           : relationship // ignore: cast_nullable_to_non_nullable
-              as ResidentialDependentRelation,
+              as ResidentialDependentRelationType,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -1093,7 +1093,7 @@ class __$$_DependentCopyWithImpl<$Res>
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as Status,
+              as StatusType,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1120,8 +1120,8 @@ class _$_Dependent extends _Dependent {
           required this.name,
       @FormControlAnnotation(validators: [requiredValidator])
           required this.lastname,
-      @FormControlAnnotation<Status>()
-          this.state = Status.active,
+      @FormControlAnnotation<StatusType>()
+          this.state = StatusType.active,
       @JsonKey(includeToJson: false, includeFromJson: true)
       @FormControlAnnotation<String>()
           this.id = ''})
@@ -1136,7 +1136,7 @@ class _$_Dependent extends _Dependent {
   final String nuiDependents;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  final ResidentialDependentRelation relationship;
+  final ResidentialDependentRelationType relationship;
   @override
   @FormControlAnnotation<String>()
   final String date;
@@ -1148,8 +1148,8 @@ class _$_Dependent extends _Dependent {
   final String lastname;
   @override
   @JsonKey()
-  @FormControlAnnotation<Status>()
-  final Status state;
+  @FormControlAnnotation<StatusType>()
+  final StatusType state;
   @override
   @JsonKey(includeToJson: false, includeFromJson: true)
   @FormControlAnnotation<String>()
@@ -1205,15 +1205,15 @@ abstract class _Dependent extends Dependent {
       ])
           required final String nuiDependents,
       @FormControlAnnotation(validators: [requiredValidator])
-          required final ResidentialDependentRelation relationship,
+          required final ResidentialDependentRelationType relationship,
       @FormControlAnnotation<String>()
           required final String date,
       @FormControlAnnotation(validators: [requiredValidator])
           required final String name,
       @FormControlAnnotation(validators: [requiredValidator])
           required final String lastname,
-      @FormControlAnnotation<Status>()
-          final Status state,
+      @FormControlAnnotation<StatusType>()
+          final StatusType state,
       @JsonKey(includeToJson: false, includeFromJson: true)
       @FormControlAnnotation<String>()
           final String id}) = _$_Dependent;
@@ -1228,7 +1228,7 @@ abstract class _Dependent extends Dependent {
   String get nuiDependents;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  ResidentialDependentRelation get relationship;
+  ResidentialDependentRelationType get relationship;
   @override
   @FormControlAnnotation<String>()
   String get date;
@@ -1239,8 +1239,8 @@ abstract class _Dependent extends Dependent {
   @FormControlAnnotation(validators: [requiredValidator])
   String get lastname;
   @override
-  @FormControlAnnotation<Status>()
-  Status get state;
+  @FormControlAnnotation<StatusType>()
+  StatusType get state;
   @override
   @JsonKey(includeToJson: false, includeFromJson: true)
   @FormControlAnnotation<String>()
@@ -1567,7 +1567,7 @@ mixin _$SecondStepResidenceModel {
   @FormControlAnnotation(validators: [requiredValidator])
   ResidentialHousingType get housingType => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
-  ResidentialTenureHousingTypeAgreemente get tenureHousingTypeAgreement =>
+  ResidentialTenureHousingAgreementeType get tenureHousingTypeAgreement =>
       throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   String get numberVillaBuilding => throw _privateConstructorUsedError;
@@ -1598,7 +1598,7 @@ abstract class $SecondStepResidenceModelCopyWith<$Res> {
       @FormControlAnnotation(validators: [requiredValidator])
           ResidentialHousingType housingType,
       @FormControlAnnotation(validators: [requiredValidator])
-          ResidentialTenureHousingTypeAgreemente tenureHousingTypeAgreement,
+          ResidentialTenureHousingAgreementeType tenureHousingTypeAgreement,
       @FormControlAnnotation(validators: [requiredValidator])
           String numberVillaBuilding,
       @FormControlAnnotation(validators: [requiredValidator])
@@ -1648,7 +1648,7 @@ class _$SecondStepResidenceModelCopyWithImpl<$Res,
       tenureHousingTypeAgreement: null == tenureHousingTypeAgreement
           ? _value.tenureHousingTypeAgreement
           : tenureHousingTypeAgreement // ignore: cast_nullable_to_non_nullable
-              as ResidentialTenureHousingTypeAgreemente,
+              as ResidentialTenureHousingAgreementeType,
       numberVillaBuilding: null == numberVillaBuilding
           ? _value.numberVillaBuilding
           : numberVillaBuilding // ignore: cast_nullable_to_non_nullable
@@ -1686,7 +1686,7 @@ abstract class _$$_SecondStepResidenceModelCopyWith<$Res>
       @FormControlAnnotation(validators: [requiredValidator])
           ResidentialHousingType housingType,
       @FormControlAnnotation(validators: [requiredValidator])
-          ResidentialTenureHousingTypeAgreemente tenureHousingTypeAgreement,
+          ResidentialTenureHousingAgreementeType tenureHousingTypeAgreement,
       @FormControlAnnotation(validators: [requiredValidator])
           String numberVillaBuilding,
       @FormControlAnnotation(validators: [requiredValidator])
@@ -1734,7 +1734,7 @@ class __$$_SecondStepResidenceModelCopyWithImpl<$Res>
       tenureHousingTypeAgreement: null == tenureHousingTypeAgreement
           ? _value.tenureHousingTypeAgreement
           : tenureHousingTypeAgreement // ignore: cast_nullable_to_non_nullable
-              as ResidentialTenureHousingTypeAgreemente,
+              as ResidentialTenureHousingAgreementeType,
       numberVillaBuilding: null == numberVillaBuilding
           ? _value.numberVillaBuilding
           : numberVillaBuilding // ignore: cast_nullable_to_non_nullable
@@ -1791,7 +1791,7 @@ class _$_SecondStepResidenceModel extends _SecondStepResidenceModel {
   final ResidentialHousingType housingType;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  final ResidentialTenureHousingTypeAgreemente tenureHousingTypeAgreement;
+  final ResidentialTenureHousingAgreementeType tenureHousingTypeAgreement;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   final String numberVillaBuilding;
@@ -1871,7 +1871,7 @@ abstract class _SecondStepResidenceModel extends SecondStepResidenceModel {
       @FormControlAnnotation(validators: [requiredValidator])
           required final ResidentialHousingType housingType,
       @FormControlAnnotation(validators: [requiredValidator])
-          required final ResidentialTenureHousingTypeAgreemente
+          required final ResidentialTenureHousingAgreementeType
               tenureHousingTypeAgreement,
       @FormControlAnnotation(validators: [requiredValidator])
           required final String numberVillaBuilding,
@@ -1897,7 +1897,7 @@ abstract class _SecondStepResidenceModel extends SecondStepResidenceModel {
   ResidentialHousingType get housingType;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  ResidentialTenureHousingTypeAgreemente get tenureHousingTypeAgreement;
+  ResidentialTenureHousingAgreementeType get tenureHousingTypeAgreement;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   String get numberVillaBuilding;

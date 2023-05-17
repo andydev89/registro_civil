@@ -69,19 +69,13 @@ Map<String, dynamic> _$$_ResidentialToJson(_$_Residential instance) =>
       'backStreet': instance.backStreet,
       'housingType': _$ResidentialHousingTypeEnumMap[instance.housingType]!,
       'tenureHousingTypeAgreement':
-          _$ResidentialTenureHousingTypeAgreementeEnumMap[
+          _$ResidentialTenureHousingAgreementeTypeEnumMap[
               instance.tenureHousingTypeAgreement]!,
       'numberVillaBuilding': instance.numberVillaBuilding,
       'floorNumber': instance.floorNumber,
       'departmentNumber': instance.departmentNumber,
       'type': _$ResidenceTypeEnumMap[instance.type]!,
       'dependents': instance.dependents,
-      'parroquia': Residential._locationToJson(instance.parroquia),
-      'province': Residential._locationToJson(instance.province),
-      'tenureHousingTypeAgreement':
-          ResidentialTenureHousingAgreementeType.toJson(
-              instance.tenureHousingTypeAgreement),
-      'type': ResidenceType.toJson(instance.type),
     };
 
 const _$ResidentialHousingTypeEnumMap = {
@@ -111,7 +105,7 @@ const _$ResidenceTypeEnumMap = {
 _$_Dependent _$$_DependentFromJson(Map<String, dynamic> json) => _$_Dependent(
       nuiDependents: json['nuiDependents'] as String,
       relationship: $enumDecode(
-          _$ResidentialDependentRelationEnumMap, json['relationship']),
+          _$ResidentialDependentRelationTypeEnumMap, json['relationship']),
       date: json['date'] as String,
       name: json['name'] as String,
       lastname: json['lastname'] as String,
@@ -124,13 +118,11 @@ Map<String, dynamic> _$$_DependentToJson(_$_Dependent instance) =>
     <String, dynamic>{
       'nuiDependents': instance.nuiDependents,
       'relationship':
-          _$ResidentialDependentRelationEnumMap[instance.relationship]!,
+          _$ResidentialDependentRelationTypeEnumMap[instance.relationship]!,
       'date': instance.date,
       'name': instance.name,
       'lastname': instance.lastname,
-      'state': _$StatusEnumMap[instance.state]!,
-          ResidentialDependentRelationType.toJson(instance.relationship),
-      'state': Dependent._toJson(instance.state),
+      'state': _$StatusTypeEnumMap[instance.state]!,
     };
 
 const _$ResidentialDependentRelationTypeEnumMap = {
@@ -170,7 +162,7 @@ _$_SecondStepResidenceModel _$$_SecondStepResidenceModelFromJson(
       housingType:
           $enumDecode(_$ResidentialHousingTypeEnumMap, json['housingType']),
       tenureHousingTypeAgreement: $enumDecode(
-          _$ResidentialTenureHousingTypeAgreementeEnumMap,
+          _$ResidentialTenureHousingAgreementeTypeEnumMap,
           json['tenureHousingTypeAgreement']),
       numberVillaBuilding: json['numberVillaBuilding'] as String,
       floorNumber: json['floorNumber'] as String,
@@ -185,60 +177,7 @@ Map<String, dynamic> _$$_SecondStepResidenceModelToJson(
       'electricalCode': instance.electricalCode,
       'housingType': _$ResidentialHousingTypeEnumMap[instance.housingType]!,
       'tenureHousingTypeAgreement':
-          _$ResidentialTenureHousingTypeAgreementeEnumMap[
-              instance.tenureHousingTypeAgreement]!,
-      'numberVillaBuilding': instance.numberVillaBuilding,
-      'floorNumber': instance.floorNumber,
-      'departmentNumber': instance.departmentNumber,
-      'type': _$ResidenceTypeEnumMap[instance.type]!,
-    };
-
-_$_FirstStepResidenceModel _$$_FirstStepResidenceModelFromJson(
-        Map<String, dynamic> json) =>
-    _$_FirstStepResidenceModel(
-      backStreet: json['backStreet'] as String,
-      canton: LocationModel.fromJson(json['canton'] as Map<String, dynamic>),
-      mainStreet: json['mainStreet'] as String,
-      parroquia:
-          LocationModel.fromJson(json['parroquia'] as Map<String, dynamic>),
-      province:
-          LocationModel.fromJson(json['province'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$$_FirstStepResidenceModelToJson(
-        _$_FirstStepResidenceModel instance) =>
-    <String, dynamic>{
-      'backStreet': instance.backStreet,
-      'canton': instance.canton,
-      'mainStreet': instance.mainStreet,
-      'parroquia': instance.parroquia,
-      'province': instance.province,
-    };
-
-_$_SecondStepResidenceModel _$$_SecondStepResidenceModelFromJson(
-        Map<String, dynamic> json) =>
-    _$_SecondStepResidenceModel(
-      electricLightMeter: json['electricLightMeter'] as bool,
-      electricalCode: json['electricalCode'] as String,
-      housingType:
-          $enumDecode(_$ResidentialHousingTypeEnumMap, json['housingType']),
-      tenureHousingTypeAgreement: $enumDecode(
-          _$ResidentialTenureHousingTypeAgreementeEnumMap,
-          json['tenureHousingTypeAgreement']),
-      numberVillaBuilding: json['numberVillaBuilding'] as String,
-      floorNumber: json['floorNumber'] as String,
-      departmentNumber: json['departmentNumber'] as String,
-      type: $enumDecode(_$ResidenceTypeEnumMap, json['type']),
-    );
-
-Map<String, dynamic> _$$_SecondStepResidenceModelToJson(
-        _$_SecondStepResidenceModel instance) =>
-    <String, dynamic>{
-      'electricLightMeter': instance.electricLightMeter,
-      'electricalCode': instance.electricalCode,
-      'housingType': _$ResidentialHousingTypeEnumMap[instance.housingType]!,
-      'tenureHousingTypeAgreement':
-          _$ResidentialTenureHousingTypeAgreementeEnumMap[
+          _$ResidentialTenureHousingAgreementeTypeEnumMap[
               instance.tenureHousingTypeAgreement]!,
       'numberVillaBuilding': instance.numberVillaBuilding,
       'floorNumber': instance.floorNumber,
