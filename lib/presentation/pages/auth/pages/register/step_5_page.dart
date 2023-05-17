@@ -24,7 +24,7 @@ class Step5Page extends ConsumerWidget {
     final l10n = context.l10n;
     return WillPopScope(
       onWillPop: () {
-        ref.read(stepperIndexProvider.notifier).index--;
+        ref.read(stepperIndexProvider.notifier).state--;
         return Future(() => true);
       },
       child: ScrollableContent(

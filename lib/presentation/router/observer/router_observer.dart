@@ -30,7 +30,7 @@ class RegisterAccountObserver extends AutoRouterObserver {
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     if (route.settings is AutoRoutePage &&
         (route.settings as AutoRoutePage).routeData.meta['index'] != null) {
-      ref.read(stepperIndexProvider.notifier).index =
+      ref.read(stepperIndexProvider.notifier).state =
           (route.settings as AutoRoutePage).routeData.meta['index'] as int;
     }
   }
@@ -39,7 +39,7 @@ class RegisterAccountObserver extends AutoRouterObserver {
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     if (route.settings is AutoRoutePage &&
         (route.settings as AutoRoutePage).routeData.meta['index'] != null) {
-      ref.read(stepperIndexProvider.notifier).index =
+      ref.read(stepperIndexProvider.notifier).state =
           (route.settings as AutoRoutePage).routeData.meta['index'] as int;
     }
   }

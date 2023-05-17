@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
-import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
 import 'package:registro_civil_apk/data/models/offers/offers_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -36,7 +35,7 @@ class Offers extends _$Offers {
         .toList();
   }
 
-  double get price {
+  double price() {
     return state.fold<double>(
       0,
       (previousValue, element) =>
@@ -44,7 +43,7 @@ class Offers extends _$Offers {
     );
   }
 
-  double get iva {
+  double iva() {
     return state.fold<double>(
       0,
       (previousValue, element) =>
@@ -52,7 +51,7 @@ class Offers extends _$Offers {
     );
   }
 
-  double get discount {
+  double discount() {
     return state.fold<double>(
       0,
       (previousValue, element) =>
@@ -60,9 +59,9 @@ class Offers extends _$Offers {
     );
   }
 
-  double get totalPay => price + iva - discount;
+  double totalPay() => price() + iva() - discount();
 
-  double get subTotal => price - discount;
+  double subTotal() => price() - discount();
 
   void empty() {
     state = [];
@@ -73,9 +72,9 @@ class Offers extends _$Offers {
     return TypeServiceModel(
       id: '0',
       name: l10n.carrito,
-      price: price,
-      iva: iva,
-      discount: discount,
+      price: price(),
+      iva: iva(),
+      discount: discount(),
       description: '',
       iconoMovil: '',
       iconoWeb: '',

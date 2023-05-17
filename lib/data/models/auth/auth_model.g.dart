@@ -6,24 +6,6 @@ part of 'auth_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RegisterCitizenModel _$RegisterCitizenModelFromJson(
-        Map<String, dynamic> json) =>
-    RegisterCitizenModel(
-      nui: json['nui'] as String? ?? '',
-      firstName: json['firstName'] as String? ?? '',
-      lastName: json['lastName'] as String? ?? '',
-      fullName: json['fullName'] as String? ?? '',
-    );
-
-Map<String, dynamic> _$RegisterCitizenModelToJson(
-        RegisterCitizenModel instance) =>
-    <String, dynamic>{
-      'nui': instance.nui,
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
-      'fullName': instance.fullName,
-    };
-
 LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) =>
     LoginResponseModel(
       jwtToken: json['jwtToken'] as String,
@@ -71,4 +53,22 @@ Map<String, dynamic> _$AuthCodeModelToJson(AuthCodeModel instance) =>
     <String, dynamic>{
       'code': instance.code,
       'command': instance.command,
+    };
+
+_$_RegisterCitizenModel _$$_RegisterCitizenModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_RegisterCitizenModel(
+      nui: json['nui'] as String? ?? '',
+      firstName: json['firstName'] as String? ?? '',
+      lastName: json['lastName'] as String? ?? '',
+      fullName: json['fullName'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_RegisterCitizenModelToJson(
+        _$_RegisterCitizenModel instance) =>
+    <String, dynamic>{
+      'nui': instance.nui,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'fullName': instance.fullName,
     };

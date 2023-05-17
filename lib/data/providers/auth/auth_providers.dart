@@ -110,15 +110,11 @@ class RegisterCode extends _$RegisterCode {
 class Citizen extends _$Citizen {
   @override
   RegisterCitizenModel build() {
-    return RegisterCitizenModel();
+    return const RegisterCitizenModel();
   }
 
-  @override
-  RegisterCitizenModel get state;
-
-  @override
-  set state(RegisterCitizenModel model) {
-    super.state = model;
+  void setCitizen(RegisterCitizenModel model) {
+    state = state.copyWithFromModel(model);
   }
 }
 

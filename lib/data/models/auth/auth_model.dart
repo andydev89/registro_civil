@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 
 part 'auth_model.g.dart';
+part 'auth_model.freezed.dart';
 
-@JsonSerializable()
-class RegisterCitizenModel {
-  RegisterCitizenModel({
-    this.nui = '',
-    this.firstName = '',
-    this.lastName = '',
-    this.fullName = '',
-  });
+@freezed
+class RegisterCitizenModel with _$RegisterCitizenModel {
+  const factory RegisterCitizenModel({
+    @Default('') String nui,
+    @Default('') String firstName,
+    @Default('') String lastName,
+    @Default('') String fullName,
+  }) = _RegisterCitizenModel;
+
+  const RegisterCitizenModel._();
 
   factory RegisterCitizenModel.fromJson(Map<String, dynamic> json) =>
       _$RegisterCitizenModelFromJson(json);
-  final String nui;
-  final String firstName;
-  final String lastName;
-  final String fullName;
 
-  String get otp => fullName.split(':').last.trim();
-
-  Map<String, dynamic> toJson() => _$RegisterCitizenModelToJson(this);
-
-  @override
-  String toString() {
-    return toJson().toString();
+  RegisterCitizenModel copyWithFromModel(RegisterCitizenModel model) {
+    return copyWith(
+      nui: model.nui,
+      firstName: model.firstName,
+      lastName: model.lastName,
+      fullName: model.fullName,
+    );
   }
 }
 

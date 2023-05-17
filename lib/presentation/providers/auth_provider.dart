@@ -8,11 +8,9 @@ class StepperIndex extends _$StepperIndex {
     return 0;
   }
 
-  set index(int idnex) {
-    state = idnex;
-  }
+  void increment() => state++;
 
-  int get index => state;
+  void decrement() => state--;
 }
 @riverpod
 class AuthStepper2Data extends _$AuthStepper2Data {
@@ -20,12 +18,4 @@ class AuthStepper2Data extends _$AuthStepper2Data {
   bool build() {
     return false;
   }
-
-@override
-  set state(bool state) {
-    this.state = state;
-  }
-
-@override
-  bool get state;
 }

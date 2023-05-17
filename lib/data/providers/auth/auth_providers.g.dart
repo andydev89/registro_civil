@@ -219,7 +219,7 @@ final registerCodeProvider =
 );
 
 typedef _$RegisterCode = AutoDisposeNotifier<bool>;
-String _$citizenHash() => r'2e0d3fbfb2012a5833ad696a5203db31f7b5af83';
+String _$citizenHash() => r'e84d32c999a7ec06285acdfdca8940c547787425';
 
 /// See also [Citizen].
 @ProviderFor(Citizen)
