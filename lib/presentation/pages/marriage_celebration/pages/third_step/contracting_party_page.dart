@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_type.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -25,8 +22,10 @@ class ContractingPartyPage extends ConsumerWidget {
   const ContractingPartyPage({
     super.key,
     required this.indexContractingParty,
+    this.operation = Crud.create,
   });
   final int indexContractingParty;
+  final Crud operation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,9 +34,9 @@ class ContractingPartyPage extends ConsumerWidget {
     final isCP =
         model.requestOwnerType == MarriageCelebrationType.contractingParty;
     final partner1 = !isCP
-        ? ref.watch(PartnersProvider(0))
-        : ref.watch(PartnersProvider(0)).updateFromWitness(model.firstWitness);
-    final partner2 = ref.watch(PartnersProvider(1));
+        ? ref.watch(partnersProvider(0))
+        : ref.watch(partnersProvider(0)).updateFromWitness(model.firstWitness);
+    final partner2 = ref.watch(partnersProvider(1));
     return MarriageCelebrationModelFormBuilder(
       initState: (_, formModel) {
         final form = indexContractingParty == 0
@@ -71,20 +70,25 @@ class ContractingPartyPage extends ConsumerWidget {
               children: [
                 PrimaryText(l10n.numCedula),
                 PrimaryReactiveNuiField(
+                  readOnly: operation.isRead,
                   formControl: form.nuiControl,
                 ),
                 PrimaryText(l10n.nombreApe),
                 PrimaryReactiveTextField(
+                  readOnly: operation.isRead,
                   formControl: form.nameControl,
                   textCapitalization: TextCapitalization.words,
                 ),
                 PrimaryText(l10n.estadoCiv),
                 PrimaryReactiveDropdown(
+                  readOnly: operation.isRead,
                   formControl: form.maritalStatusControl,
                   items: MaritalStatusType.values,
                 ),
                 PrimaryText(l10n.tieneHij),
                 PrimaryReactiveDropdown(
+                  readOnly: operation.isRead,
+                  init: operation.isRead,
                   formControl: form.hasChildrenControl,
                   items: Binary.values,
                 ),
@@ -96,6 +100,8 @@ class ContractingPartyPage extends ConsumerWidget {
                       children: [
                         PrimaryText(l10n.tusHiSon),
                         PrimaryReactiveDropdown(
+                          init: operation.isRead,
+                          readOnly: operation.isRead,
                           formControl: form.childrenRelationshipControl,
                           items: ChildrenRelationShipType.values,
                         ),
@@ -104,6 +110,7 @@ class ContractingPartyPage extends ConsumerWidget {
                   ),
                 ),
                 PrimaryReactiveCheckBox(
+                  readOnly: operation.isRead,
                   formControl: form.conadisControl,
                   label: l10n.tieneCarConadis,
                 ),
@@ -115,6 +122,7 @@ class ContractingPartyPage extends ConsumerWidget {
                       children: [
                         const PrimaryText('No. CONADIS'),
                         PrimaryReactiveTextField(
+                          readOnly: operation.isRead,
                           formControl: form.conadisNumberControl,
                           hintText: '01234567',
                           keyboardType: TextInputType.number,
@@ -136,14 +144,20 @@ class ContractingPartyPage extends ConsumerWidget {
               final form2 = createPartnerFormGroup(partner2);
               final valid = form1.valid && form2.valid;
               return PrimaryButton(
-                title: l10n.siguiente,
+                title: operation.isCreate ? l10n.siguiente : l10n.aceptar,
                 onPressed: valid
                     ? () {
-                        ref.read(marriageCelebrationProvider.notifier)
-                          ..setPartner(partner1, 0)
-                          ..setPartner(partner2, 1);
+                        if (operation.isCreate) {
+                          ref.read(marriageCelebrationProvider.notifier)
+                            ..setPartner(partner1, 0)
+                            ..setPartner(partner2, 1);
+                          context.navigateTo(
+                            MarriageCelebrationFourthStepRouterRoute(),
+                          );
+                          return;
+                        }
                         context.navigateTo(
-                          MarriageCelebrationFourthStepRouterRoute(),
+                          MarriageCelebrationRouterRoute(showAgreement: false),
                         );
                       }
                     : null,

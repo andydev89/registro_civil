@@ -24,8 +24,8 @@ enum ChildrenRelationShipType implements Translatable {
   const ChildrenRelationShipType(this.toText);
   final String toText;
 
-  static String? toJson(ChildrenRelationShipType? childrenRelationShip) =>
-      childrenRelationShip?.toText;
+  // static String toJson(ChildrenRelationShipType childrenRelationShip) =>
+  //     childrenRelationShip.toText;
 
   @override
   String translate(BuildContext context) {

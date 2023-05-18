@@ -26,8 +26,10 @@ class FirstStepAttorneyPage extends ConsumerWidget {
     return RequestOwnerFormBuilder(
       model: provider.requestOwner,
       initState: (context, formModel) {
-        setErrorFile(formModel.identityCardControl);
-        setErrorFile(formModel.powerOfAttorneyControl);
+        if (operation.isCreate) {
+          setErrorFile(formModel.identityCardControl);
+          setErrorFile(formModel.powerOfAttorneyControl);
+        }
       },
       builder: (_, formModel, __) {
         formModel.identityCardControl?.valueChanges.listen((event) {
@@ -45,18 +47,23 @@ class FirstStepAttorneyPage extends ConsumerWidget {
         return Scaffold(
           backgroundColor: Colors.transparent,
           body: ScrollableContent(
-            child: FirstStepForm(formModel: formModel),
+            child: FirstStepForm(
+              formModel: formModel,
+              operation: operation,
+            ),
           ).symmetricPadding(10, 20),
           bottomNavigationBar: ReactiveRequestOwnerFormConsumer(
             builder: (_, formModel, __) => PrimaryButton(
               title: l10n.siguiente,
               onPressed: formModel.form.valid
                   ? () {
-                      ref
-                          .read(marriageCelebrationProvider.notifier)
-                          .setFirstStep(formModel.model);
+                      if (operation.isCreate) {
+                        ref
+                            .read(marriageCelebrationProvider.notifier)
+                            .setFirstStep(formModel.model);
+                      }
                       context.navigateTo(
-                        const MarriageCelebrationAgencyRoute(),
+                         MarriageCelebrationAgencyRoute(operation: operation),
                       );
                     }
                   : null,

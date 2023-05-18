@@ -18,8 +18,8 @@ enum MaritalStatusType implements Translatable {
   const MaritalStatusType(this.toText);
   final String toText;
 
-  static String toJson(MaritalStatusType? maritalStatus) =>
-      maritalStatus?.toText ?? '';
+  // static String toJson(MaritalStatusType? maritalStatus) =>
+  //     maritalStatus?.toText ?? '';
 
   @override
   String translate(BuildContext context) {

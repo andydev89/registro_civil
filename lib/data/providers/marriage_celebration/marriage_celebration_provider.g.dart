@@ -299,7 +299,7 @@ class MarriageByIdProvider
 }
 
 String _$marriageCelebrationHash() =>
-    r'26be304a4fbb39c082571f042e1525374ea5789e';
+    r'98fb43fc455cf657cb135e193f12d3b8f4e243cd';
 
 /// See also [MarriageCelebration].
 @ProviderFor(MarriageCelebration)
@@ -315,22 +315,7 @@ final marriageCelebrationProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$MarriageCelebration = AutoDisposeNotifier<MarriageCelebrationModel>;
-String _$witness1Hash() => r'e21bc83ef8fd3220ffeed45be77857bf3adafc33';
-
-/// See also [Witness1].
-@ProviderFor(Witness1)
-final witness1Provider =
-    AutoDisposeNotifierProvider<Witness1, Witness>.internal(
-  Witness1.new,
-  name: r'witness1Provider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$witness1Hash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$Witness1 = AutoDisposeNotifier<Witness>;
-String _$witnesssHash() => r'f22067c688d4169670322df0c2e0ca213409d5da';
+String _$witnesssHash() => r'99b3f9b1393a9dd64c46ff53a69045d0c684c242';
 
 abstract class _$Witnesss extends BuildlessAutoDisposeNotifier<Witness> {
   late final int index;
@@ -425,7 +410,7 @@ class WitnesssProvider
   }
 }
 
-String _$partnersHash() => r'fb5e87c8fa25b20f1391832a4b0dd48701ca55d5';
+String _$partnersHash() => r'eee48143f5cf407300876b33a81ecb73badda725';
 
 abstract class _$Partners extends BuildlessAutoDisposeNotifier<Partner> {
   late final int indexPartner;

@@ -13,6 +13,10 @@ class MarriageCelebration extends _$MarriageCelebration {
     return MarriageCelebrationModel(outside: Outside());
   }
 
+  void updateModel(MarriageCelebrationModel model) {
+    state = state.copyWithFromModel(model);
+  }
+
 // INIT
   void setAttorney() {
     state = MarriageCelebrationModel(
@@ -29,7 +33,7 @@ class MarriageCelebration extends _$MarriageCelebration {
 
   // AGENCY
   void setAgency(AgencyModel? agency) {
-    state = state.copyWith(agency: agency);
+    state = state.copyWith(agencyID: agency);
   }
 
   // FIRST STEP
@@ -71,20 +75,14 @@ class MarriageCelebration extends _$MarriageCelebration {
 }
 
 @riverpod
-class Witness1 extends _$Witness1 {
-  @override
-  Witness build() {
-    return Witness();
-  }
-
-  void restart() => state = Witness();
-}
-
-@riverpod
 class Witnesss extends _$Witnesss {
   @override
   Witness build(int index) {
     return Witness();
+  }
+
+  void init(Witness witness) {
+    state = state.copyWithFromWitness(witness);
   }
 
   void restart() => state = Witness();
@@ -95,6 +93,10 @@ class Partners extends _$Partners {
   @override
   Partner build(int indexPartner) {
     return Partner();
+  }
+
+  void init(Partner partner) {
+    state = state.copyWithFromPartner(partner);
   }
 
   void restart() => state = Partner();

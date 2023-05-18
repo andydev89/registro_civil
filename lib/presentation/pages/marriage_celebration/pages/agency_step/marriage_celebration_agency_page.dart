@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
@@ -14,12 +16,25 @@ import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
 class MarriageCelebrationAgencyPage extends ConsumerWidget {
-  const MarriageCelebrationAgencyPage({super.key});
+  const MarriageCelebrationAgencyPage({
+    super.key,
+    this.operation = Crud.create,
+  });
+  final Crud operation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final marriage = ref.watch(marriageCelebrationProvider);
     return SelectAgencyFormBuilder(
+      initState: (context, formModel) {
+        if (operation.isRead) {
+          formModel
+            ..agencyControl.value =
+                AgencyModel.fromLocationModel(marriage.agency!)
+            ..provinceControl.value = marriage.province;
+        }
+      },
       builder: (_, formModel, __) => PrimaryScaffold(
         title: l10n.solicitudCelMat,
         subtitle: l10n.ingreseInfSol,
@@ -28,6 +43,8 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
             child: Column(
               children: [
                 SelectElementFromApi(
+                  init: operation.isRead,
+                  readOnly: operation.isRead,
                   formControl: formModel.provinceControl,
                   label: l10n.provincia,
                   provider: provincesProvider,
@@ -35,7 +52,9 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
                 ),
                 ReactiveSelectAgencyFormConsumer(
                   builder: (_, __, ___) => SelectElementFromApi(
-                    readOnly: !formModel.provinceControl.valid,
+                    readOnly:
+                        !formModel.provinceControl.valid || operation.isRead,
+                    init: operation.isRead,
                     formControl: formModel.agencyControl,
                     label: l10n.agencia,
                     provider: AgenciesByProvinceProvider(
@@ -53,15 +72,35 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
               title: l10n.siguiente,
               onPressed: formModel.form.valid
                   ? () {
-                      ref
-                          .read(marriageCelebrationProvider.notifier)
-                          .setAgency(formModel.agencyControl.value);
+                      if (operation.isCreate) {
+                        ref
+                            .read(marriageCelebrationProvider.notifier)
+                            .setAgency(formModel.agencyControl.value);
+                      } else {
+                        ref
+                          ..read(witnesssProvider(0).notifier)
+                              .init(marriage.firstWitness!)
+                          ..read(witnesssProvider(1).notifier)
+                              .init(marriage.secondWitness!);
+                      }
                       context.navigateTo(
                         MarriageCelebrationSecondStepRouterRoute(
+                          operation: operation,
                           children: [
-                            SecondStepAtHeadquarterRoute(
-                              children: [WitnessRoute(indexWitness: 0)],
-                            ),
+                            if (operation.isCreate || !marriage.isOutside)
+                              SecondStepAtHeadquarterRoute(
+                                operation: operation,
+                                children: [
+                                  WitnessRoute(
+                                    indexWitness: 0,
+                                    operation: operation,
+                                  )
+                                ],
+                              )
+                            else
+                              SecondStepOffSiteRoute(
+                                operation: operation,
+                              ),
                           ],
                         ),
                       );

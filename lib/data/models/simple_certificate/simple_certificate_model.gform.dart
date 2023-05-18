@@ -411,10 +411,11 @@ class SimpleCertificateFirstStepFamiliarModelForm
 
   @override
   SimpleCertificateFirstStepFamiliarModel get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'SimpleCertificateFirstStepFamiliarModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return SimpleCertificateFirstStepFamiliarModel(
         nui: _nuiValue,
@@ -620,10 +621,11 @@ class ConadisModelForm implements FormModel<ConadisModel> {
 
   @override
   ConadisModel get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'ConadisModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ConadisModel(
         conadis: _conadisValue, conadisNumber: _conadisNumberValue);
@@ -1114,10 +1116,11 @@ class RejectInformationForm implements FormModel<RejectInformation> {
 
   @override
   RejectInformation get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'RejectInformationForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return RejectInformation(
         rejectReason: _rejectReasonValue,

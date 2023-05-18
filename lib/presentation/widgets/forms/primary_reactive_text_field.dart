@@ -83,7 +83,6 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
             hintText: hintText ?? '${l10n.escriba}...',
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-            readOnly: readOnly,
             setSuffixIconConstraints: setSuffixIconConstraints,
           ),
         ),
