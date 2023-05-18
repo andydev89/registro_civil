@@ -3,6 +3,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -17,14 +18,16 @@ class WitnessPage extends ConsumerWidget {
   const WitnessPage({
     super.key,
     required this.indexWitness,
+    this.operation = Crud.create,
   });
   final int indexWitness;
+  final Crud operation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final witness1 = ref.watch(WitnesssProvider(0));
-    final witness2 = ref.watch(WitnesssProvider(1));
+    final witness1 = ref.watch(witnesssProvider(0));
+    final witness2 = ref.watch(witnesssProvider(1));
     return WitnessFormBuilder(
       model: indexWitness == 0 ? witness1 : witness2,
       initState: (_, formModel) => formModel.form.valueChanges
@@ -45,10 +48,12 @@ class WitnessPage extends ConsumerWidget {
           children: [
             PrimaryText(l10n.numCedula),
             PrimaryReactiveNuiField(
+              readOnly: operation.isRead,
               formControl: form.nuiControl,
             ),
             PrimaryText(l10n.nombreApe),
             PrimaryReactiveTextField(
+              readOnly: operation.isRead,
               formControl: form.nameControl,
               textCapitalization: TextCapitalization.words,
             ),
@@ -63,15 +68,26 @@ class WitnessPage extends ConsumerWidget {
               title: l10n.siguiente,
               onPressed: valid
                   ? () {
-                      ref.read(marriageCelebrationProvider.notifier)
-                        ..setWitness(witness1, 0)
-                        ..setWitness(witness2, 1);
+                      if (operation.isCreate) {
+                        ref.read(marriageCelebrationProvider.notifier)
+                          ..setWitness(witness1, 0)
+                          ..setWitness(witness2, 1);
+                      } else {
+                        final marriage = ref.read(marriageCelebrationProvider);
+                        ref
+                          ..read(partnersProvider(0).notifier)
+                              .init(marriage.firstPartner!)
+                          ..read(partnersProvider(1).notifier)
+                              .init(marriage.secondPartner!);
+                      }
                       context.navigateTo(
                         MarriageCelebrationThirdStepRouterRoute(
                           children: [
                             ThirdStepContractingPartyRoute(
+                              operation: operation,
                               children: [
                                 ContractingPartyRoute(
+                                  operation: operation,
                                   indexContractingParty: 0,
                                 )
                               ],

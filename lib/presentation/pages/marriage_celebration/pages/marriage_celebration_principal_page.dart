@@ -12,12 +12,10 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_add_item_row.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/card_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
 import 'package:registro_civil_apk/presentation/widgets/list/paged_list_view_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/widget_from_json.dart';
 
 class MarriageCelebrationPrincipalPage extends ConsumerWidget {
   const MarriageCelebrationPrincipalPage({super.key});
@@ -37,7 +35,7 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
             PrimaryAddItemRow(
               title: l10n.listadoSol,
               onPressed: () => context.navigateTo(
-                const MarriageCelebrationRouterRoute(),
+                MarriageCelebrationFirstStepRouterRoute(),
               ),
             ),
             Expanded(
@@ -70,12 +68,11 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
                               ),
                             ),
                       Crud.read: (p0) => context.navigateTo(
-                            MarriageCelebrationRouterRoute(
+                            MarriageCelebrationFirstStepRouterRoute(
+                              operation: Crud.read,
+                              marriageId: e.id,
                               children: [
-                                MarriageCelebrationFirstStepRouterRoute(
-                                  operation: Crud.read,
-                                  marriageId: e.id,
-                                )
+                                FirstStepAttorneyRoute(operation: Crud.read),
                               ],
                             ),
                           ),

@@ -12,7 +12,8 @@ import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.d
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 
 class FirstStepContractingPartyPage extends ConsumerWidget {
-  const FirstStepContractingPartyPage({super.key,
+  const FirstStepContractingPartyPage({
+    super.key,
     this.operation = Crud.create,
   });
   final Crud operation;
@@ -26,18 +27,24 @@ class FirstStepContractingPartyPage extends ConsumerWidget {
       builder: (_, formModel, __) => Scaffold(
         backgroundColor: Colors.transparent,
         body: ScrollableContent(
-          child: FirstStepForm(formModel: formModel, showFilePicker: false),
+          child: FirstStepForm(
+            formModel: formModel,
+            showFilePicker: false,
+            operation: operation,
+          ),
         ).symmetricPadding(10, 20),
         bottomNavigationBar: ReactiveRequestOwnerFormConsumer(
           builder: (_, formModel, __) => PrimaryButton(
             title: l10n.siguiente,
             onPressed: formModel.form.valid
                 ? () {
-                    ref
-                        .read(marriageCelebrationProvider.notifier)
-                        .setFirstStep(formModel.model);
+                    if (operation.isCreate) {
+                      ref
+                          .read(marriageCelebrationProvider.notifier)
+                          .setFirstStep(formModel.model);
+                    }
                     context.navigateTo(
-                      const MarriageCelebrationAgencyRoute(),
+                      MarriageCelebrationAgencyRoute(operation: operation),
                     );
                   }
                 : null,

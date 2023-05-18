@@ -194,7 +194,7 @@ class MarriageCelebrationModelForm
 
   static const String requestOwnerTypeControlName = "requestOwnerType";
 
-  static const String agencyControlName = "agency";
+  static const String agencyIDControlName = "agencyID";
 
   static const String firstWitnessControlName = "firstWitness";
 
@@ -218,7 +218,7 @@ class MarriageCelebrationModelForm
 
   String requestOwnerTypeControlPath() =>
       pathBuilder(requestOwnerTypeControlName);
-  String agencyControlPath() => pathBuilder(agencyControlName);
+  String agencyIDControlPath() => pathBuilder(agencyIDControlName);
   String firstWitnessControlPath() => pathBuilder(firstWitnessControlName);
   String secondWitnessControlPath() => pathBuilder(secondWitnessControlName);
   String isOutsideControlPath() => pathBuilder(isOutsideControlName);
@@ -226,7 +226,7 @@ class MarriageCelebrationModelForm
   String secondPartnerControlPath() => pathBuilder(secondPartnerControlName);
   MarriageCelebrationType get _requestOwnerTypeValue =>
       requestOwnerTypeControl.value as MarriageCelebrationType;
-  AgencyModel? get _agencyValue => agencyControl?.value;
+  AgencyModel? get _agencyIDValue => agencyIDControl?.value;
   Witness? get _firstWitnessValue => firstWitnessControl?.value;
   Witness? get _secondWitnessValue => secondWitnessControl?.value;
   bool get _isOutsideValue => isOutsideControl.value as bool;
@@ -241,9 +241,9 @@ class MarriageCelebrationModelForm
     }
   }
 
-  bool get containsAgency {
+  bool get containsAgencyID {
     try {
-      form.control(agencyControlPath());
+      form.control(agencyIDControlPath());
       return true;
     } catch (e) {
       return false;
@@ -296,28 +296,28 @@ class MarriageCelebrationModelForm
   }
 
   Object? get requestOwnerTypeErrors => requestOwnerTypeControl.errors;
-  Object? get agencyErrors => agencyControl?.errors;
+  Object? get agencyIDErrors => agencyIDControl?.errors;
   Object? get firstWitnessErrors => firstWitnessControl?.errors;
   Object? get secondWitnessErrors => secondWitnessControl?.errors;
   Object? get isOutsideErrors => isOutsideControl.errors;
   Object? get firstPartnerErrors => firstPartnerControl?.errors;
   Object? get secondPartnerErrors => secondPartnerControl?.errors;
   void get requestOwnerTypeFocus => form.focus(requestOwnerTypeControlPath());
-  void get agencyFocus => form.focus(agencyControlPath());
+  void get agencyIDFocus => form.focus(agencyIDControlPath());
   void get firstWitnessFocus => form.focus(firstWitnessControlPath());
   void get secondWitnessFocus => form.focus(secondWitnessControlPath());
   void get isOutsideFocus => form.focus(isOutsideControlPath());
   void get firstPartnerFocus => form.focus(firstPartnerControlPath());
   void get secondPartnerFocus => form.focus(secondPartnerControlPath());
-  void agencyRemove({
+  void agencyIDRemove({
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if (containsAgency) {
+    if (containsAgencyID) {
       final controlPath = path;
       if (controlPath == null) {
         form.removeControl(
-          agencyControlName,
+          agencyIDControlName,
           updateParent: updateParent,
           emitEvent: emitEvent,
         );
@@ -326,7 +326,7 @@ class MarriageCelebrationModelForm
 
         if (formGroup is FormGroup) {
           formGroup.removeControl(
-            agencyControlName,
+            agencyIDControlName,
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -448,12 +448,12 @@ class MarriageCelebrationModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void agencyValueUpdate(
+  void agencyIDValueUpdate(
     AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    agencyControl?.updateValue(value,
+    agencyIDControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -511,12 +511,12 @@ class MarriageCelebrationModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void agencyValuePatch(
+  void agencyIDValuePatch(
     AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    agencyControl?.patchValue(value,
+    agencyIDControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -574,14 +574,14 @@ class MarriageCelebrationModelForm
   }) =>
       requestOwnerTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void agencyValueReset(
+  void agencyIDValueReset(
     AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      agencyControl?.reset(
+      agencyIDControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void firstWitnessValueReset(
     Witness? value, {
@@ -635,8 +635,8 @@ class MarriageCelebrationModelForm
   FormControl<MarriageCelebrationType> get requestOwnerTypeControl =>
       form.control(requestOwnerTypeControlPath())
           as FormControl<MarriageCelebrationType>;
-  FormControl<AgencyModel>? get agencyControl => containsAgency
-      ? form.control(agencyControlPath()) as FormControl<AgencyModel>?
+  FormControl<AgencyModel>? get agencyIDControl => containsAgencyID
+      ? form.control(agencyIDControlPath()) as FormControl<AgencyModel>?
       : null;
   FormControl<Witness>? get firstWitnessControl => containsFirstWitness
       ? form.control(firstWitnessControlPath()) as FormControl<Witness>?
@@ -670,18 +670,18 @@ class MarriageCelebrationModelForm
     }
   }
 
-  void agencySetDisabled(
+  void agencyIDSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      agencyControl?.markAsDisabled(
+      agencyIDControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      agencyControl?.markAsEnabled(
+      agencyIDControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -780,14 +780,17 @@ class MarriageCelebrationModelForm
 
   @override
   MarriageCelebrationModel get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'MarriageCelebrationModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return MarriageCelebrationModel(
         requestOwnerType: _requestOwnerTypeValue,
-        agency: _agencyValue,
+        agencyID: _agencyIDValue,
+        province: marriageCelebrationModel?.province,
+        agency: marriageCelebrationModel?.agency,
         firstWitness: _firstWitnessValue,
         secondWitness: _secondWitnessValue,
         firstPartner: _firstPartnerValue,
@@ -835,8 +838,8 @@ class MarriageCelebrationModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        agencyControlName: FormControl<AgencyModel>(
-            value: marriageCelebrationModel?.agency,
+        agencyIDControlName: FormControl<AgencyModel>(
+            value: marriageCelebrationModel?.agencyID,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -912,14 +915,15 @@ class PartnerForm implements FormModel<Partner> {
   String conadisControlPath() => pathBuilder(conadisControlName);
   String conadisNumberControlPath() => pathBuilder(conadisNumberControlName);
   String documentsControlPath() => pathBuilder(documentsControlName);
-  String get _nuiValue => nuiControl.value ?? "";
-  String get _nameValue => nameControl.value ?? "";
-  MaritalStatusType? get _maritalStatusValue => maritalStatusControl?.value;
-  Binary? get _hasChildrenValue => hasChildrenControl?.value;
+  String get _nuiValue => nuiControl.value as String;
+  String get _nameValue => nameControl.value as String;
+  MaritalStatusType get _maritalStatusValue =>
+      maritalStatusControl.value as MaritalStatusType;
+  Binary get _hasChildrenValue => hasChildrenControl.value as Binary;
   ChildrenRelationShipType? get _childrenRelationshipValue =>
       childrenRelationshipControl?.value;
   bool get _conadisValue => conadisControl.value as bool;
-  String get _conadisNumberValue => conadisNumberControl.value ?? "";
+  String get _conadisNumberValue => conadisNumberControl.value as String;
   List<Document> get _documentsValue =>
       documentsControl.value?.whereType<Document>().toList() ?? [];
   bool get containsNui {
@@ -996,8 +1000,8 @@ class PartnerForm implements FormModel<Partner> {
 
   Object? get nuiErrors => nuiControl.errors;
   Object? get nameErrors => nameControl.errors;
-  Object? get maritalStatusErrors => maritalStatusControl?.errors;
-  Object? get hasChildrenErrors => hasChildrenControl?.errors;
+  Object? get maritalStatusErrors => maritalStatusControl.errors;
+  Object? get hasChildrenErrors => hasChildrenControl.errors;
   Object? get childrenRelationshipErrors => childrenRelationshipControl?.errors;
   Object? get conadisErrors => conadisControl.errors;
   Object? get conadisNumberErrors => conadisNumberControl.errors;
@@ -1011,58 +1015,6 @@ class PartnerForm implements FormModel<Partner> {
   void get conadisFocus => form.focus(conadisControlPath());
   void get conadisNumberFocus => form.focus(conadisNumberControlPath());
   void get documentsFocus => form.focus(documentsControlPath());
-  void maritalStatusRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsMaritalStatus) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          maritalStatusControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            maritalStatusControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
-  void hasChildrenRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsHasChildren) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          hasChildrenControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            hasChildrenControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
   void childrenRelationshipRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1108,20 +1060,20 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValueUpdate(
-    MaritalStatusType? value, {
+    MaritalStatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    maritalStatusControl?.updateValue(value,
+    maritalStatusControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void hasChildrenValueUpdate(
-    Binary? value, {
+    Binary value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    hasChildrenControl?.updateValue(value,
+    hasChildrenControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1180,20 +1132,20 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValuePatch(
-    MaritalStatusType? value, {
+    MaritalStatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    maritalStatusControl?.patchValue(value,
+    maritalStatusControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void hasChildrenValuePatch(
-    Binary? value, {
+    Binary value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    hasChildrenControl?.patchValue(value,
+    hasChildrenControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1252,22 +1204,22 @@ class PartnerForm implements FormModel<Partner> {
       nameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void maritalStatusValueReset(
-    MaritalStatusType? value, {
+    MaritalStatusType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      maritalStatusControl?.reset(
+      maritalStatusControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void hasChildrenValueReset(
-    Binary? value, {
+    Binary value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      hasChildrenControl?.reset(
+      hasChildrenControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void childrenRelationshipValueReset(
     ChildrenRelationShipType? value, {
@@ -1309,14 +1261,11 @@ class PartnerForm implements FormModel<Partner> {
       form.control(nuiControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
-  FormControl<MaritalStatusType>? get maritalStatusControl =>
-      containsMaritalStatus
-          ? form.control(maritalStatusControlPath())
-              as FormControl<MaritalStatusType>?
-          : null;
-  FormControl<Binary>? get hasChildrenControl => containsHasChildren
-      ? form.control(hasChildrenControlPath()) as FormControl<Binary>?
-      : null;
+  FormControl<MaritalStatusType> get maritalStatusControl =>
+      form.control(maritalStatusControlPath())
+          as FormControl<MaritalStatusType>;
+  FormControl<Binary> get hasChildrenControl =>
+      form.control(hasChildrenControlPath()) as FormControl<Binary>;
   FormControl<ChildrenRelationShipType>? get childrenRelationshipControl =>
       containsChildrenRelationship
           ? form.control(childrenRelationshipControlPath())
@@ -1370,12 +1319,12 @@ class PartnerForm implements FormModel<Partner> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      maritalStatusControl?.markAsDisabled(
+      maritalStatusControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      maritalStatusControl?.markAsEnabled(
+      maritalStatusControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1388,12 +1337,12 @@ class PartnerForm implements FormModel<Partner> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      hasChildrenControl?.markAsDisabled(
+      hasChildrenControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      hasChildrenControl?.markAsEnabled(
+      hasChildrenControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1514,10 +1463,11 @@ class PartnerForm implements FormModel<Partner> {
 
   @override
   Partner get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'PartnerForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Partner(
         nui: _nuiValue,
@@ -1959,10 +1909,10 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
       pathBuilder(identityCardSateControlName);
   String powerOfAttorneyStateControlPath() =>
       pathBuilder(powerOfAttorneyStateControlName);
-  String get _nuiValue => nuiControl.value ?? "";
-  String get _nameValue => nameControl.value ?? "";
-  String get _phoneValue => phoneControl.value ?? "";
-  String get _emailValue => emailControl.value ?? "";
+  String get _nuiValue => nuiControl.value as String;
+  String get _nameValue => nameControl.value as String;
+  String get _phoneValue => phoneControl.value as String;
+  String get _emailValue => emailControl.value as String;
   String? get _identityCardValue => identityCardControl?.value;
   String? get _powerOfAttorneyValue => powerOfAttorneyControl?.value;
   StateDocument? get _identityCardSateValue => identityCardSateControl?.value;
@@ -2547,10 +2497,11 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
 
   @override
   RequestOwner get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'RequestOwnerForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return RequestOwner(
         nui: _nuiValue,
@@ -2966,10 +2917,10 @@ class OutsideForm implements FormModel<Outside> {
       pathBuilder(principalStreetControlName);
   String secondaryStreetControlPath() =>
       pathBuilder(secondaryStreetControlName);
-  String get _latitudeValue => latitudeControl.value ?? "";
-  String get _longitudeValue => longitudeControl.value ?? "";
-  String get _principalStreetValue => principalStreetControl.value ?? "";
-  String get _secondaryStreetValue => secondaryStreetControl.value ?? "";
+  String get _latitudeValue => latitudeControl.value as String;
+  String get _longitudeValue => longitudeControl.value as String;
+  String get _principalStreetValue => principalStreetControl.value as String;
+  String get _secondaryStreetValue => secondaryStreetControl.value as String;
   bool get containsLatitude {
     try {
       form.control(latitudeControlPath());
@@ -3204,10 +3155,11 @@ class OutsideForm implements FormModel<Outside> {
 
   @override
   Outside get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'OutsideForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Outside(
         latitude: _latitudeValue,
@@ -3579,8 +3531,8 @@ class WitnessForm implements FormModel<Witness> {
 
   String nuiControlPath() => pathBuilder(nuiControlName);
   String nameControlPath() => pathBuilder(nameControlName);
-  String get _nuiValue => nuiControl.value ?? "";
-  String get _nameValue => nameControl.value ?? "";
+  String get _nuiValue => nuiControl.value as String;
+  String get _nameValue => nameControl.value as String;
   bool get containsNui {
     try {
       form.control(nuiControlPath());
@@ -3699,10 +3651,11 @@ class WitnessForm implements FormModel<Witness> {
 
   @override
   Witness get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'WitnessForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Witness(nui: _nuiValue, name: _nameValue);
   }
@@ -4464,10 +4417,11 @@ class DocumentForm implements FormModel<Document> {
 
   @override
   Document get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'DocumentForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Document(
         referenceId: _referenceIdValue,
@@ -4952,10 +4906,11 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
 
   @override
   SelectAgency get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'SelectAgencyForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return SelectAgency(province: _provinceValue, agency: _agencyValue);
   }
@@ -5705,10 +5660,11 @@ class DocumentsRejectionForm implements FormModel<DocumentsRejection> {
 
   @override
   DocumentsRejection get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'DocumentsRejectionForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return DocumentsRejection(
         id: documentsRejection?.id,
