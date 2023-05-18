@@ -13,6 +13,10 @@ class MarriageCelebration extends _$MarriageCelebration {
     return MarriageCelebrationModel(outside: Outside());
   }
 
+  void updateModel(MarriageCelebrationModel model) {
+    state = state.copyWithFromModel(model);
+  }
+
 // INIT
   void setAttorney() {
     state = MarriageCelebrationModel(

@@ -19,7 +19,7 @@ part 'marriage_celebration_model.gform.dart';
 class MarriageCelebrationModel {
   MarriageCelebrationModel({
     @FormControlAnnotation<MarriageCelebrationType>()
-        this.requestOwnerType = MarriageCelebrationType.attorney,
+    this.requestOwnerType = MarriageCelebrationType.attorney,
     @FormControlAnnotation<AgencyModel>() this.agency,
     @FormControlAnnotation<Witness>() this.firstWitness,
     @FormControlAnnotation<Witness>() this.secondWitness,
@@ -77,6 +77,22 @@ class MarriageCelebrationModel {
     };
   }
 
+  MarriageCelebrationModel copyWithFromModel(MarriageCelebrationModel model) {
+    return MarriageCelebrationModel(
+      requestOwnerType: model.requestOwnerType,
+      agency: model.agency,
+      requestOwner: model.requestOwner,
+      isOutside: model.isOutside,
+      outside: model.outside,
+      firstWitness: model.firstWitness,
+      secondWitness: model.secondWitness, 
+      firstPartner: model.firstPartner,
+      secondPartner: model.secondPartner,
+      state: model.state,
+      id: model.id,      
+    );
+  }
+
   Map<String, dynamic> toJson() => _$MarriageCelebrationModelToJson(this);
 
   MarriageCelebrationModel copyWith({
@@ -119,24 +135,20 @@ class RequestOwner {
         length10Validator,
       ],
     )
-        this.nui = '',
+    this.nui = '',
     @FormControlAnnotation(validators: [requiredValidator, nameValidator])
-        this.name = '',
+    this.name = '',
     @FormControlAnnotation(
       validators: [requiredValidator, length10Validator],
       asyncValidators: [phoneNumberEcuadorValidation],
     )
-        this.phone = '',
+    this.phone = '',
     @FormControlAnnotation(validators: [requiredValidator, emailValidator])
-        this.email = '',
-    @FormControlAnnotation<String>()
-        this.identityCard,
-    @FormControlAnnotation<String>()
-        this.powerOfAttorney,
-    @FormControlAnnotation<StateDocument>()
-        this.identityCardSate,
-    @FormControlAnnotation<StateDocument>()
-        this.powerOfAttorneyState,
+    this.email = '',
+    @FormControlAnnotation<String>() this.identityCard,
+    @FormControlAnnotation<String>() this.powerOfAttorney,
+    @FormControlAnnotation<StateDocument>() this.identityCardSate,
+    @FormControlAnnotation<StateDocument>() this.powerOfAttorneyState,
   });
 
   factory RequestOwner.fromJson(Map<String, dynamic> json) =>
@@ -202,9 +214,9 @@ class Outside {
     @FormControlAnnotation(validators: [requiredValidator]) this.latitude = '',
     @FormControlAnnotation(validators: [requiredValidator]) this.longitude = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        this.principalStreet = '',
+    this.principalStreet = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        this.secondaryStreet = '',
+    this.secondaryStreet = '',
   });
 
   factory Outside.fromJson(Map<String, dynamic> json) =>
@@ -229,9 +241,9 @@ class Witness {
         length10Validator,
       ],
     )
-        this.nui = '',
+    this.nui = '',
     @FormControlAnnotation(validators: [requiredValidator, nameValidator])
-        this.name = '',
+    this.name = '',
   });
 
   factory Witness.fromJson(Map<String, dynamic> json) =>
@@ -257,21 +269,17 @@ class Partner {
         length10Validator,
       ],
     )
-        this.nui = '',
+    this.nui = '',
     @FormControlAnnotation(validators: [requiredValidator, nameValidator])
-        this.name = '',
-    @FormControlAnnotation(validators: [requiredValidator])
-        this.maritalStatus,
-    @FormControlAnnotation(validators: [requiredValidator])
-        this.hasChildren,
+    this.name = '',
+    @FormControlAnnotation(validators: [requiredValidator]) this.maritalStatus,
+    @FormControlAnnotation(validators: [requiredValidator]) this.hasChildren,
     @FormControlAnnotation<ChildrenRelationShipType>()
-        this.childrenRelationship,
+    this.childrenRelationship,
     @FormControlAnnotation(validators: [requiredValidator])
-        this.conadis = false,
-    @FormControlAnnotation<String>()
-        this.conadisNumber = '',
-    @FormArrayAnnotation<Document>()
-        this.documents = const [],
+    this.conadis = false,
+    @FormControlAnnotation<String>() this.conadisNumber = '',
+    @FormArrayAnnotation<Document>() this.documents = const [],
   });
 
   factory Partner.fromJson(Map<String, dynamic> json) =>
@@ -348,7 +356,7 @@ class Partner {
 class Document {
   Document({
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.referenceId,
+    required this.referenceId,
     @FormControlAnnotation<String>() this.file = '',
     this.id,
     this.name,
@@ -409,9 +417,9 @@ class Document {
 class SelectAgency {
   SelectAgency({
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.province,
+    required this.province,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.agency,
+    required this.agency,
   });
 
   final AgencyModel agency;
