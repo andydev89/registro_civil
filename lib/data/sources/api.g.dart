@@ -1204,6 +1204,34 @@ class _Api implements Api {
     return value;
   }
 
+  @override
+  Future<ResponseModel<CommandModel>> notifyPaymentOfChangeOfName(
+      ChangeOfNamePaymentModel changeOfNamePaymentModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(changeOfNamePaymentModel.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/changename/api/changename/payment',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandModel>.fromJson(
+      _result.data!,
+      (json) => CommandModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

@@ -27,9 +27,19 @@ mixin _$ChangeOfNameModel {
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
   AgencyModel? get agency => throw _privateConstructorUsedError;
-  @FormControlAnnotation(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator,
+    no3EqualsLettersConsecutives
+  ])
   String get firstName => throw _privateConstructorUsedError;
-  @FormControlAnnotation(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator,
+    no3EqualsLettersConsecutives
+  ])
   String get secondName => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -60,9 +70,19 @@ abstract class $ChangeOfNameModelCopyWith<$Res> {
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           AgencyModel? agency,
-      @FormControlAnnotation(validators: [requiredValidator])
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+        no3EqualsLettersConsecutives
+      ])
           String firstName,
-      @FormControlAnnotation(validators: [requiredValidator])
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+        no3EqualsLettersConsecutives
+      ])
           String secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -149,9 +169,19 @@ abstract class _$$_ChangeOfNameModelCopyWith<$Res>
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           AgencyModel? agency,
-      @FormControlAnnotation(validators: [requiredValidator])
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+        no3EqualsLettersConsecutives
+      ])
           String firstName,
-      @FormControlAnnotation(validators: [requiredValidator])
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+        no3EqualsLettersConsecutives
+      ])
           String secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -231,9 +261,19 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           this.agency,
-      @FormControlAnnotation(validators: [requiredValidator])
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+        no3EqualsLettersConsecutives
+      ])
           required this.firstName,
-      @FormControlAnnotation(validators: [requiredValidator])
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+        no3EqualsLettersConsecutives
+      ])
           required this.secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -259,10 +299,20 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   final AgencyModel? agency;
   @override
-  @FormControlAnnotation(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator,
+    no3EqualsLettersConsecutives
+  ])
   final String firstName;
   @override
-  @FormControlAnnotation(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator,
+    no3EqualsLettersConsecutives
+  ])
   final String secondName;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
@@ -331,9 +381,19 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           final AgencyModel? agency,
-      @FormControlAnnotation(validators: [requiredValidator])
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+        no3EqualsLettersConsecutives
+      ])
           required final String firstName,
-      @FormControlAnnotation(validators: [requiredValidator])
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+        no3EqualsLettersConsecutives
+      ])
           required final String secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
@@ -359,10 +419,20 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   AgencyModel? get agency;
   @override
-  @FormControlAnnotation(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator,
+    no3EqualsLettersConsecutives
+  ])
   String get firstName;
   @override
-  @FormControlAnnotation(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator,
+    no3EqualsLettersConsecutives
+  ])
   String get secondName;
   @override
   @FormControlAnnotation(validators: [requiredValidator])

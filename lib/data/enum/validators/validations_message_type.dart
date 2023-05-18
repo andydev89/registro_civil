@@ -15,7 +15,9 @@ enum ValidationsMessageType implements Translatable {
   invalidNombreApellido('introduceNombreApellido'),
   seleccionarArchivo('seleccionarArchivo'),
   notRepeted('notRepeted'),
-  ;
+  lengthMax20Error('lengthMax20Error'),
+  lengthMin2Error('lengthMin2Error'),
+  no3EqualsLettersConsecutivesError('no3EqualsLettersConsecutivesError');
 
   const ValidationsMessageType(this.toText);
   final String toText;
@@ -48,6 +50,12 @@ enum ValidationsMessageType implements Translatable {
         return l10n.debeSelArc;
       case ValidationsMessageType.notRepeted:
         return l10n.noRepetir;
+      case ValidationsMessageType.lengthMax20Error:
+        return l10n.maximo20Caracteres;
+      case ValidationsMessageType.lengthMin2Error:
+        return l10n.minimo2Caracteres;
+      case ValidationsMessageType.no3EqualsLettersConsecutivesError:
+        return l10n.noSePermiten3letrasIgualesConsecutivas;
     }
   }
 }

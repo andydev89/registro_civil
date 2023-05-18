@@ -16,9 +16,9 @@ class ServicesPage extends ConsumerWidget {
       onRefresh: () => ref.refresh(typeServicesProvider),
       data: (data) => CircleAvatarCardGrid(
         totalPages: data.totalPages,
-        firstElements: data.data!,
+        firstElements: data.data ?? [],
         firstPage: 1,
-        fetch: (p0) => ref.watch(typeServicesFetchProvider(p0).future),
+        fetch: (index) => ref.watch(typeServicesFetchProvider(index).future),
       ),
     );
   }

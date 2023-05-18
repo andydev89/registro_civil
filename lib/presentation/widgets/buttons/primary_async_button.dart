@@ -1,6 +1,6 @@
 import 'package:async_button_builder/async_button_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';

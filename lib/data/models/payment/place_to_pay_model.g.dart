@@ -28,8 +28,14 @@ const PlaceToPayReferenceModelSchema = CollectionSchema(
       name: r'processUrl',
       type: IsarType.string,
     ),
-    r'validTo': PropertySchema(
+    r'serviceType': PropertySchema(
       id: 2,
+      name: r'serviceType',
+      type: IsarType.string,
+      enumMap: _PlaceToPayReferenceModelserviceTypeEnumValueMap,
+    ),
+    r'validTo': PropertySchema(
+      id: 3,
       name: r'validTo',
       type: IsarType.dateTime,
     )
@@ -56,6 +62,12 @@ int _placeToPayReferenceModelEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.paymentGatewayReference.length * 3;
   bytesCount += 3 + object.processUrl.length * 3;
+  {
+    final value = object.serviceType;
+    if (value != null) {
+      bytesCount += 3 + value.name.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -67,7 +79,8 @@ void _placeToPayReferenceModelSerialize(
 ) {
   writer.writeString(offsets[0], object.paymentGatewayReference);
   writer.writeString(offsets[1], object.processUrl);
-  writer.writeDateTime(offsets[2], object.validTo);
+  writer.writeString(offsets[2], object.serviceType?.name);
+  writer.writeDateTime(offsets[3], object.validTo);
 }
 
 PlaceToPayReferenceModel _placeToPayReferenceModelDeserialize(
@@ -77,10 +90,11 @@ PlaceToPayReferenceModel _placeToPayReferenceModelDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = PlaceToPayReferenceModel(
-    id: id,
     paymentGatewayReference: reader.readString(offsets[0]),
     processUrl: reader.readString(offsets[1]),
-    validTo: reader.readDateTime(offsets[2]),
+    serviceType: _PlaceToPayReferenceModelserviceTypeValueEnumMap[
+        reader.readStringOrNull(offsets[2])],
+    validTo: reader.readDateTime(offsets[3]),
   );
   return object;
 }
@@ -97,14 +111,61 @@ P _placeToPayReferenceModelDeserializeProp<P>(
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
+      return (_PlaceToPayReferenceModelserviceTypeValueEnumMap[
+          reader.readStringOrNull(offset)]) as P;
+    case 3:
       return (reader.readDateTime(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
 
+const _PlaceToPayReferenceModelserviceTypeEnumValueMap = {
+  r'birth': r'birth',
+  r'marriage': r'marriage',
+  r'factorUnion': r'factorUnion',
+  r'death': r'death',
+  r'gender': r'gender',
+  r'identity': r'identity',
+  r'copyBirthRegistrationCertificate': r'copyBirthRegistrationCertificate',
+  r'copyMarriageRegistrationCertificate':
+      r'copyMarriageRegistrationCertificate',
+  r'copyFactoUnionRegistrationCertificate':
+      r'copyFactoUnionRegistrationCertificate',
+  r'copyRegistrationRecordDeath': r'copyRegistrationRecordDeath',
+  r'copyRegistrationCertificateGenderRegistration':
+      r'copyRegistrationCertificateGenderRegistration',
+  r'schedule': r'schedule',
+  r'none': r'none',
+  r'residencyRegistration': r'residencyRegistration',
+  r'changeOfName': r'changeOfName',
+  r'marriageCelebration': r'marriageCelebration',
+};
+const _PlaceToPayReferenceModelserviceTypeValueEnumMap = {
+  r'birth': ServiceType.birth,
+  r'marriage': ServiceType.marriage,
+  r'factorUnion': ServiceType.factorUnion,
+  r'death': ServiceType.death,
+  r'gender': ServiceType.gender,
+  r'identity': ServiceType.identity,
+  r'copyBirthRegistrationCertificate':
+      ServiceType.copyBirthRegistrationCertificate,
+  r'copyMarriageRegistrationCertificate':
+      ServiceType.copyMarriageRegistrationCertificate,
+  r'copyFactoUnionRegistrationCertificate':
+      ServiceType.copyFactoUnionRegistrationCertificate,
+  r'copyRegistrationRecordDeath': ServiceType.copyRegistrationRecordDeath,
+  r'copyRegistrationCertificateGenderRegistration':
+      ServiceType.copyRegistrationCertificateGenderRegistration,
+  r'schedule': ServiceType.schedule,
+  r'none': ServiceType.none,
+  r'residencyRegistration': ServiceType.residencyRegistration,
+  r'changeOfName': ServiceType.changeOfName,
+  r'marriageCelebration': ServiceType.marriageCelebration,
+};
+
 Id _placeToPayReferenceModelGetId(PlaceToPayReferenceModel object) {
-  return object.id ?? Isar.autoIncrement;
+  return object.id;
 }
 
 List<IsarLinkBase<dynamic>> _placeToPayReferenceModelGetLinks(
@@ -113,9 +174,7 @@ List<IsarLinkBase<dynamic>> _placeToPayReferenceModelGetLinks(
 }
 
 void _placeToPayReferenceModelAttach(
-    IsarCollection<dynamic> col, Id id, PlaceToPayReferenceModel object) {
-  object.id = id;
-}
+    IsarCollection<dynamic> col, Id id, PlaceToPayReferenceModel object) {}
 
 extension PlaceToPayReferenceModelQueryWhereSort on QueryBuilder<
     PlaceToPayReferenceModel, PlaceToPayReferenceModel, QWhere> {
@@ -201,25 +260,7 @@ extension PlaceToPayReferenceModelQueryWhere on QueryBuilder<
 extension PlaceToPayReferenceModelQueryFilter on QueryBuilder<
     PlaceToPayReferenceModel, PlaceToPayReferenceModel, QFilterCondition> {
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
-      QAfterFilterCondition> idIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
-      QAfterFilterCondition> idIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
-      QAfterFilterCondition> idEqualTo(Id? value) {
+      QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -230,7 +271,7 @@ extension PlaceToPayReferenceModelQueryFilter on QueryBuilder<
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
       QAfterFilterCondition> idGreaterThan(
-    Id? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -244,7 +285,7 @@ extension PlaceToPayReferenceModelQueryFilter on QueryBuilder<
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
       QAfterFilterCondition> idLessThan(
-    Id? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -258,8 +299,8 @@ extension PlaceToPayReferenceModelQueryFilter on QueryBuilder<
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
       QAfterFilterCondition> idBetween(
-    Id? lower,
-    Id? upper, {
+    Id lower,
+    Id upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -553,6 +594,162 @@ extension PlaceToPayReferenceModelQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> serviceTypeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'serviceType',
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> serviceTypeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'serviceType',
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> serviceTypeEqualTo(
+    ServiceType? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'serviceType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> serviceTypeGreaterThan(
+    ServiceType? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'serviceType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> serviceTypeLessThan(
+    ServiceType? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'serviceType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> serviceTypeBetween(
+    ServiceType? lower,
+    ServiceType? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'serviceType',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> serviceTypeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'serviceType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> serviceTypeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'serviceType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+          QAfterFilterCondition>
+      serviceTypeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'serviceType',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+          QAfterFilterCondition>
+      serviceTypeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'serviceType',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> serviceTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'serviceType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> serviceTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'serviceType',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
       QAfterFilterCondition> validToEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -646,6 +843,20 @@ extension PlaceToPayReferenceModelQuerySortBy on QueryBuilder<
   }
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
+      sortByServiceType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'serviceType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
+      sortByServiceTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'serviceType', Sort.desc);
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
       sortByValidTo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'validTo', Sort.asc);
@@ -705,6 +916,20 @@ extension PlaceToPayReferenceModelQuerySortThenBy on QueryBuilder<
   }
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
+      thenByServiceType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'serviceType', Sort.asc);
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
+      thenByServiceTypeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'serviceType', Sort.desc);
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
       thenByValidTo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'validTo', Sort.asc);
@@ -737,6 +962,13 @@ extension PlaceToPayReferenceModelQueryWhereDistinct on QueryBuilder<
   }
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QDistinct>
+      distinctByServiceType({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'serviceType', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QDistinct>
       distinctByValidTo() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'validTo');
@@ -763,6 +995,13 @@ extension PlaceToPayReferenceModelQueryProperty on QueryBuilder<
       processUrlProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'processUrl');
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, ServiceType?, QQueryOperations>
+      serviceTypeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'serviceType');
     });
   }
 
@@ -909,27 +1148,60 @@ Map<String, dynamic> _$TaxesToJson(Taxes instance) => <String, dynamic>{
       'Base': instance.productPrice,
     };
 
-PlaceToPayReferenceModel _$PlaceToPayReferenceModelFromJson(
+PlaceToPayTransactionDetailsModel _$PlaceToPayTransactionDetailsModelFromJson(
         Map<String, dynamic> json) =>
-    PlaceToPayReferenceModel(
+    PlaceToPayTransactionDetailsModel(
+      civilRegistrationId: json['civilRegistrationId'] as String,
+      channel: json['channel'] as String,
+      transactionCode: json['transactionCode'] as String,
+      clientId: json['clientId'] as String,
+      reference: json['reference'] as String,
+      internalReference: json['internalReference'] as int,
+      reversedInternalReference: json['reversedInternalReference'] as int,
+      requestId: json['requestId'] as int,
+      currentStatus: $enumDecodeNullable(
+          _$TransactionStatusTypeEnumMap, json['currentStatus']),
+      expiration: DateTime.parse(json['expiration'] as String),
+      sendDate: DateTime.parse(json['sendDate'] as String),
       processUrl: json['processUrl'] as String,
-      paymentGatewayReference: json['paymentGatewayReference'] as String,
-      validTo: DateTime.parse(json['validTo'] as String),
-      details: json['Details'] as String?,
-      message: json['Message'] as String?,
+      type: json['type'] as String,
+      processorFields: json['processorFields'] as List<dynamic>,
+      id: json['id'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
       status: $enumDecodeNullable(_$StatusCodeTypeEnumMap, json['Code']),
     );
 
-Map<String, dynamic> _$PlaceToPayReferenceModelToJson(
-        PlaceToPayReferenceModel instance) =>
+Map<String, dynamic> _$PlaceToPayTransactionDetailsModelToJson(
+        PlaceToPayTransactionDetailsModel instance) =>
     <String, dynamic>{
-      'paymentGatewayReference': instance.paymentGatewayReference,
+      'channel': instance.channel,
+      'civilRegistrationId': instance.civilRegistrationId,
+      'clientId': instance.clientId,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'currentStatus': _$TransactionStatusTypeEnumMap[instance.currentStatus],
+      'expiration': instance.expiration.toIso8601String(),
+      'id': instance.id,
+      'internalReference': instance.internalReference,
       'processUrl': instance.processUrl,
-      'validTo': instance.validTo.toIso8601String(),
+      'processorFields': instance.processorFields,
+      'reference': instance.reference,
+      'requestId': instance.requestId,
+      'reversedInternalReference': instance.reversedInternalReference,
+      'sendDate': instance.sendDate.toIso8601String(),
       'Code': _$StatusCodeTypeEnumMap[instance.status],
-      'Message': instance.message,
-      'Details': instance.details,
+      'transactionCode': instance.transactionCode,
+      'type': instance.type,
+      'updatedAt': instance.updatedAt.toIso8601String(),
     };
+
+const _$TransactionStatusTypeEnumMap = {
+  TransactionStatusType.pending: 'PENDING',
+  TransactionStatusType.approved: 'APPROVED',
+  TransactionStatusType.failed: 'FAILED',
+  TransactionStatusType.cancelled: 'CANCELLED',
+  TransactionStatusType.rejected: 'REJECTED',
+};
 
 const _$StatusCodeTypeEnumMap = {
   StatusCodeType.s200: 200,
@@ -1004,57 +1276,24 @@ const _$StatusCodeTypeEnumMap = {
   StatusCodeType.s687: 687,
 };
 
-PlaceToPayTransactionDetailsModel _$PlaceToPayTransactionDetailsModelFromJson(
+_$_PlaceToPayReferenceModel _$$_PlaceToPayReferenceModelFromJson(
         Map<String, dynamic> json) =>
-    PlaceToPayTransactionDetailsModel(
-      civilRegistrationId: json['civilRegistrationId'] as String,
-      channel: json['channel'] as String,
-      transactionCode: json['transactionCode'] as String,
-      clientId: json['clientId'] as String,
-      reference: json['reference'] as String,
-      internalReference: json['internalReference'] as int,
-      reversedInternalReference: json['reversedInternalReference'] as int,
-      requestId: json['requestId'] as int,
-      currentStatus: $enumDecodeNullable(
-          _$TransactionStatusTypeEnumMap, json['currentStatus']),
-      expiration: DateTime.parse(json['expiration'] as String),
-      sendDate: DateTime.parse(json['sendDate'] as String),
+    _$_PlaceToPayReferenceModel(
       processUrl: json['processUrl'] as String,
-      type: json['type'] as String,
-      processorFields: json['processorFields'] as List<dynamic>,
-      id: json['id'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      paymentGatewayReference: json['paymentGatewayReference'] as String,
+      validTo: DateTime.parse(json['validTo'] as String),
+      details: json['Details'] as String?,
+      message: json['Message'] as String?,
       status: $enumDecodeNullable(_$StatusCodeTypeEnumMap, json['Code']),
     );
 
-Map<String, dynamic> _$PlaceToPayTransactionDetailsModelToJson(
-        PlaceToPayTransactionDetailsModel instance) =>
+Map<String, dynamic> _$$_PlaceToPayReferenceModelToJson(
+        _$_PlaceToPayReferenceModel instance) =>
     <String, dynamic>{
-      'channel': instance.channel,
-      'civilRegistrationId': instance.civilRegistrationId,
-      'clientId': instance.clientId,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'currentStatus': _$TransactionStatusTypeEnumMap[instance.currentStatus],
-      'expiration': instance.expiration.toIso8601String(),
-      'id': instance.id,
-      'internalReference': instance.internalReference,
       'processUrl': instance.processUrl,
-      'processorFields': instance.processorFields,
-      'reference': instance.reference,
-      'requestId': instance.requestId,
-      'reversedInternalReference': instance.reversedInternalReference,
-      'sendDate': instance.sendDate.toIso8601String(),
-      'transactionCode': instance.transactionCode,
-      'type': instance.type,
-      'updatedAt': instance.updatedAt.toIso8601String(),
+      'paymentGatewayReference': instance.paymentGatewayReference,
+      'validTo': instance.validTo.toIso8601String(),
+      'Details': instance.details,
+      'Message': instance.message,
       'Code': _$StatusCodeTypeEnumMap[instance.status],
     };
-
-const _$TransactionStatusTypeEnumMap = {
-  TransactionStatusType.pending: 'PENDING',
-  TransactionStatusType.approved: 'APPROVED',
-  TransactionStatusType.failed: 'FAILED',
-  TransactionStatusType.cancelled: 'CANCELLED',
-  TransactionStatusType.rejected: 'REJECTED',
-};

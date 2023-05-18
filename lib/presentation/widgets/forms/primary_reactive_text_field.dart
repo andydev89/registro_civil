@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
@@ -27,6 +27,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
     this.onTap,
     this.setSuffixIconConstraints = false,
     this.textCapitalization = TextCapitalization.none,
+    this.maxLength,
     super.key,
   });
   final FormControl<T>? formControl;
@@ -46,6 +47,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
   final bool setSuffixIconConstraints;
   final void Function(FormControl<T>)? onTap;
   final TextCapitalization textCapitalization;
+  final int? maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
             label!,
           ).verticalPadding(5),
         ReactiveTextField<T>(
+          maxLength: maxLength,
           formControl: formControl,
           formControlName: formControlName,
           readOnly: readOnly,
