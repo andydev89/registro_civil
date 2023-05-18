@@ -1,4 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_type.dart';
@@ -13,49 +13,39 @@ import 'package:registro_civil_apk/data/utils/validators.dart';
 
 part 'marriage_celebration_model.g.dart';
 part 'marriage_celebration_model.gform.dart';
+part 'marriage_celebration_model.freezed.dart';
 
 @ReactiveFormAnnotation()
-@JsonSerializable(explicitToJson: true)
-class MarriageCelebrationModel {
-  MarriageCelebrationModel({
+@Freezed(toJson: true)
+class MarriageCelebrationModel with _$MarriageCelebrationModel {
+  const factory MarriageCelebrationModel({
     @FormControlAnnotation<MarriageCelebrationType>()
-    this.requestOwnerType = MarriageCelebrationType.attorney,
-    @FormControlAnnotation<AgencyModel>() this.agency,
-    @FormControlAnnotation<Witness>() this.firstWitness,
-    @FormControlAnnotation<Witness>() this.secondWitness,
-    this.firstPartner,
-    this.secondPartner,
-    this.requestOwner,
-    @FormControlAnnotation<bool>() this.isOutside = false,
-    this.outside,
-    this.state,
-    this.id,
-  });
+    @Default(MarriageCelebrationType.attorney)
+    MarriageCelebrationType requestOwnerType,
+    @JsonKey(
+      toJson: AgencyModel.agencyToJson,
+      includeToJson: true,
+      includeFromJson: false,
+    )
+    @FormControlAnnotation<AgencyModel>()
+    AgencyModel? agencyID,
+    @JsonKey(includeToJson: false) LocationModel? province,
+    @JsonKey(includeToJson: false) LocationModel? agency,
+    @FormControlAnnotation<Witness>() Witness? firstWitness,
+    @FormControlAnnotation<Witness>() Witness? secondWitness,
+    Partner? firstPartner,
+    Partner? secondPartner,
+    RequestOwner? requestOwner,
+    @FormControlAnnotation<bool>() @Default(false) bool isOutside,
+    Outside? outside,
+    @JsonKey(includeToJson: false) StateMarriageType? state,
+    @JsonKey(includeToJson: false) String? id,
+  }) = _MarriageCelebrationModel;
+
+  const MarriageCelebrationModel._();
 
   factory MarriageCelebrationModel.fromJson(Map<String, dynamic> json) =>
       _$MarriageCelebrationModelFromJson(json);
-
-  @JsonKey(toJson: _agencyToJson, name: 'agencyId')
-  final AgencyModel? agency;
-
-  final Partner? firstPartner;
-  final Witness? firstWitness;
-  @JsonKey(includeToJson: false)
-  final String? id;
-
-  final bool isOutside;
-  final Outside? outside;
-  final RequestOwner? requestOwner;
-  @JsonKey(
-    includeFromJson: false,
-    includeToJson: true,
-  )
-  final MarriageCelebrationType requestOwnerType;
-
-  final Partner? secondPartner;
-  final Witness? secondWitness;
-  @JsonKey(includeToJson: false)
-  final StateMarriageType? state;
 
   Map<RejectingMarriage, List<Document>> rejectingDocuments() {
     return {
@@ -78,56 +68,28 @@ class MarriageCelebrationModel {
   }
 
   MarriageCelebrationModel copyWithFromModel(MarriageCelebrationModel model) {
-    return MarriageCelebrationModel(
+    return copyWith(
       requestOwnerType: model.requestOwnerType,
       agency: model.agency,
       requestOwner: model.requestOwner,
       isOutside: model.isOutside,
       outside: model.outside,
       firstWitness: model.firstWitness,
-      secondWitness: model.secondWitness, 
+      secondWitness: model.secondWitness,
       firstPartner: model.firstPartner,
       secondPartner: model.secondPartner,
       state: model.state,
-      id: model.id,      
+      id: model.id,
+      agencyID: model.agencyID,
+      province: model.province,
     );
-  }
-
-  Map<String, dynamic> toJson() => _$MarriageCelebrationModelToJson(this);
-
-  MarriageCelebrationModel copyWith({
-    MarriageCelebrationType? requestOwnerType,
-    AgencyModel? agency,
-    RequestOwner? requestOwner,
-    bool? isOutside,
-    Outside? outside,
-    Witness? firstWitness,
-    Witness? secondWitness,
-    Partner? firstPartner,
-    Partner? secondPartner,
-  }) {
-    return MarriageCelebrationModel(
-      requestOwnerType: requestOwnerType ?? this.requestOwnerType,
-      agency: agency ?? this.agency,
-      requestOwner: requestOwner ?? this.requestOwner,
-      isOutside: isOutside ?? this.isOutside,
-      outside: outside ?? this.outside,
-      firstWitness: firstWitness ?? this.firstWitness,
-      secondWitness: secondWitness ?? this.secondWitness,
-      firstPartner: firstPartner ?? this.firstPartner,
-      secondPartner: secondPartner ?? this.secondPartner,
-    );
-  }
-
-  static String _agencyToJson(AgencyModel? agency) {
-    return agency?.id ?? '';
   }
 }
 
 @ReactiveFormAnnotation()
-@JsonSerializable(explicitToJson: true)
-class RequestOwner {
-  RequestOwner({
+@Freezed(toJson: true)
+class RequestOwner with _$RequestOwner {
+  const factory RequestOwner({
     @FormControlAnnotation(
       validators: [
         requiredValidator,
@@ -135,21 +97,39 @@ class RequestOwner {
         length10Validator,
       ],
     )
-    this.nui = '',
+    @Default('')
+    String nui,
     @FormControlAnnotation(validators: [requiredValidator, nameValidator])
-    this.name = '',
+    @Default('')
+    String name,
     @FormControlAnnotation(
       validators: [requiredValidator, length10Validator],
       asyncValidators: [phoneNumberEcuadorValidation],
     )
-    this.phone = '',
+    @Default('')
+    String phone,
     @FormControlAnnotation(validators: [requiredValidator, emailValidator])
-    this.email = '',
-    @FormControlAnnotation<String>() this.identityCard,
-    @FormControlAnnotation<String>() this.powerOfAttorney,
-    @FormControlAnnotation<StateDocument>() this.identityCardSate,
-    @FormControlAnnotation<StateDocument>() this.powerOfAttorneyState,
-  });
+    @Default('')
+    String email,
+    @FormControlAnnotation<String>() String? identityCard,
+    @FormControlAnnotation<String>() String? powerOfAttorney,
+    @JsonKey(
+      includeToJson: false,
+      includeFromJson: true,
+      unknownEnumValue: StateDocument.pending,
+    )
+    @FormControlAnnotation<StateDocument>()
+    StateDocument? identityCardSate,
+    @JsonKey(
+      includeToJson: false,
+      includeFromJson: true,
+      unknownEnumValue: StateDocument.pending,
+    )
+    @FormControlAnnotation<StateDocument>()
+    StateDocument? powerOfAttorneyState,
+  }) = _RequestOwner;
+
+  const RequestOwner._();
 
   factory RequestOwner.fromJson(Map<String, dynamic> json) =>
       _$RequestOwnerFromJson(json);
@@ -162,78 +142,36 @@ class RequestOwner {
         phone: model.phone,
         email: model.email,
       );
-
-  final String email;
-  final String? identityCard;
-  @JsonKey(
-    includeToJson: false,
-    includeFromJson: true,
-    unknownEnumValue: StateDocument.pending,
-  )
-  final StateDocument? identityCardSate;
-  final String name;
-  final String nui;
-  final String phone;
-  final String? powerOfAttorney;
-  @JsonKey(
-    includeToJson: false,
-    includeFromJson: true,
-    unknownEnumValue: StateDocument.pending,
-  )
-  final StateDocument? powerOfAttorneyState;
-
-  RequestOwner copyWith({
-    String? email,
-    String? identityCard,
-    StateDocument? identityCardSate,
-    String? name,
-    String? nui,
-    String? phone,
-    String? powerOfAttorney,
-    StateDocument? powerOfAttorneyState,
-  }) {
-    return RequestOwner(
-      email: email ?? this.email,
-      identityCard: identityCard ?? this.identityCard,
-      identityCardSate: identityCardSate ?? this.identityCardSate,
-      name: name ?? this.name,
-      nui: nui ?? this.nui,
-      phone: phone ?? this.phone,
-      powerOfAttorney: powerOfAttorney ?? this.powerOfAttorney,
-      powerOfAttorneyState: powerOfAttorneyState ?? this.powerOfAttorneyState,
-    );
-  }
-
-  Map<String, dynamic> toJson() => _$RequestOwnerToJson(this);
 }
 
 @ReactiveFormAnnotation()
-@JsonSerializable()
-class Outside {
-  Outside({
-    @FormControlAnnotation(validators: [requiredValidator]) this.latitude = '',
-    @FormControlAnnotation(validators: [requiredValidator]) this.longitude = '',
+@freezed
+class Outside with _$Outside {
+  const factory Outside({
     @FormControlAnnotation(validators: [requiredValidator])
-    this.principalStreet = '',
+    @Default('')
+    String latitude,
     @FormControlAnnotation(validators: [requiredValidator])
-    this.secondaryStreet = '',
-  });
+    @Default('')
+    String longitude,
+    @FormControlAnnotation(validators: [requiredValidator])
+    @Default('')
+    String principalStreet,
+    @FormControlAnnotation(validators: [requiredValidator])
+    @Default('')
+    String secondaryStreet,
+  }) = _Outside;
+
+  const Outside._();
 
   factory Outside.fromJson(Map<String, dynamic> json) =>
       _$OutsideFromJson(json);
-
-  final String latitude;
-  final String longitude;
-  final String principalStreet;
-  final String secondaryStreet;
-
-  Map<String, dynamic> toJson() => _$OutsideToJson(this);
 }
 
 @ReactiveFormAnnotation()
-@JsonSerializable()
-class Witness {
-  Witness({
+@freezed
+class Witness with _$Witness {
+  const factory Witness({
     @FormControlAnnotation(
       validators: [
         requiredValidator,
@@ -241,27 +179,33 @@ class Witness {
         length10Validator,
       ],
     )
-    this.nui = '',
+    @Default('')
+    String nui,
     @FormControlAnnotation(validators: [requiredValidator, nameValidator])
-    this.name = '',
-  });
+    @Default('')
+    String name,
+  }) = _Witness;
+
+  const Witness._();
 
   factory Witness.fromJson(Map<String, dynamic> json) =>
       _$WitnessFromJson(json);
 
-  final String name;
-  final String nui;
-
-  Map<String, dynamic> toJson() => _$WitnessToJson(this);
+  Witness copyWithFromWitness(Witness witness) {
+    return copyWith(
+      nui: witness.nui,
+      name: witness.name,
+    );
+  }
 }
 
 @FormGroupAnnotation<Partner>(
   validators: [conadisNumberValidatorGroup, childrenRelationshipValidatorGroup],
 )
 @ReactiveFormAnnotation()
-@JsonSerializable(explicitToJson: true)
-class Partner {
-  Partner({
+@Freezed(toJson: true)
+class Partner with _$Partner {
+  const factory Partner({
     @FormControlAnnotation(
       validators: [
         requiredValidator,
@@ -269,77 +213,52 @@ class Partner {
         length10Validator,
       ],
     )
-    this.nui = '',
+    @Default('')
+    String nui,
     @FormControlAnnotation(validators: [requiredValidator, nameValidator])
-    this.name = '',
-    @FormControlAnnotation(validators: [requiredValidator]) this.maritalStatus,
-    @FormControlAnnotation(validators: [requiredValidator]) this.hasChildren,
-    @FormControlAnnotation<ChildrenRelationShipType>()
-    this.childrenRelationship,
+    @Default('')
+    String name,
     @FormControlAnnotation(validators: [requiredValidator])
-    this.conadis = false,
-    @FormControlAnnotation<String>() this.conadisNumber = '',
-    @FormArrayAnnotation<Document>() this.documents = const [],
-  });
+    @Default(MaritalStatusType.single)
+    MaritalStatusType maritalStatus,
+    @FormControlAnnotation(validators: [requiredValidator])
+    @Default(Binary.no)
+    @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
+    Binary hasChildren,
+    @FormControlAnnotation<ChildrenRelationShipType>()
+    ChildrenRelationShipType? childrenRelationship,
+    @FormControlAnnotation(validators: [requiredValidator])
+    @JsonKey(name: 'hasConadis')
+    @Default(false)
+    bool conadis,
+    @FormControlAnnotation<String>()
+    @JsonKey(
+      name: 'conadisNui',
+    )
+    @Default('')
+    String conadisNumber,
+    @FormArrayAnnotation<Document>() @Default([]) List<Document> documents,
+  }) = _Partner;
+
+  const Partner._();
 
   factory Partner.fromJson(Map<String, dynamic> json) =>
       _$PartnerFromJson(json);
 
-  @JsonKey(
-    includeFromJson: false,
-    includeToJson: true,
-    toJson: ChildrenRelationShipType.toJson,
-  )
-  final ChildrenRelationShipType? childrenRelationship;
-
-  @JsonKey(
-    name: 'hasConadis',
-    includeFromJson: false,
-    includeToJson: true,
-  )
-  final bool conadis;
-
-  @JsonKey(
-    name: 'conadisNui',
-    includeFromJson: false,
-    includeToJson: true,
-  )
-  final String conadisNumber;
-
-  final List<Document> documents;
-
-  @JsonKey(includeFromJson: false, includeToJson: true, toJson: Binary.toJson)
-  final Binary? hasChildren;
-
-  @JsonKey(toJson: MaritalStatusType.toJson)
-  final MaritalStatusType? maritalStatus;
-  final String name;
-  final String nui;
-
-  Partner copyWith({
-    String? nui,
-    String? name,
-    MaritalStatusType? maritalStatus,
-    Binary? hasChildren,
-    ChildrenRelationShipType? childrenRelationship,
-    bool? conadis,
-    String? conadisNumber,
-    List<Document>? documents,
-  }) =>
-      Partner(
-        nui: nui ?? this.nui,
-        name: name ?? this.name,
-        maritalStatus: maritalStatus ?? this.maritalStatus,
-        hasChildren: hasChildren ?? this.hasChildren,
-        childrenRelationship: childrenRelationship ?? this.childrenRelationship,
-        conadis: conadis ?? this.conadis,
-        conadisNumber: conadisNumber ?? this.conadisNumber,
-        documents: documents ?? this.documents,
+  Partner copyWithFromPartner(Partner partner) => copyWith(
+        nui: partner.nui,
+        name: partner.name,
+        maritalStatus: partner.maritalStatus,
+        hasChildren: partner.hasChildren,
+        childrenRelationship: partner.childrenRelationship,
+        conadis: partner.conadis,
+        conadisNumber: partner.conadisNumber,
+        documents: partner.documents,
       );
 
   Partner updateFromWitness(Witness? witness) => copyWith(
-        nui: witness?.nui,
-        name: witness?.name,
+        nui: witness?.nui ?? '',
+        name: witness?.name ?? '',
       );
 
   List<Document> rejectingDocuments() {
@@ -347,8 +266,6 @@ class Partner {
         .where((element) => element.state == StateDocument.rejected)
         .toList();
   }
-
-  Map<String, dynamic> toJson() => _$PartnerToJson(this);
 }
 
 @ReactiveFormAnnotation()

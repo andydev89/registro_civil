@@ -266,10 +266,11 @@ class ScheduleTurnFirstStepPersonalModelForm
 
   @override
   ScheduleTurnFirstStepPersonalModel get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'ScheduleTurnFirstStepPersonalModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ScheduleTurnFirstStepPersonalModel(
         paymentMethod: _paymentMethodValue);
@@ -994,10 +995,11 @@ class ScheduleTurnFirstStepFamiliarModelForm
 
   @override
   ScheduleTurnFirstStepFamiliarModel get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'ScheduleTurnFirstStepFamiliarModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ScheduleTurnFirstStepFamiliarModel(
         paymentMethod: _paymentMethodValue,
@@ -1263,10 +1265,11 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
 
   @override
   FamiliarFormModel get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'FamiliarFormModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return FamiliarFormModel(
         identificationNumber: _identificationNumberValue,
@@ -2123,10 +2126,11 @@ class ScheduleTurnSecondStepModelForm
 
   @override
   ScheduleTurnSecondStepModel get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'ScheduleTurnSecondStepModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ScheduleTurnSecondStepModel(
         province: _provinceValue,

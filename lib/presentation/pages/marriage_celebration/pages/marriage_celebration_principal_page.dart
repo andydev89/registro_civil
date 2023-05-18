@@ -71,6 +71,9 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
                             MarriageCelebrationFirstStepRouterRoute(
                               operation: Crud.read,
                               marriageId: e.id,
+                              children: [
+                                FirstStepAttorneyRoute(operation: Crud.read),
+                              ],
                             ),
                           ),
                     },

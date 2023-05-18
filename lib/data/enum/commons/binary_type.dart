@@ -10,9 +10,19 @@ enum Binary implements Translatable {
   no(toBool: false);
 
   const Binary({required this.toBool});
-  static bool toJson(Binary? binary) {
+
+  static bool toJson(Binary binary) {
     return binary == Binary.yes;
   }
+
+  // ignore: avoid_positional_boolean_parameters
+  static Binary fromJson(bool json) {
+    return json ? Binary.yes : Binary.no;
+  }
+
+  // static bool? toJsonNull(Binary binary) {
+  //   return binary == Binary.yes;
+  // }
 
   final bool toBool;
 

@@ -22,7 +22,7 @@ LocationModel _$LocationModelFromJson(Map<String, dynamic> json) {
 mixin _$LocationModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $LocationModelCopyWith<$Res> {
           LocationModel value, $Res Function(LocationModel) then) =
       _$LocationModelCopyWithImpl<$Res, LocationModel>;
   @useResult
-  $Res call({String id, String name, String type});
+  $Res call({String id, String name, String? type});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$LocationModelCopyWithImpl<$Res, $Val extends LocationModel>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? type = null,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -65,10 +65,10 @@ class _$LocationModelCopyWithImpl<$Res, $Val extends LocationModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -81,7 +81,7 @@ abstract class _$$_LocationModelCopyWith<$Res>
       __$$_LocationModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String type});
+  $Res call({String id, String name, String? type});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$_LocationModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? type = null,
+    Object? type = freezed,
   }) {
     return _then(_$_LocationModel(
       id: null == id
@@ -108,10 +108,10 @@ class __$$_LocationModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -119,8 +119,7 @@ class __$$_LocationModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_LocationModel extends _LocationModel {
-  const _$_LocationModel(
-      {required this.id, required this.name, required this.type})
+  const _$_LocationModel({required this.id, required this.name, this.type})
       : super._();
 
   factory _$_LocationModel.fromJson(Map<String, dynamic> json) =>
@@ -131,7 +130,7 @@ class _$_LocationModel extends _LocationModel {
   @override
   final String name;
   @override
-  final String type;
+  final String? type;
 
   @override
   String toString() {
@@ -170,7 +169,7 @@ abstract class _LocationModel extends LocationModel {
   const factory _LocationModel(
       {required final String id,
       required final String name,
-      required final String type}) = _$_LocationModel;
+      final String? type}) = _$_LocationModel;
   const _LocationModel._() : super._();
 
   factory _LocationModel.fromJson(Map<String, dynamic> json) =
@@ -181,7 +180,7 @@ abstract class _LocationModel extends LocationModel {
   @override
   String get name;
   @override
-  String get type;
+  String? get type;
   @override
   @JsonKey(ignore: true)
   _$$_LocationModelCopyWith<_$_LocationModel> get copyWith =>

@@ -62,6 +62,7 @@ Future<Result<List<AgencyModel>, StatusCodeType>> agenciesByProvince(
       : Result.err(response.status);
 }
 
+
 @riverpod
 Future<Result<List<AgencyModel>, StatusCodeType>> agenciesByCanton(
   AgenciesByCantonRef ref, {
