@@ -10,15 +10,24 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  await runZonedGuarded(
-    () async => runApp(
-      ProviderScope(
-        observers: [
-          Logger(),
-        ],
-        child: await builder(),
-      ),
+  runApp(
+    ProviderScope(
+      observers: [
+        Logger(),
+      ],
+      child: await builder(),
     ),
-    (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
+
+  // await runZonedGuarded(
+  //   () async => runApp(
+  //     ProviderScope(
+  //       observers: [
+  //         Logger(),
+  //       ],
+  //       child: await builder(),
+  //     ),
+  //   ),
+  //   (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
+  // );
 }
