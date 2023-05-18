@@ -2,22 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage_type.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_add_item_row.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/card_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
-import 'package:registro_civil_apk/presentation/widgets/list/paged_list_view_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/widget_from_json.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class MarriageCelebrationPrincipalPage extends ConsumerWidget {
   const MarriageCelebrationPrincipalPage({super.key});
