@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/data/enum/commons/agreements_type.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 

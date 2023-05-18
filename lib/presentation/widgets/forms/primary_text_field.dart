@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/presentation/widgets/decorations/input_decoration.dart';
 
 class PrimaryTextField extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/data/sources/source.dart';
 import 'package:registro_civil_apk/data/utils/utils.dart';
