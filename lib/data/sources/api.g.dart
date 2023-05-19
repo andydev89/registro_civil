@@ -409,7 +409,8 @@ class _Api implements Api {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = model;
+    final _data = <String, dynamic>{};
+    _data.addAll(model.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'POST',
@@ -649,7 +650,8 @@ class _Api implements Api {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = model;
+    final _data = <String, dynamic>{};
+    _data.addAll(model.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'POST',
@@ -1183,7 +1185,8 @@ class _Api implements Api {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = changeOfNameModel;
+    final _data = <String, dynamic>{};
+    _data.addAll(changeOfNameModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'POST',
@@ -1193,6 +1196,34 @@ class _Api implements Api {
             .compose(
               _dio.options,
               '/changename/api/changename',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandModel>.fromJson(
+      _result.data!,
+      (json) => CommandModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandModel>> notifyPaymentOfChangeOfName(
+      ChangeOfNamePaymentModel changeOfNamePaymentModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(changeOfNamePaymentModel.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/changename/api/changename/payment',
               queryParameters: queryParameters,
               data: _data,
             )

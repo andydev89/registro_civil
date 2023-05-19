@@ -771,14 +771,24 @@ class ChangeOfNameModelForm implements FormModel<ChangeOfNameModel> {
             touched: false),
         firstNameControlName: FormControl<String>(
             value: changeOfNameModel?.firstName,
-            validators: [requiredValidator],
+            validators: [
+              requiredValidator,
+              lengthMax20Validator,
+              lengthMin2Validator,
+              no3EqualsLettersConsecutives
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         secondNameControlName: FormControl<String>(
             value: changeOfNameModel?.secondName,
-            validators: [requiredValidator],
+            validators: [
+              requiredValidator,
+              lengthMax20Validator,
+              lengthMin2Validator,
+              no3EqualsLettersConsecutives
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

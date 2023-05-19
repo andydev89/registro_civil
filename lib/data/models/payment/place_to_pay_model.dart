@@ -1,8 +1,11 @@
+// ignore_for_file: invalid_annotation_target
+
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:registro_civil_apk/data/enum/commons/transaction_status_type.dart';
-import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
+import 'package:registro_civil_apk/core/const/const.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
 part 'place_to_pay_model.g.dart';
+part 'place_to_pay_model.freezed.dart';
 
 @JsonSerializable()
 class PlaceToPayModel {
@@ -267,18 +270,31 @@ class Taxes {
   Map<String, dynamic> toJson() => _$TaxesToJson(this);
 }
 
-@collection
-@JsonSerializable()
-class PlaceToPayReferenceModel {
-  PlaceToPayReferenceModel({
-    required this.processUrl,
-    required this.paymentGatewayReference,
-    required this.validTo,
-    this.details,
-    this.id,
-    this.message,
-    this.status,
-  });
+@freezed
+@collectionOnFreezed
+class PlaceToPayReferenceModel with _$PlaceToPayReferenceModel {
+  const factory PlaceToPayReferenceModel({
+    required String processUrl,
+    required String paymentGatewayReference,
+    required DateTime validTo,
+    @JsonKey(
+      includeFromJson: false,
+      includeToJson: false,
+    )
+    @Enumerated(EnumType.name)
+        ServiceType? serviceType,
+    @JsonKey(name: 'Details')
+    @ignore
+        String? details,
+    @JsonKey(name: 'Message')
+    @ignore
+        String? message,
+    @JsonKey(name: 'Code')
+    @ignore
+        StatusCodeType? status,
+  }) = _PlaceToPayReferenceModel;
+
+  const PlaceToPayReferenceModel._();
 
   factory PlaceToPayReferenceModel.fromJson(Map<String, dynamic> json) =>
       _$PlaceToPayReferenceModelFromJson(json);
@@ -287,19 +303,7 @@ class PlaceToPayReferenceModel {
     includeFromJson: false,
     includeToJson: false,
   )
-  Id? id = Isar.autoIncrement;
-  final String paymentGatewayReference;
-  final String processUrl;
-  final DateTime validTo;
-  @JsonKey(name: 'Code')
-  @ignore
-  final StatusCodeType? status;
-  @JsonKey(name: 'Message')
-  @ignore
-  final String? message;
-  @JsonKey(name: 'Details')
-  @ignore
-  final String? details;
+  Id get id => Isar.autoIncrement;
 
   @ignore
   bool get success =>
@@ -307,11 +311,6 @@ class PlaceToPayReferenceModel {
       status == StatusCodeType.s201 ||
       status == StatusCodeType.s202 ||
       status == null;
-
-  @override
-  String toString() => toJson().toString();
-
-  Map<String, dynamic> toJson() => _$PlaceToPayReferenceModelToJson(this);
 }
 
 @JsonSerializable()
@@ -356,20 +355,21 @@ class PlaceToPayTransactionDetailsModel {
   final int requestId;
   final int reversedInternalReference;
   final DateTime sendDate;
+  @JsonKey(name: 'Code')
+  final StatusCodeType? status;
+
   final String transactionCode;
   final String type;
   final DateTime updatedAt;
-  @JsonKey(name: 'Code')
-  final StatusCodeType? status;
+
+  @override
+  String toString() => toJson().toString();
 
   bool get success =>
       status == StatusCodeType.s200 ||
       status == StatusCodeType.s201 ||
       status == StatusCodeType.s202 ||
       status == null;
-
-  @override
-  String toString() => toJson().toString();
 
   Map<String, dynamic> toJson() =>
       _$PlaceToPayTransactionDetailsModelToJson(this);

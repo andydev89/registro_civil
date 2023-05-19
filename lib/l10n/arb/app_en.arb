@@ -425,5 +425,13 @@
   "dependentEliminadoCor": "Dependent successfully removed",
   "noRepetir": "The item already exists",
   "errorCarDoc": "Error loading document",
-  "certificado": "Certificate"
+  "certificado": "Certificate",
+  "maximo20Caracteres": "Maximum twenty characters",
+  "minimo2Caracteres": "Minimum two characters",
+  "noSePermiten3letrasIgualesConsecutivas": "Three consecutive equal letters are not allowed",
+  "solicitudDeCambioDeNombreEcuatoriano": "Ecuadorian name change request",
+  "estimado": "Dear",
+  "ustedSeEncuentraSolicitandoElTramiteDe": "You are requesting the process of",
+  "laSolicitudDeNombreQueRealizaEs": "The name request you make is",
+  "obteniendoComoNombreResultante": "Obtaining as resulting name"
 }

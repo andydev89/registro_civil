@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:otp_text_field/otp_text_field.dart';
-import 'package:registro_civil_apk/data/const/const.dart';
+import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';

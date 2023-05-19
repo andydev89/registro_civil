@@ -1,23 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:registro_civil_apk/data/models/auth/auth_model.dart';
-import 'package:registro_civil_apk/data/models/auth/login_model.dart';
-import 'package:registro_civil_apk/data/models/auth/register_model.dart';
-import 'package:registro_civil_apk/data/models/change_of_name/change_of_name_model.dart';
-import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
-import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
-import 'package:registro_civil_apk/data/models/commons/document_model.dart';
-import 'package:registro_civil_apk/data/models/commons/location_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
-import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
-import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/schedule_model.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/user_schedule_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response_model.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api.g.dart';
@@ -146,7 +128,8 @@ abstract class Api {
 
   @GET('/residentialregistration/api/registration/user/preview/{id}')
   Future<ResponseModel<DocumentModel>> residenceRegistrationPreviewByUser(
-      @Path('id') String id,);
+    @Path('id') String id,
+  );
 
   @POST('/residentialregistration/api/registration')
   Future<ResponseModel<CommandModel>> residenceRegistration(
@@ -257,5 +240,10 @@ abstract class Api {
   @POST('/changename/api/changename')
   Future<ResponseModel<CommandModel>> changeOfName(
     @Body() ChangeOfNameModel changeOfNameModel,
+  );
+
+  @POST('/changename/api/changename/payment')
+  Future<ResponseModel<CommandModel>> notifyPaymentOfChangeOfName(
+    @Body() ChangeOfNamePaymentModel changeOfNamePaymentModel,
   );
 }
