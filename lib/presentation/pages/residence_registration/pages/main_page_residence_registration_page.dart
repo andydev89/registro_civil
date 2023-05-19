@@ -4,44 +4,21 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
-import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
-import 'package:registro_civil_apk/data/providers/residence_registration/residence_registration_providers.dart';
-import 'package:registro_civil_apk/data/utils/alert_methods.dart';
+import 'package:power_ups/extensions/iterable_extension.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
+import 'package:registro_civil_apk/data/utils/utils.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/residence_registration/utils/residence_registration_utils.dart';
+import 'package:registro_civil_apk/presentation/pages/pages.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_add_item_row.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/card_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_area_field.dart';
-import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/pdf_view_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
-class MainPageResicenceRegistrationPage extends ConsumerStatefulWidget {
+class MainPageResicenceRegistrationPage extends ConsumerWidget {
   const MainPageResicenceRegistrationPage({super.key});
 
   @override
-  ConsumerState<MainPageResicenceRegistrationPage> createState() =>
-      _MainPageResicenceRegistrationPageState();
-}
-
-class _MainPageResicenceRegistrationPageState
-    extends ConsumerState<MainPageResicenceRegistrationPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showAceptAgreement(context);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final user = ref.watch(resRegProvider);
     return PrimaryScaffold(
@@ -73,15 +50,13 @@ class _MainPageResicenceRegistrationPageState
                           title: l10n.listadoResidencias,
                           onPressed: () => toResidence(context),
                         ),
-                        ...formModel.model.residentials.map(
-                          (element) => GestureDetector(
+                        ...formModel.model.residentials.mapWithIndex(
+                          (index, element) => GestureDetector(
                             onTap: () => context.navigateTo(
                               DependentRoute(
                                 children: [
                                   MainRouteDependentRoute(
-                                    residential: ref
-                                        .watch(resRegProvider.notifier)
-                                        .residentialFromId(element.myId),
+                                    residentialIndex: index,
                                   )
                                 ],
                               ),
@@ -100,7 +75,11 @@ class _MainPageResicenceRegistrationPageState
                                   ref
                                       .read(residentialPProvider.notifier)
                                       .state = r;
-                                  toResidence(context, operation: Crud.update);
+                                  toResidence(
+                                    context,
+                                    operation: Crud.update,
+                                    residenceIndex: index,
+                                  );
                                 },
                                 Crud.read: (r) {
                                   ref
@@ -113,7 +92,7 @@ class _MainPageResicenceRegistrationPageState
                                       onDelete: () {
                                         ref
                                             .read(resRegProvider.notifier)
-                                            .removeResidence(element);
+                                            .removeResidence(index);
                                         showAlert(
                                           l10n.residenciaEliminadaCor,
                                           TypeAlert.success,

@@ -26,7 +26,7 @@ extension PaymentMethodTypeExtension on PaymentMethodType {
   SvgPicture getText() {
     switch (this) {
       case PaymentMethodType.correspondentPayment:
-        return Assets.svg.ccorrespondentPaymentText.svg();
+        return Assets.svg.correspondentPaymentText.svg();
       case PaymentMethodType.placeToPay:
         return Assets.svg.placeToPayPaymentText.svg();
     }

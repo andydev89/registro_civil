@@ -2,16 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/data/providers/cart_provider.dart';
+import 'package:registro_civil_apk/core/const/const.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/sliding_dialog.dart';
 import 'package:registro_civil_apk/presentation/widgets/dialogs/widgets/certificate_detail.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_captio.dart';
+import 'package:registro_civil_apk/presentation/widgets/titles/primary_caption.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
 
@@ -46,8 +46,8 @@ class OffersWidget extends ConsumerWidget {
                   ).symmetricPadding(5, 32),
                   IconButton(
                     onPressed: () => controller.closeDialog(context),
-                    icon: Stack(
-                      children: const [
+                    icon: const Stack(
+                      children: [
                         Center(
                           child: Icon(
                             Icons.circle_outlined,
@@ -127,7 +127,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$${data.subTotal.toStringAsFixed(2)}',
+                            '\$${data.subTotal().toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -140,7 +140,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '-\$${data.discount.toStringAsFixed(2)}',
+                            '-\$${data.discount().toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -153,7 +153,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryCaption(
-                            '\$${data.iva.toStringAsFixed(2)}',
+                            '\$${data.iva().toStringAsFixed(2)}',
                             fontSize: fontSizeDefault + 3,
                           ),
                         ],
@@ -166,7 +166,7 @@ class OffersWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                           ),
                           PrimaryText(
-                            '\$${data.totalPay.toStringAsFixed(2)}',
+                            '\$${data.totalPay().toStringAsFixed(2)}',
                             fontWeight: FontWeight.bold,
                             fontSize: fontSizeDefault + 3,
                           ),

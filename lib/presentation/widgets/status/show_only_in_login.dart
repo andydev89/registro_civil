@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 
 class ShowOnlyInLogin extends ConsumerWidget {
   const ShowOnlyInLogin({

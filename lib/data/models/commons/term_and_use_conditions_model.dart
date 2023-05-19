@@ -5,7 +5,7 @@ part 'term_and_use_conditions_model.gform.dart';
 @ReactiveFormAnnotation()
 class TermAndUseConditionsModel {
   TermAndUseConditionsModel({
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(validators: [requiredTrueValidator])
         required this.accept,
   });
   final bool accept;

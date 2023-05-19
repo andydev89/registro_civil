@@ -5,18 +5,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
-import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/marriage_celebration/widgets/upload_document_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
-import 'package:registro_civil_apk/presentation/widgets/status/loading_status.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
+import 'package:registro_civil_apk/presentation/pages/pages.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
   const RejectionStepMarriageCelebrationPage({
@@ -28,89 +24,134 @@ class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final documents = ref.watch(marriageByIdProvider(marriageId));
-    return MarriageCelebrationModelFormBuilder(
-      initState: (context, formModel) => formModel
-        ..firstPartnerForm.conadisControl.value = false
-        ..secondPartnerForm.conadisControl.value = false
-        ..isOutsideControl.value = false
-        ..requestOwnerTypeControl.value =
-            MarriageCelebrationType.contractingParty,
-      builder: (_, formModel, __) {
-        return PrimaryScaffold(
-          title: l10n.solicitudCelMat,
-          subtitle: l10n.ingreseInfSol,
-          body: Expanded(
-            child: documents
-                .when(
-                  skipLoadingOnRefresh: false,
-                  data: (response) {
-                    final data = response.rejectingDocuments();
-                    return ScrollableContent(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (data[0]!.isNotEmpty)
-                            PrimaryText(
-                              '${l10n.contrayente} 1',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          UploadDocumentWidget(
-                            data: data[0]!,
-                            formModel: formModel.firstPartnerForm,
+    return PrimaryScaffold(
+      title: l10n.solicitudCelMat,
+      subtitle: l10n.ingreseInfSol,
+      body: Expanded(
+        child: LoadingProviderWidget(
+          async: ref.watch(marriageByIdProvider(marriageId)),
+          data: (response) {
+            final data = response.rejectingDocuments();
+            final owner = response.rejectingDocumentsOwner();
+            final isEmpty = response.isEmptyRejectingDocuments() &&
+                response.isEmptyRejectingDocumentsOwner();
+            return DocumentsRejectionFormBuilder(
+              initState: (context, formModel) {
+                if (owner[RejectingMarriage.identityCard]!) {
+                  formModel.identityCardControl
+                      ?.setValidators([Validators.required]);
+                }
+                if (owner[RejectingMarriage.powerOfAttorney]!) {
+                  formModel.powerOfAttorneyControl
+                      ?.setValidators([Validators.required]);
+                }
+              },
+              builder: (context, formModel, child) => Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Visibility(
+                  visible: !isEmpty,
+                  replacement:
+                      Center(child: PrimaryText(l10n.noHayElementosMostrar)),
+                  child: ScrollableContent(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Visibility(
+                          visible: owner[RejectingMarriage.identityCard]!,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              PrimaryText(
+                                l10n.cedulaIde,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              PrimaryReactiveFilePicker(
+                                formControl: formModel.identityCardControl,
+                              ),
+                            ],
                           ),
-                          if (data[1]!.isNotEmpty)
-                            PrimaryText(
-                              '${l10n.contrayente} 2',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          UploadDocumentWidget(
-                            data: data[1]!,
-                            formModel: formModel.secondPartnerForm,
+                        ).horizontalPadding(10),
+                        const SizedBox(height: 10),
+                        Visibility(
+                          visible: owner[RejectingMarriage.powerOfAttorney]!,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              PrimaryText(
+                                l10n.poderEsp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              PrimaryReactiveFilePicker(
+                                formControl: formModel.powerOfAttorneyControl,
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ).horizontalPadding(10),
+                        const SizedBox(height: 10),
+                        if (data[RejectingMarriage.firstPartnerDocuments]!
+                            .isNotEmpty)
+                          PrimaryText(
+                            '${l10n.contrayente} 1',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        UploadDocumentWidget(
+                          data: data[RejectingMarriage.firstPartnerDocuments]!,
+                          formModel: formModel.firstPartnerDocumentsControl,
+                        ),
+                        const SizedBox(height: 10),
+                        if (data[RejectingMarriage.secondPartnerDocuments]!
+                            .isNotEmpty)
+                          PrimaryText(
+                            '${l10n.contrayente} 2',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        UploadDocumentWidget(
+                          data: data[RejectingMarriage.secondPartnerDocuments]!,
+                          formModel: formModel.secondPartnerDocumentsControl,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                bottomNavigationBar: ReactiveDocumentsRejectionFormConsumer(
+                  builder: (_, form, __) {
+                    return PrimaryAsyncButton(
+                      title: l10n.siguiente,
+                      onPressed: form.form.valid && !isEmpty
+                          ? () => ref
+                              .read(marriageUpdateProvider.notifier)
+                              .updateMarriage(
+                                form.model.copyWith(id: marriageId),
+                              )
+                              .when(
+                                ok: (_) {
+                                  context.navigateTo(
+                                    MarriageCelebrationRouterRoute(
+                                      showAgreement: false,
+                                    ),
+                                  );
+                                  showAlert(
+                                    l10n.documentosSubCor,
+                                    TypeAlert.success,
+                                  );
+                                },
+                                err: (err) => showAlert(
+                                  err.translate(context),
+                                  TypeAlert.error,
+                                ),
+                              )
+                          : null,
                     );
                   },
-                  error: (error, _) => ErrorStatus(
-                    messagge: error.toString(),
-                    onPressed: () =>
-                        ref.refresh(marriageByIdProvider(marriageId)),
-                  ),
-                  loading: () => const LoadingStatus(),
-                )
-                .symmetricPadding(10, 20),
-          ),
-          bottomNavigationBar: ReactiveMarriageCelebrationModelFormConsumer(
-            builder: (_, form, __) {
-              return PrimaryAsyncButton(
-                title: l10n.siguiente,
-                onPressed: form.firstPartnerForm.documentsControl.valid &&
-                        form.secondPartnerForm.documentsControl.valid &&
-                        !documents.isLoading
-                    ? () => ref
-                        .read(marriageUpdateProvider.notifier)
-                        .updateMarriage(
-                          formModel.model.rejectingDocuments(),
-                          marriageId,
-                        )
-                        .when(
-                          ok: (_) {
-                            context.navigateBack();
-                            ref.invalidate(marriagesProvider());
-                            showAlert(l10n.documentosSubCor, TypeAlert.success);
-                          },
-                          err: (err) => showAlert(
-                            err.translate(context),
-                            TypeAlert.error,
-                          ),
-                        )
-                    : null,
-              );
-            },
-          ).symmetricPadding(10, 30),
-        );
-      },
+                ).symmetricPadding(10, 30),
+              ),
+            );
+          },
+          onRefresh: () => ref.refresh(marriageByIdProvider(marriageId)),
+          onRefreshIndicatot: () =>
+              ref.watch(marriageByIdProvider(marriageId).future),
+        ),
+      ),
     );
   }
 }

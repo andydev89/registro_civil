@@ -1,7 +1,7 @@
 import 'package:async_button_builder/async_button_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/data/const/const.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
+import 'package:registro_civil_apk/core/const/const.dart';
+import 'package:registro_civil_apk/data/enum/status_code/status_code_type.dart';
 import 'package:registro_civil_apk/presentation/widgets/decoration_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
 
@@ -28,7 +28,7 @@ class PrimaryAsyncButton<T> extends StatelessWidget {
   final Color? colorText;
   final Color? disabledForegroundColor;
   final void Function(T)? onSuccess;
-  final void Function(StatusCode)? onError;
+  final void Function(StatusCodeType)? onError;
   final Future<T> Function()? onPressed;
   final double fontSize;
   final String title;

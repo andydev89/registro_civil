@@ -1,16 +1,7 @@
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/children_relationship_enum.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marital_status_enum.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/marriage_celebration_radio_type_enum.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
-import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
-import 'package:registro_civil_apk/data/models/commons/querys_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'marriage_celebration_provider.g.dart';
@@ -19,18 +10,22 @@ part 'marriage_celebration_provider.g.dart';
 class MarriageCelebration extends _$MarriageCelebration {
   @override
   MarriageCelebrationModel build() {
-    return MarriageCelebrationModel(outside: Outside());
+    return const MarriageCelebrationModel(outside: Outside());
+  }
+
+  void updateModel(MarriageCelebrationModel model) {
+    state = state.copyWithFromModel(model);
   }
 
 // INIT
   void setAttorney() {
-    state = MarriageCelebrationModel(
+    state = const MarriageCelebrationModel(
       outside: Outside(),
     );
   }
 
   void setContractingParty() {
-    state = MarriageCelebrationModel(
+    state = const MarriageCelebrationModel(
       outside: Outside(),
       requestOwnerType: MarriageCelebrationType.contractingParty,
     );
@@ -38,7 +33,7 @@ class MarriageCelebration extends _$MarriageCelebration {
 
   // AGENCY
   void setAgency(AgencyModel? agency) {
-    state = state.copyWith(agency: agency);
+    state = state.copyWith(agencyId: agency);
   }
 
   // FIRST STEP
@@ -80,56 +75,47 @@ class MarriageCelebration extends _$MarriageCelebration {
 }
 
 @riverpod
-class Witness1 extends _$Witness1 {
-  @override
-  Witness build() {
-    return Witness();
-  }
-
-  @override
-  set state(Witness witness) {
-    super.state = witness;
-  }
-
-  void restart() => state = Witness();
-}
-
-@riverpod
 class Witnesss extends _$Witnesss {
   @override
   Witness build(int index) {
-    return Witness();
+    return const Witness();
   }
 
-  @override
-  set state(Witness witness) {
-    super.state = witness;
+  void init(Witness witness) {
+    state = state.copyWithFromWitness(witness);
   }
 
-  void restart() => state = Witness();
+  void updateModel(Witness witness) {
+    state = state.copyWithFromWitness(witness);
+  }
+
+  void restart() => state = const Witness();
 }
 
 @riverpod
 class Partners extends _$Partners {
   @override
   Partner build(int indexPartner) {
-    return Partner();
+    return const Partner();
   }
 
-  @override
-  set state(Partner partner) {
-    super.state = partner;
+  void init(Partner partner) {
+    state = state.copyWithFromPartner(partner);
   }
 
-  void restart() => state = Partner();
+  void updateModel(Partner partner) {
+    state = state.copyWithFromPartner(partner);
+  }
+
+  void restart() => state = const Partner();
 }
 
 @riverpod
 Future<List<DocumentResponse>> marriageDocuments(
   MarriageDocumentsRef ref, {
-  required MaritalStatus maritalStatus,
+  required MaritalStatusType maritalStatus,
   required Binary hasChildren,
-  ChildrenRelationShip? childrenRelationShip,
+  ChildrenRelationShipType? childrenRelationShip,
 }) async {
   final api = ref.watch(apiProvider);
   return (await api.marriageDocuments(
@@ -148,7 +134,7 @@ class Marriage extends _$Marriage {
     return;
   }
 
-  Future<Result<bool, StatusCode>> marriage(
+  Future<Result<bool, StatusCodeType>> marriage(
     MarriageCelebrationModel model,
   ) async {
     final api = ref.watch(apiProvider);
@@ -216,27 +202,14 @@ class MarriageUpdate extends _$MarriageUpdate {
   @override
   void build() {}
 
-  Future<Result<bool, StatusCode>> updateMarriage(
-    Map<int, List<Document>> documents,
-    String id,
+  Future<Result<bool, StatusCodeType>> updateMarriage(
+    DocumentsRejection documentsRejection,
   ) async {
     final api = ref.watch(apiProvider);
-    final result =
-        await api.marriageUpdate(_convertToDocumentsRejection(documents, id));
+    final result = await api.marriageUpdate(documentsRejection);
     if (result.success) {
       return const Result.ok(true);
     }
     return Result.err(result.status);
-  }
-
-  DocumentsRejection _convertToDocumentsRejection(
-    Map<int, List<Document>> documents,
-    String id,
-  ) {
-    return DocumentsRejection(
-      id: id,
-      firstPartnerDocuments: documents[0]!,
-      secondPartnerDocuments: documents[1]!,
-    );
   }
 }

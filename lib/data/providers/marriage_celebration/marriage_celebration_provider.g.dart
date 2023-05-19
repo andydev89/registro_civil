@@ -6,7 +6,7 @@ part of 'marriage_celebration_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$marriageDocumentsHash() => r'd948c239a4d4426f81295b8a61641590f9fcb116';
+String _$marriageDocumentsHash() => r'e845707ec38ec26e414be86d5dd28146137cf07f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -44,9 +44,9 @@ class MarriageDocumentsFamily
 
   /// See also [marriageDocuments].
   MarriageDocumentsProvider call({
-    required MaritalStatus maritalStatus,
+    required MaritalStatusType maritalStatus,
     required Binary hasChildren,
-    ChildrenRelationShip? childrenRelationShip,
+    ChildrenRelationShipType? childrenRelationShip,
   }) {
     return MarriageDocumentsProvider(
       maritalStatus: maritalStatus,
@@ -107,9 +107,9 @@ class MarriageDocumentsProvider
               MarriageDocumentsFamily._allTransitiveDependencies,
         );
 
-  final MaritalStatus maritalStatus;
+  final MaritalStatusType maritalStatus;
   final Binary hasChildren;
-  final ChildrenRelationShip? childrenRelationShip;
+  final ChildrenRelationShipType? childrenRelationShip;
 
   @override
   bool operator ==(Object other) {
@@ -299,7 +299,7 @@ class MarriageByIdProvider
 }
 
 String _$marriageCelebrationHash() =>
-    r'26be304a4fbb39c082571f042e1525374ea5789e';
+    r'822a0529c7b802cfa31c7d2676d71b2b80eff906';
 
 /// See also [MarriageCelebration].
 @ProviderFor(MarriageCelebration)
@@ -315,22 +315,7 @@ final marriageCelebrationProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$MarriageCelebration = AutoDisposeNotifier<MarriageCelebrationModel>;
-String _$witness1Hash() => r'c0cf1ddd35e4c05f617f36963f47c093c751e6f5';
-
-/// See also [Witness1].
-@ProviderFor(Witness1)
-final witness1Provider =
-    AutoDisposeNotifierProvider<Witness1, Witness>.internal(
-  Witness1.new,
-  name: r'witness1Provider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$witness1Hash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$Witness1 = AutoDisposeNotifier<Witness>;
-String _$witnesssHash() => r'908e8de10ba7bc31d7ecefbed8968b312e0005b5';
+String _$witnesssHash() => r'eeae56d88bba5583619fb899e6b09592c8a7a13c';
 
 abstract class _$Witnesss extends BuildlessAutoDisposeNotifier<Witness> {
   late final int index;
@@ -425,7 +410,7 @@ class WitnesssProvider
   }
 }
 
-String _$partnersHash() => r'833d4abcb59799874f520e00fbdeb1d7580c9351';
+String _$partnersHash() => r'b2c43ea6643e7d37c89c2bf107e60e1862955bca';
 
 abstract class _$Partners extends BuildlessAutoDisposeNotifier<Partner> {
   late final int indexPartner;
@@ -520,7 +505,7 @@ class PartnersProvider
   }
 }
 
-String _$marriageHash() => r'f4a53f004d37ed15281b94d41a1db1d01e5b41af';
+String _$marriageHash() => r'dc5cf8ad3fc4e408deeda7cd918dd8ab88cf6c03';
 
 /// See also [Marriage].
 @ProviderFor(Marriage)
@@ -550,7 +535,7 @@ final marriagesFilterProvider =
 );
 
 typedef _$MarriagesFilter = AutoDisposeNotifier<QueryMarriages>;
-String _$marriageUpdateHash() => r'74b1680e2f17a75f228a20a7f2c1df63e754f7a3';
+String _$marriageUpdateHash() => r'2978e3e9451eddf03b61b574938ac79a64cf64e6';
 
 /// See also [MarriageUpdate].
 @ProviderFor(MarriageUpdate)

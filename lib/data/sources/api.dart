@@ -1,22 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:registro_civil_apk/data/models/auth/auth_response.dart';
-import 'package:registro_civil_apk/data/models/auth/login_model.dart';
-import 'package:registro_civil_apk/data/models/auth/register_model.dart';
-import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
-import 'package:registro_civil_apk/data/models/commons/device_ip_model.dart';
-import 'package:registro_civil_apk/data/models/commons/document_model.dart';
-import 'package:registro_civil_apk/data/models/commons/location_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
-import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
-import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/schedule_model.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/user_schedule_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_model.dart';
-import 'package:registro_civil_apk/data/models/simple_certificate/simple_certificate_response.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:retrofit/http.dart' as retrofit_headers;
 import 'package:retrofit/retrofit.dart';
 
 part 'api.g.dart';
@@ -40,7 +24,7 @@ abstract class Api {
   );
 
   @POST('/api/user/register/code')
-  Future<ResponseModel<CodeModel>> registerCode(
+  Future<ResponseModel<AuthCodeModel>> registerCode(
     @Body() RegisterModel enterDataModel,
   );
 
@@ -70,17 +54,17 @@ abstract class Api {
 
   // SERVICES
   @POST('/service/api/service/certification/simple')
-  Future<ResponseModel<SimpleCertificateResponse>> simpleCertificate(
+  Future<ResponseModel<SimpleCertificateResponseModel>> simpleCertificate(
     @Body() SimpleCertificateModel simpleCertificateModel,
   );
 
   @PUT('/service/api/service/process')
-  Future<ResponseModel<ProcessResponse>> process(
+  Future<ResponseModel<ProcessResponseModel>> process(
     @Body() ProcessModel processModel,
   );
 
   @PUT('/service/api/service/cancel')
-  Future<ResponseModel<ProcessResponse>> cancel(
+  Future<ResponseModel<ProcessResponseModel>> cancel(
     @Body() CancelModel cancelModel,
   );
 
@@ -99,6 +83,7 @@ abstract class Api {
   // );
 
   // MARRIAGE CELEBRATION
+  @retrofit_headers.Headers({'Content-Type': 'application/json'})
   @POST('/marriage/api/marriage')
   Future<ResponseModel<CommandModel>> marriage(
     @Body() MarriageCelebrationModel model,
@@ -144,9 +129,12 @@ abstract class Api {
       resicenceRegistrationByUser(@Path('id') String id);
 
   @GET('/residentialregistration/api/registration/user/preview/{id}')
-  Future<ResponseModel<DocumentModel>>
-      residenceRegistrationPreviewByUser(@Path('id') String id);
+  Future<ResponseModel<DocumentModel>> residenceRegistrationPreviewByUser(
+    @Path('id') String id,
+  );
 
+
+  @retrofit_headers.Headers({'Content-Type': 'application/json'})
   @POST('/residentialregistration/api/registration')
   Future<ResponseModel<CommandModel>> residenceRegistration(
     @Body() ResidenceRegistration model,
@@ -250,5 +238,16 @@ abstract class Api {
   )
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
     @Path('reference') String reference,
+  );
+
+  //CHANGE OF NAME
+  @POST('/changename/api/changename')
+  Future<ResponseModel<CommandModel>> changeOfName(
+    @Body() ChangeOfNameModel changeOfNameModel,
+  );
+
+  @POST('/changename/api/changename/payment')
+  Future<ResponseModel<CommandModel>> notifyPaymentOfChangeOfName(
+    @Body() ChangeOfNamePaymentModel changeOfNamePaymentModel,
   );
 }

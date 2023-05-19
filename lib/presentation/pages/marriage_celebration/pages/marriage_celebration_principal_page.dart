@@ -2,44 +2,19 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_response_model.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/residence_registration/utils/residence_registration_utils.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_add_item_row.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/card_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
-import 'package:registro_civil_apk/presentation/widgets/list/paged_list_view_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
-import 'package:registro_civil_apk/presentation/widgets/widget_from_json.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
-class MarriageCelebrationPrincipalPage extends ConsumerStatefulWidget {
+class MarriageCelebrationPrincipalPage extends ConsumerWidget {
   const MarriageCelebrationPrincipalPage({super.key});
 
   @override
-  ConsumerState<MarriageCelebrationPrincipalPage> createState() =>
-      _MarriageCelebrationPrincipalPageState();
-}
-
-class _MarriageCelebrationPrincipalPageState
-    extends ConsumerState<MarriageCelebrationPrincipalPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showAceptAgreement(context);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return PrimaryScaffold(
       title: l10n.celebracionMat,
@@ -53,7 +28,7 @@ class _MarriageCelebrationPrincipalPageState
             PrimaryAddItemRow(
               title: l10n.listadoSol,
               onPressed: () => context.navigateTo(
-                const MarriageCelebrationRouterRoute(),
+                const MarriageCelebrationStepperRoute(),
               ),
             ),
             Expanded(
@@ -70,7 +45,6 @@ class _MarriageCelebrationPrincipalPageState
                   ),
                   firstElements: data.data ?? [],
                   totalPages: data.totalPages,
-                  firstPage: 1,
                   itemBuilder: (_, e, __) => CardWidget<ResponseMarriageModel>(
                     element: e,
                     rows: {
@@ -79,18 +53,22 @@ class _MarriageCelebrationPrincipalPageState
                       l10n.estado: e.state.translate(context),
                     },
                     actions: {
-                      if (e.state == StateMarriage.inProgress)
+                      if (e.state == StateMarriageType.inProgress)
                         Crud.update: (p0) => context.navigateTo(
                               RejectionStepMarriageCelebrationRoute(
                                 marriageId: p0.id,
                               ),
                             ),
-                      Crud.read: (p0) => showContentDialog(
-                            context,
-                            content: ViewFromJsonWidget(
-                              json: e.toJson(),
+                      Crud.read: (p0) => context.navigateTo(
+                              MarriageCelebrationStepperRoute(children: [
+                            MarriageCelebrationFirstStepRouterRoute(
+                              operation: Crud.read,
+                              marriageId: e.id,
+                              children: [
+                                FirstStepAttorneyRoute(operation: Crud.read),
+                              ],
                             ),
-                          ),
+                          ],),),
                     },
                   ),
                 ),

@@ -25,7 +25,7 @@ Future<void> fetchPage<T>(
       pagingController.appendPage(data.data!, nextPageKey);
     }
   } catch (error) {
-    if (error is FlutterError) {
+    if (error is FlutterError || error is TypeError) {
       if (kDebugMode) print(error);
       return;
     }

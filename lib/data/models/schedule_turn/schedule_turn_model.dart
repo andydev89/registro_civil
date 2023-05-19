@@ -32,7 +32,7 @@ class ScheduleTurnFirstStepFamiliarModel {
   final List<FamiliarFormModel> family;
 }
 
-@FormGroupAnnotation<dynamic>()
+@FormGroupAnnotation<FamiliarFormModel>()
 class FamiliarFormModel {
   FamiliarFormModel({
     @FormControlAnnotation(
@@ -50,6 +50,9 @@ class FamiliarFormModel {
   ///Cedula
   final String? identificationNumber;
   final RelationshipType? relationship;
+
+  ///Este id es para identificar el form de otros
+  Key itemIndexKey(int i) => Key('$i');
 }
 
 @ReactiveFormAnnotation()

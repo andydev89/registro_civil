@@ -37,7 +37,7 @@ ResponseMarriageModel _$ResponseMarriageModelFromJson(
       provinceName: json['provinceName'] as String,
       cantonName: json['cantonName'] as String,
       agencyName: json['agencyName'] as String,
-      state: $enumDecode(_$StateMarriageEnumMap, json['state']),
+      state: $enumDecode(_$StateMarriageTypeEnumMap, json['state']),
     );
 
 Map<String, dynamic> _$ResponseMarriageModelToJson(
@@ -55,15 +55,15 @@ Map<String, dynamic> _$ResponseMarriageModelToJson(
       'provinceName': instance.provinceName,
       'cantonName': instance.cantonName,
       'agencyName': instance.agencyName,
-      'state': _$StateMarriageEnumMap[instance.state]!,
+      'state': _$StateMarriageTypeEnumMap[instance.state]!,
     };
 
-const _$StateMarriageEnumMap = {
-  StateMarriage.pending: 'PENDING',
-  StateMarriage.inProgress: 'IN_PROGRESS',
-  StateMarriage.approved: 'APPROVED',
-  StateMarriage.rejected: 'REJECTED',
-  StateMarriage.finalized: 'FINALIZED',
+const _$StateMarriageTypeEnumMap = {
+  StateMarriageType.pending: 'PENDING',
+  StateMarriageType.inProgress: 'IN_PROGRESS',
+  StateMarriageType.approved: 'APPROVED',
+  StateMarriageType.rejected: 'REJECTED',
+  StateMarriageType.finalized: 'FINALIZED',
 };
 
 MarriageByIdModel _$MarriageByIdModelFromJson(Map<String, dynamic> json) =>

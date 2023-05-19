@@ -1,5 +1,5 @@
-import 'package:registro_civil_apk/data/enum/commons/payment_status.dart';
-import 'package:registro_civil_apk/data/enum/commons/procedure_status.dart';
+import 'package:registro_civil_apk/data/enum/commons/payment_status_type.dart';
+import 'package:registro_civil_apk/data/enum/commons/procedure_status_type.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 
 class MyOrderExpandableCardModel {
@@ -26,6 +26,6 @@ class MyOrderExpandableCardModel {
   final double iva;
   final double discount;
   final double total;
-  final PaymentStatus paymentStatus;
-  final ProceduresStatus proceduresStatus;
+  final PaymentStatusType paymentStatus;
+  final ProceduresStatusType proceduresStatus;
 }

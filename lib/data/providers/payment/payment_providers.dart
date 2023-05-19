@@ -1,18 +1,15 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:isar/isar.dart';
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/commons/transaction_status.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
-import 'package:registro_civil_apk/data/models/payment/place_to_pay_model.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
-import 'package:registro_civil_apk/data/providers/isar_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'payment_providers.g.dart';
 
 @riverpod
-Future<Result<PlaceToPayReferenceModel, StatusCode>>
+Future<Result<PlaceToPayReferenceModel, StatusCodeType>>
     createPlaceToPayTransaction(
   CreatePlaceToPayTransactionRef ref, {
   required PlaceToPayModel placeToPayModel,
@@ -21,28 +18,67 @@ Future<Result<PlaceToPayReferenceModel, StatusCode>>
   final response = await api.createPlaceToPayTransaction(placeToPayModel);
   if (response.success) {
     final isar = ref.watch(isarProvider);
-    isar.writeTxnSync(() => isar.placeToPayReferenceModels.putSync(response));
+    final serviceType =
+        ServiceType.fromJson(placeToPayModel.payment.serviceType);
+    final placeToPay = response.copyWith(
+      serviceType: serviceType,
+    );
+    isar.writeTxnSync(() => isar.placeToPayReferenceModels.putSync(placeToPay));
     ref.read(checkPendingTransactionsProvider);
     return Result.ok(response);
   } else {
-    return const Result.err(StatusCode.s400);
+    return const Result.err(StatusCodeType.s400);
   }
 }
 
 @riverpod
-Future<Result<bool, StatusCode>> isPlaceToPayTransactionCompleted(
+Future<Result<bool, StatusCodeType>> isPlaceToPayTransactionCompleted(
   IsPlaceToPayTransactionCompletedRef ref, {
   required PlaceToPayReferenceModel placeToPayReference,
 }) async {
   try {
     final api = ref.watch(apiProvider);
     final response = await api.checkPlaceToPayTransaction(
-        placeToPayReference.paymentGatewayReference,);
-    return response != null && response.currentStatus != null
-        ? Result.ok(response.currentStatus == TransactionStatus.approved)
-        : const Result.err(StatusCode.s400);
+      placeToPayReference.paymentGatewayReference,
+    );
+    if (response != null && response.currentStatus != null) {
+      if (placeToPayReference.serviceType != null) {
+        ref.watch(
+          notifyCompletePaymentToServicesProvider(
+            placeToPayTransactionDetails: response,
+            serviceType: placeToPayReference.serviceType!,
+          ),
+        );
+      }
+      return Result.ok(
+        response.currentStatus == TransactionStatusType.approved,
+      );
+    } else {
+      return const Result.err(StatusCodeType.s400);
+    }
   } catch (e) {
-    return const Result.err(StatusCode.s400);
+    return const Result.err(StatusCodeType.s400);
+  }
+}
+
+@riverpod
+Future<void> notifyCompletePaymentToServices(
+  NotifyCompletePaymentToServicesRef ref, {
+  required ServiceType serviceType,
+  required PlaceToPayTransactionDetailsModel placeToPayTransactionDetails,
+}) async {
+  final api = ref.watch(apiProvider);
+  if (serviceType == ServiceType.changeOfName) {
+    await api.notifyPaymentOfChangeOfName(
+      ChangeOfNamePaymentModel(
+        civilRegistrationId: placeToPayTransactionDetails.civilRegistrationId,
+        id: placeToPayTransactionDetails.id,
+        transactionCode: placeToPayTransactionDetails.transactionCode,
+        paymentType: PaymentMethodType.placeToPay,
+        // TODO(alejandro): ver q cosa es esto, no se de donde sacarlo
+        paymentCode: 'PAYMENT CODE',
+      ),
+    );
   }
 }
 
@@ -61,7 +97,7 @@ Future<void> checkPendingTransactions(
       ok: (transactionCompleted) {
         if (transactionCompleted) {
           isar.writeTxnSync(
-            () => isar.placeToPayReferenceModels.deleteSync(element.id!),
+            () => isar.placeToPayReferenceModels.deleteSync(element.id),
           );
           ref.read(transactionsStatusProvider.notifier).addTransaction(element);
         }
@@ -95,7 +131,7 @@ class TransactionsStatus extends _$TransactionsStatus {
   void removeTransaction(PlaceToPayReferenceModel placeToPayReference) {
     final isar = ref.watch(isarProvider);
     isar.writeTxnSync(
-      () => isar.placeToPayReferenceModels.deleteSync(placeToPayReference.id!),
+      () => isar.placeToPayReferenceModels.deleteSync(placeToPayReference.id),
     );
     state.remove(placeToPayReference);
   }

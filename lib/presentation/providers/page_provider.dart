@@ -8,9 +8,4 @@ class Page extends _$Page {
   int build(int id) {
     return 0;
   }
-
-  @override
-  set state(int index) {
-    super.state = index;
-  }
 }

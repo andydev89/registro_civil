@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/my_orders/models/my_order_expandable_card_model.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/expandable_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 
 class MyOrderExpandableCard extends StatelessWidget {
   const MyOrderExpandableCard({

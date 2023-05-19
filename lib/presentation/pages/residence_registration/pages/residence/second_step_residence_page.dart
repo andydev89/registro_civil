@@ -7,8 +7,8 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_housing_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_type_agreemente.dart';
-import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
+import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_agreemente_type.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/residence_registration/residence_registration_providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -23,8 +23,10 @@ class SecondStepResidencePage extends ConsumerWidget {
   const SecondStepResidencePage({
     super.key,
     this.operation = Crud.create,
+    this.residenceIndex,
   });
   final Crud operation;
+  final int? residenceIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -92,7 +94,7 @@ class SecondStepResidencePage extends ConsumerWidget {
                   readOnly: operation.isRead,
                 ),
                 PrimaryReactiveDropdown(
-                  items: ResidentialTenureHousingTypeAgreemente.values,
+                  items: ResidentialTenureHousingAgreementeType.values,
                   label: l10n.tenencia,
                   formControl: formModel.tenureHousingTypeAgreementControl,
                   readOnly: operation.isRead,
@@ -161,12 +163,13 @@ class SecondStepResidencePage extends ConsumerWidget {
                       } else {
                         ref
                             .read(resRegProvider.notifier)
-                            .editResidence(residence);
+                            .editResidence(residenceIndex!, residence);
                       }
                       showAlert(l10n.residenciaGuardadaCor, TypeAlert.success);
                     }
-                    context
-                        .navigateTo(const ResidenceRegistrationRouterRoute());
+                    context.navigateTo(
+                      ResidenceRegistrationRouterRoute(showAgreement: false),
+                    );
                   }
                 : null,
           ),

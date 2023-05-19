@@ -10,21 +10,20 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/residence_registration/utils/residence_registration_utils.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_add_item_row.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/card_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
 class MainPageDependentPage extends ConsumerWidget {
   const MainPageDependentPage({
     super.key,
-    required this.residential,
+    required this.residentialIndex,
   });
-  final Residential residential;
+  final int residentialIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final residence =
-        ref.watch(resRegProvider.notifier).residentialFromId(residential.myId);
+    final residence = ref.watch(resRegProvider).residentials[residentialIndex];
     return PrimaryScaffold(
       title: l10n.registroRes,
       subtitle: l10n.dependientes,
@@ -37,7 +36,7 @@ class MainPageDependentPage extends ConsumerWidget {
                 title: l10n.listadoDependientes,
                 onPressed: () => toDependent(
                   context,
-                  residenceId: residential.myId,
+                  residentialIndex: residentialIndex,
                 ),
               ),
               ...residence.dependents.map(
@@ -52,7 +51,7 @@ class MainPageDependentPage extends ConsumerWidget {
                     Crud.read: (r) => toDependent(
                           context,
                           operation: Crud.read,
-                          residenceId: residential.myId,
+                          residentialIndex: residentialIndex,
                           dependent: element,
                         ),
                     Crud.delete: (r) => showDeleteDialog(
@@ -60,7 +59,7 @@ class MainPageDependentPage extends ConsumerWidget {
                           onDelete: () {
                             ref
                                 .read(resRegProvider.notifier)
-                                .removeDependent(residential.myId, element);
+                                .removeDependent(residentialIndex, element);
                             showAlert(
                               l10n.dependentEliminadoCor,
                               TypeAlert.success,

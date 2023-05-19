@@ -1,3 +1,0 @@
-enum ProceduresStatus {
-  requested,
-}

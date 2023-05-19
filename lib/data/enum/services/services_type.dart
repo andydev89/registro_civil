@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 
-enum TypeService implements Translatable {
+enum ServiceType implements Translatable {
   @JsonValue('SERVICE_CERTIFICADO_NACIMIENTO')
   birth('SERVICE_CERTIFICADO_NACIMIENTO'),
   @JsonValue('SERVICE_CERTIFICADO_MATRIMONIO')
@@ -42,17 +42,17 @@ enum TypeService implements Translatable {
   @JsonValue('PRUEBA_MARRIAGE_CELEBRATION')
   marriageCelebration('PRUEBA_MARRIAGE_CELEBRATION');
 
-  const TypeService(this.toText);
+  const ServiceType(this.toText);
   final String toText;
 
-  static String? toJson(TypeService? type) {
+  static String? toJson(ServiceType? type) {
     return type?.toText;
   }
 
-  static TypeService fromJson(String? json) {
-    return TypeService.values.firstWhere(
+  static ServiceType fromJson(String? json) {
+    return ServiceType.values.firstWhere(
       (element) => element.toText == json,
-      orElse: () => TypeService.none,
+      orElse: () => ServiceType.none,
     );
   }
 
@@ -81,37 +81,37 @@ enum TypeService implements Translatable {
   String translate(BuildContext context) {
     final l10n = context.l10n;
     switch (this) {
-      case TypeService.factorUnion:
+      case ServiceType.factorUnion:
         return l10n.certificadoUniHec;
-      case TypeService.marriage:
+      case ServiceType.marriage:
         return l10n.certificadoMat;
-      case TypeService.death:
+      case ServiceType.death:
         return l10n.certificadoDef;
-      case TypeService.identity:
+      case ServiceType.identity:
         return l10n.certificadoIden;
-      case TypeService.birth:
+      case ServiceType.birth:
         return l10n.certificadoNac;
-      case TypeService.gender:
+      case ServiceType.gender:
         return l10n.certificadoGen;
-      case TypeService.copyMarriageRegistrationCertificate:
+      case ServiceType.copyMarriageRegistrationCertificate:
         return l10n.copiaActRegMat;
-      case TypeService.copyRegistrationCertificateGenderRegistration:
+      case ServiceType.copyRegistrationCertificateGenderRegistration:
         return l10n.copiaActRegRegGen;
-      case TypeService.copyFactoUnionRegistrationCertificate:
+      case ServiceType.copyFactoUnionRegistrationCertificate:
         return l10n.copiaActRegUniHec;
-      case TypeService.copyBirthRegistrationCertificate:
+      case ServiceType.copyBirthRegistrationCertificate:
         return l10n.copiaActRegNac;
-      case TypeService.copyRegistrationRecordDeath:
+      case ServiceType.copyRegistrationRecordDeath:
         return l10n.copiaActRegDef;
-      case TypeService.schedule:
+      case ServiceType.schedule:
         return l10n.ageTurno;
-      case TypeService.marriageCelebration:
+      case ServiceType.marriageCelebration:
         return '';
-      case TypeService.none:
+      case ServiceType.none:
         return '';
-      case TypeService.residencyRegistration:
+      case ServiceType.residencyRegistration:
         return '';
-      case TypeService.changeOfName:
+      case ServiceType.changeOfName:
         return l10n.cambioNom;
     }
   }

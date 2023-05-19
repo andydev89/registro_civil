@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/user_schedule_model.dart';
-import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_provider.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/my_turns/models/my_turn_expandable_card_model.dart';
-import 'package:registro_civil_apk/presentation/pages/my_turns/widgets/my_turns_expandable_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/primary_search.dart';
-import 'package:registro_civil_apk/presentation/widgets/list/paged_list_view_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/loading_provider_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
+import 'package:registro_civil_apk/presentation/pages/pages.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class MyOrdersPage extends ConsumerWidget {
   const MyOrdersPage({super.key});
@@ -39,7 +34,6 @@ class MyOrdersPage extends ConsumerWidget {
                       ref.read(schedulesByUserProvider(pageNo: p0).future),
                   firstElements: data.data ?? [],
                   totalPages: data.totalPages,
-                  firstPage: 1,
                   itemBuilder: (_, e, __) => MyTurnExpandableCard(
                     data: MyTurnExpandableCardModel(
                       id: e.id,

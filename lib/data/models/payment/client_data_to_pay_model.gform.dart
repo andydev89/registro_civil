@@ -122,24 +122,16 @@ class ClientDataToPayModelFormBuilder extends StatefulWidget {
 
 class _ClientDataToPayModelFormBuilderState
     extends State<ClientDataToPayModelFormBuilder> {
-  late FormGroup _form;
-
   late ClientDataToPayModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = ClientDataToPayModelForm(widget.model, _form, null);
+    _formModel = ClientDataToPayModelForm(widget.model,
+        ClientDataToPayModelForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -149,12 +141,14 @@ class _ClientDataToPayModelFormBuilderState
   @override
   void didUpdateWidget(covariant ClientDataToPayModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = ClientDataToPayModelForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = ClientDataToPayModelForm(widget.model,
+          ClientDataToPayModelForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -162,19 +156,20 @@ class _ClientDataToPayModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveClientDataToPayModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -189,21 +184,21 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
     this.path,
   ) {}
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String lastNameControlName = "lastName";
+  static const String lastNameControlName = "lastName";
 
-  static String addressControlName = "address";
+  static const String addressControlName = "address";
 
-  static String provinceControlName = "province";
+  static const String provinceControlName = "province";
 
-  static String cityControlName = "city";
+  static const String cityControlName = "city";
 
-  static String phoneControlName = "phone";
+  static const String phoneControlName = "phone";
 
-  static String emailControlName = "email";
+  static const String emailControlName = "email";
 
-  static String postalCodeControlName = "postalCode";
+  static const String postalCodeControlName = "postalCode";
 
   final ClientDataToPayModel? clientDataToPayModel;
 
@@ -693,10 +688,11 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
 
   @override
   ClientDataToPayModel get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'ClientDataToPayModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ClientDataToPayModel(
         name: _nameValue,
@@ -719,36 +715,22 @@ class ClientDataToPayModelForm implements FormModel<ClientDataToPayModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          ClientDataToPayModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    ClientDataToPayModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: ClientDataToPayModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(ClientDataToPayModelForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    ClientDataToPayModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(ClientDataToPayModel? clientDataToPayModel) =>
+      FormGroup({
         nameControlName: FormControl<String>(
             value: clientDataToPayModel?.name,
             validators: [requiredValidator],

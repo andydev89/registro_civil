@@ -10,6 +10,7 @@ class PrimaryRadioListTile<T> extends StatelessWidget {
     required this.title,
     this.titleColor,
     this.textAlign = TextAlign.start,
+    this.readOnly = false,
   });
   final T value;
   final T? groupValue;
@@ -17,21 +18,25 @@ class PrimaryRadioListTile<T> extends StatelessWidget {
   final Color? titleColor;
   final TextAlign? textAlign;
   final void Function(T?)? onChanged;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
-    return RadioListTile<T>(
-      value: value,
-      contentPadding: EdgeInsets.zero,
-      controlAffinity: ListTileControlAffinity.leading,
-      groupValue: groupValue,
-      shape: const StadiumBorder(),
-      title: PrimaryText(
-        title,
-        color: titleColor,
-        textAlign: TextAlign.start,
+    return IgnorePointer(
+      ignoring: readOnly,
+      child: RadioListTile<T>(
+        value: value,
+        contentPadding: EdgeInsets.zero,
+        controlAffinity: ListTileControlAffinity.leading,
+        groupValue: groupValue,
+        shape: const StadiumBorder(),
+        title: PrimaryText(
+          title,
+          color: titleColor,
+          textAlign: TextAlign.start,
+        ),
+        onChanged: onChanged,
       ),
-      onChanged: onChanged,
     );
   }
 }

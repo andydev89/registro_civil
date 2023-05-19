@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/services/services_state_enum.dart';
+import 'package:registro_civil_apk/data/enum/services/services_state_type.dart';
 import 'package:registro_civil_apk/data/enum/services/services_type.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/refecting_reason_enum.dart';
-import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_enum.dart';
+import 'package:registro_civil_apk/data/enum/simple_certificate/orders_rejecting_reason_type.dart';
+import 'package:registro_civil_apk/data/enum/simple_certificate/relationship_simple_certificate_type.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
 part 'simple_certificate_model.gform.dart';
@@ -26,7 +26,7 @@ class SimpleCertificateFirstStepFamiliarModel {
   });
 
   final String nui;
-  final RelationshipSimpleCertificateEnum relationship;
+  final RelationshipSimpleCertificateType relationship;
   final ConadisModel conadisModel;
 }
 
@@ -50,7 +50,7 @@ class RejectInformation {
         required this.rejectDescription,
   });
 
-  final OrdersRejectingReason rejectReason;
+  final OrdersRejectingReasonType rejectReason;
   final String rejectDescription;
 }
 
@@ -78,7 +78,7 @@ class SimpleCertificateModel {
   SimpleCertificateModel.fromPersonal({
     required this.type,
     required this.userNui,
-  })  : typeFamily = RelationshipSimpleCertificateEnum.staff,
+  })  : typeFamily = RelationshipSimpleCertificateType.staff,
         isFamily = false,
         nuiFamily = '',
         isConadis = false,
@@ -86,12 +86,12 @@ class SimpleCertificateModel {
 
   factory SimpleCertificateModel.fromJson(Map<String, dynamic> json) =>
       _$SimpleCertificateModelFromJson(json);
-  @JsonKey(toJson: TypeService.toJson)
-  final TypeService type;
+  @JsonKey(toJson: ServiceType.toJson)
+  final ServiceType type;
   final String userNui;
   final bool isFamily;
-  @JsonKey(toJson: RelationshipSimpleCertificateEnum.toJson)
-  final RelationshipSimpleCertificateEnum typeFamily;
+  @JsonKey(toJson: RelationshipSimpleCertificateType.toJson)
+  final RelationshipSimpleCertificateType typeFamily;
   final String nuiFamily;
   final bool isConadis;
   final String nuiConadis;
@@ -110,7 +110,7 @@ class ProcessModel {
   factory ProcessModel.fromJson(Map<String, dynamic> json) =>
       _$ProcessModelFromJson(json);
   final String id;
-  final ServicesState state;
+  final ServicesStateType state;
   final String observations;
 
   Map<String, dynamic> toJson() => _$ProcessModelToJson(this);

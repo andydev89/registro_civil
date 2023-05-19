@@ -2,20 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/commons/payment_method_type.dart';
-import 'package:registro_civil_apk/data/enum/commons/procedure_type.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/receipt_model.dart';
-import 'package:registro_civil_apk/data/models/schedule_turn/schedule_turn_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
-import 'package:registro_civil_apk/data/providers/commons/commons_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/schedule_turn/widgets/schedule_date_picker.dart';
-import 'package:registro_civil_apk/presentation/pages/schedule_turn/widgets/schedule_time_selector.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_async_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/select_element_from_api.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
+import 'package:registro_civil_apk/presentation/pages/schedule_turn/widgets/widgets.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class ScheduleTurnSecondPage extends ConsumerWidget {
   const ScheduleTurnSecondPage({

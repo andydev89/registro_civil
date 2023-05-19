@@ -1,14 +1,7 @@
 import 'package:oxidized/oxidized.dart';
-import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_housing_type.dart';
-import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_type_agreemente.dart';
-import 'package:registro_civil_apk/data/enum/status_codes_enum/status_codes_enum.dart';
-import 'package:registro_civil_apk/data/models/commons/document_model.dart';
-import 'package:registro_civil_apk/data/models/commons/location_model.dart';
-import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
-import 'package:registro_civil_apk/data/providers/auth_providers.dart';
-import 'package:registro_civil_apk/data/providers/dio_providers.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'residence_registration_providers.g.dart';
@@ -20,7 +13,7 @@ Future<ResidenceRegistration> residenceRegistration(
   final api = ref.watch(apiProvider);
   final user = await ref.watch(meProvider.future);
   return (await api.resicenceRegistrationByUser(user.id)).data?.first ??
-      ResidenceRegistration();
+      const ResidenceRegistration();
 }
 
 @riverpod
@@ -30,7 +23,7 @@ class ResidenceRegistrationPreview extends _$ResidenceRegistrationPreview {
     return DocumentModel(document: '');
   }
 
-  Future<Result<String, StatusCode>> certificate() async {
+  Future<Result<String, StatusCodeType>> certificate() async {
     final api = ref.watch(apiProvider);
     final user = await ref.watch(meProvider.future);
     final result = await api.residenceRegistrationPreviewByUser(user.id);
@@ -45,20 +38,15 @@ class ResidenceRegistrationPreview extends _$ResidenceRegistrationPreview {
 class ResidentialP extends _$ResidentialP {
   @override
   Residential build() {
-    return Residential(
+    return const Residential(
       province: LocationModel(id: 'id', name: 'name', type: 'type'),
       canton: LocationModel(id: 'id', name: 'name', type: 'type'),
       parroquia: LocationModel(id: 'id', name: 'name', type: 'type'),
       housingType: ResidentialHousingType.apartamento,
       tenureHousingTypeAgreement:
-          ResidentialTenureHousingTypeAgreemente.arrendada,
+          ResidentialTenureHousingAgreementeType.arrendada,
       type: ResidenceType.principal,
     );
-  }
-
-  @override
-  set state(Residential residential) {
-    super.state = residential;
   }
 
   FirstStepResidenceModel getFirstStep() {
@@ -98,81 +86,63 @@ class ResReg extends _$ResReg {
   @override
   ResidenceRegistration build() {
     final residence = ref.watch(residenceRegistrationProvider);
-    return residence.value ?? ResidenceRegistration();
+    return residence.value ?? const ResidenceRegistration();
   }
 
   void addResidence(Residential residence) {
     state = state.copyWith(residentials: [...state.residentials, residence]);
   }
 
-  void editResidence(Residential residence) {
-    final index = state.residentials
-        .indexWhere((element) => element.myId == residence.myId);
-    if (index != -1) {
-      state = state.copyWith(
-        residentials: List.of(state.residentials)..[index] = residence,
-      );
-    }
-  }
-
-  void removeResidence(Residential residence) {
-    final newResidentials =
-        state.residentials.where((r) => r.myId != residence.myId).toList();
+  void editResidence(int index, Residential residence) {
+    final newResidentials = List<Residential>.from(state.residentials);
+    newResidentials[index] = residence;
     state = state.copyWith(residentials: newResidentials);
   }
 
-  void addDependent(String residenceId, Dependent dependent) {
-    final index =
-        state.residentials.indexWhere((element) => element.myId == residenceId);
-    if (index != -1) {
-      state = state.copyWith(
-        residentials: List.of(state.residentials)
-          ..[index] = state.residentials[index].copyWith(
-            dependents: [...state.residentials[index].dependents, dependent],
-          ),
-      );
-    }
+  void removeResidence(int index) {
+    final newResidentials = List<Residential>.from(state.residentials)
+      ..removeAt(index);
+    state = state.copyWith(residentials: newResidentials);
   }
 
-  void removeDependent(String residenceId, Dependent dependent) {
-    final index =
-        state.residentials.indexWhere((element) => element.myId == residenceId);
-    if (index != -1) {
-      final newDependents = state.residentials[index].dependents
-          .where((d) => d.nuiDependents != dependent.nuiDependents)
-          .toList();
-      state = state.copyWith(
-        residentials: List.of(state.residentials)
-          ..[index] = state.residentials[index].copyWith(
-            dependents: newDependents,
-          ),
-      );
-    }
+  void addDependent(int indexResidence, Dependent dependent) {
+    final newResidentials = state.residentials.map((residential) {
+      if (state.residentials.indexOf(residential) == indexResidence) {
+        final newDependents = List<Dependent>.from(residential.dependents)
+          ..add(dependent);
+        return residential.copyWith(dependents: newDependents);
+      }
+      return residential;
+    }).toList();
+    state = state.copyWith(residentials: newResidentials);
   }
 
-  Residential residentialFromId(String residenceId) {
-    final index =
-        state.residentials.indexWhere((element) => element.myId == residenceId);
-    return state.residentials[index];
+  void removeDependent(int indexResidence, Dependent dependent) {
+    final newResidentials = state.residentials.map((residential) {
+      if (state.residentials.indexOf(residential) == indexResidence) {
+        final newDependents = List<Dependent>.from(residential.dependents)
+          ..remove(dependent);
+        return residential.copyWith(dependents: newDependents);
+      }
+      return residential;
+    }).toList();
+    state = state.copyWith(residentials: newResidentials);
   }
 
   List<String> dependentsFromResidence(
-    String residenceId, {
+    int residenceIndex, {
     Dependent? actual,
   }) {
-    final index =
-        state.residentials.indexWhere((element) => element.myId == residenceId);
-    if (index != -1) {
-      final dependents = state.residentials[index].dependents;
-      if (actual != null) {
-        return dependents
-            .where((element) => element.nuiDependents != actual.nuiDependents)
-            .map((e) => e.nuiDependents)
-            .toList();
-      }
-      return dependents.map((e) => e.nuiDependents).toList();
+    final dependents = List<Dependent>.from(
+      state.residentials[residenceIndex].dependents,
+    );
+    if (actual != null) {
+      return dependents
+          .where((element) => element.nuiDependents != actual.nuiDependents)
+          .map((e) => e.nuiDependents)
+          .toList();
     }
-    return [];
+    return dependents.map((e) => e.nuiDependents).toList();
   }
 
   bool existResidence(
@@ -190,8 +160,11 @@ class ResReg extends _$ResReg {
     }
   }
 
-  Future<Result<bool, StatusCode>> save(ResidenceRegistration residence) async {
+  Future<Result<bool, StatusCodeType>> save(
+    ResidenceRegistration residence,
+  ) async {
     final api = ref.watch(apiProvider);
+    final x = residence.toJson();
     final user = await ref.watch(meProvider.future);
     final result = await api.residenceRegistration(
       residence.copyWith(userId: user.id),

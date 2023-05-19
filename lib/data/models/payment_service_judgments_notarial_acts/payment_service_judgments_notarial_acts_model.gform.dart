@@ -132,25 +132,18 @@ class PaymentServiceJudgmentsNotarialActsModelFormBuilder
 
 class _PaymentServiceJudgmentsNotarialActsModelFormBuilderState
     extends State<PaymentServiceJudgmentsNotarialActsModelFormBuilder> {
-  late FormGroup _form;
-
   late PaymentServiceJudgmentsNotarialActsModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel =
-        PaymentServiceJudgmentsNotarialActsModelForm(widget.model, _form, null);
+    _formModel = PaymentServiceJudgmentsNotarialActsModelForm(
+        widget.model,
+        PaymentServiceJudgmentsNotarialActsModelForm.formElements(widget.model),
+        null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -162,12 +155,16 @@ class _PaymentServiceJudgmentsNotarialActsModelFormBuilderState
       covariant PaymentServiceJudgmentsNotarialActsModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
       _formModel = PaymentServiceJudgmentsNotarialActsModelForm(
-          widget.model, _form, null);
-      final elements = _formModel.formElements();
+          widget.model,
+          PaymentServiceJudgmentsNotarialActsModelForm.formElements(
+              widget.model),
+          null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -175,19 +172,20 @@ class _PaymentServiceJudgmentsNotarialActsModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactivePaymentServiceJudgmentsNotarialActsModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -203,11 +201,11 @@ class PaymentServiceJudgmentsNotarialActsModelForm
     this.path,
   ) {}
 
-  static String typesControlName = "types";
+  static const String typesControlName = "types";
 
-  static String provinceControlName = "province";
+  static const String provinceControlName = "province";
 
-  static String agencyControlName = "agency";
+  static const String agencyControlName = "agency";
 
   final PaymentServiceJudgmentsNotarialActsModel?
       paymentServiceJudgmentsNotarialActsModel;
@@ -439,10 +437,11 @@ class PaymentServiceJudgmentsNotarialActsModelForm
 
   @override
   PaymentServiceJudgmentsNotarialActsModel get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'PaymentServiceJudgmentsNotarialActsModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return PaymentServiceJudgmentsNotarialActsModel(
         types: _typesValue, province: _provinceValue, agency: _agencyValue);
@@ -460,48 +459,36 @@ class PaymentServiceJudgmentsNotarialActsModelForm
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          PaymentServiceJudgmentsNotarialActsModelForm(
-                  value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    PaymentServiceJudgmentsNotarialActsModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: PaymentServiceJudgmentsNotarialActsModelForm(
-                  value, FormGroup({}), null)
-              .formElements()
+          PaymentServiceJudgmentsNotarialActsModelForm.formElements(value)
               .rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void reset({
+    PaymentServiceJudgmentsNotarialActsModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(
+          PaymentServiceJudgmentsNotarialActsModel?
+              paymentServiceJudgmentsNotarialActsModel) =>
+      FormGroup({
         typesControlName: FormArray<bool>(
-            paymentServiceJudgmentsNotarialActsModel?.types
-                    .map((e) => FormControl<bool>(
-                          value: e,
-                          validators: [],
-                          asyncValidators: [],
-                          asyncValidatorsDebounceTime: 250,
-                          disabled: false,
-                        ))
-                    .toList() ??
-                [],
+            (paymentServiceJudgmentsNotarialActsModel?.types ?? [])
+                .map((e) => FormControl<bool>(
+                      value: e,
+                      validators: [],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
+                .toList(),
             validators: [
               (control) =>
                   atLeastOneElementValidator(control as FormArray<bool>)

@@ -2,8 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
+import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/nui_type.dart';
+import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
+import 'package:registro_civil_apk/data/providers/auth/auth_providers.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
+import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/utils/marriage_celebration_util.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/widgets/first_step_form.dart';
@@ -12,17 +17,36 @@ import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.d
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
 
 class FirstStepAttorneyPage extends ConsumerWidget {
-  const FirstStepAttorneyPage({super.key});
+  const FirstStepAttorneyPage({
+    super.key,
+    this.operation = Crud.create,
+  });
+  final Crud operation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final provider = ref.watch(marriageCelebrationProvider);
+    final me = ref.watch(meProvider).value ?? MeModel();
     return RequestOwnerFormBuilder(
-      model: provider.requestOwner,
+      model:
+          operation.isCreate ? RequestOwner.fromMe(me) : provider.requestOwner,
       initState: (context, formModel) {
-        setErrorFile(formModel.identityCardControl);
-        setErrorFile(formModel.powerOfAttorneyControl);
+        if (operation.isCreate) {
+          formModel.nuiControl.setValidators(
+            [
+              requiredValidator,
+              ecuadorDniValidator,
+              length10Validator,
+              (control) => notRepeat(
+                    control,
+                    NuiType.requestOwner.nuis(provider),
+                  )
+            ],
+          );
+          setErrorFile(formModel.identityCardControl);
+          setErrorFile(formModel.powerOfAttorneyControl);
+        }
       },
       builder: (_, formModel, __) {
         formModel.identityCardControl?.valueChanges.listen((event) {
@@ -40,18 +64,23 @@ class FirstStepAttorneyPage extends ConsumerWidget {
         return Scaffold(
           backgroundColor: Colors.transparent,
           body: ScrollableContent(
-            child: FirstStepForm(formModel: formModel),
+            child: FirstStepForm(
+              formModel: formModel,
+              operation: operation,
+            ),
           ).symmetricPadding(10, 20),
           bottomNavigationBar: ReactiveRequestOwnerFormConsumer(
             builder: (_, formModel, __) => PrimaryButton(
               title: l10n.siguiente,
-              onPressed: formModel.form.valid
+              onPressed: formModel.form.valid || operation.isRead
                   ? () {
-                      ref
-                          .read(marriageCelebrationProvider.notifier)
-                          .setFirstStep(formModel.model);
+                      if (operation.isCreate) {
+                        ref
+                            .read(marriageCelebrationProvider.notifier)
+                            .setFirstStep(formModel.model);
+                      }
                       context.navigateTo(
-                        const MarriageCelebrationAgencyRoute(),
+                        MarriageCelebrationAgencyRoute(operation: operation),
                       );
                     }
                   : null,

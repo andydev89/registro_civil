@@ -47,15 +47,15 @@ PageRouteInfo<dynamic> getSchedule(TypeServiceModel typeOfService) =>
     );
 
 PageRouteInfo<dynamic> getMarriageCelebration() =>
-    const MarriageCelebrationPrincipalRoute();
+     MarriageCelebrationRouterRoute();
 
 PageRouteInfo<dynamic> getResidencyRegistration() =>
-    const ResidenceRegistrationRouterRoute();
+    ResidenceRegistrationRouterRoute();
 
 PageRouteInfo<dynamic> getChangeOfName(TypeServiceModel typeOfService) =>
     ChangeOfNameRouterRoute(
       children: [
-        TermAndUsesConditionsRoute(typeService: typeOfService),
+        ChangeOfNameFirstStepRoute(typeService: typeOfService),
       ],
     );
 

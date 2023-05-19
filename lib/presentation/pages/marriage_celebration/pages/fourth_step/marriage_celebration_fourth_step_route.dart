@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/notification_enum/notification_type.dart';
+import 'package:registro_civil_apk/data/enum/notification/notification_type.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
@@ -17,7 +17,7 @@ import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/primary_card.dart';
 import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_file_picker.dart';
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 import 'package:registro_civil_apk/presentation/widgets/status/error_status.dart';
@@ -34,7 +34,7 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final marriageCelebrationModel = ref.watch(marriageCelebrationProvider);
+    final marriageCelebrationModel = ref.read(marriageCelebrationProvider);
     final partner = firstContractParty
         ? marriageCelebrationModel.firstPartner
         : marriageCelebrationModel.secondPartner;

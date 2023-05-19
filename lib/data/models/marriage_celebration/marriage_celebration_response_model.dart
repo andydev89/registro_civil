@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/state_marriage_type.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 
 part 'marriage_celebration_response_model.g.dart';
@@ -56,7 +56,7 @@ class ResponseMarriageModel {
   final String provinceName;
   final String cantonName;
   final String agencyName;
-  final StateMarriage state;
+  final StateMarriageType state;
 
   Map<String, dynamic> toJson() => _$ResponseMarriageModelToJson(this);
 }
@@ -148,7 +148,6 @@ class PartnerById {
   final bool hasConadis;
   final String conadisNui;
   final List<Document> documents;
-
 
   Map<String, dynamic> toJson() => _$PartnerByIdToJson(this);
 }

@@ -43,7 +43,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<RegisterCitizenModel>> registerValidateNui(
-      nuiModel) async {
+      NuiModel nuiModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -70,7 +70,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModel>> registerData(enterDataModel) async {
+  Future<ResponseModel<CommandModel>> registerData(
+      EnterDataModel enterDataModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -97,14 +98,15 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CodeModel>> registerCode(enterDataModel) async {
+  Future<ResponseModel<AuthCodeModel>> registerCode(
+      RegisterModel enterDataModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(enterDataModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<CodeModel>>(Options(
+        _setStreamType<ResponseModel<AuthCodeModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -116,9 +118,9 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<CodeModel>.fromJson(
+    final value = ResponseModel<AuthCodeModel>.fromJson(
       _result.data!,
-      (json) => CodeModel.fromJson(json as Map<String, dynamic>),
+      (json) => AuthCodeModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
@@ -126,8 +128,8 @@ class _Api implements Api {
   @override
   Future<ResponseModelPagination<List<TelephoneOperatorModel>?>>
       telephoneOperator(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -190,7 +192,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<LoginResponseModel?>> login(loginModel) async {
+  Future<ResponseModel<LoginResponseModel?>> login(
+      LoginModel loginModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -219,7 +222,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<LoginResponseModel?>> refreshToken(token) async {
+  Future<ResponseModel<LoginResponseModel?>> refreshToken(String token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'token': token};
     final _headers = <String, dynamic>{};
@@ -247,7 +250,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<dynamic>> validateToken(token) async {
+  Future<ResponseModel<dynamic>> validateToken(String token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'token': token};
     final _headers = <String, dynamic>{};
@@ -273,15 +276,15 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<SimpleCertificateResponse>> simpleCertificate(
-      simpleCertificateModel) async {
+  Future<ResponseModel<SimpleCertificateResponseModel>> simpleCertificate(
+      SimpleCertificateModel simpleCertificateModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(simpleCertificateModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<SimpleCertificateResponse>>(Options(
+        _setStreamType<ResponseModel<SimpleCertificateResponseModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -293,23 +296,24 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<SimpleCertificateResponse>.fromJson(
+    final value = ResponseModel<SimpleCertificateResponseModel>.fromJson(
       _result.data!,
       (json) =>
-          SimpleCertificateResponse.fromJson(json as Map<String, dynamic>),
+          SimpleCertificateResponseModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
 
   @override
-  Future<ResponseModel<ProcessResponse>> process(processModel) async {
+  Future<ResponseModel<ProcessResponseModel>> process(
+      ProcessModel processModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(processModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<ProcessResponse>>(Options(
+        _setStreamType<ResponseModel<ProcessResponseModel>>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
@@ -321,22 +325,23 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<ProcessResponse>.fromJson(
+    final value = ResponseModel<ProcessResponseModel>.fromJson(
       _result.data!,
-      (json) => ProcessResponse.fromJson(json as Map<String, dynamic>),
+      (json) => ProcessResponseModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
 
   @override
-  Future<ResponseModel<ProcessResponse>> cancel(cancelModel) async {
+  Future<ResponseModel<ProcessResponseModel>> cancel(
+      CancelModel cancelModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(cancelModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<ProcessResponse>>(Options(
+        _setStreamType<ResponseModel<ProcessResponseModel>>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
@@ -348,20 +353,20 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<ProcessResponse>.fromJson(
+    final value = ResponseModel<ProcessResponseModel>.fromJson(
       _result.data!,
-      (json) => ProcessResponse.fromJson(json as Map<String, dynamic>),
+      (json) => ProcessResponseModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
 
   @override
   Future<ResponseModelPagination<List<TypeServiceModel>>> typeServices({
-    pageNo = 0,
-    pageSize = 4,
-    filter = '',
-    sortBy = 'name',
-    sortType = 'asc',
+    int pageNo = 0,
+    int pageSize = 4,
+    String filter = '',
+    String sortBy = 'name',
+    String sortType = 'asc',
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -399,17 +404,19 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModel>> marriage(model) async {
+  Future<ResponseModel<CommandModel>> marriage(
+      MarriageCelebrationModel model) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(model.toJson());
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = model;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'application/json',
     )
             .compose(
               _dio.options,
@@ -427,19 +434,19 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<ResponseMarriageModel>>> marriages(
-    userNui, {
-    pageNo = 0,
-    pageSize = 20,
-    state = '',
-    userId = '',
-    createdAt = '',
-    updatedAt = '',
-    interviewAt = '',
-    amountOfDays = '',
-    provinceName = '',
-    cantonName = '',
-    agencyName = '',
-    filter = '',
+    String userNui, {
+    int pageNo = 0,
+    int pageSize = 20,
+    String state = '',
+    String userId = '',
+    String createdAt = '',
+    String updatedAt = '',
+    String interviewAt = '',
+    String amountOfDays = '',
+    String provinceName = '',
+    String cantonName = '',
+    String agencyName = '',
+    String filter = '',
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -487,9 +494,9 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<List<DocumentResponse>>> marriageDocuments(
-    maritalStatus,
-    childrenRelationship, {
-    hasChildren = false,
+    String maritalStatus,
+    String childrenRelationship, {
+    bool hasChildren = false,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -525,7 +532,8 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<MarriageCelebrationModel>> marriageById(id) async {
+  Future<ResponseModel<MarriageCelebrationModel>> marriageById(
+      String id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -551,12 +559,12 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModel>> marriageUpdate(model) async {
+  Future<ResponseModel<CommandModel>> marriageUpdate(
+      DocumentsRejection model) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(model.toJson());
+    final _data = model;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'PUT',
@@ -579,7 +587,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<List<ResidenceRegistration>>>
-      resicenceRegistrationByUser(id) async {
+      resicenceRegistrationByUser(String id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -611,7 +619,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<DocumentModel>> residenceRegistrationPreviewByUser(
-      id) async {
+      String id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -637,17 +645,19 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModel>> residenceRegistration(model) async {
+  Future<ResponseModel<CommandModel>> residenceRegistration(
+      ResidenceRegistration model) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(model.toJson());
+    final _headers = <String, dynamic>{r'Content-Type': 'application/json'};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = model;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'application/json',
     )
             .compose(
               _dio.options,
@@ -665,8 +675,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<LocationModel>?>> provinces(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -702,8 +712,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<LocationModel>?>> canton(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -739,8 +749,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<LocationModel>?>> parroquias(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -776,8 +786,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<AgencyModel>?>> agencies(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -813,9 +823,9 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByProvince(
-    province,
-    pageNo,
-    pageSize,
+    String province,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -852,9 +862,9 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByCanton(
-    canton,
-    pageNo,
-    pageSize,
+    String canton,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -890,7 +900,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<LocationModel>?>> locationByParent(
-      province) async {
+      String province) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -922,8 +932,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<TypeServiceModel>>> services(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -959,13 +969,13 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<ScheduleModel>?>> availableSchedules(
-    pageNo,
-    pageSize,
-    from,
-    to,
-    agency,
-    typeOfService, {
-    required special,
+    int pageNo,
+    int pageSize,
+    String from,
+    String to,
+    String agency,
+    String typeOfService, {
+    required bool special,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -1006,8 +1016,8 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<ScheduleModel>?>> schedules(
-    pageNo,
-    pageSize,
+    int pageNo,
+    int pageSize,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -1043,14 +1053,14 @@ class _Api implements Api {
 
   @override
   Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
-    userId, {
-    pageNo = 0,
-    pageSize = 20,
-    filter = '',
-    from = '',
-    to = '',
-    sortBy = 'time',
-    sortType = 'asc',
+    String userId, {
+    int pageNo = 0,
+    int pageSize = 20,
+    String filter = '',
+    String from = '',
+    String to = '',
+    String sortBy = 'time',
+    String sortType = 'asc',
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -1093,7 +1103,7 @@ class _Api implements Api {
 
   @override
   Future<ResponseModel<BookedReceiptModel>> confirmSchedule(
-      receiptModel) async {
+      ReceiptModel receiptModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1121,7 +1131,7 @@ class _Api implements Api {
 
   @override
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
-      placeToPayModel) async {
+      PlaceToPayModel placeToPayModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1146,7 +1156,7 @@ class _Api implements Api {
 
   @override
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
-      reference) async {
+      String reference) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1167,6 +1177,60 @@ class _Api implements Api {
     final value = _result.data == null
         ? null
         : PlaceToPayTransactionDetailsModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandModel>> changeOfName(
+      ChangeOfNameModel changeOfNameModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = changeOfNameModel;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/changename/api/changename',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandModel>.fromJson(
+      _result.data!,
+      (json) => CommandModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandModel>> notifyPaymentOfChangeOfName(
+      ChangeOfNamePaymentModel changeOfNamePaymentModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = changeOfNamePaymentModel;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/changename/api/changename/payment',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandModel>.fromJson(
+      _result.data!,
+      (json) => CommandModel.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 

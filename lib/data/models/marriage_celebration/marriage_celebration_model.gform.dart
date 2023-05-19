@@ -123,24 +123,16 @@ class MarriageCelebrationModelFormBuilder extends StatefulWidget {
 
 class _MarriageCelebrationModelFormBuilderState
     extends State<MarriageCelebrationModelFormBuilder> {
-  late FormGroup _form;
-
   late MarriageCelebrationModelForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = MarriageCelebrationModelForm(widget.model, _form, null);
+    _formModel = MarriageCelebrationModelForm(widget.model,
+        MarriageCelebrationModelForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -151,12 +143,14 @@ class _MarriageCelebrationModelFormBuilderState
   void didUpdateWidget(
       covariant MarriageCelebrationModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = MarriageCelebrationModelForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = MarriageCelebrationModelForm(widget.model,
+          MarriageCelebrationModelForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -164,19 +158,20 @@ class _MarriageCelebrationModelFormBuilderState
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveMarriageCelebrationModelForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -197,21 +192,19 @@ class MarriageCelebrationModelForm
         form, pathBuilder('secondPartner'));
   }
 
-  static String requestOwnerTypeControlName = "requestOwnerType";
+  static const String requestOwnerTypeControlName = "requestOwnerType";
 
-  static String agencyControlName = "agency";
+  static const String agencyIdControlName = "agencyId";
 
-  static String requestOwnerControlName = "requestOwner";
+  static const String firstWitnessControlName = "firstWitness";
 
-  static String firstWitnessControlName = "firstWitness";
+  static const String secondWitnessControlName = "secondWitness";
 
-  static String secondWitnessControlName = "secondWitness";
+  static const String firstPartnerControlName = "firstPartner";
 
-  static String firstPartnerControlName = "firstPartner";
+  static const String secondPartnerControlName = "secondPartner";
 
-  static String secondPartnerControlName = "secondPartner";
-
-  static String isOutsideControlName = "isOutside";
+  static const String isOutsideControlName = "isOutside";
 
   late PartnerForm firstPartnerForm;
 
@@ -225,8 +218,7 @@ class MarriageCelebrationModelForm
 
   String requestOwnerTypeControlPath() =>
       pathBuilder(requestOwnerTypeControlName);
-  String agencyControlPath() => pathBuilder(agencyControlName);
-  String requestOwnerControlPath() => pathBuilder(requestOwnerControlName);
+  String agencyIdControlPath() => pathBuilder(agencyIdControlName);
   String firstWitnessControlPath() => pathBuilder(firstWitnessControlName);
   String secondWitnessControlPath() => pathBuilder(secondWitnessControlName);
   String isOutsideControlPath() => pathBuilder(isOutsideControlName);
@@ -234,8 +226,7 @@ class MarriageCelebrationModelForm
   String secondPartnerControlPath() => pathBuilder(secondPartnerControlName);
   MarriageCelebrationType get _requestOwnerTypeValue =>
       requestOwnerTypeControl.value as MarriageCelebrationType;
-  AgencyModel? get _agencyValue => agencyControl?.value;
-  RequestOwner? get _requestOwnerValue => requestOwnerControl?.value;
+  AgencyModel? get _agencyIdValue => agencyIdControl?.value;
   Witness? get _firstWitnessValue => firstWitnessControl?.value;
   Witness? get _secondWitnessValue => secondWitnessControl?.value;
   bool get _isOutsideValue => isOutsideControl.value as bool;
@@ -250,18 +241,9 @@ class MarriageCelebrationModelForm
     }
   }
 
-  bool get containsAgency {
+  bool get containsAgencyId {
     try {
-      form.control(agencyControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsRequestOwner {
-    try {
-      form.control(requestOwnerControlPath());
+      form.control(agencyIdControlPath());
       return true;
     } catch (e) {
       return false;
@@ -314,30 +296,28 @@ class MarriageCelebrationModelForm
   }
 
   Object? get requestOwnerTypeErrors => requestOwnerTypeControl.errors;
-  Object? get agencyErrors => agencyControl?.errors;
-  Object? get requestOwnerErrors => requestOwnerControl?.errors;
+  Object? get agencyIdErrors => agencyIdControl?.errors;
   Object? get firstWitnessErrors => firstWitnessControl?.errors;
   Object? get secondWitnessErrors => secondWitnessControl?.errors;
   Object? get isOutsideErrors => isOutsideControl.errors;
   Object? get firstPartnerErrors => firstPartnerControl?.errors;
   Object? get secondPartnerErrors => secondPartnerControl?.errors;
   void get requestOwnerTypeFocus => form.focus(requestOwnerTypeControlPath());
-  void get agencyFocus => form.focus(agencyControlPath());
-  void get requestOwnerFocus => form.focus(requestOwnerControlPath());
+  void get agencyIdFocus => form.focus(agencyIdControlPath());
   void get firstWitnessFocus => form.focus(firstWitnessControlPath());
   void get secondWitnessFocus => form.focus(secondWitnessControlPath());
   void get isOutsideFocus => form.focus(isOutsideControlPath());
   void get firstPartnerFocus => form.focus(firstPartnerControlPath());
   void get secondPartnerFocus => form.focus(secondPartnerControlPath());
-  void agencyRemove({
+  void agencyIdRemove({
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if (containsAgency) {
+    if (containsAgencyId) {
       final controlPath = path;
       if (controlPath == null) {
         form.removeControl(
-          agencyControlName,
+          agencyIdControlName,
           updateParent: updateParent,
           emitEvent: emitEvent,
         );
@@ -346,33 +326,7 @@ class MarriageCelebrationModelForm
 
         if (formGroup is FormGroup) {
           formGroup.removeControl(
-            agencyControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
-  void requestOwnerRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsRequestOwner) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          requestOwnerControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            requestOwnerControlName,
+            agencyIdControlName,
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -494,21 +448,12 @@ class MarriageCelebrationModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void agencyValueUpdate(
+  void agencyIdValueUpdate(
     AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    agencyControl?.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void requestOwnerValueUpdate(
-    RequestOwner? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    requestOwnerControl?.updateValue(value,
+    agencyIdControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -544,10 +489,8 @@ class MarriageCelebrationModelForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    firstPartnerControl?.updateValue(
-        PartnerForm(value, FormGroup({}), null).formElements().rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+    firstPartnerControl?.updateValue(PartnerForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void secondPartnerValueUpdate(
@@ -555,10 +498,8 @@ class MarriageCelebrationModelForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    secondPartnerControl?.updateValue(
-        PartnerForm(value, FormGroup({}), null).formElements().rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+    secondPartnerControl?.updateValue(PartnerForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void requestOwnerTypeValuePatch(
@@ -570,21 +511,12 @@ class MarriageCelebrationModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void agencyValuePatch(
+  void agencyIdValuePatch(
     AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    agencyControl?.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void requestOwnerValuePatch(
-    RequestOwner? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    requestOwnerControl?.patchValue(value,
+    agencyIdControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -620,10 +552,8 @@ class MarriageCelebrationModelForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    firstPartnerControl?.updateValue(
-        PartnerForm(value, form, null).formElements().rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+    firstPartnerControl?.updateValue(PartnerForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void secondPartnerValuePatch(
@@ -631,10 +561,8 @@ class MarriageCelebrationModelForm
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    secondPartnerControl?.updateValue(
-        PartnerForm(value, form, null).formElements().rawValue,
-        updateParent: updateParent,
-        emitEvent: emitEvent);
+    secondPartnerControl?.updateValue(PartnerForm.formElements(value).rawValue,
+        updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void requestOwnerTypeValueReset(
@@ -646,23 +574,14 @@ class MarriageCelebrationModelForm
   }) =>
       requestOwnerTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void agencyValueReset(
+  void agencyIdValueReset(
     AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      agencyControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void requestOwnerValueReset(
-    RequestOwner? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      requestOwnerControl?.reset(
+      agencyIdControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void firstWitnessValueReset(
     Witness? value, {
@@ -699,8 +618,7 @@ class MarriageCelebrationModelForm
     bool? disabled,
   }) =>
       firstPartnerControl?.reset(
-          value:
-              PartnerForm(value, FormGroup({}), null).formElements().rawValue,
+          value: PartnerForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   void secondPartnerValueReset(
@@ -711,18 +629,14 @@ class MarriageCelebrationModelForm
     bool? disabled,
   }) =>
       secondPartnerControl?.reset(
-          value:
-              PartnerForm(value, FormGroup({}), null).formElements().rawValue,
+          value: PartnerForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   FormControl<MarriageCelebrationType> get requestOwnerTypeControl =>
       form.control(requestOwnerTypeControlPath())
           as FormControl<MarriageCelebrationType>;
-  FormControl<AgencyModel>? get agencyControl => containsAgency
-      ? form.control(agencyControlPath()) as FormControl<AgencyModel>?
-      : null;
-  FormControl<RequestOwner>? get requestOwnerControl => containsRequestOwner
-      ? form.control(requestOwnerControlPath()) as FormControl<RequestOwner>?
+  FormControl<AgencyModel>? get agencyIdControl => containsAgencyId
+      ? form.control(agencyIdControlPath()) as FormControl<AgencyModel>?
       : null;
   FormControl<Witness>? get firstWitnessControl => containsFirstWitness
       ? form.control(firstWitnessControlPath()) as FormControl<Witness>?
@@ -756,36 +670,18 @@ class MarriageCelebrationModelForm
     }
   }
 
-  void agencySetDisabled(
+  void agencyIdSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      agencyControl?.markAsDisabled(
+      agencyIdControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      agencyControl?.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void requestOwnerSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      requestOwnerControl?.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      requestOwnerControl?.markAsEnabled(
+      agencyIdControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -884,19 +780,22 @@ class MarriageCelebrationModelForm
 
   @override
   MarriageCelebrationModel get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'MarriageCelebrationModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return MarriageCelebrationModel(
         requestOwnerType: _requestOwnerTypeValue,
-        agency: _agencyValue,
-        requestOwner: _requestOwnerValue,
+        agencyId: _agencyIdValue,
+        province: marriageCelebrationModel?.province,
+        agency: marriageCelebrationModel?.agency,
         firstWitness: _firstWitnessValue,
         secondWitness: _secondWitnessValue,
         firstPartner: _firstPartnerValue,
         secondPartner: _secondPartnerValue,
+        requestOwner: marriageCelebrationModel?.requestOwner,
         isOutside: _isOutsideValue,
         outside: marriageCelebrationModel?.outside,
         state: marriageCelebrationModel?.state,
@@ -914,35 +813,24 @@ class MarriageCelebrationModelForm
     bool emitEvent = true,
   }) =>
       form.updateValue(
-          MarriageCelebrationModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    MarriageCelebrationModel value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: MarriageCelebrationModelForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
+          MarriageCelebrationModelForm.formElements(value).rawValue,
           updateParent: updateParent,
           emitEvent: emitEvent);
   @override
   void reset({
+    MarriageCelebrationModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(
+          MarriageCelebrationModel? marriageCelebrationModel) =>
+      FormGroup({
         requestOwnerTypeControlName: FormControl<MarriageCelebrationType>(
             value: marriageCelebrationModel?.requestOwnerType,
             validators: [],
@@ -950,15 +838,8 @@ class MarriageCelebrationModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        agencyControlName: FormControl<AgencyModel>(
-            value: marriageCelebrationModel?.agency,
-            validators: [],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        requestOwnerControlName: FormControl<RequestOwner>(
-            value: marriageCelebrationModel?.requestOwner,
+        agencyIdControlName: FormControl<AgencyModel>(
+            value: marriageCelebrationModel?.agencyId,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -985,8 +866,10 @@ class MarriageCelebrationModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        firstPartnerControlName: firstPartnerForm.formElements(),
-        secondPartnerControlName: secondPartnerForm.formElements()
+        firstPartnerControlName:
+            PartnerForm.formElements(marriageCelebrationModel?.firstPartner),
+        secondPartnerControlName:
+            PartnerForm.formElements(marriageCelebrationModel?.secondPartner)
       },
           validators: [],
           asyncValidators: [],
@@ -1001,21 +884,21 @@ class PartnerForm implements FormModel<Partner> {
     this.path,
   ) {}
 
-  static String nuiControlName = "nui";
+  static const String nuiControlName = "nui";
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String maritalStatusControlName = "maritalStatus";
+  static const String maritalStatusControlName = "maritalStatus";
 
-  static String hasChildrenControlName = "hasChildren";
+  static const String hasChildrenControlName = "hasChildren";
 
-  static String childrenRelationshipControlName = "childrenRelationship";
+  static const String childrenRelationshipControlName = "childrenRelationship";
 
-  static String conadisControlName = "conadis";
+  static const String conadisControlName = "conadis";
 
-  static String conadisNumberControlName = "conadisNumber";
+  static const String conadisNumberControlName = "conadisNumber";
 
-  static String documentsControlName = "documents";
+  static const String documentsControlName = "documents";
 
   final Partner? partner;
 
@@ -1032,14 +915,14 @@ class PartnerForm implements FormModel<Partner> {
   String conadisControlPath() => pathBuilder(conadisControlName);
   String conadisNumberControlPath() => pathBuilder(conadisNumberControlName);
   String documentsControlPath() => pathBuilder(documentsControlName);
-  String get _nuiValue => nuiControl.value ?? "";
-  String get _nameValue => nameControl.value ?? "";
-  MaritalStatus? get _maritalStatusValue => maritalStatusControl?.value;
+  String get _nuiValue => nuiControl.value as String;
+  String get _nameValue => nameControl.value as String;
+  MaritalStatusType? get _maritalStatusValue => maritalStatusControl?.value;
   Binary? get _hasChildrenValue => hasChildrenControl?.value;
-  ChildrenRelationShip? get _childrenRelationshipValue =>
+  ChildrenRelationShipType? get _childrenRelationshipValue =>
       childrenRelationshipControl?.value;
   bool get _conadisValue => conadisControl.value as bool;
-  String get _conadisNumberValue => conadisNumberControl.value ?? "";
+  String get _conadisNumberValue => conadisNumberControl.value as String;
   List<Document> get _documentsValue =>
       documentsControl.value?.whereType<Document>().toList() ?? [];
   bool get containsNui {
@@ -1228,7 +1111,7 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValueUpdate(
-    MaritalStatus? value, {
+    MaritalStatusType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1246,7 +1129,7 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void childrenRelationshipValueUpdate(
-    ChildrenRelationShip? value, {
+    ChildrenRelationShipType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1300,7 +1183,7 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValuePatch(
-    MaritalStatus? value, {
+    MaritalStatusType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1318,7 +1201,7 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void childrenRelationshipValuePatch(
-    ChildrenRelationShip? value, {
+    ChildrenRelationShipType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1372,7 +1255,7 @@ class PartnerForm implements FormModel<Partner> {
       nameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void maritalStatusValueReset(
-    MaritalStatus? value, {
+    MaritalStatusType? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1390,7 +1273,7 @@ class PartnerForm implements FormModel<Partner> {
       hasChildrenControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void childrenRelationshipValueReset(
-    ChildrenRelationShip? value, {
+    ChildrenRelationShipType? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1429,16 +1312,18 @@ class PartnerForm implements FormModel<Partner> {
       form.control(nuiControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
-  FormControl<MaritalStatus>? get maritalStatusControl => containsMaritalStatus
-      ? form.control(maritalStatusControlPath()) as FormControl<MaritalStatus>?
-      : null;
+  FormControl<MaritalStatusType>? get maritalStatusControl =>
+      containsMaritalStatus
+          ? form.control(maritalStatusControlPath())
+              as FormControl<MaritalStatusType>?
+          : null;
   FormControl<Binary>? get hasChildrenControl => containsHasChildren
       ? form.control(hasChildrenControlPath()) as FormControl<Binary>?
       : null;
-  FormControl<ChildrenRelationShip>? get childrenRelationshipControl =>
+  FormControl<ChildrenRelationShipType>? get childrenRelationshipControl =>
       containsChildrenRelationship
           ? form.control(childrenRelationshipControlPath())
-              as FormControl<ChildrenRelationShip>?
+              as FormControl<ChildrenRelationShipType>?
           : null;
   FormControl<bool> get conadisControl =>
       form.control(conadisControlPath()) as FormControl<bool>;
@@ -1632,10 +1517,11 @@ class PartnerForm implements FormModel<Partner> {
 
   @override
   Partner get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'PartnerForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Partner(
         nui: _nuiValue,
@@ -1658,33 +1544,21 @@ class PartnerForm implements FormModel<Partner> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          PartnerForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    Partner? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value:
-              PartnerForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(PartnerForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    Partner? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(Partner? partner) => FormGroup({
         nuiControlName: FormControl<String>(
             value: partner?.nui,
             validators: [
@@ -1703,7 +1577,7 @@ class PartnerForm implements FormModel<Partner> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        maritalStatusControlName: FormControl<MaritalStatus>(
+        maritalStatusControlName: FormControl<MaritalStatusType>(
             value: partner?.maritalStatus,
             validators: [requiredValidator],
             asyncValidators: [],
@@ -1717,7 +1591,7 @@ class PartnerForm implements FormModel<Partner> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        childrenRelationshipControlName: FormControl<ChildrenRelationShip>(
+        childrenRelationshipControlName: FormControl<ChildrenRelationShipType>(
             value: partner?.childrenRelationship,
             validators: [],
             asyncValidators: [],
@@ -1739,16 +1613,15 @@ class PartnerForm implements FormModel<Partner> {
             disabled: false,
             touched: false),
         documentsControlName: FormArray<Document>(
-            partner?.documents
-                    .map((e) => FormControl<Document>(
-                          value: e,
-                          validators: [],
-                          asyncValidators: [],
-                          asyncValidatorsDebounceTime: 250,
-                          disabled: false,
-                        ))
-                    .toList() ??
-                [],
+            (partner?.documents ?? [])
+                .map((e) => FormControl<Document>(
+                      value: e,
+                      validators: [],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
+                .toList(),
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -1995,24 +1868,16 @@ class RequestOwnerFormBuilder extends StatefulWidget {
 }
 
 class _RequestOwnerFormBuilderState extends State<RequestOwnerFormBuilder> {
-  late FormGroup _form;
-
   late RequestOwnerForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = RequestOwnerForm(widget.model, _form, null);
+    _formModel = RequestOwnerForm(
+        widget.model, RequestOwnerForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -2022,12 +1887,14 @@ class _RequestOwnerFormBuilderState extends State<RequestOwnerFormBuilder> {
   @override
   void didUpdateWidget(covariant RequestOwnerFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = RequestOwnerForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = RequestOwnerForm(
+          widget.model, RequestOwnerForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -2035,19 +1902,20 @@ class _RequestOwnerFormBuilderState extends State<RequestOwnerFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveRequestOwnerForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -2062,17 +1930,21 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     this.path,
   ) {}
 
-  static String nuiControlName = "nui";
+  static const String nuiControlName = "nui";
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
-  static String phoneControlName = "phone";
+  static const String phoneControlName = "phone";
 
-  static String emailControlName = "email";
+  static const String emailControlName = "email";
 
-  static String identityCardControlName = "identityCard";
+  static const String identityCardControlName = "identityCard";
 
-  static String powerOfAttorneyControlName = "powerOfAttorney";
+  static const String powerOfAttorneyControlName = "powerOfAttorney";
+
+  static const String identityCardSateControlName = "identityCardSate";
+
+  static const String powerOfAttorneyStateControlName = "powerOfAttorneyState";
 
   final RequestOwner? requestOwner;
 
@@ -2087,12 +1959,19 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
   String identityCardControlPath() => pathBuilder(identityCardControlName);
   String powerOfAttorneyControlPath() =>
       pathBuilder(powerOfAttorneyControlName);
+  String identityCardSateControlPath() =>
+      pathBuilder(identityCardSateControlName);
+  String powerOfAttorneyStateControlPath() =>
+      pathBuilder(powerOfAttorneyStateControlName);
   String get _nuiValue => nuiControl.value as String;
   String get _nameValue => nameControl.value as String;
   String get _phoneValue => phoneControl.value as String;
   String get _emailValue => emailControl.value as String;
   String? get _identityCardValue => identityCardControl?.value;
   String? get _powerOfAttorneyValue => powerOfAttorneyControl?.value;
+  StateDocument? get _identityCardSateValue => identityCardSateControl?.value;
+  StateDocument? get _powerOfAttorneyStateValue =>
+      powerOfAttorneyStateControl?.value;
   bool get containsNui {
     try {
       form.control(nuiControlPath());
@@ -2147,18 +2026,41 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     }
   }
 
+  bool get containsIdentityCardSate {
+    try {
+      form.control(identityCardSateControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPowerOfAttorneyState {
+    try {
+      form.control(powerOfAttorneyStateControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get nuiErrors => nuiControl.errors;
   Object? get nameErrors => nameControl.errors;
   Object? get phoneErrors => phoneControl.errors;
   Object? get emailErrors => emailControl.errors;
   Object? get identityCardErrors => identityCardControl?.errors;
   Object? get powerOfAttorneyErrors => powerOfAttorneyControl?.errors;
+  Object? get identityCardSateErrors => identityCardSateControl?.errors;
+  Object? get powerOfAttorneyStateErrors => powerOfAttorneyStateControl?.errors;
   void get nuiFocus => form.focus(nuiControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get phoneFocus => form.focus(phoneControlPath());
   void get emailFocus => form.focus(emailControlPath());
   void get identityCardFocus => form.focus(identityCardControlPath());
   void get powerOfAttorneyFocus => form.focus(powerOfAttorneyControlPath());
+  void get identityCardSateFocus => form.focus(identityCardSateControlPath());
+  void get powerOfAttorneyStateFocus =>
+      form.focus(powerOfAttorneyStateControlPath());
   void identityCardRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -2203,6 +2105,58 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
         if (formGroup is FormGroup) {
           formGroup.removeControl(
             powerOfAttorneyControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void identityCardSateRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsIdentityCardSate) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          identityCardSateControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            identityCardSateControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void powerOfAttorneyStateRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsPowerOfAttorneyState) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          powerOfAttorneyStateControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            powerOfAttorneyStateControlName,
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -2265,6 +2219,24 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void identityCardSateValueUpdate(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identityCardSateControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void powerOfAttorneyStateValueUpdate(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    powerOfAttorneyStateControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nuiValuePatch(
     String value, {
     bool updateParent = true,
@@ -2316,6 +2288,24 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     bool emitEvent = true,
   }) {
     powerOfAttorneyControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void identityCardSateValuePatch(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identityCardSateControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void powerOfAttorneyStateValuePatch(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    powerOfAttorneyStateControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -2373,6 +2363,24 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
   }) =>
       powerOfAttorneyControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void identityCardSateValueReset(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      identityCardSateControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void powerOfAttorneyStateValueReset(
+    StateDocument? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      powerOfAttorneyStateControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get nuiControl =>
       form.control(nuiControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
@@ -2387,6 +2395,16 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
   FormControl<String>? get powerOfAttorneyControl => containsPowerOfAttorney
       ? form.control(powerOfAttorneyControlPath()) as FormControl<String>?
       : null;
+  FormControl<StateDocument>? get identityCardSateControl =>
+      containsIdentityCardSate
+          ? form.control(identityCardSateControlPath())
+              as FormControl<StateDocument>?
+          : null;
+  FormControl<StateDocument>? get powerOfAttorneyStateControl =>
+      containsPowerOfAttorneyState
+          ? form.control(powerOfAttorneyStateControlPath())
+              as FormControl<StateDocument>?
+          : null;
   void nuiSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2495,12 +2513,49 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     }
   }
 
+  void identityCardSateSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      identityCardSateControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      identityCardSateControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void powerOfAttorneyStateSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      powerOfAttorneyStateControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      powerOfAttorneyStateControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   RequestOwner get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'RequestOwnerForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return RequestOwner(
         nui: _nuiValue,
@@ -2508,7 +2563,9 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
         phone: _phoneValue,
         email: _emailValue,
         identityCard: _identityCardValue,
-        powerOfAttorney: _powerOfAttorneyValue);
+        powerOfAttorney: _powerOfAttorneyValue,
+        identityCardSate: _identityCardSateValue,
+        powerOfAttorneyState: _powerOfAttorneyStateValue);
   }
 
   RequestOwnerForm copyWithPath(String? path) {
@@ -2521,34 +2578,21 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          RequestOwnerForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    RequestOwner value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: RequestOwnerForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(RequestOwnerForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    RequestOwner? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(RequestOwner? requestOwner) => FormGroup({
         nuiControlName: FormControl<String>(
             value: requestOwner?.nui,
             validators: [
@@ -2590,6 +2634,20 @@ class RequestOwnerForm implements FormModel<RequestOwner> {
             touched: false),
         powerOfAttorneyControlName: FormControl<String>(
             value: requestOwner?.powerOfAttorney,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        identityCardSateControlName: FormControl<StateDocument>(
+            value: requestOwner?.identityCardSate,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        powerOfAttorneyStateControlName: FormControl<StateDocument>(
+            value: requestOwner?.powerOfAttorneyState,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -2831,24 +2889,16 @@ class OutsideFormBuilder extends StatefulWidget {
 }
 
 class _OutsideFormBuilderState extends State<OutsideFormBuilder> {
-  late FormGroup _form;
-
   late OutsideForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = OutsideForm(widget.model, _form, null);
+    _formModel =
+        OutsideForm(widget.model, OutsideForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -2858,12 +2908,14 @@ class _OutsideFormBuilderState extends State<OutsideFormBuilder> {
   @override
   void didUpdateWidget(covariant OutsideFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = OutsideForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = OutsideForm(
+          widget.model, OutsideForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -2871,19 +2923,20 @@ class _OutsideFormBuilderState extends State<OutsideFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveOutsideForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -2898,13 +2951,13 @@ class OutsideForm implements FormModel<Outside> {
     this.path,
   ) {}
 
-  static String latitudeControlName = "latitude";
+  static const String latitudeControlName = "latitude";
 
-  static String longitudeControlName = "longitude";
+  static const String longitudeControlName = "longitude";
 
-  static String principalStreetControlName = "principalStreet";
+  static const String principalStreetControlName = "principalStreet";
 
-  static String secondaryStreetControlName = "secondaryStreet";
+  static const String secondaryStreetControlName = "secondaryStreet";
 
   final Outside? outside;
 
@@ -2918,10 +2971,10 @@ class OutsideForm implements FormModel<Outside> {
       pathBuilder(principalStreetControlName);
   String secondaryStreetControlPath() =>
       pathBuilder(secondaryStreetControlName);
-  String get _latitudeValue => latitudeControl.value ?? "";
-  String get _longitudeValue => longitudeControl.value ?? "";
-  String get _principalStreetValue => principalStreetControl.value ?? "";
-  String get _secondaryStreetValue => secondaryStreetControl.value ?? "";
+  String get _latitudeValue => latitudeControl.value as String;
+  String get _longitudeValue => longitudeControl.value as String;
+  String get _principalStreetValue => principalStreetControl.value as String;
+  String get _secondaryStreetValue => secondaryStreetControl.value as String;
   bool get containsLatitude {
     try {
       form.control(latitudeControlPath());
@@ -3156,10 +3209,11 @@ class OutsideForm implements FormModel<Outside> {
 
   @override
   Outside get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'OutsideForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Outside(
         latitude: _latitudeValue,
@@ -3178,33 +3232,21 @@ class OutsideForm implements FormModel<Outside> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          OutsideForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    Outside value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value:
-              OutsideForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(OutsideForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    Outside? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(Outside? outside) => FormGroup({
         latitudeControlName: FormControl<String>(
             value: outside?.latitude,
             validators: [requiredValidator],
@@ -3469,24 +3511,16 @@ class WitnessFormBuilder extends StatefulWidget {
 }
 
 class _WitnessFormBuilderState extends State<WitnessFormBuilder> {
-  late FormGroup _form;
-
   late WitnessForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = WitnessForm(widget.model, _form, null);
+    _formModel =
+        WitnessForm(widget.model, WitnessForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -3496,12 +3530,14 @@ class _WitnessFormBuilderState extends State<WitnessFormBuilder> {
   @override
   void didUpdateWidget(covariant WitnessFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = WitnessForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = WitnessForm(
+          widget.model, WitnessForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -3509,19 +3545,20 @@ class _WitnessFormBuilderState extends State<WitnessFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveWitnessForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -3536,9 +3573,9 @@ class WitnessForm implements FormModel<Witness> {
     this.path,
   ) {}
 
-  static String nuiControlName = "nui";
+  static const String nuiControlName = "nui";
 
-  static String nameControlName = "name";
+  static const String nameControlName = "name";
 
   final Witness? witness;
 
@@ -3548,8 +3585,8 @@ class WitnessForm implements FormModel<Witness> {
 
   String nuiControlPath() => pathBuilder(nuiControlName);
   String nameControlPath() => pathBuilder(nameControlName);
-  String get _nuiValue => nuiControl.value ?? "";
-  String get _nameValue => nameControl.value ?? "";
+  String get _nuiValue => nuiControl.value as String;
+  String get _nameValue => nameControl.value as String;
   bool get containsNui {
     try {
       form.control(nuiControlPath());
@@ -3668,10 +3705,11 @@ class WitnessForm implements FormModel<Witness> {
 
   @override
   Witness get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'WitnessForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Witness(nui: _nuiValue, name: _nameValue);
   }
@@ -3686,33 +3724,21 @@ class WitnessForm implements FormModel<Witness> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          WitnessForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    Witness value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value:
-              WitnessForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(WitnessForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    Witness? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(Witness? witness) => FormGroup({
         nuiControlName: FormControl<String>(
             value: witness?.nui,
             validators: [
@@ -3967,24 +3993,16 @@ class PartnerFormBuilder extends StatefulWidget {
 }
 
 class _PartnerFormBuilderState extends State<PartnerFormBuilder> {
-  late FormGroup _form;
-
   late PartnerForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = PartnerForm(widget.model, _form, null);
+    _formModel =
+        PartnerForm(widget.model, PartnerForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -3994,12 +4012,14 @@ class _PartnerFormBuilderState extends State<PartnerFormBuilder> {
   @override
   void didUpdateWidget(covariant PartnerFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = PartnerForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = PartnerForm(
+          widget.model, PartnerForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -4007,19 +4027,20 @@ class _PartnerFormBuilderState extends State<PartnerFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactivePartnerForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -4256,24 +4277,16 @@ class DocumentFormBuilder extends StatefulWidget {
 }
 
 class _DocumentFormBuilderState extends State<DocumentFormBuilder> {
-  late FormGroup _form;
-
   late DocumentForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = DocumentForm(widget.model, _form, null);
+    _formModel = DocumentForm(
+        widget.model, DocumentForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -4283,12 +4296,14 @@ class _DocumentFormBuilderState extends State<DocumentFormBuilder> {
   @override
   void didUpdateWidget(covariant DocumentFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = DocumentForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = DocumentForm(
+          widget.model, DocumentForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -4296,19 +4311,20 @@ class _DocumentFormBuilderState extends State<DocumentFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveDocumentForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -4323,9 +4339,9 @@ class DocumentForm implements FormModel<Document> {
     this.path,
   ) {}
 
-  static String referenceIdControlName = "referenceId";
+  static const String referenceIdControlName = "referenceId";
 
-  static String fileControlName = "file";
+  static const String fileControlName = "file";
 
   final Document? document;
 
@@ -4336,7 +4352,7 @@ class DocumentForm implements FormModel<Document> {
   String referenceIdControlPath() => pathBuilder(referenceIdControlName);
   String fileControlPath() => pathBuilder(fileControlName);
   String get _referenceIdValue => referenceIdControl.value as String;
-  String get _fileValue => fileControl.value ?? "";
+  String get _fileValue => fileControl.value as String;
   bool get containsReferenceId {
     try {
       form.control(referenceIdControlPath());
@@ -4455,10 +4471,11 @@ class DocumentForm implements FormModel<Document> {
 
   @override
   Document get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'DocumentForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return Document(
         referenceId: _referenceIdValue,
@@ -4481,33 +4498,21 @@ class DocumentForm implements FormModel<Document> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          DocumentForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    Document value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value:
-              DocumentForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(DocumentForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    Document? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(Document? document) => FormGroup({
         referenceIdControlName: FormControl<String>(
             value: document?.referenceId,
             validators: [requiredValidator],
@@ -4761,24 +4766,16 @@ class SelectAgencyFormBuilder extends StatefulWidget {
 }
 
 class _SelectAgencyFormBuilderState extends State<SelectAgencyFormBuilder> {
-  late FormGroup _form;
-
   late SelectAgencyForm _formModel;
 
   @override
   void initState() {
-    _form = FormGroup({});
-    _formModel = SelectAgencyForm(widget.model, _form, null);
+    _formModel = SelectAgencyForm(
+        widget.model, SelectAgencyForm.formElements(widget.model), null);
 
-    final elements = _formModel.formElements();
-    _form.setValidators(elements.validators);
-    _form.setAsyncValidators(elements.asyncValidators);
-
-    if (elements.disabled) {
-      _form.markAsDisabled();
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
     }
-
-    _form.addAll(elements.controls);
 
     widget.initState?.call(context, _formModel);
 
@@ -4788,12 +4785,14 @@ class _SelectAgencyFormBuilderState extends State<SelectAgencyFormBuilder> {
   @override
   void didUpdateWidget(covariant SelectAgencyFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = SelectAgencyForm(widget.model, _form, null);
-      final elements = _formModel.formElements();
+      _formModel = SelectAgencyForm(
+          widget.model, SelectAgencyForm.formElements(widget.model), null);
 
-      _form.updateValue(elements.rawValue);
-      _form.setValidators(elements.validators);
-      _form.setAsyncValidators(elements.asyncValidators);
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -4801,19 +4800,20 @@ class _SelectAgencyFormBuilderState extends State<SelectAgencyFormBuilder> {
 
   @override
   void dispose() {
-    _form.dispose();
+    _formModel.form.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ReactiveSelectAgencyForm(
+      key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
       child: ReactiveFormBuilder(
-        form: () => _form,
+        form: () => _formModel.form,
         onWillPop: widget.onWillPop,
-        builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+        builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
       ),
@@ -4828,9 +4828,9 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
     this.path,
   ) {}
 
-  static String provinceControlName = "province";
+  static const String provinceControlName = "province";
 
-  static String agencyControlName = "agency";
+  static const String agencyControlName = "agency";
 
   final SelectAgency? selectAgency;
 
@@ -4960,10 +4960,11 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
 
   @override
   SelectAgency get model {
-    if (!form.valid) {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
       debugPrint(
-        'Prefer not to call `model` on non-valid form it could cause unexpected exceptions in case you created a non-nullable field in model and expect it to be guarded by some kind of `required` validator.',
-      );
+          '[${path ?? 'SelectAgencyForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return SelectAgency(province: _provinceValue, agency: _agencyValue);
   }
@@ -4978,34 +4979,21 @@ class SelectAgencyForm implements FormModel<SelectAgency> {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(
-          SelectAgencyForm(value, FormGroup({}), null).formElements().rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
-  @override
-  void resetValue(
-    SelectAgency value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) =>
-      form.reset(
-          value: SelectAgencyForm(value, FormGroup({}), null)
-              .formElements()
-              .rawValue,
-          updateParent: updateParent,
-          emitEvent: emitEvent);
+      form.updateValue(SelectAgencyForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
+    SelectAgency? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
       form.reset(
-          value: formElements().rawValue,
+          value: value != null ? formElements(value).rawValue : null,
           updateParent: updateParent,
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  FormGroup formElements() => FormGroup({
+  static FormGroup formElements(SelectAgency? selectAgency) => FormGroup({
         provinceControlName: FormControl<LocationModel>(
             value: selectAgency?.province,
             validators: [requiredValidator],
@@ -5113,6 +5101,793 @@ class ReactiveSelectAgencyFormFormGroupArrayBuilder<V> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formModel = ReactiveSelectAgencyForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveDocumentsRejectionFormConsumer extends StatelessWidget {
+  const ReactiveDocumentsRejectionFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
+
+  final Widget? child;
+
+  final Widget Function(
+          BuildContext context, DocumentsRejectionForm formModel, Widget? child)
+      builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveDocumentsRejectionForm.of(context);
+
+    if (formModel is! DocumentsRejectionForm) {
+      throw FormControlParentNotFoundException(this);
+    }
+    return builder(context, formModel, child);
+  }
+}
+
+class DocumentsRejectionFormInheritedStreamer
+    extends InheritedStreamer<dynamic> {
+  const DocumentsRejectionFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
+
+  final DocumentsRejectionForm form;
+}
+
+class ReactiveDocumentsRejectionForm extends StatelessWidget {
+  const ReactiveDocumentsRejectionForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
+
+  final Widget child;
+
+  final DocumentsRejectionForm form;
+
+  final WillPopCallback? onWillPop;
+
+  static DocumentsRejectionForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
+    if (listen) {
+      return context
+          .dependOnInheritedWidgetOfExactType<
+              DocumentsRejectionFormInheritedStreamer>()
+          ?.form;
+    }
+
+    final element = context.getElementForInheritedWidgetOfExactType<
+        DocumentsRejectionFormInheritedStreamer>();
+    return element == null
+        ? null
+        : (element.widget as DocumentsRejectionFormInheritedStreamer).form;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DocumentsRejectionFormInheritedStreamer(
+      form: form,
+      stream: form.form.statusChanged,
+      child: WillPopScope(
+        onWillPop: onWillPop,
+        child: child,
+      ),
+    );
+  }
+}
+
+class DocumentsRejectionFormBuilder extends StatefulWidget {
+  const DocumentsRejectionFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final DocumentsRejection? model;
+
+  final Widget? child;
+
+  final WillPopCallback? onWillPop;
+
+  final Widget Function(
+          BuildContext context, DocumentsRejectionForm formModel, Widget? child)
+      builder;
+
+  final void Function(BuildContext context, DocumentsRejectionForm formModel)?
+      initState;
+
+  @override
+  _DocumentsRejectionFormBuilderState createState() =>
+      _DocumentsRejectionFormBuilderState();
+}
+
+class _DocumentsRejectionFormBuilderState
+    extends State<DocumentsRejectionFormBuilder> {
+  late DocumentsRejectionForm _formModel;
+
+  @override
+  void initState() {
+    _formModel = DocumentsRejectionForm(
+        widget.model, DocumentsRejectionForm.formElements(widget.model), null);
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant DocumentsRejectionFormBuilder oldWidget) {
+    if (widget.model != oldWidget.model) {
+      _formModel = DocumentsRejectionForm(widget.model,
+          DocumentsRejectionForm.formElements(widget.model), null);
+
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
+    }
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _formModel.form.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveDocumentsRejectionForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      onWillPop: widget.onWillPop,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        onWillPop: widget.onWillPop,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class DocumentsRejectionForm implements FormModel<DocumentsRejection> {
+  DocumentsRejectionForm(
+    this.documentsRejection,
+    this.form,
+    this.path,
+  ) {}
+
+  static const String identityCardControlName = "identityCard";
+
+  static const String powerOfAttorneyControlName = "powerOfAttorney";
+
+  static const String firstPartnerDocumentsControlName =
+      "firstPartnerDocuments";
+
+  static const String secondPartnerDocumentsControlName =
+      "secondPartnerDocuments";
+
+  final DocumentsRejection? documentsRejection;
+
+  final FormGroup form;
+
+  final String? path;
+
+  String identityCardControlPath() => pathBuilder(identityCardControlName);
+  String powerOfAttorneyControlPath() =>
+      pathBuilder(powerOfAttorneyControlName);
+  String firstPartnerDocumentsControlPath() =>
+      pathBuilder(firstPartnerDocumentsControlName);
+  String secondPartnerDocumentsControlPath() =>
+      pathBuilder(secondPartnerDocumentsControlName);
+  String? get _identityCardValue => identityCardControl?.value;
+  String? get _powerOfAttorneyValue => powerOfAttorneyControl?.value;
+  List<Document> get _firstPartnerDocumentsValue =>
+      firstPartnerDocumentsControl.value?.whereType<Document>().toList() ?? [];
+  List<Document> get _secondPartnerDocumentsValue =>
+      secondPartnerDocumentsControl.value?.whereType<Document>().toList() ?? [];
+  bool get containsIdentityCard {
+    try {
+      form.control(identityCardControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPowerOfAttorney {
+    try {
+      form.control(powerOfAttorneyControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsFirstPartnerDocuments {
+    try {
+      form.control(firstPartnerDocumentsControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsSecondPartnerDocuments {
+    try {
+      form.control(secondPartnerDocumentsControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get identityCardErrors => identityCardControl?.errors;
+  Object? get powerOfAttorneyErrors => powerOfAttorneyControl?.errors;
+  Object? get firstPartnerDocumentsErrors =>
+      firstPartnerDocumentsControl.errors;
+  Object? get secondPartnerDocumentsErrors =>
+      secondPartnerDocumentsControl.errors;
+  void get identityCardFocus => form.focus(identityCardControlPath());
+  void get powerOfAttorneyFocus => form.focus(powerOfAttorneyControlPath());
+  void get firstPartnerDocumentsFocus =>
+      form.focus(firstPartnerDocumentsControlPath());
+  void get secondPartnerDocumentsFocus =>
+      form.focus(secondPartnerDocumentsControlPath());
+  void identityCardRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsIdentityCard) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          identityCardControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            identityCardControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void powerOfAttorneyRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsPowerOfAttorney) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          powerOfAttorneyControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            powerOfAttorneyControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void identityCardValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identityCardControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void powerOfAttorneyValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    powerOfAttorneyControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void firstPartnerDocumentsValueUpdate(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    firstPartnerDocumentsControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void secondPartnerDocumentsValueUpdate(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    secondPartnerDocumentsControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void identityCardValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    identityCardControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void powerOfAttorneyValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    powerOfAttorneyControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void firstPartnerDocumentsValuePatch(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    firstPartnerDocumentsControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void secondPartnerDocumentsValuePatch(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    secondPartnerDocumentsControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void identityCardValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      identityCardControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void powerOfAttorneyValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      powerOfAttorneyControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void firstPartnerDocumentsValueReset(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      firstPartnerDocumentsControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void secondPartnerDocumentsValueReset(
+    List<Document> value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      secondPartnerDocumentsControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<String>? get identityCardControl => containsIdentityCard
+      ? form.control(identityCardControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get powerOfAttorneyControl => containsPowerOfAttorney
+      ? form.control(powerOfAttorneyControlPath()) as FormControl<String>?
+      : null;
+  FormArray<Document> get firstPartnerDocumentsControl =>
+      form.control(firstPartnerDocumentsControlPath()) as FormArray<Document>;
+  FormArray<Document> get secondPartnerDocumentsControl =>
+      form.control(secondPartnerDocumentsControlPath()) as FormArray<Document>;
+  void identityCardSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      identityCardControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      identityCardControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void powerOfAttorneySetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      powerOfAttorneyControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      powerOfAttorneyControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void firstPartnerDocumentsSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      firstPartnerDocumentsControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      firstPartnerDocumentsControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void secondPartnerDocumentsSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      secondPartnerDocumentsControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      secondPartnerDocumentsControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void addFirstPartnerDocumentsItem(
+    Document value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
+          resultingAsyncValidators.addAll(asyncValidators);
+        }
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) {
+          resultingValidators = validators;
+        }
+
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
+        break;
+    }
+
+    firstPartnerDocumentsControl.add(FormControl<Document>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
+  void addSecondPartnerDocumentsItem(
+    Document value, {
+    List<AsyncValidatorFunction>? asyncValidators,
+    List<ValidatorFunction>? validators,
+    int? asyncValidatorsDebounceTime,
+    bool? disabled,
+    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
+  }) {
+    List<ValidatorFunction> resultingValidators = [];
+    List<AsyncValidatorFunction> resultingAsyncValidators = [];
+
+    switch (validatorsApplyMode) {
+      case ValidatorsApplyMode.merge:
+        if (validators != null) {
+          resultingValidators.addAll(validators);
+        }
+        if (asyncValidators != null) {
+          resultingAsyncValidators.addAll(asyncValidators);
+        }
+        break;
+      case ValidatorsApplyMode.override:
+        if (validators != null) {
+          resultingValidators = validators;
+        }
+
+        if (asyncValidators != null) {
+          resultingAsyncValidators = asyncValidators;
+        }
+        break;
+    }
+
+    secondPartnerDocumentsControl.add(FormControl<Document>(
+      value: value,
+      validators: resultingValidators,
+      asyncValidators: resultingAsyncValidators,
+      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
+      disabled: disabled ?? false,
+    ));
+  }
+
+  @override
+  DocumentsRejection get model {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
+      debugPrint(
+          '[${path ?? 'DocumentsRejectionForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+    }
+    return DocumentsRejection(
+        id: documentsRejection?.id,
+        identityCard: _identityCardValue,
+        powerOfAttorney: _powerOfAttorneyValue,
+        firstPartnerDocuments: _firstPartnerDocumentsValue,
+        secondPartnerDocuments: _secondPartnerDocumentsValue);
+  }
+
+  DocumentsRejectionForm copyWithPath(String? path) {
+    return DocumentsRejectionForm(documentsRejection, form, path);
+  }
+
+  @override
+  void updateValue(
+    DocumentsRejection value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.updateValue(DocumentsRejectionForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
+  @override
+  void reset({
+    DocumentsRejection? value,
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+  static FormGroup formElements(DocumentsRejection? documentsRejection) =>
+      FormGroup({
+        identityCardControlName: FormControl<String>(
+            value: documentsRejection?.identityCard,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        powerOfAttorneyControlName: FormControl<String>(
+            value: documentsRejection?.powerOfAttorney,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        firstPartnerDocumentsControlName: FormArray<Document>(
+            (documentsRejection?.firstPartnerDocuments ?? [])
+                .map((e) => FormControl<Document>(
+                      value: e,
+                      validators: [],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
+                .toList(),
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false),
+        secondPartnerDocumentsControlName: FormArray<Document>(
+            (documentsRejection?.secondPartnerDocuments ?? [])
+                .map((e) => FormControl<Document>(
+                      value: e,
+                      validators: [],
+                      asyncValidators: [],
+                      asyncValidatorsDebounceTime: 250,
+                      disabled: false,
+                    ))
+                .toList(),
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+class ReactiveDocumentsRejectionFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveDocumentsRejectionFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(DocumentsRejectionForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      DocumentsRejectionForm formModel)? builder;
+
+  final Widget Function(BuildContext context, int i, T? item,
+      DocumentsRejectionForm formModel) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveDocumentsRejectionForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveDocumentsRejectionFormFormGroupArrayBuilder<V>
+    extends StatelessWidget {
+  const ReactiveDocumentsRejectionFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      DocumentsRejectionForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      DocumentsRejectionForm formModel)? builder;
+
+  final Widget Function(BuildContext context, int i, V? item,
+      DocumentsRejectionForm formModel) itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveDocumentsRejectionForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);

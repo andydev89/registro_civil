@@ -16,9 +16,12 @@ class _$AppRouter extends RootStackRouter {
   _$AppRouter({
     GlobalKey<NavigatorState>? navigatorKey,
     required this.authGuard,
+    required this.agreementGuard,
   }) : super(navigatorKey);
 
   final AuthGuard authGuard;
+
+  final AgreementGuard agreementGuard;
 
   @override
   final Map<String, PageFactory> pagesMap = {
@@ -187,38 +190,35 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     MarriageCelebrationRouterRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<MarriageCelebrationRouterRouteArgs>(
+          orElse: () => MarriageCelebrationRouterRouteArgs(
+                  showAgreement: queryParams.getBool(
+                'showAgreement',
+                true,
+              )));
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const MarriageCelebrationRouterPage(),
-      );
-    },
-    MarriageCelebrationPrincipalRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: const MarriageCelebrationPrincipalPage(),
-        transitionsBuilder: TransitionsBuilders.slideRight,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
-    RejectionStepMarriageCelebrationRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<RejectionStepMarriageCelebrationRouteArgs>();
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: RejectionStepMarriageCelebrationPage(
+        child: MarriageCelebrationRouterPage(
           key: args.key,
-          marriageId: args.marriageId,
+          showAgreement: args.showAgreement,
         ),
-        transitionsBuilder: TransitionsBuilders.slideRight,
-        opaque: true,
-        barrierDismissible: false,
       );
     },
     ResidenceRegistrationRouterRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<ResidenceRegistrationRouterRouteArgs>(
+          orElse: () => ResidenceRegistrationRouterRouteArgs(
+                  showAgreement: queryParams.getBool(
+                'showAgreement',
+                true,
+              )));
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const ResidenceRegistrationRouterPage(),
+        child: ResidenceRegistrationRouterPage(
+          key: args.key,
+          showAgreement: args.showAgreement,
+        ),
       );
     },
     ChangeOfNameRouterRoute.name: (routeData) {
@@ -262,17 +262,6 @@ class _$AppRouter extends RootStackRouter {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: const MyOrderRejectingPage(),
-      );
-    },
-    SelectPaymentRoute.name: (routeData) {
-      final args = routeData.argsAs<SelectPaymentRouteArgs>();
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: SelectPaymentPage(
-          key: args.key,
-          requestNumber: args.requestNumber,
-          totalToPay: args.totalToPay,
-        ),
       );
     },
     MakePaymentRoute.name: (routeData) {
@@ -452,25 +441,77 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    MarriageCelebrationPrincipalRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationPrincipalPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    RejectionStepMarriageCelebrationRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<RejectionStepMarriageCelebrationRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: RejectionStepMarriageCelebrationPage(
+          key: args.key,
+          marriageId: args.marriageId,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    MarriageCelebrationStepperRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationStepperPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     MarriageCelebrationFirstStepRouterRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<MarriageCelebrationFirstStepRouterRouteArgs>(
+              orElse: () =>
+                  const MarriageCelebrationFirstStepRouterRouteArgs());
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const MarriageCelebrationFirstStepRouterPage(),
+        child: MarriageCelebrationFirstStepRouterPage(
+          key: args.key,
+          operation: args.operation,
+          marriageId: args.marriageId,
+        ),
       );
     },
     MarriageCelebrationAgencyRoute.name: (routeData) {
+      final args = routeData.argsAs<MarriageCelebrationAgencyRouteArgs>(
+          orElse: () => const MarriageCelebrationAgencyRouteArgs());
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const MarriageCelebrationAgencyPage(),
+        child: MarriageCelebrationAgencyPage(
+          key: args.key,
+          operation: args.operation,
+        ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
       );
     },
     MarriageCelebrationSecondStepRouterRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<MarriageCelebrationSecondStepRouterRouteArgs>(
+              orElse: () =>
+                  const MarriageCelebrationSecondStepRouterRouteArgs());
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const MarriageCelebrationSecondStepRouterPage(),
+        child: MarriageCelebrationSecondStepRouterPage(
+          key: args.key,
+          operation: args.operation,
+        ),
       );
     },
     MarriageCelebrationThirdStepRouterRoute.name: (routeData) {
@@ -496,36 +537,55 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     FirstStepAttorneyRoute.name: (routeData) {
+      final args = routeData.argsAs<FirstStepAttorneyRouteArgs>(
+          orElse: () => const FirstStepAttorneyRouteArgs());
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const FirstStepAttorneyPage(),
+        child: FirstStepAttorneyPage(
+          key: args.key,
+          operation: args.operation,
+        ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
       );
     },
     FirstStepContractingPartyRoute.name: (routeData) {
+      final args = routeData.argsAs<FirstStepContractingPartyRouteArgs>(
+          orElse: () => const FirstStepContractingPartyRouteArgs());
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const FirstStepContractingPartyPage(),
+        child: FirstStepContractingPartyPage(
+          key: args.key,
+          operation: args.operation,
+        ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
       );
     },
     SecondStepAtHeadquarterRoute.name: (routeData) {
+      final args = routeData.argsAs<SecondStepAtHeadquarterRouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const SecondStepAtHeadquarterPage(),
+        child: SecondStepAtHeadquarterPage(
+          key: args.key,
+          operation: args.operation,
+        ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
       );
     },
     SecondStepOffSiteRoute.name: (routeData) {
+      final args = routeData.argsAs<SecondStepOffSiteRouteArgs>(
+          orElse: () => const SecondStepOffSiteRouteArgs());
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const SecondStepOffSitePage(),
+        child: SecondStepOffSitePage(
+          key: args.key,
+          operation: args.operation,
+        ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -538,6 +598,7 @@ class _$AppRouter extends RootStackRouter {
         child: WitnessPage(
           key: args.key,
           indexWitness: args.indexWitness,
+          operation: args.operation,
         ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
@@ -545,9 +606,13 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     ThirdStepContractingPartyRoute.name: (routeData) {
+      final args = routeData.argsAs<ThirdStepContractingPartyRouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const ThirdStepContractingPartyPage(),
+        child: ThirdStepContractingPartyPage(
+          key: args.key,
+          operation: args.operation,
+        ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
@@ -560,6 +625,7 @@ class _$AppRouter extends RootStackRouter {
         child: ContractingPartyPage(
           key: args.key,
           indexContractingParty: args.indexContractingParty,
+          operation: args.operation,
         ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
@@ -592,6 +658,7 @@ class _$AppRouter extends RootStackRouter {
         child: FirstStepResidencePage(
           key: args.key,
           operation: args.operation,
+          residenceIndex: args.residenceIndex,
         ),
       );
     },
@@ -603,6 +670,7 @@ class _$AppRouter extends RootStackRouter {
         child: SecondStepResidencePage(
           key: args.key,
           operation: args.operation,
+          residenceIndex: args.residenceIndex,
         ),
       );
     },
@@ -612,7 +680,7 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: MainPageDependentPage(
           key: args.key,
-          residential: args.residential,
+          residentialIndex: args.residentialIndex,
         ),
       );
     },
@@ -624,17 +692,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           operation: args.operation,
           dependent: args.dependent,
-          residenceId: args.residenceId,
-        ),
-      );
-    },
-    TermAndUsesConditionsRoute.name: (routeData) {
-      final args = routeData.argsAs<TermAndUsesConditionsRouteArgs>();
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: TermAndUsesConditionsPage(
-          key: args.key,
-          typeService: args.typeService,
+          residentialIndex: args.residentialIndex,
         ),
       );
     },
@@ -840,95 +898,110 @@ class _$AppRouter extends RootStackRouter {
               MarriageCelebrationRouterRoute.name,
               path: 'marriage-celebration-router-page',
               parent: RootRouterRoute.name,
-              guards: [authGuard],
+              meta: <String, dynamic>{'agreementType': 2},
+              guards: [
+                authGuard,
+                agreementGuard,
+              ],
               children: [
                 RouteConfig(
-                  MarriageCelebrationFirstStepRouterRoute.name,
+                  MarriageCelebrationPrincipalRoute.name,
                   path: '',
                   parent: MarriageCelebrationRouterRoute.name,
-                  children: [
-                    RouteConfig(
-                      FirstStepAttorneyRoute.name,
-                      path: '',
-                      parent: MarriageCelebrationFirstStepRouterRoute.name,
-                    ),
-                    RouteConfig(
-                      FirstStepContractingPartyRoute.name,
-                      path: 'first-step-contracting-party-page',
-                      parent: MarriageCelebrationFirstStepRouterRoute.name,
-                    ),
-                  ],
                 ),
                 RouteConfig(
-                  MarriageCelebrationAgencyRoute.name,
-                  path: 'marriage-celebration-agency-page',
+                  RejectionStepMarriageCelebrationRoute.name,
+                  path: 'rejection-step-marriage-celebration-page',
                   parent: MarriageCelebrationRouterRoute.name,
                 ),
                 RouteConfig(
-                  MarriageCelebrationSecondStepRouterRoute.name,
-                  path: 'marriage-celebration-second-step-router-page',
+                  MarriageCelebrationStepperRoute.name,
+                  path: 'marriage-celebration-stepper-page',
                   parent: MarriageCelebrationRouterRoute.name,
                   children: [
                     RouteConfig(
-                      SecondStepAtHeadquarterRoute.name,
+                      MarriageCelebrationFirstStepRouterRoute.name,
                       path: '',
-                      parent: MarriageCelebrationSecondStepRouterRoute.name,
+                      parent: MarriageCelebrationStepperRoute.name,
                       children: [
                         RouteConfig(
-                          WitnessRoute.name,
+                          FirstStepAttorneyRoute.name,
                           path: '',
-                          parent: SecondStepAtHeadquarterRoute.name,
+                          parent: MarriageCelebrationFirstStepRouterRoute.name,
+                        ),
+                        RouteConfig(
+                          FirstStepContractingPartyRoute.name,
+                          path: 'first-step-contracting-party-page',
+                          parent: MarriageCelebrationFirstStepRouterRoute.name,
+                        ),
+                      ],
+                    ),
+                    RouteConfig(
+                      MarriageCelebrationAgencyRoute.name,
+                      path: 'marriage-celebration-agency-page',
+                      parent: MarriageCelebrationStepperRoute.name,
+                    ),
+                    RouteConfig(
+                      MarriageCelebrationSecondStepRouterRoute.name,
+                      path: 'marriage-celebration-second-step-router-page',
+                      parent: MarriageCelebrationStepperRoute.name,
+                      children: [
+                        RouteConfig(
+                          SecondStepAtHeadquarterRoute.name,
+                          path: '',
+                          parent: MarriageCelebrationSecondStepRouterRoute.name,
+                          children: [
+                            RouteConfig(
+                              WitnessRoute.name,
+                              path: '',
+                              parent: SecondStepAtHeadquarterRoute.name,
+                            )
+                          ],
+                        ),
+                        RouteConfig(
+                          SecondStepOffSiteRoute.name,
+                          path: 'second-step-off-site-page',
+                          parent: MarriageCelebrationSecondStepRouterRoute.name,
+                        ),
+                      ],
+                    ),
+                    RouteConfig(
+                      MarriageCelebrationThirdStepRouterRoute.name,
+                      path: 'marriage-celebration-third-step-router-page',
+                      parent: MarriageCelebrationStepperRoute.name,
+                      children: [
+                        RouteConfig(
+                          ThirdStepContractingPartyRoute.name,
+                          path: '',
+                          parent: MarriageCelebrationThirdStepRouterRoute.name,
+                          children: [
+                            RouteConfig(
+                              ContractingPartyRoute.name,
+                              path: '',
+                              parent: ThirdStepContractingPartyRoute.name,
+                            )
+                          ],
                         )
                       ],
                     ),
                     RouteConfig(
-                      SecondStepOffSiteRoute.name,
-                      path: 'second-step-off-site-page',
-                      parent: MarriageCelebrationSecondStepRouterRoute.name,
+                      MarriageCelebrationFourthStepRouterRoute.name,
+                      path: 'marriage-celebration-fourth-step-router-page',
+                      parent: MarriageCelebrationStepperRoute.name,
                     ),
                   ],
-                ),
-                RouteConfig(
-                  MarriageCelebrationThirdStepRouterRoute.name,
-                  path: 'marriage-celebration-third-step-router-page',
-                  parent: MarriageCelebrationRouterRoute.name,
-                  children: [
-                    RouteConfig(
-                      ThirdStepContractingPartyRoute.name,
-                      path: '',
-                      parent: MarriageCelebrationThirdStepRouterRoute.name,
-                      children: [
-                        RouteConfig(
-                          ContractingPartyRoute.name,
-                          path: '',
-                          parent: ThirdStepContractingPartyRoute.name,
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                RouteConfig(
-                  MarriageCelebrationFourthStepRouterRoute.name,
-                  path: 'marriage-celebration-fourth-step-router-page',
-                  parent: MarriageCelebrationRouterRoute.name,
                 ),
               ],
-            ),
-            RouteConfig(
-              MarriageCelebrationPrincipalRoute.name,
-              path: 'marriage-celebration-principal-page',
-              parent: RootRouterRoute.name,
-            ),
-            RouteConfig(
-              RejectionStepMarriageCelebrationRoute.name,
-              path: 'rejection-step-marriage-celebration-page',
-              parent: RootRouterRoute.name,
             ),
             RouteConfig(
               ResidenceRegistrationRouterRoute.name,
               path: 'residence-registration-router-page',
               parent: RootRouterRoute.name,
-              guards: [authGuard],
+              meta: <String, dynamic>{'agreementType': 1},
+              guards: [
+                authGuard,
+                agreementGuard,
+              ],
               children: [
                 RouteConfig(
                   MainRouteResicenceRegistrationRoute.name,
@@ -975,16 +1048,15 @@ class _$AppRouter extends RootStackRouter {
               ChangeOfNameRouterRoute.name,
               path: 'change-of-name-router-page',
               parent: RootRouterRoute.name,
-              guards: [authGuard],
+              meta: <String, dynamic>{'agreementType': 0},
+              guards: [
+                authGuard,
+                agreementGuard,
+              ],
               children: [
                 RouteConfig(
-                  TermAndUsesConditionsRoute.name,
-                  path: '',
-                  parent: ChangeOfNameRouterRoute.name,
-                ),
-                RouteConfig(
                   ChangeOfNameFirstStepRoute.name,
-                  path: 'change-of-name-first-step-page',
+                  path: '',
                   parent: ChangeOfNameRouterRoute.name,
                 ),
                 RouteConfig(
@@ -1013,11 +1085,6 @@ class _$AppRouter extends RootStackRouter {
             RouteConfig(
               MyOrderRejectingRoute.name,
               path: 'my-order-rejecting-page',
-              parent: RootRouterRoute.name,
-            ),
-            RouteConfig(
-              SelectPaymentRoute.name,
-              path: 'select-payment-page',
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
@@ -1080,8 +1147,7 @@ class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
     required void Function(
       BuildContext,
       bool,
-    )
-        onLogin,
+    ) onLogin,
   }) : super(
           LoginRoute.name,
           path: '',
@@ -1345,75 +1411,78 @@ class SimpleCertificateRouterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [MarriageCelebrationRouterPage]
-class MarriageCelebrationRouterRoute extends PageRouteInfo<void> {
-  const MarriageCelebrationRouterRoute({List<PageRouteInfo>? children})
-      : super(
+class MarriageCelebrationRouterRoute
+    extends PageRouteInfo<MarriageCelebrationRouterRouteArgs> {
+  MarriageCelebrationRouterRoute({
+    Key? key,
+    bool showAgreement = true,
+    List<PageRouteInfo>? children,
+  }) : super(
           MarriageCelebrationRouterRoute.name,
           path: 'marriage-celebration-router-page',
+          args: MarriageCelebrationRouterRouteArgs(
+            key: key,
+            showAgreement: showAgreement,
+          ),
+          rawQueryParams: {'showAgreement': showAgreement},
           initialChildren: children,
         );
 
   static const String name = 'MarriageCelebrationRouterRoute';
 }
 
-/// generated route for
-/// [MarriageCelebrationPrincipalPage]
-class MarriageCelebrationPrincipalRoute extends PageRouteInfo<void> {
-  const MarriageCelebrationPrincipalRoute()
-      : super(
-          MarriageCelebrationPrincipalRoute.name,
-          path: 'marriage-celebration-principal-page',
-        );
-
-  static const String name = 'MarriageCelebrationPrincipalRoute';
-}
-
-/// generated route for
-/// [RejectionStepMarriageCelebrationPage]
-class RejectionStepMarriageCelebrationRoute
-    extends PageRouteInfo<RejectionStepMarriageCelebrationRouteArgs> {
-  RejectionStepMarriageCelebrationRoute({
-    Key? key,
-    required String marriageId,
-  }) : super(
-          RejectionStepMarriageCelebrationRoute.name,
-          path: 'rejection-step-marriage-celebration-page',
-          args: RejectionStepMarriageCelebrationRouteArgs(
-            key: key,
-            marriageId: marriageId,
-          ),
-        );
-
-  static const String name = 'RejectionStepMarriageCelebrationRoute';
-}
-
-class RejectionStepMarriageCelebrationRouteArgs {
-  const RejectionStepMarriageCelebrationRouteArgs({
+class MarriageCelebrationRouterRouteArgs {
+  const MarriageCelebrationRouterRouteArgs({
     this.key,
-    required this.marriageId,
+    this.showAgreement = true,
   });
 
   final Key? key;
 
-  final String marriageId;
+  final bool showAgreement;
 
   @override
   String toString() {
-    return 'RejectionStepMarriageCelebrationRouteArgs{key: $key, marriageId: $marriageId}';
+    return 'MarriageCelebrationRouterRouteArgs{key: $key, showAgreement: $showAgreement}';
   }
 }
 
 /// generated route for
 /// [ResidenceRegistrationRouterPage]
-class ResidenceRegistrationRouterRoute extends PageRouteInfo<void> {
-  const ResidenceRegistrationRouterRoute({List<PageRouteInfo>? children})
-      : super(
+class ResidenceRegistrationRouterRoute
+    extends PageRouteInfo<ResidenceRegistrationRouterRouteArgs> {
+  ResidenceRegistrationRouterRoute({
+    Key? key,
+    bool showAgreement = true,
+    List<PageRouteInfo>? children,
+  }) : super(
           ResidenceRegistrationRouterRoute.name,
           path: 'residence-registration-router-page',
+          args: ResidenceRegistrationRouterRouteArgs(
+            key: key,
+            showAgreement: showAgreement,
+          ),
+          rawQueryParams: {'showAgreement': showAgreement},
           initialChildren: children,
         );
 
   static const String name = 'ResidenceRegistrationRouterRoute';
+}
+
+class ResidenceRegistrationRouterRouteArgs {
+  const ResidenceRegistrationRouterRouteArgs({
+    this.key,
+    this.showAgreement = true,
+  });
+
+  final Key? key;
+
+  final bool showAgreement;
+
+  @override
+  String toString() {
+    return 'ResidenceRegistrationRouterRouteArgs{key: $key, showAgreement: $showAgreement}';
+  }
 }
 
 /// generated route for
@@ -1542,45 +1611,6 @@ class MyOrderRejectingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MyOrderRejectingRoute';
-}
-
-/// generated route for
-/// [SelectPaymentPage]
-class SelectPaymentRoute extends PageRouteInfo<SelectPaymentRouteArgs> {
-  SelectPaymentRoute({
-    Key? key,
-    required String requestNumber,
-    required double totalToPay,
-  }) : super(
-          SelectPaymentRoute.name,
-          path: 'select-payment-page',
-          args: SelectPaymentRouteArgs(
-            key: key,
-            requestNumber: requestNumber,
-            totalToPay: totalToPay,
-          ),
-        );
-
-  static const String name = 'SelectPaymentRoute';
-}
-
-class SelectPaymentRouteArgs {
-  const SelectPaymentRouteArgs({
-    this.key,
-    required this.requestNumber,
-    required this.totalToPay,
-  });
-
-  final Key? key;
-
-  final String requestNumber;
-
-  final double totalToPay;
-
-  @override
-  String toString() {
-    return 'SelectPaymentRouteArgs{key: $key, requestNumber: $requestNumber, totalToPay: $totalToPay}';
-  }
 }
 
 /// generated route for
@@ -2069,7 +2099,7 @@ class SimpleCertificateFirstStepRouterRouteArgs {
 class SimpleCertificateSecondStepRoute
     extends PageRouteInfo<SimpleCertificateSecondStepRouteArgs> {
   SimpleCertificateSecondStepRoute({
-    required SimpleCertificateResponse simpleCertificateResponse,
+    required SimpleCertificateResponseModel simpleCertificateResponse,
     required TypeServiceModel model,
     Key? key,
   }) : super(
@@ -2092,7 +2122,7 @@ class SimpleCertificateSecondStepRouteArgs {
     this.key,
   });
 
-  final SimpleCertificateResponse simpleCertificateResponse;
+  final SimpleCertificateResponseModel simpleCertificateResponse;
 
   final TypeServiceModel model;
 
@@ -2175,42 +2205,177 @@ class SimpleCertificateFirstStepPersonalRouteArgs {
 }
 
 /// generated route for
-/// [MarriageCelebrationFirstStepRouterPage]
-class MarriageCelebrationFirstStepRouterRoute extends PageRouteInfo<void> {
-  const MarriageCelebrationFirstStepRouterRoute({List<PageRouteInfo>? children})
+/// [MarriageCelebrationPrincipalPage]
+class MarriageCelebrationPrincipalRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationPrincipalRoute()
       : super(
+          MarriageCelebrationPrincipalRoute.name,
+          path: '',
+        );
+
+  static const String name = 'MarriageCelebrationPrincipalRoute';
+}
+
+/// generated route for
+/// [RejectionStepMarriageCelebrationPage]
+class RejectionStepMarriageCelebrationRoute
+    extends PageRouteInfo<RejectionStepMarriageCelebrationRouteArgs> {
+  RejectionStepMarriageCelebrationRoute({
+    Key? key,
+    required String marriageId,
+  }) : super(
+          RejectionStepMarriageCelebrationRoute.name,
+          path: 'rejection-step-marriage-celebration-page',
+          args: RejectionStepMarriageCelebrationRouteArgs(
+            key: key,
+            marriageId: marriageId,
+          ),
+        );
+
+  static const String name = 'RejectionStepMarriageCelebrationRoute';
+}
+
+class RejectionStepMarriageCelebrationRouteArgs {
+  const RejectionStepMarriageCelebrationRouteArgs({
+    this.key,
+    required this.marriageId,
+  });
+
+  final Key? key;
+
+  final String marriageId;
+
+  @override
+  String toString() {
+    return 'RejectionStepMarriageCelebrationRouteArgs{key: $key, marriageId: $marriageId}';
+  }
+}
+
+/// generated route for
+/// [MarriageCelebrationStepperPage]
+class MarriageCelebrationStepperRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationStepperRoute({List<PageRouteInfo>? children})
+      : super(
+          MarriageCelebrationStepperRoute.name,
+          path: 'marriage-celebration-stepper-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'MarriageCelebrationStepperRoute';
+}
+
+/// generated route for
+/// [MarriageCelebrationFirstStepRouterPage]
+class MarriageCelebrationFirstStepRouterRoute
+    extends PageRouteInfo<MarriageCelebrationFirstStepRouterRouteArgs> {
+  MarriageCelebrationFirstStepRouterRoute({
+    Key? key,
+    Crud operation = Crud.create,
+    String? marriageId,
+    List<PageRouteInfo>? children,
+  }) : super(
           MarriageCelebrationFirstStepRouterRoute.name,
           path: '',
+          args: MarriageCelebrationFirstStepRouterRouteArgs(
+            key: key,
+            operation: operation,
+            marriageId: marriageId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'MarriageCelebrationFirstStepRouterRoute';
 }
 
+class MarriageCelebrationFirstStepRouterRouteArgs {
+  const MarriageCelebrationFirstStepRouterRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+    this.marriageId,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  final String? marriageId;
+
+  @override
+  String toString() {
+    return 'MarriageCelebrationFirstStepRouterRouteArgs{key: $key, operation: $operation, marriageId: $marriageId}';
+  }
+}
+
 /// generated route for
 /// [MarriageCelebrationAgencyPage]
-class MarriageCelebrationAgencyRoute extends PageRouteInfo<void> {
-  const MarriageCelebrationAgencyRoute()
-      : super(
+class MarriageCelebrationAgencyRoute
+    extends PageRouteInfo<MarriageCelebrationAgencyRouteArgs> {
+  MarriageCelebrationAgencyRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
           MarriageCelebrationAgencyRoute.name,
           path: 'marriage-celebration-agency-page',
+          args: MarriageCelebrationAgencyRouteArgs(
+            key: key,
+            operation: operation,
+          ),
         );
 
   static const String name = 'MarriageCelebrationAgencyRoute';
 }
 
+class MarriageCelebrationAgencyRouteArgs {
+  const MarriageCelebrationAgencyRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'MarriageCelebrationAgencyRouteArgs{key: $key, operation: $operation}';
+  }
+}
+
 /// generated route for
 /// [MarriageCelebrationSecondStepRouterPage]
-class MarriageCelebrationSecondStepRouterRoute extends PageRouteInfo<void> {
-  const MarriageCelebrationSecondStepRouterRoute(
-      {List<PageRouteInfo>? children})
-      : super(
+class MarriageCelebrationSecondStepRouterRoute
+    extends PageRouteInfo<MarriageCelebrationSecondStepRouterRouteArgs> {
+  MarriageCelebrationSecondStepRouterRoute({
+    Key? key,
+    Crud operation = Crud.create,
+    List<PageRouteInfo>? children,
+  }) : super(
           MarriageCelebrationSecondStepRouterRoute.name,
           path: 'marriage-celebration-second-step-router-page',
+          args: MarriageCelebrationSecondStepRouterRouteArgs(
+            key: key,
+            operation: operation,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'MarriageCelebrationSecondStepRouterRoute';
+}
+
+class MarriageCelebrationSecondStepRouterRouteArgs {
+  const MarriageCelebrationSecondStepRouterRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'MarriageCelebrationSecondStepRouterRouteArgs{key: $key, operation: $operation}';
+  }
 }
 
 /// generated route for
@@ -2263,51 +2428,142 @@ class MarriageCelebrationFourthStepRouterRouteArgs {
 
 /// generated route for
 /// [FirstStepAttorneyPage]
-class FirstStepAttorneyRoute extends PageRouteInfo<void> {
-  const FirstStepAttorneyRoute()
-      : super(
+class FirstStepAttorneyRoute extends PageRouteInfo<FirstStepAttorneyRouteArgs> {
+  FirstStepAttorneyRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
           FirstStepAttorneyRoute.name,
           path: '',
+          args: FirstStepAttorneyRouteArgs(
+            key: key,
+            operation: operation,
+          ),
         );
 
   static const String name = 'FirstStepAttorneyRoute';
 }
 
+class FirstStepAttorneyRouteArgs {
+  const FirstStepAttorneyRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'FirstStepAttorneyRouteArgs{key: $key, operation: $operation}';
+  }
+}
+
 /// generated route for
 /// [FirstStepContractingPartyPage]
-class FirstStepContractingPartyRoute extends PageRouteInfo<void> {
-  const FirstStepContractingPartyRoute()
-      : super(
+class FirstStepContractingPartyRoute
+    extends PageRouteInfo<FirstStepContractingPartyRouteArgs> {
+  FirstStepContractingPartyRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
           FirstStepContractingPartyRoute.name,
           path: 'first-step-contracting-party-page',
+          args: FirstStepContractingPartyRouteArgs(
+            key: key,
+            operation: operation,
+          ),
         );
 
   static const String name = 'FirstStepContractingPartyRoute';
 }
 
+class FirstStepContractingPartyRouteArgs {
+  const FirstStepContractingPartyRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'FirstStepContractingPartyRouteArgs{key: $key, operation: $operation}';
+  }
+}
+
 /// generated route for
 /// [SecondStepAtHeadquarterPage]
-class SecondStepAtHeadquarterRoute extends PageRouteInfo<void> {
-  const SecondStepAtHeadquarterRoute({List<PageRouteInfo>? children})
-      : super(
+class SecondStepAtHeadquarterRoute
+    extends PageRouteInfo<SecondStepAtHeadquarterRouteArgs> {
+  SecondStepAtHeadquarterRoute({
+    Key? key,
+    required Crud operation,
+    List<PageRouteInfo>? children,
+  }) : super(
           SecondStepAtHeadquarterRoute.name,
           path: '',
+          args: SecondStepAtHeadquarterRouteArgs(
+            key: key,
+            operation: operation,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'SecondStepAtHeadquarterRoute';
 }
 
+class SecondStepAtHeadquarterRouteArgs {
+  const SecondStepAtHeadquarterRouteArgs({
+    this.key,
+    required this.operation,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'SecondStepAtHeadquarterRouteArgs{key: $key, operation: $operation}';
+  }
+}
+
 /// generated route for
 /// [SecondStepOffSitePage]
-class SecondStepOffSiteRoute extends PageRouteInfo<void> {
-  const SecondStepOffSiteRoute()
-      : super(
+class SecondStepOffSiteRoute extends PageRouteInfo<SecondStepOffSiteRouteArgs> {
+  SecondStepOffSiteRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
           SecondStepOffSiteRoute.name,
           path: 'second-step-off-site-page',
+          args: SecondStepOffSiteRouteArgs(
+            key: key,
+            operation: operation,
+          ),
         );
 
   static const String name = 'SecondStepOffSiteRoute';
+}
+
+class SecondStepOffSiteRouteArgs {
+  const SecondStepOffSiteRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'SecondStepOffSiteRouteArgs{key: $key, operation: $operation}';
+  }
 }
 
 /// generated route for
@@ -2316,12 +2572,14 @@ class WitnessRoute extends PageRouteInfo<WitnessRouteArgs> {
   WitnessRoute({
     Key? key,
     required int indexWitness,
+    Crud operation = Crud.create,
   }) : super(
           WitnessRoute.name,
           path: '',
           args: WitnessRouteArgs(
             key: key,
             indexWitness: indexWitness,
+            operation: operation,
           ),
         );
 
@@ -2332,29 +2590,56 @@ class WitnessRouteArgs {
   const WitnessRouteArgs({
     this.key,
     required this.indexWitness,
+    this.operation = Crud.create,
   });
 
   final Key? key;
 
   final int indexWitness;
 
+  final Crud operation;
+
   @override
   String toString() {
-    return 'WitnessRouteArgs{key: $key, indexWitness: $indexWitness}';
+    return 'WitnessRouteArgs{key: $key, indexWitness: $indexWitness, operation: $operation}';
   }
 }
 
 /// generated route for
 /// [ThirdStepContractingPartyPage]
-class ThirdStepContractingPartyRoute extends PageRouteInfo<void> {
-  const ThirdStepContractingPartyRoute({List<PageRouteInfo>? children})
-      : super(
+class ThirdStepContractingPartyRoute
+    extends PageRouteInfo<ThirdStepContractingPartyRouteArgs> {
+  ThirdStepContractingPartyRoute({
+    Key? key,
+    required Crud operation,
+    List<PageRouteInfo>? children,
+  }) : super(
           ThirdStepContractingPartyRoute.name,
           path: '',
+          args: ThirdStepContractingPartyRouteArgs(
+            key: key,
+            operation: operation,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ThirdStepContractingPartyRoute';
+}
+
+class ThirdStepContractingPartyRouteArgs {
+  const ThirdStepContractingPartyRouteArgs({
+    this.key,
+    required this.operation,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'ThirdStepContractingPartyRouteArgs{key: $key, operation: $operation}';
+  }
 }
 
 /// generated route for
@@ -2363,12 +2648,14 @@ class ContractingPartyRoute extends PageRouteInfo<ContractingPartyRouteArgs> {
   ContractingPartyRoute({
     Key? key,
     required int indexContractingParty,
+    Crud operation = Crud.create,
   }) : super(
           ContractingPartyRoute.name,
           path: '',
           args: ContractingPartyRouteArgs(
             key: key,
             indexContractingParty: indexContractingParty,
+            operation: operation,
           ),
         );
 
@@ -2379,15 +2666,18 @@ class ContractingPartyRouteArgs {
   const ContractingPartyRouteArgs({
     this.key,
     required this.indexContractingParty,
+    this.operation = Crud.create,
   });
 
   final Key? key;
 
   final int indexContractingParty;
 
+  final Crud operation;
+
   @override
   String toString() {
-    return 'ContractingPartyRouteArgs{key: $key, indexContractingParty: $indexContractingParty}';
+    return 'ContractingPartyRouteArgs{key: $key, indexContractingParty: $indexContractingParty, operation: $operation}';
   }
 }
 
@@ -2436,12 +2726,14 @@ class FirstStepResidenceRoute
   FirstStepResidenceRoute({
     Key? key,
     Crud operation = Crud.create,
+    int? residenceIndex,
   }) : super(
           FirstStepResidenceRoute.name,
           path: '',
           args: FirstStepResidenceRouteArgs(
             key: key,
             operation: operation,
+            residenceIndex: residenceIndex,
           ),
         );
 
@@ -2452,15 +2744,18 @@ class FirstStepResidenceRouteArgs {
   const FirstStepResidenceRouteArgs({
     this.key,
     this.operation = Crud.create,
+    this.residenceIndex,
   });
 
   final Key? key;
 
   final Crud operation;
 
+  final int? residenceIndex;
+
   @override
   String toString() {
-    return 'FirstStepResidenceRouteArgs{key: $key, operation: $operation}';
+    return 'FirstStepResidenceRouteArgs{key: $key, operation: $operation, residenceIndex: $residenceIndex}';
   }
 }
 
@@ -2471,12 +2766,14 @@ class SecondStepResidenceRoute
   SecondStepResidenceRoute({
     Key? key,
     Crud operation = Crud.create,
+    int? residenceIndex,
   }) : super(
           SecondStepResidenceRoute.name,
           path: 'second-step-residence-page',
           args: SecondStepResidenceRouteArgs(
             key: key,
             operation: operation,
+            residenceIndex: residenceIndex,
           ),
         );
 
@@ -2487,15 +2784,18 @@ class SecondStepResidenceRouteArgs {
   const SecondStepResidenceRouteArgs({
     this.key,
     this.operation = Crud.create,
+    this.residenceIndex,
   });
 
   final Key? key;
 
   final Crud operation;
 
+  final int? residenceIndex;
+
   @override
   String toString() {
-    return 'SecondStepResidenceRouteArgs{key: $key, operation: $operation}';
+    return 'SecondStepResidenceRouteArgs{key: $key, operation: $operation, residenceIndex: $residenceIndex}';
   }
 }
 
@@ -2505,13 +2805,13 @@ class MainRouteDependentRoute
     extends PageRouteInfo<MainRouteDependentRouteArgs> {
   MainRouteDependentRoute({
     Key? key,
-    required Residential residential,
+    required int residentialIndex,
   }) : super(
           MainRouteDependentRoute.name,
           path: '',
           args: MainRouteDependentRouteArgs(
             key: key,
-            residential: residential,
+            residentialIndex: residentialIndex,
           ),
         );
 
@@ -2521,16 +2821,16 @@ class MainRouteDependentRoute
 class MainRouteDependentRouteArgs {
   const MainRouteDependentRouteArgs({
     this.key,
-    required this.residential,
+    required this.residentialIndex,
   });
 
   final Key? key;
 
-  final Residential residential;
+  final int residentialIndex;
 
   @override
   String toString() {
-    return 'MainRouteDependentRouteArgs{key: $key, residential: $residential}';
+    return 'MainRouteDependentRouteArgs{key: $key, residentialIndex: $residentialIndex}';
   }
 }
 
@@ -2542,7 +2842,7 @@ class FirstStepDependentRoute
     Key? key,
     Crud operation = Crud.create,
     Dependent? dependent,
-    required String residenceId,
+    required int residentialIndex,
   }) : super(
           FirstStepDependentRoute.name,
           path: 'first-step-dependent-page',
@@ -2550,7 +2850,7 @@ class FirstStepDependentRoute
             key: key,
             operation: operation,
             dependent: dependent,
-            residenceId: residenceId,
+            residentialIndex: residentialIndex,
           ),
         );
 
@@ -2562,7 +2862,7 @@ class FirstStepDependentRouteArgs {
     this.key,
     this.operation = Crud.create,
     this.dependent,
-    required this.residenceId,
+    required this.residentialIndex,
   });
 
   final Key? key;
@@ -2571,46 +2871,11 @@ class FirstStepDependentRouteArgs {
 
   final Dependent? dependent;
 
-  final String residenceId;
+  final int residentialIndex;
 
   @override
   String toString() {
-    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent, residenceId: $residenceId}';
-  }
-}
-
-/// generated route for
-/// [TermAndUsesConditionsPage]
-class TermAndUsesConditionsRoute
-    extends PageRouteInfo<TermAndUsesConditionsRouteArgs> {
-  TermAndUsesConditionsRoute({
-    Key? key,
-    required TypeServiceModel typeService,
-  }) : super(
-          TermAndUsesConditionsRoute.name,
-          path: '',
-          args: TermAndUsesConditionsRouteArgs(
-            key: key,
-            typeService: typeService,
-          ),
-        );
-
-  static const String name = 'TermAndUsesConditionsRoute';
-}
-
-class TermAndUsesConditionsRouteArgs {
-  const TermAndUsesConditionsRouteArgs({
-    this.key,
-    required this.typeService,
-  });
-
-  final Key? key;
-
-  final TypeServiceModel typeService;
-
-  @override
-  String toString() {
-    return 'TermAndUsesConditionsRouteArgs{key: $key, typeService: $typeService}';
+    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent, residentialIndex: $residentialIndex}';
   }
 }
 
@@ -2623,7 +2888,7 @@ class ChangeOfNameFirstStepRoute
     required TypeServiceModel typeService,
   }) : super(
           ChangeOfNameFirstStepRoute.name,
-          path: 'change-of-name-first-step-page',
+          path: '',
           args: ChangeOfNameFirstStepRouteArgs(
             key: key,
             typeService: typeService,

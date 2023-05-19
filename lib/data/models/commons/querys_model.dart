@@ -1,4 +1,4 @@
-import 'package:registro_civil_apk/data/enum/sort/sort_type_enum.dart';
+import 'package:registro_civil_apk/data/enum/sort/sort_type.dart';
 
 class QueryTypeService {
   QueryTypeService({

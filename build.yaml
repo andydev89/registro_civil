@@ -1,0 +1,11 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        options:
+          generic_argument_factories: true
+
+global_options:
+  freezed:freezed:
+    runs_before:
+      - isar_generator:isar_generator

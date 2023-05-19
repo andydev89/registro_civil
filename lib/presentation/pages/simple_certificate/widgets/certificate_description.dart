@@ -1,12 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:registro_civil_apk/data/const/const.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_button.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_title.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class CertificateDescription extends StatelessWidget {
   const CertificateDescription({

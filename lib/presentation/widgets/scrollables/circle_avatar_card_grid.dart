@@ -1,14 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:registro_civil_apk/data/enum/services/status_enum.dart';
+import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
 import 'package:registro_civil_apk/data/models/responses/basic_response_model.dart';
 import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
 import 'package:registro_civil_apk/data/utils/methods.dart';
 import 'package:registro_civil_apk/presentation/pages/home/utils/service_utils.dart';
 import 'package:registro_civil_apk/presentation/pages/simple_certificate/widgets/certificate_description.dart';
 import 'package:registro_civil_apk/presentation/widgets/circle_avatar_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs.dart';
+import 'package:registro_civil_apk/presentation/widgets/dialogs/dialogs_methods.dart';
 import 'package:registro_civil_apk/presentation/widgets/list/paged_grid_view_widget.dart';
 
 class CircleAvatarCardGrid extends ConsumerWidget {
@@ -18,7 +18,7 @@ class CircleAvatarCardGrid extends ConsumerWidget {
     this.crossAxisCount = 2,
     this.firstElements = const [],
     this.totalPages,
-    this.firstPage=0,
+    this.firstPage = 0,
   });
   final Future<ResponseModelPagination<List<TypeServiceModel>>> Function(int)?
       fetch;
@@ -62,7 +62,7 @@ class CircleAvatarCardGrid extends ConsumerWidget {
           },
         ),
         title: item.name,
-        onPressedCheck: () => item.state == Status.active
+        onPressedCheck: () => item.state == StatusType.active
             ? context.navigateTo(getRoute(item))
             : () {},
         onPressedView: () => showContentDialog(

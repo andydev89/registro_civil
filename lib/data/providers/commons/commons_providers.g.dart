@@ -6,12 +6,12 @@ part of 'commons_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$provincesHash() => r'fb8d719d5f01d727ff4456c5ab2653fe199b4bc1';
+String _$provincesHash() => r'15e0651ce0a4fe6e0b3cf308565cd855063b23a4';
 
 /// See also [provinces].
 @ProviderFor(provinces)
-final provincesProvider =
-    AutoDisposeFutureProvider<Result<List<LocationModel>, StatusCode>>.internal(
+final provincesProvider = AutoDisposeFutureProvider<
+    Result<List<LocationModel>, StatusCodeType>>.internal(
   provinces,
   name: r'provincesProvider',
   debugGetCreateSourceHash:
@@ -21,13 +21,13 @@ final provincesProvider =
 );
 
 typedef ProvincesRef
-    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCode>>;
-String _$cantonHash() => r'ce5df292e20aa3a619f466d1ad73267bce2180fa';
+    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCodeType>>;
+String _$cantonHash() => r'23e9795ac06945efd1c0c39f026b05d80bb9d240';
 
 /// See also [canton].
 @ProviderFor(canton)
-final cantonProvider =
-    AutoDisposeFutureProvider<Result<List<LocationModel>, StatusCode>>.internal(
+final cantonProvider = AutoDisposeFutureProvider<
+    Result<List<LocationModel>, StatusCodeType>>.internal(
   canton,
   name: r'cantonProvider',
   debugGetCreateSourceHash:
@@ -37,13 +37,13 @@ final cantonProvider =
 );
 
 typedef CantonRef
-    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCode>>;
-String _$parroquiaHash() => r'e3a0b940986beb2b340deb2cd9067e76c69214e8';
+    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCodeType>>;
+String _$parroquiaHash() => r'a53fb707014b76a2ac542eb7e79bd04e91c2aa87';
 
 /// See also [parroquia].
 @ProviderFor(parroquia)
-final parroquiaProvider =
-    AutoDisposeFutureProvider<Result<List<LocationModel>, StatusCode>>.internal(
+final parroquiaProvider = AutoDisposeFutureProvider<
+    Result<List<LocationModel>, StatusCodeType>>.internal(
   parroquia,
   name: r'parroquiaProvider',
   debugGetCreateSourceHash:
@@ -53,13 +53,13 @@ final parroquiaProvider =
 );
 
 typedef ParroquiaRef
-    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCode>>;
-String _$agenciesHash() => r'ec81c4e5a5ed483d2011ce3c6398c2f9b949c1d8';
+    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCodeType>>;
+String _$agenciesHash() => r'036a9c94ad1a6e2916bb1ae462efb77e73cf1136';
 
 /// See also [agencies].
 @ProviderFor(agencies)
-final agenciesProvider =
-    AutoDisposeFutureProvider<Result<List<AgencyModel>, StatusCode>>.internal(
+final agenciesProvider = AutoDisposeFutureProvider<
+    Result<List<AgencyModel>, StatusCodeType>>.internal(
   agencies,
   name: r'agenciesProvider',
   debugGetCreateSourceHash:
@@ -69,9 +69,9 @@ final agenciesProvider =
 );
 
 typedef AgenciesRef
-    = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
+    = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCodeType>>;
 String _$agenciesByProvinceHash() =>
-    r'f89c498948bc9d1ba4ef86acce27e40179117e40';
+    r'c8b42194b70ca72be93afd02601eb069f7f173b3';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -95,7 +95,7 @@ class _SystemHash {
 }
 
 typedef AgenciesByProvinceRef
-    = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
+    = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCodeType>>;
 
 /// See also [agenciesByProvince].
 @ProviderFor(agenciesByProvince)
@@ -103,7 +103,7 @@ const agenciesByProvinceProvider = AgenciesByProvinceFamily();
 
 /// See also [agenciesByProvince].
 class AgenciesByProvinceFamily
-    extends Family<AsyncValue<Result<List<AgencyModel>, StatusCode>>> {
+    extends Family<AsyncValue<Result<List<AgencyModel>, StatusCodeType>>> {
   /// See also [agenciesByProvince].
   const AgenciesByProvinceFamily();
 
@@ -141,8 +141,8 @@ class AgenciesByProvinceFamily
 }
 
 /// See also [agenciesByProvince].
-class AgenciesByProvinceProvider
-    extends AutoDisposeFutureProvider<Result<List<AgencyModel>, StatusCode>> {
+class AgenciesByProvinceProvider extends AutoDisposeFutureProvider<
+    Result<List<AgencyModel>, StatusCodeType>> {
   /// See also [agenciesByProvince].
   AgenciesByProvinceProvider({
     required this.provinceId,
@@ -179,9 +179,9 @@ class AgenciesByProvinceProvider
   }
 }
 
-String _$agenciesByCantonHash() => r'9a2b832724d1bb3ca37ca6704275b2fe41534670';
+String _$agenciesByCantonHash() => r'b32e78e18dc4df0991c9ad1143a13a18ba7bac56';
 typedef AgenciesByCantonRef
-    = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCode>>;
+    = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCodeType>>;
 
 /// See also [agenciesByCanton].
 @ProviderFor(agenciesByCanton)
@@ -189,7 +189,7 @@ const agenciesByCantonProvider = AgenciesByCantonFamily();
 
 /// See also [agenciesByCanton].
 class AgenciesByCantonFamily
-    extends Family<AsyncValue<Result<List<AgencyModel>, StatusCode>>> {
+    extends Family<AsyncValue<Result<List<AgencyModel>, StatusCodeType>>> {
   /// See also [agenciesByCanton].
   const AgenciesByCantonFamily();
 
@@ -227,8 +227,8 @@ class AgenciesByCantonFamily
 }
 
 /// See also [agenciesByCanton].
-class AgenciesByCantonProvider
-    extends AutoDisposeFutureProvider<Result<List<AgencyModel>, StatusCode>> {
+class AgenciesByCantonProvider extends AutoDisposeFutureProvider<
+    Result<List<AgencyModel>, StatusCodeType>> {
   /// See also [agenciesByCanton].
   AgenciesByCantonProvider({
     required this.cantonId,
@@ -264,9 +264,9 @@ class AgenciesByCantonProvider
   }
 }
 
-String _$locationByParentHash() => r'0a48e2ed993237772bf26ea779965b5b52d04674';
+String _$locationByParentHash() => r'def306b0726f4f133f93c38b3f3192ae054432a0';
 typedef LocationByParentRef
-    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCode>>;
+    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCodeType>>;
 
 /// See also [locationByParent].
 @ProviderFor(locationByParent)
@@ -274,7 +274,7 @@ const locationByParentProvider = LocationByParentFamily();
 
 /// See also [locationByParent].
 class LocationByParentFamily
-    extends Family<AsyncValue<Result<List<LocationModel>, StatusCode>>> {
+    extends Family<AsyncValue<Result<List<LocationModel>, StatusCodeType>>> {
   /// See also [locationByParent].
   const LocationByParentFamily();
 
@@ -312,8 +312,8 @@ class LocationByParentFamily
 }
 
 /// See also [locationByParent].
-class LocationByParentProvider
-    extends AutoDisposeFutureProvider<Result<List<LocationModel>, StatusCode>> {
+class LocationByParentProvider extends AutoDisposeFutureProvider<
+    Result<List<LocationModel>, StatusCodeType>> {
   /// See also [locationByParent].
   LocationByParentProvider({
     required this.parentId,
@@ -349,9 +349,9 @@ class LocationByParentProvider
   }
 }
 
-String _$servicesHash() => r'3b3e30b328b9d103aa664002930f3d639aa4cbdc';
-typedef ServicesRef
-    = AutoDisposeFutureProviderRef<Result<List<TypeServiceModel>, StatusCode>>;
+String _$servicesHash() => r'184637a77f15dd0b017de579f1a04117dc764984';
+typedef ServicesRef = AutoDisposeFutureProviderRef<
+    Result<List<TypeServiceModel>, StatusCodeType>>;
 
 /// See also [services].
 @ProviderFor(services)
@@ -359,7 +359,7 @@ const servicesProvider = ServicesFamily();
 
 /// See also [services].
 class ServicesFamily
-    extends Family<AsyncValue<Result<List<TypeServiceModel>, StatusCode>>> {
+    extends Family<AsyncValue<Result<List<TypeServiceModel>, StatusCodeType>>> {
   /// See also [services].
   const ServicesFamily();
 
@@ -398,7 +398,7 @@ class ServicesFamily
 
 /// See also [services].
 class ServicesProvider extends AutoDisposeFutureProvider<
-    Result<List<TypeServiceModel>, StatusCode>> {
+    Result<List<TypeServiceModel>, StatusCodeType>> {
   /// See also [services].
   ServicesProvider({
     this.bookable,

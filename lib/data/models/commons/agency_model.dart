@@ -22,6 +22,22 @@ class AgencyModel extends Equatable implements Translatable {
     this.longitude,
   });
 
+  factory AgencyModel.fromLocationModel(LocationModel locationModel) {
+    return AgencyModel(
+      id: locationModel.id,
+      name: locationModel.name,
+      description: '',
+      country: locationModel,
+      province: locationModel,
+      canton: locationModel,
+      parroquia: locationModel,
+      region: '',
+      latitude: '',
+      longitude: '',
+      state: '',
+    );
+  }
+
   factory AgencyModel.fromJson(Map<String, dynamic> json) =>
       _$AgencyModelFromJson(json);
 
@@ -41,6 +57,10 @@ class AgencyModel extends Equatable implements Translatable {
   double? get lon => longitude != null ? double.tryParse(longitude!) : null;
 
   Map<String, dynamic> toJson() => _$AgencyModelToJson(this);
+
+  static String? agencyToJson(AgencyModel? agency) {
+    return agency?.id;
+  }
 
   @override
   String translate(BuildContext context) => name;
