@@ -46,8 +46,9 @@ class _ContractingPartyPageState extends ConsumerState<ContractingPartyPage> {
     model = ref.read(marriageCelebrationProvider);
     isCP = model.requestOwnerType == MarriageCelebrationType.contractingParty;
     final oldPartner1 = ref.read(partnersProvider(0));
-    partner1 =
-        !isCP ? oldPartner1 : oldPartner1.updateFromWitness(model.firstWitness);
+    partner1 = !isCP
+        ? oldPartner1
+        : oldPartner1.updateFromRequestOwner(model.requestOwner);
     partner2 = ref.read(partnersProvider(1));
   }
 

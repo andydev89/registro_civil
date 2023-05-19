@@ -4,7 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/enum/marriage_celebration/nui_type.dart';
+import 'package:registro_civil_apk/data/models/auth/register_model.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
+import 'package:registro_civil_apk/data/providers/auth/auth_providers.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -25,8 +27,10 @@ class FirstStepAttorneyPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final provider = ref.watch(marriageCelebrationProvider);
+    final me = ref.watch(meProvider).value ?? MeModel();
     return RequestOwnerFormBuilder(
-      model: provider.requestOwner,
+      model:
+          operation.isCreate ? RequestOwner.fromMe(me) : provider.requestOwner,
       initState: (context, formModel) {
         if (operation.isCreate) {
           formModel.nuiControl.setValidators(

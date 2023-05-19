@@ -299,7 +299,7 @@ class MarriageByIdProvider
 }
 
 String _$marriageCelebrationHash() =>
-    r'2e7d4a908540d9f98cf906aceab28aa704ad4464';
+    r'822a0529c7b802cfa31c7d2676d71b2b80eff906';
 
 /// See also [MarriageCelebration].
 @ProviderFor(MarriageCelebration)

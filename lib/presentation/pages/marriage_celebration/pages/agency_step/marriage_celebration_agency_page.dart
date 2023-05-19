@@ -30,8 +30,9 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
       initState: (context, formModel) {
         if (operation.isRead) {
           formModel
-            ..agencyControl.value =
-                AgencyModel.fromLocationModel(marriage.agency!)
+            ..agencyControl.value = AgencyModel.fromLocationModel(
+              marriage.agency!,
+            )
             ..provinceControl.value = marriage.province;
         }
       },
@@ -47,6 +48,8 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
                   readOnly: operation.isRead,
                   formControl: formModel.provinceControl,
                   label: l10n.provincia,
+                  initialValue: (data) => data?.firstWhere(
+                      (element) => element.id == marriage.province?.id,),
                   provider: provincesProvider,
                   onChanged: (p0) => formModel.agencyControl.value = null,
                 ),
@@ -57,6 +60,8 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
                     init: operation.isRead,
                     formControl: formModel.agencyControl,
                     label: l10n.agencia,
+                    initialValue: (data) => data?.firstWhere(
+                        (element) => element.id == marriage.agency?.id,),
                     provider: AgenciesByProvinceProvider(
                       provinceId: formModel.provinceControl.value?.id ?? '',
                     ),
