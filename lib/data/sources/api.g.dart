@@ -409,8 +409,7 @@ class _Api implements Api {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(model.toJson());
+    final _data = model;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'POST',
@@ -563,8 +562,7 @@ class _Api implements Api {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(model.toJson());
+    final _data = model;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'PUT',
@@ -650,8 +648,7 @@ class _Api implements Api {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(model.toJson());
+    final _data = model;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'POST',
@@ -1185,8 +1182,7 @@ class _Api implements Api {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(changeOfNameModel.toJson());
+    final _data = changeOfNameModel;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'POST',
@@ -1213,8 +1209,7 @@ class _Api implements Api {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(changeOfNamePaymentModel.toJson());
+    final _data = changeOfNamePaymentModel;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'POST',

@@ -122,22 +122,22 @@ class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
             builder: (_, form, __) {
               return PrimaryAsyncButton(
                 title: l10n.siguiente,
-                onPressed: form.form.valid && !documents.isLoading
-                    ? () => ref
-                        .read(marriageUpdateProvider.notifier)
-                        .updateMarriage(form.model.copyWith(id: marriageId))
-                        .when(
-                          ok: (_) {
-                            context.navigateBack();
-                            ref.invalidate(marriagesProvider());
-                            showAlert(l10n.documentosSubCor, TypeAlert.success);
-                          },
-                          err: (err) => showAlert(
-                            err.translate(context),
-                            TypeAlert.error,
-                          ),
-                        )
-                    : null,
+                // onPressed: form.form.valid && !documents.isLoading
+                //     ? () => ref
+                //         .read(marriageUpdateProvider.notifier)
+                //         .updateMarriage(form.model.copyWith(id: marriageId))
+                //         .when(
+                //           ok: (_) {
+                //             context.navigateBack();
+                //             ref.invalidate(marriagesProvider());
+                //             showAlert(l10n.documentosSubCor, TypeAlert.success);
+                //           },
+                //           err: (err) => showAlert(
+                //             err.translate(context),
+                //             TypeAlert.error,
+                //           ),
+                //         )
+                //     : null,
               );
             },
           ).symmetricPadding(10, 30),

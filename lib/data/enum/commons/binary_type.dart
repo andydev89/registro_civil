@@ -15,9 +15,18 @@ enum Binary implements Translatable {
     return binary == Binary.yes;
   }
 
+  static bool? toJsonNull(Binary? binary) {
+    return binary?.toBool;
+  }
+
   // ignore: avoid_positional_boolean_parameters
   static Binary fromJson(bool json) {
     return json ? Binary.yes : Binary.no;
+  }
+
+  // ignore: avoid_positional_boolean_parameters
+  static Binary? fromJsonNull(bool? json) {
+    return json ?? false ? Binary.yes : Binary.no;
   }
 
   // static bool? toJsonNull(Binary binary) {

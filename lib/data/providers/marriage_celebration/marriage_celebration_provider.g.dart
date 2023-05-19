@@ -410,7 +410,7 @@ class WitnesssProvider
   }
 }
 
-String _$partnersHash() => r'f858249fe4115c18a9b17862a1fdae91c7b5bb26';
+String _$partnersHash() => r'b2c43ea6643e7d37c89c2bf107e60e1862955bca';
 
 abstract class _$Partners extends BuildlessAutoDisposeNotifier<Partner> {
   late final int indexPartner;
@@ -505,7 +505,7 @@ class PartnersProvider
   }
 }
 
-String _$marriageHash() => r'dc5cf8ad3fc4e408deeda7cd918dd8ab88cf6c03';
+String _$marriageHash() => r'edc236fcd8a25612c3c62c945f1577bb5c1ec8c9';
 
 /// See also [Marriage].
 @ProviderFor(Marriage)

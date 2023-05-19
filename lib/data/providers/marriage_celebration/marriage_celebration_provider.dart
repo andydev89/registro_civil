@@ -96,10 +96,7 @@ class Witnesss extends _$Witnesss {
 class Partners extends _$Partners {
   @override
   Partner build(int indexPartner) {
-    return const Partner(
-      hasChildren: Binary.no,
-      maritalStatus: MaritalStatusType.single,
-    );
+    return const Partner();
   }
 
   void init(Partner partner) {
@@ -110,10 +107,7 @@ class Partners extends _$Partners {
     state = state.copyWithFromPartner(partner);
   }
 
-  void restart() => state = const Partner(
-        hasChildren: Binary.no,
-        maritalStatus: MaritalStatusType.single,
-      );
+  void restart() => state = const Partner();
 }
 
 @riverpod
@@ -143,6 +137,8 @@ class Marriage extends _$Marriage {
   Future<Result<bool, StatusCodeType>> marriage(
     MarriageCelebrationModel model,
   ) async {
+    final x = model.toJson();
+    print(x);
     final api = ref.watch(apiProvider);
     final result = await api.marriage(model);
     if (result.success) {

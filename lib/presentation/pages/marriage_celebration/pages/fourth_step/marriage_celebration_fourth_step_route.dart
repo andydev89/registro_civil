@@ -34,14 +34,14 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final marriageCelebrationModel = ref.watch(marriageCelebrationProvider);
+    final marriageCelebrationModel = ref.read(marriageCelebrationProvider);
     final partner = firstContractParty
         ? marriageCelebrationModel.firstPartner
         : marriageCelebrationModel.secondPartner;
     final documents = ref.watch(
       marriageDocumentsProvider(
-        maritalStatus: partner!.maritalStatus,
-        hasChildren: partner.hasChildren,
+        maritalStatus: partner!.maritalStatus!,
+        hasChildren: partner.hasChildren!,
         childrenRelationShip: partner.childrenRelationship,
       ),
     );
@@ -180,8 +180,8 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                     messagge: error.toString(),
                     onPressed: () => ref.refresh(
                       marriageDocumentsProvider(
-                        maritalStatus: partner.maritalStatus,
-                        hasChildren: partner.hasChildren,
+                        maritalStatus: partner.maritalStatus!,
+                        hasChildren: partner.hasChildren!,
                         childrenRelationShip: partner.childrenRelationship,
                       ),
                     ),

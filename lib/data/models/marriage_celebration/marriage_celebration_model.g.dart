@@ -6,51 +6,6 @@ part of 'marriage_celebration_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Document _$DocumentFromJson(Map<String, dynamic> json) => Document(
-      referenceId: json['referenceId'] as String,
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-      state: $enumDecodeNullable(_$StateDocumentEnumMap, json['state']),
-      comment: json['comment'] as String?,
-      documentPath: json['documentPath'] as String?,
-      rejectionTypeId: json['rejectionTypeId'] as String?,
-    );
-
-Map<String, dynamic> _$DocumentToJson(Document instance) => <String, dynamic>{
-      'file': instance.file,
-      'referenceId': instance.referenceId,
-    };
-
-const _$StateDocumentEnumMap = {
-  StateDocument.pending: 'PENDING',
-  StateDocument.approved: 'APPROVED',
-  StateDocument.rejected: 'REJECTED',
-};
-
-DocumentsRejection _$DocumentsRejectionFromJson(Map<String, dynamic> json) =>
-    DocumentsRejection(
-      id: json['id'] as String?,
-      identityCard: json['identityCard'] as String?,
-      powerOfAttorney: json['powerOfAttorney'] as String?,
-      firstPartnerDocuments: (json['firstPartnerDocuments'] as List<dynamic>?)
-              ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      secondPartnerDocuments: (json['secondPartnerDocuments'] as List<dynamic>?)
-              ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-    );
-
-Map<String, dynamic> _$DocumentsRejectionToJson(DocumentsRejection instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'identityCard': instance.identityCard,
-      'powerOfAttorney': instance.powerOfAttorney,
-      'firstPartnerDocuments': instance.firstPartnerDocuments,
-      'secondPartnerDocuments': instance.secondPartnerDocuments,
-    };
-
 _$_MarriageCelebrationModel _$$_MarriageCelebrationModelFromJson(
         Map<String, dynamic> json) =>
     _$_MarriageCelebrationModel(
@@ -140,6 +95,12 @@ Map<String, dynamic> _$$_RequestOwnerToJson(_$_RequestOwner instance) =>
       'powerOfAttorney': instance.powerOfAttorney,
     };
 
+const _$StateDocumentEnumMap = {
+  StateDocument.pending: 'PENDING',
+  StateDocument.approved: 'APPROVED',
+  StateDocument.rejected: 'REJECTED',
+};
+
 _$_Outside _$$_OutsideFromJson(Map<String, dynamic> json) => _$_Outside(
       latitude: json['latitude'] as String? ?? '',
       longitude: json['longitude'] as String? ?? '',
@@ -169,9 +130,9 @@ Map<String, dynamic> _$$_WitnessToJson(_$_Witness instance) =>
 _$_Partner _$$_PartnerFromJson(Map<String, dynamic> json) => _$_Partner(
       nui: json['nui'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      maritalStatus:
-          $enumDecode(_$MaritalStatusTypeEnumMap, json['maritalStatus']),
-      hasChildren: Binary.fromJson(json['hasChildren'] as bool),
+      maritalStatus: $enumDecodeNullable(
+          _$MaritalStatusTypeEnumMap, json['maritalStatus']),
+      hasChildren: Binary.fromJsonNull(json['hasChildren'] as bool?),
       childrenRelationship: $enumDecodeNullable(
           _$ChildrenRelationShipTypeEnumMap, json['childrenRelationship']),
       conadis: json['hasConadis'] as bool? ?? false,
@@ -186,8 +147,8 @@ Map<String, dynamic> _$$_PartnerToJson(_$_Partner instance) =>
     <String, dynamic>{
       'nui': instance.nui,
       'name': instance.name,
-      'maritalStatus': _$MaritalStatusTypeEnumMap[instance.maritalStatus]!,
-      'hasChildren': Binary.toJson(instance.hasChildren),
+      'maritalStatus': _$MaritalStatusTypeEnumMap[instance.maritalStatus],
+      'hasChildren': Binary.toJsonNull(instance.hasChildren),
       'childrenRelationship':
           _$ChildrenRelationShipTypeEnumMap[instance.childrenRelationship],
       'hasConadis': instance.conadis,
@@ -214,3 +175,44 @@ const _$ChildrenRelationShipTypeEnumMap = {
   ChildrenRelationShipType.ecuadoriansInCommonToBeRecognized:
       'ECUADORIANS_IN_COMMON_TO_BE_RECOGNIZED',
 };
+
+_$_Document _$$_DocumentFromJson(Map<String, dynamic> json) => _$_Document(
+      referenceId: json['referenceId'] as String,
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      state: $enumDecodeNullable(_$StateDocumentEnumMap, json['state']),
+      comment: json['comment'] as String?,
+      documentPath: json['documentPath'] as String?,
+      rejectionTypeId: json['rejectionTypeId'] as String?,
+    );
+
+Map<String, dynamic> _$$_DocumentToJson(_$_Document instance) =>
+    <String, dynamic>{
+      'file': instance.file,
+    };
+
+_$_DocumentsRejection _$$_DocumentsRejectionFromJson(
+        Map<String, dynamic> json) =>
+    _$_DocumentsRejection(
+      id: json['id'] as String?,
+      identityCard: json['identityCard'] as String?,
+      powerOfAttorney: json['powerOfAttorney'] as String?,
+      firstPartnerDocuments: (json['firstPartnerDocuments'] as List<dynamic>?)
+              ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      secondPartnerDocuments: (json['secondPartnerDocuments'] as List<dynamic>?)
+              ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$$_DocumentsRejectionToJson(
+        _$_DocumentsRejection instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'identityCard': instance.identityCard,
+      'powerOfAttorney': instance.powerOfAttorney,
+      'firstPartnerDocuments': instance.firstPartnerDocuments,
+      'secondPartnerDocuments': instance.secondPartnerDocuments,
+    };

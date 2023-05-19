@@ -98,7 +98,7 @@ class _ContractingPartyPageState extends ConsumerState<ContractingPartyPage> {
                 ),
                 ReactivePartnerFormConsumer(
                   builder: (_, __, ___) => Visibility(
-                    visible: formModel.hasChildrenControl.value == Binary.yes,
+                    visible: formModel.hasChildrenControl?.value == Binary.yes,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
