@@ -106,7 +106,7 @@ Future<void> showOffersDialog(
 
 Future<void> showMapPickerDialog(
   BuildContext context,
-  void Function(LatLng latLng)? onPicked, {
+  Future<void> Function(LatLng latLng)? onPicked, {
   bool automaticClose = false,
 }) {
   return showDialog(
@@ -134,8 +134,13 @@ Future<void> showMapPickerDialog(
                   borderRadius: BorderRadius.circular(20),
                   child: GMap(
                     onPicked: (latLng) {
-                      onPicked?.call(latLng);
-                      if (automaticClose) context.popRoute();
+                      onPicked?.call(latLng).then(
+                        (value) {
+                          if (automaticClose) {
+                            context.popRoute();
+                          }
+                        },
+                      );
                     },
                   ),
                 ),
