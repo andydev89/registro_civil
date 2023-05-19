@@ -46,7 +46,7 @@ Map<String, dynamic> _$$_MarriageCelebrationModelToJson(
     <String, dynamic>{
       'requestOwnerType':
           _$MarriageCelebrationTypeEnumMap[instance.requestOwnerType]!,
-      'agencyID': AgencyModel.agencyToJson(instance.agencyID),
+      'agencyId': AgencyModel.agencyToJson(instance.agencyId),
       'firstWitness': instance.firstWitness?.toJson(),
       'secondWitness': instance.secondWitness?.toJson(),
       'firstPartner': instance.firstPartner?.toJson(),

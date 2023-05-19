@@ -31,7 +31,7 @@ class MarriageCelebrationModel with _$MarriageCelebrationModel {
       includeFromJson: false,
     )
     @FormControlAnnotation<AgencyModel>()
-    AgencyModel? agencyID,
+    AgencyModel? agencyId,
     @JsonKey(includeToJson: false) LocationModel? province,
     @JsonKey(includeToJson: false) LocationModel? agency,
     @FormControlAnnotation<Witness>() Witness? firstWitness,
@@ -95,7 +95,7 @@ class MarriageCelebrationModel with _$MarriageCelebrationModel {
       secondPartner: model.secondPartner,
       state: model.state,
       id: model.id,
-      agencyID: model.agencyID,
+      agencyId: model.agencyId,
       province: model.province,
     );
   }
@@ -270,9 +270,9 @@ class Partner with _$Partner {
         documents: partner.documents,
       );
 
-  Partner updateFromWitness(Witness? witness) => copyWith(
-        nui: witness?.nui ?? '',
-        name: witness?.name ?? '',
+  Partner updateFromRequestOwner(RequestOwner? owner) => copyWith(
+        nui: owner?.nui ?? '',
+        name: owner?.name ?? '',
       );
 
   List<Document> rejectingDocuments() {

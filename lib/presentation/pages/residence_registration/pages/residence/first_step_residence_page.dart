@@ -31,10 +31,9 @@ class FirstStepResidencePage extends ConsumerWidget {
     final l10n = context.l10n;
     final init = operation.isEditOrRead;
     var alreadyStarter = false;
+    final model = ref.watch(residentialPProvider.notifier).getFirstStep();
     return FirstStepResidenceModelFormBuilder(
-      model: operation.isEditOrRead
-          ? ref.watch(residentialPProvider.notifier).getFirstStep()
-          : null,
+      model: operation.isEditOrRead ? model : null,
       builder: (context, formModel, snapshot) {
         return PrimaryScaffold(
           title: l10n.registroRes,
@@ -49,6 +48,9 @@ class FirstStepResidencePage extends ConsumerWidget {
                     formControl: formModel.provinceControl,
                     label: l10n.provincia,
                     init: init && !alreadyStarter,
+                    initialValue: (data) => data?.firstWhere(
+                      (element) => element.id == model.province.id,
+                    ),
                     provider: provincesProvider,
                     onChanged: (p0) {
                       formModel.cantonControl.value = null;
@@ -60,6 +62,9 @@ class FirstStepResidencePage extends ConsumerWidget {
                       children: [
                         SelectElementFromApi(
                           init: init && !alreadyStarter,
+                          initialValue: (data) => data?.firstWhere(
+                            (element) => element.id == model.canton.id,
+                          ),
                           readOnly: !formModel.provinceControl.valid ||
                               operation.isRead,
                           formControl: formModel.cantonControl,
@@ -74,6 +79,9 @@ class FirstStepResidencePage extends ConsumerWidget {
                         ),
                         SelectElementFromApi(
                           init: init && !alreadyStarter,
+                          initialValue: (data) => data?.firstWhere(
+                            (element) => element.id == model.parroquia.id,
+                          ),
                           readOnly: !formModel.cantonControl.valid ||
                               operation.isRead,
                           formControl: formModel.parroquiaControl,
@@ -145,8 +153,8 @@ class FirstStepResidencePage extends ConsumerWidget {
                       context.navigateTo(
                         SecondStepResidenceRoute(
                           operation: operation,
-                          residenceIndex: residenceIndex
-                        ,),
+                          residenceIndex: residenceIndex,
+                        ),
                       );
                     }
                   : null,

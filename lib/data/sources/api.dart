@@ -133,6 +133,8 @@ abstract class Api {
     @Path('id') String id,
   );
 
+
+  @retrofit_headers.Headers({'Content-Type': 'application/json'})
   @POST('/residentialregistration/api/registration')
   Future<ResponseModel<CommandModel>> residenceRegistration(
     @Body() ResidenceRegistration model,

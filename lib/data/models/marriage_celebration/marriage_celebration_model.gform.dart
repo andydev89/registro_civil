@@ -194,7 +194,7 @@ class MarriageCelebrationModelForm
 
   static const String requestOwnerTypeControlName = "requestOwnerType";
 
-  static const String agencyIDControlName = "agencyID";
+  static const String agencyIdControlName = "agencyId";
 
   static const String firstWitnessControlName = "firstWitness";
 
@@ -218,7 +218,7 @@ class MarriageCelebrationModelForm
 
   String requestOwnerTypeControlPath() =>
       pathBuilder(requestOwnerTypeControlName);
-  String agencyIDControlPath() => pathBuilder(agencyIDControlName);
+  String agencyIdControlPath() => pathBuilder(agencyIdControlName);
   String firstWitnessControlPath() => pathBuilder(firstWitnessControlName);
   String secondWitnessControlPath() => pathBuilder(secondWitnessControlName);
   String isOutsideControlPath() => pathBuilder(isOutsideControlName);
@@ -226,7 +226,7 @@ class MarriageCelebrationModelForm
   String secondPartnerControlPath() => pathBuilder(secondPartnerControlName);
   MarriageCelebrationType get _requestOwnerTypeValue =>
       requestOwnerTypeControl.value as MarriageCelebrationType;
-  AgencyModel? get _agencyIDValue => agencyIDControl?.value;
+  AgencyModel? get _agencyIdValue => agencyIdControl?.value;
   Witness? get _firstWitnessValue => firstWitnessControl?.value;
   Witness? get _secondWitnessValue => secondWitnessControl?.value;
   bool get _isOutsideValue => isOutsideControl.value as bool;
@@ -241,9 +241,9 @@ class MarriageCelebrationModelForm
     }
   }
 
-  bool get containsAgencyID {
+  bool get containsAgencyId {
     try {
-      form.control(agencyIDControlPath());
+      form.control(agencyIdControlPath());
       return true;
     } catch (e) {
       return false;
@@ -296,28 +296,28 @@ class MarriageCelebrationModelForm
   }
 
   Object? get requestOwnerTypeErrors => requestOwnerTypeControl.errors;
-  Object? get agencyIDErrors => agencyIDControl?.errors;
+  Object? get agencyIdErrors => agencyIdControl?.errors;
   Object? get firstWitnessErrors => firstWitnessControl?.errors;
   Object? get secondWitnessErrors => secondWitnessControl?.errors;
   Object? get isOutsideErrors => isOutsideControl.errors;
   Object? get firstPartnerErrors => firstPartnerControl?.errors;
   Object? get secondPartnerErrors => secondPartnerControl?.errors;
   void get requestOwnerTypeFocus => form.focus(requestOwnerTypeControlPath());
-  void get agencyIDFocus => form.focus(agencyIDControlPath());
+  void get agencyIdFocus => form.focus(agencyIdControlPath());
   void get firstWitnessFocus => form.focus(firstWitnessControlPath());
   void get secondWitnessFocus => form.focus(secondWitnessControlPath());
   void get isOutsideFocus => form.focus(isOutsideControlPath());
   void get firstPartnerFocus => form.focus(firstPartnerControlPath());
   void get secondPartnerFocus => form.focus(secondPartnerControlPath());
-  void agencyIDRemove({
+  void agencyIdRemove({
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    if (containsAgencyID) {
+    if (containsAgencyId) {
       final controlPath = path;
       if (controlPath == null) {
         form.removeControl(
-          agencyIDControlName,
+          agencyIdControlName,
           updateParent: updateParent,
           emitEvent: emitEvent,
         );
@@ -326,7 +326,7 @@ class MarriageCelebrationModelForm
 
         if (formGroup is FormGroup) {
           formGroup.removeControl(
-            agencyIDControlName,
+            agencyIdControlName,
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -448,12 +448,12 @@ class MarriageCelebrationModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void agencyIDValueUpdate(
+  void agencyIdValueUpdate(
     AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    agencyIDControl?.updateValue(value,
+    agencyIdControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -511,12 +511,12 @@ class MarriageCelebrationModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void agencyIDValuePatch(
+  void agencyIdValuePatch(
     AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    agencyIDControl?.patchValue(value,
+    agencyIdControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -574,14 +574,14 @@ class MarriageCelebrationModelForm
   }) =>
       requestOwnerTypeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void agencyIDValueReset(
+  void agencyIdValueReset(
     AgencyModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      agencyIDControl?.reset(
+      agencyIdControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void firstWitnessValueReset(
     Witness? value, {
@@ -635,8 +635,8 @@ class MarriageCelebrationModelForm
   FormControl<MarriageCelebrationType> get requestOwnerTypeControl =>
       form.control(requestOwnerTypeControlPath())
           as FormControl<MarriageCelebrationType>;
-  FormControl<AgencyModel>? get agencyIDControl => containsAgencyID
-      ? form.control(agencyIDControlPath()) as FormControl<AgencyModel>?
+  FormControl<AgencyModel>? get agencyIdControl => containsAgencyId
+      ? form.control(agencyIdControlPath()) as FormControl<AgencyModel>?
       : null;
   FormControl<Witness>? get firstWitnessControl => containsFirstWitness
       ? form.control(firstWitnessControlPath()) as FormControl<Witness>?
@@ -670,18 +670,18 @@ class MarriageCelebrationModelForm
     }
   }
 
-  void agencyIDSetDisabled(
+  void agencyIdSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      agencyIDControl?.markAsDisabled(
+      agencyIdControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      agencyIDControl?.markAsEnabled(
+      agencyIdControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -788,7 +788,7 @@ class MarriageCelebrationModelForm
     }
     return MarriageCelebrationModel(
         requestOwnerType: _requestOwnerTypeValue,
-        agencyID: _agencyIDValue,
+        agencyId: _agencyIdValue,
         province: marriageCelebrationModel?.province,
         agency: marriageCelebrationModel?.agency,
         firstWitness: _firstWitnessValue,
@@ -838,8 +838,8 @@ class MarriageCelebrationModelForm
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        agencyIDControlName: FormControl<AgencyModel>(
-            value: marriageCelebrationModel?.agencyID,
+        agencyIdControlName: FormControl<AgencyModel>(
+            value: marriageCelebrationModel?.agencyId,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

@@ -56,7 +56,7 @@ final residentialPProvider =
 );
 
 typedef _$ResidentialP = AutoDisposeNotifier<Residential>;
-String _$resRegHash() => r'2cacce48386bf64f42057f74b0fc7bc759c199a9';
+String _$resRegHash() => r'cf79947bac28007026662a17c498dcfc23e4ad1d';
 
 /// See also [ResReg].
 @ProviderFor(ResReg)

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -12,7 +13,11 @@ part 'dio_providers.g.dart';
 @riverpod
 Dio dio(DioRef ref) {
   final fresh = ref.watch(freshProvider);
-  return Dio()
+  return Dio(
+    BaseOptions(
+      headers: {'Content-Type': 'application/json'},
+    ),
+  )
     ..options.baseUrl = baseUrl
     ..options.validateStatus = (status) {
       // TODO(alejandro): esto cambiarlo cuando el back corrija el error

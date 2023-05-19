@@ -156,7 +156,8 @@ class __$$_ResidenceRegistrationCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_ResidenceRegistration extends _ResidenceRegistration {
   const _$_ResidenceRegistration(
       {@FormControlAnnotation<String>()
@@ -631,7 +632,8 @@ class __$$_ResidentialCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_Residential extends _Residential {
   const _$_Residential(
       {@FormControlAnnotation(validators: [requiredValidator])

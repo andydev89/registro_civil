@@ -129,13 +129,6 @@ class ResReg extends _$ResReg {
     state = state.copyWith(residentials: newResidentials);
   }
 
-  // Residential residentialFromId(String residenceId) {
-  //   final index =
-  //       state.residentials.indexWhere((element) =>
-  //element.myId == residenceId);
-  //   return state.residentials[index];
-  // }
-
   List<String> dependentsFromResidence(
     int residenceIndex, {
     Dependent? actual,
@@ -171,6 +164,7 @@ class ResReg extends _$ResReg {
     ResidenceRegistration residence,
   ) async {
     final api = ref.watch(apiProvider);
+    final x = residence.toJson();
     final user = await ref.watch(meProvider.future);
     final result = await api.residenceRegistration(
       residence.copyWith(userId: user.id),

@@ -23,7 +23,7 @@ Map<String, dynamic> _$$_ResidenceRegistrationToJson(
     <String, dynamic>{
       'userId': instance.userId,
       'observations': instance.observations,
-      'residentials': instance.residentials,
+      'residentials': instance.residentials.map((e) => e.toJson()).toList(),
     };
 
 const _$StatusTypeEnumMap = {
@@ -75,7 +75,7 @@ Map<String, dynamic> _$$_ResidentialToJson(_$_Residential instance) =>
       'floorNumber': instance.floorNumber,
       'departmentNumber': instance.departmentNumber,
       'type': _$ResidenceTypeEnumMap[instance.type]!,
-      'dependents': instance.dependents,
+      'dependents': instance.dependents.map((e) => e.toJson()).toList(),
     };
 
 const _$ResidentialHousingTypeEnumMap = {
