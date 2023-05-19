@@ -298,6 +298,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           service: args.service,
           transactionCode: args.transactionCode,
+          requestNumber: args.requestNumber,
         ),
       );
     },
@@ -1721,6 +1722,7 @@ class ChoosePaymentMethodRoute
     Key? key,
     required TypeServiceModel service,
     required String transactionCode,
+    String? requestNumber,
   }) : super(
           ChoosePaymentMethodRoute.name,
           path: 'choose-payment-method-page',
@@ -1728,6 +1730,7 @@ class ChoosePaymentMethodRoute
             key: key,
             service: service,
             transactionCode: transactionCode,
+            requestNumber: requestNumber,
           ),
         );
 
@@ -1739,6 +1742,7 @@ class ChoosePaymentMethodRouteArgs {
     this.key,
     required this.service,
     required this.transactionCode,
+    this.requestNumber,
   });
 
   final Key? key;
@@ -1747,9 +1751,11 @@ class ChoosePaymentMethodRouteArgs {
 
   final String transactionCode;
 
+  final String? requestNumber;
+
   @override
   String toString() {
-    return 'ChoosePaymentMethodRouteArgs{key: $key, service: $service, transactionCode: $transactionCode}';
+    return 'ChoosePaymentMethodRouteArgs{key: $key, service: $service, transactionCode: $transactionCode, requestNumber: $requestNumber}';
   }
 }
 

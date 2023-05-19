@@ -36,7 +36,6 @@ mixin _$PlaceToPayReferenceModel {
   @JsonKey(name: 'Code')
   @ignore
   StatusCodeType? get status => throw _privateConstructorUsedError;
-  @ignore
   String? get transactionCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -67,8 +66,7 @@ abstract class $PlaceToPayReferenceModelCopyWith<$Res> {
       @JsonKey(name: 'Code')
       @ignore
           StatusCodeType? status,
-      @ignore
-          String? transactionCode});
+      String? transactionCode});
 }
 
 /// @nodoc
@@ -156,8 +154,7 @@ abstract class _$$_PlaceToPayReferenceModelCopyWith<$Res>
       @JsonKey(name: 'Code')
       @ignore
           StatusCodeType? status,
-      @ignore
-          String? transactionCode});
+      String? transactionCode});
 }
 
 /// @nodoc
@@ -237,8 +234,7 @@ class _$_PlaceToPayReferenceModel extends _PlaceToPayReferenceModel {
       @JsonKey(name: 'Code')
       @ignore
           this.status,
-      @ignore
-          this.transactionCode})
+      this.transactionCode})
       : super._();
 
   factory _$_PlaceToPayReferenceModel.fromJson(Map<String, dynamic> json) =>
@@ -267,7 +263,6 @@ class _$_PlaceToPayReferenceModel extends _PlaceToPayReferenceModel {
   @ignore
   final StatusCodeType? status;
   @override
-  @ignore
   final String? transactionCode;
 
   @override
@@ -340,8 +335,7 @@ abstract class _PlaceToPayReferenceModel extends PlaceToPayReferenceModel {
       @JsonKey(name: 'Code')
       @ignore
           final StatusCodeType? status,
-      @ignore
-          final String? transactionCode}) = _$_PlaceToPayReferenceModel;
+      final String? transactionCode}) = _$_PlaceToPayReferenceModel;
   const _PlaceToPayReferenceModel._() : super._();
 
   factory _PlaceToPayReferenceModel.fromJson(Map<String, dynamic> json) =
@@ -370,7 +364,6 @@ abstract class _PlaceToPayReferenceModel extends PlaceToPayReferenceModel {
   @ignore
   StatusCodeType? get status;
   @override
-  @ignore
   String? get transactionCode;
   @override
   @JsonKey(ignore: true)

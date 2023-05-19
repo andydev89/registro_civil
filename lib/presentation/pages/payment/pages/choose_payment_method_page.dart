@@ -13,9 +13,11 @@ class ChoosePaymentMethodPage extends ConsumerWidget {
     super.key,
     required this.service,
     required this.transactionCode,
+    this.requestNumber,
   });
   final TypeServiceModel service;
   final String transactionCode;
+  final String? requestNumber;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

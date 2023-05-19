@@ -28,7 +28,7 @@ class CommandWithTransactionCodeModel with _$CommandWithTransactionCodeModel {
 @freezed
 class CommandListModel with _$CommandListModel {
   const factory CommandListModel({
-    required List<String> ids,
+    required List<String> id,
     required String command,
   }) = _CommandListModel;
 
@@ -40,7 +40,7 @@ class CommandListModel with _$CommandListModel {
 class CommandListWithTransactionCodeModel
     with _$CommandListWithTransactionCodeModel {
   const factory CommandListWithTransactionCodeModel({
-    required List<String> ids,
+    required List<String> id,
     required String transactionCode,
     required String command,
   }) = _CommandListWithTransactionCodeModel;

@@ -36,13 +36,13 @@ Map<String, dynamic> _$$_CommandWithTransactionCodeModelToJson(
 
 _$_CommandListModel _$$_CommandListModelFromJson(Map<String, dynamic> json) =>
     _$_CommandListModel(
-      ids: (json['ids'] as List<dynamic>).map((e) => e as String).toList(),
+      id: (json['id'] as List<dynamic>).map((e) => e as String).toList(),
       command: json['command'] as String,
     );
 
 Map<String, dynamic> _$$_CommandListModelToJson(_$_CommandListModel instance) =>
     <String, dynamic>{
-      'ids': instance.ids,
+      'id': instance.id,
       'command': instance.command,
     };
 
@@ -50,7 +50,7 @@ _$_CommandListWithTransactionCodeModel
     _$$_CommandListWithTransactionCodeModelFromJson(
             Map<String, dynamic> json) =>
         _$_CommandListWithTransactionCodeModel(
-          ids: (json['ids'] as List<dynamic>).map((e) => e as String).toList(),
+          id: (json['id'] as List<dynamic>).map((e) => e as String).toList(),
           transactionCode: json['transactionCode'] as String,
           command: json['command'] as String,
         );
@@ -58,7 +58,7 @@ _$_CommandListWithTransactionCodeModel
 Map<String, dynamic> _$$_CommandListWithTransactionCodeModelToJson(
         _$_CommandListWithTransactionCodeModel instance) =>
     <String, dynamic>{
-      'ids': instance.ids,
+      'id': instance.id,
       'transactionCode': instance.transactionCode,
       'command': instance.command,
     };

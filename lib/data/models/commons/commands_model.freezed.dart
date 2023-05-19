@@ -360,7 +360,7 @@ CommandListModel _$CommandListModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CommandListModel {
-  List<String> get ids => throw _privateConstructorUsedError;
+  List<String> get id => throw _privateConstructorUsedError;
   String get command => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -375,7 +375,7 @@ abstract class $CommandListModelCopyWith<$Res> {
           CommandListModel value, $Res Function(CommandListModel) then) =
       _$CommandListModelCopyWithImpl<$Res, CommandListModel>;
   @useResult
-  $Res call({List<String> ids, String command});
+  $Res call({List<String> id, String command});
 }
 
 /// @nodoc
@@ -391,13 +391,13 @@ class _$CommandListModelCopyWithImpl<$Res, $Val extends CommandListModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ids = null,
+    Object? id = null,
     Object? command = null,
   }) {
     return _then(_value.copyWith(
-      ids: null == ids
-          ? _value.ids
-          : ids // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as List<String>,
       command: null == command
           ? _value.command
@@ -415,7 +415,7 @@ abstract class _$$_CommandListModelCopyWith<$Res>
       __$$_CommandListModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> ids, String command});
+  $Res call({List<String> id, String command});
 }
 
 /// @nodoc
@@ -429,13 +429,13 @@ class __$$_CommandListModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ids = null,
+    Object? id = null,
     Object? command = null,
   }) {
     return _then(_$_CommandListModel(
-      ids: null == ids
-          ? _value._ids
-          : ids // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value._id
+          : id // ignore: cast_nullable_to_non_nullable
               as List<String>,
       command: null == command
           ? _value.command
@@ -449,18 +449,18 @@ class __$$_CommandListModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CommandListModel implements _CommandListModel {
   const _$_CommandListModel(
-      {required final List<String> ids, required this.command})
-      : _ids = ids;
+      {required final List<String> id, required this.command})
+      : _id = id;
 
   factory _$_CommandListModel.fromJson(Map<String, dynamic> json) =>
       _$$_CommandListModelFromJson(json);
 
-  final List<String> _ids;
+  final List<String> _id;
   @override
-  List<String> get ids {
-    if (_ids is EqualUnmodifiableListView) return _ids;
+  List<String> get id {
+    if (_id is EqualUnmodifiableListView) return _id;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_ids);
+    return EqualUnmodifiableListView(_id);
   }
 
   @override
@@ -468,7 +468,7 @@ class _$_CommandListModel implements _CommandListModel {
 
   @override
   String toString() {
-    return 'CommandListModel(ids: $ids, command: $command)';
+    return 'CommandListModel(id: $id, command: $command)';
   }
 
   @override
@@ -476,14 +476,14 @@ class _$_CommandListModel implements _CommandListModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CommandListModel &&
-            const DeepCollectionEquality().equals(other._ids, _ids) &&
+            const DeepCollectionEquality().equals(other._id, _id) &&
             (identical(other.command, command) || other.command == command));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_ids), command);
+      runtimeType, const DeepCollectionEquality().hash(_id), command);
 
   @JsonKey(ignore: true)
   @override
@@ -501,14 +501,14 @@ class _$_CommandListModel implements _CommandListModel {
 
 abstract class _CommandListModel implements CommandListModel {
   const factory _CommandListModel(
-      {required final List<String> ids,
+      {required final List<String> id,
       required final String command}) = _$_CommandListModel;
 
   factory _CommandListModel.fromJson(Map<String, dynamic> json) =
       _$_CommandListModel.fromJson;
 
   @override
-  List<String> get ids;
+  List<String> get id;
   @override
   String get command;
   @override
@@ -524,7 +524,7 @@ CommandListWithTransactionCodeModel
 
 /// @nodoc
 mixin _$CommandListWithTransactionCodeModel {
-  List<String> get ids => throw _privateConstructorUsedError;
+  List<String> get id => throw _privateConstructorUsedError;
   String get transactionCode => throw _privateConstructorUsedError;
   String get command => throw _privateConstructorUsedError;
 
@@ -543,7 +543,7 @@ abstract class $CommandListWithTransactionCodeModelCopyWith<$Res> {
       _$CommandListWithTransactionCodeModelCopyWithImpl<$Res,
           CommandListWithTransactionCodeModel>;
   @useResult
-  $Res call({List<String> ids, String transactionCode, String command});
+  $Res call({List<String> id, String transactionCode, String command});
 }
 
 /// @nodoc
@@ -560,14 +560,14 @@ class _$CommandListWithTransactionCodeModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ids = null,
+    Object? id = null,
     Object? transactionCode = null,
     Object? command = null,
   }) {
     return _then(_value.copyWith(
-      ids: null == ids
-          ? _value.ids
-          : ids // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as List<String>,
       transactionCode: null == transactionCode
           ? _value.transactionCode
@@ -590,7 +590,7 @@ abstract class _$$_CommandListWithTransactionCodeModelCopyWith<$Res>
       __$$_CommandListWithTransactionCodeModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> ids, String transactionCode, String command});
+  $Res call({List<String> id, String transactionCode, String command});
 }
 
 /// @nodoc
@@ -606,14 +606,14 @@ class __$$_CommandListWithTransactionCodeModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ids = null,
+    Object? id = null,
     Object? transactionCode = null,
     Object? command = null,
   }) {
     return _then(_$_CommandListWithTransactionCodeModel(
-      ids: null == ids
-          ? _value._ids
-          : ids // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value._id
+          : id // ignore: cast_nullable_to_non_nullable
               as List<String>,
       transactionCode: null == transactionCode
           ? _value.transactionCode
@@ -632,21 +632,21 @@ class __$$_CommandListWithTransactionCodeModelCopyWithImpl<$Res>
 class _$_CommandListWithTransactionCodeModel
     implements _CommandListWithTransactionCodeModel {
   const _$_CommandListWithTransactionCodeModel(
-      {required final List<String> ids,
+      {required final List<String> id,
       required this.transactionCode,
       required this.command})
-      : _ids = ids;
+      : _id = id;
 
   factory _$_CommandListWithTransactionCodeModel.fromJson(
           Map<String, dynamic> json) =>
       _$$_CommandListWithTransactionCodeModelFromJson(json);
 
-  final List<String> _ids;
+  final List<String> _id;
   @override
-  List<String> get ids {
-    if (_ids is EqualUnmodifiableListView) return _ids;
+  List<String> get id {
+    if (_id is EqualUnmodifiableListView) return _id;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_ids);
+    return EqualUnmodifiableListView(_id);
   }
 
   @override
@@ -656,7 +656,7 @@ class _$_CommandListWithTransactionCodeModel
 
   @override
   String toString() {
-    return 'CommandListWithTransactionCodeModel(ids: $ids, transactionCode: $transactionCode, command: $command)';
+    return 'CommandListWithTransactionCodeModel(id: $id, transactionCode: $transactionCode, command: $command)';
   }
 
   @override
@@ -664,7 +664,7 @@ class _$_CommandListWithTransactionCodeModel
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CommandListWithTransactionCodeModel &&
-            const DeepCollectionEquality().equals(other._ids, _ids) &&
+            const DeepCollectionEquality().equals(other._id, _id) &&
             (identical(other.transactionCode, transactionCode) ||
                 other.transactionCode == transactionCode) &&
             (identical(other.command, command) || other.command == command));
@@ -673,7 +673,7 @@ class _$_CommandListWithTransactionCodeModel
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_ids), transactionCode, command);
+      const DeepCollectionEquality().hash(_id), transactionCode, command);
 
   @JsonKey(ignore: true)
   @override
@@ -694,7 +694,7 @@ class _$_CommandListWithTransactionCodeModel
 abstract class _CommandListWithTransactionCodeModel
     implements CommandListWithTransactionCodeModel {
   const factory _CommandListWithTransactionCodeModel(
-      {required final List<String> ids,
+      {required final List<String> id,
       required final String transactionCode,
       required final String command}) = _$_CommandListWithTransactionCodeModel;
 
@@ -703,7 +703,7 @@ abstract class _CommandListWithTransactionCodeModel
       _$_CommandListWithTransactionCodeModel.fromJson;
 
   @override
-  List<String> get ids;
+  List<String> get id;
   @override
   String get transactionCode;
   @override
