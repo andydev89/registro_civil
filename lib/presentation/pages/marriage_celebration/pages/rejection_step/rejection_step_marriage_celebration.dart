@@ -11,6 +11,7 @@ import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/pages.dart';
+import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
@@ -58,6 +59,7 @@ class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
                         Visibility(
                           visible: owner[RejectingMarriage.identityCard]!,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               PrimaryText(
                                 l10n.cedulaIde,
@@ -68,11 +70,12 @@ class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
                               ),
                             ],
                           ),
-                        ),
+                        ).horizontalPadding(10),
                         const SizedBox(height: 10),
                         Visibility(
                           visible: owner[RejectingMarriage.powerOfAttorney]!,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               PrimaryText(
                                 l10n.poderEsp,
@@ -83,7 +86,7 @@ class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
                               ),
                             ],
                           ),
-                        ),
+                        ).horizontalPadding(10),
                         const SizedBox(height: 10),
                         if (data[RejectingMarriage.firstPartnerDocuments]!
                             .isNotEmpty)
@@ -122,8 +125,11 @@ class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
                               )
                               .when(
                                 ok: (_) {
-                                  context.navigateBack();
-                                  ref.invalidate(marriagesProvider());
+                                  context.navigateTo(
+                                    MarriageCelebrationRouterRoute(
+                                      showAgreement: false,
+                                    ),
+                                  );
                                   showAlert(
                                     l10n.documentosSubCor,
                                     TypeAlert.success,

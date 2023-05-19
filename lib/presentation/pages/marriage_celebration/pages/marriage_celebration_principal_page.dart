@@ -45,7 +45,6 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
                   ),
                   firstElements: data.data ?? [],
                   totalPages: data.totalPages,
-                  firstPage: 1,
                   itemBuilder: (_, e, __) => CardWidget<ResponseMarriageModel>(
                     element: e,
                     rows: {

@@ -33,7 +33,7 @@ class MarriageCelebration extends _$MarriageCelebration {
 
   // AGENCY
   void setAgency(AgencyModel? agency) {
-    state = state.copyWith(agencyID: agency);
+    state = state.copyWith(agencyId: agency);
   }
 
   // FIRST STEP

@@ -50,7 +50,7 @@ class _PagedGridViewWidgetState<T>
     );
     if (widget.totalPages != null) {
       if (widget.firstPage + 1 < widget.totalPages!) {
-        _pagingController.appendPage(widget.firstElements, widget.firstPage);
+        _pagingController.appendPage(widget.firstElements, widget.firstPage+1);
       } else {
         _pagingController.appendLastPage(widget.firstElements);
       }

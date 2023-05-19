@@ -17,6 +17,7 @@ part 'residence_registration_model.freezed.dart';
 @ReactiveFormAnnotation()
 @Freezed(toJson: true)
 class ResidenceRegistration with _$ResidenceRegistration {
+  @JsonSerializable(explicitToJson: true)
   const factory ResidenceRegistration({
     @FormControlAnnotation<String>()
     @Default('')
@@ -43,6 +44,7 @@ class ResidenceRegistration with _$ResidenceRegistration {
 @Freezed(toJson: true)
 @ReactiveFormAnnotation()
 class Residential with _$Residential {
+  @JsonSerializable(explicitToJson: true)
   const factory Residential({
     @FormControlAnnotation(validators: [requiredValidator])
     @Default(false)

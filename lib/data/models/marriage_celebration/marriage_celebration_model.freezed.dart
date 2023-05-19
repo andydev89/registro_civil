@@ -29,7 +29,7 @@ mixin _$MarriageCelebrationModel {
       includeToJson: true,
       includeFromJson: false)
   @FormControlAnnotation<AgencyModel>()
-  AgencyModel? get agencyID => throw _privateConstructorUsedError;
+  AgencyModel? get agencyId => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false)
   LocationModel? get province => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false)
@@ -69,7 +69,7 @@ abstract class $MarriageCelebrationModelCopyWith<$Res> {
           includeToJson: true,
           includeFromJson: false)
       @FormControlAnnotation<AgencyModel>()
-          AgencyModel? agencyID,
+          AgencyModel? agencyId,
       @JsonKey(includeToJson: false)
           LocationModel? province,
       @JsonKey(includeToJson: false)
@@ -114,7 +114,7 @@ class _$MarriageCelebrationModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? requestOwnerType = null,
-    Object? agencyID = freezed,
+    Object? agencyId = freezed,
     Object? province = freezed,
     Object? agency = freezed,
     Object? firstWitness = freezed,
@@ -132,9 +132,9 @@ class _$MarriageCelebrationModelCopyWithImpl<$Res,
           ? _value.requestOwnerType
           : requestOwnerType // ignore: cast_nullable_to_non_nullable
               as MarriageCelebrationType,
-      agencyID: freezed == agencyID
-          ? _value.agencyID
-          : agencyID // ignore: cast_nullable_to_non_nullable
+      agencyId: freezed == agencyId
+          ? _value.agencyId
+          : agencyId // ignore: cast_nullable_to_non_nullable
               as AgencyModel?,
       province: freezed == province
           ? _value.province
@@ -297,7 +297,7 @@ abstract class _$$_MarriageCelebrationModelCopyWith<$Res>
           includeToJson: true,
           includeFromJson: false)
       @FormControlAnnotation<AgencyModel>()
-          AgencyModel? agencyID,
+          AgencyModel? agencyId,
       @JsonKey(includeToJson: false)
           LocationModel? province,
       @JsonKey(includeToJson: false)
@@ -348,7 +348,7 @@ class __$$_MarriageCelebrationModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? requestOwnerType = null,
-    Object? agencyID = freezed,
+    Object? agencyId = freezed,
     Object? province = freezed,
     Object? agency = freezed,
     Object? firstWitness = freezed,
@@ -366,9 +366,9 @@ class __$$_MarriageCelebrationModelCopyWithImpl<$Res>
           ? _value.requestOwnerType
           : requestOwnerType // ignore: cast_nullable_to_non_nullable
               as MarriageCelebrationType,
-      agencyID: freezed == agencyID
-          ? _value.agencyID
-          : agencyID // ignore: cast_nullable_to_non_nullable
+      agencyId: freezed == agencyId
+          ? _value.agencyId
+          : agencyId // ignore: cast_nullable_to_non_nullable
               as AgencyModel?,
       province: freezed == province
           ? _value.province
@@ -430,7 +430,7 @@ class _$_MarriageCelebrationModel extends _MarriageCelebrationModel {
           includeToJson: true,
           includeFromJson: false)
       @FormControlAnnotation<AgencyModel>()
-          this.agencyID,
+          this.agencyId,
       @JsonKey(includeToJson: false)
           this.province,
       @JsonKey(includeToJson: false)
@@ -464,7 +464,7 @@ class _$_MarriageCelebrationModel extends _MarriageCelebrationModel {
       includeToJson: true,
       includeFromJson: false)
   @FormControlAnnotation<AgencyModel>()
-  final AgencyModel? agencyID;
+  final AgencyModel? agencyId;
   @override
   @JsonKey(includeToJson: false)
   final LocationModel? province;
@@ -498,7 +498,7 @@ class _$_MarriageCelebrationModel extends _MarriageCelebrationModel {
 
   @override
   String toString() {
-    return 'MarriageCelebrationModel(requestOwnerType: $requestOwnerType, agencyID: $agencyID, province: $province, agency: $agency, firstWitness: $firstWitness, secondWitness: $secondWitness, firstPartner: $firstPartner, secondPartner: $secondPartner, requestOwner: $requestOwner, isOutside: $isOutside, outside: $outside, state: $state, id: $id)';
+    return 'MarriageCelebrationModel(requestOwnerType: $requestOwnerType, agencyId: $agencyId, province: $province, agency: $agency, firstWitness: $firstWitness, secondWitness: $secondWitness, firstPartner: $firstPartner, secondPartner: $secondPartner, requestOwner: $requestOwner, isOutside: $isOutside, outside: $outside, state: $state, id: $id)';
   }
 
   @override
@@ -508,8 +508,8 @@ class _$_MarriageCelebrationModel extends _MarriageCelebrationModel {
             other is _$_MarriageCelebrationModel &&
             (identical(other.requestOwnerType, requestOwnerType) ||
                 other.requestOwnerType == requestOwnerType) &&
-            (identical(other.agencyID, agencyID) ||
-                other.agencyID == agencyID) &&
+            (identical(other.agencyId, agencyId) ||
+                other.agencyId == agencyId) &&
             (identical(other.province, province) ||
                 other.province == province) &&
             (identical(other.agency, agency) || other.agency == agency) &&
@@ -535,7 +535,7 @@ class _$_MarriageCelebrationModel extends _MarriageCelebrationModel {
   int get hashCode => Object.hash(
       runtimeType,
       requestOwnerType,
-      agencyID,
+      agencyId,
       province,
       agency,
       firstWitness,
@@ -572,7 +572,7 @@ abstract class _MarriageCelebrationModel extends MarriageCelebrationModel {
           includeToJson: true,
           includeFromJson: false)
       @FormControlAnnotation<AgencyModel>()
-          final AgencyModel? agencyID,
+          final AgencyModel? agencyId,
       @JsonKey(includeToJson: false)
           final LocationModel? province,
       @JsonKey(includeToJson: false)
@@ -605,7 +605,7 @@ abstract class _MarriageCelebrationModel extends MarriageCelebrationModel {
       includeToJson: true,
       includeFromJson: false)
   @FormControlAnnotation<AgencyModel>()
-  AgencyModel? get agencyID;
+  AgencyModel? get agencyId;
   @override
   @JsonKey(includeToJson: false)
   LocationModel? get province;

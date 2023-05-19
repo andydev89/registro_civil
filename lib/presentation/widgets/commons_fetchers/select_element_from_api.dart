@@ -19,6 +19,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
     this.readOnly = false,
     this.onChanged,
     this.init = false,
+    this.initialValue,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
@@ -30,6 +31,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
   final bool readOnly;
   final void Function(FormControl<Object?>)? onChanged;
   final bool init;
+  final T? Function(List<T>?)? initialValue;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +43,7 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
           err: (error) => _onError(),
         );
         if (data?.isNotEmpty ?? false) {
-          formControl?.value = data![0];
+          formControl?.value = initialValue?.call(data);
         }
       });
     }
