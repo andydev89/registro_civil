@@ -59,7 +59,10 @@ void selectLocation({
 }
 
 // create WitnessFormGroup a partir de un Witness
-FormGroup createWitnessFormGroup(Witness witness) {
+FormGroup createWitnessFormGroup(
+  Witness witness, {
+  List<String> list = const [],
+}) {
   return FormGroup({
     'nui': FormControl<String>(
       value: witness.nui,
@@ -67,6 +70,10 @@ FormGroup createWitnessFormGroup(Witness witness) {
         requiredValidator,
         ecuadorDniValidator,
         length10Validator,
+        (control) => notRepeat(
+              control,
+              list,
+            )
       ],
     ),
     'name': FormControl<String>(
@@ -77,7 +84,10 @@ FormGroup createWitnessFormGroup(Witness witness) {
 }
 
 // create PartnerFormGroup a partir de un Partner
-FormGroup createPartnerFormGroup(Partner partner) {
+FormGroup createPartnerFormGroup(
+  Partner partner, {
+  List<String> list = const [],
+}) {
   return FormGroup(
     {
       'nui': FormControl<String>(
@@ -86,6 +96,10 @@ FormGroup createPartnerFormGroup(Partner partner) {
           requiredValidator,
           ecuadorDniValidator,
           length10Validator,
+          (control) => notRepeat(
+                control,
+                list,
+              )
         ],
       ),
       'name': FormControl<String>(

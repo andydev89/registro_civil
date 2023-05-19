@@ -70,7 +70,7 @@ class MarriageCelebrationAgencyPage extends ConsumerWidget {
           builder: (_, formModel, __) {
             return PrimaryButton(
               title: l10n.siguiente,
-              onPressed: formModel.form.valid
+              onPressed: formModel.form.valid || operation.isRead
                   ? () {
                       if (operation.isCreate) {
                         ref

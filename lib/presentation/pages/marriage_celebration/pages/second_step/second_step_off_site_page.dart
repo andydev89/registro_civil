@@ -100,7 +100,7 @@ class SecondStepOffSitePage extends ConsumerWidget {
         bottomNavigationBar: ReactiveOutsideFormConsumer(
           builder: (_, formModel, __) => PrimaryButton(
             title: l10n.siguiente,
-            onPressed: formModel.form.valid
+            onPressed: formModel.form.valid || operation.isRead
                 ? () {
                     if (operation.isCreate) {
                       ref

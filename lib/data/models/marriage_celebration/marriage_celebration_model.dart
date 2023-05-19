@@ -18,8 +18,9 @@ part 'marriage_celebration_model.gform.dart';
 part 'marriage_celebration_model.freezed.dart';
 
 @ReactiveFormAnnotation()
-@Freezed(toJson: true)
+@Freezed()
 class MarriageCelebrationModel with _$MarriageCelebrationModel {
+  @JsonSerializable(explicitToJson: true)
   const factory MarriageCelebrationModel({
     @FormControlAnnotation<MarriageCelebrationType>()
     @Default(MarriageCelebrationType.attorney)
@@ -60,6 +61,11 @@ class MarriageCelebrationModel with _$MarriageCelebrationModel {
     };
   }
 
+  bool isEmptyRejectingDocuments() {
+    return (firstPartner?.rejectingDocuments().isEmpty ?? true) &&
+        (secondPartner?.rejectingDocuments().isEmpty ?? true);
+  }
+
   Map<RejectingMarriage, bool> rejectingDocumentsOwner() {
     return {
       RejectingMarriage.identityCard:
@@ -67,6 +73,13 @@ class MarriageCelebrationModel with _$MarriageCelebrationModel {
       RejectingMarriage.powerOfAttorney:
           requestOwner?.powerOfAttorneyState == StateDocument.rejected,
     };
+  }
+
+  bool isEmptyRejectingDocumentsOwner() {
+    return (requestOwner?.identityCardSate == StateDocument.approved ||
+            requestOwner?.identityCardSate == null) &&
+        (requestOwner?.powerOfAttorneyState == StateDocument.approved ||
+            requestOwner?.powerOfAttorneyState == null);
   }
 
   MarriageCelebrationModel copyWithFromModel(MarriageCelebrationModel model) {
@@ -89,7 +102,7 @@ class MarriageCelebrationModel with _$MarriageCelebrationModel {
 }
 
 @ReactiveFormAnnotation()
-@Freezed(toJson: true)
+@freezed
 class RequestOwner with _$RequestOwner {
   const factory RequestOwner({
     @FormControlAnnotation(
@@ -205,8 +218,9 @@ class Witness with _$Witness {
   validators: [conadisNumberValidatorGroup, childrenRelationshipValidatorGroup],
 )
 @ReactiveFormAnnotation()
-@Freezed(toJson: true)
+@freezed
 class Partner with _$Partner {
+  @JsonSerializable(explicitToJson: true)
   const factory Partner({
     @FormControlAnnotation(
       validators: [
@@ -269,11 +283,10 @@ class Partner with _$Partner {
 }
 
 @ReactiveFormAnnotation()
-@Freezed(toJson: true)
+@freezed
 class Document with _$Document {
   const factory Document({
     @FormControlAnnotation(validators: [requiredValidator])
-    @JsonKey(includeToJson: false)
     required String referenceId,
     @JsonKey(
       includeFromJson: false,
@@ -310,8 +323,9 @@ class SelectAgency {
 }
 
 @ReactiveFormAnnotation()
-@Freezed(toJson: true)
+@freezed
 class DocumentsRejection with _$DocumentsRejection {
+  @JsonSerializable(explicitToJson: true)
   const factory DocumentsRejection({
     String? id,
     @FormControlAnnotation<String>() String? identityCard,

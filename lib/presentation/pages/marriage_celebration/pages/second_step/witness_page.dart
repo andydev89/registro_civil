@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/nui_type.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
+import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/utils/marriage_celebration_util.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -30,17 +32,41 @@ class WitnessPage extends ConsumerWidget {
     final witness2 = ref.read(witnesssProvider(1));
     return WitnessFormBuilder(
       model: indexWitness == 0 ? witness1 : witness2,
-      initState: (_, formModel) => formModel.form.valueChanges
-          .distinct(
-            (prev, curr) => const DeepCollectionEquality().equals(prev, curr),
-          )
-          .listen(
-            (event) => updateWitness(
-              ref: ref,
-              witness: formModel.model,
-              index: indexWitness,
-            ),
-          ),
+      initState: (_, formModel) {
+        final model = ref.read(marriageCelebrationProvider);
+        formModel.nuiControl.setValidators(
+          [
+            requiredValidator,
+            ecuadorDniValidator,
+            length10Validator,
+            (control) => notRepeat(
+                  control,
+                  indexWitness == 0
+                      ? NuiType.witness1.nuis(
+                          model.copyWith(
+                            secondWitness: ref.watch(witnesssProvider(1)),
+                          ),
+                        )
+                      : NuiType.witness2.nuis(
+                          model.copyWith(
+                            firstWitness: ref.watch(witnesssProvider(0)),
+                          ),
+                        ),
+                )
+          ],
+        );
+        formModel.form.valueChanges
+            .distinct(
+              (prev, curr) => const DeepCollectionEquality().equals(prev, curr),
+            )
+            .listen(
+              (event) => updateWitness(
+                ref: ref,
+                witness: formModel.model,
+                index: indexWitness,
+              ),
+            );
+      },
       builder: (context, form, child) => Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -63,12 +89,27 @@ class WitnessPage extends ConsumerWidget {
           builder: (_, form, __) {
             final witness1 = ref.read(witnesssProvider(0));
             final witness2 = ref.read(witnesssProvider(1));
-            final form1 = createWitnessFormGroup(witness1);
-            final form2 = createWitnessFormGroup(witness2);
+            final model = ref.read(marriageCelebrationProvider);
+            final form1 = createWitnessFormGroup(
+              witness1,
+              list: NuiType.witness1.nuis(
+                model.copyWith(
+                  secondWitness: witness2,
+                ),
+              ),
+            );
+            final form2 = createWitnessFormGroup(
+              witness2,
+              list: NuiType.witness2.nuis(
+                model.copyWith(
+                  firstWitness: witness1,
+                ),
+              ),
+            );
             final valid = form1.valid && form2.valid;
             return PrimaryButton(
               title: l10n.siguiente,
-              onPressed: valid
+              onPressed: valid || operation.isRead
                   ? () {
                       if (operation.isCreate) {
                         ref.read(marriageCelebrationProvider.notifier)

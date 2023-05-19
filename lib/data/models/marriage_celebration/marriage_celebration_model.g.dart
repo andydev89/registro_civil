@@ -47,13 +47,13 @@ Map<String, dynamic> _$$_MarriageCelebrationModelToJson(
       'requestOwnerType':
           _$MarriageCelebrationTypeEnumMap[instance.requestOwnerType]!,
       'agencyID': AgencyModel.agencyToJson(instance.agencyID),
-      'firstWitness': instance.firstWitness,
-      'secondWitness': instance.secondWitness,
-      'firstPartner': instance.firstPartner,
-      'secondPartner': instance.secondPartner,
-      'requestOwner': instance.requestOwner,
+      'firstWitness': instance.firstWitness?.toJson(),
+      'secondWitness': instance.secondWitness?.toJson(),
+      'firstPartner': instance.firstPartner?.toJson(),
+      'secondPartner': instance.secondPartner?.toJson(),
+      'requestOwner': instance.requestOwner?.toJson(),
       'isOutside': instance.isOutside,
-      'outside': instance.outside,
+      'outside': instance.outside?.toJson(),
     };
 
 const _$MarriageCelebrationTypeEnumMap = {
@@ -153,7 +153,7 @@ Map<String, dynamic> _$$_PartnerToJson(_$_Partner instance) =>
           _$ChildrenRelationShipTypeEnumMap[instance.childrenRelationship],
       'hasConadis': instance.conadis,
       'conadisNui': instance.conadisNumber,
-      'documents': instance.documents,
+      'documents': instance.documents.map((e) => e.toJson()).toList(),
     };
 
 const _$MaritalStatusTypeEnumMap = {
@@ -188,6 +188,7 @@ _$_Document _$$_DocumentFromJson(Map<String, dynamic> json) => _$_Document(
 
 Map<String, dynamic> _$$_DocumentToJson(_$_Document instance) =>
     <String, dynamic>{
+      'referenceId': instance.referenceId,
       'file': instance.file,
     };
 
@@ -213,6 +214,8 @@ Map<String, dynamic> _$$_DocumentsRejectionToJson(
       'id': instance.id,
       'identityCard': instance.identityCard,
       'powerOfAttorney': instance.powerOfAttorney,
-      'firstPartnerDocuments': instance.firstPartnerDocuments,
-      'secondPartnerDocuments': instance.secondPartnerDocuments,
+      'firstPartnerDocuments':
+          instance.firstPartnerDocuments.map((e) => e.toJson()).toList(),
+      'secondPartnerDocuments':
+          instance.secondPartnerDocuments.map((e) => e.toJson()).toList(),
     };

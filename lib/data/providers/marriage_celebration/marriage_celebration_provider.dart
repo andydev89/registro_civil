@@ -138,7 +138,6 @@ class Marriage extends _$Marriage {
     MarriageCelebrationModel model,
   ) async {
     final x = model.toJson();
-    print(x);
     final api = ref.watch(apiProvider);
     final result = await api.marriage(model);
     if (result.success) {

@@ -419,7 +419,8 @@ class __$$_MarriageCelebrationModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_MarriageCelebrationModel extends _MarriageCelebrationModel {
   const _$_MarriageCelebrationModel(
       {@FormControlAnnotation<MarriageCelebrationType>()
@@ -1727,7 +1728,8 @@ class __$$_PartnerCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_Partner extends _Partner {
   const _$_Partner(
       {@FormControlAnnotation(validators: [
@@ -1918,7 +1920,6 @@ Document _$DocumentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Document {
   @FormControlAnnotation(validators: [requiredValidator])
-  @JsonKey(includeToJson: false)
   String get referenceId => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: false, includeToJson: true)
   @FormControlAnnotation<String>()
@@ -1949,7 +1950,6 @@ abstract class $DocumentCopyWith<$Res> {
   @useResult
   $Res call(
       {@FormControlAnnotation(validators: [requiredValidator])
-      @JsonKey(includeToJson: false)
           String referenceId,
       @JsonKey(includeFromJson: false, includeToJson: true)
       @FormControlAnnotation<String>()
@@ -2036,7 +2036,6 @@ abstract class _$$_DocumentCopyWith<$Res> implements $DocumentCopyWith<$Res> {
   @useResult
   $Res call(
       {@FormControlAnnotation(validators: [requiredValidator])
-      @JsonKey(includeToJson: false)
           String referenceId,
       @JsonKey(includeFromJson: false, includeToJson: true)
       @FormControlAnnotation<String>()
@@ -2117,7 +2116,6 @@ class __$$_DocumentCopyWithImpl<$Res>
 class _$_Document extends _Document {
   const _$_Document(
       {@FormControlAnnotation(validators: [requiredValidator])
-      @JsonKey(includeToJson: false)
           required this.referenceId,
       @JsonKey(includeFromJson: false, includeToJson: true)
       @FormControlAnnotation<String>()
@@ -2141,7 +2139,6 @@ class _$_Document extends _Document {
 
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  @JsonKey(includeToJson: false)
   final String referenceId;
   @override
   @JsonKey(includeFromJson: false, includeToJson: true)
@@ -2211,7 +2208,6 @@ class _$_Document extends _Document {
 abstract class _Document extends Document {
   const factory _Document(
       {@FormControlAnnotation(validators: [requiredValidator])
-      @JsonKey(includeToJson: false)
           required final String referenceId,
       @JsonKey(includeFromJson: false, includeToJson: true)
       @FormControlAnnotation<String>()
@@ -2234,7 +2230,6 @@ abstract class _Document extends Document {
 
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  @JsonKey(includeToJson: false)
   String get referenceId;
   @override
   @JsonKey(includeFromJson: false, includeToJson: true)
@@ -2405,7 +2400,8 @@ class __$$_DocumentsRejectionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_DocumentsRejection extends _DocumentsRejection {
   const _$_DocumentsRejection(
       {this.id,
