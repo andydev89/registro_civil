@@ -29,10 +29,12 @@ class MakePaymentPage extends ConsumerWidget {
     required this.service,
     this.onTapSuccessPayment,
     this.onTapFailedPayment,
+    required this.transactionCode,
   });
   final String? requestNumber;
   final String buttonText;
   final TypeServiceModel service;
+  final String transactionCode;
   final void Function(BuildContext context)? onTapSuccessPayment;
   final void Function(BuildContext context)? onTapFailedPayment;
 
@@ -183,6 +185,7 @@ class MakePaymentPage extends ConsumerWidget {
                     final result = await ref.read(
                       createPlaceToPayTransactionProvider(
                         placeToPayModel: placeToPay,
+                        transactionCode: transactionCode,
                       ).future,
                     );
                     result.when(

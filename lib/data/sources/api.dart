@@ -219,8 +219,13 @@ abstract class Api {
   });
 
   @POST('/schedule/api/receipt')
-  Future<ResponseModel<BookedReceiptModel>> confirmSchedule(
+  Future<ResponseModel<CommandListWithTransactionCodeModel>> confirmSchedule(
     @Body() ReceiptModel receiptModel,
+  );
+
+  @POST('/schedule/api/receipt/payment')
+  Future<ResponseModel<CommandWithTransactionCodeModel>> notifyPaymentOfSchedule(
+    @Body() NotifyServicePaymentDoneModel notifyServicePaymentDoneModel,
   );
 
   //PLACE TO PAY PAYMENT
@@ -240,12 +245,12 @@ abstract class Api {
 
   //CHANGE OF NAME
   @POST('/changename/api/changename')
-  Future<ResponseModel<CommandModel>> changeOfName(
+  Future<ResponseModel<CommandWithTransactionCodeModel>> changeOfName(
     @Body() ChangeOfNameModel changeOfNameModel,
   );
 
   @POST('/changename/api/changename/payment')
   Future<ResponseModel<CommandModel>> notifyPaymentOfChangeOfName(
-    @Body() ChangeOfNamePaymentModel changeOfNamePaymentModel,
+    @Body() NotifyServicePaymentDoneModel notifyServicePaymentDoneModel,
   );
 }

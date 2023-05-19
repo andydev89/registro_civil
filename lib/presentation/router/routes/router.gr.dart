@@ -275,6 +275,7 @@ class _$AppRouter extends RootStackRouter {
           service: args.service,
           onTapSuccessPayment: args.onTapSuccessPayment,
           onTapFailedPayment: args.onTapFailedPayment,
+          transactionCode: args.transactionCode,
         ),
       );
     },
@@ -296,6 +297,7 @@ class _$AppRouter extends RootStackRouter {
         child: ChoosePaymentMethodPage(
           key: args.key,
           service: args.service,
+          transactionCode: args.transactionCode,
         ),
       );
     },
@@ -1623,6 +1625,7 @@ class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
     required TypeServiceModel service,
     void Function(BuildContext)? onTapSuccessPayment,
     void Function(BuildContext)? onTapFailedPayment,
+    required String transactionCode,
   }) : super(
           MakePaymentRoute.name,
           path: 'make-payment-page',
@@ -1633,6 +1636,7 @@ class MakePaymentRoute extends PageRouteInfo<MakePaymentRouteArgs> {
             service: service,
             onTapSuccessPayment: onTapSuccessPayment,
             onTapFailedPayment: onTapFailedPayment,
+            transactionCode: transactionCode,
           ),
         );
 
@@ -1647,6 +1651,7 @@ class MakePaymentRouteArgs {
     required this.service,
     this.onTapSuccessPayment,
     this.onTapFailedPayment,
+    required this.transactionCode,
   });
 
   final Key? key;
@@ -1661,9 +1666,11 @@ class MakePaymentRouteArgs {
 
   final void Function(BuildContext)? onTapFailedPayment;
 
+  final String transactionCode;
+
   @override
   String toString() {
-    return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, buttonText: $buttonText, service: $service, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment}';
+    return 'MakePaymentRouteArgs{key: $key, requestNumber: $requestNumber, buttonText: $buttonText, service: $service, onTapSuccessPayment: $onTapSuccessPayment, onTapFailedPayment: $onTapFailedPayment, transactionCode: $transactionCode}';
   }
 }
 
@@ -1713,12 +1720,14 @@ class ChoosePaymentMethodRoute
   ChoosePaymentMethodRoute({
     Key? key,
     required TypeServiceModel service,
+    required String transactionCode,
   }) : super(
           ChoosePaymentMethodRoute.name,
           path: 'choose-payment-method-page',
           args: ChoosePaymentMethodRouteArgs(
             key: key,
             service: service,
+            transactionCode: transactionCode,
           ),
         );
 
@@ -1729,15 +1738,18 @@ class ChoosePaymentMethodRouteArgs {
   const ChoosePaymentMethodRouteArgs({
     this.key,
     required this.service,
+    required this.transactionCode,
   });
 
   final Key? key;
 
   final TypeServiceModel service;
 
+  final String transactionCode;
+
   @override
   String toString() {
-    return 'ChoosePaymentMethodRouteArgs{key: $key, service: $service}';
+    return 'ChoosePaymentMethodRouteArgs{key: $key, service: $service, transactionCode: $transactionCode}';
   }
 }
 

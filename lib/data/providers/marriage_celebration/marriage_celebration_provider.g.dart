@@ -505,7 +505,7 @@ class PartnersProvider
   }
 }
 
-String _$marriageHash() => r'edc236fcd8a25612c3c62c945f1577bb5c1ec8c9';
+String _$marriageHash() => r'dc5cf8ad3fc4e408deeda7cd918dd8ab88cf6c03';
 
 /// See also [Marriage].
 @ProviderFor(Marriage)

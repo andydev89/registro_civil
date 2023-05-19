@@ -1100,7 +1100,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<BookedReceiptModel>> confirmSchedule(
+  Future<ResponseModel<CommandListWithTransactionCodeModel>> confirmSchedule(
       ReceiptModel receiptModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1108,21 +1108,52 @@ class _Api implements Api {
     final _data = <String, dynamic>{};
     _data.addAll(receiptModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<BookedReceiptModel>>(Options(
+        _setStreamType<ResponseModel<CommandListWithTransactionCodeModel>>(
+            Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/schedule/api/receipt',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandListWithTransactionCodeModel>.fromJson(
+      _result.data!,
+      (json) => CommandListWithTransactionCodeModel.fromJson(
+          json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandWithTransactionCodeModel>>
+      notifyPaymentOfSchedule(
+          NotifyServicePaymentDoneModel notifyServicePaymentDoneModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = notifyServicePaymentDoneModel;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandWithTransactionCodeModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/schedule/api/receipt',
+              '/schedule/api/receipt/payment',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<BookedReceiptModel>.fromJson(
+    final value = ResponseModel<CommandWithTransactionCodeModel>.fromJson(
       _result.data!,
-      (json) => BookedReceiptModel.fromJson(json as Map<String, dynamic>),
+      (json) => CommandWithTransactionCodeModel.fromJson(
+          json as Map<String, dynamic>),
     );
     return value;
   }
@@ -1179,14 +1210,14 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModel>> changeOfName(
+  Future<ResponseModel<CommandWithTransactionCodeModel>> changeOfName(
       ChangeOfNameModel changeOfNameModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = changeOfNameModel;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<CommandModel>>(Options(
+        _setStreamType<ResponseModel<CommandWithTransactionCodeModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -1198,20 +1229,21 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<CommandModel>.fromJson(
+    final value = ResponseModel<CommandWithTransactionCodeModel>.fromJson(
       _result.data!,
-      (json) => CommandModel.fromJson(json as Map<String, dynamic>),
+      (json) => CommandWithTransactionCodeModel.fromJson(
+          json as Map<String, dynamic>),
     );
     return value;
   }
 
   @override
   Future<ResponseModel<CommandModel>> notifyPaymentOfChangeOfName(
-      ChangeOfNamePaymentModel changeOfNamePaymentModel) async {
+      NotifyServicePaymentDoneModel notifyServicePaymentDoneModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = changeOfNamePaymentModel;
+    final _data = notifyServicePaymentDoneModel;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandModel>>(Options(
       method: 'POST',

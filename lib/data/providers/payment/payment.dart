@@ -1,1 +1,1 @@
-export 'payment_providers.dart';
+export 'place_to_pay_providers.dart';

@@ -6,13 +6,14 @@ import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'payment_providers.g.dart';
+part 'place_to_pay_providers.g.dart';
 
 @riverpod
 Future<Result<PlaceToPayReferenceModel, StatusCodeType>>
     createPlaceToPayTransaction(
   CreatePlaceToPayTransactionRef ref, {
   required PlaceToPayModel placeToPayModel,
+  required String transactionCode,
 }) async {
   final api = ref.watch(apiProvider);
   final response = await api.createPlaceToPayTransaction(placeToPayModel);
@@ -22,6 +23,7 @@ Future<Result<PlaceToPayReferenceModel, StatusCodeType>>
         ServiceType.fromJson(placeToPayModel.payment.serviceType);
     final placeToPay = response.copyWith(
       serviceType: serviceType,
+      transactionCode: transactionCode,
     );
     isar.writeTxnSync(() => isar.placeToPayReferenceModels.putSync(placeToPay));
     ref.read(checkPendingTransactionsProvider);
@@ -42,17 +44,28 @@ Future<Result<bool, StatusCodeType>> isPlaceToPayTransactionCompleted(
       placeToPayReference.paymentGatewayReference,
     );
     if (response != null && response.currentStatus != null) {
-      if (placeToPayReference.serviceType != null) {
-        ref.watch(
-          notifyCompletePaymentToServicesProvider(
-            placeToPayTransactionDetails: response,
-            serviceType: placeToPayReference.serviceType!,
-          ),
+      if (response.currentStatus == TransactionStatusType.approved) {
+        if (placeToPayReference.serviceType != null &&
+            placeToPayReference.transactionCode != null) {
+          ref.watch(
+            notifyCompletePaymentToServicesProvider(
+              placeToPayTransactionDetails: response,
+              serviceType: placeToPayReference.serviceType!,
+              transactionCode: placeToPayReference.transactionCode!,
+            ),
+          );
+          return const Result.ok(
+            true,
+          );
+        }
+        return const Result.ok(
+          false,
+        );
+      } else {
+        return const Result.ok(
+          false,
         );
       }
-      return Result.ok(
-        response.currentStatus == TransactionStatusType.approved,
-      );
     } else {
       return const Result.err(StatusCodeType.s400);
     }
@@ -66,18 +79,22 @@ Future<void> notifyCompletePaymentToServices(
   NotifyCompletePaymentToServicesRef ref, {
   required ServiceType serviceType,
   required PlaceToPayTransactionDetailsModel placeToPayTransactionDetails,
+  required String transactionCode,
 }) async {
   final api = ref.watch(apiProvider);
+  final notifyServicePaymentDone = NotifyServicePaymentDoneModel(
+    civilRegistrationId: placeToPayTransactionDetails.civilRegistrationId,
+    transactionCode: transactionCode,
+    paymentType: PaymentMethodType.placeToPay,
+    paymentCode: placeToPayTransactionDetails.reference,
+  );
   if (serviceType == ServiceType.changeOfName) {
     await api.notifyPaymentOfChangeOfName(
-      ChangeOfNamePaymentModel(
-        civilRegistrationId: placeToPayTransactionDetails.civilRegistrationId,
-        id: placeToPayTransactionDetails.id,
-        transactionCode: placeToPayTransactionDetails.transactionCode,
-        paymentType: PaymentMethodType.placeToPay,
-        // TODO(alejandro): ver q cosa es esto, no se de donde sacarlo
-        paymentCode: 'PAYMENT CODE',
-      ),
+      notifyServicePaymentDone,
+    );
+  } else if (serviceType == ServiceType.schedule) {
+    await api.notifyPaymentOfSchedule(
+      notifyServicePaymentDone,
     );
   }
 }

@@ -1285,6 +1285,7 @@ _$_PlaceToPayReferenceModel _$$_PlaceToPayReferenceModelFromJson(
       details: json['Details'] as String?,
       message: json['Message'] as String?,
       status: $enumDecodeNullable(_$StatusCodeTypeEnumMap, json['Code']),
+      transactionCode: json['transactionCode'] as String?,
     );
 
 Map<String, dynamic> _$$_PlaceToPayReferenceModelToJson(
@@ -1296,4 +1297,5 @@ Map<String, dynamic> _$$_PlaceToPayReferenceModelToJson(
       'Details': instance.details,
       'Message': instance.message,
       'Code': _$StatusCodeTypeEnumMap[instance.status],
+      'transactionCode': instance.transactionCode,
     };

@@ -36,6 +36,8 @@ mixin _$PlaceToPayReferenceModel {
   @JsonKey(name: 'Code')
   @ignore
   StatusCodeType? get status => throw _privateConstructorUsedError;
+  @ignore
+  String? get transactionCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,7 +66,9 @@ abstract class $PlaceToPayReferenceModelCopyWith<$Res> {
           String? message,
       @JsonKey(name: 'Code')
       @ignore
-          StatusCodeType? status});
+          StatusCodeType? status,
+      @ignore
+          String? transactionCode});
 }
 
 /// @nodoc
@@ -88,6 +92,7 @@ class _$PlaceToPayReferenceModelCopyWithImpl<$Res,
     Object? details = freezed,
     Object? message = freezed,
     Object? status = freezed,
+    Object? transactionCode = freezed,
   }) {
     return _then(_value.copyWith(
       processUrl: null == processUrl
@@ -118,6 +123,10 @@ class _$PlaceToPayReferenceModelCopyWithImpl<$Res,
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusCodeType?,
+      transactionCode: freezed == transactionCode
+          ? _value.transactionCode
+          : transactionCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -146,7 +155,9 @@ abstract class _$$_PlaceToPayReferenceModelCopyWith<$Res>
           String? message,
       @JsonKey(name: 'Code')
       @ignore
-          StatusCodeType? status});
+          StatusCodeType? status,
+      @ignore
+          String? transactionCode});
 }
 
 /// @nodoc
@@ -168,6 +179,7 @@ class __$$_PlaceToPayReferenceModelCopyWithImpl<$Res>
     Object? details = freezed,
     Object? message = freezed,
     Object? status = freezed,
+    Object? transactionCode = freezed,
   }) {
     return _then(_$_PlaceToPayReferenceModel(
       processUrl: null == processUrl
@@ -198,6 +210,10 @@ class __$$_PlaceToPayReferenceModelCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusCodeType?,
+      transactionCode: freezed == transactionCode
+          ? _value.transactionCode
+          : transactionCode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -220,7 +236,9 @@ class _$_PlaceToPayReferenceModel extends _PlaceToPayReferenceModel {
           this.message,
       @JsonKey(name: 'Code')
       @ignore
-          this.status})
+          this.status,
+      @ignore
+          this.transactionCode})
       : super._();
 
   factory _$_PlaceToPayReferenceModel.fromJson(Map<String, dynamic> json) =>
@@ -248,10 +266,13 @@ class _$_PlaceToPayReferenceModel extends _PlaceToPayReferenceModel {
   @JsonKey(name: 'Code')
   @ignore
   final StatusCodeType? status;
+  @override
+  @ignore
+  final String? transactionCode;
 
   @override
   String toString() {
-    return 'PlaceToPayReferenceModel(processUrl: $processUrl, paymentGatewayReference: $paymentGatewayReference, validTo: $validTo, serviceType: $serviceType, details: $details, message: $message, status: $status)';
+    return 'PlaceToPayReferenceModel(processUrl: $processUrl, paymentGatewayReference: $paymentGatewayReference, validTo: $validTo, serviceType: $serviceType, details: $details, message: $message, status: $status, transactionCode: $transactionCode)';
   }
 
   @override
@@ -269,13 +290,23 @@ class _$_PlaceToPayReferenceModel extends _PlaceToPayReferenceModel {
                 other.serviceType == serviceType) &&
             (identical(other.details, details) || other.details == details) &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.transactionCode, transactionCode) ||
+                other.transactionCode == transactionCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, processUrl,
-      paymentGatewayReference, validTo, serviceType, details, message, status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      processUrl,
+      paymentGatewayReference,
+      validTo,
+      serviceType,
+      details,
+      message,
+      status,
+      transactionCode);
 
   @JsonKey(ignore: true)
   @override
@@ -308,7 +339,9 @@ abstract class _PlaceToPayReferenceModel extends PlaceToPayReferenceModel {
           final String? message,
       @JsonKey(name: 'Code')
       @ignore
-          final StatusCodeType? status}) = _$_PlaceToPayReferenceModel;
+          final StatusCodeType? status,
+      @ignore
+          final String? transactionCode}) = _$_PlaceToPayReferenceModel;
   const _PlaceToPayReferenceModel._() : super._();
 
   factory _PlaceToPayReferenceModel.fromJson(Map<String, dynamic> json) =
@@ -336,6 +369,9 @@ abstract class _PlaceToPayReferenceModel extends PlaceToPayReferenceModel {
   @JsonKey(name: 'Code')
   @ignore
   StatusCodeType? get status;
+  @override
+  @ignore
+  String? get transactionCode;
   @override
   @JsonKey(ignore: true)
   _$$_PlaceToPayReferenceModelCopyWith<_$_PlaceToPayReferenceModel>

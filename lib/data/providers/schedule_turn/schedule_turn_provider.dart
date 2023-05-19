@@ -81,7 +81,8 @@ Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
 }
 
 @riverpod
-Future<Result<BookedReceiptModel, StatusCodeType>> confirmSchedule(
+Future<Result<CommandListWithTransactionCodeModel, StatusCodeType>>
+    confirmSchedule(
   ConfirmScheduleRef ref, {
   required ReceiptModel recipt,
 }) async {
