@@ -60,7 +60,7 @@ class RegisterValidateCitizen extends _$RegisterValidateCitizen {
     final api = ref.watch(apiProvider);
     final response = await api.registerValidateNui(model);
     if (response.status == StatusCodeType.s200) {
-      state = response.data!.citizen;
+      state = response.data!.citizen.copyWith(nui: model.nui);
       return Result.ok(state!);
     }
     return Result.err(response.status);
