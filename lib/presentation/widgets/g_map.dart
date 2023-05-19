@@ -14,7 +14,7 @@ class GMap extends HookWidget {
     final markers = useState(<Marker>[]);
     return GoogleMap(
       initialCameraPosition: const CameraPosition(
-        //TODO poner la ubicacion del dispositivo
+        // TODO(alejandro): poner la ubicacion del dispositivo
         target: LatLng(23.1330200, -82.3830400),
         zoom: 18,
       ),

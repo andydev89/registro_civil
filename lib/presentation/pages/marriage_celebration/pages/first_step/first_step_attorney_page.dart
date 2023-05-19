@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:power_ups/extensions/widget_extension.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/nui_type.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
+import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/utils/marriage_celebration_util.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/widgets/first_step_form.dart';
@@ -27,6 +29,17 @@ class FirstStepAttorneyPage extends ConsumerWidget {
       model: provider.requestOwner,
       initState: (context, formModel) {
         if (operation.isCreate) {
+          formModel.nuiControl.setValidators(
+            [
+              requiredValidator,
+              ecuadorDniValidator,
+              length10Validator,
+              (control) => notRepeat(
+                    control,
+                    NuiType.requestOwner.nuis(provider),
+                  )
+            ],
+          );
           setErrorFile(formModel.identityCardControl);
           setErrorFile(formModel.powerOfAttorneyControl);
         }
@@ -55,7 +68,7 @@ class FirstStepAttorneyPage extends ConsumerWidget {
           bottomNavigationBar: ReactiveRequestOwnerFormConsumer(
             builder: (_, formModel, __) => PrimaryButton(
               title: l10n.siguiente,
-              onPressed: formModel.form.valid
+              onPressed: formModel.form.valid || operation.isRead
                   ? () {
                       if (operation.isCreate) {
                         ref
@@ -63,7 +76,7 @@ class FirstStepAttorneyPage extends ConsumerWidget {
                             .setFirstStep(formModel.model);
                       }
                       context.navigateTo(
-                         MarriageCelebrationAgencyRoute(operation: operation),
+                        MarriageCelebrationAgencyRoute(operation: operation),
                       );
                     }
                   : null,

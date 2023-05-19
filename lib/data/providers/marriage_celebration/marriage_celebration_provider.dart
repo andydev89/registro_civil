@@ -10,7 +10,7 @@ part 'marriage_celebration_provider.g.dart';
 class MarriageCelebration extends _$MarriageCelebration {
   @override
   MarriageCelebrationModel build() {
-    return MarriageCelebrationModel(outside: Outside());
+    return const MarriageCelebrationModel(outside: Outside());
   }
 
   void updateModel(MarriageCelebrationModel model) {
@@ -19,13 +19,13 @@ class MarriageCelebration extends _$MarriageCelebration {
 
 // INIT
   void setAttorney() {
-    state = MarriageCelebrationModel(
+    state = const MarriageCelebrationModel(
       outside: Outside(),
     );
   }
 
   void setContractingParty() {
-    state = MarriageCelebrationModel(
+    state = const MarriageCelebrationModel(
       outside: Outside(),
       requestOwnerType: MarriageCelebrationType.contractingParty,
     );
@@ -78,28 +78,36 @@ class MarriageCelebration extends _$MarriageCelebration {
 class Witnesss extends _$Witnesss {
   @override
   Witness build(int index) {
-    return Witness();
+    return const Witness();
   }
 
   void init(Witness witness) {
     state = state.copyWithFromWitness(witness);
   }
 
-  void restart() => state = Witness();
+  void updateModel(Witness witness) {
+    state = state.copyWithFromWitness(witness);
+  }
+
+  void restart() => state = const Witness();
 }
 
 @riverpod
 class Partners extends _$Partners {
   @override
   Partner build(int indexPartner) {
-    return Partner();
+    return const Partner();
   }
 
   void init(Partner partner) {
     state = state.copyWithFromPartner(partner);
   }
 
-  void restart() => state = Partner();
+  void updateModel(Partner partner) {
+    state = state.copyWithFromPartner(partner);
+  }
+
+  void restart() => state = const Partner();
 }
 
 @riverpod

@@ -5,8 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/enum/marriage_celebration/nui_type.dart';
 import 'package:registro_civil_apk/data/models/marriage_celebration/marriage_celebration_model.dart';
 import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
+import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/marriage_celebration/utils/marriage_celebration_util.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -18,7 +20,7 @@ import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_n
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_text_field.dart';
 import 'package:registro_civil_apk/presentation/widgets/titles/primary_text.dart';
 
-class ContractingPartyPage extends ConsumerWidget {
+class ContractingPartyPage extends ConsumerStatefulWidget {
   const ContractingPartyPage({
     super.key,
     required this.indexContractingParty,
@@ -28,20 +30,55 @@ class ContractingPartyPage extends ConsumerWidget {
   final Crud operation;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ContractingPartyPage> createState() =>
+      _ContractingPartyPageState();
+}
+
+class _ContractingPartyPageState extends ConsumerState<ContractingPartyPage> {
+  late Partner partner1;
+  late Partner partner2;
+  late MarriageCelebrationModel model;
+  late bool isCP;
+
+  @override
+  void initState() {
+    super.initState();
+    model = ref.read(marriageCelebrationProvider);
+    isCP = model.requestOwnerType == MarriageCelebrationType.contractingParty;
+    final oldPartner1 = ref.read(partnersProvider(0));
+    partner1 =
+        !isCP ? oldPartner1 : oldPartner1.updateFromWitness(model.firstWitness);
+    partner2 = ref.read(partnersProvider(1));
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final model = ref.watch(marriageCelebrationProvider);
-    final isCP =
-        model.requestOwnerType == MarriageCelebrationType.contractingParty;
-    final partner1 = !isCP
-        ? ref.watch(partnersProvider(0))
-        : ref.watch(partnersProvider(0)).updateFromWitness(model.firstWitness);
-    final partner2 = ref.watch(partnersProvider(1));
-    return MarriageCelebrationModelFormBuilder(
+    return PartnerFormBuilder(
+      model: widget.indexContractingParty == 0 ? partner1 : partner2,
       initState: (_, formModel) {
-        final form = indexContractingParty == 0
-            ? formModel.firstPartnerForm
-            : formModel.secondPartnerForm;
+        final model = ref.read(marriageCelebrationProvider);
+        formModel.nuiControl.setValidators(
+          [
+            requiredValidator,
+            ecuadorDniValidator,
+            length10Validator,
+            (control) => notRepeat(
+                  control,
+                  widget.indexContractingParty == 0
+                      ? NuiType.partner1.nuis(
+                          model.copyWith(
+                            secondPartner: ref.watch(partnersProvider(1)),
+                          ),
+                        )
+                      : NuiType.partner2.nuis(
+                          model.copyWith(
+                            firstPartner: ref.watch(partnersProvider(0)),
+                          ),
+                        ),
+                )
+          ],
+        );
         formModel.form.valueChanges
             .distinct(
               (prev, curr) => const DeepCollectionEquality().equals(prev, curr),
@@ -49,19 +86,12 @@ class ContractingPartyPage extends ConsumerWidget {
             .listen(
               (event) => updatePartner(
                 ref: ref,
-                partner: form.model,
-                index: indexContractingParty,
+                partner: formModel.model,
+                index: widget.indexContractingParty,
               ),
             );
       },
-      model: MarriageCelebrationModel(
-        firstPartner: partner1,
-        secondPartner: partner2,
-      ),
       builder: (_, formModel, __) {
-        final form = indexContractingParty == 0
-            ? formModel.firstPartnerForm
-            : formModel.secondPartnerForm;
         return Scaffold(
           backgroundColor: Colors.transparent,
           body: ScrollableContent(
@@ -70,39 +100,41 @@ class ContractingPartyPage extends ConsumerWidget {
               children: [
                 PrimaryText(l10n.numCedula),
                 PrimaryReactiveNuiField(
-                  readOnly: operation.isRead,
-                  formControl: form.nuiControl,
+                  readOnly: widget.operation.isRead ||
+                      (widget.indexContractingParty == 0 && isCP),
+                  formControl: formModel.nuiControl,
                 ),
                 PrimaryText(l10n.nombreApe),
                 PrimaryReactiveTextField(
-                  readOnly: operation.isRead,
-                  formControl: form.nameControl,
+                  readOnly: widget.operation.isRead ||
+                      (widget.indexContractingParty == 0 && isCP),
+                  formControl: formModel.nameControl,
                   textCapitalization: TextCapitalization.words,
                 ),
                 PrimaryText(l10n.estadoCiv),
                 PrimaryReactiveDropdown(
-                  readOnly: operation.isRead,
-                  formControl: form.maritalStatusControl,
+                  readOnly: widget.operation.isRead,
+                  formControl: formModel.maritalStatusControl,
                   items: MaritalStatusType.values,
                 ),
                 PrimaryText(l10n.tieneHij),
                 PrimaryReactiveDropdown(
-                  readOnly: operation.isRead,
-                  init: operation.isRead,
-                  formControl: form.hasChildrenControl,
+                  readOnly: widget.operation.isRead,
+                  init: widget.operation.isRead,
+                  formControl: formModel.hasChildrenControl,
                   items: Binary.values,
                 ),
-                ReactiveMarriageCelebrationModelFormConsumer(
+                ReactivePartnerFormConsumer(
                   builder: (_, __, ___) => Visibility(
-                    visible: form.hasChildrenControl?.value == Binary.yes,
+                    visible: formModel.hasChildrenControl?.value == Binary.yes,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PrimaryText(l10n.tusHiSon),
                         PrimaryReactiveDropdown(
-                          init: operation.isRead,
-                          readOnly: operation.isRead,
-                          formControl: form.childrenRelationshipControl,
+                          init: widget.operation.isRead,
+                          readOnly: widget.operation.isRead,
+                          formControl: formModel.childrenRelationshipControl,
                           items: ChildrenRelationShipType.values,
                         ),
                       ],
@@ -110,20 +142,20 @@ class ContractingPartyPage extends ConsumerWidget {
                   ),
                 ),
                 PrimaryReactiveCheckBox(
-                  readOnly: operation.isRead,
-                  formControl: form.conadisControl,
+                  readOnly: widget.operation.isRead,
+                  formControl: formModel.conadisControl,
                   label: l10n.tieneCarConadis,
                 ),
-                ReactiveMarriageCelebrationModelFormConsumer(
+                ReactivePartnerFormConsumer(
                   builder: (_, __, ___) => Visibility(
-                    visible: form.conadisControl.value ?? false,
+                    visible: formModel.conadisControl.value ?? false,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const PrimaryText('No. CONADIS'),
                         PrimaryReactiveTextField(
-                          readOnly: operation.isRead,
-                          formControl: form.conadisNumberControl,
+                          readOnly: widget.operation.isRead,
+                          formControl: formModel.conadisNumberControl,
                           hintText: '01234567',
                           keyboardType: TextInputType.number,
                           inputFormatters: [
@@ -138,16 +170,30 @@ class ContractingPartyPage extends ConsumerWidget {
               ],
             ).horizontalPadding(20),
           ),
-          bottomNavigationBar: ReactiveMarriageCelebrationModelFormConsumer(
+          bottomNavigationBar: ReactivePartnerFormConsumer(
             builder: (_, form, __) {
-              final form1 = createPartnerFormGroup(partner1);
-              final form2 = createPartnerFormGroup(partner2);
+              final partner1 = ref.read(partnersProvider(0));
+              final partner2 = ref.read(partnersProvider(1));
+              final model = ref.read(marriageCelebrationProvider);
+              final form1 = createPartnerFormGroup(
+                partner1,
+                list: NuiType.partner1.nuis(
+                  model.copyWith(secondPartner: ref.watch(partnersProvider(1))),
+                ),
+              );
+              final form2 = createPartnerFormGroup(
+                partner2,
+                list: NuiType.partner2.nuis(
+                  model.copyWith(firstPartner: ref.watch(partnersProvider(0))),
+                ),
+              );
               final valid = form1.valid && form2.valid;
               return PrimaryButton(
-                title: operation.isCreate ? l10n.siguiente : l10n.aceptar,
-                onPressed: valid
+                title:
+                    widget.operation.isCreate ? l10n.siguiente : l10n.aceptar,
+                onPressed: valid || widget.operation.isRead
                     ? () {
-                        if (operation.isCreate) {
+                        if (widget.operation.isCreate) {
                           ref.read(marriageCelebrationProvider.notifier)
                             ..setPartner(partner1, 0)
                             ..setPartner(partner2, 1);

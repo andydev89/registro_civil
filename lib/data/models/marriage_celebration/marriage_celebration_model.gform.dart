@@ -917,9 +917,8 @@ class PartnerForm implements FormModel<Partner> {
   String documentsControlPath() => pathBuilder(documentsControlName);
   String get _nuiValue => nuiControl.value as String;
   String get _nameValue => nameControl.value as String;
-  MaritalStatusType get _maritalStatusValue =>
-      maritalStatusControl.value as MaritalStatusType;
-  Binary get _hasChildrenValue => hasChildrenControl.value as Binary;
+  MaritalStatusType? get _maritalStatusValue => maritalStatusControl?.value;
+  Binary? get _hasChildrenValue => hasChildrenControl?.value;
   ChildrenRelationShipType? get _childrenRelationshipValue =>
       childrenRelationshipControl?.value;
   bool get _conadisValue => conadisControl.value as bool;
@@ -1000,8 +999,8 @@ class PartnerForm implements FormModel<Partner> {
 
   Object? get nuiErrors => nuiControl.errors;
   Object? get nameErrors => nameControl.errors;
-  Object? get maritalStatusErrors => maritalStatusControl.errors;
-  Object? get hasChildrenErrors => hasChildrenControl.errors;
+  Object? get maritalStatusErrors => maritalStatusControl?.errors;
+  Object? get hasChildrenErrors => hasChildrenControl?.errors;
   Object? get childrenRelationshipErrors => childrenRelationshipControl?.errors;
   Object? get conadisErrors => conadisControl.errors;
   Object? get conadisNumberErrors => conadisNumberControl.errors;
@@ -1015,6 +1014,58 @@ class PartnerForm implements FormModel<Partner> {
   void get conadisFocus => form.focus(conadisControlPath());
   void get conadisNumberFocus => form.focus(conadisNumberControlPath());
   void get documentsFocus => form.focus(documentsControlPath());
+  void maritalStatusRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMaritalStatus) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          maritalStatusControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            maritalStatusControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void hasChildrenRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsHasChildren) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          hasChildrenControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            hasChildrenControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void childrenRelationshipRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1060,20 +1111,20 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValueUpdate(
-    MaritalStatusType value, {
+    MaritalStatusType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    maritalStatusControl.updateValue(value,
+    maritalStatusControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void hasChildrenValueUpdate(
-    Binary value, {
+    Binary? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    hasChildrenControl.updateValue(value,
+    hasChildrenControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1132,20 +1183,20 @@ class PartnerForm implements FormModel<Partner> {
   }
 
   void maritalStatusValuePatch(
-    MaritalStatusType value, {
+    MaritalStatusType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    maritalStatusControl.patchValue(value,
+    maritalStatusControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void hasChildrenValuePatch(
-    Binary value, {
+    Binary? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    hasChildrenControl.patchValue(value,
+    hasChildrenControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1204,22 +1255,22 @@ class PartnerForm implements FormModel<Partner> {
       nameControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void maritalStatusValueReset(
-    MaritalStatusType value, {
+    MaritalStatusType? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      maritalStatusControl.reset(
+      maritalStatusControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void hasChildrenValueReset(
-    Binary value, {
+    Binary? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      hasChildrenControl.reset(
+      hasChildrenControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void childrenRelationshipValueReset(
     ChildrenRelationShipType? value, {
@@ -1261,11 +1312,14 @@ class PartnerForm implements FormModel<Partner> {
       form.control(nuiControlPath()) as FormControl<String>;
   FormControl<String> get nameControl =>
       form.control(nameControlPath()) as FormControl<String>;
-  FormControl<MaritalStatusType> get maritalStatusControl =>
-      form.control(maritalStatusControlPath())
-          as FormControl<MaritalStatusType>;
-  FormControl<Binary> get hasChildrenControl =>
-      form.control(hasChildrenControlPath()) as FormControl<Binary>;
+  FormControl<MaritalStatusType>? get maritalStatusControl =>
+      containsMaritalStatus
+          ? form.control(maritalStatusControlPath())
+              as FormControl<MaritalStatusType>?
+          : null;
+  FormControl<Binary>? get hasChildrenControl => containsHasChildren
+      ? form.control(hasChildrenControlPath()) as FormControl<Binary>?
+      : null;
   FormControl<ChildrenRelationShipType>? get childrenRelationshipControl =>
       containsChildrenRelationship
           ? form.control(childrenRelationshipControlPath())
@@ -1319,12 +1373,12 @@ class PartnerForm implements FormModel<Partner> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      maritalStatusControl.markAsDisabled(
+      maritalStatusControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      maritalStatusControl.markAsEnabled(
+      maritalStatusControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1337,12 +1391,12 @@ class PartnerForm implements FormModel<Partner> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      hasChildrenControl.markAsDisabled(
+      hasChildrenControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      hasChildrenControl.markAsEnabled(
+      hasChildrenControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -4298,7 +4352,7 @@ class DocumentForm implements FormModel<Document> {
   String referenceIdControlPath() => pathBuilder(referenceIdControlName);
   String fileControlPath() => pathBuilder(fileControlName);
   String get _referenceIdValue => referenceIdControl.value as String;
-  String get _fileValue => fileControl.value ?? "";
+  String get _fileValue => fileControl.value as String;
   bool get containsReferenceId {
     try {
       form.control(referenceIdControlPath());

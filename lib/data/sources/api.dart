@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:retrofit/http.dart' as retrofit_headers;
 import 'package:retrofit/retrofit.dart';
 
 part 'api.g.dart';
@@ -82,6 +83,7 @@ abstract class Api {
   // );
 
   // MARRIAGE CELEBRATION
+  @retrofit_headers.Headers({'Content-Type': 'application/json'})
   @POST('/marriage/api/marriage')
   Future<ResponseModel<CommandModel>> marriage(
     @Body() MarriageCelebrationModel model,

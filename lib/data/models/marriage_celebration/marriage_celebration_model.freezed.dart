@@ -419,7 +419,8 @@ class __$$_MarriageCelebrationModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_MarriageCelebrationModel extends _MarriageCelebrationModel {
   const _$_MarriageCelebrationModel(
       {@FormControlAnnotation<MarriageCelebrationType>()
@@ -1526,10 +1527,10 @@ mixin _$Partner {
   @FormControlAnnotation(validators: [requiredValidator, nameValidator])
   String get name => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
-  MaritalStatusType get maritalStatus => throw _privateConstructorUsedError;
+  MaritalStatusType? get maritalStatus => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
-  @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-  Binary get hasChildren => throw _privateConstructorUsedError;
+  @JsonKey(toJson: Binary.toJsonNull, fromJson: Binary.fromJsonNull)
+  Binary? get hasChildren => throw _privateConstructorUsedError;
   @FormControlAnnotation<ChildrenRelationShipType>()
   ChildrenRelationShipType? get childrenRelationship =>
       throw _privateConstructorUsedError;
@@ -1562,10 +1563,10 @@ abstract class $PartnerCopyWith<$Res> {
       @FormControlAnnotation(validators: [requiredValidator, nameValidator])
           String name,
       @FormControlAnnotation(validators: [requiredValidator])
-          MaritalStatusType maritalStatus,
+          MaritalStatusType? maritalStatus,
       @FormControlAnnotation(validators: [requiredValidator])
-      @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-          Binary hasChildren,
+      @JsonKey(toJson: Binary.toJsonNull, fromJson: Binary.fromJsonNull)
+          Binary? hasChildren,
       @FormControlAnnotation<ChildrenRelationShipType>()
           ChildrenRelationShipType? childrenRelationship,
       @FormControlAnnotation(validators: [requiredValidator])
@@ -1593,8 +1594,8 @@ class _$PartnerCopyWithImpl<$Res, $Val extends Partner>
   $Res call({
     Object? nui = null,
     Object? name = null,
-    Object? maritalStatus = null,
-    Object? hasChildren = null,
+    Object? maritalStatus = freezed,
+    Object? hasChildren = freezed,
     Object? childrenRelationship = freezed,
     Object? conadis = null,
     Object? conadisNumber = null,
@@ -1609,14 +1610,14 @@ class _$PartnerCopyWithImpl<$Res, $Val extends Partner>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      maritalStatus: null == maritalStatus
+      maritalStatus: freezed == maritalStatus
           ? _value.maritalStatus
           : maritalStatus // ignore: cast_nullable_to_non_nullable
-              as MaritalStatusType,
-      hasChildren: null == hasChildren
+              as MaritalStatusType?,
+      hasChildren: freezed == hasChildren
           ? _value.hasChildren
           : hasChildren // ignore: cast_nullable_to_non_nullable
-              as Binary,
+              as Binary?,
       childrenRelationship: freezed == childrenRelationship
           ? _value.childrenRelationship
           : childrenRelationship // ignore: cast_nullable_to_non_nullable
@@ -1654,10 +1655,10 @@ abstract class _$$_PartnerCopyWith<$Res> implements $PartnerCopyWith<$Res> {
       @FormControlAnnotation(validators: [requiredValidator, nameValidator])
           String name,
       @FormControlAnnotation(validators: [requiredValidator])
-          MaritalStatusType maritalStatus,
+          MaritalStatusType? maritalStatus,
       @FormControlAnnotation(validators: [requiredValidator])
-      @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-          Binary hasChildren,
+      @JsonKey(toJson: Binary.toJsonNull, fromJson: Binary.fromJsonNull)
+          Binary? hasChildren,
       @FormControlAnnotation<ChildrenRelationShipType>()
           ChildrenRelationShipType? childrenRelationship,
       @FormControlAnnotation(validators: [requiredValidator])
@@ -1682,8 +1683,8 @@ class __$$_PartnerCopyWithImpl<$Res>
   $Res call({
     Object? nui = null,
     Object? name = null,
-    Object? maritalStatus = null,
-    Object? hasChildren = null,
+    Object? maritalStatus = freezed,
+    Object? hasChildren = freezed,
     Object? childrenRelationship = freezed,
     Object? conadis = null,
     Object? conadisNumber = null,
@@ -1698,14 +1699,14 @@ class __$$_PartnerCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      maritalStatus: null == maritalStatus
+      maritalStatus: freezed == maritalStatus
           ? _value.maritalStatus
           : maritalStatus // ignore: cast_nullable_to_non_nullable
-              as MaritalStatusType,
-      hasChildren: null == hasChildren
+              as MaritalStatusType?,
+      hasChildren: freezed == hasChildren
           ? _value.hasChildren
           : hasChildren // ignore: cast_nullable_to_non_nullable
-              as Binary,
+              as Binary?,
       childrenRelationship: freezed == childrenRelationship
           ? _value.childrenRelationship
           : childrenRelationship // ignore: cast_nullable_to_non_nullable
@@ -1727,7 +1728,8 @@ class __$$_PartnerCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_Partner extends _Partner {
   const _$_Partner(
       {@FormControlAnnotation(validators: [
@@ -1739,10 +1741,10 @@ class _$_Partner extends _Partner {
       @FormControlAnnotation(validators: [requiredValidator, nameValidator])
           this.name = '',
       @FormControlAnnotation(validators: [requiredValidator])
-          this.maritalStatus = MaritalStatusType.single,
+          this.maritalStatus,
       @FormControlAnnotation(validators: [requiredValidator])
-      @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-          this.hasChildren = Binary.no,
+      @JsonKey(toJson: Binary.toJsonNull, fromJson: Binary.fromJsonNull)
+          this.hasChildren,
       @FormControlAnnotation<ChildrenRelationShipType>()
           this.childrenRelationship,
       @FormControlAnnotation(validators: [requiredValidator])
@@ -1769,13 +1771,12 @@ class _$_Partner extends _Partner {
   @FormControlAnnotation(validators: [requiredValidator, nameValidator])
   final String name;
   @override
-  @JsonKey()
   @FormControlAnnotation(validators: [requiredValidator])
-  final MaritalStatusType maritalStatus;
+  final MaritalStatusType? maritalStatus;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-  final Binary hasChildren;
+  @JsonKey(toJson: Binary.toJsonNull, fromJson: Binary.fromJsonNull)
+  final Binary? hasChildren;
   @override
   @FormControlAnnotation<ChildrenRelationShipType>()
   final ChildrenRelationShipType? childrenRelationship;
@@ -1860,10 +1861,10 @@ abstract class _Partner extends Partner {
       @FormControlAnnotation(validators: [requiredValidator, nameValidator])
           final String name,
       @FormControlAnnotation(validators: [requiredValidator])
-          final MaritalStatusType maritalStatus,
+          final MaritalStatusType? maritalStatus,
       @FormControlAnnotation(validators: [requiredValidator])
-      @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-          final Binary hasChildren,
+      @JsonKey(toJson: Binary.toJsonNull, fromJson: Binary.fromJsonNull)
+          final Binary? hasChildren,
       @FormControlAnnotation<ChildrenRelationShipType>()
           final ChildrenRelationShipType? childrenRelationship,
       @FormControlAnnotation(validators: [requiredValidator])
@@ -1887,11 +1888,11 @@ abstract class _Partner extends Partner {
   String get name;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  MaritalStatusType get maritalStatus;
+  MaritalStatusType? get maritalStatus;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
-  @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-  Binary get hasChildren;
+  @JsonKey(toJson: Binary.toJsonNull, fromJson: Binary.fromJsonNull)
+  Binary? get hasChildren;
   @override
   @FormControlAnnotation<ChildrenRelationShipType>()
   ChildrenRelationShipType? get childrenRelationship;
@@ -1909,5 +1910,624 @@ abstract class _Partner extends Partner {
   @override
   @JsonKey(ignore: true)
   _$$_PartnerCopyWith<_$_Partner> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Document _$DocumentFromJson(Map<String, dynamic> json) {
+  return _Document.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Document {
+  @FormControlAnnotation(validators: [requiredValidator])
+  String get referenceId => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: true)
+  @FormControlAnnotation<String>()
+  String get file => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  String? get id => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  StateDocument? get state => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  String? get comment => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  String? get documentPath => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  String? get rejectionTypeId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DocumentCopyWith<Document> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DocumentCopyWith<$Res> {
+  factory $DocumentCopyWith(Document value, $Res Function(Document) then) =
+      _$DocumentCopyWithImpl<$Res, Document>;
+  @useResult
+  $Res call(
+      {@FormControlAnnotation(validators: [requiredValidator])
+          String referenceId,
+      @JsonKey(includeFromJson: false, includeToJson: true)
+      @FormControlAnnotation<String>()
+          String file,
+      @JsonKey(includeToJson: false)
+          String? id,
+      @JsonKey(includeToJson: false)
+          String? name,
+      @JsonKey(includeToJson: false)
+          StateDocument? state,
+      @JsonKey(includeToJson: false)
+          String? comment,
+      @JsonKey(includeToJson: false)
+          String? documentPath,
+      @JsonKey(includeToJson: false)
+          String? rejectionTypeId});
+}
+
+/// @nodoc
+class _$DocumentCopyWithImpl<$Res, $Val extends Document>
+    implements $DocumentCopyWith<$Res> {
+  _$DocumentCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? referenceId = null,
+    Object? file = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? state = freezed,
+    Object? comment = freezed,
+    Object? documentPath = freezed,
+    Object? rejectionTypeId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      referenceId: null == referenceId
+          ? _value.referenceId
+          : referenceId // ignore: cast_nullable_to_non_nullable
+              as String,
+      file: null == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as StateDocument?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      documentPath: freezed == documentPath
+          ? _value.documentPath
+          : documentPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rejectionTypeId: freezed == rejectionTypeId
+          ? _value.rejectionTypeId
+          : rejectionTypeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_DocumentCopyWith<$Res> implements $DocumentCopyWith<$Res> {
+  factory _$$_DocumentCopyWith(
+          _$_Document value, $Res Function(_$_Document) then) =
+      __$$_DocumentCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@FormControlAnnotation(validators: [requiredValidator])
+          String referenceId,
+      @JsonKey(includeFromJson: false, includeToJson: true)
+      @FormControlAnnotation<String>()
+          String file,
+      @JsonKey(includeToJson: false)
+          String? id,
+      @JsonKey(includeToJson: false)
+          String? name,
+      @JsonKey(includeToJson: false)
+          StateDocument? state,
+      @JsonKey(includeToJson: false)
+          String? comment,
+      @JsonKey(includeToJson: false)
+          String? documentPath,
+      @JsonKey(includeToJson: false)
+          String? rejectionTypeId});
+}
+
+/// @nodoc
+class __$$_DocumentCopyWithImpl<$Res>
+    extends _$DocumentCopyWithImpl<$Res, _$_Document>
+    implements _$$_DocumentCopyWith<$Res> {
+  __$$_DocumentCopyWithImpl(
+      _$_Document _value, $Res Function(_$_Document) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? referenceId = null,
+    Object? file = null,
+    Object? id = freezed,
+    Object? name = freezed,
+    Object? state = freezed,
+    Object? comment = freezed,
+    Object? documentPath = freezed,
+    Object? rejectionTypeId = freezed,
+  }) {
+    return _then(_$_Document(
+      referenceId: null == referenceId
+          ? _value.referenceId
+          : referenceId // ignore: cast_nullable_to_non_nullable
+              as String,
+      file: null == file
+          ? _value.file
+          : file // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as StateDocument?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      documentPath: freezed == documentPath
+          ? _value.documentPath
+          : documentPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      rejectionTypeId: freezed == rejectionTypeId
+          ? _value.rejectionTypeId
+          : rejectionTypeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Document extends _Document {
+  const _$_Document(
+      {@FormControlAnnotation(validators: [requiredValidator])
+          required this.referenceId,
+      @JsonKey(includeFromJson: false, includeToJson: true)
+      @FormControlAnnotation<String>()
+          this.file = '',
+      @JsonKey(includeToJson: false)
+          this.id,
+      @JsonKey(includeToJson: false)
+          this.name,
+      @JsonKey(includeToJson: false)
+          this.state,
+      @JsonKey(includeToJson: false)
+          this.comment,
+      @JsonKey(includeToJson: false)
+          this.documentPath,
+      @JsonKey(includeToJson: false)
+          this.rejectionTypeId})
+      : super._();
+
+  factory _$_Document.fromJson(Map<String, dynamic> json) =>
+      _$$_DocumentFromJson(json);
+
+  @override
+  @FormControlAnnotation(validators: [requiredValidator])
+  final String referenceId;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: true)
+  @FormControlAnnotation<String>()
+  final String file;
+  @override
+  @JsonKey(includeToJson: false)
+  final String? id;
+  @override
+  @JsonKey(includeToJson: false)
+  final String? name;
+  @override
+  @JsonKey(includeToJson: false)
+  final StateDocument? state;
+  @override
+  @JsonKey(includeToJson: false)
+  final String? comment;
+  @override
+  @JsonKey(includeToJson: false)
+  final String? documentPath;
+  @override
+  @JsonKey(includeToJson: false)
+  final String? rejectionTypeId;
+
+  @override
+  String toString() {
+    return 'Document(referenceId: $referenceId, file: $file, id: $id, name: $name, state: $state, comment: $comment, documentPath: $documentPath, rejectionTypeId: $rejectionTypeId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Document &&
+            (identical(other.referenceId, referenceId) ||
+                other.referenceId == referenceId) &&
+            (identical(other.file, file) || other.file == file) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.documentPath, documentPath) ||
+                other.documentPath == documentPath) &&
+            (identical(other.rejectionTypeId, rejectionTypeId) ||
+                other.rejectionTypeId == rejectionTypeId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, referenceId, file, id, name,
+      state, comment, documentPath, rejectionTypeId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DocumentCopyWith<_$_Document> get copyWith =>
+      __$$_DocumentCopyWithImpl<_$_Document>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DocumentToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Document extends Document {
+  const factory _Document(
+      {@FormControlAnnotation(validators: [requiredValidator])
+          required final String referenceId,
+      @JsonKey(includeFromJson: false, includeToJson: true)
+      @FormControlAnnotation<String>()
+          final String file,
+      @JsonKey(includeToJson: false)
+          final String? id,
+      @JsonKey(includeToJson: false)
+          final String? name,
+      @JsonKey(includeToJson: false)
+          final StateDocument? state,
+      @JsonKey(includeToJson: false)
+          final String? comment,
+      @JsonKey(includeToJson: false)
+          final String? documentPath,
+      @JsonKey(includeToJson: false)
+          final String? rejectionTypeId}) = _$_Document;
+  const _Document._() : super._();
+
+  factory _Document.fromJson(Map<String, dynamic> json) = _$_Document.fromJson;
+
+  @override
+  @FormControlAnnotation(validators: [requiredValidator])
+  String get referenceId;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: true)
+  @FormControlAnnotation<String>()
+  String get file;
+  @override
+  @JsonKey(includeToJson: false)
+  String? get id;
+  @override
+  @JsonKey(includeToJson: false)
+  String? get name;
+  @override
+  @JsonKey(includeToJson: false)
+  StateDocument? get state;
+  @override
+  @JsonKey(includeToJson: false)
+  String? get comment;
+  @override
+  @JsonKey(includeToJson: false)
+  String? get documentPath;
+  @override
+  @JsonKey(includeToJson: false)
+  String? get rejectionTypeId;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DocumentCopyWith<_$_Document> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+DocumentsRejection _$DocumentsRejectionFromJson(Map<String, dynamic> json) {
+  return _DocumentsRejection.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DocumentsRejection {
+  String? get id => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  String? get identityCard => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  String? get powerOfAttorney => throw _privateConstructorUsedError;
+  @FormArrayAnnotation<Document>()
+  List<Document> get firstPartnerDocuments =>
+      throw _privateConstructorUsedError;
+  @FormArrayAnnotation<Document>()
+  List<Document> get secondPartnerDocuments =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DocumentsRejectionCopyWith<DocumentsRejection> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DocumentsRejectionCopyWith<$Res> {
+  factory $DocumentsRejectionCopyWith(
+          DocumentsRejection value, $Res Function(DocumentsRejection) then) =
+      _$DocumentsRejectionCopyWithImpl<$Res, DocumentsRejection>;
+  @useResult
+  $Res call(
+      {String? id,
+      @FormControlAnnotation<String>() String? identityCard,
+      @FormControlAnnotation<String>() String? powerOfAttorney,
+      @FormArrayAnnotation<Document>() List<Document> firstPartnerDocuments,
+      @FormArrayAnnotation<Document>() List<Document> secondPartnerDocuments});
+}
+
+/// @nodoc
+class _$DocumentsRejectionCopyWithImpl<$Res, $Val extends DocumentsRejection>
+    implements $DocumentsRejectionCopyWith<$Res> {
+  _$DocumentsRejectionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? identityCard = freezed,
+    Object? powerOfAttorney = freezed,
+    Object? firstPartnerDocuments = null,
+    Object? secondPartnerDocuments = null,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      identityCard: freezed == identityCard
+          ? _value.identityCard
+          : identityCard // ignore: cast_nullable_to_non_nullable
+              as String?,
+      powerOfAttorney: freezed == powerOfAttorney
+          ? _value.powerOfAttorney
+          : powerOfAttorney // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstPartnerDocuments: null == firstPartnerDocuments
+          ? _value.firstPartnerDocuments
+          : firstPartnerDocuments // ignore: cast_nullable_to_non_nullable
+              as List<Document>,
+      secondPartnerDocuments: null == secondPartnerDocuments
+          ? _value.secondPartnerDocuments
+          : secondPartnerDocuments // ignore: cast_nullable_to_non_nullable
+              as List<Document>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_DocumentsRejectionCopyWith<$Res>
+    implements $DocumentsRejectionCopyWith<$Res> {
+  factory _$$_DocumentsRejectionCopyWith(_$_DocumentsRejection value,
+          $Res Function(_$_DocumentsRejection) then) =
+      __$$_DocumentsRejectionCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? id,
+      @FormControlAnnotation<String>() String? identityCard,
+      @FormControlAnnotation<String>() String? powerOfAttorney,
+      @FormArrayAnnotation<Document>() List<Document> firstPartnerDocuments,
+      @FormArrayAnnotation<Document>() List<Document> secondPartnerDocuments});
+}
+
+/// @nodoc
+class __$$_DocumentsRejectionCopyWithImpl<$Res>
+    extends _$DocumentsRejectionCopyWithImpl<$Res, _$_DocumentsRejection>
+    implements _$$_DocumentsRejectionCopyWith<$Res> {
+  __$$_DocumentsRejectionCopyWithImpl(
+      _$_DocumentsRejection _value, $Res Function(_$_DocumentsRejection) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? identityCard = freezed,
+    Object? powerOfAttorney = freezed,
+    Object? firstPartnerDocuments = null,
+    Object? secondPartnerDocuments = null,
+  }) {
+    return _then(_$_DocumentsRejection(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      identityCard: freezed == identityCard
+          ? _value.identityCard
+          : identityCard // ignore: cast_nullable_to_non_nullable
+              as String?,
+      powerOfAttorney: freezed == powerOfAttorney
+          ? _value.powerOfAttorney
+          : powerOfAttorney // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstPartnerDocuments: null == firstPartnerDocuments
+          ? _value._firstPartnerDocuments
+          : firstPartnerDocuments // ignore: cast_nullable_to_non_nullable
+              as List<Document>,
+      secondPartnerDocuments: null == secondPartnerDocuments
+          ? _value._secondPartnerDocuments
+          : secondPartnerDocuments // ignore: cast_nullable_to_non_nullable
+              as List<Document>,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_DocumentsRejection extends _DocumentsRejection {
+  const _$_DocumentsRejection(
+      {this.id,
+      @FormControlAnnotation<String>()
+          this.identityCard,
+      @FormControlAnnotation<String>()
+          this.powerOfAttorney,
+      @FormArrayAnnotation<Document>()
+          final List<Document> firstPartnerDocuments = const [],
+      @FormArrayAnnotation<Document>()
+          final List<Document> secondPartnerDocuments = const []})
+      : _firstPartnerDocuments = firstPartnerDocuments,
+        _secondPartnerDocuments = secondPartnerDocuments,
+        super._();
+
+  factory _$_DocumentsRejection.fromJson(Map<String, dynamic> json) =>
+      _$$_DocumentsRejectionFromJson(json);
+
+  @override
+  final String? id;
+  @override
+  @FormControlAnnotation<String>()
+  final String? identityCard;
+  @override
+  @FormControlAnnotation<String>()
+  final String? powerOfAttorney;
+  final List<Document> _firstPartnerDocuments;
+  @override
+  @JsonKey()
+  @FormArrayAnnotation<Document>()
+  List<Document> get firstPartnerDocuments {
+    if (_firstPartnerDocuments is EqualUnmodifiableListView)
+      return _firstPartnerDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_firstPartnerDocuments);
+  }
+
+  final List<Document> _secondPartnerDocuments;
+  @override
+  @JsonKey()
+  @FormArrayAnnotation<Document>()
+  List<Document> get secondPartnerDocuments {
+    if (_secondPartnerDocuments is EqualUnmodifiableListView)
+      return _secondPartnerDocuments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_secondPartnerDocuments);
+  }
+
+  @override
+  String toString() {
+    return 'DocumentsRejection(id: $id, identityCard: $identityCard, powerOfAttorney: $powerOfAttorney, firstPartnerDocuments: $firstPartnerDocuments, secondPartnerDocuments: $secondPartnerDocuments)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DocumentsRejection &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.identityCard, identityCard) ||
+                other.identityCard == identityCard) &&
+            (identical(other.powerOfAttorney, powerOfAttorney) ||
+                other.powerOfAttorney == powerOfAttorney) &&
+            const DeepCollectionEquality()
+                .equals(other._firstPartnerDocuments, _firstPartnerDocuments) &&
+            const DeepCollectionEquality().equals(
+                other._secondPartnerDocuments, _secondPartnerDocuments));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      identityCard,
+      powerOfAttorney,
+      const DeepCollectionEquality().hash(_firstPartnerDocuments),
+      const DeepCollectionEquality().hash(_secondPartnerDocuments));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DocumentsRejectionCopyWith<_$_DocumentsRejection> get copyWith =>
+      __$$_DocumentsRejectionCopyWithImpl<_$_DocumentsRejection>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DocumentsRejectionToJson(
+      this,
+    );
+  }
+}
+
+abstract class _DocumentsRejection extends DocumentsRejection {
+  const factory _DocumentsRejection(
+      {final String? id,
+      @FormControlAnnotation<String>()
+          final String? identityCard,
+      @FormControlAnnotation<String>()
+          final String? powerOfAttorney,
+      @FormArrayAnnotation<Document>()
+          final List<Document> firstPartnerDocuments,
+      @FormArrayAnnotation<Document>()
+          final List<Document> secondPartnerDocuments}) = _$_DocumentsRejection;
+  const _DocumentsRejection._() : super._();
+
+  factory _DocumentsRejection.fromJson(Map<String, dynamic> json) =
+      _$_DocumentsRejection.fromJson;
+
+  @override
+  String? get id;
+  @override
+  @FormControlAnnotation<String>()
+  String? get identityCard;
+  @override
+  @FormControlAnnotation<String>()
+  String? get powerOfAttorney;
+  @override
+  @FormArrayAnnotation<Document>()
+  List<Document> get firstPartnerDocuments;
+  @override
+  @FormArrayAnnotation<Document>()
+  List<Document> get secondPartnerDocuments;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DocumentsRejectionCopyWith<_$_DocumentsRejection> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
@@ -16,8 +18,9 @@ part 'marriage_celebration_model.gform.dart';
 part 'marriage_celebration_model.freezed.dart';
 
 @ReactiveFormAnnotation()
-@Freezed(toJson: true)
+@Freezed()
 class MarriageCelebrationModel with _$MarriageCelebrationModel {
+  @JsonSerializable(explicitToJson: true)
   const factory MarriageCelebrationModel({
     @FormControlAnnotation<MarriageCelebrationType>()
     @Default(MarriageCelebrationType.attorney)
@@ -58,6 +61,11 @@ class MarriageCelebrationModel with _$MarriageCelebrationModel {
     };
   }
 
+  bool isEmptyRejectingDocuments() {
+    return (firstPartner?.rejectingDocuments().isEmpty ?? true) &&
+        (secondPartner?.rejectingDocuments().isEmpty ?? true);
+  }
+
   Map<RejectingMarriage, bool> rejectingDocumentsOwner() {
     return {
       RejectingMarriage.identityCard:
@@ -65,6 +73,13 @@ class MarriageCelebrationModel with _$MarriageCelebrationModel {
       RejectingMarriage.powerOfAttorney:
           requestOwner?.powerOfAttorneyState == StateDocument.rejected,
     };
+  }
+
+  bool isEmptyRejectingDocumentsOwner() {
+    return (requestOwner?.identityCardSate == StateDocument.approved ||
+            requestOwner?.identityCardSate == null) &&
+        (requestOwner?.powerOfAttorneyState == StateDocument.approved ||
+            requestOwner?.powerOfAttorneyState == null);
   }
 
   MarriageCelebrationModel copyWithFromModel(MarriageCelebrationModel model) {
@@ -87,7 +102,7 @@ class MarriageCelebrationModel with _$MarriageCelebrationModel {
 }
 
 @ReactiveFormAnnotation()
-@Freezed(toJson: true)
+@freezed
 class RequestOwner with _$RequestOwner {
   const factory RequestOwner({
     @FormControlAnnotation(
@@ -203,8 +218,9 @@ class Witness with _$Witness {
   validators: [conadisNumberValidatorGroup, childrenRelationshipValidatorGroup],
 )
 @ReactiveFormAnnotation()
-@Freezed(toJson: true)
+@freezed
 class Partner with _$Partner {
+  @JsonSerializable(explicitToJson: true)
   const factory Partner({
     @FormControlAnnotation(
       validators: [
@@ -219,12 +235,10 @@ class Partner with _$Partner {
     @Default('')
     String name,
     @FormControlAnnotation(validators: [requiredValidator])
-    @Default(MaritalStatusType.single)
-    MaritalStatusType maritalStatus,
+    MaritalStatusType? maritalStatus,
     @FormControlAnnotation(validators: [requiredValidator])
-    @Default(Binary.no)
-    @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-    Binary hasChildren,
+    @JsonKey(toJson: Binary.toJsonNull, fromJson: Binary.fromJsonNull)
+    Binary? hasChildren,
     @FormControlAnnotation<ChildrenRelationShipType>()
     ChildrenRelationShipType? childrenRelationship,
     @FormControlAnnotation(validators: [requiredValidator])
@@ -269,65 +283,30 @@ class Partner with _$Partner {
 }
 
 @ReactiveFormAnnotation()
-@JsonSerializable(explicitToJson: true)
-class Document {
-  Document({
+@freezed
+class Document with _$Document {
+  const factory Document({
     @FormControlAnnotation(validators: [requiredValidator])
-    required this.referenceId,
-    @FormControlAnnotation<String>() this.file = '',
-    this.id,
-    this.name,
-    this.state,
-    this.comment,
-    this.documentPath,
-    this.rejectionTypeId,
-  });
+    required String referenceId,
+    @JsonKey(
+      includeFromJson: false,
+      includeToJson: true,
+    )
+    @FormControlAnnotation<String>()
+    @Default('')
+    String file,
+    @JsonKey(includeToJson: false) String? id,
+    @JsonKey(includeToJson: false) String? name,
+    @JsonKey(includeToJson: false) StateDocument? state,
+    @JsonKey(includeToJson: false) String? comment,
+    @JsonKey(includeToJson: false) String? documentPath,
+    @JsonKey(includeToJson: false) String? rejectionTypeId,
+  }) = _Document;
+
+  const Document._();
 
   factory Document.fromJson(Map<String, dynamic> json) =>
       _$DocumentFromJson(json);
-
-  @JsonKey(includeToJson: false)
-  final String? comment;
-
-  @JsonKey(includeToJson: false)
-  final String? documentPath;
-
-  @JsonKey(
-    includeFromJson: false,
-    includeToJson: true,
-  )
-  final String file;
-
-  @JsonKey(includeToJson: false)
-  final String? id;
-
-  @JsonKey(includeToJson: false)
-  final String? name;
-
-  final String referenceId;
-
-  @JsonKey(includeToJson: false)
-  final String? rejectionTypeId;
-
-  @JsonKey(includeToJson: false)
-  final StateDocument? state;
-
-  Document copyWith({
-    String? referenceId,
-    String? file,
-  }) =>
-      Document(
-        referenceId: referenceId ?? this.referenceId,
-        file: file ?? this.file,
-        id: id,
-        name: name,
-        state: state,
-        comment: comment,
-        documentPath: documentPath,
-        rejectionTypeId: rejectionTypeId,
-      );
-
-  Map<String, dynamic> toJson() => _$DocumentToJson(this);
 }
 
 @ReactiveFormAnnotation()
@@ -344,35 +323,23 @@ class SelectAgency {
 }
 
 @ReactiveFormAnnotation()
-@JsonSerializable()
-class DocumentsRejection {
-  DocumentsRejection({
-    this.id,
-    @FormControlAnnotation<String>() this.identityCard,
-    @FormControlAnnotation<String>() this.powerOfAttorney,
-    @FormArrayAnnotation<Document>() this.firstPartnerDocuments = const [],
-    @FormArrayAnnotation<Document>() this.secondPartnerDocuments = const [],
-  });
+@freezed
+class DocumentsRejection with _$DocumentsRejection {
+  @JsonSerializable(explicitToJson: true)
+  const factory DocumentsRejection({
+    String? id,
+    @FormControlAnnotation<String>() String? identityCard,
+    @FormControlAnnotation<String>() String? powerOfAttorney,
+    @FormArrayAnnotation<Document>()
+    @Default([])
+    List<Document> firstPartnerDocuments,
+    @FormArrayAnnotation<Document>()
+    @Default([])
+    List<Document> secondPartnerDocuments,
+  }) = _DocumentsRejection;
+
+  const DocumentsRejection._();
 
   factory DocumentsRejection.fromJson(Map<String, dynamic> json) =>
       _$DocumentsRejectionFromJson(json);
-
-  final String? id;
-  final String? identityCard;
-  final String? powerOfAttorney;
-  final List<Document> firstPartnerDocuments;
-  final List<Document> secondPartnerDocuments;
-
-  DocumentsRejection copyWith({
-    String? id,
-  }) =>
-      DocumentsRejection(
-        id: id ?? this.id,
-        identityCard: identityCard,
-        powerOfAttorney: powerOfAttorney,
-        firstPartnerDocuments: firstPartnerDocuments,
-        secondPartnerDocuments: secondPartnerDocuments,
-      );
-
-  Map<String, dynamic> toJson() => _$DocumentsRejectionToJson(this);
 }

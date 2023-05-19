@@ -51,6 +51,7 @@ class Step3Page extends ConsumerWidget {
                             '${l10n.nombre}: ${form.model.firstName}'
                             ' ${form.model.lastName}',
                             color: Colors.white,
+                            maxLines: null,
                           ),
                         ],
                       ),

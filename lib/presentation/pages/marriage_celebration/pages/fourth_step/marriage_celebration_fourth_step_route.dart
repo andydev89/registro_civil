@@ -34,7 +34,7 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final marriageCelebrationModel = ref.watch(marriageCelebrationProvider);
+    final marriageCelebrationModel = ref.read(marriageCelebrationProvider);
     final partner = firstContractParty
         ? marriageCelebrationModel.firstPartner
         : marriageCelebrationModel.secondPartner;
