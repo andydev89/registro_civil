@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:registro_civil_apk/app.dart';
+import 'package:registro_civil_apk/bootstrap.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
@@ -36,6 +38,7 @@ Future<void> initMethod() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  await bootstrap(App.new);
 }
 
 Future<File> createPdfFileFromBase64(String base64Pdf) async {

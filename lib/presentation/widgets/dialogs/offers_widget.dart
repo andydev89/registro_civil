@@ -46,8 +46,8 @@ class OffersWidget extends ConsumerWidget {
                   ).symmetricPadding(5, 32),
                   IconButton(
                     onPressed: () => controller.closeDialog(context),
-                    icon: Stack(
-                      children: const [
+                    icon: const Stack(
+                      children: [
                         Center(
                           child: Icon(
                             Icons.circle_outlined,

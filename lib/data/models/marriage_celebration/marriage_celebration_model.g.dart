@@ -169,12 +169,9 @@ Map<String, dynamic> _$$_WitnessToJson(_$_Witness instance) =>
 _$_Partner _$$_PartnerFromJson(Map<String, dynamic> json) => _$_Partner(
       nui: json['nui'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      maritalStatus: $enumDecodeNullable(
-              _$MaritalStatusTypeEnumMap, json['maritalStatus']) ??
-          MaritalStatusType.single,
-      hasChildren: json['hasChildren'] == null
-          ? Binary.no
-          : Binary.fromJson(json['hasChildren'] as bool),
+      maritalStatus:
+          $enumDecode(_$MaritalStatusTypeEnumMap, json['maritalStatus']),
+      hasChildren: Binary.fromJson(json['hasChildren'] as bool),
       childrenRelationship: $enumDecodeNullable(
           _$ChildrenRelationShipTypeEnumMap, json['childrenRelationship']),
       conadis: json['hasConadis'] as bool? ?? false,

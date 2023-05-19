@@ -35,7 +35,7 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
             PrimaryAddItemRow(
               title: l10n.listadoSol,
               onPressed: () => context.navigateTo(
-                MarriageCelebrationFirstStepRouterRoute(),
+                const MarriageCelebrationStepperRoute(),
               ),
             ),
             Expanded(
@@ -68,6 +68,7 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
                               ),
                             ),
                       Crud.read: (p0) => context.navigateTo(
+                              MarriageCelebrationStepperRoute(children: [
                             MarriageCelebrationFirstStepRouterRoute(
                               operation: Crud.read,
                               marriageId: e.id,
@@ -75,7 +76,7 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
                                 FirstStepAttorneyRoute(operation: Crud.read),
                               ],
                             ),
-                          ),
+                          ])),
                     },
                   ),
                 ),

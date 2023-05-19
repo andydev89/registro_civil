@@ -26,7 +26,7 @@ void updateWitness({
   required int index,
   required Witness witness,
 }) {
-  ref.read(witnesssProvider(index).notifier).state = witness;
+  ref.read(witnesssProvider(index).notifier).updateModel(witness);
 }
 
 void updatePartner({
@@ -34,7 +34,7 @@ void updatePartner({
   required int index,
   required Partner partner,
 }) {
-  ref.read(partnersProvider(index).notifier).state = partner;
+  ref.read(partnersProvider(index).notifier).updateModel(partner);
 }
 
 void selectLocation({

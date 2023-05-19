@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/commons/binary_type.dart';
@@ -219,12 +221,10 @@ class Partner with _$Partner {
     @Default('')
     String name,
     @FormControlAnnotation(validators: [requiredValidator])
-    @Default(MaritalStatusType.single)
-    MaritalStatusType maritalStatus,
+    required MaritalStatusType maritalStatus,
     @FormControlAnnotation(validators: [requiredValidator])
-    @Default(Binary.no)
     @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-    Binary hasChildren,
+    required Binary hasChildren,
     @FormControlAnnotation<ChildrenRelationShipType>()
     ChildrenRelationShipType? childrenRelationship,
     @FormControlAnnotation(validators: [requiredValidator])

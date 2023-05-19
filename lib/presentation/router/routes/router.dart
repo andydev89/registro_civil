@@ -178,65 +178,72 @@ part 'router.gr.dart';
               page: RejectionStepMarriageCelebrationPage,
               transitionsBuilder: TransitionsBuilders.slideRight,
             ),
-            CupertinoRoute(
-              page: MarriageCelebrationFirstStepRouterPage,
-              children: [
-                CustomRoute(
-                  page: FirstStepAttorneyPage,
-                  initial: true,
-                  transitionsBuilder: TransitionsBuilders.slideRight,
-                ),
-                CustomRoute(
-                  page: FirstStepContractingPartyPage,
-                  transitionsBuilder: TransitionsBuilders.slideLeft,
-                ),
-              ],
-            ),
             CustomRoute(
-              page: MarriageCelebrationAgencyPage,
+              page: MarriageCelebrationStepperPage,
               transitionsBuilder: TransitionsBuilders.slideRight,
-            ),
-            CupertinoRoute(
-              page: MarriageCelebrationSecondStepRouterPage,
               children: [
-                CustomRoute(
-                  page: SecondStepAtHeadquarterPage,
+                CupertinoRoute(
+                  page: MarriageCelebrationFirstStepRouterPage,
                   initial: true,
-                  transitionsBuilder: TransitionsBuilders.slideRight,
                   children: [
                     CustomRoute(
-                      page: WitnessPage,
+                      page: FirstStepAttorneyPage,
                       initial: true,
                       transitionsBuilder: TransitionsBuilders.slideRight,
+                    ),
+                    CustomRoute(
+                      page: FirstStepContractingPartyPage,
+                      transitionsBuilder: TransitionsBuilders.slideLeft,
                     ),
                   ],
                 ),
                 CustomRoute(
-                  page: SecondStepOffSitePage,
-                  transitionsBuilder: TransitionsBuilders.slideLeft,
-                ),
-              ],
-            ),
-            CupertinoRoute(
-              page: MarriageCelebrationThirdStepRouterPage,
-              children: [
-                CustomRoute(
-                  initial: true,
-                  page: ThirdStepContractingPartyPage,
+                  page: MarriageCelebrationAgencyPage,
                   transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                CupertinoRoute(
+                  page: MarriageCelebrationSecondStepRouterPage,
                   children: [
                     CustomRoute(
-                      page: ContractingPartyPage,
+                      page: SecondStepAtHeadquarterPage,
                       initial: true,
                       transitionsBuilder: TransitionsBuilders.slideRight,
+                      children: [
+                        CustomRoute(
+                          page: WitnessPage,
+                          initial: true,
+                          transitionsBuilder: TransitionsBuilders.slideRight,
+                        ),
+                      ],
+                    ),
+                    CustomRoute(
+                      page: SecondStepOffSitePage,
+                      transitionsBuilder: TransitionsBuilders.slideLeft,
                     ),
                   ],
                 ),
+                CupertinoRoute(
+                  page: MarriageCelebrationThirdStepRouterPage,
+                  children: [
+                    CustomRoute(
+                      initial: true,
+                      page: ThirdStepContractingPartyPage,
+                      transitionsBuilder: TransitionsBuilders.slideRight,
+                      children: [
+                        CustomRoute(
+                          page: ContractingPartyPage,
+                          initial: true,
+                          transitionsBuilder: TransitionsBuilders.slideRight,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                CustomRoute(
+                  page: MarriageCelebrationFourthStepRouterPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
               ],
-            ),
-            CustomRoute(
-              page: MarriageCelebrationFourthStepRouterPage,
-              transitionsBuilder: TransitionsBuilders.slideRight,
             ),
           ],
         ),

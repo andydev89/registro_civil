@@ -40,8 +40,8 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
         : marriageCelebrationModel.secondPartner;
     final documents = ref.watch(
       marriageDocumentsProvider(
-        maritalStatus: partner!.maritalStatus!,
-        hasChildren: partner.hasChildren!,
+        maritalStatus: partner!.maritalStatus,
+        hasChildren: partner.hasChildren,
         childrenRelationShip: partner.childrenRelationship,
       ),
     );
@@ -180,8 +180,8 @@ class MarriageCelebrationFourthStepRouterPage extends ConsumerWidget {
                     messagge: error.toString(),
                     onPressed: () => ref.refresh(
                       marriageDocumentsProvider(
-                        maritalStatus: partner.maritalStatus!,
-                        hasChildren: partner.hasChildren!,
+                        maritalStatus: partner.maritalStatus,
+                        hasChildren: partner.hasChildren,
                         childrenRelationShip: partner.childrenRelationship,
                       ),
                     ),

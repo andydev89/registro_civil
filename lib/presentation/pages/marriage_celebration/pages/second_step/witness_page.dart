@@ -26,8 +26,8 @@ class WitnessPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final witness1 = ref.watch(witnesssProvider(0));
-    final witness2 = ref.watch(witnesssProvider(1));
+    final witness1 = ref.read(witnesssProvider(0));
+    final witness2 = ref.read(witnesssProvider(1));
     return WitnessFormBuilder(
       model: indexWitness == 0 ? witness1 : witness2,
       initState: (_, formModel) => formModel.form.valueChanges
@@ -61,6 +61,8 @@ class WitnessPage extends ConsumerWidget {
         ).horizontalPadding(20),
         bottomNavigationBar: ReactiveWitnessFormConsumer(
           builder: (_, form, __) {
+            final witness1 = ref.read(witnesssProvider(0));
+            final witness2 = ref.read(witnesssProvider(1));
             final form1 = createWitnessFormGroup(witness1);
             final form2 = createWitnessFormGroup(witness2);
             final valid = form1.valid && form2.valid;

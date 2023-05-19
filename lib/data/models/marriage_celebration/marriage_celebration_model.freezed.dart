@@ -1739,10 +1739,10 @@ class _$_Partner extends _Partner {
       @FormControlAnnotation(validators: [requiredValidator, nameValidator])
           this.name = '',
       @FormControlAnnotation(validators: [requiredValidator])
-          this.maritalStatus = MaritalStatusType.single,
+          required this.maritalStatus,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-          this.hasChildren = Binary.no,
+          required this.hasChildren,
       @FormControlAnnotation<ChildrenRelationShipType>()
           this.childrenRelationship,
       @FormControlAnnotation(validators: [requiredValidator])
@@ -1769,7 +1769,6 @@ class _$_Partner extends _Partner {
   @FormControlAnnotation(validators: [requiredValidator, nameValidator])
   final String name;
   @override
-  @JsonKey()
   @FormControlAnnotation(validators: [requiredValidator])
   final MaritalStatusType maritalStatus;
   @override
@@ -1860,10 +1859,10 @@ abstract class _Partner extends Partner {
       @FormControlAnnotation(validators: [requiredValidator, nameValidator])
           final String name,
       @FormControlAnnotation(validators: [requiredValidator])
-          final MaritalStatusType maritalStatus,
+          required final MaritalStatusType maritalStatus,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(toJson: Binary.toJson, fromJson: Binary.fromJson)
-          final Binary hasChildren,
+          required final Binary hasChildren,
       @FormControlAnnotation<ChildrenRelationShipType>()
           final ChildrenRelationShipType? childrenRelationship,
       @FormControlAnnotation(validators: [requiredValidator])

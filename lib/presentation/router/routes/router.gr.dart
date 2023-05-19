@@ -475,6 +475,15 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    MarriageCelebrationStepperRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const MarriageCelebrationStepperPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     MarriageCelebrationFirstStepRouterRoute.name: (routeData) {
       final args =
           routeData.argsAs<MarriageCelebrationFirstStepRouterRouteArgs>(
@@ -917,74 +926,81 @@ class _$AppRouter extends RootStackRouter {
                   parent: MarriageCelebrationRouterRoute.name,
                 ),
                 RouteConfig(
-                  MarriageCelebrationFirstStepRouterRoute.name,
-                  path: 'marriage-celebration-first-step-router-page',
+                  MarriageCelebrationStepperRoute.name,
+                  path: 'marriage-celebration-stepper-page',
                   parent: MarriageCelebrationRouterRoute.name,
                   children: [
                     RouteConfig(
-                      FirstStepAttorneyRoute.name,
+                      MarriageCelebrationFirstStepRouterRoute.name,
                       path: '',
-                      parent: MarriageCelebrationFirstStepRouterRoute.name,
-                    ),
-                    RouteConfig(
-                      FirstStepContractingPartyRoute.name,
-                      path: 'first-step-contracting-party-page',
-                      parent: MarriageCelebrationFirstStepRouterRoute.name,
-                    ),
-                  ],
-                ),
-                RouteConfig(
-                  MarriageCelebrationAgencyRoute.name,
-                  path: 'marriage-celebration-agency-page',
-                  parent: MarriageCelebrationRouterRoute.name,
-                ),
-                RouteConfig(
-                  MarriageCelebrationSecondStepRouterRoute.name,
-                  path: 'marriage-celebration-second-step-router-page',
-                  parent: MarriageCelebrationRouterRoute.name,
-                  children: [
-                    RouteConfig(
-                      SecondStepAtHeadquarterRoute.name,
-                      path: '',
-                      parent: MarriageCelebrationSecondStepRouterRoute.name,
+                      parent: MarriageCelebrationStepperRoute.name,
                       children: [
                         RouteConfig(
-                          WitnessRoute.name,
+                          FirstStepAttorneyRoute.name,
                           path: '',
-                          parent: SecondStepAtHeadquarterRoute.name,
+                          parent: MarriageCelebrationFirstStepRouterRoute.name,
+                        ),
+                        RouteConfig(
+                          FirstStepContractingPartyRoute.name,
+                          path: 'first-step-contracting-party-page',
+                          parent: MarriageCelebrationFirstStepRouterRoute.name,
+                        ),
+                      ],
+                    ),
+                    RouteConfig(
+                      MarriageCelebrationAgencyRoute.name,
+                      path: 'marriage-celebration-agency-page',
+                      parent: MarriageCelebrationStepperRoute.name,
+                    ),
+                    RouteConfig(
+                      MarriageCelebrationSecondStepRouterRoute.name,
+                      path: 'marriage-celebration-second-step-router-page',
+                      parent: MarriageCelebrationStepperRoute.name,
+                      children: [
+                        RouteConfig(
+                          SecondStepAtHeadquarterRoute.name,
+                          path: '',
+                          parent: MarriageCelebrationSecondStepRouterRoute.name,
+                          children: [
+                            RouteConfig(
+                              WitnessRoute.name,
+                              path: '',
+                              parent: SecondStepAtHeadquarterRoute.name,
+                            )
+                          ],
+                        ),
+                        RouteConfig(
+                          SecondStepOffSiteRoute.name,
+                          path: 'second-step-off-site-page',
+                          parent: MarriageCelebrationSecondStepRouterRoute.name,
+                        ),
+                      ],
+                    ),
+                    RouteConfig(
+                      MarriageCelebrationThirdStepRouterRoute.name,
+                      path: 'marriage-celebration-third-step-router-page',
+                      parent: MarriageCelebrationStepperRoute.name,
+                      children: [
+                        RouteConfig(
+                          ThirdStepContractingPartyRoute.name,
+                          path: '',
+                          parent: MarriageCelebrationThirdStepRouterRoute.name,
+                          children: [
+                            RouteConfig(
+                              ContractingPartyRoute.name,
+                              path: '',
+                              parent: ThirdStepContractingPartyRoute.name,
+                            )
+                          ],
                         )
                       ],
                     ),
                     RouteConfig(
-                      SecondStepOffSiteRoute.name,
-                      path: 'second-step-off-site-page',
-                      parent: MarriageCelebrationSecondStepRouterRoute.name,
+                      MarriageCelebrationFourthStepRouterRoute.name,
+                      path: 'marriage-celebration-fourth-step-router-page',
+                      parent: MarriageCelebrationStepperRoute.name,
                     ),
                   ],
-                ),
-                RouteConfig(
-                  MarriageCelebrationThirdStepRouterRoute.name,
-                  path: 'marriage-celebration-third-step-router-page',
-                  parent: MarriageCelebrationRouterRoute.name,
-                  children: [
-                    RouteConfig(
-                      ThirdStepContractingPartyRoute.name,
-                      path: '',
-                      parent: MarriageCelebrationThirdStepRouterRoute.name,
-                      children: [
-                        RouteConfig(
-                          ContractingPartyRoute.name,
-                          path: '',
-                          parent: ThirdStepContractingPartyRoute.name,
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                RouteConfig(
-                  MarriageCelebrationFourthStepRouterRoute.name,
-                  path: 'marriage-celebration-fourth-step-router-page',
-                  parent: MarriageCelebrationRouterRoute.name,
                 ),
               ],
             ),
@@ -2291,6 +2307,19 @@ class RejectionStepMarriageCelebrationRouteArgs {
 }
 
 /// generated route for
+/// [MarriageCelebrationStepperPage]
+class MarriageCelebrationStepperRoute extends PageRouteInfo<void> {
+  const MarriageCelebrationStepperRoute({List<PageRouteInfo>? children})
+      : super(
+          MarriageCelebrationStepperRoute.name,
+          path: 'marriage-celebration-stepper-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'MarriageCelebrationStepperRoute';
+}
+
+/// generated route for
 /// [MarriageCelebrationFirstStepRouterPage]
 class MarriageCelebrationFirstStepRouterRoute
     extends PageRouteInfo<MarriageCelebrationFirstStepRouterRouteArgs> {
@@ -2301,7 +2330,7 @@ class MarriageCelebrationFirstStepRouterRoute
     List<PageRouteInfo>? children,
   }) : super(
           MarriageCelebrationFirstStepRouterRoute.name,
-          path: 'marriage-celebration-first-step-router-page',
+          path: '',
           args: MarriageCelebrationFirstStepRouterRouteArgs(
             key: key,
             operation: operation,
