@@ -75,7 +75,7 @@ Future<void> notifyCompletePaymentToServices(
         id: placeToPayTransactionDetails.id,
         transactionCode: placeToPayTransactionDetails.transactionCode,
         paymentType: PaymentMethodType.placeToPay,
-        //TODO ver q cosa es esto, no se de donde sacarlo
+        // TODO(alejandro): ver q cosa es esto, no se de donde sacarlo
         paymentCode: 'PAYMENT CODE',
       ),
     );

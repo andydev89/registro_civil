@@ -137,7 +137,6 @@ class Marriage extends _$Marriage {
   Future<Result<bool, StatusCodeType>> marriage(
     MarriageCelebrationModel model,
   ) async {
-    final x = model.toJson();
     final api = ref.watch(apiProvider);
     final result = await api.marriage(model);
     if (result.success) {

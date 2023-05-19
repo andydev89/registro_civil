@@ -15,6 +15,7 @@ import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key, required this.onLogin});
+  // ignore: avoid_positional_boolean_parameters
   final void Function(BuildContext, bool) onLogin;
 
   @override
