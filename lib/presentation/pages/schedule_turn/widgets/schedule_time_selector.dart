@@ -21,18 +21,20 @@ class ScheduleTimeSelector extends ConsumerWidget {
     return RadioTimeSelector(
       formControl: formControl,
       label: l10n.horDisponibles,
-      times: initialTime != null && endTime != null ? List.generate(
-        (endTime!.hour - initialTime!.hour) + 1,
-        (index) {
-          // print(index);
-          // print(initialTime);
-          // print(endTime);
-          return TimeOfDay(
-            hour: initialTime!.hour + index,
-            minute: initialTime!.minute,
-          );
-        },
-      ) : [],
+      times: initialTime != null && endTime != null
+          ? List.generate(
+              (endTime!.hour - initialTime!.hour) + 1,
+              (index) {
+                // print(index);
+                // print(initialTime);
+                // print(endTime);
+                return TimeOfDay(
+                  hour: initialTime!.hour + index,
+                  minute: initialTime!.minute,
+                );
+              },
+            )
+          : [],
     );
   }
 }

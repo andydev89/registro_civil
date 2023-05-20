@@ -55,7 +55,12 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
             ? RefreshStatus(onRefresh: onError)
             : isLoading
                 ? const LoadingStatusAdaptative()
-                : Assets.svg.calendar.svg(),
+                : Assets.svg.calendar
+                    .svg(
+                      width: 20,
+                      height: 20,
+                    )
+                    .horizontalPadding(10),
         onTap: (control) => !readOnly || isLoading
             ? showDialog<Widget>(
                 context: context,
@@ -143,17 +148,17 @@ class _CustomCalendarState extends State<CustomCalendar> {
     return TableCalendar(
       firstDay: DateTime.now(),
       lastDay: DateTime.now().add(const Duration(days: 365 * 30)),
-      onPageChanged: (focusedDay) async {
-        _focusedDay = focusedDay;
-        if (mounted) {
-          final availablesDays =
-              await widget.onPageChanged?.call(focusedDay) ?? [];
-          setState(() {
-            widget.availablesDate.clear();
-            widget.availablesDate.addAll(availablesDays);
-          });
-        }
-      },
+      // onPageChanged: (focusedDay) async {
+      //   _focusedDay = focusedDay;
+      //   if (mounted) {
+      //     final availablesDays =
+      //         await widget.onPageChanged?.call(focusedDay) ?? [];
+      //     setState(() {
+      //       widget.availablesDate.clear();
+      //       widget.availablesDate.addAll(availablesDays);
+      //     });
+      //   }
+      // },
       focusedDay: _focusedDay,
       // selectedDayPredicate: (day) =>  _selectedDays.contains(day)
       selectedDayPredicate: (day) {
