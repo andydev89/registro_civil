@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'change_of_name_payment_model.dart';
+part of 'notify_service_payment_done_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,44 +14,48 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ChangeOfNamePaymentModel _$ChangeOfNamePaymentModelFromJson(
+NotifyServicePaymentDoneModel _$NotifyServicePaymentDoneModelFromJson(
     Map<String, dynamic> json) {
-  return _ChangeOfNamePaymentModel.fromJson(json);
+  return _NotifyServicePaymentDoneModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ChangeOfNamePaymentModel {
-  String get id => throw _privateConstructorUsedError;
+mixin _$NotifyServicePaymentDoneModel {
   String get transactionCode => throw _privateConstructorUsedError;
   PaymentMethodType get paymentType => throw _privateConstructorUsedError;
+
+  ///Se utiliza para cuando es pago corresponsal, en place to pay es la referencia
   String get paymentCode => throw _privateConstructorUsedError;
-  String get civilRegistrationId => throw _privateConstructorUsedError;
+
+  ///En pago corresponsal es null
+  String? get civilRegistrationId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ChangeOfNamePaymentModelCopyWith<ChangeOfNamePaymentModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $NotifyServicePaymentDoneModelCopyWith<NotifyServicePaymentDoneModel>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ChangeOfNamePaymentModelCopyWith<$Res> {
-  factory $ChangeOfNamePaymentModelCopyWith(ChangeOfNamePaymentModel value,
-          $Res Function(ChangeOfNamePaymentModel) then) =
-      _$ChangeOfNamePaymentModelCopyWithImpl<$Res, ChangeOfNamePaymentModel>;
+abstract class $NotifyServicePaymentDoneModelCopyWith<$Res> {
+  factory $NotifyServicePaymentDoneModelCopyWith(
+          NotifyServicePaymentDoneModel value,
+          $Res Function(NotifyServicePaymentDoneModel) then) =
+      _$NotifyServicePaymentDoneModelCopyWithImpl<$Res,
+          NotifyServicePaymentDoneModel>;
   @useResult
   $Res call(
-      {String id,
-      String transactionCode,
+      {String transactionCode,
       PaymentMethodType paymentType,
       String paymentCode,
-      String civilRegistrationId});
+      String? civilRegistrationId});
 }
 
 /// @nodoc
-class _$ChangeOfNamePaymentModelCopyWithImpl<$Res,
-        $Val extends ChangeOfNamePaymentModel>
-    implements $ChangeOfNamePaymentModelCopyWith<$Res> {
-  _$ChangeOfNamePaymentModelCopyWithImpl(this._value, this._then);
+class _$NotifyServicePaymentDoneModelCopyWithImpl<$Res,
+        $Val extends NotifyServicePaymentDoneModel>
+    implements $NotifyServicePaymentDoneModelCopyWith<$Res> {
+  _$NotifyServicePaymentDoneModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -61,17 +65,12 @@ class _$ChangeOfNamePaymentModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? transactionCode = null,
     Object? paymentType = null,
     Object? paymentCode = null,
-    Object? civilRegistrationId = null,
+    Object? civilRegistrationId = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       transactionCode: null == transactionCode
           ? _value.transactionCode
           : transactionCode // ignore: cast_nullable_to_non_nullable
@@ -84,54 +83,49 @@ class _$ChangeOfNamePaymentModelCopyWithImpl<$Res,
           ? _value.paymentCode
           : paymentCode // ignore: cast_nullable_to_non_nullable
               as String,
-      civilRegistrationId: null == civilRegistrationId
+      civilRegistrationId: freezed == civilRegistrationId
           ? _value.civilRegistrationId
           : civilRegistrationId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ChangeOfNamePaymentModelCopyWith<$Res>
-    implements $ChangeOfNamePaymentModelCopyWith<$Res> {
-  factory _$$_ChangeOfNamePaymentModelCopyWith(
-          _$_ChangeOfNamePaymentModel value,
-          $Res Function(_$_ChangeOfNamePaymentModel) then) =
-      __$$_ChangeOfNamePaymentModelCopyWithImpl<$Res>;
+abstract class _$$_NotifyServicePaymentDoneModelCopyWith<$Res>
+    implements $NotifyServicePaymentDoneModelCopyWith<$Res> {
+  factory _$$_NotifyServicePaymentDoneModelCopyWith(
+          _$_NotifyServicePaymentDoneModel value,
+          $Res Function(_$_NotifyServicePaymentDoneModel) then) =
+      __$$_NotifyServicePaymentDoneModelCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String id,
-      String transactionCode,
+      {String transactionCode,
       PaymentMethodType paymentType,
       String paymentCode,
-      String civilRegistrationId});
+      String? civilRegistrationId});
 }
 
 /// @nodoc
-class __$$_ChangeOfNamePaymentModelCopyWithImpl<$Res>
-    extends _$ChangeOfNamePaymentModelCopyWithImpl<$Res,
-        _$_ChangeOfNamePaymentModel>
-    implements _$$_ChangeOfNamePaymentModelCopyWith<$Res> {
-  __$$_ChangeOfNamePaymentModelCopyWithImpl(_$_ChangeOfNamePaymentModel _value,
-      $Res Function(_$_ChangeOfNamePaymentModel) _then)
+class __$$_NotifyServicePaymentDoneModelCopyWithImpl<$Res>
+    extends _$NotifyServicePaymentDoneModelCopyWithImpl<$Res,
+        _$_NotifyServicePaymentDoneModel>
+    implements _$$_NotifyServicePaymentDoneModelCopyWith<$Res> {
+  __$$_NotifyServicePaymentDoneModelCopyWithImpl(
+      _$_NotifyServicePaymentDoneModel _value,
+      $Res Function(_$_NotifyServicePaymentDoneModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? transactionCode = null,
     Object? paymentType = null,
     Object? paymentCode = null,
-    Object? civilRegistrationId = null,
+    Object? civilRegistrationId = freezed,
   }) {
-    return _then(_$_ChangeOfNamePaymentModel(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$_NotifyServicePaymentDoneModel(
       transactionCode: null == transactionCode
           ? _value.transactionCode
           : transactionCode // ignore: cast_nullable_to_non_nullable
@@ -144,49 +138,51 @@ class __$$_ChangeOfNamePaymentModelCopyWithImpl<$Res>
           ? _value.paymentCode
           : paymentCode // ignore: cast_nullable_to_non_nullable
               as String,
-      civilRegistrationId: null == civilRegistrationId
+      civilRegistrationId: freezed == civilRegistrationId
           ? _value.civilRegistrationId
           : civilRegistrationId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ChangeOfNamePaymentModel implements _ChangeOfNamePaymentModel {
-  const _$_ChangeOfNamePaymentModel(
-      {required this.id,
-      required this.transactionCode,
+class _$_NotifyServicePaymentDoneModel
+    implements _NotifyServicePaymentDoneModel {
+  const _$_NotifyServicePaymentDoneModel(
+      {required this.transactionCode,
       required this.paymentType,
       required this.paymentCode,
       required this.civilRegistrationId});
 
-  factory _$_ChangeOfNamePaymentModel.fromJson(Map<String, dynamic> json) =>
-      _$$_ChangeOfNamePaymentModelFromJson(json);
+  factory _$_NotifyServicePaymentDoneModel.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_NotifyServicePaymentDoneModelFromJson(json);
 
-  @override
-  final String id;
   @override
   final String transactionCode;
   @override
   final PaymentMethodType paymentType;
+
+  ///Se utiliza para cuando es pago corresponsal, en place to pay es la referencia
   @override
   final String paymentCode;
+
+  ///En pago corresponsal es null
   @override
-  final String civilRegistrationId;
+  final String? civilRegistrationId;
 
   @override
   String toString() {
-    return 'ChangeOfNamePaymentModel(id: $id, transactionCode: $transactionCode, paymentType: $paymentType, paymentCode: $paymentCode, civilRegistrationId: $civilRegistrationId)';
+    return 'NotifyServicePaymentDoneModel(transactionCode: $transactionCode, paymentType: $paymentType, paymentCode: $paymentCode, civilRegistrationId: $civilRegistrationId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChangeOfNamePaymentModel &&
-            (identical(other.id, id) || other.id == id) &&
+            other is _$_NotifyServicePaymentDoneModel &&
             (identical(other.transactionCode, transactionCode) ||
                 other.transactionCode == transactionCode) &&
             (identical(other.paymentType, paymentType) ||
@@ -199,47 +195,50 @@ class _$_ChangeOfNamePaymentModel implements _ChangeOfNamePaymentModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, transactionCode, paymentType,
+  int get hashCode => Object.hash(runtimeType, transactionCode, paymentType,
       paymentCode, civilRegistrationId);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChangeOfNamePaymentModelCopyWith<_$_ChangeOfNamePaymentModel>
-      get copyWith => __$$_ChangeOfNamePaymentModelCopyWithImpl<
-          _$_ChangeOfNamePaymentModel>(this, _$identity);
+  _$$_NotifyServicePaymentDoneModelCopyWith<_$_NotifyServicePaymentDoneModel>
+      get copyWith => __$$_NotifyServicePaymentDoneModelCopyWithImpl<
+          _$_NotifyServicePaymentDoneModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ChangeOfNamePaymentModelToJson(
+    return _$$_NotifyServicePaymentDoneModelToJson(
       this,
     );
   }
 }
 
-abstract class _ChangeOfNamePaymentModel implements ChangeOfNamePaymentModel {
-  const factory _ChangeOfNamePaymentModel(
-      {required final String id,
-      required final String transactionCode,
-      required final PaymentMethodType paymentType,
-      required final String paymentCode,
-      required final String civilRegistrationId}) = _$_ChangeOfNamePaymentModel;
+abstract class _NotifyServicePaymentDoneModel
+    implements NotifyServicePaymentDoneModel {
+  const factory _NotifyServicePaymentDoneModel(
+          {required final String transactionCode,
+          required final PaymentMethodType paymentType,
+          required final String paymentCode,
+          required final String? civilRegistrationId}) =
+      _$_NotifyServicePaymentDoneModel;
 
-  factory _ChangeOfNamePaymentModel.fromJson(Map<String, dynamic> json) =
-      _$_ChangeOfNamePaymentModel.fromJson;
+  factory _NotifyServicePaymentDoneModel.fromJson(Map<String, dynamic> json) =
+      _$_NotifyServicePaymentDoneModel.fromJson;
 
-  @override
-  String get id;
   @override
   String get transactionCode;
   @override
   PaymentMethodType get paymentType;
   @override
+
+  ///Se utiliza para cuando es pago corresponsal, en place to pay es la referencia
   String get paymentCode;
   @override
-  String get civilRegistrationId;
+
+  ///En pago corresponsal es null
+  String? get civilRegistrationId;
   @override
   @JsonKey(ignore: true)
-  _$$_ChangeOfNamePaymentModelCopyWith<_$_ChangeOfNamePaymentModel>
+  _$$_NotifyServicePaymentDoneModelCopyWith<_$_NotifyServicePaymentDoneModel>
       get copyWith => throw _privateConstructorUsedError;
 }

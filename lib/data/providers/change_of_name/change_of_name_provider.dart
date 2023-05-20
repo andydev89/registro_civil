@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'change_of_name_provider.g.dart';
 
 @riverpod
-Future<Result<CommandModel, StatusCodeType>> changeOfName(
+Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> changeOfName(
   ChangeOfNameRef ref, {
   required ChangeOfNameModel changeOfNameModel,
 }) async {

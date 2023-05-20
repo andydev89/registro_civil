@@ -55,19 +55,3 @@ class RelativeModel {
 
   Map<String, dynamic> toJson() => _$RelativeModelToJson(this);
 }
-
-@JsonSerializable()
-class BookedReceiptModel {
-  BookedReceiptModel({
-    required this.id,
-    required this.transactionCode,
-  });
-
-  factory BookedReceiptModel.fromJson(Map<String, dynamic> json) =>
-      _$BookedReceiptModelFromJson(json);
-
-  final List<String> id;
-  final String transactionCode;
-
-  Map<String, dynamic> toJson() => _$BookedReceiptModelToJson(this);
-}
