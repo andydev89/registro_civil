@@ -189,6 +189,8 @@ class OffersWidget extends ConsumerWidget {
                       controller.closeDialog(context);
                       context.navigateTo(
                         ChoosePaymentMethodRoute(
+                          //TODO agregar el codigo de transaccion
+                          transactionCode: '',
                           service: ref
                               .read(offersProvider.notifier)
                               .convertToTypeServiceModel(context),

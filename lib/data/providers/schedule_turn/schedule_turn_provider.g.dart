@@ -248,17 +248,17 @@ class SchedulesByUserProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$confirmScheduleHash() => r'0701f34420289ba3e7343584d8c13a8f141b989e';
-typedef ConfirmScheduleRef
-    = AutoDisposeFutureProviderRef<Result<BookedReceiptModel, StatusCodeType>>;
+String _$confirmScheduleHash() => r'474602a930d441434d976c147ce5ea061d2945f3';
+typedef ConfirmScheduleRef = AutoDisposeFutureProviderRef<
+    Result<CommandListWithTransactionCodeModel, StatusCodeType>>;
 
 /// See also [confirmSchedule].
 @ProviderFor(confirmSchedule)
 const confirmScheduleProvider = ConfirmScheduleFamily();
 
 /// See also [confirmSchedule].
-class ConfirmScheduleFamily
-    extends Family<AsyncValue<Result<BookedReceiptModel, StatusCodeType>>> {
+class ConfirmScheduleFamily extends Family<
+    AsyncValue<Result<CommandListWithTransactionCodeModel, StatusCodeType>>> {
   /// See also [confirmSchedule].
   const ConfirmScheduleFamily();
 
@@ -297,7 +297,7 @@ class ConfirmScheduleFamily
 
 /// See also [confirmSchedule].
 class ConfirmScheduleProvider extends AutoDisposeFutureProvider<
-    Result<BookedReceiptModel, StatusCodeType>> {
+    Result<CommandListWithTransactionCodeModel, StatusCodeType>> {
   /// See also [confirmSchedule].
   ConfirmScheduleProvider({
     required this.recipt,

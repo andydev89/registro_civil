@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
@@ -112,7 +110,6 @@ class VerifyInformationPage extends ConsumerWidget {
               PrimaryAsyncButton(
                 title: l10n.aceptar,
                 onPressed: () {
-                  log(changeOfNameModel.toJson().toString());
                   return ref
                       .read(
                         changeOfNameProvider(
@@ -122,15 +119,11 @@ class VerifyInformationPage extends ConsumerWidget {
                       .then(
                         (value) => value.when(
                           ok: (data) {
-                            // ref.read(offersProvider.notifier).addOffer(
-                            //       OffersModel(
-                            //         simpleCertificate: typeService,
-                            //       ),
-                            //     );
-                            // context.navigateTo(const HomeRouterRoute());
-                            // showOffersDialog(context);
                             context.navigateTo(
-                              ChoosePaymentMethodRoute(service: typeService),
+                              ChoosePaymentMethodRoute(
+                                service: typeService,
+                                transactionCode: data.transactionCode,
+                              ),
                             );
                           },
                           err: (error) => showAlert(

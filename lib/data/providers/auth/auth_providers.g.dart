@@ -173,7 +173,7 @@ final loginProvider = AutoDisposeAsyncNotifierProvider<Login, bool>.internal(
 
 typedef _$Login = AutoDisposeAsyncNotifier<bool>;
 String _$registerValidateCitizenHash() =>
-    r'650c54b2c505e433d183b04c1b5fc95af9f72f0e';
+    r'9bc3f4eb0b39249a07efed00b4bd1607c0c70323';
 
 /// See also [RegisterValidateCitizen].
 @ProviderFor(RegisterValidateCitizen)

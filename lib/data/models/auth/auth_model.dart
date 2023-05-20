@@ -43,21 +43,6 @@ class TelephoneOperatorModel implements Translatable {
 }
 
 @JsonSerializable()
-class CommandModel {
-  CommandModel({
-    required this.id,
-    required this.command,
-  });
-
-  factory CommandModel.fromJson(Map<String, dynamic> json) =>
-      _$CommandModelFromJson(json);
-  final String id;
-  final String command;
-
-  Map<String, dynamic> toJson() => _$CommandModelToJson(this);
-}
-
-@JsonSerializable()
 class AuthCodeModel {
   AuthCodeModel({
     required this.code,

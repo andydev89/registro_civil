@@ -115,23 +115,20 @@ class TurnDetailsPage extends ConsumerWidget {
         onPressed: () => ref
             .read(confirmScheduleProvider(recipt: receipt).future)
             .when(
-              ok: (value) => paymentMethod ==
-                      PaymentMethodType.correspondentPayment
-                  ? context.replaceRoute(
-                      NotificationRoute(
-                        notificationType: NotificationType.success,
-                        message: l10n.turnoReservadoMensajeFormal,
-                        bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
-                        buttonText: l10n.misTurnos,
-                        onTap: (cxt) => cxt.replaceRoute(const MyTurnsRoute()),
-                      ),
-                    )
-                  : context.replaceRoute(
-                      MakePaymentRoute(
-                        requestNumber: value.transactionCode,
-                        buttonText: l10n.continuar,
-                        service: typeOfService,
-                        onTapSuccessPayment: (cxt) => context.replaceRoute(
+              ok: (value) {
+                if (typeOfService.isFreeService) {
+                  context.replaceRoute(
+                    NotificationRoute(
+                      notificationType: NotificationType.success,
+                      message: l10n.turnoReservadoMensajeFormal,
+                      bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
+                      buttonText: l10n.misTurnos,
+                      onTap: (cxt) => cxt.replaceRoute(const MyTurnsRoute()),
+                    ),
+                  );
+                } else {
+                  paymentMethod == PaymentMethodType.correspondentPayment
+                      ? context.replaceRoute(
                           NotificationRoute(
                             notificationType: NotificationType.success,
                             message: l10n.turnoReservadoMensajeFormal,
@@ -140,9 +137,28 @@ class TurnDetailsPage extends ConsumerWidget {
                             onTap: (cxt) =>
                                 cxt.replaceRoute(const MyTurnsRoute()),
                           ),
-                        ),
-                      ),
-                    ),
+                        )
+                      : context.replaceRoute(
+                          MakePaymentRoute(
+                            transactionCode: value.transactionCode,
+                            requestNumber: value.transactionCode,
+                            buttonText: l10n.continuar,
+                            service: typeOfService,
+                            onTapSuccessPayment: (cxt) => context.replaceRoute(
+                              NotificationRoute(
+                                notificationType: NotificationType.success,
+                                message: l10n.turnoReservadoMensajeFormal,
+                                bottonTitle:
+                                    l10n.turnoReservadoMensajeCorreoFormal,
+                                buttonText: l10n.misTurnos,
+                                onTap: (cxt) =>
+                                    cxt.replaceRoute(const MyTurnsRoute()),
+                              ),
+                            ),
+                          ),
+                        );
+                }
+              },
               err: (error) => showAlert(
                 error.translate(context),
                 TypeAlert.error,

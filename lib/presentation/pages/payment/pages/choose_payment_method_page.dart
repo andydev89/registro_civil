@@ -12,8 +12,12 @@ class ChoosePaymentMethodPage extends ConsumerWidget {
   const ChoosePaymentMethodPage({
     super.key,
     required this.service,
+    required this.transactionCode,
+    this.requestNumber,
   });
   final TypeServiceModel service;
+  final String transactionCode;
+  final String? requestNumber;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,6 +56,7 @@ class ChoosePaymentMethodPage extends ConsumerWidget {
                     : context.replaceRoute(
                         MakePaymentRoute(
                           buttonText: l10n.continuar,
+                          transactionCode: transactionCode,
                           service: service,
                           onTapSuccessPayment: (cxt) => context.replaceRoute(
                             NotificationRoute(

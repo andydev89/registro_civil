@@ -32,17 +32,6 @@ Map<String, dynamic> _$TelephoneOperatorModelToJson(
       'name': instance.name,
     };
 
-CommandModel _$CommandModelFromJson(Map<String, dynamic> json) => CommandModel(
-      id: json['id'] as String,
-      command: json['command'] as String,
-    );
-
-Map<String, dynamic> _$CommandModelToJson(CommandModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'command': instance.command,
-    };
-
 AuthCodeModel _$AuthCodeModelFromJson(Map<String, dynamic> json) =>
     AuthCodeModel(
       code: json['code'] as String,
