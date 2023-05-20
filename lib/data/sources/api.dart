@@ -133,7 +133,6 @@ abstract class Api {
     @Path('id') String id,
   );
 
-
   @retrofit_headers.Headers({'Content-Type': 'application/json'})
   @POST('/residentialregistration/api/registration')
   Future<ResponseModel<CommandModel>> residenceRegistration(
@@ -226,20 +225,21 @@ abstract class Api {
   );
 
   @POST('/schedule/api/receipt/payment')
-  Future<ResponseModel<CommandWithTransactionCodeModel>> notifyPaymentOfSchedule(
+  Future<ResponseModel<CommandWithTransactionCodeModel>>
+      notifyPaymentOfSchedule(
     @Body() NotifyServicePaymentDoneModel notifyServicePaymentDoneModel,
   );
 
   //PLACE TO PAY PAYMENT
   @POST(
-    'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
+    'https://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
   )
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
     @Body() PlaceToPayModel placeToPayModel,
   );
 
   @GET(
-    'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/{reference}',
+    'https://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/{reference}',
   )
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
     @Path('reference') String reference,

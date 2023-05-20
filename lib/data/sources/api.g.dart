@@ -1176,7 +1176,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
+              'https://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1200,7 +1200,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/${reference}',
+              'https://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/${reference}',
               queryParameters: queryParameters,
               data: _data,
             )
