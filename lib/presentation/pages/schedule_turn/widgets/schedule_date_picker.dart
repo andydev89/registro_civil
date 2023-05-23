@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
-import 'package:registro_civil_apk/data/models/services/type_services_model.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/schedule_turn/schedule_turn_provider.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/primary_reactive_date_picker.dart';
 
@@ -57,6 +56,7 @@ class ScheduleDatePicker extends ConsumerWidget {
       }
     });
     return PrimaryReactiveDatePicker(
+      key: key,
       formControl: formControl,
       readOnly: readOnly,
       label: label,
@@ -77,26 +77,37 @@ class ScheduleDatePicker extends ConsumerWidget {
         ),
       ),
       onDaySelected: (selectedDay) async {
-        final result = await ref.read(
-          availableSchedulesProvider(
-            startDate: selectedDay.copyWith(day: 1),
-            endDate: selectedDay.lastDateOfMonth,
-            agency: agency.value?.id ?? '',
-            typeOfService: typeOfServiceModel.id,
-            special: false,
-          ).future,
+        final schedulesTemp = schedules.asData?.value.when(
+              ok: (data) => data.map((e) => e).toList(),
+              err: (error) => <ScheduleModel>[],
+            ) ??
+            <ScheduleModel>[];
+        final selectedSchedue = schedulesTemp.firstWhere(
+          (element) => element.date.onlyDate == selectedDay.onlyDate,
         );
-        result.when(
-          ok: (data) {
-            final selectedSchedue = data.firstWhere(
-              (element) => element.date.onlyDate == selectedDay.onlyDate,
-            );
-            initialTime?.updateValue(selectedSchedue.startTime);
-            endTime?.updateValue(selectedSchedue.endingTime);
-            scheduleId.updateValue(selectedSchedue.id);
-          },
-          err: (error) => null,
-        );
+        initialTime?.updateValue(selectedSchedue.startTime);
+        endTime?.updateValue(selectedSchedue.endingTime);
+        scheduleId.updateValue(selectedSchedue.id);
+        // final result = await ref.read(
+        //   availableSchedulesProvider(
+        //     startDate: selectedDay.copyWith(day: 1),
+        //     endDate: selectedDay.lastDateOfMonth,
+        //     agency: agency.value?.id ?? '',
+        //     typeOfService: typeOfServiceModel.id,
+        //     special: false,
+        //   ).future,
+        // );
+        // result.when(
+        //   ok: (data) {
+        //     final selectedSchedue = data.firstWhere(
+        //       (element) => element.date.onlyDate == selectedDay.onlyDate,
+        //     );
+        //     initialTime?.updateValue(selectedSchedue.startTime);
+        //     endTime?.updateValue(selectedSchedue.endingTime);
+        //     scheduleId.updateValue(selectedSchedue.id);
+        //   },
+        //   err: (error) => null,
+        // );
       },
       onPageChanged: (date) async {
         final result = await ref.refresh(

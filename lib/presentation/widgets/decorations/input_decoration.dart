@@ -20,8 +20,12 @@ InputDecoration primaryInputDecoration({
     suffixIcon: suffixIcon?.horizontalPadding(10),
     prefixIcon: prefixIcon?.horizontalPadding(15),
     // prefixIconConstraints: const BoxConstraints(maxHeight: 20),
-    suffixIconConstraints:
-        setSuffixIconConstraints ? const BoxConstraints(maxHeight: 20) : null,
+    suffixIconConstraints: setSuffixIconConstraints
+        ? const BoxConstraints(
+            // maxWidth: 40,
+            maxHeight: 40,
+          )
+        : null,
     hintText: hintText,
     hintStyle: TextStyle(
       color: light ? Colors.white : Colors.grey,
