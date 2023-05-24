@@ -108,7 +108,7 @@ class CustomCalendar extends StatefulWidget {
 }
 
 class _CustomCalendarState extends State<CustomCalendar> {
-  DateTime _focusedDay = DateTime.now();
+  final DateTime _focusedDay = DateTime.now();
   // final Set<DateTime> _selectedDays = LinkedHashSet<DateTime>(
   //   equals: isSameDay,
   //   hashCode: _getHashCode,
