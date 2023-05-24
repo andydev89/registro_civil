@@ -279,6 +279,17 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    CodeRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<CodeRouteArgs>(orElse: () => const CodeRouteArgs());
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: CodePage(
+          key: args.key,
+          onCodeAccepted: args.onCodeAccepted,
+        ),
+      );
+    },
     WebviewPaymentRoute.name: (routeData) {
       final args = routeData.argsAs<WebviewPaymentRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -327,19 +338,6 @@ class _$AppRouter extends RootStackRouter {
         child: ScheduleTurnFirstStepRouterPage(
           key: args.key,
           typeOfService: args.typeOfService,
-        ),
-      );
-    },
-    CodeRoute.name: (routeData) {
-      final args = routeData.argsAs<CodeRouteArgs>();
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: CodePage(
-          key: args.key,
-          typeOfService: args.typeOfService,
-          includMe: args.includMe,
-          procedureType: args.procedureType,
-          relatives: args.relatives,
         ),
       );
     },
@@ -1096,6 +1094,11 @@ class _$AppRouter extends RootStackRouter {
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
+              CodeRoute.name,
+              path: 'code-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
               WebviewPaymentRoute.name,
               path: 'webview-payment-page',
               parent: RootRouterRoute.name,
@@ -1676,6 +1679,40 @@ class MakePaymentRouteArgs {
 }
 
 /// generated route for
+/// [CodePage]
+class CodeRoute extends PageRouteInfo<CodeRouteArgs> {
+  CodeRoute({
+    Key? key,
+    void Function(BuildContext)? onCodeAccepted,
+  }) : super(
+          CodeRoute.name,
+          path: 'code-page',
+          args: CodeRouteArgs(
+            key: key,
+            onCodeAccepted: onCodeAccepted,
+          ),
+        );
+
+  static const String name = 'CodeRoute';
+}
+
+class CodeRouteArgs {
+  const CodeRouteArgs({
+    this.key,
+    this.onCodeAccepted,
+  });
+
+  final Key? key;
+
+  final void Function(BuildContext)? onCodeAccepted;
+
+  @override
+  String toString() {
+    return 'CodeRouteArgs{key: $key, onCodeAccepted: $onCodeAccepted}';
+  }
+}
+
+/// generated route for
 /// [WebviewPaymentPage]
 class WebviewPaymentRoute extends PageRouteInfo<WebviewPaymentRouteArgs> {
   WebviewPaymentRoute({
@@ -1829,55 +1866,6 @@ class ScheduleTurnFirstStepRouterRouteArgs {
   @override
   String toString() {
     return 'ScheduleTurnFirstStepRouterRouteArgs{key: $key, typeOfService: $typeOfService}';
-  }
-}
-
-/// generated route for
-/// [CodePage]
-class CodeRoute extends PageRouteInfo<CodeRouteArgs> {
-  CodeRoute({
-    Key? key,
-    required TypeServiceModel typeOfService,
-    required bool includMe,
-    required ProcedureType procedureType,
-    required List<RelativeModel> relatives,
-  }) : super(
-          CodeRoute.name,
-          path: 'code-page',
-          args: CodeRouteArgs(
-            key: key,
-            typeOfService: typeOfService,
-            includMe: includMe,
-            procedureType: procedureType,
-            relatives: relatives,
-          ),
-        );
-
-  static const String name = 'CodeRoute';
-}
-
-class CodeRouteArgs {
-  const CodeRouteArgs({
-    this.key,
-    required this.typeOfService,
-    required this.includMe,
-    required this.procedureType,
-    required this.relatives,
-  });
-
-  final Key? key;
-
-  final TypeServiceModel typeOfService;
-
-  final bool includMe;
-
-  final ProcedureType procedureType;
-
-  final List<RelativeModel> relatives;
-
-  @override
-  String toString() {
-    return 'CodeRouteArgs{key: $key, typeOfService: $typeOfService, includMe: $includMe, procedureType: $procedureType, relatives: $relatives}';
   }
 }
 

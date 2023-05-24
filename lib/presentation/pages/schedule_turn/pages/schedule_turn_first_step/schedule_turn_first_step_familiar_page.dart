@@ -108,41 +108,22 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
             title: l10n.continuar,
             onPressed: formModel.form.valid
                 ? () {
-                    if (formModel.model.paymentMethod ==
-                        PaymentMethodType.correspondentPayment) {
-                      context.navigateTo(
-                        CodeRoute(
-                          typeOfService: typeOfService,
-                          includMe: formModel.model.scheduleForMe,
-                          procedureType: ProcedureType.familiar,
-                          relatives: formModel.model.family
-                              .map(
-                                (e) => RelativeModel(
-                                  identification: e.identificationNumber!,
-                                  familiarKin: e.relationship!,
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      );
-                    } else {
-                      context.navigateTo(
-                        ScheduleTurnSecondRoute(
-                          paymentMethod: formModel.model.paymentMethod,
-                          typeOfService: typeOfService,
-                          includMe: formModel.model.scheduleForMe,
-                          procedureType: ProcedureType.familiar,
-                          relatives: formModel.model.family
-                              .map(
-                                (e) => RelativeModel(
-                                  identification: e.identificationNumber!,
-                                  familiarKin: e.relationship!,
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      );
-                    }
+                    context.navigateTo(
+                      ScheduleTurnSecondRoute(
+                        paymentMethod: formModel.model.paymentMethod,
+                        typeOfService: typeOfService,
+                        includMe: formModel.model.scheduleForMe,
+                        procedureType: ProcedureType.familiar,
+                        relatives: formModel.model.family
+                            .map(
+                              (e) => RelativeModel(
+                                identification: e.identificationNumber!,
+                                familiarKin: e.relationship!,
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    );
                   }
                 : null,
           ),

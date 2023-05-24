@@ -129,13 +129,18 @@ class TurnDetailsPage extends ConsumerWidget {
                 } else {
                   paymentMethod == PaymentMethodType.correspondentPayment
                       ? context.replaceRoute(
-                          NotificationRoute(
-                            notificationType: NotificationType.success,
-                            message: l10n.turnoReservadoMensajeFormal,
-                            bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
-                            buttonText: l10n.misTurnos,
-                            onTap: (cxt) =>
-                                cxt.replaceRoute(const MyTurnsRoute()),
+                          CodeRoute(
+                            onCodeAccepted: (ctx) => ctx.replaceRoute(
+                              NotificationRoute(
+                                notificationType: NotificationType.success,
+                                message: l10n.turnoReservadoMensajeFormal,
+                                bottonTitle:
+                                    l10n.turnoReservadoMensajeCorreoFormal,
+                                buttonText: l10n.misTurnos,
+                                onTap: (cxt) =>
+                                    cxt.replaceRoute(const MyTurnsRoute()),
+                              ),
+                            ),
                           ),
                         )
                       : context.replaceRoute(
