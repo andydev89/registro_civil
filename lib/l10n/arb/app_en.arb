@@ -434,5 +434,7 @@
   "estimado": "Dear",
   "ustedSeEncuentraSolicitandoElTramiteDe": "You are requesting the process of",
   "laSolicitudDeNombreQueRealizaEs": "The name request you make is",
-  "obteniendoComoNombreResultante": "Obtaining as resulting name"
+  "obteniendoComoNombreResultante": "Obtaining as resulting name",
+  "laTransaccion": "The transaction",
+  "haSido": "Has been"
 }

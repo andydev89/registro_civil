@@ -12,6 +12,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MakePaymentPage extends ConsumerWidget {
   const MakePaymentPage({
@@ -23,12 +24,13 @@ class MakePaymentPage extends ConsumerWidget {
     this.onTapFailedPayment,
     required this.transactionCode,
   });
-  final String? requestNumber;
-  final String buttonText;
-  final TypeServiceModel service;
-  final String transactionCode;
+
   final void Function(BuildContext context)? onTapSuccessPayment;
   final void Function(BuildContext context)? onTapFailedPayment;
+  final String buttonText;
+  final String? requestNumber;
+  final TypeServiceModel service;
+  final String transactionCode;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -121,11 +123,20 @@ class MakePaymentPage extends ConsumerWidget {
                           color: blue,
                           textAlign: TextAlign.start,
                         ),
-                        // TODO(alejandro): hacer esto un link al correo
-                        const PrimaryCaption(
-                          'enlinea@registrocivil.gob.ec',
-                          color: blue,
-                          fontWeight: FontWeight.bold,
+                        InkWell(
+                          onTap: () async {
+                            final params = Uri(
+                              scheme: 'mailto',
+                              path: 'enlinea@registrocivil.gob.ec',
+                            );
+                            final url = Uri.parse(params.toString());
+                            await launchUrl(url);
+                          },
+                          child: const PrimaryCaption(
+                            'enlinea@registrocivil.gob.ec',
+                            color: blue,
+                            fontWeight: FontWeight.bold,
+                          ),
                         )
                       ],
                     ).horizontalPadding(20),
