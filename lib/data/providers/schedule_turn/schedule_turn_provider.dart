@@ -92,3 +92,21 @@ Future<Result<CommandListWithTransactionCodeModel, StatusCodeType>>
       ? Result.ok(response.data!)
       : Result.err(response.status);
 }
+
+@riverpod
+Future<Result<CheckRelationshipModel, StatusCodeType>> checkRelationship(
+  CheckRelationshipRef ref, {
+  required String firstNui,
+  required String secondNui,
+  required String relationship,
+}) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.checkRelationship(
+    firstNui,
+    secondNui,
+    relationship,
+  );
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}

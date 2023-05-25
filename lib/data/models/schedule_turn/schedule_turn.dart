@@ -1,3 +1,4 @@
+export 'check_relationship_model.dart';
 export 'receipt_model.dart';
 export 'schedule_model.dart';
 export 'schedule_turn_model.dart';

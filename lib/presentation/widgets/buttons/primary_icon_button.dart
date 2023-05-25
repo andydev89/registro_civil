@@ -26,7 +26,8 @@ class PrimaryIconButton extends StatelessWidget {
       width: width,
       height: height,
       decoration: ShapeDecoration(
-        gradient: gradientePrincipal(),
+        color: onPressed == null ? Colors.grey : null,
+        gradient: onPressed != null ? gradientePrincipal() : null,
         shape: shape ?? RoundedRectangleBorder(borderRadius: borderRadius()),
         shadows: const [
           BoxShadow(
@@ -48,12 +49,6 @@ class PrimaryIconButton extends StatelessWidget {
           ),
         ),
       ),
-      // child: RawMaterialButton(
-      //   shape: RoundedRectangleBorder(borderRadius: borderRadius()),
-      //   onPressed: onPressed,
-      //   child: icon,
-      //   // color: Colors.white,
-      // ),
     );
   }
 }

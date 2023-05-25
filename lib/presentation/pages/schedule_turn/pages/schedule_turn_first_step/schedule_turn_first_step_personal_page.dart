@@ -37,27 +37,15 @@ class ScheduleTurnFirstStepPersonalPage extends StatelessWidget {
             title: l10n.continuar,
             onPressed: formModel.form.valid
                 ? () {
-                    if (formModel.model.paymentMethod ==
-                        PaymentMethodType.correspondentPayment) {
-                      context.navigateTo(
-                        CodeRoute(
-                          typeOfService: typeOfService,
-                          includMe: true,
-                          procedureType: ProcedureType.personal,
-                          relatives: const [],
-                        ),
-                      );
-                    } else {
-                      context.navigateTo(
-                        ScheduleTurnSecondRoute(
-                          paymentMethod: formModel.model.paymentMethod,
-                          typeOfService: typeOfService,
-                          includMe: true,
-                          procedureType: ProcedureType.personal,
-                          relatives: const [],
-                        ),
-                      );
-                    }
+                    context.navigateTo(
+                      ScheduleTurnSecondRoute(
+                        paymentMethod: formModel.model.paymentMethod,
+                        typeOfService: typeOfService,
+                        includMe: true,
+                        procedureType: ProcedureType.personal,
+                        relatives: const [],
+                      ),
+                    );
                   }
                 : null,
           ),

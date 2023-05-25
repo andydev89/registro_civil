@@ -1078,6 +1078,8 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
 
   static const String relationshipControlName = "relationship";
 
+  static const String relationshipApprovedControlName = "relationshipApproved";
+
   final FamiliarFormModel? familiarFormModel;
 
   final FormGroup form;
@@ -1087,8 +1089,11 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   String identificationNumberControlPath() =>
       pathBuilder(identificationNumberControlName);
   String relationshipControlPath() => pathBuilder(relationshipControlName);
+  String relationshipApprovedControlPath() =>
+      pathBuilder(relationshipApprovedControlName);
   String? get _identificationNumberValue => identificationNumberControl?.value;
   RelationshipType? get _relationshipValue => relationshipControl?.value;
+  bool? get _relationshipApprovedValue => relationshipApprovedControl?.value;
   bool get containsIdentificationNumber {
     try {
       form.control(identificationNumberControlPath());
@@ -1107,11 +1112,23 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
     }
   }
 
+  bool get containsRelationshipApproved {
+    try {
+      form.control(relationshipApprovedControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get identificationNumberErrors => identificationNumberControl?.errors;
   Object? get relationshipErrors => relationshipControl?.errors;
+  Object? get relationshipApprovedErrors => relationshipApprovedControl?.errors;
   void get identificationNumberFocus =>
       form.focus(identificationNumberControlPath());
   void get relationshipFocus => form.focus(relationshipControlPath());
+  void get relationshipApprovedFocus =>
+      form.focus(relationshipApprovedControlPath());
   void identificationNumberRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1164,6 +1181,32 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
     }
   }
 
+  void relationshipApprovedRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsRelationshipApproved) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          relationshipApprovedControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            relationshipApprovedControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void identificationNumberValueUpdate(
     String? value, {
     bool updateParent = true,
@@ -1179,6 +1222,15 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
     bool emitEvent = true,
   }) {
     relationshipControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void relationshipApprovedValueUpdate(
+    bool? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    relationshipApprovedControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1200,6 +1252,15 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void relationshipApprovedValuePatch(
+    bool? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    relationshipApprovedControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void identificationNumberValueReset(
     String? value, {
     bool updateParent = true,
@@ -1218,6 +1279,15 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
   }) =>
       relationshipControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void relationshipApprovedValueReset(
+    bool? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      relationshipApprovedControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String>? get identificationNumberControl =>
       containsIdentificationNumber
           ? form.control(identificationNumberControlPath())
@@ -1227,6 +1297,11 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
       ? form.control(relationshipControlPath())
           as FormControl<RelationshipType>?
       : null;
+  FormControl<bool>? get relationshipApprovedControl =>
+      containsRelationshipApproved
+          ? form.control(relationshipApprovedControlPath())
+              as FormControl<bool>?
+          : null;
   void identificationNumberSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1263,6 +1338,24 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
     }
   }
 
+  void relationshipApprovedSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      relationshipApprovedControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      relationshipApprovedControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   FamiliarFormModel get model {
     final currentForm = path == null ? form : form.control(path!);
@@ -1273,7 +1366,8 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
     }
     return FamiliarFormModel(
         identificationNumber: _identificationNumberValue,
-        relationship: _relationshipValue);
+        relationship: _relationshipValue,
+        relationshipApproved: _relationshipApprovedValue);
   }
 
   FamiliarFormModelForm copyWithPath(String? path) {
@@ -1315,6 +1409,13 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
             touched: false),
         relationshipControlName: FormControl<RelationshipType>(
             value: familiarFormModel?.relationship,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        relationshipApprovedControlName: FormControl<bool>(
+            value: familiarFormModel?.relationshipApproved,
             validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

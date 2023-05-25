@@ -1161,6 +1161,42 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModel<CheckRelationshipModel?>> checkRelationship(
+    String firstNui,
+    String secondNui,
+    String relationship,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'firstNui': firstNui,
+      r'secondNui': secondNui,
+      r'relationship': relationship,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CheckRelationshipModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/middleware/api/nui/relationship/check',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CheckRelationshipModel?>.fromJson(
+      _result.data!,
+      (json) => json == null
+          ? null
+          : CheckRelationshipModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
       PlaceToPayModel placeToPayModel) async {
     const _extra = <String, dynamic>{};

@@ -324,6 +324,9 @@ part 'router.gr.dart';
           page: MakePaymentPage,
         ),
         CupertinoRoute(
+          page: CodePage,
+        ),
+        CupertinoRoute(
           page: WebviewPaymentPage,
         ),
         CupertinoRoute(
