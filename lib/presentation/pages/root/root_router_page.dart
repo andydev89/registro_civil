@@ -32,9 +32,9 @@ class RootRouterPage extends ConsumerWidget {
                 ? TypeAlert.success
                 : TypeAlert.error,
           );
-          ref
-              .read(transactionsStatusProvider.notifier)
-              .removeTransaction(element);
+          // ref
+          //     .read(transactionsStatusProvider.notifier)
+          //     .removeTransaction(element);
         }
       });
     return const FingerPrintScaffold(body: AutoRouter());

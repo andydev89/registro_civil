@@ -230,6 +230,13 @@ abstract class Api {
     @Body() NotifyServicePaymentDoneModel notifyServicePaymentDoneModel,
   );
 
+  @GET('/middleware/api/nui/relationship/check')
+  Future<ResponseModel<CheckRelationshipModel?>> checkRelationship(
+    @Query('firstNui') String firstNui,
+    @Query('secondNui') String secondNui,
+    @Query('relationship') String relationship,
+  );
+
   //PLACE TO PAY PAYMENT
   @POST(
     'https://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',

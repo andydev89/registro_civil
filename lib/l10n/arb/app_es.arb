@@ -243,7 +243,8 @@
   "s685": "Pago requerido",
   "s686": "Usuario menor de edad",
   "s687": "Servicio de cambio de nombre no encontrado",
-  "s740": "Solo un recibo del propietario",
+  "s740": "Solo un turno por propietario",
+  "s762": "Respuesta fallida para conectar el servidor suri o nui inexistente",
   "nombre": "Nombre",
   "apellidos": "Apellidos",
   "direccion": "Dirección",
@@ -436,5 +437,8 @@
   "laSolicitudDeNombreQueRealizaEs": "La solicitud de nombre que realiza es",
   "obteniendoComoNombreResultante": "Obteniendo como nombre resultante",
   "laTransaccion": "La transacción",
-  "haSido": "Ha sido"
+  "haSido": "Ha sido",
+  "padreOMadre": "Padre o madre",
+  "hijoOHija": "Hijo o hija",
+  "conyuge": "Cónyuge"
   }

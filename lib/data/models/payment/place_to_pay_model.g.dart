@@ -1486,6 +1486,7 @@ const _$StatusCodeTypeEnumMap = {
   StatusCodeType.s686: 686,
   StatusCodeType.s687: 687,
   StatusCodeType.s740: 740,
+  StatusCodeType.s762: 762,
 };
 
 _$_PlaceToPayReferenceModel _$$_PlaceToPayReferenceModelFromJson(

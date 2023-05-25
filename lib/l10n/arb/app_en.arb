@@ -259,6 +259,7 @@
   "s686": "Underage user",
   "s687": "Name change service not found",
   "s740": "Only one receipt by owner",
+  "s762": "Failed response to connect the suri server or nui not exist",
   "nombre": "Name",
   "apellidos": "Last name",
   "direccion": "Address",
@@ -436,5 +437,8 @@
   "laSolicitudDeNombreQueRealizaEs": "The name request you make is",
   "obteniendoComoNombreResultante": "Obtaining as resulting name",
   "laTransaccion": "The transaction",
-  "haSido": "Has been"
+  "haSido": "Has been",
+  "padreOMadre": "Parent",
+  "hijoOHija": "child",
+  "conyuge": "Spouse"
 }

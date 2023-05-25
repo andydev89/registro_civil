@@ -81,7 +81,8 @@ enum StatusCodeType implements Translatable {
   s685(685),
   s686(686),
   s687(687),
-  s740(740);
+  s740(740),
+  s762(762);
 
   const StatusCodeType(this.code);
   final int code;
@@ -236,6 +237,8 @@ enum StatusCodeType implements Translatable {
         return l10n.s687;
       case StatusCodeType.s740:
         return l10n.s740;
+      case StatusCodeType.s762:
+        return l10n.s762;
     }
   }
 }
