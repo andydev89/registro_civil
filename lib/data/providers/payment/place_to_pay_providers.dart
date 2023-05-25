@@ -129,7 +129,7 @@ Future<void> checkPendingTransactions(
 void executeCheckingPendingTransactions(
   ExecuteCheckingPendingTransactionsRef ref,
 ) {
-  ref.read(checkPendingTransactionsProvider);
+  // ref.read(checkPendingTransactionsProvider);
   Timer.periodic(const Duration(minutes: 5), (timer) {
     log(
       'Se ejecuto checkPendingTransactions cada 5 minutos',

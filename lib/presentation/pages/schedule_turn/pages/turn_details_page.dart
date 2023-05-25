@@ -149,17 +149,8 @@ class TurnDetailsPage extends ConsumerWidget {
                             requestNumber: value.transactionCode,
                             buttonText: l10n.continuar,
                             service: typeOfService,
-                            onTapSuccessPayment: (cxt) => context.replaceRoute(
-                              NotificationRoute(
-                                notificationType: NotificationType.success,
-                                message: l10n.turnoReservadoMensajeFormal,
-                                bottonTitle:
-                                    l10n.turnoReservadoMensajeCorreoFormal,
-                                buttonText: l10n.misTurnos,
-                                onTap: (cxt) =>
-                                    cxt.replaceRoute(const MyTurnsRoute()),
-                              ),
-                            ),
+                            onTapSuccessPayment: (cxt) =>
+                                cxt.replaceRoute(const MyTurnsRoute()),
                           ),
                         );
                 }

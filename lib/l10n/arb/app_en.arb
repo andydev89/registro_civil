@@ -258,6 +258,7 @@
   "s685": "Payment required",
   "s686": "Underage user",
   "s687": "Name change service not found",
+  "s740": "Only one receipt by owner",
   "nombre": "Name",
   "apellidos": "Last name",
   "direccion": "Address",

@@ -297,7 +297,9 @@ class _$AppRouter extends RootStackRouter {
         child: WebviewPaymentPage(
           key: args.key,
           url: args.url,
-          onPageFinished: args.onPageFinished,
+          placeToPayReference: args.placeToPayReference,
+          totalToPay: args.totalToPay,
+          onTap: args.onTap,
         ),
       );
     },
@@ -1718,14 +1720,18 @@ class WebviewPaymentRoute extends PageRouteInfo<WebviewPaymentRouteArgs> {
   WebviewPaymentRoute({
     Key? key,
     required String url,
-    void Function()? onPageFinished,
+    required PlaceToPayReferenceModel placeToPayReference,
+    required double totalToPay,
+    void Function(BuildContext)? onTap,
   }) : super(
           WebviewPaymentRoute.name,
           path: 'webview-payment-page',
           args: WebviewPaymentRouteArgs(
             key: key,
             url: url,
-            onPageFinished: onPageFinished,
+            placeToPayReference: placeToPayReference,
+            totalToPay: totalToPay,
+            onTap: onTap,
           ),
         );
 
@@ -1736,18 +1742,24 @@ class WebviewPaymentRouteArgs {
   const WebviewPaymentRouteArgs({
     this.key,
     required this.url,
-    this.onPageFinished,
+    required this.placeToPayReference,
+    required this.totalToPay,
+    this.onTap,
   });
 
   final Key? key;
 
   final String url;
 
-  final void Function()? onPageFinished;
+  final PlaceToPayReferenceModel placeToPayReference;
+
+  final double totalToPay;
+
+  final void Function(BuildContext)? onTap;
 
   @override
   String toString() {
-    return 'WebviewPaymentRouteArgs{key: $key, url: $url, onPageFinished: $onPageFinished}';
+    return 'WebviewPaymentRouteArgs{key: $key, url: $url, placeToPayReference: $placeToPayReference, totalToPay: $totalToPay, onTap: $onTap}';
   }
 }
 

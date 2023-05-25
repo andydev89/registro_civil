@@ -331,7 +331,7 @@ final checkPendingTransactionsProvider =
 
 typedef CheckPendingTransactionsRef = AutoDisposeFutureProviderRef<void>;
 String _$executeCheckingPendingTransactionsHash() =>
-    r'f408b5a3dc8833d9d60f5d0f89a161e0cd056b5c';
+    r'aeda80373b7ca4e665fc5916fe5fd8c825c66b7a';
 
 /// See also [executeCheckingPendingTransactions].
 @ProviderFor(executeCheckingPendingTransactions)
