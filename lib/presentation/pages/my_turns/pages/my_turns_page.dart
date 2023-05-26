@@ -4,6 +4,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/pages/my_turns/widgets/my_turns_filter_widget.dart';
 import 'package:registro_civil_apk/presentation/pages/pages.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
@@ -21,6 +22,25 @@ class MyTurnsPage extends ConsumerWidget {
           children: [
             PrimarySearch(
               showFilter: true,
+              onPressed: () => showContentDialog(
+                context,
+                content: const MyTurnsFilterWidget(),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PrimaryText(
+                      l10n.aplicarfiltros,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    IconButton(
+                      onPressed: () => ref
+                          .read(schedulesByUserFilterProvider.notifier)
+                          .clearOtherFilter(),
+                      icon: const Icon(Icons.clear),
+                    ),
+                  ],
+                ),
+              ),
               filter: (p0) => ref
                   .read(schedulesByUserFilterProvider.notifier)
                   .setFilter(p0),

@@ -396,6 +396,7 @@
   "numeroDepartamento": "Número de departamento",
   "eliminar": "Eliminar",
   "seguroeliminarresidence": "¿Está seguro que desea eliminar esta residencia?",
+  "seguroeliminarDependiente": "¿Está seguro que desea eliminar este dependiente?",
   "limpiar": "Limpiar",
   "limpiarCarrito": "Limpiar carrito",
   "tenercuentaLimpiarCarrito": "Ten en cuenta que al dar limpiar se eliminaran todos los pedidos del carrito.",
@@ -433,5 +434,12 @@
   "estimado": "Estimado",
   "ustedSeEncuentraSolicitandoElTramiteDe": "Usted se encuentra solicitando el trámite de",
   "laSolicitudDeNombreQueRealizaEs": "La solicitud de nombre que realiza es",
-  "obteniendoComoNombreResultante": "Obteniendo como nombre resultante"
+  "obteniendoComoNombreResultante": "Obteniendo como nombre resultante",
+  "aplicarfiltros": "Aplicar filtros",
+  "filtrar" : "Filtrar",
+  "desde" : "Desde",
+  "hasta" : "Hasta",
+  "asc" : "Ascendente",
+  "desc" : "Descendiente",
+  "orden" : "Orden"
   }

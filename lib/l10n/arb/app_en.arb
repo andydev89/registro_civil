@@ -433,5 +433,13 @@
   "estimado": "Dear",
   "ustedSeEncuentraSolicitandoElTramiteDe": "You are requesting the process of",
   "laSolicitudDeNombreQueRealizaEs": "The name request you make is",
-  "obteniendoComoNombreResultante": "Obtaining as resulting name"
+  "obteniendoComoNombreResultante": "Obtaining as resulting name",
+  "seguroeliminarDependiente": "Are you sure you want to delete this dependent?",
+  "aplicarfiltros": "Apply filters",
+  "filtrar" : "Filter",
+  "desde" : "From",
+  "hasta" : "To",
+  "asc" : "Ascending",
+  "desc" : "Descendant",
+  "orden" : "Order"
 }

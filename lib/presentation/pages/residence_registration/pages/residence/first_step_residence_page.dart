@@ -84,6 +84,7 @@ class FirstStepResidencePage extends ConsumerWidget {
                           ),
                           readOnly: !formModel.cantonControl.valid ||
                               operation.isRead,
+                              onChanged: (p0) => alreadyStarter = true,
                           formControl: formModel.parroquiaControl,
                           label: l10n.parroquia,
                           provider: LocationByParentProvider(
