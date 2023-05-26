@@ -25,20 +25,9 @@ class MyTurnsPage extends ConsumerWidget {
               onPressed: () => showContentDialog(
                 context,
                 content: const MyTurnsFilterWidget(),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    PrimaryText(
-                      l10n.aplicarfiltros,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    IconButton(
-                      onPressed: () => ref
-                          .read(schedulesByUserFilterProvider.notifier)
-                          .clearOtherFilter(),
-                      icon: const Icon(Icons.clear),
-                    ),
-                  ],
+                title: PrimaryText(
+                  l10n.aplicarfiltros,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               filter: (p0) => ref

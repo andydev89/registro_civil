@@ -47,16 +47,30 @@ class MyTurnsFilterWidget extends ConsumerWidget {
               height: 20,
             ),
             ReactiveQueryScheduleByUserFormConsumer(
-              builder: (_, formModel, __) => PrimaryButton(
-                title: l10n.filtrar,
-                onPressed: formModel.form.valid
-                    ? () {
-                        Navigator.pop(context);
-                        ref
-                            .read(schedulesByUserFilterProvider.notifier)
-                            .setOther(formModel.model);
-                      }
-                    : null,
+              builder: (_, formModel, __) => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  PrimaryButton(
+                    title: l10n.filtrar,
+                    onPressed: formModel.form.valid
+                        ? () {
+                            Navigator.pop(context);
+                            ref
+                                .read(schedulesByUserFilterProvider.notifier)
+                                .setOther(formModel.model);
+                          }
+                        : null,
+                  ),
+                  PrimaryTextButton(
+                    title: l10n.limpiar,
+                    onPressed: () {
+                      Navigator.pop(context);
+                      ref
+                          .read(schedulesByUserFilterProvider.notifier)
+                          .clearOtherFilter();
+                    },
+                  ),
+                ],
               ),
             ),
           ],
