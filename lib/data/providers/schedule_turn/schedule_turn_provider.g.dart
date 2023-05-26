@@ -163,7 +163,7 @@ final schedulesProvider = AutoDisposeFutureProvider<
 
 typedef SchedulesRef
     = AutoDisposeFutureProviderRef<Result<List<ScheduleModel>, StatusCodeType>>;
-String _$schedulesByUserHash() => r'1c454ad1ffe8b1ed5d62b1c3325637caa5e61a33';
+String _$schedulesByUserHash() => r'257bb4c35a23c1cd3e42920b5749e2fd1a59d312';
 typedef SchedulesByUserRef = AutoDisposeFutureProviderRef<
     ResponseModelPagination<List<UserScheduleModel>>>;
 
@@ -436,7 +436,7 @@ class CheckRelationshipProvider extends AutoDisposeFutureProvider<
 }
 
 String _$schedulesByUserFilterHash() =>
-    r'360e96b1199b0a18900ad73ce30f21c6790bee3c';
+    r'b8b12fae052affa200365507d8c1f3f3ef9d304f';
 
 /// See also [SchedulesByUserFilter].
 @ProviderFor(SchedulesByUserFilter)

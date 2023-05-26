@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_geocoding_api/google_geocoding_api.dart';
@@ -18,11 +20,17 @@ void selectLocationResidenceREgistration({
     automaticClose: true,
     (latLng) async {
       final result = await ref.read(getPlaceFromLatLngProvider(latLng).future);
-      final route = result.first.addressComponents.firstWhere(
-        (element) => element.types.contains('route'),
-        orElse: () => const GoogleGeocodingAddressComponent(),
-      );
-      formControl.value = route.longName;
+      var longName = '';
+      var pos = 0;
+      while (longName.isEmpty && pos < result.length) {
+        final route = result.elementAt(pos++).addressComponents.firstWhere(
+          (element) => element.types.contains('route'),
+          orElse: () => const GoogleGeocodingAddressComponent(),
+        );
+        longName = route.longName;
+      }
+        
+      formControl.value = longName;
     },
   );
 }
