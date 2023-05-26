@@ -23,7 +23,7 @@ class RootRouterPage extends ConsumerWidget {
         }
       })
       ..listen(transactionsStatusProvider, (previous, next) {
-        final elementsToShow = next;
+        final elementsToShow = [...next];
         for (final element in elementsToShow) {
           showAlert(
             '${l10n.laTransaccion} ${element.paymentGatewayReference}'
@@ -32,9 +32,9 @@ class RootRouterPage extends ConsumerWidget {
                 ? TypeAlert.success
                 : TypeAlert.error,
           );
-          // ref
-          //     .read(transactionsStatusProvider.notifier)
-          //     .removeTransaction(element);
+          ref
+              .read(transactionsStatusProvider.notifier)
+              .removeTransaction(element);
         }
       });
     return const FingerPrintScaffold(body: AutoRouter());
