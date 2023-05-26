@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'payment_providers.dart';
+part of 'place_to_pay_providers.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
 String _$createPlaceToPayTransactionHash() =>
-    r'6e82404acbbd58d9c51eaefd328152a939ece2e1';
+    r'af6824f0e40276b3a2c4e01d4e21b8a4e18116b6';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -46,9 +46,11 @@ class CreatePlaceToPayTransactionFamily extends Family<
   /// See also [createPlaceToPayTransaction].
   CreatePlaceToPayTransactionProvider call({
     required PlaceToPayModel placeToPayModel,
+    required String transactionCode,
   }) {
     return CreatePlaceToPayTransactionProvider(
       placeToPayModel: placeToPayModel,
+      transactionCode: transactionCode,
     );
   }
 
@@ -58,6 +60,7 @@ class CreatePlaceToPayTransactionFamily extends Family<
   ) {
     return call(
       placeToPayModel: provider.placeToPayModel,
+      transactionCode: provider.transactionCode,
     );
   }
 
@@ -82,10 +85,12 @@ class CreatePlaceToPayTransactionProvider extends AutoDisposeFutureProvider<
   /// See also [createPlaceToPayTransaction].
   CreatePlaceToPayTransactionProvider({
     required this.placeToPayModel,
+    required this.transactionCode,
   }) : super.internal(
           (ref) => createPlaceToPayTransaction(
             ref,
             placeToPayModel: placeToPayModel,
+            transactionCode: transactionCode,
           ),
           from: createPlaceToPayTransactionProvider,
           name: r'createPlaceToPayTransactionProvider',
@@ -99,112 +104,27 @@ class CreatePlaceToPayTransactionProvider extends AutoDisposeFutureProvider<
         );
 
   final PlaceToPayModel placeToPayModel;
+  final String transactionCode;
 
   @override
   bool operator ==(Object other) {
     return other is CreatePlaceToPayTransactionProvider &&
-        other.placeToPayModel == placeToPayModel;
+        other.placeToPayModel == placeToPayModel &&
+        other.transactionCode == transactionCode;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, placeToPayModel.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-String _$isPlaceToPayTransactionCompletedHash() =>
-    r'3551a42ba42f7fb82c9b09713b76bb960d3e1913';
-typedef IsPlaceToPayTransactionCompletedRef
-    = AutoDisposeFutureProviderRef<Result<bool, StatusCodeType>>;
-
-/// See also [isPlaceToPayTransactionCompleted].
-@ProviderFor(isPlaceToPayTransactionCompleted)
-const isPlaceToPayTransactionCompletedProvider =
-    IsPlaceToPayTransactionCompletedFamily();
-
-/// See also [isPlaceToPayTransactionCompleted].
-class IsPlaceToPayTransactionCompletedFamily
-    extends Family<AsyncValue<Result<bool, StatusCodeType>>> {
-  /// See also [isPlaceToPayTransactionCompleted].
-  const IsPlaceToPayTransactionCompletedFamily();
-
-  /// See also [isPlaceToPayTransactionCompleted].
-  IsPlaceToPayTransactionCompletedProvider call({
-    required PlaceToPayReferenceModel placeToPayReference,
-  }) {
-    return IsPlaceToPayTransactionCompletedProvider(
-      placeToPayReference: placeToPayReference,
-    );
-  }
-
-  @override
-  IsPlaceToPayTransactionCompletedProvider getProviderOverride(
-    covariant IsPlaceToPayTransactionCompletedProvider provider,
-  ) {
-    return call(
-      placeToPayReference: provider.placeToPayReference,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'isPlaceToPayTransactionCompletedProvider';
-}
-
-/// See also [isPlaceToPayTransactionCompleted].
-class IsPlaceToPayTransactionCompletedProvider
-    extends AutoDisposeFutureProvider<Result<bool, StatusCodeType>> {
-  /// See also [isPlaceToPayTransactionCompleted].
-  IsPlaceToPayTransactionCompletedProvider({
-    required this.placeToPayReference,
-  }) : super.internal(
-          (ref) => isPlaceToPayTransactionCompleted(
-            ref,
-            placeToPayReference: placeToPayReference,
-          ),
-          from: isPlaceToPayTransactionCompletedProvider,
-          name: r'isPlaceToPayTransactionCompletedProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$isPlaceToPayTransactionCompletedHash,
-          dependencies: IsPlaceToPayTransactionCompletedFamily._dependencies,
-          allTransitiveDependencies:
-              IsPlaceToPayTransactionCompletedFamily._allTransitiveDependencies,
-        );
-
-  final PlaceToPayReferenceModel placeToPayReference;
-
-  @override
-  bool operator ==(Object other) {
-    return other is IsPlaceToPayTransactionCompletedProvider &&
-        other.placeToPayReference == placeToPayReference;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, placeToPayReference.hashCode);
+    hash = _SystemHash.combine(hash, transactionCode.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 String _$notifyCompletePaymentToServicesHash() =>
-    r'ee3fcc63bf1724937f6738e733a6b4cd205d4cd9';
+    r'2d42dbd2d50d36fef1fffa8c0029093110f8b8c3';
 typedef NotifyCompletePaymentToServicesRef = AutoDisposeFutureProviderRef<void>;
 
 /// See also [notifyCompletePaymentToServices].
@@ -221,10 +141,12 @@ class NotifyCompletePaymentToServicesFamily extends Family<AsyncValue<void>> {
   NotifyCompletePaymentToServicesProvider call({
     required ServiceType serviceType,
     required PlaceToPayTransactionDetailsModel placeToPayTransactionDetails,
+    required String transactionCode,
   }) {
     return NotifyCompletePaymentToServicesProvider(
       serviceType: serviceType,
       placeToPayTransactionDetails: placeToPayTransactionDetails,
+      transactionCode: transactionCode,
     );
   }
 
@@ -235,6 +157,7 @@ class NotifyCompletePaymentToServicesFamily extends Family<AsyncValue<void>> {
     return call(
       serviceType: provider.serviceType,
       placeToPayTransactionDetails: provider.placeToPayTransactionDetails,
+      transactionCode: provider.transactionCode,
     );
   }
 
@@ -260,11 +183,13 @@ class NotifyCompletePaymentToServicesProvider
   NotifyCompletePaymentToServicesProvider({
     required this.serviceType,
     required this.placeToPayTransactionDetails,
+    required this.transactionCode,
   }) : super.internal(
           (ref) => notifyCompletePaymentToServices(
             ref,
             serviceType: serviceType,
             placeToPayTransactionDetails: placeToPayTransactionDetails,
+            transactionCode: transactionCode,
           ),
           from: notifyCompletePaymentToServicesProvider,
           name: r'notifyCompletePaymentToServicesProvider',
@@ -279,12 +204,14 @@ class NotifyCompletePaymentToServicesProvider
 
   final ServiceType serviceType;
   final PlaceToPayTransactionDetailsModel placeToPayTransactionDetails;
+  final String transactionCode;
 
   @override
   bool operator ==(Object other) {
     return other is NotifyCompletePaymentToServicesProvider &&
         other.serviceType == serviceType &&
-        other.placeToPayTransactionDetails == placeToPayTransactionDetails;
+        other.placeToPayTransactionDetails == placeToPayTransactionDetails &&
+        other.transactionCode == transactionCode;
   }
 
   @override
@@ -292,13 +219,14 @@ class NotifyCompletePaymentToServicesProvider
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, serviceType.hashCode);
     hash = _SystemHash.combine(hash, placeToPayTransactionDetails.hashCode);
+    hash = _SystemHash.combine(hash, transactionCode.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 String _$checkPendingTransactionsHash() =>
-    r'8ea255d7ee98ba64bf7ccb759277ce1517db7a48';
+    r'bbfb11c662f35f19ff29a29529baef91f8a4eee7';
 
 /// See also [checkPendingTransactions].
 @ProviderFor(checkPendingTransactions)
@@ -315,7 +243,7 @@ final checkPendingTransactionsProvider =
 
 typedef CheckPendingTransactionsRef = AutoDisposeFutureProviderRef<void>;
 String _$executeCheckingPendingTransactionsHash() =>
-    r'f408b5a3dc8833d9d60f5d0f89a161e0cd056b5c';
+    r'aeda80373b7ca4e665fc5916fe5fd8c825c66b7a';
 
 /// See also [executeCheckingPendingTransactions].
 @ProviderFor(executeCheckingPendingTransactions)

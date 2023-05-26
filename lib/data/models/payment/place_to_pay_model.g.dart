@@ -34,8 +34,13 @@ const PlaceToPayReferenceModelSchema = CollectionSchema(
       type: IsarType.string,
       enumMap: _PlaceToPayReferenceModelserviceTypeEnumValueMap,
     ),
-    r'validTo': PropertySchema(
+    r'transactionCode': PropertySchema(
       id: 3,
+      name: r'transactionCode',
+      type: IsarType.string,
+    ),
+    r'validTo': PropertySchema(
+      id: 4,
       name: r'validTo',
       type: IsarType.dateTime,
     )
@@ -68,6 +73,12 @@ int _placeToPayReferenceModelEstimateSize(
       bytesCount += 3 + value.name.length * 3;
     }
   }
+  {
+    final value = object.transactionCode;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -80,7 +91,8 @@ void _placeToPayReferenceModelSerialize(
   writer.writeString(offsets[0], object.paymentGatewayReference);
   writer.writeString(offsets[1], object.processUrl);
   writer.writeString(offsets[2], object.serviceType?.name);
-  writer.writeDateTime(offsets[3], object.validTo);
+  writer.writeString(offsets[3], object.transactionCode);
+  writer.writeDateTime(offsets[4], object.validTo);
 }
 
 PlaceToPayReferenceModel _placeToPayReferenceModelDeserialize(
@@ -94,7 +106,8 @@ PlaceToPayReferenceModel _placeToPayReferenceModelDeserialize(
     processUrl: reader.readString(offsets[1]),
     serviceType: _PlaceToPayReferenceModelserviceTypeValueEnumMap[
         reader.readStringOrNull(offsets[2])],
-    validTo: reader.readDateTime(offsets[3]),
+    transactionCode: reader.readStringOrNull(offsets[3]),
+    validTo: reader.readDateTime(offsets[4]),
   );
   return object;
 }
@@ -114,6 +127,8 @@ P _placeToPayReferenceModelDeserializeProp<P>(
       return (_PlaceToPayReferenceModelserviceTypeValueEnumMap[
           reader.readStringOrNull(offset)]) as P;
     case 3:
+      return (reader.readStringOrNull(offset)) as P;
+    case 4:
       return (reader.readDateTime(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -750,6 +765,162 @@ extension PlaceToPayReferenceModelQueryFilter on QueryBuilder<
   }
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> transactionCodeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'transactionCode',
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> transactionCodeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'transactionCode',
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> transactionCodeEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'transactionCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> transactionCodeGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'transactionCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> transactionCodeLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'transactionCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> transactionCodeBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'transactionCode',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> transactionCodeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'transactionCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> transactionCodeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'transactionCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+          QAfterFilterCondition>
+      transactionCodeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'transactionCode',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+          QAfterFilterCondition>
+      transactionCodeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'transactionCode',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> transactionCodeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'transactionCode',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
+      QAfterFilterCondition> transactionCodeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'transactionCode',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel,
       QAfterFilterCondition> validToEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -857,6 +1028,20 @@ extension PlaceToPayReferenceModelQuerySortBy on QueryBuilder<
   }
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
+      sortByTransactionCode() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transactionCode', Sort.asc);
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
+      sortByTransactionCodeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transactionCode', Sort.desc);
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
       sortByValidTo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'validTo', Sort.asc);
@@ -930,6 +1115,20 @@ extension PlaceToPayReferenceModelQuerySortThenBy on QueryBuilder<
   }
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
+      thenByTransactionCode() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transactionCode', Sort.asc);
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
+      thenByTransactionCodeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'transactionCode', Sort.desc);
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QAfterSortBy>
       thenByValidTo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'validTo', Sort.asc);
@@ -969,6 +1168,14 @@ extension PlaceToPayReferenceModelQueryWhereDistinct on QueryBuilder<
   }
 
   QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QDistinct>
+      distinctByTransactionCode({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'transactionCode',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, PlaceToPayReferenceModel, QDistinct>
       distinctByValidTo() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'validTo');
@@ -1002,6 +1209,13 @@ extension PlaceToPayReferenceModelQueryProperty on QueryBuilder<
       serviceTypeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'serviceType');
+    });
+  }
+
+  QueryBuilder<PlaceToPayReferenceModel, String?, QQueryOperations>
+      transactionCodeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'transactionCode');
     });
   }
 
@@ -1196,10 +1410,7 @@ Map<String, dynamic> _$PlaceToPayTransactionDetailsModelToJson(
     };
 
 const _$TransactionStatusTypeEnumMap = {
-  TransactionStatusType.pending: 'PENDING',
   TransactionStatusType.approved: 'APPROVED',
-  TransactionStatusType.failed: 'FAILED',
-  TransactionStatusType.cancelled: 'CANCELLED',
   TransactionStatusType.rejected: 'REJECTED',
 };
 
@@ -1274,6 +1485,8 @@ const _$StatusCodeTypeEnumMap = {
   StatusCodeType.s685: 685,
   StatusCodeType.s686: 686,
   StatusCodeType.s687: 687,
+  StatusCodeType.s740: 740,
+  StatusCodeType.s762: 762,
 };
 
 _$_PlaceToPayReferenceModel _$$_PlaceToPayReferenceModelFromJson(
@@ -1285,6 +1498,9 @@ _$_PlaceToPayReferenceModel _$$_PlaceToPayReferenceModelFromJson(
       details: json['Details'] as String?,
       message: json['Message'] as String?,
       status: $enumDecodeNullable(_$StatusCodeTypeEnumMap, json['Code']),
+      transactionCode: json['transactionCode'] as String?,
+      transactionStatus: $enumDecodeNullable(
+          _$TransactionStatusTypeEnumMap, json['transactionStatus']),
     );
 
 Map<String, dynamic> _$$_PlaceToPayReferenceModelToJson(
@@ -1296,4 +1512,7 @@ Map<String, dynamic> _$$_PlaceToPayReferenceModelToJson(
       'Details': instance.details,
       'Message': instance.message,
       'Code': _$StatusCodeTypeEnumMap[instance.status],
+      'transactionCode': instance.transactionCode,
+      'transactionStatus':
+          _$TransactionStatusTypeEnumMap[instance.transactionStatus],
     };

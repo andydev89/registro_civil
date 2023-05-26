@@ -1,25 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'change_of_name_payment_model.dart';
+part of 'notify_service_payment_done_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ChangeOfNamePaymentModel _$$_ChangeOfNamePaymentModelFromJson(
+_$_NotifyServicePaymentDoneModel _$$_NotifyServicePaymentDoneModelFromJson(
         Map<String, dynamic> json) =>
-    _$_ChangeOfNamePaymentModel(
-      id: json['id'] as String,
+    _$_NotifyServicePaymentDoneModel(
       transactionCode: json['transactionCode'] as String,
       paymentType: $enumDecode(_$PaymentMethodTypeEnumMap, json['paymentType']),
       paymentCode: json['paymentCode'] as String,
-      civilRegistrationId: json['civilRegistrationId'] as String,
+      civilRegistrationId: json['civilRegistrationId'] as String?,
     );
 
-Map<String, dynamic> _$$_ChangeOfNamePaymentModelToJson(
-        _$_ChangeOfNamePaymentModel instance) =>
+Map<String, dynamic> _$$_NotifyServicePaymentDoneModelToJson(
+        _$_NotifyServicePaymentDoneModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'transactionCode': instance.transactionCode,
       'paymentType': _$PaymentMethodTypeEnumMap[instance.paymentType]!,
       'paymentCode': instance.paymentCode,

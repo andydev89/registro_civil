@@ -28,6 +28,7 @@ class ScheduleTurnSecondPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final now = DateTime.now();
     return ScheduleTurnSecondStepModelFormBuilder(
       builder: (context, formModel, child) => PrimaryScaffold(
         title: '${l10n.obtengaSuTurno}: ${typeOfService.name}',
@@ -65,7 +66,7 @@ class ScheduleTurnSecondPage extends ConsumerWidget {
                           endTime: formModel.endTimeControl,
                           agency: formModel.agencyControl,
                           typeOfServiceModel: typeOfService,
-                          starDate: DateTime.now(),
+                          starDate: now,
                         ),
                         Visibility(
                           visible: formModel.dateControl.valid,

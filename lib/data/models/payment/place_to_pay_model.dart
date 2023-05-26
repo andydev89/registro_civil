@@ -282,16 +282,12 @@ class PlaceToPayReferenceModel with _$PlaceToPayReferenceModel {
       includeToJson: false,
     )
     @Enumerated(EnumType.name)
-        ServiceType? serviceType,
-    @JsonKey(name: 'Details')
-    @ignore
-        String? details,
-    @JsonKey(name: 'Message')
-    @ignore
-        String? message,
-    @JsonKey(name: 'Code')
-    @ignore
-        StatusCodeType? status,
+    ServiceType? serviceType,
+    @JsonKey(name: 'Details') @ignore String? details,
+    @JsonKey(name: 'Message') @ignore String? message,
+    @JsonKey(name: 'Code') @ignore StatusCodeType? status,
+    String? transactionCode,
+    @ignore TransactionStatusType? transactionStatus,
   }) = _PlaceToPayReferenceModel;
 
   const PlaceToPayReferenceModel._();

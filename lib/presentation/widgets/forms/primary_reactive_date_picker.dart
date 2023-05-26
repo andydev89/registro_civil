@@ -25,11 +25,17 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
     this.onPageChanged,
     this.onDaySelected,
     this.readOnly = false,
+    this.firstDate,
+    this.lastDate,
+    this.initFocusedDay = false,
   });
 
-  final FormControl<DateTime> formControl;
+  final FormControl<DateTime>? formControl;
+  final DateTime? firstDate;
+  final DateTime? lastDate;
+  final bool initFocusedDay;
   final String? label;
-  final List<DateTime> availablesDate;
+  final List<DateTime>? availablesDate;
   final bool isLoading;
   final bool hasError;
   final void Function()? onError;
@@ -55,7 +61,12 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
             ? RefreshStatus(onRefresh: onError)
             : isLoading
                 ? const LoadingStatusAdaptative()
-                : Assets.svg.calendar.svg(),
+                : Assets.svg.calendar
+                    .svg(
+                      width: 20,
+                      height: 20,
+                    )
+                    .horizontalPadding(10),
         onTap: (control) => !readOnly || isLoading
             ? showDialog<Widget>(
                 context: context,
@@ -68,6 +79,9 @@ class PrimaryReactiveDatePicker extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomCalendar(
+                        initFocusedDay: initFocusedDay,
+                        lastDate: lastDate,
+                        firstDate: firstDate,
                         formControl: formControl,
                         availablesDate: availablesDate,
                         onPageChanged: onPageChanged,
@@ -91,10 +105,16 @@ class CustomCalendar extends StatefulWidget {
     required this.formControl,
     required this.availablesDate,
     this.onPageChanged,
+    this.firstDate,
     this.onDaySelected,
+    this.lastDate,
+    required this.initFocusedDay,
   });
-  final FormControl<DateTime> formControl;
-  final List<DateTime> availablesDate;
+  final FormControl<DateTime>? formControl;
+  final DateTime? firstDate;
+  final DateTime? lastDate;
+  final bool initFocusedDay;
+  final List<DateTime>? availablesDate;
   final Future<List<DateTime>> Function(DateTime)? onPageChanged;
   final void Function(DateTime)? onDaySelected;
 
@@ -103,61 +123,27 @@ class CustomCalendar extends StatefulWidget {
 }
 
 class _CustomCalendarState extends State<CustomCalendar> {
-  DateTime _focusedDay = DateTime.now();
-  // final Set<DateTime> _selectedDays = LinkedHashSet<DateTime>(
-  //   equals: isSameDay,
-  //   hashCode: _getHashCode,
-  // );
+  late DateTime _focusedDay;
 
   @override
   void initState() {
+    _focusedDay = widget.initFocusedDay
+        ? (widget.formControl?.value ?? DateTime.now())
+        : DateTime.now();
     super.initState();
-    // widget.formControl.value?.forEach(_selectedDays.add);
   }
-
-  // void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-  //   setState(() {
-  //     _focusedDay = focusedDay;
-  //     // Update values in a Set
-  //     if (_selectedDays.contains(selectedDay)) {
-  //       _selectedDays.remove(selectedDay);
-  //     } else {
-  //       _selectedDays.add(selectedDay);
-  //     }
-  //     if (_selectedDays.isNotEmpty) {
-  //       widget.formControl.updateValue(_selectedDays.toList());
-  //       final formatedListDate = _selectedDays
-  //           .toList()
-  //           .map((e) => DateFormat.yMd().format(e))
-  //           .reduce((value, element) => '$value, $element');
-  //       widget.dateRangeToShow.updateValue(formatedListDate);
-  //     } else {
-  //       widget.dateRangeToShow.reset();
-  //       widget.formControl.reset();
-  //     }
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
-      firstDay: DateTime.now(),
-      lastDay: DateTime.now().add(const Duration(days: 365 * 30)),
-      onPageChanged: (focusedDay) async {
-        _focusedDay = focusedDay;
-        if (mounted) {
-          final availablesDays =
-              await widget.onPageChanged?.call(focusedDay) ?? [];
-          setState(() {
-            widget.availablesDate.clear();
-            widget.availablesDate.addAll(availablesDays);
-          });
-        }
-      },
+      firstDay: widget.firstDate ?? DateTime.now(),
+      lastDay:
+          widget.lastDate ?? DateTime.now().add(const Duration(days: 365 * 30)),
       focusedDay: _focusedDay,
-      // selectedDayPredicate: (day) =>  _selectedDays.contains(day)
       selectedDayPredicate: (day) {
-        return widget.availablesDate.any(
+        if (widget.availablesDate == null) return true;
+
+        return widget.availablesDate!.any(
               (element) => DateUtils.isSameDay(element, day),
             ) &&
             !day.isBefore(DateTime.now());
@@ -166,10 +152,12 @@ class _CustomCalendarState extends State<CustomCalendar> {
         CalendarFormat.month: 'Month',
       },
       onDaySelected: (selectedDay, focusedDay) {
-        if (widget.availablesDate
-                .any((element) => DateUtils.isSameDay(element, selectedDay)) &&
-            !selectedDay.isBefore(DateTime.now())) {
-          widget.formControl.updateValue(selectedDay);
+        if (widget.availablesDate == null ||
+            (widget.availablesDate!.any(
+                  (element) => DateUtils.isSameDay(element, selectedDay),
+                ) &&
+                !selectedDay.isBefore(DateTime.now()))) {
+          widget.formControl?.updateValue(selectedDay);
           widget.onDaySelected?.call(selectedDay);
           context.popRoute();
         }
@@ -220,7 +208,3 @@ class _CustomCalendarState extends State<CustomCalendar> {
     );
   }
 }
-
-// int _getHashCode(DateTime key) {
-//   return key.day * 1000000 + key.month * 10000 + key.year;
-// }

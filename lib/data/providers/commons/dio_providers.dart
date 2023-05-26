@@ -47,17 +47,26 @@ Fresh<OAuth2Token> fresh(FreshRef ref) {
     tokenStorage: SSTokenStorage(),
     shouldRefresh: (response) {
       // final uri = response?.realUri;
-      // ignore: avoid_dynamic_calls
-      final status = response?.data['status'];
-      // final shouldRefresh = status == 401 &&
-      //     (uri!.path.contains('identity/api/auth/refresh') == false);
-      // return shouldRefresh;
-      if (status == 401) {
-        ref.read(loginProvider.notifier).logout();
-        showAlert(
-          'Debe estar autenticado',
-          TypeAlert.warning,
-        );
+      if (response != null) {
+        if (!response.realUri.path.contains(
+          'placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
+        )) {
+          final status = response.data['status'];
+          // final shouldRefresh = status == 401 &&
+          //     (uri!.path.contains('identity/api/auth/refresh') == false);
+          // return shouldRefresh;
+          if (status == 401 &&
+              !response.realUri.path.contains(
+                '/api/auth',
+              )) {
+            ref.read(loginProvider.notifier).logout();
+            showAlert(
+              //TODO traducir
+              'Debe estar autenticado',
+              TypeAlert.warning,
+            );
+          }
+        }
       }
       return false;
     },

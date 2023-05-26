@@ -1,6 +1,7 @@
 export 'buttons_group/buttons_group.dart';
 export 'primary_add_item_row.dart';
 export 'primary_async_button.dart';
+export 'primary_async_icon_button.dart';
 export 'primary_button.dart';
 export 'primary_child_button.dart';
 export 'primary_icon_button.dart';

@@ -52,21 +52,7 @@ Map<String, dynamic> _$RelativeModelToJson(RelativeModel instance) =>
     };
 
 const _$RelationshipTypeEnumMap = {
-  RelationshipType.spouseOrCohabitant: 'spouseOrCohabitant',
-  RelationshipType.minorChild: 'minorChild',
-  RelationshipType.brother: 'brother',
-  RelationshipType.father: 'father',
-  RelationshipType.mother: 'mother',
+  RelationshipType.parner: 'PARTNER',
+  RelationshipType.sonOrDaughter: 'CHILD',
+  RelationshipType.parent: 'PARENT',
 };
-
-BookedReceiptModel _$BookedReceiptModelFromJson(Map<String, dynamic> json) =>
-    BookedReceiptModel(
-      id: (json['id'] as List<dynamic>).map((e) => e as String).toList(),
-      transactionCode: json['transactionCode'] as String,
-    );
-
-Map<String, dynamic> _$BookedReceiptModelToJson(BookedReceiptModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'transactionCode': instance.transactionCode,
-    };

@@ -133,7 +133,6 @@ abstract class Api {
     @Path('id') String id,
   );
 
-
   @retrofit_headers.Headers({'Content-Type': 'application/json'})
   @POST('/residentialregistration/api/registration')
   Future<ResponseModel<CommandModel>> residenceRegistration(
@@ -221,20 +220,33 @@ abstract class Api {
   });
 
   @POST('/schedule/api/receipt')
-  Future<ResponseModel<BookedReceiptModel>> confirmSchedule(
+  Future<ResponseModel<CommandListWithTransactionCodeModel>> confirmSchedule(
     @Body() ReceiptModel receiptModel,
+  );
+
+  @POST('/schedule/api/receipt/payment')
+  Future<ResponseModel<CommandWithTransactionCodeModel>>
+      notifyPaymentOfSchedule(
+    @Body() NotifyServicePaymentDoneModel notifyServicePaymentDoneModel,
+  );
+
+  @GET('/middleware/api/nui/relationship/check')
+  Future<ResponseModel<CheckRelationshipModel?>> checkRelationship(
+    @Query('firstNui') String firstNui,
+    @Query('secondNui') String secondNui,
+    @Query('relationship') String relationship,
   );
 
   //PLACE TO PAY PAYMENT
   @POST(
-    'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
+    'https://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
   )
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
     @Body() PlaceToPayModel placeToPayModel,
   );
 
   @GET(
-    'http://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/{reference}',
+    'https://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/{reference}',
   )
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
     @Path('reference') String reference,
@@ -242,12 +254,12 @@ abstract class Api {
 
   //CHANGE OF NAME
   @POST('/changename/api/changename')
-  Future<ResponseModel<CommandModel>> changeOfName(
+  Future<ResponseModel<CommandWithTransactionCodeModel>> changeOfName(
     @Body() ChangeOfNameModel changeOfNameModel,
   );
 
   @POST('/changename/api/changename/payment')
   Future<ResponseModel<CommandModel>> notifyPaymentOfChangeOfName(
-    @Body() ChangeOfNamePaymentModel changeOfNamePaymentModel,
+    @Body() NotifyServicePaymentDoneModel notifyServicePaymentDoneModel,
   );
 }

@@ -56,6 +56,7 @@ class MainPageDependentPage extends ConsumerWidget {
                         ),
                     Crud.delete: (r) => showDeleteDialog(
                           context,
+                          message: l10n.seguroeliminarDependiente,
                           onDelete: () {
                             ref
                                 .read(resRegProvider.notifier)

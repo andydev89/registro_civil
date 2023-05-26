@@ -69,6 +69,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
           decoration: primaryInputDecoration(
             light: light,
             prefixIcon: prefixIcon,
+            readOnly: readOnly,
           ),
           isExpanded: isExpanded,
           hint: Text(

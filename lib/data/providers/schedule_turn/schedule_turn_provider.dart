@@ -47,7 +47,7 @@ Future<Result<List<ScheduleModel>, StatusCodeType>> schedules(
 class SchedulesByUserFilter extends _$SchedulesByUserFilter {
   @override
   QueryScheduleByUser build() {
-    return QueryScheduleByUser();
+    return const QueryScheduleByUser();
   }
 
   void setFilter(String filter) {
@@ -56,6 +56,23 @@ class SchedulesByUserFilter extends _$SchedulesByUserFilter {
 
   void setPageNo(int pageNo, {int pageSize = 20}) {
     state = state.copyWith(pageNo: pageNo, pageSize: pageSize);
+  }
+
+  void setOther(QueryScheduleByUser query) {
+    state = state.copyWith(
+      from: query.from,
+      to: query.to,
+      sortType: query.sortType,
+    );
+  }
+
+  void clearOtherFilter(){
+    state = QueryScheduleByUser(
+      filter: state.filter,
+      pageNo: state.pageNo,
+      pageSize: state.pageSize,
+      sortBy: state.sortBy,
+    );
   }
 }
 
@@ -74,19 +91,38 @@ Future<ResponseModelPagination<List<UserScheduleModel>>> schedulesByUser(
     filter: query.filter,
     sortBy: query.sortBy,
     sortType: query.sortType.toJson,
-    from: query.from,
-    to: query.to,
+    from: query.from?.onlyDate ?? '',
+    to: query.to?.onlyDate ?? '',
   );
   return response;
 }
 
 @riverpod
-Future<Result<BookedReceiptModel, StatusCodeType>> confirmSchedule(
+Future<Result<CommandListWithTransactionCodeModel, StatusCodeType>>
+    confirmSchedule(
   ConfirmScheduleRef ref, {
   required ReceiptModel recipt,
 }) async {
   final api = ref.watch(apiProvider);
   final response = await api.confirmSchedule(recipt);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+@riverpod
+Future<Result<CheckRelationshipModel, StatusCodeType>> checkRelationship(
+  CheckRelationshipRef ref, {
+  required String firstNui,
+  required String secondNui,
+  required String relationship,
+}) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.checkRelationship(
+    firstNui,
+    secondNui,
+    relationship,
+  );
   return response.success
       ? Result.ok(response.data!)
       : Result.err(response.status);
