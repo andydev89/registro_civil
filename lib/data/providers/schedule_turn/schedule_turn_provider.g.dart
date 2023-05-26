@@ -333,6 +333,108 @@ class ConfirmScheduleProvider extends AutoDisposeFutureProvider<
   }
 }
 
+String _$checkRelationshipHash() => r'efa5c7099e62ddb830bfc86f7ca626de73ee1b99';
+typedef CheckRelationshipRef = AutoDisposeFutureProviderRef<
+    Result<CheckRelationshipModel, StatusCodeType>>;
+
+/// See also [checkRelationship].
+@ProviderFor(checkRelationship)
+const checkRelationshipProvider = CheckRelationshipFamily();
+
+/// See also [checkRelationship].
+class CheckRelationshipFamily
+    extends Family<AsyncValue<Result<CheckRelationshipModel, StatusCodeType>>> {
+  /// See also [checkRelationship].
+  const CheckRelationshipFamily();
+
+  /// See also [checkRelationship].
+  CheckRelationshipProvider call({
+    required String firstNui,
+    required String secondNui,
+    required String relationship,
+  }) {
+    return CheckRelationshipProvider(
+      firstNui: firstNui,
+      secondNui: secondNui,
+      relationship: relationship,
+    );
+  }
+
+  @override
+  CheckRelationshipProvider getProviderOverride(
+    covariant CheckRelationshipProvider provider,
+  ) {
+    return call(
+      firstNui: provider.firstNui,
+      secondNui: provider.secondNui,
+      relationship: provider.relationship,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'checkRelationshipProvider';
+}
+
+/// See also [checkRelationship].
+class CheckRelationshipProvider extends AutoDisposeFutureProvider<
+    Result<CheckRelationshipModel, StatusCodeType>> {
+  /// See also [checkRelationship].
+  CheckRelationshipProvider({
+    required this.firstNui,
+    required this.secondNui,
+    required this.relationship,
+  }) : super.internal(
+          (ref) => checkRelationship(
+            ref,
+            firstNui: firstNui,
+            secondNui: secondNui,
+            relationship: relationship,
+          ),
+          from: checkRelationshipProvider,
+          name: r'checkRelationshipProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$checkRelationshipHash,
+          dependencies: CheckRelationshipFamily._dependencies,
+          allTransitiveDependencies:
+              CheckRelationshipFamily._allTransitiveDependencies,
+        );
+
+  final String firstNui;
+  final String secondNui;
+  final String relationship;
+
+  @override
+  bool operator ==(Object other) {
+    return other is CheckRelationshipProvider &&
+        other.firstNui == firstNui &&
+        other.secondNui == secondNui &&
+        other.relationship == relationship;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, firstNui.hashCode);
+    hash = _SystemHash.combine(hash, secondNui.hashCode);
+    hash = _SystemHash.combine(hash, relationship.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$schedulesByUserFilterHash() =>
     r'b8b12fae052affa200365507d8c1f3f3ef9d304f';
 

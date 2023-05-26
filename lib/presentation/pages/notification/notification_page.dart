@@ -67,6 +67,7 @@ class NotificationPage extends StatelessWidget {
       ),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (onTap != null)
             PrimaryAsyncButton(

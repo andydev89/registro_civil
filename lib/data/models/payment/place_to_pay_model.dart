@@ -287,6 +287,7 @@ class PlaceToPayReferenceModel with _$PlaceToPayReferenceModel {
     @JsonKey(name: 'Message') @ignore String? message,
     @JsonKey(name: 'Code') @ignore StatusCodeType? status,
     String? transactionCode,
+    @ignore TransactionStatusType? transactionStatus,
   }) = _PlaceToPayReferenceModel;
 
   const PlaceToPayReferenceModel._();

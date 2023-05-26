@@ -33,46 +33,46 @@ Future<Result<PlaceToPayReferenceModel, StatusCodeType>>
   }
 }
 
-@riverpod
-Future<Result<bool, StatusCodeType>> isPlaceToPayTransactionCompleted(
-  IsPlaceToPayTransactionCompletedRef ref, {
-  required PlaceToPayReferenceModel placeToPayReference,
-}) async {
-  try {
-    final api = ref.watch(apiProvider);
-    final response = await api.checkPlaceToPayTransaction(
-      placeToPayReference.paymentGatewayReference,
-    );
-    if (response != null && response.currentStatus != null) {
-      if (response.currentStatus == TransactionStatusType.approved) {
-        if (placeToPayReference.serviceType != null &&
-            placeToPayReference.transactionCode != null) {
-          ref.watch(
-            notifyCompletePaymentToServicesProvider(
-              placeToPayTransactionDetails: response,
-              serviceType: placeToPayReference.serviceType!,
-              transactionCode: placeToPayReference.transactionCode!,
-            ),
-          );
-          return const Result.ok(
-            true,
-          );
-        }
-        return const Result.ok(
-          false,
-        );
-      } else {
-        return const Result.ok(
-          false,
-        );
-      }
-    } else {
-      return const Result.err(StatusCodeType.s400);
-    }
-  } catch (e) {
-    return const Result.err(StatusCodeType.s400);
-  }
-}
+//Una transaccion es completada si da accepted o rejected
+// @riverpod
+// Future<Result<bool, StatusCodeType>> isPlaceToPayTransactionCompleted(
+//   IsPlaceToPayTransactionCompletedRef ref, {
+//   required PlaceToPayReferenceModel placeToPayReference,
+// }) async {
+//   try {
+//     final api = ref.watch(apiProvider);
+//     final response = await api.checkPlaceToPayTransaction(
+//       placeToPayReference.paymentGatewayReference,
+//     );
+//     if (response != null && response.currentStatus != null) {
+//       if (response.currentStatus == TransactionStatusType.approved) {
+//         if (placeToPayReference.serviceType != null &&
+//             placeToPayReference.transactionCode != null) {
+//           ref.watch(
+//             notifyCompletePaymentToServicesProvider(
+//               placeToPayTransactionDetails: response,
+//               serviceType: placeToPayReference.serviceType!,
+//               transactionCode: placeToPayReference.transactionCode!,
+//             ),
+//           );
+//         }
+//         return const Result.ok(
+//           true,
+//         );
+//       } else if (response.currentStatus == TransactionStatusType.rejected) {
+//         return const Result.ok(
+//           true,
+//         );
+//       } else {
+//         return const Result.ok(false);
+//       }
+//     } else {
+//       return const Result.ok(false);
+//     }
+//   } catch (e) {
+//     return const Result.err(StatusCodeType.s400);
+//   }
+// }
 
 @riverpod
 Future<void> notifyCompletePaymentToServices(
@@ -103,25 +103,46 @@ Future<void> notifyCompletePaymentToServices(
 Future<void> checkPendingTransactions(
   CheckPendingTransactionsRef ref,
 ) async {
+  final api = ref.watch(apiProvider);
   final isar = ref.watch(isarProvider);
   final transactions = isar.placeToPayReferenceModels.where().findAllSync();
-  for (final element in transactions) {
-    final status = await ref.watch(
-      isPlaceToPayTransactionCompletedProvider(placeToPayReference: element)
-          .future,
+  //Para cada transaccion en isar
+  for (final placeToPayReference in transactions) {
+    //Obtener el estado de la trasaccion
+    final response = await api.checkPlaceToPayTransaction(
+      placeToPayReference.paymentGatewayReference,
     );
-    status.when(
-      ok: (transactionCompleted) {
-        if (transactionCompleted) {
-          isar.writeTxnSync(
-            () => isar.placeToPayReferenceModels.deleteSync(element.id),
+    //Si posee estado la transaccion
+    if (response != null && response.currentStatus != null) {
+      //Si la transaccion es aprobada notificar al servicio correspondiente
+      if (response.currentStatus == TransactionStatusType.approved) {
+        if (placeToPayReference.serviceType != null &&
+            placeToPayReference.transactionCode != null) {
+          ref.watch(
+            notifyCompletePaymentToServicesProvider(
+              placeToPayTransactionDetails: response,
+              serviceType: placeToPayReference.serviceType!,
+              transactionCode: placeToPayReference.transactionCode!,
+            ),
           );
-          ref.read(transactionsStatusProvider.notifier).addTransaction(element);
         }
-      },
-      err: (error) =>
-          log('error: $error', name: 'Check Pending Transactions Provider'),
-    );
+      }
+      //Si la transaccion es aprobada o rechazada (ya se completo)
+      //eliminarla de isar y agregarla a las transacciones pendientes a mostrar
+      //al usuario
+      if (response.currentStatus == TransactionStatusType.approved ||
+          response.currentStatus == TransactionStatusType.rejected) {
+        isar.writeTxnSync(
+          () =>
+              isar.placeToPayReferenceModels.deleteSync(placeToPayReference.id),
+        );
+        ref.read(transactionsStatusProvider.notifier).addTransaction(
+              placeToPayReference.copyWith(
+                transactionStatus: response.currentStatus,
+              ),
+            );
+      }
+    }
   }
 }
 
@@ -129,7 +150,7 @@ Future<void> checkPendingTransactions(
 void executeCheckingPendingTransactions(
   ExecuteCheckingPendingTransactionsRef ref,
 ) {
-  ref.read(checkPendingTransactionsProvider);
+  // ref.read(checkPendingTransactionsProvider);
   Timer.periodic(const Duration(minutes: 5), (timer) {
     log(
       'Se ejecuto checkPendingTransactions cada 5 minutos',

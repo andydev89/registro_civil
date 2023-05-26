@@ -1,24 +1,15 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class CodePage extends StatelessWidget {
   const CodePage({
     super.key,
-    required this.typeOfService,
-    required this.includMe,
-    required this.procedureType,
-    required this.relatives,
+    this.onCodeAccepted,
   });
-  final TypeServiceModel typeOfService;
-  final bool includMe;
-  final List<RelativeModel> relatives;
-  final ProcedureType procedureType;
+  final void Function(BuildContext)? onCodeAccepted;
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +28,10 @@ class CodePage extends StatelessWidget {
           builder: (context, formModel, child) => PrimaryButton(
             title: l10n.continuar,
             onPressed: formModel.form.valid
-                ? () => context.navigateTo(
-                      ScheduleTurnSecondRoute(
-                        paymentMethod: PaymentMethodType.correspondentPayment,
-                        typeOfService: typeOfService,
-                        includMe: includMe,
-                        procedureType: procedureType,
-                        relatives: relatives,
-                      ),
-                    )
+                ? () {
+                    //TODO verificar el codigo de pago corresponsal
+                    onCodeAccepted?.call(context);
+                  }
                 : null,
           ).symmetricPadding(10, 30),
         ),

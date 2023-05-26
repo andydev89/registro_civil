@@ -258,6 +258,8 @@
   "s685": "Payment required",
   "s686": "Underage user",
   "s687": "Name change service not found",
+  "s740": "Only one receipt by owner",
+  "s762": "Failed response to connect the suri server or nui not exist",
   "nombre": "Name",
   "apellidos": "Last name",
   "direccion": "Address",
@@ -441,5 +443,9 @@
   "hasta" : "To",
   "asc" : "Ascending",
   "desc" : "Descendant",
-  "orden" : "Order"
+  "orden" : "Order",
+  "laTransaccion": "The transaction",
+  "haSido": "Has been",
+  "padreOMadre": "Parent",
+  "hijoOHija": "child",
 }
