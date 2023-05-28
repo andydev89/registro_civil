@@ -18,6 +18,11 @@ abstract class Api {
     @Body() NuiModel nuiModel,
   );
 
+  @POST('api/user/password/recover')
+  Future<ResponseModel<CommandModelEmail>> forgotPassword(
+    @Body() EnterEmailModel email,
+  );
+
   @POST('/api/user/register/data')
   Future<ResponseModel<CommandModel>> registerData(
     @Body() EnterDataModel enterDataModel,
@@ -34,6 +39,7 @@ abstract class Api {
     @Query('pageNo') int pageNo,
     @Query('pageSize') int pageSize,
   );
+
   @GET('/identity/api/user/me')
   Future<ResponseModel<MeModel>> me();
 

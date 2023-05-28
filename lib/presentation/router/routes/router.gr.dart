@@ -83,9 +83,15 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     SuccessRoute.name: (routeData) {
+      final args = routeData.argsAs<SuccessRouteArgs>(
+          orElse: () => const SuccessRouteArgs());
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const SuccessPage(),
+        child: SuccessPage(
+          key: args.key,
+          title: args.title,
+          subtitle: args.subtitle,
+        ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -1228,14 +1234,41 @@ class ScanRouterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SuccessPage]
-class SuccessRoute extends PageRouteInfo<void> {
-  const SuccessRoute()
-      : super(
+class SuccessRoute extends PageRouteInfo<SuccessRouteArgs> {
+  SuccessRoute({
+    Key? key,
+    String? title,
+    String? subtitle,
+  }) : super(
           SuccessRoute.name,
           path: 'success-page',
+          args: SuccessRouteArgs(
+            key: key,
+            title: title,
+            subtitle: subtitle,
+          ),
         );
 
   static const String name = 'SuccessRoute';
+}
+
+class SuccessRouteArgs {
+  const SuccessRouteArgs({
+    this.key,
+    this.title,
+    this.subtitle,
+  });
+
+  final Key? key;
+
+  final String? title;
+
+  final String? subtitle;
+
+  @override
+  String toString() {
+    return 'SuccessRouteArgs{key: $key, title: $title, subtitle: $subtitle}';
+  }
 }
 
 /// generated route for

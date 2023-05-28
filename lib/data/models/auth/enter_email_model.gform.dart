@@ -194,7 +194,7 @@ class EnterEmailModelForm implements FormModel<EnterEmailModel> {
   final String? path;
 
   String emailControlPath() => pathBuilder(emailControlName);
-  String get _emailValue => emailControl.value ?? "";
+  String get _emailValue => emailControl.value as String;
   bool get containsEmail {
     try {
       form.control(emailControlPath());
