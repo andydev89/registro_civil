@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residence_type.dart';
@@ -7,6 +8,7 @@ import 'package:registro_civil_apk/data/enum/residence_registration/residential_
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_housing_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_tenure_housing_agreemente_type.dart';
 import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
+import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
@@ -22,23 +24,41 @@ class ResidenceRegistration with _$ResidenceRegistration {
     @FormControlAnnotation<String>()
     @Default('')
     @JsonKey(includeToJson: true, includeFromJson: false)
-        String userId,
+    String userId,
     @FormControlAnnotation(validators: [requiredValidator])
     @Default('')
-        String observations,
+    String observations,
     @FormArrayAnnotation<Residential>()
     @Default([])
-        List<Residential> residentials,
+    List<Residential> residentials,
     @Default(StatusType.active)
     @FormControlAnnotation<StatusType>()
     @JsonKey(includeToJson: false, includeFromJson: true)
-        StatusType state,
+    StatusType state,
   }) = _ResidenceRegistration;
 
   const ResidenceRegistration._();
 
   factory ResidenceRegistration.fromJson(Map<String, dynamic> json) =>
       _$ResidenceRegistrationFromJson(json);
+
+  List<Dependent> dependents() {
+    final dependents = <Dependent>[];
+    for (final element in residentials) {
+      dependents.addAll(_addAddress(element));
+    }
+    return dependents;
+  }
+
+  List<Dependent> _addAddress(Residential residential) {
+    final dependents = <Dependent>[];
+    for (final element in residential.dependents) {
+      dependents.add(
+        element.copyWith(address: residential.address),
+      );
+    }
+    return dependents;
+  }
 }
 
 @Freezed(toJson: true)
@@ -48,44 +68,43 @@ class Residential with _$Residential {
   const factory Residential({
     @FormControlAnnotation(validators: [requiredValidator])
     @Default(false)
-        bool electricLightMeter,
+    bool electricLightMeter,
     @FormControlAnnotation<String>() @Default('') String electricalCode,
     @FormControlAnnotation(validators: [requiredValidator])
     @JsonKey(toJson: LocationModel.locationToJson)
-        required LocationModel province,
+    required LocationModel province,
     @FormControlAnnotation(validators: [requiredValidator])
     @JsonKey(toJson: LocationModel.locationToJson)
-        required LocationModel canton,
+    required LocationModel canton,
     @FormControlAnnotation(validators: [requiredValidator])
     @JsonKey(toJson: LocationModel.locationToJson)
-        required LocationModel parroquia,
+    required LocationModel parroquia,
     @FormControlAnnotation(validators: [requiredValidator])
     @Default('')
-        String mainStreet,
+    String mainStreet,
     @FormControlAnnotation(validators: [requiredValidator])
     @Default('')
-        String backStreet,
+    String backStreet,
     @FormControlAnnotation(validators: [requiredValidator])
-        required ResidentialHousingType housingType,
+    required ResidentialHousingType housingType,
     @FormControlAnnotation(validators: [requiredValidator])
-        required ResidentialTenureHousingAgreementeType
-            tenureHousingTypeAgreement,
-    @FormControlAnnotation(validators: [requiredValidator])
-    @Default('')
-        String numberVillaBuilding,
+    required ResidentialTenureHousingAgreementeType tenureHousingTypeAgreement,
     @FormControlAnnotation(validators: [requiredValidator])
     @Default('')
-        String floorNumber,
+    String numberVillaBuilding,
     @FormControlAnnotation(validators: [requiredValidator])
     @Default('')
-        String departmentNumber,
+    String floorNumber,
     @FormControlAnnotation(validators: [requiredValidator])
-        required ResidenceType type,
+    @Default('')
+    String departmentNumber,
+    @FormControlAnnotation(validators: [requiredValidator])
+    required ResidenceType type,
     @FormArrayAnnotation<Dependent>() @Default([]) List<Dependent> dependents,
     @JsonKey(includeToJson: false, includeFromJson: true)
     @FormControlAnnotation<String>()
     @Default('')
-        String id,
+    String id,
   }) = _Residential;
 
   const Residential._();
@@ -94,7 +113,8 @@ class Residential with _$Residential {
       _$ResidentialFromJson(json);
 
   @JsonKey(includeToJson: false, includeFromJson: false)
-  String get address => '$mainStreet, $backStreet #$numberVillaBuilding';
+  TranslatableString get address =>
+      TranslatableString('$mainStreet, $backStreet #$numberVillaBuilding');
 
   @JsonKey(includeToJson: false, includeFromJson: false)
   String get reisdentialId => '${province.id}${canton.id}${parroquia.id}'
@@ -148,7 +168,7 @@ class Residential with _$Residential {
 
 @Freezed(toJson: true)
 @ReactiveFormAnnotation()
-class Dependent with _$Dependent {
+class Dependent extends Equatable with _$Dependent {
   const factory Dependent({
     @FormControlAnnotation(
       validators: [
@@ -157,28 +177,35 @@ class Dependent with _$Dependent {
         length10Validator,
       ],
     )
-        required String nuiDependents,
+    required String nuiDependents,
     @FormControlAnnotation(validators: [requiredValidator])
-        required ResidentialDependentRelationType relationship,
-    @FormControlAnnotation<String>()
-        required String date,
+    required ResidentialDependentRelationType relationship,
+    @FormControlAnnotation<String>() required String date,
     @FormControlAnnotation(validators: [requiredValidator])
-        required String name,
+    required String name,
     @FormControlAnnotation(validators: [requiredValidator])
-        required String lastname,
+    required String lastname,
     @FormControlAnnotation<StatusType>()
     @Default(StatusType.active)
-        StatusType state,
+    StatusType state,
     @JsonKey(includeToJson: false, includeFromJson: true)
     @FormControlAnnotation<String>()
     @Default('')
-        String id,
+    String id,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    @FormControlAnnotation(validators: [requiredValidator])
+    @Default(TranslatableString(''))
+    TranslatableString address,
   }) = _Dependent;
 
   const Dependent._();
 
   factory Dependent.fromJson(Map<String, dynamic> json) =>
       _$DependentFromJson(json);
+
+  @override
+  List<Object?> get props =>
+      [nuiDependents, relationship, date, name, lastname, state, id, address];
 }
 
 @freezed
@@ -186,15 +213,15 @@ class Dependent with _$Dependent {
 class FirstStepResidenceModel with _$FirstStepResidenceModel {
   const factory FirstStepResidenceModel({
     @FormControlAnnotation(validators: [requiredValidator])
-        required String backStreet,
+    required String backStreet,
     @FormControlAnnotation(validators: [requiredValidator])
-        required LocationModel canton,
+    required LocationModel canton,
     @FormControlAnnotation(validators: [requiredValidator])
-        required String mainStreet,
+    required String mainStreet,
     @FormControlAnnotation(validators: [requiredValidator])
-        required LocationModel parroquia,
+    required LocationModel parroquia,
     @FormControlAnnotation(validators: [requiredValidator])
-        required LocationModel province,
+    required LocationModel province,
   }) = _FirstStepResidenceModel;
 
   factory FirstStepResidenceModel.fromJson(Map<String, dynamic> json) =>
@@ -219,18 +246,17 @@ class SecondStepResidenceModel with _$SecondStepResidenceModel {
     @FormControlAnnotation<bool>() required bool electricLightMeter,
     @FormControlAnnotation<String>() required String electricalCode,
     @FormControlAnnotation(validators: [requiredValidator])
-        required ResidentialHousingType housingType,
+    required ResidentialHousingType housingType,
     @FormControlAnnotation(validators: [requiredValidator])
-        required ResidentialTenureHousingAgreementeType
-            tenureHousingTypeAgreement,
+    required ResidentialTenureHousingAgreementeType tenureHousingTypeAgreement,
     @FormControlAnnotation(validators: [requiredValidator])
-        required String numberVillaBuilding,
+    required String numberVillaBuilding,
     @FormControlAnnotation(validators: [requiredValidator])
-        required String floorNumber,
+    required String floorNumber,
     @FormControlAnnotation(validators: [requiredValidator])
-        required String departmentNumber,
+    required String departmentNumber,
     @FormControlAnnotation(validators: [requiredValidator])
-        required ResidenceType type,
+    required ResidenceType type,
   }) = _SecondStepResidenceModel;
 
   const SecondStepResidenceModel._();
@@ -249,4 +275,15 @@ class SecondStepResidenceModel with _$SecondStepResidenceModel {
 
   factory SecondStepResidenceModel.fromJson(Map<String, dynamic> json) =>
       _$SecondStepResidenceModelFromJson(json);
+}
+
+class TranslatableString extends Equatable implements Translatable {
+  const TranslatableString(this.string);
+  final String string;
+
+  @override
+  String translate(BuildContext context) => string;
+
+  @override
+  List<Object?> get props => [string];
 }

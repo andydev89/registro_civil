@@ -6,6 +6,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/commons/crud_type.dart';
 import 'package:registro_civil_apk/data/enum/residence_registration/residential_dependent_relation_type.dart';
 import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/models/residence_registration/residence_registration_model.dart';
 import 'package:registro_civil_apk/data/providers/residence_registration/residence_registration_providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
@@ -22,11 +23,9 @@ class FirstStepDependentPage extends ConsumerWidget {
     super.key,
     this.operation = Crud.create,
     this.dependent,
-    required this.residentialIndex,
   });
   final Crud operation;
   final Dependent? dependent;
-  final int residentialIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,7 +41,7 @@ class FirstStepDependentPage extends ConsumerWidget {
             (control) => notRepeat(
                   control,
                   ref.watch(resRegProvider.notifier).dependentsFromResidence(
-                        residentialIndex,
+                        formModel.addressControl.value,
                         actual: dependent,
                       ),
                 )
@@ -50,38 +49,50 @@ class FirstStepDependentPage extends ConsumerWidget {
         )
         ..dateControl.value = DateTime.now().toString()
         ..stateControl.value = StatusType.active
-        ..idControl.value = '',
+        ..idControl.value = ''
+        ..addressControl.valueChanges.listen(
+              (event) =>
+                  formModel.nuiDependentsControl.updateValueAndValidity(),
+            ),
       builder: (context, formModel, child) => PrimaryScaffold(
         title: l10n.registroRes,
         subtitle: l10n.ingreseInfSol,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              PrimaryReactiveNuiField(
-                readOnly: operation == Crud.read,
-                label: l10n.numCedula,
-                formControl: formModel.nuiDependentsControl,
-              ),
-              PrimaryReactiveTextField(
-                readOnly: operation == Crud.read,
-                label: l10n.nombre,
-                formControl: formModel.nameControl,
-                textCapitalization: TextCapitalization.words,
-              ),
-              PrimaryReactiveTextField(
-                readOnly: operation == Crud.read,
-                label: l10n.apellidos,
-                formControl: formModel.lastnameControl,
-                textCapitalization: TextCapitalization.words,
-              ),
-              PrimaryReactiveDropdown(
-                readOnly: operation == Crud.read,
-                label: l10n.parentezco,
-                formControl: formModel.relationshipControl,
-                items: ResidentialDependentRelationType.items,
-              ),
-            ],
-          ).horizontalPadding(20),
+        body: Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                PrimaryReactiveNuiField(
+                  readOnly: operation == Crud.read,
+                  label: l10n.numCedula,
+                  formControl: formModel.nuiDependentsControl,
+                ),
+                PrimaryReactiveTextField(
+                  readOnly: operation == Crud.read,
+                  label: l10n.nombre,
+                  formControl: formModel.nameControl,
+                  textCapitalization: TextCapitalization.words,
+                ),
+                PrimaryReactiveTextField(
+                  readOnly: operation == Crud.read,
+                  label: l10n.apellidos,
+                  formControl: formModel.lastnameControl,
+                  textCapitalization: TextCapitalization.words,
+                ),
+                PrimaryReactiveDropdown(
+                  readOnly: operation == Crud.read,
+                  label: l10n.parentezco,
+                  formControl: formModel.relationshipControl,
+                  items: ResidentialDependentRelationType.items,
+                ),
+                PrimaryReactiveDropdown(
+                  readOnly: operation == Crud.read,
+                  label: l10n.residencia,
+                  formControl: formModel.addressControl,
+                  items: ref.read(resRegProvider.notifier).address(),
+                ),
+              ],
+            ).horizontalPadding(20),
+          ),
         ),
         bottomNavigationBar: ReactiveDependentFormConsumer(
           builder: (context, formModel, child) => PrimaryButton(
@@ -91,7 +102,7 @@ class FirstStepDependentPage extends ConsumerWidget {
                     if (operation == Crud.create) {
                       ref
                           .read(resRegProvider.notifier)
-                          .addDependent(residentialIndex, formModel.model);
+                          .addDependent(formModel.model);
                       showAlert(l10n.dependienteGuardadoCor, TypeAlert.success);
                     }
                     context.popRoute();

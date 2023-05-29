@@ -62,7 +62,6 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
       light: light,
       hintText: hintText,
       prefixIcon: prefixIcon,
-      init: init,
       items: elements.asData?.value.when(
             ok: (data) => data,
             err: (error) => _onError(),

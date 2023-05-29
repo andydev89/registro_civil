@@ -9,5 +9,6 @@ analyzer:
     - '**.g.dart'
     - '**.gr.dart'
     - '**.gform.dart'
+    - '**.freezed.dart'
   plugins:
     - custom_lint

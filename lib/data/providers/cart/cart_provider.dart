@@ -80,6 +80,7 @@ class Offers extends _$Offers {
       publishMovil: true,
       publishWeb: true,
       schedule: false,
+      typeEnum: TypeEnumType.service,
       state: StatusType.active,
       type: ServiceType.none,
     );

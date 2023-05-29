@@ -6,8 +6,8 @@ part of 'type_services_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TypeServiceModel _$TypeServiceModelFromJson(Map<String, dynamic> json) =>
-    TypeServiceModel(
+_$_TypeServiceModel _$$_TypeServiceModelFromJson(Map<String, dynamic> json) =>
+    _$_TypeServiceModel(
       id: json['id'] as String,
       name: json['name'] as String,
       description: json['description'] as String,
@@ -18,31 +18,62 @@ TypeServiceModel _$TypeServiceModelFromJson(Map<String, dynamic> json) =>
       publishWeb: json['publishWeb'] as bool,
       publishMovil: json['publishMovil'] as bool,
       path: json['path'] as String?,
+      typeEnum: $enumDecode(_$TypeEnumTypeEnumMap, json['typeEnum']),
       iconoWeb: json['iconoWeb'] as String,
       iconoMovil: json['iconoMovil'] as String,
-      type: ServiceType.fromJson(json['type'] as String?),
+      type: $enumDecode(_$ServiceTypeEnumMap, json['type'],
+          unknownValue: ServiceType.none),
       schedule: json['schedule'] as bool,
     );
 
-Map<String, dynamic> _$TypeServiceModelToJson(TypeServiceModel instance) =>
+Map<String, dynamic> _$$_TypeServiceModelToJson(_$_TypeServiceModel instance) =>
     <String, dynamic>{
-      'description': instance.description,
-      'discount': instance.discount,
-      'iconoMovil': instance.iconoMovil,
-      'iconoWeb': instance.iconoWeb,
       'id': instance.id,
-      'iva': instance.iva,
       'name': instance.name,
-      'path': instance.path,
+      'description': instance.description,
       'price': instance.price,
-      'publishMovil': instance.publishMovil,
-      'publishWeb': instance.publishWeb,
-      'schedule': instance.schedule,
+      'iva': instance.iva,
+      'discount': instance.discount,
       'state': _$StatusTypeEnumMap[instance.state]!,
-      'type': ServiceType.toJson(instance.type),
+      'publishWeb': instance.publishWeb,
+      'publishMovil': instance.publishMovil,
+      'path': instance.path,
+      'typeEnum': _$TypeEnumTypeEnumMap[instance.typeEnum]!,
+      'iconoWeb': instance.iconoWeb,
+      'iconoMovil': instance.iconoMovil,
+      'type': _$ServiceTypeEnumMap[instance.type]!,
+      'schedule': instance.schedule,
     };
 
 const _$StatusTypeEnumMap = {
   StatusType.active: 'ACTIVE',
   StatusType.inactive: 'INACTIVE',
+};
+
+const _$TypeEnumTypeEnumMap = {
+  TypeEnumType.procedure: 'PROCEDURE',
+  TypeEnumType.service: 'SERVICE',
+};
+
+const _$ServiceTypeEnumMap = {
+  ServiceType.birth: 'SERVICE_CERTIFICADO_NACIMIENTO',
+  ServiceType.marriage: 'SERVICE_CERTIFICADO_MATRIMONIO',
+  ServiceType.factorUnion: 'SERVICE_CERTIFICADO_UNION_HECHO',
+  ServiceType.death: 'SERVICE_CERTIFICADO_DEFUNCION',
+  ServiceType.gender: 'SERVICE_CERTIFICADO_GENERO',
+  ServiceType.identity: 'SERVICE_CERTIFICADO_IDENTIDAD_ESTADO_CIVIL',
+  ServiceType.copyBirthRegistrationCertificate:
+      'SERVICE_ACTA_REGISTRAL_NACIMIENTO',
+  ServiceType.copyMarriageRegistrationCertificate:
+      'SERVICE_ACTA_REGISTRAL_MATRIMONIO',
+  ServiceType.copyFactoUnionRegistrationCertificate:
+      'SERVICE_ACTA_REGISTRAL_UNION_HECHO',
+  ServiceType.copyRegistrationRecordDeath: 'SERVICE_ACTA_REGISTRAL_DEFUNCION',
+  ServiceType.copyRegistrationCertificateGenderRegistration:
+      'SERVICE_ACTA_REGISTRAL_GENERO',
+  ServiceType.schedule: 'SERVICE_AGENDAR_TURNO',
+  ServiceType.none: 'NULL',
+  ServiceType.residencyRegistration: 'SERVICE_RESIDENCY_REGISTRATION',
+  ServiceType.changeOfName: 'SERVICE_CAMBIO_NOMBRE',
+  ServiceType.marriageCelebration: 'FORMALITY_MARRIAGE_CELEBRATION',
 };

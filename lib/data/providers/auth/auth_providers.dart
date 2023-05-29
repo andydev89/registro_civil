@@ -50,7 +50,7 @@ class Login extends _$Login {
 @riverpod
 class RegisterValidateCitizen extends _$RegisterValidateCitizen {
   @override
- CitizenModel? build() {
+  CitizenModel? build() {
     return null;
   }
 
@@ -162,4 +162,19 @@ Future<MeModel> me(MeRef ref) async {
     return response.data!;
   }
   return MeModel();
+}
+
+@riverpod
+class ForgotPassword extends _$ForgotPassword {
+  @override
+  void build() {}
+
+  Future<Result<bool, StatusCodeType>> forgotPassword(
+    EnterEmailModel email,
+  ) async {
+    final api = ref.watch(apiProvider);
+    final response = await api.forgotPassword(email);
+    if (response.success) return const Result.ok(true);
+    return Result.err(response.status);
+  }
 }

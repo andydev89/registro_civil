@@ -935,6 +935,9 @@ mixin _$Dependent {
   @JsonKey(includeToJson: false, includeFromJson: true)
   @FormControlAnnotation<String>()
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  @FormControlAnnotation<TranslatableString>(validators: [requiredValidator])
+  TranslatableString get address => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -966,7 +969,12 @@ abstract class $DependentCopyWith<$Res> {
           StatusType state,
       @JsonKey(includeToJson: false, includeFromJson: true)
       @FormControlAnnotation<String>()
-          String id});
+          String id,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      @FormControlAnnotation<TranslatableString>(validators: [
+        requiredValidator
+      ])
+          TranslatableString address});
 }
 
 /// @nodoc
@@ -989,6 +997,7 @@ class _$DependentCopyWithImpl<$Res, $Val extends Dependent>
     Object? lastname = null,
     Object? state = null,
     Object? id = null,
+    Object? address = null,
   }) {
     return _then(_value.copyWith(
       nuiDependents: null == nuiDependents
@@ -1019,6 +1028,10 @@ class _$DependentCopyWithImpl<$Res, $Val extends Dependent>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as TranslatableString,
     ) as $Val);
   }
 }
@@ -1049,7 +1062,12 @@ abstract class _$$_DependentCopyWith<$Res> implements $DependentCopyWith<$Res> {
           StatusType state,
       @JsonKey(includeToJson: false, includeFromJson: true)
       @FormControlAnnotation<String>()
-          String id});
+          String id,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      @FormControlAnnotation<TranslatableString>(validators: [
+        requiredValidator
+      ])
+          TranslatableString address});
 }
 
 /// @nodoc
@@ -1070,6 +1088,7 @@ class __$$_DependentCopyWithImpl<$Res>
     Object? lastname = null,
     Object? state = null,
     Object? id = null,
+    Object? address = null,
   }) {
     return _then(_$_Dependent(
       nuiDependents: null == nuiDependents
@@ -1100,6 +1119,10 @@ class __$$_DependentCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as TranslatableString,
     ));
   }
 }
@@ -1126,7 +1149,12 @@ class _$_Dependent extends _Dependent {
           this.state = StatusType.active,
       @JsonKey(includeToJson: false, includeFromJson: true)
       @FormControlAnnotation<String>()
-          this.id = ''})
+          this.id = '',
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      @FormControlAnnotation<TranslatableString>(validators: [
+        requiredValidator
+      ])
+          this.address = const TranslatableString('')})
       : super._();
 
   factory _$_Dependent.fromJson(Map<String, dynamic> json) =>
@@ -1156,33 +1184,10 @@ class _$_Dependent extends _Dependent {
   @JsonKey(includeToJson: false, includeFromJson: true)
   @FormControlAnnotation<String>()
   final String id;
-
   @override
-  String toString() {
-    return 'Dependent(nuiDependents: $nuiDependents, relationship: $relationship, date: $date, name: $name, lastname: $lastname, state: $state, id: $id)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Dependent &&
-            (identical(other.nuiDependents, nuiDependents) ||
-                other.nuiDependents == nuiDependents) &&
-            (identical(other.relationship, relationship) ||
-                other.relationship == relationship) &&
-            (identical(other.date, date) || other.date == date) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.lastname, lastname) ||
-                other.lastname == lastname) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.id, id) || other.id == id));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, nuiDependents, relationship,
-      date, name, lastname, state, id);
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  @FormControlAnnotation<TranslatableString>(validators: [requiredValidator])
+  final TranslatableString address;
 
   @JsonKey(ignore: true)
   @override
@@ -1218,7 +1223,12 @@ abstract class _Dependent extends Dependent {
           final StatusType state,
       @JsonKey(includeToJson: false, includeFromJson: true)
       @FormControlAnnotation<String>()
-          final String id}) = _$_Dependent;
+          final String id,
+      @JsonKey(includeToJson: false, includeFromJson: false)
+      @FormControlAnnotation<TranslatableString>(validators: [
+        requiredValidator
+      ])
+          final TranslatableString address}) = _$_Dependent;
   const _Dependent._() : super._();
 
   factory _Dependent.fromJson(Map<String, dynamic> json) =
@@ -1247,6 +1257,10 @@ abstract class _Dependent extends Dependent {
   @JsonKey(includeToJson: false, includeFromJson: true)
   @FormControlAnnotation<String>()
   String get id;
+  @override
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  @FormControlAnnotation<TranslatableString>(validators: [requiredValidator])
+  TranslatableString get address;
   @override
   @JsonKey(ignore: true)
   _$$_DependentCopyWith<_$_Dependent> get copyWith =>
