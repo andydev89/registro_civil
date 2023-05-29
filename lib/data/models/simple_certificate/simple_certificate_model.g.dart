@@ -22,7 +22,7 @@ SimpleCertificateModel _$SimpleCertificateModelFromJson(
 Map<String, dynamic> _$SimpleCertificateModelToJson(
         SimpleCertificateModel instance) =>
     <String, dynamic>{
-      'type': ServiceType.toJson(instance.type),
+      'type': _$ServiceTypeEnumMap[instance.type]!,
       'userNui': instance.userNui,
       'isFamily': instance.isFamily,
       'typeFamily':

@@ -164,7 +164,6 @@ class ResReg extends _$ResReg {
     ResidenceRegistration residence,
   ) async {
     final api = ref.watch(apiProvider);
-    final x = residence.toJson();
     final user = await ref.watch(meProvider.future);
     final result = await api.residenceRegistration(
       residence.copyWith(userId: user.id),

@@ -80,6 +80,7 @@ abstract class Api {
     @Query('pageSize') int pageSize = 4,
     @Query('filter') String filter = '',
     @Query('sortBy') String sortBy = 'name',
+    @Query('type') String type = '',
     @Query('sortType') String sortType = 'asc',
   });
 

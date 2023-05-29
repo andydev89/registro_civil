@@ -393,6 +393,7 @@ class _Api implements Api {
     int pageSize = 4,
     String filter = '',
     String sortBy = 'name',
+    String type = '',
     String sortType = 'asc',
   }) async {
     const _extra = <String, dynamic>{};
@@ -401,6 +402,7 @@ class _Api implements Api {
       r'pageSize': pageSize,
       r'filter': filter,
       r'sortBy': sortBy,
+      r'type': type,
       r'sortType': sortType,
     };
     final _headers = <String, dynamic>{};
