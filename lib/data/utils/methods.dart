@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:face_camera/face_camera.dart';
 import 'package:fk_user_agent/fk_user_agent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,6 +34,7 @@ StatusCodeType _getStatusCode(StatusCodeType statusCode) {
 
 Future<void> initMethod() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FaceCamera.initialize();
   await initIsar();
   await FkUserAgent.init();
   await SystemChrome.setPreferredOrientations([
