@@ -694,14 +694,14 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     FirstStepDependentRoute.name: (routeData) {
-      final args = routeData.argsAs<FirstStepDependentRouteArgs>();
+      final args = routeData.argsAs<FirstStepDependentRouteArgs>(
+          orElse: () => const FirstStepDependentRouteArgs());
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: FirstStepDependentPage(
           key: args.key,
           operation: args.operation,
           dependent: args.dependent,
-          residentialIndex: args.residentialIndex,
         ),
       );
     },
@@ -2893,7 +2893,6 @@ class FirstStepDependentRoute
     Key? key,
     Crud operation = Crud.create,
     Dependent? dependent,
-    required int residentialIndex,
   }) : super(
           FirstStepDependentRoute.name,
           path: 'first-step-dependent-page',
@@ -2901,7 +2900,6 @@ class FirstStepDependentRoute
             key: key,
             operation: operation,
             dependent: dependent,
-            residentialIndex: residentialIndex,
           ),
         );
 
@@ -2913,7 +2911,6 @@ class FirstStepDependentRouteArgs {
     this.key,
     this.operation = Crud.create,
     this.dependent,
-    required this.residentialIndex,
   });
 
   final Key? key;
@@ -2922,11 +2919,9 @@ class FirstStepDependentRouteArgs {
 
   final Dependent? dependent;
 
-  final int residentialIndex;
-
   @override
   String toString() {
-    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent, residentialIndex: $residentialIndex}';
+    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent}';
   }
 }
 

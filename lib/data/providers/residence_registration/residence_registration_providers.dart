@@ -105,7 +105,10 @@ class ResReg extends _$ResReg {
     state = state.copyWith(residentials: newResidentials);
   }
 
-  void addDependent(int indexResidence, Dependent dependent) {
+  void addDependent(Dependent dependent) {
+    final indexResidence = state.residentials.indexWhere(
+      (element) => element.address == dependent.address,
+    );
     final newResidentials = state.residentials.map((residential) {
       if (state.residentials.indexOf(residential) == indexResidence) {
         final newDependents = List<Dependent>.from(residential.dependents)
@@ -117,11 +120,19 @@ class ResReg extends _$ResReg {
     state = state.copyWith(residentials: newResidentials);
   }
 
-  void removeDependent(int indexResidence, Dependent dependent) {
+  void removeDependent(Dependent dependent) {
+    final indexResidence = state.residentials.indexWhere(
+      (residential) => residential.address == dependent.address,
+    );
+    final indexDependent =
+        state.residentials.elementAt(indexResidence).dependents.indexWhere(
+              (element) => element.nuiDependents == dependent.nuiDependents,
+            );
+    final newDependents =
+        List<Dependent>.from(state.residentials[indexResidence].dependents)
+          ..removeAt(indexDependent);
     final newResidentials = state.residentials.map((residential) {
       if (state.residentials.indexOf(residential) == indexResidence) {
-        final newDependents = List<Dependent>.from(residential.dependents)
-          ..remove(dependent);
         return residential.copyWith(dependents: newDependents);
       }
       return residential;
@@ -129,11 +140,15 @@ class ResReg extends _$ResReg {
     state = state.copyWith(residentials: newResidentials);
   }
 
-  List<String> dependentsFromResidence(
-    int residenceIndex, {
+  List<String>dependentsFromResidence(
+    TranslatableString? residentialAddress, {
     Dependent? actual,
   }) {
-    final dependents = List<Dependent>.from(
+    final residenceIndex = state.residentials.indexWhere(
+      (element) => element.address == residentialAddress,
+    );
+    if (residenceIndex == -1) return [];
+    final dependents =List<Dependent>.from(
       state.residentials[residenceIndex].dependents,
     );
     if (actual != null) {
@@ -158,6 +173,10 @@ class ResReg extends _$ResReg {
       return index != -1 &&
           state.residentials[index].reisdentialId != actual.reisdentialId;
     }
+  }
+
+  List<TranslatableString> address() {
+    return state.residentials.map((e) => e.address).toList();
   }
 
   Future<Result<bool, StatusCodeType>> save(

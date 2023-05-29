@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/services/services.dart';
 import 'package:registro_civil_apk/data/enum/sort/sort_type.dart';
 
 part 'querys_model.g.dart';
