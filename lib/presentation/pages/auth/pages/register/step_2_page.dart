@@ -71,7 +71,13 @@ class Step2Page extends ConsumerWidget {
                 PrimaryButton(
                   title: cargoData ? l10n.siguiente : l10n.escanear,
                   onPressed: () {
-                    // TODO(alguien): escanear rostro
+                    context.navigateTo(
+                      FaceRecognitionRoute(
+                        onFaceDetected: (face) {
+                          //TODO guardar en isar la cara
+                        },
+                      ),
+                    );
                   },
                 ),
                 PrimaryTextButton(

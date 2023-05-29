@@ -73,6 +73,20 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    FaceRecognitionRoute.name: (routeData) {
+      final args = routeData.argsAs<FaceRecognitionRouteArgs>(
+          orElse: () => const FaceRecognitionRouteArgs());
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: FaceRecognitionPage(
+          key: args.key,
+          onFaceDetected: args.onFaceDetected,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ScanRouterRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -794,6 +808,11 @@ class _$AppRouter extends RootStackRouter {
               ],
             ),
             RouteConfig(
+              FaceRecognitionRoute.name,
+              path: 'face-recognition-page',
+              parent: AuthRouterRoute.name,
+            ),
+            RouteConfig(
               ScanRouterRoute.name,
               path: 'scan-router-page',
               parent: AuthRouterRoute.name,
@@ -1217,6 +1236,40 @@ class ForgotPasswordRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ForgotPasswordRouterRoute';
+}
+
+/// generated route for
+/// [FaceRecognitionPage]
+class FaceRecognitionRoute extends PageRouteInfo<FaceRecognitionRouteArgs> {
+  FaceRecognitionRoute({
+    Key? key,
+    void Function(File)? onFaceDetected,
+  }) : super(
+          FaceRecognitionRoute.name,
+          path: 'face-recognition-page',
+          args: FaceRecognitionRouteArgs(
+            key: key,
+            onFaceDetected: onFaceDetected,
+          ),
+        );
+
+  static const String name = 'FaceRecognitionRoute';
+}
+
+class FaceRecognitionRouteArgs {
+  const FaceRecognitionRouteArgs({
+    this.key,
+    this.onFaceDetected,
+  });
+
+  final Key? key;
+
+  final void Function(File)? onFaceDetected;
+
+  @override
+  String toString() {
+    return 'FaceRecognitionRouteArgs{key: $key, onFaceDetected: $onFaceDetected}';
+  }
 }
 
 /// generated route for
