@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/widgets/cards/translucent_card.dart';
-import 'package:registro_civil_apk/presentation/widgets/success_widget.dart';
-import 'package:registro_civil_apk/presentation/widgets/titles/primary_label.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class SuccessPage extends StatelessWidget {
-  const SuccessPage({super.key});
+  const SuccessPage({
+    super.key,
+    this.title,
+    this.subtitle,
+  });
+
+  final String? subtitle;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +25,16 @@ class SuccessPage extends StatelessWidget {
           Column(
             children: [
               PrimaryLabel(
-                l10n.regSatisfactorio,
+                title ?? l10n.regSatisfactorio,
                 color: Colors.white,
               ),
               const SizedBox(
                 height: 30,
               ),
-              PrimaryLabel(
-                l10n.envCorreo,
+              PrimaryText(
+                subtitle ?? l10n.envCorreo,
                 color: Colors.white,
-                fontWeight: FontWeight.normal,
+                maxLines: null,
               ),
             ],
           ),

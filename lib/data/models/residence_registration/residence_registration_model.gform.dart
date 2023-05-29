@@ -2323,6 +2323,8 @@ class DependentForm implements FormModel<Dependent> {
 
   static const String idControlName = "id";
 
+  static const String addressControlName = "address";
+
   final Dependent? dependent;
 
   final FormGroup form;
@@ -2336,6 +2338,7 @@ class DependentForm implements FormModel<Dependent> {
   String lastnameControlPath() => pathBuilder(lastnameControlName);
   String stateControlPath() => pathBuilder(stateControlName);
   String idControlPath() => pathBuilder(idControlName);
+  String addressControlPath() => pathBuilder(addressControlName);
   String get _nuiDependentsValue => nuiDependentsControl.value as String;
   ResidentialDependentRelationType get _relationshipValue =>
       relationshipControl.value as ResidentialDependentRelationType;
@@ -2344,6 +2347,8 @@ class DependentForm implements FormModel<Dependent> {
   String get _lastnameValue => lastnameControl.value as String;
   StatusType get _stateValue => stateControl.value as StatusType;
   String get _idValue => idControl.value as String;
+  TranslatableString get _addressValue =>
+      addressControl.value as TranslatableString;
   bool get containsNuiDependents {
     try {
       form.control(nuiDependentsControlPath());
@@ -2407,6 +2412,15 @@ class DependentForm implements FormModel<Dependent> {
     }
   }
 
+  bool get containsAddress {
+    try {
+      form.control(addressControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get nuiDependentsErrors => nuiDependentsControl.errors;
   Object? get relationshipErrors => relationshipControl.errors;
   Object? get dateErrors => dateControl.errors;
@@ -2414,6 +2428,7 @@ class DependentForm implements FormModel<Dependent> {
   Object? get lastnameErrors => lastnameControl.errors;
   Object? get stateErrors => stateControl.errors;
   Object? get idErrors => idControl.errors;
+  Object? get addressErrors => addressControl.errors;
   void get nuiDependentsFocus => form.focus(nuiDependentsControlPath());
   void get relationshipFocus => form.focus(relationshipControlPath());
   void get dateFocus => form.focus(dateControlPath());
@@ -2421,6 +2436,7 @@ class DependentForm implements FormModel<Dependent> {
   void get lastnameFocus => form.focus(lastnameControlPath());
   void get stateFocus => form.focus(stateControlPath());
   void get idFocus => form.focus(idControlPath());
+  void get addressFocus => form.focus(addressControlPath());
   void nuiDependentsValueUpdate(
     String value, {
     bool updateParent = true,
@@ -2481,6 +2497,15 @@ class DependentForm implements FormModel<Dependent> {
     bool emitEvent = true,
   }) {
     idControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void addressValueUpdate(
+    TranslatableString value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    addressControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -2547,6 +2572,15 @@ class DependentForm implements FormModel<Dependent> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void addressValuePatch(
+    TranslatableString value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    addressControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nuiDependentsValueReset(
     String value, {
     bool updateParent = true,
@@ -2610,6 +2644,15 @@ class DependentForm implements FormModel<Dependent> {
   }) =>
       idControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void addressValueReset(
+    TranslatableString value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      addressControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get nuiDependentsControl =>
       form.control(nuiDependentsControlPath()) as FormControl<String>;
   FormControl<ResidentialDependentRelationType> get relationshipControl =>
@@ -2625,6 +2668,8 @@ class DependentForm implements FormModel<Dependent> {
       form.control(stateControlPath()) as FormControl<StatusType>;
   FormControl<String> get idControl =>
       form.control(idControlPath()) as FormControl<String>;
+  FormControl<TranslatableString> get addressControl =>
+      form.control(addressControlPath()) as FormControl<TranslatableString>;
   void nuiDependentsSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -2751,6 +2796,24 @@ class DependentForm implements FormModel<Dependent> {
     }
   }
 
+  void addressSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      addressControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      addressControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   Dependent get model {
     final currentForm = path == null ? form : form.control(path!);
@@ -2766,7 +2829,8 @@ class DependentForm implements FormModel<Dependent> {
         name: _nameValue,
         lastname: _lastnameValue,
         state: _stateValue,
-        id: _idValue);
+        id: _idValue,
+        address: _addressValue);
   }
 
   DependentForm copyWithPath(String? path) {
@@ -2843,6 +2907,16 @@ class DependentForm implements FormModel<Dependent> {
         idControlName: FormControl<String>(
             value: dependent?.id,
             validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        addressControlName: FormControl<TranslatableString>(
+            value: dependent?.address,
+            validators: [
+              (control) =>
+                  requiredValidator(control as FormControl<TranslatableString>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

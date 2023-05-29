@@ -234,4 +234,20 @@ final citizenProvider =
 );
 
 typedef _$Citizen = AutoDisposeNotifier<CitizenModel>;
+String _$forgotPasswordHash() => r'57c9186acb4b274d0ef8c86279b367a4f2be3d74';
+
+/// See also [ForgotPassword].
+@ProviderFor(ForgotPassword)
+final forgotPasswordProvider =
+    AutoDisposeNotifierProvider<ForgotPassword, void>.internal(
+  ForgotPassword.new,
+  name: r'forgotPasswordProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$forgotPasswordHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ForgotPassword = AutoDisposeNotifier<void>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

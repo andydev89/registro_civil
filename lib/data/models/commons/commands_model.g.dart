@@ -18,6 +18,19 @@ Map<String, dynamic> _$$_CommandModelToJson(_$_CommandModel instance) =>
       'command': instance.command,
     };
 
+_$_CommandModelEmail _$$_CommandModelEmailFromJson(Map<String, dynamic> json) =>
+    _$_CommandModelEmail(
+      email: json['email'] as String,
+      command: json['command'] as String,
+    );
+
+Map<String, dynamic> _$$_CommandModelEmailToJson(
+        _$_CommandModelEmail instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'command': instance.command,
+    };
+
 _$_CommandWithTransactionCodeModel _$$_CommandWithTransactionCodeModelFromJson(
         Map<String, dynamic> json) =>
     _$_CommandWithTransactionCodeModel(

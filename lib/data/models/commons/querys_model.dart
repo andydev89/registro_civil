@@ -6,36 +6,20 @@ part 'querys_model.g.dart';
 part 'querys_model.freezed.dart';
 part 'querys_model.gform.dart';
 
-class QueryTypeService {
-  QueryTypeService({
-    this.pageNo = 0,
-    this.pageSize = 4,
-    this.filter = '',
-    this.sortBy = 'name',
-    this.sortType = SortType.asc,
-  });
+@freezed
+class QueryTypeService with _$QueryTypeService {
+  const factory QueryTypeService({
+    @Default(0) int pageNo,
+    @Default(4) int pageSize,
+    @Default('') String filter,
+    @Default('name') String sortBy,
+    @Default(SortType.asc) SortType sortType,
+  }) = _QueryTypeService;
 
-  final int pageNo;
-  final int pageSize;
-  final String filter;
-  final String sortBy;
-  final SortType sortType;
+  const QueryTypeService._();
 
-  QueryTypeService copyWith({
-    int? pageNo,
-    int? pageSize,
-    String? filter,
-    String? sortBy,
-    SortType? sortType,
-  }) {
-    return QueryTypeService(
-      pageNo: pageNo ?? this.pageNo,
-      pageSize: pageSize ?? this.pageSize,
-      filter: filter ?? this.filter,
-      sortBy: sortBy ?? this.sortBy,
-      sortType: sortType ?? this.sortType,
-    );
-  }
+  factory QueryTypeService.fromJson(Map<String, dynamic> json) =>
+      _$QueryTypeServiceFromJson(json);
 }
 
 @ReactiveFormAnnotation()

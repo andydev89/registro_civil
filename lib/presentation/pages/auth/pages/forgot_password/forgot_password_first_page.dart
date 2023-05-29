@@ -1,15 +1,20 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/models/auth/enter_email_model.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
-class ForgotPasswordFirstPage extends StatelessWidget {
+class ForgotPasswordFirstPage extends ConsumerWidget {
   const ForgotPasswordFirstPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return TranslucentCard(
       scrollContentOnResized: true,
@@ -39,11 +44,22 @@ class ForgotPasswordFirstPage extends StatelessWidget {
               ),
               ReactiveEnterEmailModelFormConsumer(
                 builder: (_, form, __) {
-                  return PrimaryButton(
-                    title: l10n.siguiente,
+                  return PrimaryAsyncButton(
+                    title: l10n.enviarCorreo,
                     onPressed: form.form.valid
-                        ? () => context
-                            .navigateTo(const ForgotPasswordSecondRoute())
+                        ? () => ref
+                            .watch(forgotPasswordProvider.notifier)
+                            .forgotPassword(form.model)
+                            .when(
+                              ok: (_) =>context.replaceRoute(SuccessRoute(
+                                title: l10n.alertaPassword,
+                                subtitle: l10n.envioAlertaCorreo
+                              ),),
+                              err: (err) => showAlert(
+                                err.translate(context),
+                                TypeAlert.error,
+                              ),
+                            )
                         : null,
                   );
                 },

@@ -5,7 +5,6 @@ import 'package:fk_user_agent/fk_user_agent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart';
-import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:registro_civil_apk/app.dart';
 import 'package:registro_civil_apk/bootstrap.dart';

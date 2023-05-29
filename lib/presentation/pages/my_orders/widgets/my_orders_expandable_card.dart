@@ -24,7 +24,7 @@ class MyOrderExpandableCard extends StatelessWidget {
           ),
           DescriptionRow(
             label: l10n.tramites,
-            text: data.typeOfService.translate(context),
+            text: data.typeOfService.name,
           ),
           DescriptionRow(
             label: l10n.fecha,
