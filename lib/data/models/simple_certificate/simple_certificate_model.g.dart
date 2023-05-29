@@ -22,7 +22,7 @@ SimpleCertificateModel _$SimpleCertificateModelFromJson(
 Map<String, dynamic> _$SimpleCertificateModelToJson(
         SimpleCertificateModel instance) =>
     <String, dynamic>{
-      'type': ServiceType.toJson(instance.type),
+      'type': _$ServiceTypeEnumMap[instance.type]!,
       'userNui': instance.userNui,
       'isFamily': instance.isFamily,
       'typeFamily':
@@ -52,7 +52,7 @@ const _$ServiceTypeEnumMap = {
   ServiceType.none: 'NULL',
   ServiceType.residencyRegistration: 'SERVICE_RESIDENCY_REGISTRATION',
   ServiceType.changeOfName: 'SERVICE_CAMBIO_NOMBRE',
-  ServiceType.marriageCelebration: 'PRUEBA_MARRIAGE_CELEBRATION',
+  ServiceType.marriageCelebration: 'FORMALITY_MARRIAGE_CELEBRATION',
 };
 
 const _$RelationshipSimpleCertificateTypeEnumMap = {

@@ -63,7 +63,7 @@ class TurnDetailsPage extends ConsumerWidget {
                       ),
                       PrimaryRowLabel(
                         boldLabel: l10n.servicio,
-                        simpleLabel: typeOfService.translate(context),
+                        simpleLabel: typeOfService.name,
                       ),
                       Row(
                         children: [

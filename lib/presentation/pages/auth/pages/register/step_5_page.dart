@@ -76,7 +76,7 @@ class Step5Page extends ConsumerWidget {
                               )
                               .when(
                                 ok: (_) =>
-                                    context.replaceRoute(const SuccessRoute()),
+                                    context.replaceRoute( SuccessRoute()),
                                 err: (error) => showAlert(
                                   error.translate(context),
                                   TypeAlert.error,

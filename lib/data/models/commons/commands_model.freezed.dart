@@ -168,6 +168,161 @@ abstract class _CommandModel implements CommandModel {
       throw _privateConstructorUsedError;
 }
 
+CommandModelEmail _$CommandModelEmailFromJson(Map<String, dynamic> json) {
+  return _CommandModelEmail.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CommandModelEmail {
+  String get email => throw _privateConstructorUsedError;
+  String get command => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CommandModelEmailCopyWith<CommandModelEmail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CommandModelEmailCopyWith<$Res> {
+  factory $CommandModelEmailCopyWith(
+          CommandModelEmail value, $Res Function(CommandModelEmail) then) =
+      _$CommandModelEmailCopyWithImpl<$Res, CommandModelEmail>;
+  @useResult
+  $Res call({String email, String command});
+}
+
+/// @nodoc
+class _$CommandModelEmailCopyWithImpl<$Res, $Val extends CommandModelEmail>
+    implements $CommandModelEmailCopyWith<$Res> {
+  _$CommandModelEmailCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? command = null,
+  }) {
+    return _then(_value.copyWith(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      command: null == command
+          ? _value.command
+          : command // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_CommandModelEmailCopyWith<$Res>
+    implements $CommandModelEmailCopyWith<$Res> {
+  factory _$$_CommandModelEmailCopyWith(_$_CommandModelEmail value,
+          $Res Function(_$_CommandModelEmail) then) =
+      __$$_CommandModelEmailCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String email, String command});
+}
+
+/// @nodoc
+class __$$_CommandModelEmailCopyWithImpl<$Res>
+    extends _$CommandModelEmailCopyWithImpl<$Res, _$_CommandModelEmail>
+    implements _$$_CommandModelEmailCopyWith<$Res> {
+  __$$_CommandModelEmailCopyWithImpl(
+      _$_CommandModelEmail _value, $Res Function(_$_CommandModelEmail) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? command = null,
+  }) {
+    return _then(_$_CommandModelEmail(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      command: null == command
+          ? _value.command
+          : command // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_CommandModelEmail implements _CommandModelEmail {
+  const _$_CommandModelEmail({required this.email, required this.command});
+
+  factory _$_CommandModelEmail.fromJson(Map<String, dynamic> json) =>
+      _$$_CommandModelEmailFromJson(json);
+
+  @override
+  final String email;
+  @override
+  final String command;
+
+  @override
+  String toString() {
+    return 'CommandModelEmail(email: $email, command: $command)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CommandModelEmail &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.command, command) || other.command == command));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, email, command);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CommandModelEmailCopyWith<_$_CommandModelEmail> get copyWith =>
+      __$$_CommandModelEmailCopyWithImpl<_$_CommandModelEmail>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CommandModelEmailToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CommandModelEmail implements CommandModelEmail {
+  const factory _CommandModelEmail(
+      {required final String email,
+      required final String command}) = _$_CommandModelEmail;
+
+  factory _CommandModelEmail.fromJson(Map<String, dynamic> json) =
+      _$_CommandModelEmail.fromJson;
+
+  @override
+  String get email;
+  @override
+  String get command;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CommandModelEmailCopyWith<_$_CommandModelEmail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 CommandWithTransactionCodeModel _$CommandWithTransactionCodeModelFromJson(
     Map<String, dynamic> json) {
   return _CommandWithTransactionCodeModel.fromJson(json);

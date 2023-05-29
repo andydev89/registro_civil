@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,7 +53,6 @@ Future<void> toDependent(
   BuildContext context, {
   Crud operation = Crud.create,
   Dependent? dependent,
-  required int residentialIndex,
 }) =>
     context.navigateTo(
       DependentRoute(
@@ -63,7 +61,6 @@ Future<void> toDependent(
             key: UniqueKey(),
             operation: operation,
             dependent: dependent,
-            residentialIndex: residentialIndex,
           ),
         ],
       ),

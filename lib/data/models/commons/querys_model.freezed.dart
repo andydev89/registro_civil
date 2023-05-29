@@ -14,6 +14,236 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+QueryTypeService _$QueryTypeServiceFromJson(Map<String, dynamic> json) {
+  return _QueryTypeService.fromJson(json);
+}
+
+/// @nodoc
+mixin _$QueryTypeService {
+  int get pageNo => throw _privateConstructorUsedError;
+  int get pageSize => throw _privateConstructorUsedError;
+  String get filter => throw _privateConstructorUsedError;
+  String get sortBy => throw _privateConstructorUsedError;
+  SortType get sortType => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $QueryTypeServiceCopyWith<QueryTypeService> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $QueryTypeServiceCopyWith<$Res> {
+  factory $QueryTypeServiceCopyWith(
+          QueryTypeService value, $Res Function(QueryTypeService) then) =
+      _$QueryTypeServiceCopyWithImpl<$Res, QueryTypeService>;
+  @useResult
+  $Res call(
+      {int pageNo,
+      int pageSize,
+      String filter,
+      String sortBy,
+      SortType sortType});
+}
+
+/// @nodoc
+class _$QueryTypeServiceCopyWithImpl<$Res, $Val extends QueryTypeService>
+    implements $QueryTypeServiceCopyWith<$Res> {
+  _$QueryTypeServiceCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pageNo = null,
+    Object? pageSize = null,
+    Object? filter = null,
+    Object? sortBy = null,
+    Object? sortType = null,
+  }) {
+    return _then(_value.copyWith(
+      pageNo: null == pageNo
+          ? _value.pageNo
+          : pageNo // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageSize: null == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as String,
+      sortBy: null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      sortType: null == sortType
+          ? _value.sortType
+          : sortType // ignore: cast_nullable_to_non_nullable
+              as SortType,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_QueryTypeServiceCopyWith<$Res>
+    implements $QueryTypeServiceCopyWith<$Res> {
+  factory _$$_QueryTypeServiceCopyWith(
+          _$_QueryTypeService value, $Res Function(_$_QueryTypeService) then) =
+      __$$_QueryTypeServiceCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int pageNo,
+      int pageSize,
+      String filter,
+      String sortBy,
+      SortType sortType});
+}
+
+/// @nodoc
+class __$$_QueryTypeServiceCopyWithImpl<$Res>
+    extends _$QueryTypeServiceCopyWithImpl<$Res, _$_QueryTypeService>
+    implements _$$_QueryTypeServiceCopyWith<$Res> {
+  __$$_QueryTypeServiceCopyWithImpl(
+      _$_QueryTypeService _value, $Res Function(_$_QueryTypeService) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pageNo = null,
+    Object? pageSize = null,
+    Object? filter = null,
+    Object? sortBy = null,
+    Object? sortType = null,
+  }) {
+    return _then(_$_QueryTypeService(
+      pageNo: null == pageNo
+          ? _value.pageNo
+          : pageNo // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageSize: null == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      filter: null == filter
+          ? _value.filter
+          : filter // ignore: cast_nullable_to_non_nullable
+              as String,
+      sortBy: null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as String,
+      sortType: null == sortType
+          ? _value.sortType
+          : sortType // ignore: cast_nullable_to_non_nullable
+              as SortType,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_QueryTypeService extends _QueryTypeService {
+  const _$_QueryTypeService(
+      {this.pageNo = 0,
+      this.pageSize = 4,
+      this.filter = '',
+      this.sortBy = 'name',
+      this.sortType = SortType.asc})
+      : super._();
+
+  factory _$_QueryTypeService.fromJson(Map<String, dynamic> json) =>
+      _$$_QueryTypeServiceFromJson(json);
+
+  @override
+  @JsonKey()
+  final int pageNo;
+  @override
+  @JsonKey()
+  final int pageSize;
+  @override
+  @JsonKey()
+  final String filter;
+  @override
+  @JsonKey()
+  final String sortBy;
+  @override
+  @JsonKey()
+  final SortType sortType;
+
+  @override
+  String toString() {
+    return 'QueryTypeService(pageNo: $pageNo, pageSize: $pageSize, filter: $filter, sortBy: $sortBy, sortType: $sortType)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_QueryTypeService &&
+            (identical(other.pageNo, pageNo) || other.pageNo == pageNo) &&
+            (identical(other.pageSize, pageSize) ||
+                other.pageSize == pageSize) &&
+            (identical(other.filter, filter) || other.filter == filter) &&
+            (identical(other.sortBy, sortBy) || other.sortBy == sortBy) &&
+            (identical(other.sortType, sortType) ||
+                other.sortType == sortType));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, pageNo, pageSize, filter, sortBy, sortType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_QueryTypeServiceCopyWith<_$_QueryTypeService> get copyWith =>
+      __$$_QueryTypeServiceCopyWithImpl<_$_QueryTypeService>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_QueryTypeServiceToJson(
+      this,
+    );
+  }
+}
+
+abstract class _QueryTypeService extends QueryTypeService {
+  const factory _QueryTypeService(
+      {final int pageNo,
+      final int pageSize,
+      final String filter,
+      final String sortBy,
+      final SortType sortType}) = _$_QueryTypeService;
+  const _QueryTypeService._() : super._();
+
+  factory _QueryTypeService.fromJson(Map<String, dynamic> json) =
+      _$_QueryTypeService.fromJson;
+
+  @override
+  int get pageNo;
+  @override
+  int get pageSize;
+  @override
+  String get filter;
+  @override
+  String get sortBy;
+  @override
+  SortType get sortType;
+  @override
+  @JsonKey(ignore: true)
+  _$$_QueryTypeServiceCopyWith<_$_QueryTypeService> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 QueryScheduleByUser _$QueryScheduleByUserFromJson(Map<String, dynamic> json) {
   return _QueryScheduleByUser.fromJson(json);
 }

@@ -50,60 +50,86 @@ class MainPageResicenceRegistrationPage extends ConsumerWidget {
                           title: l10n.listadoResidencias,
                           onPressed: () => toResidence(context),
                         ),
-                        ...formModel.model.residentials.mapWithIndex(
-                          (index, element) => GestureDetector(
-                            onTap: () => context.navigateTo(
-                              DependentRoute(
-                                children: [
-                                  MainRouteDependentRoute(
-                                    residentialIndex: index,
-                                  )
-                                ],
-                              ),
-                            ),
-                            child: CardWidget<Residential>(
-                              rows: {
-                                l10n.tipoDeVivienda: element.housingType.toText,
-                                l10n.direccion: element.address,
-                                l10n.tipoDeResidencia:
-                                    element.tenureHousingTypeAgreement.toText,
-                                l10n.dependientes:
-                                    element.dependents.length.toString(),
+                        ...user.residentials.mapWithIndex(
+                          (index, element) => CardWidget<Residential>(
+                            rows: {
+                              l10n.tipoDeVivienda: element.housingType.toText,
+                              l10n.direccion: element.address.string,
+                              l10n.tipoDeResidencia:
+                                  element.tenureHousingTypeAgreement.toText,
+                              l10n.dependientes: element.dependents.length.toString(),
+                            },
+                            actions: {
+                              Crud.update: (r) {
+                                ref
+                                    .read(residentialPProvider.notifier)
+                                    .state = r;
+                                toResidence(
+                                  context,
+                                  operation: Crud.update,
+                                  residenceIndex: index,
+                                );
                               },
-                              actions: {
-                                Crud.update: (r) {
-                                  ref
-                                      .read(residentialPProvider.notifier)
-                                      .state = r;
-                                  toResidence(
+                              Crud.read: (r) {
+                                ref
+                                    .read(residentialPProvider.notifier)
+                                    .state = r;
+                                toResidence(context, operation: Crud.read);
+                              },
+                              Crud.delete: (r) => showDeleteDialog(
                                     context,
-                                    operation: Crud.update,
-                                    residenceIndex: index,
-                                  );
-                                },
-                                Crud.read: (r) {
-                                  ref
-                                      .read(residentialPProvider.notifier)
-                                      .state = r;
-                                  toResidence(context, operation: Crud.read);
-                                },
-                                Crud.delete: (r) => showDeleteDialog(
-                                      context,
-                                      onDelete: () {
-                                        ref
-                                            .read(resRegProvider.notifier)
-                                            .removeResidence(index);
-                                        showAlert(
-                                          l10n.residenciaEliminadaCor,
-                                          TypeAlert.success,
-                                        );
-                                      },
-                                    )
-                              },
-                              element: element,
-                            ),
+                                    onDelete: () {
+                                      ref
+                                          .read(resRegProvider.notifier)
+                                          .removeResidence(index);
+                                      showAlert(
+                                        l10n.residenciaEliminadaCor,
+                                        TypeAlert.success,
+                                      );
+                                    },
+                                  )
+                            },
+                            element: element,
                           ),
                         ),
+                        PrimaryAddItemRow(
+                          title: l10n.listadoDependientes,
+                          onPressed: user.residentials.isEmpty
+                              ? null
+                              : () => toDependent(context),
+                        ),
+                        ...user.dependents().map(
+                              (element) => CardWidget<Dependent>(
+                                rows: {
+                                  l10n.numCedula: element.nuiDependents,
+                                  l10n.nombre: element.name,
+                                  l10n.apellidos: element.lastname,
+                                  l10n.residencia:
+                                      element.address.translate(context),
+                                },
+                                actions: {
+                                  Crud.read: (r) => toDependent(
+                                        context,
+                                        operation: Crud.read,
+                                        dependent: element,
+                                      ),
+                                  Crud.delete: (r) => showDeleteDialog(
+                                        context,
+                                        message: l10n.seguroeliminarDependiente,
+                                        onDelete: () {
+                                          ref
+                                              .read(resRegProvider.notifier)
+                                              .removeDependent(element);
+                                          showAlert(
+                                            l10n.dependentEliminadoCor,
+                                            TypeAlert.success,
+                                          );
+                                        },
+                                      )
+                                },
+                                element: element,
+                              ),
+                            ),
                       ],
                     ).horizontalPadding(20),
                   ),

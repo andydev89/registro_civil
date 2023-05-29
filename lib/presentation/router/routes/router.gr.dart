@@ -97,9 +97,15 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     SuccessRoute.name: (routeData) {
+      final args = routeData.argsAs<SuccessRouteArgs>(
+          orElse: () => const SuccessRouteArgs());
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const SuccessPage(),
+        child: SuccessPage(
+          key: args.key,
+          title: args.title,
+          subtitle: args.subtitle,
+        ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -702,14 +708,14 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     FirstStepDependentRoute.name: (routeData) {
-      final args = routeData.argsAs<FirstStepDependentRouteArgs>();
+      final args = routeData.argsAs<FirstStepDependentRouteArgs>(
+          orElse: () => const FirstStepDependentRouteArgs());
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: FirstStepDependentPage(
           key: args.key,
           operation: args.operation,
           dependent: args.dependent,
-          residentialIndex: args.residentialIndex,
         ),
       );
     },
@@ -1281,14 +1287,41 @@ class ScanRouterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SuccessPage]
-class SuccessRoute extends PageRouteInfo<void> {
-  const SuccessRoute()
-      : super(
+class SuccessRoute extends PageRouteInfo<SuccessRouteArgs> {
+  SuccessRoute({
+    Key? key,
+    String? title,
+    String? subtitle,
+  }) : super(
           SuccessRoute.name,
           path: 'success-page',
+          args: SuccessRouteArgs(
+            key: key,
+            title: title,
+            subtitle: subtitle,
+          ),
         );
 
   static const String name = 'SuccessRoute';
+}
+
+class SuccessRouteArgs {
+  const SuccessRouteArgs({
+    this.key,
+    this.title,
+    this.subtitle,
+  });
+
+  final Key? key;
+
+  final String? title;
+
+  final String? subtitle;
+
+  @override
+  String toString() {
+    return 'SuccessRouteArgs{key: $key, title: $title, subtitle: $subtitle}';
+  }
 }
 
 /// generated route for
@@ -2913,7 +2946,6 @@ class FirstStepDependentRoute
     Key? key,
     Crud operation = Crud.create,
     Dependent? dependent,
-    required int residentialIndex,
   }) : super(
           FirstStepDependentRoute.name,
           path: 'first-step-dependent-page',
@@ -2921,7 +2953,6 @@ class FirstStepDependentRoute
             key: key,
             operation: operation,
             dependent: dependent,
-            residentialIndex: residentialIndex,
           ),
         );
 
@@ -2933,7 +2964,6 @@ class FirstStepDependentRouteArgs {
     this.key,
     this.operation = Crud.create,
     this.dependent,
-    required this.residentialIndex,
   });
 
   final Key? key;
@@ -2942,11 +2972,9 @@ class FirstStepDependentRouteArgs {
 
   final Dependent? dependent;
 
-  final int residentialIndex;
-
   @override
   String toString() {
-    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent, residentialIndex: $residentialIndex}';
+    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent}';
   }
 }
 

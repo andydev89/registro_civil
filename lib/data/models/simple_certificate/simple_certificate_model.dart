@@ -86,7 +86,7 @@ class SimpleCertificateModel {
 
   factory SimpleCertificateModel.fromJson(Map<String, dynamic> json) =>
       _$SimpleCertificateModelFromJson(json);
-  @JsonKey(toJson: ServiceType.toJson)
+  // @JsonKey(toJson: ServiceType.toJson)
   final ServiceType type;
   final String userNui;
   final bool isFamily;

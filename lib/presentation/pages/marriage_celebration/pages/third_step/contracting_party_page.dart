@@ -121,7 +121,6 @@ class _ContractingPartyPageState extends ConsumerState<ContractingPartyPage> {
                 PrimaryText(l10n.tieneHij),
                 PrimaryReactiveDropdown(
                   readOnly: widget.operation.isRead,
-                  init: widget.operation.isRead,
                   formControl: formModel.hasChildrenControl,
                   items: Binary.values,
                 ),
@@ -133,7 +132,6 @@ class _ContractingPartyPageState extends ConsumerState<ContractingPartyPage> {
                       children: [
                         PrimaryText(l10n.tusHiSon),
                         PrimaryReactiveDropdown(
-                          init: widget.operation.isRead,
                           readOnly: widget.operation.isRead,
                           formControl: formModel.childrenRelationshipControl,
                           items: ChildrenRelationShipType.values,
