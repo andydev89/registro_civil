@@ -7,6 +7,7 @@ const grey = Color(0xffCCCCCC);
 const blue = Color(0xff24487A);
 const ligthBlue = Color(0xff2983F4);
 const green = Color(0xff5CA71B);
+const greyText = Color(0xFFA6A6A8);
 const gradient = LinearGradient(
   colors: [
     primaryColor,

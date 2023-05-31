@@ -2,6 +2,7 @@ export 'auth/auth.dart';
 export 'cart/cart.dart';
 export 'change_of_name/change_of_name.dart';
 export 'commons/commons.dart';
+export 'id_duplicate/id_duplicate.dart';
 export 'marriage_celebration/marriage_celebration.dart';
 export 'payment/payment.dart';
 export 'residence_registration/residence_registration.dart';

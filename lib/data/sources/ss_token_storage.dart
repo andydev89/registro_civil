@@ -27,6 +27,7 @@ class SSTokenStorage extends TokenStorage<OAuth2Token> {
       tokenType: json['tokenType'] as String?,
     );
     log('TOKEN LEIDO', name: 'SSTokenStorage');
+    log(token.accessToken, name: 'SSTokenStorage');
     return token;
   }
 

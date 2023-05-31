@@ -1,0 +1,58 @@
+import 'dart:convert';
+import 'dart:ui';
+
+import 'package:intl/intl.dart';
+import 'package:oxidized/oxidized.dart';
+import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/auth/auth.dart';
+import 'package:registro_civil_apk/data/providers/commons/commons.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'id_duplicate_provider.g.dart';
+
+@riverpod
+class IdDuplicate extends _$IdDuplicate {
+  @override
+  IdDuplicateModel build() {
+    return const IdDuplicateModel();
+  }
+
+  void setFirstStep(
+      {required ProcedureTypeSubModel procedureType,
+      required String requestOwner,}) {
+    state = state.copyWith(
+      type: procedureType.idDuplicateProcedureType,
+      nui: procedureType.nui,
+      birthdate: DateFormat('yyyy-MM-dd').format(procedureType.birthDate),
+      requestOwner: requestOwner,
+    );
+  }
+
+  void setSecondStep(ProcedureReasonSubModel reason) {
+    state = state.copyWith(
+      agencyId: reason.agency,
+      provinceId: reason.province.id,
+      reasonType: reason.reason,
+    );
+  }
+}
+
+@riverpod
+class IdDuplicateApi extends _$IdDuplicateApi {
+  @override
+  void build() {
+    return;
+  }
+
+  Future<Result<bool, StatusCodeType>> duplicate(
+    IdDuplicateModel model,
+  ) async {
+    final api = ref.watch(apiProvider);
+    final result = await api.createDuplicate(model);
+    if (result.success) {
+      return const Result.ok(true);
+    }
+    return Result.err(result.status);
+  }
+}

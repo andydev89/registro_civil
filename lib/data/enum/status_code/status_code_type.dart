@@ -82,6 +82,9 @@ enum StatusCodeType implements Translatable {
   s686(686),
   s687(687);
 
+  //Errores para el duplicado de cédula
+
+
   const StatusCodeType(this.code);
   final int code;
 

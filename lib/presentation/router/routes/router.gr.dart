@@ -308,6 +308,12 @@ class _$AppRouter extends RootStackRouter {
         child: const PaymentServiceJudgmentsNotarialActsPage(),
       );
     },
+    IdDuplicateRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const IdDuplicateRouterPage(),
+      );
+    },
     ServicesRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -720,6 +726,38 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    IdDuplicateFirstStepRoute.name: (routeData) {
+      final args = routeData.argsAs<IdDuplicateFirstStepRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: IdDuplicateFirstStepPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+      );
+    },
+    IdDuplicateSecondStepRoute.name: (routeData) {
+      final args = routeData.argsAs<IdDuplicateSecondStepRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: IdDuplicateSecondStepPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          me: args.me,
+        ),
+      );
+    },
+    IdDuplicateDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<IdDuplicateDetailRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: IdDuplicateDetailPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          me: args.me,
+        ),
+      );
+    },
   };
 
   @override
@@ -1110,6 +1148,34 @@ class _$AppRouter extends RootStackRouter {
               path: 'payment-service-judgments-notarial-acts-page',
               parent: RootRouterRoute.name,
               guards: [authGuard],
+            ),
+            RouteConfig(
+              IdDuplicateRouterRoute.name,
+              path: 'id-duplicate-router-page',
+              parent: RootRouterRoute.name,
+              guards: [authGuard],
+              children: [
+                RouteConfig(
+                  IdDuplicateFirstStepRoute.name,
+                  path: '',
+                  parent: IdDuplicateRouterRoute.name,
+                ),
+                RouteConfig(
+                  IdDuplicateSecondStepRoute.name,
+                  path: 'id-duplicate-second-step-page',
+                  parent: IdDuplicateRouterRoute.name,
+                ),
+                RouteConfig(
+                  IdDuplicateSecondStepRoute.name,
+                  path: 'id-duplicate-second-step-page',
+                  parent: IdDuplicateRouterRoute.name,
+                ),
+                RouteConfig(
+                  IdDuplicateDetailRoute.name,
+                  path: 'id-duplicate-detail-page',
+                  parent: IdDuplicateRouterRoute.name,
+                ),
+              ],
             ),
           ],
         ),
@@ -1769,6 +1835,19 @@ class PaymentServiceJudgmentsNotarialActsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'PaymentServiceJudgmentsNotarialActsRoute';
+}
+
+/// generated route for
+/// [IdDuplicateRouterPage]
+class IdDuplicateRouterRoute extends PageRouteInfo<void> {
+  const IdDuplicateRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          IdDuplicateRouterRoute.name,
+          path: 'id-duplicate-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'IdDuplicateRouterRoute';
 }
 
 /// generated route for
@@ -2968,5 +3047,119 @@ class VerifyInformationRouteArgs {
   @override
   String toString() {
     return 'VerifyInformationRouteArgs{key: $key, changeOfNameModel: $changeOfNameModel, typeService: $typeService}';
+  }
+}
+
+/// generated route for
+/// [IdDuplicateFirstStepPage]
+class IdDuplicateFirstStepRoute
+    extends PageRouteInfo<IdDuplicateFirstStepRouteArgs> {
+  IdDuplicateFirstStepRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          IdDuplicateFirstStepRoute.name,
+          path: '',
+          args: IdDuplicateFirstStepRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'IdDuplicateFirstStepRoute';
+}
+
+class IdDuplicateFirstStepRouteArgs {
+  const IdDuplicateFirstStepRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'IdDuplicateFirstStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [IdDuplicateSecondStepPage]
+class IdDuplicateSecondStepRoute
+    extends PageRouteInfo<IdDuplicateSecondStepRouteArgs> {
+  IdDuplicateSecondStepRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    required MeModel me,
+  }) : super(
+          IdDuplicateSecondStepRoute.name,
+          path: 'id-duplicate-second-step-page',
+          args: IdDuplicateSecondStepRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            me: me,
+          ),
+        );
+
+  static const String name = 'IdDuplicateSecondStepRoute';
+}
+
+class IdDuplicateSecondStepRouteArgs {
+  const IdDuplicateSecondStepRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    required this.me,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final MeModel me;
+
+  @override
+  String toString() {
+    return 'IdDuplicateSecondStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, me: $me}';
+  }
+}
+
+/// generated route for
+/// [IdDuplicateDetailPage]
+class IdDuplicateDetailRoute extends PageRouteInfo<IdDuplicateDetailRouteArgs> {
+  IdDuplicateDetailRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    required MeModel me,
+  }) : super(
+          IdDuplicateDetailRoute.name,
+          path: 'id-duplicate-detail-page',
+          args: IdDuplicateDetailRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            me: me,
+          ),
+        );
+
+  static const String name = 'IdDuplicateDetailRoute';
+}
+
+class IdDuplicateDetailRouteArgs {
+  const IdDuplicateDetailRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    required this.me,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final MeModel me;
+
+  @override
+  String toString() {
+    return 'IdDuplicateDetailRouteArgs{key: $key, typeServiceModel: $typeServiceModel, me: $me}';
   }
 }

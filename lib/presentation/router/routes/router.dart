@@ -334,6 +334,26 @@ part 'router.gr.dart';
           guards: [AuthGuard],
           page: PaymentServiceJudgmentsNotarialActsPage,
         ),
+        //ID_DUPLICATE
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: IdDuplicateRouterPage,
+          children: [
+            CupertinoRoute(
+              page: IdDuplicateFirstStepPage,
+              initial: true,
+            ),
+            CupertinoRoute(
+              page: IdDuplicateSecondStepPage,
+            ),
+            CupertinoRoute(
+              page: IdDuplicateSecondStepPage,
+            ),
+            CupertinoRoute(
+              page: IdDuplicateDetailPage,
+            ),
+          ],
+        ),
       ],
     ),
   ],

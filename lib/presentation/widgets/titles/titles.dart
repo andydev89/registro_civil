@@ -4,3 +4,4 @@ export 'primary_label.dart';
 export 'primary_row_label.dart';
 export 'primary_text.dart';
 export 'primary_title.dart';
+export 'secondary_row_label.dart';

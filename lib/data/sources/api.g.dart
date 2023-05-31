@@ -1266,6 +1266,34 @@ class _Api implements Api {
     return value;
   }
 
+  @override
+  Future<ResponseModel<CommandWithTransactionCodeModel>> createDuplicate(
+      IdDuplicateModel idDuplicateModel) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = idDuplicateModel;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandWithTransactionCodeModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/duplicateid/api/duplicate',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandWithTransactionCodeModel>.fromJson(
+      _result.data!,
+      (json) => CommandWithTransactionCodeModel.fromJson(
+          json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

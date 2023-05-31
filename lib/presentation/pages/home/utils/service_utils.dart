@@ -59,6 +59,13 @@ PageRouteInfo<dynamic> getChangeOfName(TypeServiceModel typeOfService) =>
       ],
     );
 
+PageRouteInfo<dynamic> getIdDuplicate(TypeServiceModel typeOfService) =>
+    IdDuplicateRouterRoute(
+      children: [
+        IdDuplicateFirstStepRoute(typeServiceModel: typeOfService),
+      ],
+    );
+
 PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   final type = typeServiceModel.type;
   if (type.isSimpleCertificate) {
@@ -75,6 +82,9 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   }
   if (type.isChangeOfName) {
     return getChangeOfName(typeServiceModel);
+  }
+  if (type.isIdDuplicate) {
+    return getIdDuplicate(typeServiceModel);
   }
   return getMarriageCelebration();
 }

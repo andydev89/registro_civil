@@ -62,9 +62,11 @@ class CircleAvatarCardGrid extends ConsumerWidget {
           },
         ),
         title: item.name,
-        onPressedCheck: () => item.state == StatusType.active
-            ? context.navigateTo(getRoute(item))
-            : () {},
+        onPressedCheck: () {
+          if (item.state == StatusType.active) {
+            context.navigateTo(getRoute(item));
+          }
+        },
         onPressedView: () => showContentDialog(
           context,
           content: CertificateDescription(

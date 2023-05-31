@@ -255,4 +255,9 @@ abstract class Api {
   Future<ResponseModel<CommandModel>> notifyPaymentOfChangeOfName(
     @Body() NotifyServicePaymentDoneModel notifyServicePaymentDoneModel,
   );
+
+  @POST('/duplicateid/api/duplicate')
+  Future<ResponseModel<CommandWithTransactionCodeModel>> createDuplicate(
+    @Body() IdDuplicateModel idDuplicateModel,
+  );
 }
