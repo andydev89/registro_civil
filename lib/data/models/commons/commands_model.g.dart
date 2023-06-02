@@ -8,7 +8,7 @@ part of 'commands_model.dart';
 
 _$_CommandModel _$$_CommandModelFromJson(Map<String, dynamic> json) =>
     _$_CommandModel(
-      id: json['id'] as String,
+      id: json['id'] as String?,
       command: json['command'] as String,
     );
 
@@ -18,10 +18,23 @@ Map<String, dynamic> _$$_CommandModelToJson(_$_CommandModel instance) =>
       'command': instance.command,
     };
 
+_$_CommandModelEmail _$$_CommandModelEmailFromJson(Map<String, dynamic> json) =>
+    _$_CommandModelEmail(
+      email: json['email'] as String,
+      command: json['command'] as String,
+    );
+
+Map<String, dynamic> _$$_CommandModelEmailToJson(
+        _$_CommandModelEmail instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'command': instance.command,
+    };
+
 _$_CommandWithTransactionCodeModel _$$_CommandWithTransactionCodeModelFromJson(
         Map<String, dynamic> json) =>
     _$_CommandWithTransactionCodeModel(
-      id: json['id'] as String,
+      id: json['id'] as String?,
       transactionCode: json['transactionCode'] as String,
       command: json['command'] as String,
     );
@@ -36,7 +49,7 @@ Map<String, dynamic> _$$_CommandWithTransactionCodeModelToJson(
 
 _$_CommandListModel _$$_CommandListModelFromJson(Map<String, dynamic> json) =>
     _$_CommandListModel(
-      id: (json['id'] as List<dynamic>).map((e) => e as String).toList(),
+      id: (json['id'] as List<dynamic>?)?.map((e) => e as String).toList(),
       command: json['command'] as String,
     );
 
@@ -50,7 +63,7 @@ _$_CommandListWithTransactionCodeModel
     _$$_CommandListWithTransactionCodeModelFromJson(
             Map<String, dynamic> json) =>
         _$_CommandListWithTransactionCodeModel(
-          id: (json['id'] as List<dynamic>).map((e) => e as String).toList(),
+          id: (json['id'] as List<dynamic>?)?.map((e) => e as String).toList(),
           transactionCode: json['transactionCode'] as String,
           command: json['command'] as String,
         );

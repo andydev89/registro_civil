@@ -55,7 +55,10 @@ Fresh<OAuth2Token> fresh(FreshRef ref) {
           // final shouldRefresh = status == 401 &&
           //     (uri!.path.contains('identity/api/auth/refresh') == false);
           // return shouldRefresh;
-          if (status == 401) {
+          if (status == 401 &&
+              !response.realUri.path.contains(
+                '/api/auth',
+              )) {
             ref.read(loginProvider.notifier).logout();
             showAlert(
               //TODO traducir

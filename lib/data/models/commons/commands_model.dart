@@ -5,7 +5,7 @@ part 'commands_model.freezed.dart';
 @freezed
 class CommandModel with _$CommandModel {
   const factory CommandModel({
-    required String id,
+    required String? id,
     required String command,
   }) = _CommandModel;
 
@@ -14,9 +14,20 @@ class CommandModel with _$CommandModel {
 }
 
 @freezed
+class CommandModelEmail with _$CommandModelEmail {
+  const factory CommandModelEmail({
+    required String email,
+    required String command,
+  }) = _CommandModelEmail;
+
+  factory CommandModelEmail.fromJson(Map<String, dynamic> json) =>
+      _$CommandModelEmailFromJson(json);
+}
+
+@freezed
 class CommandWithTransactionCodeModel with _$CommandWithTransactionCodeModel {
   const factory CommandWithTransactionCodeModel({
-    required String id,
+    required String? id,
     required String transactionCode,
     required String command,
   }) = _CommandWithTransactionCodeModel;
@@ -28,7 +39,7 @@ class CommandWithTransactionCodeModel with _$CommandWithTransactionCodeModel {
 @freezed
 class CommandListModel with _$CommandListModel {
   const factory CommandListModel({
-    required List<String> id,
+    required List<String>? id,
     required String command,
   }) = _CommandListModel;
 
@@ -40,7 +51,7 @@ class CommandListModel with _$CommandListModel {
 class CommandListWithTransactionCodeModel
     with _$CommandListWithTransactionCodeModel {
   const factory CommandListWithTransactionCodeModel({
-    required List<String> id,
+    required List<String>? id,
     required String transactionCode,
     required String command,
   }) = _CommandListWithTransactionCodeModel;

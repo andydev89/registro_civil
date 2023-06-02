@@ -48,7 +48,9 @@ class _AppState extends ConsumerState<App> {
       ),
 
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      supportedLocales:const [
+         Locale('es', 'EC'),
+      ],
       routerDelegate: appRouter.delegate(
         navigatorObservers: () => [RouterObserver(), SlidingDialogObserver()],
       ),

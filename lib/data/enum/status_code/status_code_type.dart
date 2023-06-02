@@ -80,7 +80,9 @@ enum StatusCodeType implements Translatable {
   s684(684),
   s685(685),
   s686(686),
-  s687(687);
+  s687(687),
+  s740(740),
+  s762(762);
 
   //Errores para el duplicado de cédula
 
@@ -236,6 +238,10 @@ enum StatusCodeType implements Translatable {
         return l10n.s686;
       case StatusCodeType.s687:
         return l10n.s687;
+      case StatusCodeType.s740:
+        return l10n.s740;
+      case StatusCodeType.s762:
+        return l10n.s762;
     }
   }
 }

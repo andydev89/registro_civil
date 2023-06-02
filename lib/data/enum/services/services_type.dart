@@ -38,18 +38,18 @@ enum ServiceType implements Translatable {
   residencyRegistration('SERVICE_RESIDENCY_REGISTRATION'),
   @JsonValue('SERVICE_CAMBIO_NOMBRE')
   changeOfName('SERVICE_CAMBIO_NOMBRE'),
+  // PROCEDURES
   @JsonValue('FORMALITY_DUPLICATE_IDENTITY')
   idDuplicate('FORMALITY_DUPLICATE_IDENTITY'),
-  // TODO(jang): temp
-  @JsonValue('PRUEBA_MARRIAGE_CELEBRATION')
-  marriageCelebration('PRUEBA_MARRIAGE_CELEBRATION');
+  @JsonValue('FORMALITY_MARRIAGE_CELEBRATION')
+  marriageCelebration('FORMALITY_MARRIAGE_CELEBRATION');
 
   const ServiceType(this.toText);
   final String toText;
 
-  static String? toJson(ServiceType? type) {
-    return type?.toText;
-  }
+  // static String? toJson(ServiceType? type) {
+  //   return type?.toText;
+  // }
 
   static ServiceType fromJson(String? json) {
     return ServiceType.values.firstWhere(
@@ -121,4 +121,14 @@ enum ServiceType implements Translatable {
         return l10n.duplicadoCed;
     }
   }
+}
+
+enum TypeEnumType {
+  @JsonValue('PROCEDURE')
+  procedure('PROCEDURE'),
+  @JsonValue('SERVICE')
+  service('SERVICE');
+
+  const TypeEnumType(this.toText);
+  final String toText;
 }

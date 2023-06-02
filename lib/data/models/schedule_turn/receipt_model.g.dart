@@ -52,9 +52,7 @@ Map<String, dynamic> _$RelativeModelToJson(RelativeModel instance) =>
     };
 
 const _$RelationshipTypeEnumMap = {
-  RelationshipType.spouseOrCohabitant: 'spouseOrCohabitant',
-  RelationshipType.minorChild: 'minorChild',
-  RelationshipType.brother: 'brother',
-  RelationshipType.father: 'father',
-  RelationshipType.mother: 'mother',
+  RelationshipType.parner: 'PARTNER',
+  RelationshipType.sonOrDaughter: 'CHILD',
+  RelationshipType.parent: 'PARENT',
 };

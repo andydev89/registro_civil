@@ -1412,10 +1412,7 @@ Map<String, dynamic> _$PlaceToPayTransactionDetailsModelToJson(
     };
 
 const _$TransactionStatusTypeEnumMap = {
-  TransactionStatusType.pending: 'PENDING',
   TransactionStatusType.approved: 'APPROVED',
-  TransactionStatusType.failed: 'FAILED',
-  TransactionStatusType.cancelled: 'CANCELLED',
   TransactionStatusType.rejected: 'REJECTED',
 };
 
@@ -1490,6 +1487,8 @@ const _$StatusCodeTypeEnumMap = {
   StatusCodeType.s685: 685,
   StatusCodeType.s686: 686,
   StatusCodeType.s687: 687,
+  StatusCodeType.s740: 740,
+  StatusCodeType.s762: 762,
 };
 
 _$_PlaceToPayReferenceModel _$$_PlaceToPayReferenceModelFromJson(
@@ -1502,6 +1501,8 @@ _$_PlaceToPayReferenceModel _$$_PlaceToPayReferenceModelFromJson(
       message: json['Message'] as String?,
       status: $enumDecodeNullable(_$StatusCodeTypeEnumMap, json['Code']),
       transactionCode: json['transactionCode'] as String?,
+      transactionStatus: $enumDecodeNullable(
+          _$TransactionStatusTypeEnumMap, json['transactionStatus']),
     );
 
 Map<String, dynamic> _$$_PlaceToPayReferenceModelToJson(
@@ -1514,4 +1515,6 @@ Map<String, dynamic> _$$_PlaceToPayReferenceModelToJson(
       'Message': instance.message,
       'Code': _$StatusCodeTypeEnumMap[instance.status],
       'transactionCode': instance.transactionCode,
+      'transactionStatus':
+          _$TransactionStatusTypeEnumMap[instance.transactionStatus],
     };

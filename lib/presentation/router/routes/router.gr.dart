@@ -73,6 +73,20 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    FaceRecognitionRoute.name: (routeData) {
+      final args = routeData.argsAs<FaceRecognitionRouteArgs>(
+          orElse: () => const FaceRecognitionRouteArgs());
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: FaceRecognitionPage(
+          key: args.key,
+          onFaceDetected: args.onFaceDetected,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ScanRouterRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -83,9 +97,15 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     SuccessRoute.name: (routeData) {
+      final args = routeData.argsAs<SuccessRouteArgs>(
+          orElse: () => const SuccessRouteArgs());
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const SuccessPage(),
+        child: SuccessPage(
+          key: args.key,
+          title: args.title,
+          subtitle: args.subtitle,
+        ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -279,6 +299,17 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    CodeRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<CodeRouteArgs>(orElse: () => const CodeRouteArgs());
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: CodePage(
+          key: args.key,
+          onCodeAccepted: args.onCodeAccepted,
+        ),
+      );
+    },
     WebviewPaymentRoute.name: (routeData) {
       final args = routeData.argsAs<WebviewPaymentRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -286,7 +317,9 @@ class _$AppRouter extends RootStackRouter {
         child: WebviewPaymentPage(
           key: args.key,
           url: args.url,
-          onPageFinished: args.onPageFinished,
+          placeToPayReference: args.placeToPayReference,
+          totalToPay: args.totalToPay,
+          onTap: args.onTap,
         ),
       );
     },
@@ -333,19 +366,6 @@ class _$AppRouter extends RootStackRouter {
         child: ScheduleTurnFirstStepRouterPage(
           key: args.key,
           typeOfService: args.typeOfService,
-        ),
-      );
-    },
-    CodeRoute.name: (routeData) {
-      final args = routeData.argsAs<CodeRouteArgs>();
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: CodePage(
-          key: args.key,
-          typeOfService: args.typeOfService,
-          includMe: args.includMe,
-          procedureType: args.procedureType,
-          relatives: args.relatives,
         ),
       );
     },
@@ -694,14 +714,14 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     FirstStepDependentRoute.name: (routeData) {
-      final args = routeData.argsAs<FirstStepDependentRouteArgs>();
+      final args = routeData.argsAs<FirstStepDependentRouteArgs>(
+          orElse: () => const FirstStepDependentRouteArgs());
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: FirstStepDependentPage(
           key: args.key,
           operation: args.operation,
           dependent: args.dependent,
-          residentialIndex: args.residentialIndex,
         ),
       );
     },
@@ -824,6 +844,11 @@ class _$AppRouter extends RootStackRouter {
                   parent: ForgotPasswordRouterRoute.name,
                 ),
               ],
+            ),
+            RouteConfig(
+              FaceRecognitionRoute.name,
+              path: 'face-recognition-page',
+              parent: AuthRouterRoute.name,
             ),
             RouteConfig(
               ScanRouterRoute.name,
@@ -1134,6 +1159,11 @@ class _$AppRouter extends RootStackRouter {
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
+              CodeRoute.name,
+              path: 'code-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
               WebviewPaymentRoute.name,
               path: 'webview-payment-page',
               parent: RootRouterRoute.name,
@@ -1275,6 +1305,40 @@ class ForgotPasswordRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [FaceRecognitionPage]
+class FaceRecognitionRoute extends PageRouteInfo<FaceRecognitionRouteArgs> {
+  FaceRecognitionRoute({
+    Key? key,
+    void Function(File)? onFaceDetected,
+  }) : super(
+          FaceRecognitionRoute.name,
+          path: 'face-recognition-page',
+          args: FaceRecognitionRouteArgs(
+            key: key,
+            onFaceDetected: onFaceDetected,
+          ),
+        );
+
+  static const String name = 'FaceRecognitionRoute';
+}
+
+class FaceRecognitionRouteArgs {
+  const FaceRecognitionRouteArgs({
+    this.key,
+    this.onFaceDetected,
+  });
+
+  final Key? key;
+
+  final void Function(File)? onFaceDetected;
+
+  @override
+  String toString() {
+    return 'FaceRecognitionRouteArgs{key: $key, onFaceDetected: $onFaceDetected}';
+  }
+}
+
+/// generated route for
 /// [ScanRouterPage]
 class ScanRouterRoute extends PageRouteInfo<void> {
   const ScanRouterRoute({List<PageRouteInfo>? children})
@@ -1289,14 +1353,41 @@ class ScanRouterRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SuccessPage]
-class SuccessRoute extends PageRouteInfo<void> {
-  const SuccessRoute()
-      : super(
+class SuccessRoute extends PageRouteInfo<SuccessRouteArgs> {
+  SuccessRoute({
+    Key? key,
+    String? title,
+    String? subtitle,
+  }) : super(
           SuccessRoute.name,
           path: 'success-page',
+          args: SuccessRouteArgs(
+            key: key,
+            title: title,
+            subtitle: subtitle,
+          ),
         );
 
   static const String name = 'SuccessRoute';
+}
+
+class SuccessRouteArgs {
+  const SuccessRouteArgs({
+    this.key,
+    this.title,
+    this.subtitle,
+  });
+
+  final Key? key;
+
+  final String? title;
+
+  final String? subtitle;
+
+  @override
+  String toString() {
+    return 'SuccessRouteArgs{key: $key, title: $title, subtitle: $subtitle}';
+  }
 }
 
 /// generated route for
@@ -1742,19 +1833,57 @@ class MakePaymentRouteArgs {
 }
 
 /// generated route for
+/// [CodePage]
+class CodeRoute extends PageRouteInfo<CodeRouteArgs> {
+  CodeRoute({
+    Key? key,
+    void Function(BuildContext)? onCodeAccepted,
+  }) : super(
+          CodeRoute.name,
+          path: 'code-page',
+          args: CodeRouteArgs(
+            key: key,
+            onCodeAccepted: onCodeAccepted,
+          ),
+        );
+
+  static const String name = 'CodeRoute';
+}
+
+class CodeRouteArgs {
+  const CodeRouteArgs({
+    this.key,
+    this.onCodeAccepted,
+  });
+
+  final Key? key;
+
+  final void Function(BuildContext)? onCodeAccepted;
+
+  @override
+  String toString() {
+    return 'CodeRouteArgs{key: $key, onCodeAccepted: $onCodeAccepted}';
+  }
+}
+
+/// generated route for
 /// [WebviewPaymentPage]
 class WebviewPaymentRoute extends PageRouteInfo<WebviewPaymentRouteArgs> {
   WebviewPaymentRoute({
     Key? key,
     required String url,
-    void Function()? onPageFinished,
+    required PlaceToPayReferenceModel placeToPayReference,
+    required double totalToPay,
+    void Function(BuildContext)? onTap,
   }) : super(
           WebviewPaymentRoute.name,
           path: 'webview-payment-page',
           args: WebviewPaymentRouteArgs(
             key: key,
             url: url,
-            onPageFinished: onPageFinished,
+            placeToPayReference: placeToPayReference,
+            totalToPay: totalToPay,
+            onTap: onTap,
           ),
         );
 
@@ -1765,18 +1894,24 @@ class WebviewPaymentRouteArgs {
   const WebviewPaymentRouteArgs({
     this.key,
     required this.url,
-    this.onPageFinished,
+    required this.placeToPayReference,
+    required this.totalToPay,
+    this.onTap,
   });
 
   final Key? key;
 
   final String url;
 
-  final void Function()? onPageFinished;
+  final PlaceToPayReferenceModel placeToPayReference;
+
+  final double totalToPay;
+
+  final void Function(BuildContext)? onTap;
 
   @override
   String toString() {
-    return 'WebviewPaymentRouteArgs{key: $key, url: $url, onPageFinished: $onPageFinished}';
+    return 'WebviewPaymentRouteArgs{key: $key, url: $url, placeToPayReference: $placeToPayReference, totalToPay: $totalToPay, onTap: $onTap}';
   }
 }
 
@@ -1908,55 +2043,6 @@ class ScheduleTurnFirstStepRouterRouteArgs {
   @override
   String toString() {
     return 'ScheduleTurnFirstStepRouterRouteArgs{key: $key, typeOfService: $typeOfService}';
-  }
-}
-
-/// generated route for
-/// [CodePage]
-class CodeRoute extends PageRouteInfo<CodeRouteArgs> {
-  CodeRoute({
-    Key? key,
-    required TypeServiceModel typeOfService,
-    required bool includMe,
-    required ProcedureType procedureType,
-    required List<RelativeModel> relatives,
-  }) : super(
-          CodeRoute.name,
-          path: 'code-page',
-          args: CodeRouteArgs(
-            key: key,
-            typeOfService: typeOfService,
-            includMe: includMe,
-            procedureType: procedureType,
-            relatives: relatives,
-          ),
-        );
-
-  static const String name = 'CodeRoute';
-}
-
-class CodeRouteArgs {
-  const CodeRouteArgs({
-    this.key,
-    required this.typeOfService,
-    required this.includMe,
-    required this.procedureType,
-    required this.relatives,
-  });
-
-  final Key? key;
-
-  final TypeServiceModel typeOfService;
-
-  final bool includMe;
-
-  final ProcedureType procedureType;
-
-  final List<RelativeModel> relatives;
-
-  @override
-  String toString() {
-    return 'CodeRouteArgs{key: $key, typeOfService: $typeOfService, includMe: $includMe, procedureType: $procedureType, relatives: $relatives}';
   }
 }
 
@@ -2939,7 +3025,6 @@ class FirstStepDependentRoute
     Key? key,
     Crud operation = Crud.create,
     Dependent? dependent,
-    required int residentialIndex,
   }) : super(
           FirstStepDependentRoute.name,
           path: 'first-step-dependent-page',
@@ -2947,7 +3032,6 @@ class FirstStepDependentRoute
             key: key,
             operation: operation,
             dependent: dependent,
-            residentialIndex: residentialIndex,
           ),
         );
 
@@ -2959,7 +3043,6 @@ class FirstStepDependentRouteArgs {
     this.key,
     this.operation = Crud.create,
     this.dependent,
-    required this.residentialIndex,
   });
 
   final Key? key;
@@ -2968,11 +3051,9 @@ class FirstStepDependentRouteArgs {
 
   final Dependent? dependent;
 
-  final int residentialIndex;
-
   @override
   String toString() {
-    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent, residentialIndex: $residentialIndex}';
+    return 'FirstStepDependentRouteArgs{key: $key, operation: $operation, dependent: $dependent}';
   }
 }
 

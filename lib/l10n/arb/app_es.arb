@@ -243,6 +243,8 @@
   "s685": "Pago requerido",
   "s686": "Usuario menor de edad",
   "s687": "Servicio de cambio de nombre no encontrado",
+  "s740": "Solo un turno por propietario",
+  "s762": "Respuesta fallida para conectar el servidor suri o nui inexistente",
   "nombre": "Nombre",
   "apellidos": "Apellidos",
   "direccion": "Dirección",
@@ -396,6 +398,7 @@
   "numeroDepartamento": "Número de departamento",
   "eliminar": "Eliminar",
   "seguroeliminarresidence": "¿Está seguro que desea eliminar esta residencia?",
+  "seguroeliminarDependiente": "¿Está seguro que desea eliminar este dependiente?",
   "limpiar": "Limpiar",
   "limpiarCarrito": "Limpiar carrito",
   "tenercuentaLimpiarCarrito": "Ten en cuenta que al dar limpiar se eliminaran todos los pedidos del carrito.",
@@ -433,5 +436,19 @@
   "estimado": "Estimado",
   "ustedSeEncuentraSolicitandoElTramiteDe": "Usted se encuentra solicitando el trámite de",
   "laSolicitudDeNombreQueRealizaEs": "La solicitud de nombre que realiza es",
-  "obteniendoComoNombreResultante": "Obteniendo como nombre resultante"
-  }
+  "obteniendoComoNombreResultante": "Obteniendo como nombre resultante",
+  "aplicarfiltros": "Aplicar filtros",
+  "filtrar": "Filtrar",
+  "desde": "Desde",
+  "hasta": "Hasta",
+  "asc": "Ascendente",
+  "desc": "Descendiente",
+  "orden": "Orden",
+  "laTransaccion": "La transacción",
+  "haSido": "Ha sido",
+  "padreOMadre": "Padre o madre",
+  "hijoOHija": "Hijo o hija",
+  "enviarCorreo": "Enviar correo",
+  "alertaPassword": "Alerta de cambio de contraseña",
+  "envioAlertaCorreo": "Hemos enviado un correo electrónico con instrucciones para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada y sigue los pasos proporcionados para continuar con el cambio de contraseña. Si no has iniciado esta solicitud, puedes ignorar el correo electrónico. Si necesitas ayuda, por favor contacta a nuestro equipo de soporte."
+}

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:registro_civil_apk/core/const/const.dart';
@@ -37,6 +39,7 @@ part 'router.gr.dart';
             CustomRoute(
               transitionsBuilder: TransitionsBuilders.slideLeft,
               page: Step2Page,
+              // initial: true,
               meta: {'index': 1},
             ),
             CustomRoute(
@@ -71,6 +74,11 @@ part 'router.gr.dart';
               page: ForgotPasswordSecondPage,
             ),
           ],
+        ),
+        //FACE RECOGNITION
+        CustomRoute(
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+          page: FaceRecognitionPage,
         ),
         //SCAN
         CustomRoute(
@@ -322,6 +330,9 @@ part 'router.gr.dart';
         //PAYMENT
         CupertinoRoute(
           page: MakePaymentPage,
+        ),
+        CupertinoRoute(
+          page: CodePage,
         ),
         CupertinoRoute(
           page: WebviewPaymentPage,

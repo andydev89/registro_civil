@@ -63,7 +63,7 @@ class TurnDetailsPage extends ConsumerWidget {
                       ),
                       PrimaryRowLabel(
                         boldLabel: l10n.servicio,
-                        simpleLabel: typeOfService.translate(context),
+                        simpleLabel: typeOfService.name,
                       ),
                       Row(
                         children: [
@@ -129,22 +129,8 @@ class TurnDetailsPage extends ConsumerWidget {
                 } else {
                   paymentMethod == PaymentMethodType.correspondentPayment
                       ? context.replaceRoute(
-                          NotificationRoute(
-                            notificationType: NotificationType.success,
-                            message: l10n.turnoReservadoMensajeFormal,
-                            bottonTitle: l10n.turnoReservadoMensajeCorreoFormal,
-                            buttonText: l10n.misTurnos,
-                            onTap: (cxt) =>
-                                cxt.replaceRoute(const MyTurnsRoute()),
-                          ),
-                        )
-                      : context.replaceRoute(
-                          MakePaymentRoute(
-                            transactionCode: value.transactionCode,
-                            requestNumber: value.transactionCode,
-                            buttonText: l10n.continuar,
-                            service: typeOfService,
-                            onTapSuccessPayment: (cxt) => context.replaceRoute(
+                          CodeRoute(
+                            onCodeAccepted: (ctx) => ctx.replaceRoute(
                               NotificationRoute(
                                 notificationType: NotificationType.success,
                                 message: l10n.turnoReservadoMensajeFormal,
@@ -155,6 +141,16 @@ class TurnDetailsPage extends ConsumerWidget {
                                     cxt.replaceRoute(const MyTurnsRoute()),
                               ),
                             ),
+                          ),
+                        )
+                      : context.replaceRoute(
+                          MakePaymentRoute(
+                            transactionCode: value.transactionCode,
+                            requestNumber: value.transactionCode,
+                            buttonText: l10n.continuar,
+                            service: typeOfService,
+                            onTapSuccessPayment: (cxt) =>
+                                cxt.replaceRoute(const MyTurnsRoute()),
                           ),
                         );
                 }

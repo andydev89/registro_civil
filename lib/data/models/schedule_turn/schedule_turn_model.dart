@@ -11,7 +11,7 @@ part 'schedule_turn_model.gform.dart';
 class ScheduleTurnFirstStepPersonalModel {
   ScheduleTurnFirstStepPersonalModel({
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.paymentMethod,
+    required this.paymentMethod,
   });
 
   final PaymentMethodType paymentMethod;
@@ -21,10 +21,10 @@ class ScheduleTurnFirstStepPersonalModel {
 class ScheduleTurnFirstStepFamiliarModel {
   ScheduleTurnFirstStepFamiliarModel({
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.paymentMethod,
+    required this.paymentMethod,
     @FormControlAnnotation<dynamic>() this.scheduleForMe = false,
     @FormArrayAnnotation<dynamic>(validators: [requiredValidator])
-        this.family = const [],
+    this.family = const [],
   });
 
   final PaymentMethodType paymentMethod;
@@ -42,14 +42,16 @@ class FamiliarFormModel {
         length10Validator,
       ],
     )
-        this.identificationNumber,
+    this.identificationNumber,
+    @FormControlAnnotation(validators: [requiredValidator]) this.relationship,
     @FormControlAnnotation(validators: [requiredValidator])
-        this.relationship,
+    this.relationshipApproved,
   });
 
   ///Cedula
   final String? identificationNumber;
   final RelationshipType? relationship;
+  final bool? relationshipApproved;
 
   ///Este id es para identificar el form de otros
   Key itemIndexKey(int i) => Key('$i');
@@ -59,12 +61,12 @@ class FamiliarFormModel {
 class ScheduleTurnSecondStepModel {
   ScheduleTurnSecondStepModel({
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.province,
+    required this.province,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.agency,
+    required this.agency,
     @FormControlAnnotation(validators: [requiredValidator]) required this.date,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.scheduleId,
+    required this.scheduleId,
     @FormControlAnnotation(validators: [requiredValidator]) required this.time,
     @FormControlAnnotation<dynamic>() this.initialTime,
     @FormControlAnnotation<dynamic>() this.endTime,

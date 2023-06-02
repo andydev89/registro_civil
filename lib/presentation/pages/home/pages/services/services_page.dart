@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:power_ups/extensions/widget_extension.dart';
+import 'package:registro_civil_apk/data/enum/services/services_type.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
@@ -9,16 +11,30 @@ class ServicesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return LoadingProviderWidget<
-        ResponseModelPagination<List<TypeServiceModel>>>(
-      async: ref.watch(typeServicesProvider),
-      onRefreshIndicatot: () => ref.refresh(typeServicesProvider.future),
-      onRefresh: () => ref.refresh(typeServicesProvider),
-      data: (data) => CircleAvatarCardGrid(
-        totalPages: data.totalPages,
-        firstElements: data.data ?? [],
-        fetch: (index) => ref.watch(typeServicesFetchProvider(index).future),
-      ),
+    final provider = typeServicesProvider(TypeEnumType.service);
+    return Column(
+      children: [
+        PrimarySearch(
+          filter: (p0) => ref
+              .read(typeServicesFilterProvider(TypeEnumType.service).notifier)
+              .setFilter(p0),
+        ).symmetricPadding(10, 40),
+        Expanded(
+          child: LoadingProviderWidget<
+              ResponseModelPagination<List<TypeServiceModel>>>(
+            async: ref.watch(provider),
+            onRefreshIndicatot: () => ref.refresh(provider.future),
+            onRefresh: () => ref.refresh(provider),
+            data: (data) => CircleAvatarCardGrid(
+              totalPages: data.totalPages,
+              firstElements: data.data ?? [],
+              fetch: (index) => ref.watch(
+                typeServicesFetchProvider(TypeEnumType.service, index).future,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

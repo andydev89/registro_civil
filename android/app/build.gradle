@@ -21,11 +21,11 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-def keystoreProperties = new Properties()
+/*def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
+}*/
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -50,13 +50,13 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.verygoodcore.registro_civil_apk"
-        minSdkVersion 20
+        minSdkVersion 23
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
-    signingConfigs {
+    /*signingConfigs {
         if (System.getenv("ANDROID_KEYSTORE_PATH")) {
             release {
                 storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
@@ -72,9 +72,9 @@ android {
                 storePassword keystoreProperties['storePassword']
             }
         }
-    }
+    }*/
 
-    flavorDimensions "default"
+    /*flavorDimensions "default"
     productFlavors { 
         production {
             dimension "default"
@@ -91,11 +91,12 @@ android {
             applicationIdSuffix ".dev"
             manifestPlaceholders = [appName: "[DEV] Registro Civil Apk"]
         }
-    }
+    }*/
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }

@@ -36,7 +36,6 @@ class MainPageDependentPage extends ConsumerWidget {
                 title: l10n.listadoDependientes,
                 onPressed: () => toDependent(
                   context,
-                  residentialIndex: residentialIndex,
                 ),
               ),
               ...residence.dependents.map(
@@ -45,21 +44,21 @@ class MainPageDependentPage extends ConsumerWidget {
                     l10n.numCedula: element.nuiDependents,
                     l10n.nombre: element.name,
                     l10n.apellidos: element.lastname,
-                    l10n.residencia: residence.address,
+                    l10n.residencia: residence.address.string,
                   },
                   actions: {
                     Crud.read: (r) => toDependent(
                           context,
                           operation: Crud.read,
-                          residentialIndex: residentialIndex,
                           dependent: element,
                         ),
                     Crud.delete: (r) => showDeleteDialog(
                           context,
+                          message: l10n.seguroeliminarDependiente,
                           onDelete: () {
                             ref
                                 .read(resRegProvider.notifier)
-                                .removeDependent(residentialIndex, element);
+                                .removeDependent( element);
                             showAlert(
                               l10n.dependentEliminadoCor,
                               TypeAlert.success,

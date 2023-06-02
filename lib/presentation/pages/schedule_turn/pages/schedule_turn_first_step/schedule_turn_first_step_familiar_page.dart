@@ -1,14 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
+import 'package:registro_civil_apk/data/utils/utils.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
-class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
+class ScheduleTurnFirstStepFamiliarPage extends ConsumerWidget {
   const ScheduleTurnFirstStepFamiliarPage({
     super.key,
     required this.typeOfService,
@@ -16,7 +20,7 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
   final TypeServiceModel typeOfService;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return ScheduleTurnFirstStepFamiliarModelFormBuilder(
       initState: (context, formModel) {
@@ -78,19 +82,63 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
                             items: RelationshipType.values,
                           ),
                         ],
-                      ).horizontalPadding(20),
+                      ).horizontalPadding(15),
                     ),
-                    PrimaryIconButton(
-                      icon: Assets.svg.trash.svg(
-                        width: 20,
-                        height: 20,
-                      ),
-                      onPressed: () {
-                        formModel.removeFamilyItemAtIndex(
-                          i,
-                        );
-                      },
-                    ).verticalPadding(15),
+                    Column(
+                      children: [
+                        PrimaryAsyncIconButton(
+                          icon: Assets.svg.starCheck.svg(
+                            width: 20,
+                            height: 20,
+                          ),
+                          onPressed: (item.identificationNumberControl?.valid ??
+                                      false) &&
+                                  (item.relationshipControl?.valid ?? false)
+                              ? () async {
+                                  final user =
+                                      await ref.read(meProvider.future);
+                                  final result = await ref.read(
+                                    checkRelationshipProvider(
+                                      firstNui: user.identification,
+                                      secondNui: item
+                                          .identificationNumberControl!.value!,
+                                      relationship: item
+                                          .relationshipControl!.value!.toText,
+                                    ).future,
+                                  );
+                                  return result.when(
+                                    ok: (value) {
+                                      item.relationshipApprovedControl
+                                          ?.updateValue(
+                                        value.result,
+                                      );
+                                    },
+                                    err: (error) {
+                                      showAlert(
+                                        error.translate(context),
+                                        TypeAlert.error,
+                                      );
+                                    },
+                                  );
+                                }
+                              : null,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        PrimaryIconButton(
+                          icon: Assets.svg.trash.svg(
+                            width: 20,
+                            height: 20,
+                          ),
+                          onPressed: () {
+                            formModel.removeFamilyItemAtIndex(
+                              i,
+                            );
+                          },
+                        ),
+                      ],
+                    ).horizontalPadding(5),
                   ],
                 ),
               ),
@@ -108,41 +156,22 @@ class ScheduleTurnFirstStepFamiliarPage extends StatelessWidget {
             title: l10n.continuar,
             onPressed: formModel.form.valid
                 ? () {
-                    if (formModel.model.paymentMethod ==
-                        PaymentMethodType.correspondentPayment) {
-                      context.navigateTo(
-                        CodeRoute(
-                          typeOfService: typeOfService,
-                          includMe: formModel.model.scheduleForMe,
-                          procedureType: ProcedureType.familiar,
-                          relatives: formModel.model.family
-                              .map(
-                                (e) => RelativeModel(
-                                  identification: e.identificationNumber!,
-                                  familiarKin: e.relationship!,
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      );
-                    } else {
-                      context.navigateTo(
-                        ScheduleTurnSecondRoute(
-                          paymentMethod: formModel.model.paymentMethod,
-                          typeOfService: typeOfService,
-                          includMe: formModel.model.scheduleForMe,
-                          procedureType: ProcedureType.familiar,
-                          relatives: formModel.model.family
-                              .map(
-                                (e) => RelativeModel(
-                                  identification: e.identificationNumber!,
-                                  familiarKin: e.relationship!,
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      );
-                    }
+                    context.navigateTo(
+                      ScheduleTurnSecondRoute(
+                        paymentMethod: formModel.model.paymentMethod,
+                        typeOfService: typeOfService,
+                        includMe: formModel.model.scheduleForMe,
+                        procedureType: ProcedureType.familiar,
+                        relatives: formModel.model.family
+                            .map(
+                              (e) => RelativeModel(
+                                identification: e.identificationNumber!,
+                                familiarKin: e.relationship!,
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    );
                   }
                 : null,
           ),

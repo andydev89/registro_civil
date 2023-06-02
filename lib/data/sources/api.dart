@@ -18,6 +18,11 @@ abstract class Api {
     @Body() NuiModel nuiModel,
   );
 
+  @POST('api/user/password/recover')
+  Future<ResponseModel<CommandModelEmail>> forgotPassword(
+    @Body() EnterEmailModel email,
+  );
+
   @POST('/api/user/register/data')
   Future<ResponseModel<CommandModel>> registerData(
     @Body() EnterDataModel enterDataModel,
@@ -34,6 +39,7 @@ abstract class Api {
     @Query('pageNo') int pageNo,
     @Query('pageSize') int pageSize,
   );
+
   @GET('/identity/api/user/me')
   Future<ResponseModel<MeModel>> me();
 
@@ -74,6 +80,7 @@ abstract class Api {
     @Query('pageSize') int pageSize = 4,
     @Query('filter') String filter = '',
     @Query('sortBy') String sortBy = 'name',
+    @Query('type') String type = '',
     @Query('sortType') String sortType = 'asc',
   });
 
@@ -228,6 +235,13 @@ abstract class Api {
   Future<ResponseModel<CommandWithTransactionCodeModel>>
       notifyPaymentOfSchedule(
     @Body() NotifyServicePaymentDoneModel notifyServicePaymentDoneModel,
+  );
+
+  @GET('/middleware/api/nui/relationship/check')
+  Future<ResponseModel<CheckRelationshipModel?>> checkRelationship(
+    @Query('firstNui') String firstNui,
+    @Query('secondNui') String secondNui,
+    @Query('relationship') String relationship,
   );
 
   //PLACE TO PAY PAYMENT
