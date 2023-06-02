@@ -52,8 +52,8 @@ const _$ServiceTypeEnumMap = {
   ServiceType.none: 'NULL',
   ServiceType.residencyRegistration: 'SERVICE_RESIDENCY_REGISTRATION',
   ServiceType.changeOfName: 'SERVICE_CAMBIO_NOMBRE',
-  ServiceType.marriageCelebration: 'FORMALITY_MARRIAGE_CELEBRATION',
   ServiceType.idDuplicate: 'FORMALITY_DUPLICATE_IDENTITY',
+  ServiceType.marriageCelebration: 'FORMALITY_MARRIAGE_CELEBRATION',
 };
 
 const _$RelationshipSimpleCertificateTypeEnumMap = {

@@ -2913,10 +2913,7 @@ class DependentForm implements FormModel<Dependent> {
             touched: false),
         addressControlName: FormControl<TranslatableString>(
             value: dependent?.address,
-            validators: [
-              (control) =>
-                  requiredValidator(control as FormControl<TranslatableString>)
-            ],
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

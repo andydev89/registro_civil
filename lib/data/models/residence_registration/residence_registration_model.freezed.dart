@@ -936,7 +936,7 @@ mixin _$Dependent {
   @FormControlAnnotation<String>()
   String get id => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false, includeFromJson: false)
-  @FormControlAnnotation<TranslatableString>(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [requiredValidator])
   TranslatableString get address => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -971,9 +971,7 @@ abstract class $DependentCopyWith<$Res> {
       @FormControlAnnotation<String>()
           String id,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      @FormControlAnnotation<TranslatableString>(validators: [
-        requiredValidator
-      ])
+      @FormControlAnnotation(validators: [requiredValidator])
           TranslatableString address});
 }
 
@@ -1064,9 +1062,7 @@ abstract class _$$_DependentCopyWith<$Res> implements $DependentCopyWith<$Res> {
       @FormControlAnnotation<String>()
           String id,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      @FormControlAnnotation<TranslatableString>(validators: [
-        requiredValidator
-      ])
+      @FormControlAnnotation(validators: [requiredValidator])
           TranslatableString address});
 }
 
@@ -1151,9 +1147,7 @@ class _$_Dependent extends _Dependent {
       @FormControlAnnotation<String>()
           this.id = '',
       @JsonKey(includeToJson: false, includeFromJson: false)
-      @FormControlAnnotation<TranslatableString>(validators: [
-        requiredValidator
-      ])
+      @FormControlAnnotation(validators: [requiredValidator])
           this.address = const TranslatableString('')})
       : super._();
 
@@ -1186,7 +1180,7 @@ class _$_Dependent extends _Dependent {
   final String id;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  @FormControlAnnotation<TranslatableString>(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [requiredValidator])
   final TranslatableString address;
 
   @JsonKey(ignore: true)
@@ -1225,9 +1219,7 @@ abstract class _Dependent extends Dependent {
       @FormControlAnnotation<String>()
           final String id,
       @JsonKey(includeToJson: false, includeFromJson: false)
-      @FormControlAnnotation<TranslatableString>(validators: [
-        requiredValidator
-      ])
+      @FormControlAnnotation(validators: [requiredValidator])
           final TranslatableString address}) = _$_Dependent;
   const _Dependent._() : super._();
 
@@ -1259,7 +1251,7 @@ abstract class _Dependent extends Dependent {
   String get id;
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  @FormControlAnnotation<TranslatableString>(validators: [requiredValidator])
+  @FormControlAnnotation(validators: [requiredValidator])
   TranslatableString get address;
   @override
   @JsonKey(ignore: true)
