@@ -270,8 +270,14 @@ abstract class Api {
     @Body() NotifyServicePaymentDoneModel notifyServicePaymentDoneModel,
   );
 
+  //ID DUPLICATE
   @POST('/duplicateid/api/duplicate')
   Future<ResponseModel<CommandWithTransactionCodeModel>> createDuplicate(
     @Body() IdDuplicateModel idDuplicateModel,
   );
+
+  @GET('/duplicateid/api/duplicate')
+  Future<ResponseModelPagination<List<IdDuplicateResponseModel>>> duplicates({
+    @Query('pageNo') int pageNo = 0,
+  });
 }

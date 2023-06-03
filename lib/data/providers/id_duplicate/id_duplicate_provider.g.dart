@@ -6,6 +6,113 @@ part of 'id_duplicate_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$duplicatesHash() => r'9ee12bcae211206695b1067fb389ee93ba16aad9';
+
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
+
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
+
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
+
+typedef DuplicatesRef = AutoDisposeFutureProviderRef<
+    ResponseModelPagination<List<IdDuplicateResponseModel>>>;
+
+/// See also [duplicates].
+@ProviderFor(duplicates)
+const duplicatesProvider = DuplicatesFamily();
+
+/// See also [duplicates].
+class DuplicatesFamily extends Family<
+    AsyncValue<ResponseModelPagination<List<IdDuplicateResponseModel>>>> {
+  /// See also [duplicates].
+  const DuplicatesFamily();
+
+  /// See also [duplicates].
+  DuplicatesProvider call({
+    int? pageNo,
+  }) {
+    return DuplicatesProvider(
+      pageNo: pageNo,
+    );
+  }
+
+  @override
+  DuplicatesProvider getProviderOverride(
+    covariant DuplicatesProvider provider,
+  ) {
+    return call(
+      pageNo: provider.pageNo,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'duplicatesProvider';
+}
+
+/// See also [duplicates].
+class DuplicatesProvider extends AutoDisposeFutureProvider<
+    ResponseModelPagination<List<IdDuplicateResponseModel>>> {
+  /// See also [duplicates].
+  DuplicatesProvider({
+    this.pageNo,
+  }) : super.internal(
+          (ref) => duplicates(
+            ref,
+            pageNo: pageNo,
+          ),
+          from: duplicatesProvider,
+          name: r'duplicatesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$duplicatesHash,
+          dependencies: DuplicatesFamily._dependencies,
+          allTransitiveDependencies:
+              DuplicatesFamily._allTransitiveDependencies,
+        );
+
+  final int? pageNo;
+
+  @override
+  bool operator ==(Object other) {
+    return other is DuplicatesProvider && other.pageNo == pageNo;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, pageNo.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$idDuplicateHash() => r'0fdef8d26d3ee4be54ca8401dcb8882610c57d3d';
 
 /// See also [IdDuplicate].

@@ -350,21 +350,25 @@ part 'router.gr.dart';
           guards: [AuthGuard],
           page: IdDuplicateRouterPage,
           children: [
-            CupertinoRoute(
-              page: IdDuplicateFirstStepPage,
+            CustomRoute(
               initial: true,
+              page: IdDuplicateMainPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
             ),
-            CupertinoRoute(
+            CustomRoute(
+              page: IdDuplicateFirstStepPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+            CustomRoute(
               page: IdDuplicateSecondStepPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
             ),
-            CupertinoRoute(
-              page: IdDuplicateSecondStepPage,
-            ),
-            CupertinoRoute(
+            CustomRoute(
               page: IdDuplicateDetailPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
             ),
           ],
-        ),
+        )
       ],
     ),
   ],

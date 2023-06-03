@@ -56,3 +56,13 @@ class IdDuplicateApi extends _$IdDuplicateApi {
     return Result.err(result.status);
   }
 }
+
+@riverpod
+Future<ResponseModelPagination<List<IdDuplicateResponseModel>>> duplicates(
+    DuplicatesRef ref, {
+      int? pageNo,
+    }) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.duplicates(pageNo: pageNo ?? 0);
+  return response;
+}

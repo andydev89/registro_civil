@@ -8,8 +8,6 @@ class IdDuplicateRouterPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //Se inicializa el provider y se valida que no se inicialice nuevamente en el formulario
-    ref.watch(idDuplicateProvider);
     return const AutoRouter();
   }
 }

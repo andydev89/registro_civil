@@ -1359,6 +1359,40 @@ class _Api implements Api {
     return value;
   }
 
+  @override
+  Future<ResponseModelPagination<List<IdDuplicateResponseModel>>> duplicates(
+      {int pageNo = 0}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'pageNo': pageNo};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<IdDuplicateResponseModel>>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/duplicateid/api/duplicate',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        ResponseModelPagination<List<IdDuplicateResponseModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<IdDuplicateResponseModel>((i) =>
+                  IdDuplicateResponseModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

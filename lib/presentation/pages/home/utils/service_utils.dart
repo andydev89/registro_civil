@@ -62,7 +62,7 @@ PageRouteInfo<dynamic> getChangeOfName(TypeServiceModel typeOfService) =>
 PageRouteInfo<dynamic> getIdDuplicate(TypeServiceModel typeOfService) =>
     IdDuplicateRouterRoute(
       children: [
-        IdDuplicateFirstStepRoute(typeServiceModel: typeOfService),
+        IdDuplicateMainRoute(typeServiceModel: typeOfService),
       ],
     );
 

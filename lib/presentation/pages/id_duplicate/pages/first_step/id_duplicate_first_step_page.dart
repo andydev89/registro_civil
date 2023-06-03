@@ -14,9 +14,14 @@ import 'package:registro_civil_apk/presentation/widgets/forms/secondary_reactive
 import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
 
 class IdDuplicateFirstStepPage extends ConsumerWidget {
-  const IdDuplicateFirstStepPage({super.key, required this.typeServiceModel});
+  const IdDuplicateFirstStepPage({
+    super.key,
+    required this.typeServiceModel,
+    this.operation = Crud.create,
+  });
 
   final TypeServiceModel typeServiceModel;
+  final Crud operation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
