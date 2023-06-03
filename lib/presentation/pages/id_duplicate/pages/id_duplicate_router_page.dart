@@ -8,6 +8,7 @@ class IdDuplicateRouterPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(idDuplicateProvider);
     return const AutoRouter();
   }
 }

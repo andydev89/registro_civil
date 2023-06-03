@@ -37,9 +37,9 @@ class IdDuplicateMainPage extends ConsumerWidget {
                   ResponseModelPagination<List<IdDuplicateResponseModel>>>(
                 async: ref.watch(duplicatesProvider()),
                 onRefreshIndicatot: () => ref.refresh(
-                  marriagesProvider().future,
+                  duplicatesProvider().future,
                 ),
-                onRefresh: () => ref.refresh(marriagesProvider()),
+                onRefresh: () => ref.refresh(duplicatesProvider()),
                 data: (data) => PagedListViewWidget<IdDuplicateResponseModel>(
                   fetch: (page) => ref.read(
                     duplicatesProvider(pageNo: page).future,

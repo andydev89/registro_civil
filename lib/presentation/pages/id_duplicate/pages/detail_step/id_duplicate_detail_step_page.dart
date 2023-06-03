@@ -96,10 +96,9 @@ class IdDuplicateDetailPage extends ConsumerWidget {
                     height: 16,
                   ),
                   ReactiveProcedureReasonSubModelFormConsumer(
-                    builder: (context, formModel, child) => PrimaryButton(
+                    builder: (context, formModel, child) => PrimaryAsyncButton(
                       title: l10n.confirmar,
-                      onPressed: () {
-                        ref
+                      onPressed: () => ref
                             .read(idDuplicateApiProvider.notifier)
                             .duplicate(ref.watch(idDuplicateProvider))
                             .when(
@@ -115,8 +114,7 @@ class IdDuplicateDetailPage extends ConsumerWidget {
                               TypeAlert.error,
                             );
                           },
-                        );
-                      },
+                        ),
                     ),
                   ),
                   PrimaryButton(
