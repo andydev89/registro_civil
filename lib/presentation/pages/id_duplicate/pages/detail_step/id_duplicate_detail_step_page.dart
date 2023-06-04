@@ -12,6 +12,7 @@ import 'package:registro_civil_apk/data/providers/auth/auth.dart';
 import 'package:registro_civil_apk/data/providers/id_duplicate/id_duplicate.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
@@ -99,13 +100,21 @@ class IdDuplicateDetailPage extends ConsumerWidget {
                     builder: (context, formModel, child) => PrimaryAsyncButton(
                       title: l10n.confirmar,
                       onPressed: () => ref
-                            .read(idDuplicateApiProvider.notifier)
-                            .duplicate(ref.watch(idDuplicateProvider))
-                            .when(
-                          ok: (_) {
-                            showAlert(
-                              'Duplicado creado satisfactoriamente',
-                              TypeAlert.success,
+                          .read(idDuplicateApiProvider.notifier)
+                          .duplicate(ref.watch(idDuplicateProvider))
+                          .when(
+                        ok: (data) {
+                          context
+                            ..navigateTo(
+                              IdDuplicateMainRoute(
+                                typeServiceModel: typeServiceModel,
+                              ),
+                            )
+                            ..navigateTo(
+                              ChoosePaymentMethodRoute(
+                                transactionCode: data.transactionCode,
+                                service: typeServiceModel,
+                              ),
                             );
                         },
                         err: (err) {

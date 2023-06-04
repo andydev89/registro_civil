@@ -45,13 +45,13 @@ class IdDuplicateApi extends _$IdDuplicateApi {
     return;
   }
 
-  Future<Result<bool, StatusCodeType>> duplicate(
+  Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> duplicate(
     IdDuplicateModel model,
   ) async {
     final api = ref.watch(apiProvider);
     final result = await api.createDuplicate(model);
     if (result.success) {
-      return const Result.ok(true);
+      return Result.ok(result.data!);
     }
     return Result.err(result.status);
   }

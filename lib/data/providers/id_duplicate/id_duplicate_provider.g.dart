@@ -128,7 +128,7 @@ final idDuplicateProvider =
 );
 
 typedef _$IdDuplicate = AutoDisposeNotifier<IdDuplicateModel>;
-String _$idDuplicateApiHash() => r'bcce2d2f39abfb63d03e0882d9d3a499ae6ad0cc';
+String _$idDuplicateApiHash() => r'e950d746f081d62400891c465663a4229f05eea7';
 
 /// See also [IdDuplicateApi].
 @ProviderFor(IdDuplicateApi)
