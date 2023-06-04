@@ -107,14 +107,14 @@ class IdDuplicateDetailPage extends ConsumerWidget {
                               'Duplicado creado satisfactoriamente',
                               TypeAlert.success,
                             );
-                          },
-                          err: (err) {
-                            showAlert(
-                              err.toString(),
-                              TypeAlert.error,
-                            );
-                          },
-                        ),
+                        },
+                        err: (err) {
+                          showAlert(
+                            err.translate(context),
+                            TypeAlert.error,
+                          );
+                        },
+                      ),
                     ),
                   ),
                   PrimaryButton(
