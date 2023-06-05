@@ -17,9 +17,9 @@ enum IdDuplicateProcedureType implements Translatable {
     final l10n = context.l10n;
     switch (this) {
       case IdDuplicateProcedureType.personal:
-        return 'Solicitud de emisión de duplicado de cédula';
+        return l10n.tramitePersonalDesc;
       case IdDuplicateProcedureType.child:
-        return 'Solicitud de Duplicado de cédula para hijos menores de edad';
+        return l10n.tramiteHijoDesc;
     }
   }
 }

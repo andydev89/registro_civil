@@ -38,7 +38,7 @@ class IdDuplicateDetailPage extends ConsumerWidget {
     // final me = ref.watch(meProvider).value ?? MeModel();
     return PrimaryScaffold(
       title: l10n.duplicadoCed,
-      subtitle: 'Detalles',
+      subtitle: l10n.detalles,
       body: ProcedureReasonSubModelFormBuilder(
         builder: (context, formModel, child) => Expanded(
           child: SingleChildScrollView(
@@ -53,19 +53,19 @@ class IdDuplicateDetailPage extends ConsumerWidget {
                         value: data.nui ?? '',
                       ),
                       SecondaryRowLabel(
-                        label: 'Nombre del ciudadano',
+                        label: l10n.nombreCiudadano,
                         value: '${me.firstName} ${me.lastName}',
                       ),
                       SecondaryRowLabel(
-                        label: 'Trámite',
+                        label: l10n.tramite,
                         value: typeServiceModel.name,
                       ),
                       SecondaryRowLabel(
-                        label: 'Valor unitario',
+                        label: l10n.valorUnitario,
                         value: '\$${currency.format(typeServiceModel.price)}',
                       ),
                       SecondaryRowLabel(
-                        label: 'Subtotal',
+                        label: l10n.subtotal,
                         value: '\$${currency.format(typeServiceModel.price)}',
                       ),
                       SecondaryRowLabel(
@@ -73,21 +73,21 @@ class IdDuplicateDetailPage extends ConsumerWidget {
                         value: '\$${currency.format(typeServiceModel.iva)}',
                       ),
                       SecondaryRowLabel(
-                        label: 'Descuento',
+                        label: l10n.descuento,
                         value:
                             '\$${currency.format(typeServiceModel.discount)}',
                       ),
                       SecondaryRowLabel(
-                        label: 'Total',
+                        label: l10n.total,
                         value: '\$${currency.format(typeServiceModel.total)}',
                       ),
-                      const SecondaryRowLabel(
-                        label: 'Estado del pago',
+                      SecondaryRowLabel(
+                        label: l10n.estadoPago,
                         value: 'SIN PAGAR',
                         valueColor: red,
                       ),
-                      const SecondaryRowLabel(
-                        label: 'Estado de la solicitud',
+                      SecondaryRowLabel(
+                        label: l10n.estadoSol,
                         value: 'ACTIVO',
                         valueColor: green,
                       ),

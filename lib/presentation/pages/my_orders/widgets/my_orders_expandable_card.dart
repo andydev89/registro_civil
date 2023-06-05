@@ -39,11 +39,11 @@ class MyOrderExpandableCard extends StatelessWidget {
             text: data.nut,
           ),
           DescriptionRow(
-            label: 'Valor unitario',
+            label: l10n.valorUnitario,
             text: data.unitaryValue.toStringAsFixed(2),
           ),
           DescriptionRow(
-            label: 'Subtotal',
+            label: l10n.subtotal,
             text: data.subtotal.toStringAsFixed(2),
           ),
           DescriptionRow(
@@ -51,15 +51,15 @@ class MyOrderExpandableCard extends StatelessWidget {
             text: data.iva.toStringAsFixed(2),
           ),
           DescriptionRow(
-            label: 'Descuento',
+            label: l10n.descuento,
             text: data.discount.toStringAsFixed(2),
           ),
           DescriptionRow(
-            label: 'Total',
+            label: l10n.total,
             text: data.total.toStringAsFixed(2),
           ),
           DescriptionRow(
-            label: 'Estado del pago',
+            label: l10n.estadoPago,
             text: data.paymentStatus.toString(),
           ),
           DescriptionRow(

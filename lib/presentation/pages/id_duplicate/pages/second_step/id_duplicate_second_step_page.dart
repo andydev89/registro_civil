@@ -23,7 +23,7 @@ class IdDuplicateSecondStepPage extends ConsumerWidget {
     final l10n = context.l10n;
     return PrimaryScaffold(
       title: l10n.duplicadoCed,
-      subtitle: 'Complete la información solicitada',
+      subtitle: l10n.completeInformacionSolicitada,
       body: ProcedureReasonSubModelFormBuilder(
         builder: (context, formModel, child) => Expanded(
           child: SingleChildScrollView(
@@ -31,7 +31,7 @@ class IdDuplicateSecondStepPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PrimaryReactiveDropdown(
-                  label: 'Motivo de la solicitud',
+                  label: l10n.motivoSol,
                   formControl: formModel.reasonControl,
                   items: IdDuplicateReason.values,
                 ),

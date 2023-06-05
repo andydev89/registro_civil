@@ -19,11 +19,11 @@ enum IdDuplicateReason implements Translatable {
     final l10n = context.l10n;
     switch (this) {
       case IdDuplicateReason.loss:
-        return 'Pérdida';
+        return l10n.razonPerdida;
       case IdDuplicateReason.heist:
-        return 'Robo';
+        return l10n.razonRobo;
       case IdDuplicateReason.spoilage:
-        return 'Deterioro';
+        return l10n.razonDeterioro;
     }
   }
 }

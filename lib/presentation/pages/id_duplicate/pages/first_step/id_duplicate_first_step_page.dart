@@ -29,7 +29,7 @@ class IdDuplicateFirstStepPage extends ConsumerWidget {
     final me = ref.watch(meProvider).value ?? MeModel();
     return PrimaryScaffold(
       title: l10n.duplicadoCed,
-      subtitle: 'Complete la información solicitada para validar su cédula',
+      subtitle: l10n.completeInformacionSolicitadaCed,
       body: ProcedureTypeSubModelFormBuilder(
         builder: (context, formModel, child) => Expanded(
           child: SingleChildScrollView(
@@ -37,7 +37,7 @@ class IdDuplicateFirstStepPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PrimaryReactiveDropdown(
-                  label: 'Tipo de trámite',
+                  label: l10n.tipoTramite,
                   formControl: formModel.idDuplicateProcedureTypeControl,
                   items: IdDuplicateProcedureType.values,
                 ),
@@ -47,7 +47,7 @@ class IdDuplicateFirstStepPage extends ConsumerWidget {
                   init: true,
                 ),
                 SecondaryReactiveDatePicker(
-                  label: 'Fecha de nacimiento',
+                  label: l10n.fechaNac,
                   formControl: formModel.birthDateControl,
                   // readOnly: true,
                   onDaySelected: (DateTime? selected) {
