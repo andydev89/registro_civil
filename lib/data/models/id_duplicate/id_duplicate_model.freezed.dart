@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-IdDuplicateModel _$IdDuplicateModelFromJson(Map<String, dynamic> json) {
-  return _IdDuplicateModel.fromJson(json);
-}
-
 /// @nodoc
 mixin _$IdDuplicateModel {
   @JsonKey(includeToJson: true)
@@ -27,18 +23,19 @@ mixin _$IdDuplicateModel {
   String? get nui => throw _privateConstructorUsedError;
   String? get birthdate => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: true)
-  IdDuplicateReason? get reasonType => throw _privateConstructorUsedError;
-  @JsonKey(
+  IdDuplicateReason? get reasonType =>
+      throw _privateConstructorUsedError; /*@JsonKey(
       toJson: AgencyModel.agencyToJson,
       includeToJson: true,
-      includeFromJson: false)
-  @FormControlAnnotation<AgencyModel>()
-  AgencyModel? get agencyId => throw _privateConstructorUsedError;
+      includeFromJson: false,
+    )
+    @FormControlAnnotation<AgencyModel>()
+    AgencyModel? agencyId,*/
+  String? get agencyId => throw _privateConstructorUsedError;
   String? get provinceId => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: true)
   PaymentMethodType? get paymentType => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $IdDuplicateModelCopyWith<IdDuplicateModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -51,23 +48,14 @@ abstract class $IdDuplicateModelCopyWith<$Res> {
       _$IdDuplicateModelCopyWithImpl<$Res, IdDuplicateModel>;
   @useResult
   $Res call(
-      {@JsonKey(includeToJson: true)
-          IdDuplicateProcedureType? type,
-      @JsonKey(includeToJson: false)
-          String? requestOwner,
+      {@JsonKey(includeToJson: true) IdDuplicateProcedureType? type,
+      @JsonKey(includeToJson: false) String? requestOwner,
       String? nui,
       String? birthdate,
-      @JsonKey(includeToJson: true)
-          IdDuplicateReason? reasonType,
-      @JsonKey(
-          toJson: AgencyModel.agencyToJson,
-          includeToJson: true,
-          includeFromJson: false)
-      @FormControlAnnotation<AgencyModel>()
-          AgencyModel? agencyId,
+      @JsonKey(includeToJson: true) IdDuplicateReason? reasonType,
+      String? agencyId,
       String? provinceId,
-      @JsonKey(includeToJson: true)
-          PaymentMethodType? paymentType});
+      @JsonKey(includeToJson: true) PaymentMethodType? paymentType});
 }
 
 /// @nodoc
@@ -116,7 +104,7 @@ class _$IdDuplicateModelCopyWithImpl<$Res, $Val extends IdDuplicateModel>
       agencyId: freezed == agencyId
           ? _value.agencyId
           : agencyId // ignore: cast_nullable_to_non_nullable
-              as AgencyModel?,
+              as String?,
       provinceId: freezed == provinceId
           ? _value.provinceId
           : provinceId // ignore: cast_nullable_to_non_nullable
@@ -138,23 +126,14 @@ abstract class _$$_IdDuplicateModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(includeToJson: true)
-          IdDuplicateProcedureType? type,
-      @JsonKey(includeToJson: false)
-          String? requestOwner,
+      {@JsonKey(includeToJson: true) IdDuplicateProcedureType? type,
+      @JsonKey(includeToJson: false) String? requestOwner,
       String? nui,
       String? birthdate,
-      @JsonKey(includeToJson: true)
-          IdDuplicateReason? reasonType,
-      @JsonKey(
-          toJson: AgencyModel.agencyToJson,
-          includeToJson: true,
-          includeFromJson: false)
-      @FormControlAnnotation<AgencyModel>()
-          AgencyModel? agencyId,
+      @JsonKey(includeToJson: true) IdDuplicateReason? reasonType,
+      String? agencyId,
       String? provinceId,
-      @JsonKey(includeToJson: true)
-          PaymentMethodType? paymentType});
+      @JsonKey(includeToJson: true) PaymentMethodType? paymentType});
 }
 
 /// @nodoc
@@ -201,7 +180,7 @@ class __$$_IdDuplicateModelCopyWithImpl<$Res>
       agencyId: freezed == agencyId
           ? _value.agencyId
           : agencyId // ignore: cast_nullable_to_non_nullable
-              as AgencyModel?,
+              as String?,
       provinceId: freezed == provinceId
           ? _value.provinceId
           : provinceId // ignore: cast_nullable_to_non_nullable
@@ -216,7 +195,6 @@ class __$$_IdDuplicateModelCopyWithImpl<$Res>
 
 /// @nodoc
 
-@JsonSerializable(explicitToJson: true)
 class _$_IdDuplicateModel extends _IdDuplicateModel {
   const _$_IdDuplicateModel(
       {@JsonKey(includeToJson: true)
@@ -227,19 +205,11 @@ class _$_IdDuplicateModel extends _IdDuplicateModel {
       this.birthdate = '',
       @JsonKey(includeToJson: true)
           this.reasonType,
-      @JsonKey(
-          toJson: AgencyModel.agencyToJson,
-          includeToJson: true,
-          includeFromJson: false)
-      @FormControlAnnotation<AgencyModel>()
-          this.agencyId,
+      this.agencyId = '',
       this.provinceId = '',
       @JsonKey(includeToJson: true)
           this.paymentType = PaymentMethodType.placeToPay})
       : super._();
-
-  factory _$_IdDuplicateModel.fromJson(Map<String, dynamic> json) =>
-      _$$_IdDuplicateModelFromJson(json);
 
   @override
   @JsonKey(includeToJson: true)
@@ -256,13 +226,16 @@ class _$_IdDuplicateModel extends _IdDuplicateModel {
   @override
   @JsonKey(includeToJson: true)
   final IdDuplicateReason? reasonType;
-  @override
-  @JsonKey(
+/*@JsonKey(
       toJson: AgencyModel.agencyToJson,
       includeToJson: true,
-      includeFromJson: false)
-  @FormControlAnnotation<AgencyModel>()
-  final AgencyModel? agencyId;
+      includeFromJson: false,
+    )
+    @FormControlAnnotation<AgencyModel>()
+    AgencyModel? agencyId,*/
+  @override
+  @JsonKey()
+  final String? agencyId;
   @override
   @JsonKey()
   final String? provinceId;
@@ -296,7 +269,6 @@ class _$_IdDuplicateModel extends _IdDuplicateModel {
                 other.paymentType == paymentType));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, type, requestOwner, nui,
       birthdate, reasonType, agencyId, provinceId, paymentType);
@@ -306,38 +278,20 @@ class _$_IdDuplicateModel extends _IdDuplicateModel {
   @pragma('vm:prefer-inline')
   _$$_IdDuplicateModelCopyWith<_$_IdDuplicateModel> get copyWith =>
       __$$_IdDuplicateModelCopyWithImpl<_$_IdDuplicateModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_IdDuplicateModelToJson(
-      this,
-    );
-  }
 }
 
 abstract class _IdDuplicateModel extends IdDuplicateModel {
   const factory _IdDuplicateModel(
-      {@JsonKey(includeToJson: true)
-          final IdDuplicateProcedureType? type,
-      @JsonKey(includeToJson: false)
-          final String? requestOwner,
-      final String? nui,
-      final String? birthdate,
-      @JsonKey(includeToJson: true)
-          final IdDuplicateReason? reasonType,
-      @JsonKey(
-          toJson: AgencyModel.agencyToJson,
-          includeToJson: true,
-          includeFromJson: false)
-      @FormControlAnnotation<AgencyModel>()
-          final AgencyModel? agencyId,
-      final String? provinceId,
-      @JsonKey(includeToJson: true)
-          final PaymentMethodType? paymentType}) = _$_IdDuplicateModel;
+          {@JsonKey(includeToJson: true) final IdDuplicateProcedureType? type,
+          @JsonKey(includeToJson: false) final String? requestOwner,
+          final String? nui,
+          final String? birthdate,
+          @JsonKey(includeToJson: true) final IdDuplicateReason? reasonType,
+          final String? agencyId,
+          final String? provinceId,
+          @JsonKey(includeToJson: true) final PaymentMethodType? paymentType}) =
+      _$_IdDuplicateModel;
   const _IdDuplicateModel._() : super._();
-
-  factory _IdDuplicateModel.fromJson(Map<String, dynamic> json) =
-      _$_IdDuplicateModel.fromJson;
 
   @override
   @JsonKey(includeToJson: true)
@@ -352,13 +306,14 @@ abstract class _IdDuplicateModel extends IdDuplicateModel {
   @override
   @JsonKey(includeToJson: true)
   IdDuplicateReason? get reasonType;
-  @override
-  @JsonKey(
+  @override /*@JsonKey(
       toJson: AgencyModel.agencyToJson,
       includeToJson: true,
-      includeFromJson: false)
-  @FormControlAnnotation<AgencyModel>()
-  AgencyModel? get agencyId;
+      includeFromJson: false,
+    )
+    @FormControlAnnotation<AgencyModel>()
+    AgencyModel? agencyId,*/
+  String? get agencyId;
   @override
   String? get provinceId;
   @override

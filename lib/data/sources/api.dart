@@ -280,4 +280,9 @@ abstract class Api {
   Future<ResponseModelPagination<List<IdDuplicateResponseModel>>> duplicates({
     @Query('pageNo') int pageNo = 0,
   });
+
+  @GET('/duplicateid/api/duplicate/{id}')
+  Future<ResponseModel<IdDuplicateModel>> duplicateById(
+      @Path('id') String id,
+      );
 }

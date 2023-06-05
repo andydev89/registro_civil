@@ -12,6 +12,7 @@ import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class IdDuplicateMainPage extends ConsumerWidget {
   const IdDuplicateMainPage({super.key, required this.typeServiceModel});
+
   final TypeServiceModel typeServiceModel;
 
   @override
@@ -29,7 +30,13 @@ class IdDuplicateMainPage extends ConsumerWidget {
             PrimaryAddItemRow(
               title: l10n.listadoSol,
               onPressed: () => context.navigateTo(
-                IdDuplicateFirstStepRoute(typeServiceModel: typeServiceModel),
+                IdDuplicateFirstStepRouterRoute(
+                    typeServiceModel: typeServiceModel,
+                    children: [
+                      IdDuplicateFirstStepRoute(
+                        typeServiceModel: typeServiceModel,
+                      ),
+                    ]),
               ),
             ),
             Expanded(
@@ -46,10 +53,11 @@ class IdDuplicateMainPage extends ConsumerWidget {
                   ),
                   firstElements: data.data ?? [],
                   totalPages: data.totalPages,
-                  itemBuilder: (_, e, __) => CardWidget<IdDuplicateResponseModel>(
+                  itemBuilder: (_, e, __) =>
+                      CardWidget<IdDuplicateResponseModel>(
                     element: e,
                     rows: {
-                      'Motivo': e.reasonType.translate(context),
+                      l10n.motivo: e.reasonType.translate(context),
                       l10n.fechaCreacion: '${e.createAt.onlyDate} -'
                           ' ${e.createAt.onlyTime}',
                       l10n.estado: e.state.translate(context),
@@ -57,20 +65,23 @@ class IdDuplicateMainPage extends ConsumerWidget {
                     actions: {
                       if (e.state == StateMarriageType.inProgress)
                         Crud.update: (p0) => context.navigateTo(
-                          RejectionStepMarriageCelebrationRoute(
-                            marriageId: p0.id,
-                          ),
-                        ),
+                              RejectionStepMarriageCelebrationRoute(
+                                marriageId: p0.id,
+                              ),
+                            ),
                       Crud.read: (p0) => context.navigateTo(
-                        MarriageCelebrationStepperRoute(children: [
-                          MarriageCelebrationFirstStepRouterRoute(
-                            operation: Crud.read,
-                            marriageId: e.id,
-                            children: [
-                              FirstStepAttorneyRoute(operation: Crud.read),
-                            ],
+                            IdDuplicateFirstStepRouterRoute(
+                              operation: Crud.read,
+                              typeServiceModel: typeServiceModel,
+                              duplicateId: e.id,
+                              children: [
+                                IdDuplicateFirstStepRoute(
+                                  typeServiceModel: typeServiceModel,
+                                  operation: Crud.read,
+                                ),
+                              ],
+                            ),
                           ),
-                        ],),),
                     },
                   ),
                 ),

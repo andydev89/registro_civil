@@ -113,7 +113,90 @@ class DuplicatesProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$idDuplicateHash() => r'0fdef8d26d3ee4be54ca8401dcb8882610c57d3d';
+String _$duplicateByIdHash() => r'8812972139a1484dfee0dc99017de88875a9cd00';
+typedef DuplicateByIdRef = AutoDisposeFutureProviderRef<IdDuplicateModel>;
+
+/// See also [duplicateById].
+@ProviderFor(duplicateById)
+const duplicateByIdProvider = DuplicateByIdFamily();
+
+/// See also [duplicateById].
+class DuplicateByIdFamily extends Family<AsyncValue<IdDuplicateModel>> {
+  /// See also [duplicateById].
+  const DuplicateByIdFamily();
+
+  /// See also [duplicateById].
+  DuplicateByIdProvider call(
+    String id,
+  ) {
+    return DuplicateByIdProvider(
+      id,
+    );
+  }
+
+  @override
+  DuplicateByIdProvider getProviderOverride(
+    covariant DuplicateByIdProvider provider,
+  ) {
+    return call(
+      provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'duplicateByIdProvider';
+}
+
+/// See also [duplicateById].
+class DuplicateByIdProvider
+    extends AutoDisposeFutureProvider<IdDuplicateModel> {
+  /// See also [duplicateById].
+  DuplicateByIdProvider(
+    this.id,
+  ) : super.internal(
+          (ref) => duplicateById(
+            ref,
+            id,
+          ),
+          from: duplicateByIdProvider,
+          name: r'duplicateByIdProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$duplicateByIdHash,
+          dependencies: DuplicateByIdFamily._dependencies,
+          allTransitiveDependencies:
+              DuplicateByIdFamily._allTransitiveDependencies,
+        );
+
+  final String id;
+
+  @override
+  bool operator ==(Object other) {
+    return other is DuplicateByIdProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$idDuplicateHash() => r'e806db90bcdbd6bfad61c2be814d91a6628a64a4';
 
 /// See also [IdDuplicate].
 @ProviderFor(IdDuplicate)

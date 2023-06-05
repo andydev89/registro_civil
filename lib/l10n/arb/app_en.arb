@@ -123,6 +123,7 @@
   "completeInformacionSolicitada": "Complete the requested information",
   "completeInformacionSolicitadaCed": "Complete the requested information to validate your ID",
   "motivoSol": "Reason for the request",
+  "motivo": "Reason",
   "tipoTramite": "Procedure type",
   "fechaNac": "Birthdate",
   "detalles": "Details",

@@ -1337,7 +1337,8 @@ class _Api implements Api {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = idDuplicateModel;
+    final _data = <String, dynamic>{};
+    _data.addAll(idDuplicateModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResponseModel<CommandWithTransactionCodeModel>>(Options(
       method: 'POST',
@@ -1389,6 +1390,32 @@ class _Api implements Api {
                   IdDuplicateResponseModel.fromJson(i as Map<String, dynamic>))
               .toList()
           : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<IdDuplicateModel>> duplicateById(String id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<IdDuplicateModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/duplicateid/api/duplicate/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<IdDuplicateModel>.fromJson(
+      _result.data!,
+      (json) => IdDuplicateModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }

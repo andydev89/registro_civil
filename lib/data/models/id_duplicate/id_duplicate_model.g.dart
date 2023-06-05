@@ -6,28 +6,28 @@ part of 'id_duplicate_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_IdDuplicateModel _$$_IdDuplicateModelFromJson(Map<String, dynamic> json) =>
-    _$_IdDuplicateModel(
+IdDuplicateModel _$IdDuplicateModelFromJson(Map<String, dynamic> json) =>
+    IdDuplicateModel(
       type:
           $enumDecodeNullable(_$IdDuplicateProcedureTypeEnumMap, json['type']),
-      requestOwner: json['requestOwner'] as String? ?? '',
-      nui: json['nui'] as String? ?? '',
-      birthdate: json['birthdate'] as String? ?? '',
+      requestOwner: json['requestOwner'] as String?,
+      nui: json['nui'] as String?,
+      birthdate: json['birthdate'] as String?,
       reasonType:
           $enumDecodeNullable(_$IdDuplicateReasonEnumMap, json['reasonType']),
-      provinceId: json['provinceId'] as String? ?? '',
-      paymentType: $enumDecodeNullable(
-              _$PaymentMethodTypeEnumMap, json['paymentType']) ??
-          PaymentMethodType.placeToPay,
+      agencyId: json['agencyId'] as String?,
+      provinceId: json['provinceId'] as String?,
+      paymentType:
+          $enumDecodeNullable(_$PaymentMethodTypeEnumMap, json['paymentType']),
     );
 
-Map<String, dynamic> _$$_IdDuplicateModelToJson(_$_IdDuplicateModel instance) =>
+Map<String, dynamic> _$IdDuplicateModelToJson(IdDuplicateModel instance) =>
     <String, dynamic>{
       'type': _$IdDuplicateProcedureTypeEnumMap[instance.type],
       'nui': instance.nui,
       'birthdate': instance.birthdate,
       'reasonType': _$IdDuplicateReasonEnumMap[instance.reasonType],
-      'agencyId': AgencyModel.agencyToJson(instance.agencyId),
+      'agencyId': instance.agencyId,
       'provinceId': instance.provinceId,
       'paymentType': _$PaymentMethodTypeEnumMap[instance.paymentType],
     };

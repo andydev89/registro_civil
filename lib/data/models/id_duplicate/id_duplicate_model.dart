@@ -3,7 +3,6 @@ import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/commons/commons.dart';
 import 'package:registro_civil_apk/data/enum/id_duplicate/id_duplicate.dart';
 import 'package:registro_civil_apk/data/enum/id_duplicate/id_duplicate_reason.dart';
-import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/models/commons/commons.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
@@ -11,10 +10,9 @@ part 'id_duplicate_model.g.dart';
 part 'id_duplicate_model.gform.dart';
 part 'id_duplicate_model.freezed.dart';
 
-@ReactiveFormAnnotation()
 @freezed
+@JsonSerializable(explicitToJson: true)
 class IdDuplicateModel with _$IdDuplicateModel {
-  @JsonSerializable(explicitToJson: true)
   const factory IdDuplicateModel({
     @JsonKey(includeToJson: true) IdDuplicateProcedureType? type,
     @Default('')
@@ -24,13 +22,15 @@ class IdDuplicateModel with _$IdDuplicateModel {
     @Default('')
     String? birthdate,
     @JsonKey(includeToJson: true) IdDuplicateReason? reasonType,
-    @JsonKey(
+    /*@JsonKey(
       toJson: AgencyModel.agencyToJson,
       includeToJson: true,
       includeFromJson: false,
     )
     @FormControlAnnotation<AgencyModel>()
-    AgencyModel? agencyId,
+    AgencyModel? agencyId,*/
+    @Default('')
+    String? agencyId,
     @Default('')
     String? provinceId,
     @Default(PaymentMethodType.placeToPay)
@@ -39,24 +39,31 @@ class IdDuplicateModel with _$IdDuplicateModel {
 
   const IdDuplicateModel._();
 
-  factory IdDuplicateModel.fromJson(Map<String, dynamic> json) =>
-      _$IdDuplicateModelFromJson(json);
+  factory IdDuplicateModel.fromJson(Map<String, dynamic> json) {
+    if (json.containsKey('requestOwnerId')) {
+      json['requestOwner'] = json['requestOwnerId'];
+    }
+    if (json.containsKey('birthDate')) {
+      json['birthdate'] = json['birthDate'];
+    }
+    return _$IdDuplicateModelFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$IdDuplicateModelToJson(this);
+
+  IdDuplicateModel copyWithFromModel(IdDuplicateModel model) {
+    return copyWith(
+      type: model.type,
+      requestOwner: model.requestOwner,
+      nui: model.nui,
+      birthdate: model.birthdate,
+      reasonType: model.reasonType,
+      agencyId: model.agencyId,
+      provinceId: model.provinceId,
+      paymentType: model.paymentType,
+    );
+  }
 }
-
-/*class IdDuplicateModel with _$IdDuplicateModel {
-  @JsonSerializable(explicitToJson: true)
-  const factory IdDuplicateModel({
-    @FormControlAnnotation<ProcedureTypeSubModel>()
-    ProcedureTypeSubModel? procedureType,
-    @FormControlAnnotation<ProcedureReasonSubModel>()
-    ProcedureReasonSubModel? procedureReason,
-  }) = _IdDuplicateModel;
-
-  const IdDuplicateModel._();
-
-  factory IdDuplicateModel.fromJson(Map<String, dynamic> json) =>
-      _$IdDuplicateModelFromJson(json);
-}*/
 
 @ReactiveFormAnnotation()
 @freezed

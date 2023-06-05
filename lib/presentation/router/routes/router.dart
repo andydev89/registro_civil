@@ -355,18 +355,25 @@ part 'router.gr.dart';
               page: IdDuplicateMainPage,
               transitionsBuilder: TransitionsBuilders.slideRight,
             ),
-            CustomRoute(
-              page: IdDuplicateFirstStepPage,
-              transitionsBuilder: TransitionsBuilders.slideRight,
+            CupertinoRoute(
+              page: IdDuplicateFirstStepRouterPage,
+              children: [
+                CustomRoute(
+                  initial: true,
+                  page: IdDuplicateFirstStepPage,
+                  // transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                CustomRoute(
+                  page: IdDuplicateSecondStepPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                CustomRoute(
+                  page: IdDuplicateDetailPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+              ],
             ),
-            CustomRoute(
-              page: IdDuplicateSecondStepPage,
-              transitionsBuilder: TransitionsBuilders.slideRight,
-            ),
-            CustomRoute(
-              page: IdDuplicateDetailPage,
-              transitionsBuilder: TransitionsBuilders.slideRight,
-            ),
+
           ],
         )
       ],

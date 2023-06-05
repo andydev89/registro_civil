@@ -18,6 +18,10 @@ class IdDuplicate extends _$IdDuplicate {
     return const IdDuplicateModel();
   }
 
+  void updateModel(IdDuplicateModel model) {
+    state = state.copyWithFromModel(model);
+  }
+
   void setFirstStep(
       {required ProcedureTypeSubModel procedureType,
       required String requestOwner,}) {
@@ -31,7 +35,7 @@ class IdDuplicate extends _$IdDuplicate {
 
   void setSecondStep(ProcedureReasonSubModel reason) {
     state = state.copyWith(
-      agencyId: reason.agency,
+      agencyId: reason.agency.id,
       provinceId: reason.province.id,
       reasonType: reason.reason,
     );
@@ -64,5 +68,15 @@ Future<ResponseModelPagination<List<IdDuplicateResponseModel>>> duplicates(
     }) async {
   final api = ref.watch(apiProvider);
   final response = await api.duplicates(pageNo: pageNo ?? 0);
+  return response;
+}
+
+@riverpod
+Future<IdDuplicateModel> duplicateById(
+    DuplicateByIdRef ref,
+    String id,
+    ) async {
+  final api = ref.watch(apiProvider);
+  final response = (await api.duplicateById(id)).data!;
   return response;
 }

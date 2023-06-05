@@ -39,99 +39,95 @@ class IdDuplicateDetailPage extends ConsumerWidget {
     return PrimaryScaffold(
       title: l10n.duplicadoCed,
       subtitle: l10n.detalles,
-      body: ProcedureReasonSubModelFormBuilder(
-        builder: (context, formModel, child) => Expanded(
-          child: SingleChildScrollView(
-            child: PrimaryCard(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      SecondaryRowLabel(
-                        label: l10n.numCedula,
-                        value: data.nui ?? '',
-                      ),
-                      SecondaryRowLabel(
-                        label: l10n.nombreCiudadano,
-                        value: '${me.firstName} ${me.lastName}',
-                      ),
-                      SecondaryRowLabel(
-                        label: l10n.tramite,
-                        value: typeServiceModel.name,
-                      ),
-                      SecondaryRowLabel(
-                        label: l10n.valorUnitario,
-                        value: '\$${currency.format(typeServiceModel.price)}',
-                      ),
-                      SecondaryRowLabel(
-                        label: l10n.subtotal,
-                        value: '\$${currency.format(typeServiceModel.price)}',
-                      ),
-                      SecondaryRowLabel(
-                        label: 'IVA',
-                        value: '\$${currency.format(typeServiceModel.iva)}',
-                      ),
-                      SecondaryRowLabel(
-                        label: l10n.descuento,
-                        value:
-                            '\$${currency.format(typeServiceModel.discount)}',
-                      ),
-                      SecondaryRowLabel(
-                        label: l10n.total,
-                        value: '\$${currency.format(typeServiceModel.total)}',
-                      ),
-                      SecondaryRowLabel(
-                        label: l10n.estadoPago,
-                        value: 'SIN PAGAR',
-                        valueColor: red,
-                      ),
-                      SecondaryRowLabel(
-                        label: l10n.estadoSol,
-                        value: 'ACTIVO',
-                        valueColor: green,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  ReactiveProcedureReasonSubModelFormConsumer(
-                    builder: (context, formModel, child) => PrimaryAsyncButton(
-                      title: l10n.confirmar,
-                      onPressed: () => ref
-                          .read(idDuplicateApiProvider.notifier)
-                          .duplicate(ref.watch(idDuplicateProvider))
-                          .when(
-                        ok: (data) {
-                          context
-                            ..navigateTo(
-                              IdDuplicateMainRoute(
-                                typeServiceModel: typeServiceModel,
-                              ),
-                            )
-                            ..navigateTo(
-                              ChoosePaymentMethodRoute(
-                                transactionCode: data.transactionCode,
-                                service: typeServiceModel,
-                              ),
-                            );
-                        },
-                        err: (err) {
-                          showAlert(
-                            err.translate(context),
-                            TypeAlert.error,
-                          );
-                        },
-                      ),
+      body: Expanded(
+        child: SingleChildScrollView(
+          child: PrimaryCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  children: [
+                    SecondaryRowLabel(
+                      label: l10n.numCedula,
+                      value: data.nui ?? '',
                     ),
+                    SecondaryRowLabel(
+                      label: l10n.nombreCiudadano,
+                      value: '${me.firstName} ${me.lastName}',
+                    ),
+                    SecondaryRowLabel(
+                      label: l10n.tramite,
+                      value: typeServiceModel.name,
+                    ),
+                    SecondaryRowLabel(
+                      label: l10n.valorUnitario,
+                      value: '\$${currency.format(typeServiceModel.price)}',
+                    ),
+                    SecondaryRowLabel(
+                      label: l10n.subtotal,
+                      value: '\$${currency.format(typeServiceModel.price)}',
+                    ),
+                    SecondaryRowLabel(
+                      label: 'IVA',
+                      value: '\$${currency.format(typeServiceModel.iva)}',
+                    ),
+                    SecondaryRowLabel(
+                      label: l10n.descuento,
+                      value:
+                      '\$${currency.format(typeServiceModel.discount)}',
+                    ),
+                    SecondaryRowLabel(
+                      label: l10n.total,
+                      value: '\$${currency.format(typeServiceModel.total)}',
+                    ),
+                    SecondaryRowLabel(
+                      label: l10n.estadoPago,
+                      value: 'SIN PAGAR',
+                      valueColor: red,
+                    ),
+                    SecondaryRowLabel(
+                      label: l10n.estadoSol,
+                      value: 'ACTIVO',
+                      valueColor: green,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                PrimaryAsyncButton(
+                  title: l10n.confirmar,
+                  onPressed: () => ref
+                      .read(idDuplicateApiProvider.notifier)
+                      .duplicate(ref.watch(idDuplicateProvider))
+                      .when(
+                    ok: (data) {
+                      context
+                        ..navigateTo(
+                          IdDuplicateMainRoute(
+                            typeServiceModel: typeServiceModel,
+                          ),
+                        )
+                        ..navigateTo(
+                          ChoosePaymentMethodRoute(
+                            transactionCode: data.transactionCode,
+                            service: typeServiceModel,
+                          ),
+                        );
+                    },
+                    err: (err) {
+                      showAlert(
+                        err.translate(context),
+                        TypeAlert.error,
+                      );
+                    },
                   ),
-                  PrimaryButton(
-                    title: l10n.cancelar,
-                    onPressed: () => context.popRoute(),
-                  ).verticalPadding(10),
-                ],
-              ),
+                ),
+                PrimaryButton(
+                  title: l10n.cancelar,
+                  onPressed: () => context.popRoute(),
+                ).verticalPadding(10),
+              ],
             ),
           ),
         ),

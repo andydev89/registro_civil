@@ -128,6 +128,7 @@
   "completeInformacionSolicitada": "Complete la información solicitada",
   "completeInformacionSolicitadaCed": "Complete la información solicitada para validar su cédula",
   "motivoSol": "Motivo de la solicitud",
+  "motivo": "Motivo",
   "tipoTramite": "Tipo de trámite",
   "fechaNac": "Fecha de nacimiento",
   "detalles": "Detalles",
