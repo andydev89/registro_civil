@@ -78,6 +78,11 @@ class IdDuplicateSecondStepPage extends ConsumerWidget {
                     ),
                   ),
                 ),
+                if (operation.isCreate)
+                  PrimaryReactiveCheckBox(
+                    formControl: formModel.acceptTermsControl,
+                    label: l10n.aceptoTermCondiciones,
+                  ).verticalPadding(20),
                 const SizedBox(
                   height: 16,
                 ),

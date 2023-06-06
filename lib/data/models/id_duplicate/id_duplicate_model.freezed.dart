@@ -577,6 +577,8 @@ mixin _$ProcedureReasonSubModel {
   LocationModel get province => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   AgencyModel get agency => throw _privateConstructorUsedError;
+  @FormControlAnnotation(validators: [requiredTrueValidator])
+  bool get acceptTerms => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -597,7 +599,9 @@ abstract class $ProcedureReasonSubModelCopyWith<$Res> {
       @JsonKey(toJson: LocationModel.locationToJson)
           LocationModel province,
       @FormControlAnnotation(validators: [requiredValidator])
-          AgencyModel agency});
+          AgencyModel agency,
+      @FormControlAnnotation(validators: [requiredTrueValidator])
+          bool acceptTerms});
 
   $LocationModelCopyWith<$Res> get province;
 }
@@ -619,6 +623,7 @@ class _$ProcedureReasonSubModelCopyWithImpl<$Res,
     Object? reason = null,
     Object? province = null,
     Object? agency = null,
+    Object? acceptTerms = null,
   }) {
     return _then(_value.copyWith(
       reason: null == reason
@@ -633,6 +638,10 @@ class _$ProcedureReasonSubModelCopyWithImpl<$Res,
           ? _value.agency
           : agency // ignore: cast_nullable_to_non_nullable
               as AgencyModel,
+      acceptTerms: null == acceptTerms
+          ? _value.acceptTerms
+          : acceptTerms // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -660,7 +669,9 @@ abstract class _$$_ProcedureReasonFormCopyWith<$Res>
       @JsonKey(toJson: LocationModel.locationToJson)
           LocationModel province,
       @FormControlAnnotation(validators: [requiredValidator])
-          AgencyModel agency});
+          AgencyModel agency,
+      @FormControlAnnotation(validators: [requiredTrueValidator])
+          bool acceptTerms});
 
   @override
   $LocationModelCopyWith<$Res> get province;
@@ -680,6 +691,7 @@ class __$$_ProcedureReasonFormCopyWithImpl<$Res>
     Object? reason = null,
     Object? province = null,
     Object? agency = null,
+    Object? acceptTerms = null,
   }) {
     return _then(_$_ProcedureReasonForm(
       reason: null == reason
@@ -694,6 +706,10 @@ class __$$_ProcedureReasonFormCopyWithImpl<$Res>
           ? _value.agency
           : agency // ignore: cast_nullable_to_non_nullable
               as AgencyModel,
+      acceptTerms: null == acceptTerms
+          ? _value.acceptTerms
+          : acceptTerms // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -709,7 +725,9 @@ class _$_ProcedureReasonForm extends _ProcedureReasonForm {
       @JsonKey(toJson: LocationModel.locationToJson)
           required this.province,
       @FormControlAnnotation(validators: [requiredValidator])
-          required this.agency})
+          required this.agency,
+      @FormControlAnnotation(validators: [requiredTrueValidator])
+          required this.acceptTerms})
       : super._();
 
   factory _$_ProcedureReasonForm.fromJson(Map<String, dynamic> json) =>
@@ -725,10 +743,13 @@ class _$_ProcedureReasonForm extends _ProcedureReasonForm {
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   final AgencyModel agency;
+  @override
+  @FormControlAnnotation(validators: [requiredTrueValidator])
+  final bool acceptTerms;
 
   @override
   String toString() {
-    return 'ProcedureReasonSubModel(reason: $reason, province: $province, agency: $agency)';
+    return 'ProcedureReasonSubModel(reason: $reason, province: $province, agency: $agency, acceptTerms: $acceptTerms)';
   }
 
   @override
@@ -739,12 +760,15 @@ class _$_ProcedureReasonForm extends _ProcedureReasonForm {
             (identical(other.reason, reason) || other.reason == reason) &&
             (identical(other.province, province) ||
                 other.province == province) &&
-            (identical(other.agency, agency) || other.agency == agency));
+            (identical(other.agency, agency) || other.agency == agency) &&
+            (identical(other.acceptTerms, acceptTerms) ||
+                other.acceptTerms == acceptTerms));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, reason, province, agency);
+  int get hashCode =>
+      Object.hash(runtimeType, reason, province, agency, acceptTerms);
 
   @JsonKey(ignore: true)
   @override
@@ -769,7 +793,9 @@ abstract class _ProcedureReasonForm extends ProcedureReasonSubModel {
       @JsonKey(toJson: LocationModel.locationToJson)
           required final LocationModel province,
       @FormControlAnnotation(validators: [requiredValidator])
-          required final AgencyModel agency}) = _$_ProcedureReasonForm;
+          required final AgencyModel agency,
+      @FormControlAnnotation(validators: [requiredTrueValidator])
+          required final bool acceptTerms}) = _$_ProcedureReasonForm;
   const _ProcedureReasonForm._() : super._();
 
   factory _ProcedureReasonForm.fromJson(Map<String, dynamic> json) =
@@ -785,6 +811,9 @@ abstract class _ProcedureReasonForm extends ProcedureReasonSubModel {
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   AgencyModel get agency;
+  @override
+  @FormControlAnnotation(validators: [requiredTrueValidator])
+  bool get acceptTerms;
   @override
   @JsonKey(ignore: true)
   _$$_ProcedureReasonFormCopyWith<_$_ProcedureReasonForm> get copyWith =>

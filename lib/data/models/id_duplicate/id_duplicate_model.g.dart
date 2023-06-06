@@ -72,6 +72,7 @@ _$_ProcedureReasonForm _$$_ProcedureReasonFormFromJson(
       province:
           LocationModel.fromJson(json['province'] as Map<String, dynamic>),
       agency: AgencyModel.fromJson(json['agency'] as Map<String, dynamic>),
+      acceptTerms: json['acceptTerms'] as bool,
     );
 
 Map<String, dynamic> _$$_ProcedureReasonFormToJson(
@@ -80,4 +81,5 @@ Map<String, dynamic> _$$_ProcedureReasonFormToJson(
       'reason': _$IdDuplicateReasonEnumMap[instance.reason]!,
       'province': LocationModel.locationToJson(instance.province),
       'agency': instance.agency.toJson(),
+      'acceptTerms': instance.acceptTerms,
     };

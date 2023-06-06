@@ -125,7 +125,11 @@ class IdDuplicateDetailPage extends ConsumerWidget {
                 ),
                 PrimaryButton(
                   title: l10n.cancelar,
-                  onPressed: () => context.popRoute(),
+                  onPressed: () => context.navigateTo(
+                    IdDuplicateMainRoute(
+                      typeServiceModel: typeServiceModel,
+                    ),
+                  ),
                 ).verticalPadding(10),
               ],
             ),

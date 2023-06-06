@@ -191,6 +191,7 @@
   "razonDeterioro": "Deterioro",
   "tramitePersonalDesc": "Solicitud de emisión de duplicado de cédula",
   "tramiteHijoDesc": "Solicitud de Duplicado de cédula para hijos menores de edad",
+  "aceptoTermCondiciones": "He leído y acepto los términos y condiciones.",
   "s200": "Solicitud procesada correctamente",
   "s201": "Nuevo recurso creado en el servidor",
   "s202": "Solicitud aceptada para procesamiento",

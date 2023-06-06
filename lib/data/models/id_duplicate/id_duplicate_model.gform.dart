@@ -757,6 +757,8 @@ class ProcedureReasonSubModelForm
 
   static const String agencyControlName = "agency";
 
+  static const String acceptTermsControlName = "acceptTerms";
+
   final ProcedureReasonSubModel? procedureReasonSubModel;
 
   final FormGroup form;
@@ -766,10 +768,12 @@ class ProcedureReasonSubModelForm
   String reasonControlPath() => pathBuilder(reasonControlName);
   String provinceControlPath() => pathBuilder(provinceControlName);
   String agencyControlPath() => pathBuilder(agencyControlName);
+  String acceptTermsControlPath() => pathBuilder(acceptTermsControlName);
   IdDuplicateReason get _reasonValue =>
       reasonControl.value as IdDuplicateReason;
   LocationModel get _provinceValue => provinceControl.value as LocationModel;
   AgencyModel get _agencyValue => agencyControl.value as AgencyModel;
+  bool get _acceptTermsValue => acceptTermsControl.value as bool;
   bool get containsReason {
     try {
       form.control(reasonControlPath());
@@ -797,12 +801,23 @@ class ProcedureReasonSubModelForm
     }
   }
 
+  bool get containsAcceptTerms {
+    try {
+      form.control(acceptTermsControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Object? get reasonErrors => reasonControl.errors;
   Object? get provinceErrors => provinceControl.errors;
   Object? get agencyErrors => agencyControl.errors;
+  Object? get acceptTermsErrors => acceptTermsControl.errors;
   void get reasonFocus => form.focus(reasonControlPath());
   void get provinceFocus => form.focus(provinceControlPath());
   void get agencyFocus => form.focus(agencyControlPath());
+  void get acceptTermsFocus => form.focus(acceptTermsControlPath());
   void reasonValueUpdate(
     IdDuplicateReason value, {
     bool updateParent = true,
@@ -827,6 +842,15 @@ class ProcedureReasonSubModelForm
     bool emitEvent = true,
   }) {
     agencyControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void acceptTermsValueUpdate(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    acceptTermsControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -857,6 +881,15 @@ class ProcedureReasonSubModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void acceptTermsValuePatch(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    acceptTermsControl.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void reasonValueReset(
     IdDuplicateReason value, {
     bool updateParent = true,
@@ -884,12 +917,23 @@ class ProcedureReasonSubModelForm
   }) =>
       agencyControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void acceptTermsValueReset(
+    bool value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      acceptTermsControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<IdDuplicateReason> get reasonControl =>
       form.control(reasonControlPath()) as FormControl<IdDuplicateReason>;
   FormControl<LocationModel> get provinceControl =>
       form.control(provinceControlPath()) as FormControl<LocationModel>;
   FormControl<AgencyModel> get agencyControl =>
       form.control(agencyControlPath()) as FormControl<AgencyModel>;
+  FormControl<bool> get acceptTermsControl =>
+      form.control(acceptTermsControlPath()) as FormControl<bool>;
   void reasonSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -944,6 +988,24 @@ class ProcedureReasonSubModelForm
     }
   }
 
+  void acceptTermsSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      acceptTermsControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      acceptTermsControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   @override
   ProcedureReasonSubModel get model {
     final currentForm = path == null ? form : form.control(path!);
@@ -953,7 +1015,10 @@ class ProcedureReasonSubModelForm
           '[${path ?? 'ProcedureReasonSubModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ProcedureReasonSubModel(
-        reason: _reasonValue, province: _provinceValue, agency: _agencyValue);
+        reason: _reasonValue,
+        province: _provinceValue,
+        agency: _agencyValue,
+        acceptTerms: _acceptTermsValue);
   }
 
   ProcedureReasonSubModelForm copyWithPath(String? path) {
@@ -1000,6 +1065,13 @@ class ProcedureReasonSubModelForm
         agencyControlName: FormControl<AgencyModel>(
             value: procedureReasonSubModel?.agency,
             validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        acceptTermsControlName: FormControl<bool>(
+            value: procedureReasonSubModel?.acceptTerms,
+            validators: [requiredTrueValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

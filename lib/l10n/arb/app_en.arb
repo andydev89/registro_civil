@@ -206,6 +206,7 @@
   "razonDeterioro": "Spoilage",
   "tramitePersonalDesc": "Request for the issuance of a duplicate ID",
   "tramiteHijoDesc": "Request for Duplicate ID for minor children",
+  "aceptoTermCondiciones": "I have read and accepted the terms and conditions.",
   "s200": "Request processed successfully",
   "s201": "New resource created on server",
   "s202": "Request accepted for processing",

@@ -63,12 +63,6 @@ class IdDuplicateMainPage extends ConsumerWidget {
                       l10n.estado: e.state.translate(context),
                     },
                     actions: {
-                      if (e.state == StateMarriageType.inProgress)
-                        Crud.update: (p0) => context.navigateTo(
-                              RejectionStepMarriageCelebrationRoute(
-                                marriageId: p0.id,
-                              ),
-                            ),
                       Crud.read: (p0) => context.navigateTo(
                             IdDuplicateFirstStepRouterRoute(
                               operation: Crud.read,

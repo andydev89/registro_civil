@@ -103,6 +103,8 @@ class ProcedureReasonSubModel with _$ProcedureReasonSubModel {
     required LocationModel province,
     @FormControlAnnotation(validators: [requiredValidator])
     required AgencyModel agency,
+    @FormControlAnnotation(validators: [requiredTrueValidator])
+    required bool acceptTerms,
   }) = _ProcedureReasonForm;
 
   const ProcedureReasonSubModel._();
