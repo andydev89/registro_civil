@@ -9,10 +9,7 @@ import 'package:registro_civil_apk/data/providers/auth/auth.dart';
 import 'package:registro_civil_apk/data/providers/id_duplicate/id_duplicate.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/buttons.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/forms.dart';
-import 'package:registro_civil_apk/presentation/widgets/forms/secondary_reactive_date_picker.dart';
-import 'package:registro_civil_apk/presentation/widgets/scaffolds/primary_scaffold.dart';
+import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class IdDuplicateFirstStepPage extends ConsumerWidget {
   const IdDuplicateFirstStepPage({
@@ -65,12 +62,8 @@ class IdDuplicateFirstStepPage extends ConsumerWidget {
                 ),
                 SecondaryReactiveDatePicker(
                   label: l10n.fechaNac,
+                  lastDate: DateTime.now(),
                   formControl: formModel.birthDateControl,
-                  onDaySelected: (DateTime? selected) {
-                    if (selected != null) {
-                      formModel.birthDateControl.value = selected;
-                    }
-                  },
                   readOnly: operation.isRead,
                 ),
                 const SizedBox(
