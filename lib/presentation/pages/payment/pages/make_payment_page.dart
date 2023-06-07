@@ -200,14 +200,16 @@ class MakePaymentPage extends ConsumerWidget {
                         ).future,
                       );
                       result.when(
-                        ok: (data) => context.replaceRoute(
-                          WebviewPaymentRoute(
-                            url: data.processUrl,
-                            placeToPayReference: data,
-                            totalToPay: service.total,
-                            onTap: onTapSuccessPayment,
-                          ),
-                        ),
+                        ok: (data) {
+                          context.replaceRoute(
+                            WebviewPaymentRoute(
+                              url: data.processUrl,
+                              placeToPayReference: data,
+                              totalToPay: service.total,
+                              onTap: onTapSuccessPayment,
+                            ),
+                          );
+                        },
                         err: (error) => showAlert(
                           error.translate(context),
                           TypeAlert.error,

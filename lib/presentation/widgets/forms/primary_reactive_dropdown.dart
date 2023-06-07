@@ -92,6 +92,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
                   textAlign: TextAlign.start,
                   overFlow: TextOverflow.ellipsis,
                   color: light ? Colors.white : primaryColor,
+                  maxLines: null,
                 ),
               )
               .toList(),
