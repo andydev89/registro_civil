@@ -173,10 +173,28 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    ForgotPasswordSecondRoute.name: (routeData) {
+    ForgotPasswordOtpVerificationRoute.name: (routeData) {
+      final args = routeData.argsAs<ForgotPasswordOtpVerificationRouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const ForgotPasswordSecondPage(),
+        child: ForgotPasswordOtpVerificationPage(
+          key: args.key,
+          command: args.command,
+          email: args.email,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ForgotPasswordSecondRoute.name: (routeData) {
+      final args = routeData.argsAs<ForgotPasswordSecondRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ForgotPasswordSecondPage(
+          key: args.key,
+          userId: args.userId,
+        ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
@@ -874,6 +892,11 @@ class _$AppRouter extends RootStackRouter {
                   parent: ForgotPasswordRouterRoute.name,
                 ),
                 RouteConfig(
+                  ForgotPasswordOtpVerificationRoute.name,
+                  path: 'forgot-password-otp-verification-page',
+                  parent: ForgotPasswordRouterRoute.name,
+                ),
+                RouteConfig(
                   ForgotPasswordSecondRoute.name,
                   path: 'forgot-password-second-page',
                   parent: ForgotPasswordRouterRoute.name,
@@ -1549,15 +1572,78 @@ class ForgotPasswordFirstRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ForgotPasswordOtpVerificationPage]
+class ForgotPasswordOtpVerificationRoute
+    extends PageRouteInfo<ForgotPasswordOtpVerificationRouteArgs> {
+  ForgotPasswordOtpVerificationRoute({
+    Key? key,
+    required String command,
+    required String email,
+  }) : super(
+          ForgotPasswordOtpVerificationRoute.name,
+          path: 'forgot-password-otp-verification-page',
+          args: ForgotPasswordOtpVerificationRouteArgs(
+            key: key,
+            command: command,
+            email: email,
+          ),
+        );
+
+  static const String name = 'ForgotPasswordOtpVerificationRoute';
+}
+
+class ForgotPasswordOtpVerificationRouteArgs {
+  const ForgotPasswordOtpVerificationRouteArgs({
+    this.key,
+    required this.command,
+    required this.email,
+  });
+
+  final Key? key;
+
+  final String command;
+
+  final String email;
+
+  @override
+  String toString() {
+    return 'ForgotPasswordOtpVerificationRouteArgs{key: $key, command: $command, email: $email}';
+  }
+}
+
+/// generated route for
 /// [ForgotPasswordSecondPage]
-class ForgotPasswordSecondRoute extends PageRouteInfo<void> {
-  const ForgotPasswordSecondRoute()
-      : super(
+class ForgotPasswordSecondRoute
+    extends PageRouteInfo<ForgotPasswordSecondRouteArgs> {
+  ForgotPasswordSecondRoute({
+    Key? key,
+    required String userId,
+  }) : super(
           ForgotPasswordSecondRoute.name,
           path: 'forgot-password-second-page',
+          args: ForgotPasswordSecondRouteArgs(
+            key: key,
+            userId: userId,
+          ),
         );
 
   static const String name = 'ForgotPasswordSecondRoute';
+}
+
+class ForgotPasswordSecondRouteArgs {
+  const ForgotPasswordSecondRouteArgs({
+    this.key,
+    required this.userId,
+  });
+
+  final Key? key;
+
+  final String userId;
+
+  @override
+  String toString() {
+    return 'ForgotPasswordSecondRouteArgs{key: $key, userId: $userId}';
+  }
 }
 
 /// generated route for

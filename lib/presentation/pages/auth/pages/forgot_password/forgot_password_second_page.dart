@@ -5,7 +5,8 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class ForgotPasswordSecondPage extends StatelessWidget {
-  const ForgotPasswordSecondPage({super.key});
+  const ForgotPasswordSecondPage({super.key, required this.userId});
+  final String userId;
 
   @override
   Widget build(BuildContext context) {

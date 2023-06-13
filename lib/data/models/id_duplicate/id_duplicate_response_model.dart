@@ -3,6 +3,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/enum/id_duplicate/id_duplicate_reason.dart';
+import 'package:registro_civil_apk/data/models/commons/commons.dart';
 
 part 'id_duplicate_response_model.g.dart';
 
@@ -41,7 +42,7 @@ class IdDuplicateResponseModel {
   final dynamic operatorId;
   final StateMarriageType state;
   final String provinceId;
-  final String agencyId;
+  final LocationModel? agencyId;
 
   Map<String, dynamic> toJson() => _$IdDuplicateResponseModelToJson(this);
 }

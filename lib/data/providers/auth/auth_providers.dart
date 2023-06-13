@@ -169,12 +169,21 @@ class ForgotPassword extends _$ForgotPassword {
   @override
   void build() {}
 
-  Future<Result<bool, StatusCodeType>> forgotPassword(
+  Future<Result<bool, StatusCodeType>> forgotPasswordStep1(
     EnterEmailModel email,
   ) async {
     final api = ref.watch(apiProvider);
-    final response = await api.forgotPassword(email);
+    final response = await api.forgotPasswordSendOtp(email);
     if (response.success) return const Result.ok(true);
     return Result.err(response.status);
+  }
+
+  Future<MeModel> meByEmail(String email) async {
+    final api = ref.watch(apiProvider);
+    final response = await api.meByEmail(email);
+    if (response.status == StatusCodeType.s200) {
+      return response.data![0];
+    }
+    return MeModel();
   }
 }

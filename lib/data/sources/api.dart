@@ -18,9 +18,17 @@ abstract class Api {
     @Body() NuiModel nuiModel,
   );
 
-  @POST('api/user/password/recover')
-  Future<ResponseModel<CommandModelEmail>> forgotPassword(
+  @POST('api/user/password/recover/step_one')
+  Future<ResponseModel<CommandModelEmail>> forgotPasswordSendOtp(
     @Body() EnterEmailModel email,
+  );
+
+  @GET('/api/backoffice/user')
+  Future<ResponseModel<List<MeModel>>> meByEmail(@Query('email') String email);
+
+  @POST('api/user/password/recover/step_two')
+  Future<ResponseModel<CommandModelEmail>> forgotPasswordVerifyOtp(
+    @Body() ForgotOtpModel otp,
   );
 
   @POST('/api/user/register/data')
@@ -283,6 +291,6 @@ abstract class Api {
 
   @GET('/duplicateid/api/duplicate/{id}')
   Future<ResponseModel<IdDuplicateModel>> duplicateById(
-      @Path('id') String id,
-      );
+    @Path('id') String id,
+  );
 }

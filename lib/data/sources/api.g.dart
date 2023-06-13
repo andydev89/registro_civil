@@ -70,7 +70,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModelEmail>> forgotPassword(
+  Future<ResponseModel<CommandModelEmail>> forgotPasswordSendOtp(
       EnterEmailModel email) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -84,7 +84,65 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'api/user/password/recover',
+              'api/user/password/recover/step_one',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandModelEmail>.fromJson(
+      _result.data!,
+      (json) => CommandModelEmail.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<List<MeModel>>> meByEmail(String email) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'email': email};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<List<MeModel>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/backoffice/user',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<List<MeModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<MeModel>((i) => MeModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandModelEmail>> forgotPasswordVerifyOtp(
+      ForgotOtpModel otp) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(otp.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandModelEmail>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/user/password/recover/step_two',
               queryParameters: queryParameters,
               data: _data,
             )

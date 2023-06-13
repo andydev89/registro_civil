@@ -71,6 +71,10 @@ part 'router.gr.dart';
             ),
             CustomRoute(
               transitionsBuilder: TransitionsBuilders.slideLeft,
+              page: ForgotPasswordOtpVerificationPage,
+            ),
+            CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
               page: ForgotPasswordSecondPage,
             ),
           ],

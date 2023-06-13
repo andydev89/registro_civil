@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
+import 'package:registro_civil_apk/data/models/auth/auth.dart';
 import 'package:registro_civil_apk/data/models/auth/enter_email_model.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
@@ -47,17 +48,25 @@ class ForgotPasswordFirstPage extends ConsumerWidget {
                   return PrimaryAsyncButton(
                     title: l10n.enviarCorreo,
                     onPressed: form.form.valid
-                        ? () => ref
+                        ? () => /*ref
                             .watch(forgotPasswordProvider.notifier)
-                            .forgotPassword(form.model)
+                            .forgotPasswordStep1(form.model)
                             .when(
                               ok: (_) =>context.replaceRoute(SuccessRoute(
                                 title: l10n.alertaPassword,
-                                subtitle: l10n.envioAlertaCorreo
+                                subtitle: l10n.envioAlertaCorreo,
                               ),),
                               err: (err) => showAlert(
                                 err.translate(context),
                                 TypeAlert.error,
+                              ),
+                            )*/
+                            context.navigateTo(
+                              ForgotPasswordOtpVerificationRoute(
+                                command: 'RECOVER_LOST_PASSWORD',
+                                email: form.emailControl.value ?? '',
+                                // userId: (me as MeModel).id,
+                                // userId: '',
                               ),
                             )
                         : null,
