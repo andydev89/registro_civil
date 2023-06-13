@@ -1,5 +1,6 @@
 export 'auth/auth.dart';
 export 'chage_of_name/change_of_name.dart';
+export 'default/default.dart';
 export 'home/home.dart';
 export 'id_duplicate/id_duplicate.dart';
 export 'marriage_celebration/marriage_celebration.dart';

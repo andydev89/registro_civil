@@ -66,6 +66,9 @@ PageRouteInfo<dynamic> getIdDuplicate(TypeServiceModel typeOfService) =>
       ],
     );
 
+PageRouteInfo<dynamic> getDefault(TypeServiceModel typeOfService) =>
+    DefaultRoute(typeServiceModel: typeOfService);
+
 PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   final type = typeServiceModel.type;
   if (type.isSimpleCertificate) {
@@ -86,5 +89,8 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   if (type.isIdDuplicate) {
     return getIdDuplicate(typeServiceModel);
   }
-  return getMarriageCelebration();
+  if (type.isMarriageCelebration) {
+    return getMarriageCelebration();
+  }
+  return getDefault(typeServiceModel);
 }
