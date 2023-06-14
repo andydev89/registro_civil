@@ -379,6 +379,10 @@ part 'router.gr.dart';
             ),
 
           ],
+        ),
+        CupertinoRoute(
+          // guards: [AuthGuard],
+          page: DefaultPage,
         )
       ],
     ),

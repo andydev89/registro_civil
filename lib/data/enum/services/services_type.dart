@@ -81,6 +81,8 @@ enum ServiceType implements Translatable {
 
   bool get isIdDuplicate => this == idDuplicate;
 
+  bool get isMarriageCelebration => this == marriageCelebration;
+
   @override
   String translate(BuildContext context) {
     final l10n = context.l10n;

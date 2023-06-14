@@ -365,6 +365,16 @@ class _$AppRouter extends RootStackRouter {
         child: const IdDuplicateRouterPage(),
       );
     },
+    DefaultRoute.name: (routeData) {
+      final args = routeData.argsAs<DefaultRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: DefaultPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+      );
+    },
     ServicesRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -1272,6 +1282,11 @@ class _$AppRouter extends RootStackRouter {
                 ),
               ],
             ),
+            RouteConfig(
+              DefaultRoute.name,
+              path: 'default-page',
+              parent: RootRouterRoute.name,
+            ),
           ],
         ),
       ];
@@ -2111,6 +2126,40 @@ class IdDuplicateRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'IdDuplicateRouterRoute';
+}
+
+/// generated route for
+/// [DefaultPage]
+class DefaultRoute extends PageRouteInfo<DefaultRouteArgs> {
+  DefaultRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          DefaultRoute.name,
+          path: 'default-page',
+          args: DefaultRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'DefaultRoute';
+}
+
+class DefaultRouteArgs {
+  const DefaultRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'DefaultRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
 }
 
 /// generated route for
