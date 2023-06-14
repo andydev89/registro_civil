@@ -48,25 +48,21 @@ class ForgotPasswordFirstPage extends ConsumerWidget {
                   return PrimaryAsyncButton(
                     title: l10n.enviarCorreo,
                     onPressed: form.form.valid
-                        ? () => /*ref
+                        ? () => ref
                             .watch(forgotPasswordProvider.notifier)
                             .forgotPasswordStep1(form.model)
                             .when(
-                              ok: (_) =>context.replaceRoute(SuccessRoute(
-                                title: l10n.alertaPassword,
-                                subtitle: l10n.envioAlertaCorreo,
-                              ),),
+                              ok: (_) => context.navigateTo(
+                                ForgotPasswordOtpVerificationRoute(
+                                  command: 'RECOVER_LOST_PASSWORD',
+                                  email: form.emailControl.value ?? '',
+                                  // userId: (me as MeModel).id,
+                                  // userId: '',
+                                ),
+                              ),
                               err: (err) => showAlert(
                                 err.translate(context),
                                 TypeAlert.error,
-                              ),
-                            )*/
-                            context.navigateTo(
-                              ForgotPasswordOtpVerificationRoute(
-                                command: 'RECOVER_LOST_PASSWORD',
-                                email: form.emailControl.value ?? '',
-                                // userId: (me as MeModel).id,
-                                // userId: '',
                               ),
                             )
                         : null,

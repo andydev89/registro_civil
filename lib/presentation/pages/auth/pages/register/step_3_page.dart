@@ -47,11 +47,13 @@ class Step3Page extends ConsumerWidget {
                       const SizedBox(height: 20),
                       Row(
                         children: [
-                          PrimaryText(
-                            '${l10n.nombre}: ${form.model.firstName}'
-                            ' ${form.model.lastName}',
-                            color: Colors.white,
-                            maxLines: null,
+                          Expanded(
+                            child: PrimaryText(
+                              '${l10n.nombre}: ${form.model.firstName}'
+                              ' ${form.model.lastName}',
+                              color: Colors.white,
+                              maxLines: null,
+                            ),
                           ),
                         ],
                       ),
