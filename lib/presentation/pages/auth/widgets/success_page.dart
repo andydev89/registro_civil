@@ -31,11 +31,11 @@ class SuccessPage extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              PrimaryText(
+              /*PrimaryText(
                 subtitle ?? l10n.envCorreo,
                 color: Colors.white,
                 maxLines: null,
-              ),
+              ),*/
             ],
           ),
         ],
