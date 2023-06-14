@@ -15,6 +15,7 @@ import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key, required this.onLogin});
+
   // ignore: avoid_positional_boolean_parameters
   final void Function(BuildContext, bool) onLogin;
 
@@ -98,10 +99,16 @@ class LoginPage extends ConsumerWidget {
                                   .login(form.model)
                                   .when(
                                     ok: (value) => onLogin(context, value),
-                                    err: (error) => showAlert(
-                                      error.translate(context),
-                                      TypeAlert.error,
-                                    ),
+                                    err: (error) {
+                                      var message = error.translate(context);
+                                      if (error.code == 401) {
+                                        message = l10n.credencialesInvalidas;
+                                      }
+                                      showAlert(
+                                        message,
+                                        TypeAlert.error,
+                                      );
+                                    },
                                   )
                               : null,
                         );
