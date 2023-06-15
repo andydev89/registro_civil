@@ -23,7 +23,7 @@ class ProceduresPage extends ConsumerWidget {
           child: LoadingProviderWidget<
               ResponseModelPagination<List<TypeServiceModel>>>(
             async: ref.watch(provider),
-            onRefreshIndicatot: () => ref.refresh(provider.future),
+            onRefreshIndicator: () => ref.refresh(provider.future),
             onRefresh: () => ref.refresh(provider),
             data: (data) => CircleAvatarCardGrid(
               totalPages: data.totalPages,
@@ -32,6 +32,7 @@ class ProceduresPage extends ConsumerWidget {
                 typeServicesFetchProvider(TypeEnumType.procedure, index).future,
               ),
             ),
+            loadingWidget: const GridSkeletonCircleAvatarCardWidget(),
           ),
         ),
       ],

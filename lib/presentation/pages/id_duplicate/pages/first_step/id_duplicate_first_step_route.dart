@@ -31,7 +31,7 @@ class IdDuplicateFirstStepRouterPage extends HookWidget {
                 onRefresh: () => ref.refresh(
                   duplicateByIdProvider(duplicateId!),
                 ),
-                onRefreshIndicatot: () => ref.watch(
+                onRefreshIndicator: () => ref.watch(
                   duplicateByIdProvider(duplicateId!).future,
                 ),
                 data: (data) {

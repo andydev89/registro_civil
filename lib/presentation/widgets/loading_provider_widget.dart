@@ -9,17 +9,19 @@ class LoadingProviderWidget<T> extends ConsumerWidget {
     required this.async,
     required this.data,
     required this.onRefresh,
-    required this.onRefreshIndicatot,
+    required this.onRefreshIndicator,
+    this.loadingWidget,
   });
   final AsyncValue<T> async;
   final Widget Function(T) data;
+  final Widget? loadingWidget;
   final void Function() onRefresh;
-  final Future<void> Function() onRefreshIndicatot;
+  final Future<void> Function() onRefreshIndicator;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return RefreshIndicator(
-      onRefresh: onRefreshIndicatot,
+      onRefresh: onRefreshIndicator,
       child: async.when(
         skipLoadingOnRefresh: false,
         data: data,
@@ -27,7 +29,7 @@ class LoadingProviderWidget<T> extends ConsumerWidget {
           messagge: error.toString(),
           onPressed: onRefresh,
         ),
-        loading: () => const LoadingStatus(),
+        loading: () => loadingWidget ?? const LoadingStatus(),
       ),
     );
   }

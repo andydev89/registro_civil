@@ -43,7 +43,7 @@ class IdDuplicateMainPage extends ConsumerWidget {
               child: LoadingProviderWidget<
                   ResponseModelPagination<List<IdDuplicateResponseModel>>>(
                 async: ref.watch(duplicatesProvider()),
-                onRefreshIndicatot: () => ref.refresh(
+                onRefreshIndicator: () => ref.refresh(
                   duplicatesProvider().future,
                 ),
                 onRefresh: () => ref.refresh(duplicatesProvider()),

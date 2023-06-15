@@ -31,7 +31,7 @@ class MarriageCelebrationFirstStepRouterPage extends HookWidget {
                     onRefresh: () => ref.refresh(
                       marriageByIdProvider(marriageId!),
                     ),
-                    onRefreshIndicatot: () => ref.watch(
+                    onRefreshIndicator: () => ref.watch(
                       marriageByIdProvider(marriageId!).future,
                     ),
                     data: (data) {

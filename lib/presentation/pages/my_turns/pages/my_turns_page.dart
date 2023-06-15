@@ -55,7 +55,7 @@ class MyTurnsPage extends ConsumerWidget {
                     ),
                   ).verticalPadding(10),
                 ),
-                onRefreshIndicatot: () =>
+                onRefreshIndicator: () =>
                     ref.refresh(schedulesByUserProvider().future),
                 onRefresh: () => ref.refresh(schedulesByUserProvider()),
               ),

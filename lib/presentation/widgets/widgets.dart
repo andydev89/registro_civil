@@ -22,6 +22,7 @@ export 'recharge_widget.dart';
 export 'scaffolds/scaffolds.dart';
 export 'scrollables/scrollables.dart';
 export 'shadows_widget.dart';
+export 'skeleton/skeleton.dart';
 export 'status/status.dart';
 export 'success_widget.dart';
 export 'titles/titles.dart';

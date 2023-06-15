@@ -148,7 +148,7 @@ class RejectionStepMarriageCelebrationPage extends ConsumerWidget {
             );
           },
           onRefresh: () => ref.refresh(marriageByIdProvider(marriageId)),
-          onRefreshIndicatot: () =>
+          onRefreshIndicator: () =>
               ref.watch(marriageByIdProvider(marriageId).future),
         ),
       ),

@@ -28,7 +28,7 @@ class MainPageResicenceRegistrationPage extends ConsumerWidget {
         child: LoadingProviderWidget(
           async: ref.watch(residenceRegistrationProvider),
           onRefresh: () => ref.refresh(residenceRegistrationProvider),
-          onRefreshIndicatot: () => ref.read(
+          onRefreshIndicator: () => ref.read(
             residenceRegistrationProvider.future,
           ),
           data: (_) {

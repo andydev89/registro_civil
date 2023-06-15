@@ -35,7 +35,7 @@ class MarriageCelebrationPrincipalPage extends ConsumerWidget {
               child: LoadingProviderWidget<
                   ResponseModelPagination<List<ResponseMarriageModel>>>(
                 async: ref.watch(marriagesProvider()),
-                onRefreshIndicatot: () => ref.refresh(
+                onRefreshIndicator: () => ref.refresh(
                   marriagesProvider().future,
                 ),
                 onRefresh: () => ref.refresh(marriagesProvider()),
