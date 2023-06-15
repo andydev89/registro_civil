@@ -27,8 +27,13 @@ abstract class Api {
   Future<ResponseModel<List<MeModel>>> meByEmail(@Query('email') String email);
 
   @POST('api/user/password/recover/step_two')
-  Future<ResponseModel<CommandModelEmail>> forgotPasswordVerifyOtp(
+  Future<ResponseModel<ValidOtpModel>> forgotPasswordVerifyOtp(
     @Body() ForgotOtpModel otp,
+  );
+
+  @POST('api/user/password/recover/step_three')
+  Future<ResponseModel<CommandModel>> forgotPassword(
+    @Body() ForgotConfirmPasswordModel confirmPasswordModel,
   );
 
   @POST('/api/user/register/data')

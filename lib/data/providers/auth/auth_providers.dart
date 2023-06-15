@@ -178,12 +178,30 @@ class ForgotPassword extends _$ForgotPassword {
     return Result.err(response.status);
   }
 
-  Future<MeModel> meByEmail(String email) async {
+  Future<Result<ValidOtpModel, StatusCodeType>> forgotPasswordStep2(
+      ForgotOtpModel otpModel,
+      ) async {
+    final api = ref.watch(apiProvider);
+    final response = await api.forgotPasswordVerifyOtp(otpModel);
+    if (response.success) return Result.ok(response.data!);
+    return Result.err(response.status);
+  }
+
+  Future<Result<CommandModel, StatusCodeType>> forgotPasswordStep3(
+      ForgotConfirmPasswordModel confirmPasswordModel,
+      ) async {
+    final api = ref.watch(apiProvider);
+    final response = await api.forgotPassword(confirmPasswordModel);
+    if (response.success) return Result.ok(response.data!);
+    return Result.err(response.status);
+  }
+
+  Future<Result<MeModel, StatusCodeType>> meByEmail(String email) async {
     final api = ref.watch(apiProvider);
     final response = await api.meByEmail(email);
     if (response.status == StatusCodeType.s200) {
-      return response.data![0];
+      return Result.ok(response.data![0]);
     }
-    return MeModel();
+    return Result.err(response.status);
   }
 }

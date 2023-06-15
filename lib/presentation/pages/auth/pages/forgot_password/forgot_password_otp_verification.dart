@@ -1,11 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:otp_text_field/otp_text_field.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/data/models/auth/auth.dart';
 import 'package:registro_civil_apk/data/providers/auth/auth.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
@@ -35,10 +38,16 @@ class _ForgotPasswordOtpVerificationPageState
     _fetchMeByEmail();
   }
 
-  Future<void> _fetchMeByEmail() async {
-    final fetchedMe =
-        await ref.read(forgotPasswordProvider.notifier).meByEmail(widget.email);
-    me = fetchedMe;
+  void _fetchMeByEmail() {
+    ref.read(forgotPasswordProvider.notifier).meByEmail(widget.email).when(
+          ok: (MeModel result) {
+            me = result;
+          },
+          err: (err) => showAlert(
+            err.translate(context),
+            TypeAlert.error,
+          ),
+        );
   }
 
   @override
@@ -89,7 +98,7 @@ class _ForgotPasswordOtpVerificationPageState
                       textFieldAlignment: MainAxisAlignment.spaceAround,
                       onChanged: (value) {
                         //  update the value in the form
-                        form.codeControl.value = value;
+                        form.otpControl.value = value;
                         /*if (value != otp) {
                           form.codeControl.setErrors(
                             {ValidationsMessageType.invalidCode.toText: true},
@@ -100,7 +109,7 @@ class _ForgotPasswordOtpVerificationPageState
                           ValidationsMessageType.invalidCode.toText,
                         );*/
                       },
-                      onCompleted: (pin) => form.codeControl.value = pin,
+                      onCompleted: (pin) => form.otpControl.value = pin,
                     );
                   },
                 ),
@@ -115,16 +124,41 @@ class _ForgotPasswordOtpVerificationPageState
                 onPressed: form.form.valid
                     ? () async {
                         if (me == null || me!.id.isEmpty) {
-                          me = await ref.read(forgotPasswordProvider.notifier).meByEmail(widget.email);
+                          await ref
+                              .watch(forgotPasswordProvider.notifier)
+                              .meByEmail(widget.email)
+                              .when(
+                            ok: (MeModel result) {
+                              me = result;
+                            },
+                            err: (err) {
+                              showAlert(
+                                err.translate(context),
+                                TypeAlert.error,
+                              );
+                              return;
+                            },
+                          );
                         }
-                        form.model.userId = me!.id;
-                        //Aqui tengo que llamar al metodo que envia el otp (step_two)
-                        // ref.read(provider)
-                        context.navigateTo(
-                          ForgotPasswordSecondRoute(
-                            userId: me!.id,
-                          ),
-                        );
+                        await ref
+                            .read(forgotPasswordProvider.notifier)
+                            .forgotPasswordStep2(
+                              ForgotOtpModel(
+                                userId: me!.id,
+                                otp: form.model.otp,
+                              ),
+                            )
+                            .when(
+                              ok: (_) => context.navigateTo(
+                                ForgotPasswordSecondRoute(
+                                  userId: me!.id,
+                                ),
+                              ),
+                              err: (err) => showAlert(
+                                err.translate(context),
+                                TypeAlert.error,
+                              ),
+                            );
                       }
                     : null,
               );

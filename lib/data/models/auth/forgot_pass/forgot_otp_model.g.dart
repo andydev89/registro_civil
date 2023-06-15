@@ -8,12 +8,38 @@ part of 'forgot_otp_model.dart';
 
 ForgotOtpModel _$ForgotOtpModelFromJson(Map<String, dynamic> json) =>
     ForgotOtpModel(
-      code: json['code'] as String? ?? '',
+      otp: json['otp'] as String? ?? '',
       userId: json['userId'] as String?,
     );
 
 Map<String, dynamic> _$ForgotOtpModelToJson(ForgotOtpModel instance) =>
     <String, dynamic>{
-      'code': instance.code,
+      'otp': instance.otp,
       'userId': instance.userId,
+    };
+
+ValidOtpModel _$ValidOtpModelFromJson(Map<String, dynamic> json) =>
+    ValidOtpModel(
+      valid: json['valid'] as bool? ?? false,
+    );
+
+Map<String, dynamic> _$ValidOtpModelToJson(ValidOtpModel instance) =>
+    <String, dynamic>{
+      'valid': instance.valid,
+    };
+
+ForgotConfirmPasswordModel _$ForgotConfirmPasswordModelFromJson(
+        Map<String, dynamic> json) =>
+    ForgotConfirmPasswordModel(
+      userId: json['userId'] as String? ?? '',
+      newPassword: json['newPassword'] as String? ?? '',
+      confirmPassword: json['confirmPassword'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$ForgotConfirmPasswordModelToJson(
+        ForgotConfirmPasswordModel instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+      'newPassword': instance.newPassword,
+      'confirmPassword': instance.confirmPassword,
     };

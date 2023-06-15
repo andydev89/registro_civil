@@ -193,6 +193,7 @@
   "tramiteHijoDesc": "Solicitud de Duplicado de cédula para hijos menores de edad",
   "aceptoTermCondiciones": "He leído y acepto los términos y condiciones.",
   "credencialesInvalidas": "La contraseña introducida es incorrecta, vuelva a intentarlo. Tiene tres intentos y luego se bloquearará el usuario",
+  "cambioClaveOk": "¡Su contraseña se ha cambiado \nsatisfactoriamente!",
   "s200": "Solicitud procesada correctamente",
   "s201": "Nuevo recurso creado en el servidor",
   "s202": "Solicitud aceptada para procesamiento",
