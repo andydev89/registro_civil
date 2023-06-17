@@ -262,7 +262,7 @@ Future<bool?> showAceptAgreement(
                     ReactiveTermAndUseConditionsModelFormConsumer(
                       builder: (_, formModel, __) {
                         return PrimaryButton(
-                          title: l10n.aceptar,
+                          title: l10n.siguiente,
                           onPressed: formModel.form.valid
                               ? () {
                                   condition = true;
