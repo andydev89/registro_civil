@@ -1,4 +1,4 @@
-package com.example.verygoodcore.registro_civil_apk
+package com.gov.ec.registrocivil
 
 import io.flutter.embedding.android.FlutterActivity
 
