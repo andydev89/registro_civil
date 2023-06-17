@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.verygoodcore.registro_civil_apk">
+    package="com.gov.ec.registrocivil">
    <application
         android:requestLegacyExternalStorage="true"
         android:label="Agencia Virtual"
