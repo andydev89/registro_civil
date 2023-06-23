@@ -46,7 +46,7 @@ class _AppState extends ConsumerState<App> {
           const DropdownAlert(),
         ],
       ),
-
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales:const [
          Locale('es', 'EC'),
