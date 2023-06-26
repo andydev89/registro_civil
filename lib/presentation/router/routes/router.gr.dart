@@ -145,6 +145,7 @@ class _$AppRouter extends RootStackRouter {
         child: Step4Page(
           key: args.key,
           command: args.command,
+          email: args.email,
         ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
@@ -1514,12 +1515,14 @@ class Step4Route extends PageRouteInfo<Step4RouteArgs> {
   Step4Route({
     Key? key,
     required String command,
+    required String email,
   }) : super(
           Step4Route.name,
           path: 'step4-page',
           args: Step4RouteArgs(
             key: key,
             command: command,
+            email: email,
           ),
         );
 
@@ -1530,15 +1533,18 @@ class Step4RouteArgs {
   const Step4RouteArgs({
     this.key,
     required this.command,
+    required this.email,
   });
 
   final Key? key;
 
   final String command;
 
+  final String email;
+
   @override
   String toString() {
-    return 'Step4RouteArgs{key: $key, command: $command}';
+    return 'Step4RouteArgs{key: $key, command: $command, email: $email}';
   }
 }
 

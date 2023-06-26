@@ -84,7 +84,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'api/user/password/recover/step_one',
+              'api/user/password/recover/otp',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -142,7 +142,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'api/user/password/recover/step_two',
+              'api/user/password/recover/validate',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -170,7 +170,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'api/user/password/recover/step_three',
+              'api/user/password/recover/reset',
               queryParameters: queryParameters,
               data: _data,
             )

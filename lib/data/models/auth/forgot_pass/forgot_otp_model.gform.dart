@@ -290,7 +290,7 @@ class ForgotOtpModelForm implements FormModel<ForgotOtpModel> {
   static FormGroup formElements(ForgotOtpModel? forgotOtpModel) => FormGroup({
         otpControlName: FormControl<String>(
             value: forgotOtpModel?.otp,
-            validators: [requiredValidator],
+            validators: [requiredValidator, length6Validator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

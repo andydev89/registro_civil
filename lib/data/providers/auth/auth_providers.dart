@@ -169,12 +169,12 @@ class ForgotPassword extends _$ForgotPassword {
   @override
   void build() {}
 
-  Future<Result<bool, StatusCodeType>> forgotPasswordStep1(
+  Future<Result<CommandModelNui, StatusCodeType>> forgotPasswordStep1(
     EnterNuiModel nui,
   ) async {
     final api = ref.watch(apiProvider);
     final response = await api.forgotPasswordSendOtp(nui);
-    if (response.success) return const Result.ok(true);
+    if (response.success) return Result.ok(response.data!);
     return Result.err(response.status);
   }
 

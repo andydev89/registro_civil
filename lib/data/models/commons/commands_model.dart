@@ -28,6 +28,7 @@ class CommandModelEmail with _$CommandModelEmail {
 class CommandModelNui with _$CommandModelNui {
   const factory CommandModelNui({
     required String nui,
+    required String email,
     required String command,
   }) = _CommandModelNui;
 

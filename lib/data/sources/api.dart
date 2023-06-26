@@ -18,7 +18,7 @@ abstract class Api {
     @Body() NuiModel nuiModel,
   );
 
-  @POST('api/user/password/recover/step_one')
+  @POST('api/user/password/recover/otp')
   Future<ResponseModel<CommandModelNui>> forgotPasswordSendOtp(
     @Body() EnterNuiModel nui,
   );
@@ -26,12 +26,12 @@ abstract class Api {
   @GET('/api/backoffice/user')
   Future<ResponseModel<List<MeModel>>> meByEmail(@Query('email') String email);
 
-  @POST('api/user/password/recover/step_two')
+  @POST('api/user/password/recover/validate')
   Future<ResponseModel<ValidOtpModel>> forgotPasswordVerifyOtp(
     @Body() ForgotOtpModel otp,
   );
 
-  @POST('api/user/password/recover/step_three')
+  @POST('api/user/password/recover/reset')
   Future<ResponseModel<CommandModel>> forgotPassword(
     @Body() ForgotConfirmPasswordModel confirmPasswordModel,
   );

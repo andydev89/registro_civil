@@ -52,12 +52,11 @@ class ForgotPasswordFirstPage extends ConsumerWidget {
                             .watch(forgotPasswordProvider.notifier)
                             .forgotPasswordStep1(form.model)
                             .when(
-                              ok: (_) => context.navigateTo(
+                              ok: (data) => context.navigateTo(
                                 ForgotPasswordOtpVerificationRoute(
-                                  command: 'REQUEST_OTP',
-                                  //todo: falta agregar el correo cuando el servicio del paso 1 lo retorne
-                                  email: '',
-                                  nui: form.nuiControl.value ?? ''
+                                  command: data.command,
+                                  email: data.email,
+                                  nui: form.nuiControl.value ?? '',
                                   // userId: (me as MeModel).id,
                                   // userId: '',
                                 ),

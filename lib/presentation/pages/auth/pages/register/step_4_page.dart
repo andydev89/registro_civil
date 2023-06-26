@@ -15,7 +15,9 @@ class Step4Page extends ConsumerWidget {
   const Step4Page({
     super.key,
     required this.command,
+    required this.email,
   });
+  final String email;
   final String command;
 
   @override
@@ -46,7 +48,7 @@ class Step4Page extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: PrimaryText(
-                      l10n.terminosCondiciones,
+                      l10n.terminosCondiciones(email),
                       color: Colors.white,
                     ),
                   ),

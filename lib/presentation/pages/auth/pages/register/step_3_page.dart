@@ -109,10 +109,14 @@ class Step3Page extends ConsumerWidget {
                           .registerData(form.model)
                           .when(
                             ok: (result) {
-                              ref.read(stepperIndexProvider.notifier)
-                              .increment();
+                              ref
+                                  .read(stepperIndexProvider.notifier)
+                                  .increment();
                               context.navigateTo(
-                                Step4Route(command: result.command),
+                                Step4Route(
+                                  command: result.command,
+                                  email: form.emailControl.value ?? '',
+                                ),
                               );
                             },
                             err: (error) => showAlert(

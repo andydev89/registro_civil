@@ -330,6 +330,7 @@ CommandModelNui _$CommandModelNuiFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CommandModelNui {
   String get nui => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   String get command => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -344,7 +345,7 @@ abstract class $CommandModelNuiCopyWith<$Res> {
           CommandModelNui value, $Res Function(CommandModelNui) then) =
       _$CommandModelNuiCopyWithImpl<$Res, CommandModelNui>;
   @useResult
-  $Res call({String nui, String command});
+  $Res call({String nui, String email, String command});
 }
 
 /// @nodoc
@@ -361,12 +362,17 @@ class _$CommandModelNuiCopyWithImpl<$Res, $Val extends CommandModelNui>
   @override
   $Res call({
     Object? nui = null,
+    Object? email = null,
     Object? command = null,
   }) {
     return _then(_value.copyWith(
       nui: null == nui
           ? _value.nui
           : nui // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       command: null == command
           ? _value.command
@@ -384,7 +390,7 @@ abstract class _$$_CommandModelNuiCopyWith<$Res>
       __$$_CommandModelNuiCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String nui, String command});
+  $Res call({String nui, String email, String command});
 }
 
 /// @nodoc
@@ -399,12 +405,17 @@ class __$$_CommandModelNuiCopyWithImpl<$Res>
   @override
   $Res call({
     Object? nui = null,
+    Object? email = null,
     Object? command = null,
   }) {
     return _then(_$_CommandModelNui(
       nui: null == nui
           ? _value.nui
           : nui // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       command: null == command
           ? _value.command
@@ -417,7 +428,8 @@ class __$$_CommandModelNuiCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_CommandModelNui implements _CommandModelNui {
-  const _$_CommandModelNui({required this.nui, required this.command});
+  const _$_CommandModelNui(
+      {required this.nui, required this.email, required this.command});
 
   factory _$_CommandModelNui.fromJson(Map<String, dynamic> json) =>
       _$$_CommandModelNuiFromJson(json);
@@ -425,11 +437,13 @@ class _$_CommandModelNui implements _CommandModelNui {
   @override
   final String nui;
   @override
+  final String email;
+  @override
   final String command;
 
   @override
   String toString() {
-    return 'CommandModelNui(nui: $nui, command: $command)';
+    return 'CommandModelNui(nui: $nui, email: $email, command: $command)';
   }
 
   @override
@@ -438,12 +452,13 @@ class _$_CommandModelNui implements _CommandModelNui {
         (other.runtimeType == runtimeType &&
             other is _$_CommandModelNui &&
             (identical(other.nui, nui) || other.nui == nui) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.command, command) || other.command == command));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, nui, command);
+  int get hashCode => Object.hash(runtimeType, nui, email, command);
 
   @JsonKey(ignore: true)
   @override
@@ -462,6 +477,7 @@ class _$_CommandModelNui implements _CommandModelNui {
 abstract class _CommandModelNui implements CommandModelNui {
   const factory _CommandModelNui(
       {required final String nui,
+      required final String email,
       required final String command}) = _$_CommandModelNui;
 
   factory _CommandModelNui.fromJson(Map<String, dynamic> json) =
@@ -469,6 +485,8 @@ abstract class _CommandModelNui implements CommandModelNui {
 
   @override
   String get nui;
+  @override
+  String get email;
   @override
   String get command;
   @override

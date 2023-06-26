@@ -48,7 +48,7 @@ class ForgotPasswordOtpVerificationPage extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: PrimaryText(
-                    l10n.terminosCondiciones,
+                    l10n.terminosCondiciones(email),
                     color: Colors.white,
                   ),
                 ),
@@ -108,12 +108,21 @@ class ForgotPasswordOtpVerificationPage extends ConsumerWidget {
                               ),
                             )
                             .when(
-                              ok: (_) => context.navigateTo(
-                                ForgotPasswordSecondRoute(
-                                  nui: nui,
-                                  otp: form.otpControl.value ?? '',
-                                ),
-                              ),
+                              ok: (data) {
+                                if (data.valid) {
+                                  context.navigateTo(
+                                    ForgotPasswordSecondRoute(
+                                      nui: nui,
+                                      otp: form.otpControl.value ?? '',
+                                    ),
+                                  );
+                                } else {
+                                  showAlert(
+                                    l10n.invalidCode,
+                                    TypeAlert.error,
+                                  );
+                                }
+                              },
                               err: (err) => showAlert(
                                 err.translate(context),
                                 TypeAlert.error,
