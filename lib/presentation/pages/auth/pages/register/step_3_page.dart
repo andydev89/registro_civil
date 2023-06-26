@@ -76,6 +76,7 @@ class Step3Page extends ConsumerWidget {
                         ligth: true,
                         formControl: form.phoneControl,
                         hintText: l10n.telefonoCel,
+                        keyboardType: TextInputType.phone,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(10),
