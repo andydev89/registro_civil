@@ -4,7 +4,7 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/models/auth/auth.dart';
-import 'package:registro_civil_apk/data/models/auth/enter_email_model.dart';
+import 'package:registro_civil_apk/data/models/auth/enter_nui_model.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -19,7 +19,7 @@ class ForgotPasswordFirstPage extends ConsumerWidget {
     final l10n = context.l10n;
     return TranslucentCard(
       scrollContentOnResized: true,
-      child: EnterEmailModelFormBuilder(
+      child: EnterNuiModelFormBuilder(
         builder: (_, form, __) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -29,24 +29,24 @@ class ForgotPasswordFirstPage extends ConsumerWidget {
                 color: Colors.white,
               ),
               PrimaryText(
-                l10n.ingreseCorreo,
+                l10n.ingreseNui,
                 color: Colors.white,
               ),
               const SizedBox(
                 height: 5,
               ),
-              PrimaryReactiveEmailField(
-                formControl: form.emailControl,
-                hintText: l10n.correoE,
+              PrimaryReactiveNuiField(
+                formControl: form.nuiControl,
+                hintText: l10n.numCedula,
                 ligth: true,
               ),
               const SizedBox(
                 height: 5,
               ),
-              ReactiveEnterEmailModelFormConsumer(
+              ReactiveEnterNuiModelFormConsumer(
                 builder: (_, form, __) {
                   return PrimaryAsyncButton(
-                    title: l10n.enviarCorreo,
+                    title: l10n.continuar,
                     onPressed: form.form.valid
                         ? () => ref
                             .watch(forgotPasswordProvider.notifier)
@@ -54,8 +54,10 @@ class ForgotPasswordFirstPage extends ConsumerWidget {
                             .when(
                               ok: (_) => context.navigateTo(
                                 ForgotPasswordOtpVerificationRoute(
-                                  command: 'RECOVER_LOST_PASSWORD',
-                                  email: form.emailControl.value ?? '',
+                                  command: 'REQUEST_OTP',
+                                  //todo: falta agregar el correo cuando el servicio del paso 1 lo retorne
+                                  email: '',
+                                  nui: form.nuiControl.value ?? ''
                                   // userId: (me as MeModel).id,
                                   // userId: '',
                                 ),

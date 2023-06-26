@@ -10,15 +10,16 @@ part 'forgot_otp_model.gform.dart';
 @JsonSerializable()
 class ForgotOtpModel {
   ForgotOtpModel({
-    @FormControlAnnotation(validators: [requiredValidator]) this.otp = '',
-    this.userId,
+    @FormControlAnnotation(validators: [requiredValidator, length6Validator])
+        this.otp = '',
+    this.nui,
   });
 
   factory ForgotOtpModel.fromJson(Map<String, dynamic> json) =>
       _$ForgotOtpModelFromJson(json);
 
   final String otp;
-  String? userId;
+  final String? nui;
 
   Map<String, dynamic> toJson() => _$ForgotOtpModelToJson(this);
 }
@@ -41,25 +42,26 @@ class ValidOtpModel {
     validators: [passwordsMustMatch])
 class ForgotConfirmPasswordModel {
   ForgotConfirmPasswordModel({
-    this.userId = '',
     @FormControlAnnotation(validators: [requiredValidator, passwordValidator])
         this.newPassword = '',
     @FormControlAnnotation(validators: [requiredValidator])
         this.confirmPassword = '',
+    this.nui,
+    this.otp,
   });
 
   factory ForgotConfirmPasswordModel.fromJson(Map<String, dynamic> json) =>
       _$ForgotConfirmPasswordModelFromJson(json);
 
-  String? userId;
   final String newPassword;
   final String confirmPassword;
+  final String? nui;
+  final String? otp;
 
   // Map<String, dynamic> toJson() => _$ForgotConfirmPasswordModelToJson(this);
   Map<String, dynamic> toJson() {
     final data = _$ForgotConfirmPasswordModelToJson(this);
-    data['passwordOne'] = data['newPassword'];
-    data['passwordTwo'] = data['confirmPassword'];
+    data['password'] = data['newPassword'];
     data
       ..remove('newPassword')
       ..remove('confirmPassword');

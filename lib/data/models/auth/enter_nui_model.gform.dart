@@ -3,14 +3,14 @@
 // ignore_for_file: type=lint
 // ignore_for_file:
 
-part of 'enter_email_model.dart';
+part of 'enter_nui_model.dart';
 
 // **************************************************************************
 // ReactiveFormsGenerator
 // **************************************************************************
 
-class ReactiveEnterEmailModelFormConsumer extends StatelessWidget {
-  const ReactiveEnterEmailModelFormConsumer({
+class ReactiveEnterNuiModelFormConsumer extends StatelessWidget {
+  const ReactiveEnterNuiModelFormConsumer({
     Key? key,
     required this.builder,
     this.child,
@@ -19,22 +19,21 @@ class ReactiveEnterEmailModelFormConsumer extends StatelessWidget {
   final Widget? child;
 
   final Widget Function(
-          BuildContext context, EnterEmailModelForm formModel, Widget? child)
-      builder;
+      BuildContext context, EnterNuiModelForm formModel, Widget? child) builder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveEnterEmailModelForm.of(context);
+    final formModel = ReactiveEnterNuiModelForm.of(context);
 
-    if (formModel is! EnterEmailModelForm) {
+    if (formModel is! EnterNuiModelForm) {
       throw FormControlParentNotFoundException(this);
     }
     return builder(context, formModel, child);
   }
 }
 
-class EnterEmailModelFormInheritedStreamer extends InheritedStreamer<dynamic> {
-  const EnterEmailModelFormInheritedStreamer({
+class EnterNuiModelFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const EnterNuiModelFormInheritedStreamer({
     Key? key,
     required this.form,
     required Stream<dynamic> stream,
@@ -45,11 +44,11 @@ class EnterEmailModelFormInheritedStreamer extends InheritedStreamer<dynamic> {
           key: key,
         );
 
-  final EnterEmailModelForm form;
+  final EnterNuiModelForm form;
 }
 
-class ReactiveEnterEmailModelForm extends StatelessWidget {
-  const ReactiveEnterEmailModelForm({
+class ReactiveEnterNuiModelForm extends StatelessWidget {
+  const ReactiveEnterNuiModelForm({
     Key? key,
     required this.form,
     required this.child,
@@ -58,31 +57,31 @@ class ReactiveEnterEmailModelForm extends StatelessWidget {
 
   final Widget child;
 
-  final EnterEmailModelForm form;
+  final EnterNuiModelForm form;
 
   final WillPopCallback? onWillPop;
 
-  static EnterEmailModelForm? of(
+  static EnterNuiModelForm? of(
     BuildContext context, {
     bool listen = true,
   }) {
     if (listen) {
       return context
           .dependOnInheritedWidgetOfExactType<
-              EnterEmailModelFormInheritedStreamer>()
+              EnterNuiModelFormInheritedStreamer>()
           ?.form;
     }
 
     final element = context.getElementForInheritedWidgetOfExactType<
-        EnterEmailModelFormInheritedStreamer>();
+        EnterNuiModelFormInheritedStreamer>();
     return element == null
         ? null
-        : (element.widget as EnterEmailModelFormInheritedStreamer).form;
+        : (element.widget as EnterNuiModelFormInheritedStreamer).form;
   }
 
   @override
   Widget build(BuildContext context) {
-    return EnterEmailModelFormInheritedStreamer(
+    return EnterNuiModelFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
       child: WillPopScope(
@@ -93,8 +92,8 @@ class ReactiveEnterEmailModelForm extends StatelessWidget {
   }
 }
 
-class EnterEmailModelFormBuilder extends StatefulWidget {
-  const EnterEmailModelFormBuilder({
+class EnterNuiModelFormBuilder extends StatefulWidget {
+  const EnterNuiModelFormBuilder({
     Key? key,
     this.model,
     this.child,
@@ -103,32 +102,30 @@ class EnterEmailModelFormBuilder extends StatefulWidget {
     this.initState,
   }) : super(key: key);
 
-  final EnterEmailModel? model;
+  final EnterNuiModel? model;
 
   final Widget? child;
 
   final WillPopCallback? onWillPop;
 
   final Widget Function(
-          BuildContext context, EnterEmailModelForm formModel, Widget? child)
-      builder;
+      BuildContext context, EnterNuiModelForm formModel, Widget? child) builder;
 
-  final void Function(BuildContext context, EnterEmailModelForm formModel)?
+  final void Function(BuildContext context, EnterNuiModelForm formModel)?
       initState;
 
   @override
-  _EnterEmailModelFormBuilderState createState() =>
-      _EnterEmailModelFormBuilderState();
+  _EnterNuiModelFormBuilderState createState() =>
+      _EnterNuiModelFormBuilderState();
 }
 
-class _EnterEmailModelFormBuilderState
-    extends State<EnterEmailModelFormBuilder> {
-  late EnterEmailModelForm _formModel;
+class _EnterNuiModelFormBuilderState extends State<EnterNuiModelFormBuilder> {
+  late EnterNuiModelForm _formModel;
 
   @override
   void initState() {
-    _formModel = EnterEmailModelForm(
-        widget.model, EnterEmailModelForm.formElements(widget.model), null);
+    _formModel = EnterNuiModelForm(
+        widget.model, EnterNuiModelForm.formElements(widget.model), null);
 
     if (_formModel.form.disabled) {
       _formModel.form.markAsDisabled();
@@ -140,10 +137,10 @@ class _EnterEmailModelFormBuilderState
   }
 
   @override
-  void didUpdateWidget(covariant EnterEmailModelFormBuilder oldWidget) {
+  void didUpdateWidget(covariant EnterNuiModelFormBuilder oldWidget) {
     if (widget.model != oldWidget.model) {
-      _formModel = EnterEmailModelForm(
-          widget.model, EnterEmailModelForm.formElements(widget.model), null);
+      _formModel = EnterNuiModelForm(
+          widget.model, EnterNuiModelForm.formElements(widget.model), null);
 
       if (_formModel.form.disabled) {
         _formModel.form.markAsDisabled();
@@ -163,7 +160,7 @@ class _EnterEmailModelFormBuilderState
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveEnterEmailModelForm(
+    return ReactiveEnterNuiModelForm(
       key: ObjectKey(_formModel),
       form: _formModel,
       onWillPop: widget.onWillPop,
@@ -178,75 +175,75 @@ class _EnterEmailModelFormBuilderState
   }
 }
 
-class EnterEmailModelForm implements FormModel<EnterEmailModel> {
-  EnterEmailModelForm(
-    this.enterEmailModel,
+class EnterNuiModelForm implements FormModel<EnterNuiModel> {
+  EnterNuiModelForm(
+    this.enterNuiModel,
     this.form,
     this.path,
   ) {}
 
-  static const String emailControlName = "email";
+  static const String nuiControlName = "nui";
 
-  final EnterEmailModel? enterEmailModel;
+  final EnterNuiModel? enterNuiModel;
 
   final FormGroup form;
 
   final String? path;
 
-  String emailControlPath() => pathBuilder(emailControlName);
-  String get _emailValue => emailControl.value as String;
-  bool get containsEmail {
+  String nuiControlPath() => pathBuilder(nuiControlName);
+  String get _nuiValue => nuiControl.value as String;
+  bool get containsNui {
     try {
-      form.control(emailControlPath());
+      form.control(nuiControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  Object? get emailErrors => emailControl.errors;
-  void get emailFocus => form.focus(emailControlPath());
-  void emailValueUpdate(
+  Object? get nuiErrors => nuiControl.errors;
+  void get nuiFocus => form.focus(nuiControlPath());
+  void nuiValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.updateValue(value,
+    nuiControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailValuePatch(
+  void nuiValuePatch(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    emailControl.patchValue(value,
+    nuiControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void emailValueReset(
+  void nuiValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      emailControl.reset(
+      nuiControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get emailControl =>
-      form.control(emailControlPath()) as FormControl<String>;
-  void emailSetDisabled(
+  FormControl<String> get nuiControl =>
+      form.control(nuiControlPath()) as FormControl<String>;
+  void nuiSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      emailControl.markAsDisabled(
+      nuiControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      emailControl.markAsEnabled(
+      nuiControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -254,31 +251,31 @@ class EnterEmailModelForm implements FormModel<EnterEmailModel> {
   }
 
   @override
-  EnterEmailModel get model {
+  EnterNuiModel get model {
     final currentForm = path == null ? form : form.control(path!);
 
     if (!currentForm.valid) {
       debugPrint(
-          '[${path ?? 'EnterEmailModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+          '[${path ?? 'EnterNuiModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
-    return EnterEmailModel(email: _emailValue);
+    return EnterNuiModel(nui: _nuiValue);
   }
 
-  EnterEmailModelForm copyWithPath(String? path) {
-    return EnterEmailModelForm(enterEmailModel, form, path);
+  EnterNuiModelForm copyWithPath(String? path) {
+    return EnterNuiModelForm(enterNuiModel, form, path);
   }
 
   @override
   void updateValue(
-    EnterEmailModel value, {
+    EnterNuiModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
-      form.updateValue(EnterEmailModelForm.formElements(value).rawValue,
+      form.updateValue(EnterNuiModelForm.formElements(value).rawValue,
           updateParent: updateParent, emitEvent: emitEvent);
   @override
   void reset({
-    EnterEmailModel? value,
+    EnterNuiModel? value,
     bool updateParent = true,
     bool emitEvent = true,
   }) =>
@@ -288,10 +285,14 @@ class EnterEmailModelForm implements FormModel<EnterEmailModel> {
           emitEvent: emitEvent);
   String pathBuilder(String? pathItem) =>
       [path, pathItem].whereType<String>().join(".");
-  static FormGroup formElements(EnterEmailModel? enterEmailModel) => FormGroup({
-        emailControlName: FormControl<String>(
-            value: enterEmailModel?.email,
-            validators: [requiredValidator, emailValidator],
+  static FormGroup formElements(EnterNuiModel? enterNuiModel) => FormGroup({
+        nuiControlName: FormControl<String>(
+            value: enterNuiModel?.nui,
+            validators: [
+              requiredValidator,
+              ecuadorDniValidator,
+              length10Validator
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -303,8 +304,8 @@ class EnterEmailModelForm implements FormModel<EnterEmailModel> {
           disabled: false);
 }
 
-class ReactiveEnterEmailModelFormArrayBuilder<T> extends StatelessWidget {
-  const ReactiveEnterEmailModelFormArrayBuilder({
+class ReactiveEnterNuiModelFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveEnterNuiModelFormArrayBuilder({
     Key? key,
     this.control,
     this.formControl,
@@ -316,18 +317,18 @@ class ReactiveEnterEmailModelFormArrayBuilder<T> extends StatelessWidget {
 
   final FormArray<T>? formControl;
 
-  final FormArray<T>? Function(EnterEmailModelForm formModel)? control;
+  final FormArray<T>? Function(EnterNuiModelForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
-      EnterEmailModelForm formModel)? builder;
+      EnterNuiModelForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, EnterEmailModelForm formModel)
+          BuildContext context, int i, T? item, EnterNuiModelForm formModel)
       itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveEnterEmailModelForm.of(context);
+    final formModel = ReactiveEnterNuiModelForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
@@ -363,9 +364,9 @@ class ReactiveEnterEmailModelFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveEnterEmailModelFormFormGroupArrayBuilder<V>
+class ReactiveEnterNuiModelFormFormGroupArrayBuilder<V>
     extends StatelessWidget {
-  const ReactiveEnterEmailModelFormFormGroupArrayBuilder({
+  const ReactiveEnterNuiModelFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
     this.getExtended,
@@ -378,18 +379,18 @@ class ReactiveEnterEmailModelFormFormGroupArrayBuilder<V>
   final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
 
   final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
-      EnterEmailModelForm formModel)? getExtended;
+      EnterNuiModelForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
-      EnterEmailModelForm formModel)? builder;
+      EnterNuiModelForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, V? item, EnterEmailModelForm formModel)
+          BuildContext context, int i, V? item, EnterNuiModelForm formModel)
       itemBuilder;
 
   @override
   Widget build(BuildContext context) {
-    final formModel = ReactiveEnterEmailModelForm.of(context);
+    final formModel = ReactiveEnterNuiModelForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);

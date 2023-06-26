@@ -5,6 +5,7 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:oxidized/oxidized.dart';
+import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/data/models/auth/auth.dart';
 import 'package:registro_civil_apk/data/providers/auth/auth.dart';
@@ -13,45 +14,20 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
-class ForgotPasswordOtpVerificationPage extends ConsumerStatefulWidget {
+class ForgotPasswordOtpVerificationPage extends ConsumerWidget {
   const ForgotPasswordOtpVerificationPage({
     super.key,
     required this.command,
-    required this.email,
+    required this.nui,
+    this.email = '',
   });
 
   final String email;
   final String command;
+  final String nui;
 
   @override
-  ConsumerState<ForgotPasswordOtpVerificationPage> createState() =>
-      _ForgotPasswordOtpVerificationPageState();
-}
-
-class _ForgotPasswordOtpVerificationPageState
-    extends ConsumerState<ForgotPasswordOtpVerificationPage> {
-  MeModel? me;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchMeByEmail();
-  }
-
-  void _fetchMeByEmail() {
-    ref.read(forgotPasswordProvider.notifier).meByEmail(widget.email).when(
-          ok: (MeModel result) {
-            me = result;
-          },
-          err: (err) => showAlert(
-            err.translate(context),
-            TypeAlert.error,
-          ),
-        );
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return ForgotOtpModelFormBuilder(
       builder: (_, form, __) {
@@ -121,37 +97,21 @@ class _ForgotPasswordOtpVerificationPageState
             builder: (_, form, __) {
               return PrimaryAsyncButton(
                 title: l10n.siguiente,
-                onPressed: form.form.valid
+                onPressed: form.form.valid && form.otpControl.value?.length == 6
                     ? () async {
-                        if (me == null || me!.id.isEmpty) {
-                          await ref
-                              .watch(forgotPasswordProvider.notifier)
-                              .meByEmail(widget.email)
-                              .when(
-                            ok: (MeModel result) {
-                              me = result;
-                            },
-                            err: (err) {
-                              showAlert(
-                                err.translate(context),
-                                TypeAlert.error,
-                              );
-                              return;
-                            },
-                          );
-                        }
                         await ref
                             .read(forgotPasswordProvider.notifier)
                             .forgotPasswordStep2(
                               ForgotOtpModel(
-                                userId: me!.id,
+                                nui: nui,
                                 otp: form.model.otp,
                               ),
                             )
                             .when(
                               ok: (_) => context.navigateTo(
                                 ForgotPasswordSecondRoute(
-                                  userId: me!.id,
+                                  nui: nui,
+                                  otp: form.otpControl.value ?? '',
                                 ),
                               ),
                               err: (err) => showAlert(
@@ -164,7 +124,7 @@ class _ForgotPasswordOtpVerificationPageState
               );
             },
           ),
-        );
+        ).horizontalPadding(10);
       },
     );
   }

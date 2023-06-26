@@ -180,6 +180,7 @@ class _$AppRouter extends RootStackRouter {
         child: ForgotPasswordOtpVerificationPage(
           key: args.key,
           command: args.command,
+          nui: args.nui,
           email: args.email,
         ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
@@ -193,7 +194,8 @@ class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: ForgotPasswordSecondPage(
           key: args.key,
-          userId: args.userId,
+          nui: args.nui,
+          otp: args.otp,
         ),
         transitionsBuilder: TransitionsBuilders.slideLeft,
         opaque: true,
@@ -1593,13 +1595,15 @@ class ForgotPasswordOtpVerificationRoute
   ForgotPasswordOtpVerificationRoute({
     Key? key,
     required String command,
-    required String email,
+    required String nui,
+    String email = '',
   }) : super(
           ForgotPasswordOtpVerificationRoute.name,
           path: 'forgot-password-otp-verification-page',
           args: ForgotPasswordOtpVerificationRouteArgs(
             key: key,
             command: command,
+            nui: nui,
             email: email,
           ),
         );
@@ -1611,18 +1615,21 @@ class ForgotPasswordOtpVerificationRouteArgs {
   const ForgotPasswordOtpVerificationRouteArgs({
     this.key,
     required this.command,
-    required this.email,
+    required this.nui,
+    this.email = '',
   });
 
   final Key? key;
 
   final String command;
 
+  final String nui;
+
   final String email;
 
   @override
   String toString() {
-    return 'ForgotPasswordOtpVerificationRouteArgs{key: $key, command: $command, email: $email}';
+    return 'ForgotPasswordOtpVerificationRouteArgs{key: $key, command: $command, nui: $nui, email: $email}';
   }
 }
 
@@ -1632,13 +1639,15 @@ class ForgotPasswordSecondRoute
     extends PageRouteInfo<ForgotPasswordSecondRouteArgs> {
   ForgotPasswordSecondRoute({
     Key? key,
-    required String userId,
+    required String nui,
+    required String otp,
   }) : super(
           ForgotPasswordSecondRoute.name,
           path: 'forgot-password-second-page',
           args: ForgotPasswordSecondRouteArgs(
             key: key,
-            userId: userId,
+            nui: nui,
+            otp: otp,
           ),
         );
 
@@ -1648,16 +1657,19 @@ class ForgotPasswordSecondRoute
 class ForgotPasswordSecondRouteArgs {
   const ForgotPasswordSecondRouteArgs({
     this.key,
-    required this.userId,
+    required this.nui,
+    required this.otp,
   });
 
   final Key? key;
 
-  final String userId;
+  final String nui;
+
+  final String otp;
 
   @override
   String toString() {
-    return 'ForgotPasswordSecondRouteArgs{key: $key, userId: $userId}';
+    return 'ForgotPasswordSecondRouteArgs{key: $key, nui: $nui, otp: $otp}';
   }
 }
 

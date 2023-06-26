@@ -19,8 +19,8 @@ abstract class Api {
   );
 
   @POST('api/user/password/recover/step_one')
-  Future<ResponseModel<CommandModelEmail>> forgotPasswordSendOtp(
-    @Body() EnterEmailModel email,
+  Future<ResponseModel<CommandModelNui>> forgotPasswordSendOtp(
+    @Body() EnterNuiModel nui,
   );
 
   @GET('/api/backoffice/user')

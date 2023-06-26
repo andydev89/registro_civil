@@ -5,17 +5,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/models/auth/auth.dart';
-import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/providers/auth/auth.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
-import 'package:registro_civil_apk/data/providers/auth/auth.dart';
-import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 
 class ForgotPasswordSecondPage extends ConsumerWidget {
-  const ForgotPasswordSecondPage({super.key, required this.userId});
+  const ForgotPasswordSecondPage({
+    super.key,
+    required this.nui,
+    required this.otp,
+  });
 
-  final String userId;
+  final String nui;
+  final String otp;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -58,25 +62,25 @@ class ForgotPasswordSecondPage extends ConsumerWidget {
                   return PrimaryAsyncButton(
                     title: l10n.cambiarContrasena,
                     onPressed: form.form.valid
-                        ? () =>
-                            ref
-                                .read(forgotPasswordProvider.notifier)
-                                .forgotPasswordStep3(
-                                  ForgotConfirmPasswordModel(
-                                    userId: userId,
-                                    confirmPassword: form.model.confirmPassword,
-                                    newPassword: form.model.newPassword,
-                                  ),
-                                )
-                                .when(
-                                  ok: (_) => context.replaceRoute(
-                                    SuccessRoute(title: l10n.cambioClaveOk),
-                                  ),
-                                  err: (err) => showAlert(
-                                    err.translate(context),
-                                    TypeAlert.error,
-                                  ),
-                                )
+                        ? () => ref
+                            .read(forgotPasswordProvider.notifier)
+                            .forgotPasswordStep3(
+                              ForgotConfirmPasswordModel(
+                                nui: nui,
+                                otp: otp,
+                                confirmPassword: form.model.confirmPassword,
+                                newPassword: form.model.newPassword,
+                              ),
+                            )
+                            .when(
+                              ok: (_) => context.replaceRoute(
+                                SuccessRoute(title: l10n.cambioClaveOk),
+                              ),
+                              err: (err) => showAlert(
+                                err.translate(context),
+                                TypeAlert.error,
+                              ),
+                            )
                         : null,
                   );
                 },

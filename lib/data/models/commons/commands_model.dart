@@ -25,6 +25,17 @@ class CommandModelEmail with _$CommandModelEmail {
 }
 
 @freezed
+class CommandModelNui with _$CommandModelNui {
+  const factory CommandModelNui({
+    required String nui,
+    required String command,
+  }) = _CommandModelNui;
+
+  factory CommandModelNui.fromJson(Map<String, dynamic> json) =>
+      _$CommandModelNuiFromJson(json);
+}
+
+@freezed
 class CommandWithTransactionCodeModel with _$CommandWithTransactionCodeModel {
   const factory CommandWithTransactionCodeModel({
     required String? id,

@@ -31,6 +31,18 @@ Map<String, dynamic> _$$_CommandModelEmailToJson(
       'command': instance.command,
     };
 
+_$_CommandModelNui _$$_CommandModelNuiFromJson(Map<String, dynamic> json) =>
+    _$_CommandModelNui(
+      nui: json['nui'] as String,
+      command: json['command'] as String,
+    );
+
+Map<String, dynamic> _$$_CommandModelNuiToJson(_$_CommandModelNui instance) =>
+    <String, dynamic>{
+      'nui': instance.nui,
+      'command': instance.command,
+    };
+
 _$_CommandWithTransactionCodeModel _$$_CommandWithTransactionCodeModelFromJson(
         Map<String, dynamic> json) =>
     _$_CommandWithTransactionCodeModel(

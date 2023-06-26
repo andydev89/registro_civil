@@ -260,7 +260,7 @@ class ForgotOtpModelForm implements FormModel<ForgotOtpModel> {
       debugPrint(
           '[${path ?? 'ForgotOtpModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
-    return ForgotOtpModel(otp: _otpValue, userId: forgotOtpModel?.userId);
+    return ForgotOtpModel(otp: _otpValue, nui: forgotOtpModel?.nui);
   }
 
   ForgotOtpModelForm copyWithPath(String? path) {
@@ -743,9 +743,10 @@ class ForgotConfirmPasswordModelForm
           '[${path ?? 'ForgotConfirmPasswordModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return ForgotConfirmPasswordModel(
-        userId: forgotConfirmPasswordModel?.userId,
         newPassword: _newPasswordValue,
-        confirmPassword: _confirmPasswordValue);
+        confirmPassword: _confirmPasswordValue,
+        nui: forgotConfirmPasswordModel?.nui,
+        otp: forgotConfirmPasswordModel?.otp);
   }
 
   ForgotConfirmPasswordModelForm copyWithPath(String? path) {

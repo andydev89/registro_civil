@@ -70,14 +70,14 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModel<CommandModelEmail>> forgotPasswordSendOtp(
-      EnterEmailModel email) async {
+  Future<ResponseModel<CommandModelNui>> forgotPasswordSendOtp(
+      EnterNuiModel nui) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = email;
+    final _data = nui;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModel<CommandModelEmail>>(Options(
+        _setStreamType<ResponseModel<CommandModelNui>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -89,9 +89,9 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModel<CommandModelEmail>.fromJson(
+    final value = ResponseModel<CommandModelNui>.fromJson(
       _result.data!,
-      (json) => CommandModelEmail.fromJson(json as Map<String, dynamic>),
+      (json) => CommandModelNui.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }

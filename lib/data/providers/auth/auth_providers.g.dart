@@ -234,7 +234,7 @@ final citizenProvider =
 );
 
 typedef _$Citizen = AutoDisposeNotifier<CitizenModel>;
-String _$forgotPasswordHash() => r'da6fba82591f2193b1802677abb6a54dab106ccf';
+String _$forgotPasswordHash() => r'ab27ef900baa00759d1036c48ca31558bf1c4a82';
 
 /// See also [ForgotPassword].
 @ProviderFor(ForgotPassword)
