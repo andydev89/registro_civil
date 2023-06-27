@@ -94,6 +94,7 @@ const _$StatusCodeTypeEnumMap = {
   StatusCodeType.s642: 642,
   StatusCodeType.s643: 643,
   StatusCodeType.s644: 644,
+  StatusCodeType.s780: 780,
   StatusCodeType.s680: 680,
   StatusCodeType.s681: 681,
   StatusCodeType.s682: 682,

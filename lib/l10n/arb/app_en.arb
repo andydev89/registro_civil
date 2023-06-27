@@ -293,6 +293,7 @@
   "s740": "Only one receipt by owner",
   "s757": "Duplicate identity card name resource not found",
   "s762": "Failed response to connect the suri server or nui not exist",
+  "s780": "User has registered before",
   "nombre": "Name",
   "apellidos": "Last name",
   "direccion": "Address",

@@ -259,7 +259,7 @@ abstract class Api {
 
   //PLACE TO PAY PAYMENT
   @POST(
-    'https://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions',
+    'https://payment.registro-civil.ddns.net/placetopay/b00324f9-a966-408b-866c-fa6cc99c16b9/transactions',
   )
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
     @Body() PlaceToPayModel placeToPayModel,

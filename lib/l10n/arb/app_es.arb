@@ -271,6 +271,7 @@
   "s740": "Solo un turno por propietario",
   "s757": "Nombre de duplicado de cédula no encontrado",
   "s762": "Respuesta fallida para conectar el servidor suri o nui inexistente",
+  "s780": "El usuario se ha registrado antes",
   "nombre": "Nombre",
   "apellidos": "Apellidos",
   "direccion": "Dirección",
