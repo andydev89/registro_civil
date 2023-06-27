@@ -15,7 +15,7 @@ UserScheduleModel _$UserScheduleModelFromJson(Map<String, dynamic> json) =>
       state: $enumDecode(_$StateEnumEnumMap, json['state']),
       paymentType: $enumDecode(_$PaymentMethodTypeEnumMap, json['paymentType']),
       ownerIdentification: json['ownerIdentification'] as String,
-      ownerFullName: json['ownerFullName'] as String,
+      ownerFullName: json['ownerFullName'] as String?,
       time: const TimeOfDayConverter().fromJson(json['time'] as String),
       userId: json['user'] as String,
       schedule:

@@ -259,14 +259,14 @@ abstract class Api {
 
   //PLACE TO PAY PAYMENT
   @POST(
-    'https://payment.registro-civil.ddns.net/placetopay/b00324f9-a966-408b-866c-fa6cc99c16b9/transactions',
+    'https://payment.sourcecodesas.com/placetopay/833f470c-97d2-4145-ab9a-79b9d79ed11c/transactions',
   )
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
     @Body() PlaceToPayModel placeToPayModel,
   );
 
   @GET(
-    'https://payment.registro-civil.ddns.net/placetopay/d592071c-8013-4320-a082-c88354b0ea6c/transactions/{reference}',
+    'https://payment.sourcecodesas.com/placetopay/833f470c-97d2-4145-ab9a-79b9d79ed11c/transactions/{reference}',
   )
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
     @Path('reference') String reference,

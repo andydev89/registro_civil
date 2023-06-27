@@ -31,7 +31,7 @@ Map<String, dynamic> _$ReceiptModelToJson(ReceiptModel instance) =>
 
 const _$ProcedureTypeEnumMap = {
   ProcedureType.personal: 'PERSONAL',
-  ProcedureType.familiar: 'FAMILIAR',
+  ProcedureType.familiar: 'FAMILY',
 };
 
 const _$PaymentMethodTypeEnumMap = {

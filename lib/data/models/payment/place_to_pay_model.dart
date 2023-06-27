@@ -212,7 +212,10 @@ class Payment {
   @override
   String toString() => toJson().toString();
 
-  Map<String, dynamic> toJson() => _$PaymentToJson(this);
+  Map<String, dynamic> toJson() {
+    final truncatedServiceType = serviceType.substring(0, 22);
+    return _$PaymentToJson(this)..['ServiceType'] = truncatedServiceType;
+  }
 }
 
 @JsonSerializable()

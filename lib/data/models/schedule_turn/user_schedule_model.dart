@@ -26,7 +26,7 @@ class UserScheduleModel {
       _$UserScheduleModelFromJson(json);
 
   final String id;
-  final String ownerFullName;
+  final String? ownerFullName;
   final String ownerIdentification;
   final PaymentMethodType paymentType;
   final String receiptCode;
