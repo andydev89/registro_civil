@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
@@ -17,6 +18,7 @@ class ScheduleTurnFirstStepFamiliarPage extends ConsumerWidget {
     super.key,
     required this.typeOfService,
   });
+
   final TypeServiceModel typeOfService;
 
   @override
@@ -57,90 +59,114 @@ class ScheduleTurnFirstStepFamiliarPage extends ConsumerWidget {
                 ),
               ),
               // ignore: lines_longer_than_80_chars
-              // ignore: lines_longer_than_80_chars
               ReactiveScheduleTurnFirstStepFamiliarModelFormFormGroupArrayBuilder(
                 extended: formModel.familyExtendedControl,
-                itemBuilder: (context, i, item, formModel) => Row(
-                  children: [
-                    Expanded(
-                      child: Column(
+                itemBuilder: (context, i, item, formModel) {
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            PrimaryReactiveNuiField<String>(
+                              key: Key(
+                                item!.identificationNumberControl.hashCode
+                                    .toString(),
+                              ),
+                              formControl: item.identificationNumberControl,
+                              label: l10n.cedula,
+                              onChanged: (value) {
+                                if (item.relationshipApprovedControl?.value ??
+                                    false) {
+                                  item.relationshipApprovedControl
+                                      ?.updateValue(false);
+                                }
+                              },
+                            ),
+                            PrimaryReactiveDropdown<RelationshipType>(
+                              key: Key(
+                                item.relationshipControl.hashCode.toString(),
+                              ),
+                              formControl: item.relationshipControl,
+                              label: l10n.parentezco,
+                              items: RelationshipType.values,
+                              onChanged:
+                                  (FormControl<RelationshipType?> value) {
+                                if (item.relationshipApprovedControl!.value ??
+                                    false) {
+                                  item.relationshipApprovedControl
+                                      ?.updateValue(false);
+                                }
+                              },
+                            ),
+                          ],
+                        ).horizontalPadding(15),
+                      ),
+                      Column(
                         children: [
-                          PrimaryReactiveNuiField<String>(
-                            key: Key(
-                              item!.identificationNumberControl.hashCode
-                                  .toString(),
+                          PrimaryAsyncIconButton(
+                            icon: Assets.svg.starCheck.svg(
+                              width: 20,
+                              height: 20,
                             ),
-                            formControl: item.identificationNumberControl,
-                            label: l10n.cedula,
+                            onPressed: (item.identificationNumberControl
+                                            ?.valid ??
+                                        false) &&
+                                    (item.relationshipControl?.valid ?? false)
+                                ? () async {
+                                    final user =
+                                        await ref.read(meProvider.future);
+                                    final result = await ref.read(
+                                      checkRelationshipProvider(
+                                        firstNui: user.identification,
+                                        secondNui: item
+                                            .identificationNumberControl!
+                                            .value!,
+                                        relationship: item
+                                            .relationshipControl!.value!.toText,
+                                      ).future,
+                                    );
+                                    return result.when(
+                                      ok: (value) {
+                                        item.relationshipApprovedControl
+                                            ?.updateValue(
+                                          value.result,
+                                        );
+                                        if (!value.result) {
+                                          showAlert(
+                                            l10n.noExisteParentezco,
+                                            TypeAlert.error,
+                                          );
+                                        }
+                                      },
+                                      err: (error) {
+                                        showAlert(
+                                          error.translate(context),
+                                          TypeAlert.error,
+                                        );
+                                      },
+                                    );
+                                  }
+                                : null,
                           ),
-                          PrimaryReactiveDropdown<RelationshipType>(
-                            key: Key(
-                              item.relationshipControl.hashCode.toString(),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          PrimaryIconButton(
+                            icon: Assets.svg.trash.svg(
+                              width: 20,
+                              height: 20,
                             ),
-                            formControl: item.relationshipControl,
-                            label: l10n.parentezco,
-                            items: RelationshipType.values,
+                            onPressed: () {
+                              formModel.removeFamilyItemAtIndex(
+                                i,
+                              );
+                            },
                           ),
                         ],
-                      ).horizontalPadding(15),
-                    ),
-                    Column(
-                      children: [
-                        PrimaryAsyncIconButton(
-                          icon: Assets.svg.starCheck.svg(
-                            width: 20,
-                            height: 20,
-                          ),
-                          onPressed: (item.identificationNumberControl?.valid ??
-                                      false) &&
-                                  (item.relationshipControl?.valid ?? false)
-                              ? () async {
-                                  final user =
-                                      await ref.read(meProvider.future);
-                                  final result = await ref.read(
-                                    checkRelationshipProvider(
-                                      firstNui: user.identification,
-                                      secondNui: item
-                                          .identificationNumberControl!.value!,
-                                      relationship: item
-                                          .relationshipControl!.value!.toText,
-                                    ).future,
-                                  );
-                                  return result.when(
-                                    ok: (value) {
-                                      item.relationshipApprovedControl
-                                          ?.updateValue(
-                                        value.result,
-                                      );
-                                    },
-                                    err: (error) {
-                                      showAlert(
-                                        error.translate(context),
-                                        TypeAlert.error,
-                                      );
-                                    },
-                                  );
-                                }
-                              : null,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        PrimaryIconButton(
-                          icon: Assets.svg.trash.svg(
-                            width: 20,
-                            height: 20,
-                          ),
-                          onPressed: () {
-                            formModel.removeFamilyItemAtIndex(
-                              i,
-                            );
-                          },
-                        ),
-                      ],
-                    ).horizontalPadding(5),
-                  ],
-                ),
+                      ).horizontalPadding(5),
+                    ],
+                  );
+                },
               ),
               PaymentSelector(
                 label: l10n.seleccioneMetodoPago,

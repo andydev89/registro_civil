@@ -28,6 +28,7 @@ class PrimaryReactiveNuiField<T> extends ConsumerWidget {
     this.setSuffixIconConstraints = false,
     super.key,
     this.init = false,
+    this.onChanged,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
@@ -44,6 +45,7 @@ class PrimaryReactiveNuiField<T> extends ConsumerWidget {
   final bool setSuffixIconConstraints;
   final void Function(FormControl<T>)? onTap;
   final bool init;
+  final void Function(FormControl<T?>)? onChanged;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -76,6 +78,7 @@ class PrimaryReactiveNuiField<T> extends ConsumerWidget {
           cursorColor: ligth ? Colors.white : Colors.black,
           keyboardType: TextInputType.number,
           validationMessages: validationMessage(context),
+          onChanged: onChanged,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(10),

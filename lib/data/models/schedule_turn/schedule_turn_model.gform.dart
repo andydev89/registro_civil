@@ -1416,7 +1416,7 @@ class FamiliarFormModelForm implements FormModel<FamiliarFormModel> {
             touched: false),
         relationshipApprovedControlName: FormControl<bool>(
             value: familiarFormModel?.relationshipApproved,
-            validators: [requiredValidator],
+            validators: [requiredValidator, trueValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

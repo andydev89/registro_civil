@@ -172,6 +172,7 @@
   "hora": "Hour",
   "estado": "State",
   "parentezco": "Relationship",
+  "noExisteParentezco": "There is no relationship",
   "agendarTurnoParaMi": "Schedule appointment for me",
   "certificadoNacDes": "It is the document issued by the Civil Registry, which attests to the fact of birth, providing information on: names of the registered, date, place, sex and filiation of the registered. nIt can be requested by the citizen who owns the information or only for their relatives: Child under 18 years of age, Deceased parents, Spouse / Cohabitant legally constituted.",
   "certificadoMatDes": "It is the document issued by the Civil Registry, which attests to the act of marriage, providing information on: spouses, date and place of the act. It can be requested by the citizen who owns the information.",

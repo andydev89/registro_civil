@@ -44,7 +44,7 @@ class FamiliarFormModel {
     )
     this.identificationNumber,
     @FormControlAnnotation(validators: [requiredValidator]) this.relationship,
-    @FormControlAnnotation(validators: [requiredValidator])
+    @FormControlAnnotation(validators: [requiredValidator, trueValidator])
     this.relationshipApproved,
   });
 

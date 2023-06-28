@@ -155,6 +155,7 @@
   "hora": "Hora",
   "estado": "Estado",
   "parentezco": "Parentezco",
+  "noExisteParentezco": "No existe el parentezco",
   "agendarTurnoParaMi": "Agendar turno para mí",
   "descuentoCon": "Aplica descuento -CONADIS",
   "noIva": "No aplica IVA",
