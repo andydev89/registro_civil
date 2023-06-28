@@ -213,7 +213,7 @@ class Payment {
   String toString() => toJson().toString();
 
   Map<String, dynamic> toJson() {
-    final truncatedServiceType = serviceType.substring(0, 22);
+    final truncatedServiceType = serviceType.substring(0, 20);
     return _$PaymentToJson(this)..['ServiceType'] = truncatedServiceType;
   }
 }

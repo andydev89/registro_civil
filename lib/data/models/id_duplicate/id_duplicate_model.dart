@@ -7,21 +7,26 @@ import 'package:registro_civil_apk/data/models/commons/commons.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
 part 'id_duplicate_model.g.dart';
+
 part 'id_duplicate_model.gform.dart';
+
 part 'id_duplicate_model.freezed.dart';
 
 @freezed
 @JsonSerializable(explicitToJson: true)
 class IdDuplicateModel with _$IdDuplicateModel {
   const factory IdDuplicateModel({
-    @JsonKey(includeToJson: true) IdDuplicateProcedureType? type,
+    @JsonKey(includeToJson: true)
+        IdDuplicateProcedureType? type,
     @Default('')
-    @JsonKey(includeToJson: false) String? requestOwner,
+    @JsonKey(includeToJson: false)
+        String? requestOwner,
     @Default('')
-    String? nui,
+        String? nui,
     @Default('')
-    String? birthdate,
-    @JsonKey(includeToJson: true) IdDuplicateReason? reasonType,
+        String? birthdate,
+    @JsonKey(includeToJson: true)
+        IdDuplicateReason? reasonType,
     /*@JsonKey(
       toJson: AgencyModel.agencyToJson,
       includeToJson: true,
@@ -29,12 +34,17 @@ class IdDuplicateModel with _$IdDuplicateModel {
     )
     @FormControlAnnotation<AgencyModel>()
     AgencyModel? agencyId,*/
+    @JsonKey(
+      toJson: LocationAgencyModel.locationToJson,
+      includeToJson: true,
+      includeFromJson: true,
+    )
+        LocationAgencyModel? agency,
     @Default('')
-    String? agencyId,
-    @Default('')
-    String? provinceId,
+        String? provinceId,
     @Default(PaymentMethodType.placeToPay)
-    @JsonKey(includeToJson: true) PaymentMethodType? paymentType,
+    @JsonKey(includeToJson: true)
+        PaymentMethodType? paymentType,
   }) = _IdDuplicateModel;
 
   const IdDuplicateModel._();
@@ -49,7 +59,12 @@ class IdDuplicateModel with _$IdDuplicateModel {
     return _$IdDuplicateModelFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$IdDuplicateModelToJson(this);
+  Map<String, dynamic> toJson() {
+    final json = _$IdDuplicateModelToJson(this);
+    json['agencyId'] = json['agency'];
+    json.remove('agency');
+    return json;
+  }
 
   IdDuplicateModel copyWithFromModel(IdDuplicateModel model) {
     return copyWith(
@@ -58,7 +73,7 @@ class IdDuplicateModel with _$IdDuplicateModel {
       nui: model.nui,
       birthdate: model.birthdate,
       reasonType: model.reasonType,
-      agencyId: model.agencyId,
+      agency: model.agency,
       provinceId: model.provinceId,
       paymentType: model.paymentType,
     );
@@ -71,7 +86,7 @@ class ProcedureTypeSubModel with _$ProcedureTypeSubModel {
   const factory ProcedureTypeSubModel({
     @FormControlAnnotation(validators: [requiredValidator])
     @JsonKey(name: 'procedureType')
-    required IdDuplicateProcedureType idDuplicateProcedureType,
+        required IdDuplicateProcedureType idDuplicateProcedureType,
     @FormControlAnnotation(
       validators: [
         requiredValidator,
@@ -80,9 +95,13 @@ class ProcedureTypeSubModel with _$ProcedureTypeSubModel {
       ],
     )
     @Default('')
-    String nui,
-    @FormControlAnnotation(validators: [requiredValidator,],)
-    required DateTime birthDate,
+        String nui,
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+      ],
+    )
+        required DateTime birthDate,
   }) = _ProcedureTypeForm;
 
   const ProcedureTypeSubModel._();
@@ -97,14 +116,14 @@ class ProcedureReasonSubModel with _$ProcedureReasonSubModel {
   @JsonSerializable(explicitToJson: true)
   const factory ProcedureReasonSubModel({
     @FormControlAnnotation(validators: [requiredValidator])
-    required IdDuplicateReason reason,
+        required IdDuplicateReason reason,
     @FormControlAnnotation(validators: [requiredValidator])
     @JsonKey(toJson: LocationModel.locationToJson)
-    required LocationModel province,
+        required LocationModel province,
     @FormControlAnnotation(validators: [requiredValidator])
-    required AgencyModel agency,
+        required AgencyModel agency,
     @FormControlAnnotation(validators: [requiredTrueValidator])
-    required bool acceptTerms,
+        required bool acceptTerms,
   }) = _ProcedureReasonForm;
 
   const ProcedureReasonSubModel._();
@@ -112,4 +131,3 @@ class ProcedureReasonSubModel with _$ProcedureReasonSubModel {
   factory ProcedureReasonSubModel.fromJson(Map<String, dynamic> json) =>
       _$ProcedureReasonSubModelFromJson(json);
 }
-

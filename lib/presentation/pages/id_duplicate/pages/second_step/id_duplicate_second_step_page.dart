@@ -66,7 +66,7 @@ class IdDuplicateSecondStepPage extends ConsumerWidget {
                     init: operation.isRead,
                     initialValue: (data) {
                       return data?.firstWhere(
-                        (element) => element.id == duplicate.agencyId,
+                        (element) => element.id == duplicate.agency?.agencyId,
                       );
                     },
                     readOnly:
@@ -86,37 +86,48 @@ class IdDuplicateSecondStepPage extends ConsumerWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                ReactiveProcedureReasonSubModelFormConsumer(
-                  builder: (context, formModel, child) => PrimaryButton(
-                    title: operation.isCreate ? l10n.siguiente : l10n.aceptar,
-                    onPressed: formModel.form.valid
-                        ? () {
-                            if (operation.isCreate) {
-                              ref
-                                  .read(idDuplicateProvider.notifier)
-                                  .setSecondStep(formModel.model);
-                              final me =
-                                  ref.read(meProvider).value ?? MeModel();
-                              context.navigateTo(
-                                IdDuplicateDetailRoute(
-                                  typeServiceModel: typeServiceModel,
-                                  me: me,
-                                ),
-                              );
-                            } else {
-                              context.navigateTo(
-                                IdDuplicateMainRoute(
-                                  typeServiceModel: typeServiceModel,
-                                ),
-                              );
-                            }
-                          }
-                        : null,
-                  ),
-                ),
                 if (operation.isCreate)
+                  ...[
+                    ReactiveProcedureReasonSubModelFormConsumer(
+                      builder: (context, formModel, child) => PrimaryButton(
+                        title: operation.isCreate ? l10n.siguiente : l10n.aceptar,
+                        onPressed: formModel.form.valid
+                            ? () {
+                          if (operation.isCreate) {
+                            ref
+                                .read(idDuplicateProvider.notifier)
+                                .setSecondStep(formModel.model);
+                            final me =
+                                ref.read(meProvider).value ?? MeModel();
+                            context.navigateTo(
+                              IdDuplicateDetailRoute(
+                                typeServiceModel: typeServiceModel,
+                                me: me,
+                              ),
+                            );
+                          } else {
+                            context.navigateTo(
+                              IdDuplicateMainRoute(
+                                typeServiceModel: typeServiceModel,
+                              ),
+                            );
+                          }
+                        }
+                            : null,
+                      ),
+                    ),
+                    PrimaryButton(
+                      title: l10n.cancelar,
+                      onPressed: () => context.navigateTo(
+                        IdDuplicateMainRoute(
+                          typeServiceModel: typeServiceModel,
+                        ),
+                      ),
+                    ).verticalPadding(10),
+                  ],
+                if (operation.isRead)
                   PrimaryButton(
-                    title: l10n.cancelar,
+                    title: l10n.aceptar,
                     onPressed: () => context.navigateTo(
                       IdDuplicateMainRoute(
                         typeServiceModel: typeServiceModel,

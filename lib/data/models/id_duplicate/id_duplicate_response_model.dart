@@ -23,7 +23,7 @@ class IdDuplicateResponseModel {
     this.operatorId,
     required this.state,
     required this.provinceId,
-    required this.agencyId,
+    this.agency,
   });
 
   factory IdDuplicateResponseModel.fromJson(Map<String, dynamic> json) =>
@@ -42,7 +42,7 @@ class IdDuplicateResponseModel {
   final dynamic operatorId;
   final StateMarriageType state;
   final String provinceId;
-  final LocationModel? agencyId;
+  final LocationAgencyModel? agency;
 
   Map<String, dynamic> toJson() => _$IdDuplicateResponseModelToJson(this);
 }

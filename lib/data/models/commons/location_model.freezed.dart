@@ -186,3 +186,161 @@ abstract class _LocationModel extends LocationModel {
   _$$_LocationModelCopyWith<_$_LocationModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+LocationAgencyModel _$LocationAgencyModelFromJson(Map<String, dynamic> json) {
+  return _LocationAgencyModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LocationAgencyModel {
+  String get agencyId => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LocationAgencyModelCopyWith<LocationAgencyModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LocationAgencyModelCopyWith<$Res> {
+  factory $LocationAgencyModelCopyWith(
+          LocationAgencyModel value, $Res Function(LocationAgencyModel) then) =
+      _$LocationAgencyModelCopyWithImpl<$Res, LocationAgencyModel>;
+  @useResult
+  $Res call({String agencyId, String name});
+}
+
+/// @nodoc
+class _$LocationAgencyModelCopyWithImpl<$Res, $Val extends LocationAgencyModel>
+    implements $LocationAgencyModelCopyWith<$Res> {
+  _$LocationAgencyModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? agencyId = null,
+    Object? name = null,
+  }) {
+    return _then(_value.copyWith(
+      agencyId: null == agencyId
+          ? _value.agencyId
+          : agencyId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_LocationAgencyModelCopyWith<$Res>
+    implements $LocationAgencyModelCopyWith<$Res> {
+  factory _$$_LocationAgencyModelCopyWith(_$_LocationAgencyModel value,
+          $Res Function(_$_LocationAgencyModel) then) =
+      __$$_LocationAgencyModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String agencyId, String name});
+}
+
+/// @nodoc
+class __$$_LocationAgencyModelCopyWithImpl<$Res>
+    extends _$LocationAgencyModelCopyWithImpl<$Res, _$_LocationAgencyModel>
+    implements _$$_LocationAgencyModelCopyWith<$Res> {
+  __$$_LocationAgencyModelCopyWithImpl(_$_LocationAgencyModel _value,
+      $Res Function(_$_LocationAgencyModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? agencyId = null,
+    Object? name = null,
+  }) {
+    return _then(_$_LocationAgencyModel(
+      agencyId: null == agencyId
+          ? _value.agencyId
+          : agencyId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_LocationAgencyModel extends _LocationAgencyModel {
+  const _$_LocationAgencyModel({required this.agencyId, required this.name})
+      : super._();
+
+  factory _$_LocationAgencyModel.fromJson(Map<String, dynamic> json) =>
+      _$$_LocationAgencyModelFromJson(json);
+
+  @override
+  final String agencyId;
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'LocationAgencyModel(agencyId: $agencyId, name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LocationAgencyModel &&
+            (identical(other.agencyId, agencyId) ||
+                other.agencyId == agencyId) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, agencyId, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LocationAgencyModelCopyWith<_$_LocationAgencyModel> get copyWith =>
+      __$$_LocationAgencyModelCopyWithImpl<_$_LocationAgencyModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LocationAgencyModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _LocationAgencyModel extends LocationAgencyModel {
+  const factory _LocationAgencyModel(
+      {required final String agencyId,
+      required final String name}) = _$_LocationAgencyModel;
+  const _LocationAgencyModel._() : super._();
+
+  factory _LocationAgencyModel.fromJson(Map<String, dynamic> json) =
+      _$_LocationAgencyModel.fromJson;
+
+  @override
+  String get agencyId;
+  @override
+  String get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LocationAgencyModelCopyWith<_$_LocationAgencyModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}

@@ -15,7 +15,10 @@ IdDuplicateModel _$IdDuplicateModelFromJson(Map<String, dynamic> json) =>
       birthdate: json['birthdate'] as String?,
       reasonType:
           $enumDecodeNullable(_$IdDuplicateReasonEnumMap, json['reasonType']),
-      agencyId: json['agencyId'] as String?,
+      agency: json['agency'] == null
+          ? null
+          : LocationAgencyModel.fromJson(
+              json['agency'] as Map<String, dynamic>),
       provinceId: json['provinceId'] as String?,
       paymentType:
           $enumDecodeNullable(_$PaymentMethodTypeEnumMap, json['paymentType']),
@@ -27,7 +30,7 @@ Map<String, dynamic> _$IdDuplicateModelToJson(IdDuplicateModel instance) =>
       'nui': instance.nui,
       'birthdate': instance.birthdate,
       'reasonType': _$IdDuplicateReasonEnumMap[instance.reasonType],
-      'agencyId': instance.agencyId,
+      'agency': LocationAgencyModel.locationToJson(instance.agency),
       'provinceId': instance.provinceId,
       'paymentType': _$PaymentMethodTypeEnumMap[instance.paymentType],
     };
