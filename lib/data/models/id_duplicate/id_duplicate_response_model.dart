@@ -41,8 +41,16 @@ class IdDuplicateResponseModel {
   final dynamic deliveredAt;
   final dynamic operatorId;
   final StateMarriageType state;
-  final String provinceId;
-  final LocationAgencyModel? agency;
+  @JsonKey(
+    fromJson: LocationModel.provinceFromJson,
+    includeFromJson: true,
+  )
+  final LocationModel? provinceId;
+  @JsonKey(
+    fromJson: LocationModel.agencyFromJson,
+    includeFromJson: true,
+  )
+  final LocationModel? agency;
 
   Map<String, dynamic> toJson() => _$IdDuplicateResponseModelToJson(this);
 }

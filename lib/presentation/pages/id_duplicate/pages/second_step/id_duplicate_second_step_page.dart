@@ -53,7 +53,7 @@ class IdDuplicateSecondStepPage extends ConsumerWidget {
                 SelectElementFromApi(
                   init: operation.isRead,
                   initialValue: (data) => data?.firstWhere(
-                    (element) => element.id == duplicate.provinceId,
+                    (element) => element.id == duplicate.provinceId?.id,
                   ),
                   readOnly: operation.isRead,
                   formControl: formModel.provinceControl,
@@ -66,7 +66,7 @@ class IdDuplicateSecondStepPage extends ConsumerWidget {
                     init: operation.isRead,
                     initialValue: (data) {
                       return data?.firstWhere(
-                        (element) => element.id == duplicate.agency?.agencyId,
+                        (element) => element.id == duplicate.agency?.id,
                       );
                     },
                     readOnly:

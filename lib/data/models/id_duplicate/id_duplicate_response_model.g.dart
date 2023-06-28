@@ -21,11 +21,10 @@ IdDuplicateResponseModel _$IdDuplicateResponseModelFromJson(
       deliveredAt: json['deliveredAt'],
       operatorId: json['operatorId'],
       state: $enumDecode(_$StateMarriageTypeEnumMap, json['state']),
-      provinceId: json['provinceId'] as String,
-      agency: json['agency'] == null
-          ? null
-          : LocationAgencyModel.fromJson(
-              json['agency'] as Map<String, dynamic>),
+      provinceId: LocationModel.provinceFromJson(
+          json['provinceId'] as Map<String, dynamic>),
+      agency:
+          LocationModel.agencyFromJson(json['agency'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$IdDuplicateResponseModelToJson(
@@ -43,7 +42,7 @@ Map<String, dynamic> _$IdDuplicateResponseModelToJson(
       'deliveredAt': instance.deliveredAt,
       'operatorId': instance.operatorId,
       'state': _$StateMarriageTypeEnumMap[instance.state]!,
-      'provinceId': instance.provinceId,
+      'provinceId': instance.provinceId?.toJson(),
       'agency': instance.agency?.toJson(),
     };
 

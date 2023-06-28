@@ -24,23 +24,20 @@ class LocationModel with _$LocationModel, Translatable {
 
   static String locationToJson(LocationModel instance) => instance.id;
   static String? locationToJsonNull(LocationModel? instance) => instance?.id;
-}
 
-@freezed
-class LocationAgencyModel with _$LocationAgencyModel, Translatable {
-  const factory LocationAgencyModel({
-    required String agencyId,
-    required String name,
-  }) = _LocationAgencyModel;
+  static LocationModel? provinceFromJson(Map<String, dynamic> json) {
+    final modified = <String, dynamic>{
+      'id': json['provinceId'],
+      'name': json['name'],
+    };
+    return LocationModel.fromJson(modified);
+  }
 
-  factory LocationAgencyModel.fromJson(Map<String, dynamic> json) =>
-      _$LocationAgencyModelFromJson(json);
-
-  const LocationAgencyModel._();
-
-  @override
-  String translate(BuildContext context) => name;
-
-  static String? locationToJson(LocationAgencyModel? instance) =>
-      instance?.agencyId;
+  static LocationModel? agencyFromJson(Map<String, dynamic> json) {
+    final modified = <String, dynamic>{
+      'id': json['agencyId'],
+      'name': json['name'],
+    };
+    return LocationModel.fromJson(modified);
+  }
 }

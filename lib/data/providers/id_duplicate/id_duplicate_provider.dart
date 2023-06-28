@@ -36,9 +36,9 @@ class IdDuplicate extends _$IdDuplicate {
 
   void setSecondStep(ProcedureReasonSubModel reason) {
     state = state.copyWith(
-      agency: LocationAgencyModel(
-          agencyId: reason.agency.id, name: reason.agency.name),
-      provinceId: reason.province.id,
+      agency: LocationModel(
+          id: reason.agency.id, name: reason.agency.name),
+      provinceId: reason.province,
       reasonType: reason.reason,
     );
   }

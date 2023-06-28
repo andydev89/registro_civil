@@ -35,13 +35,18 @@ class IdDuplicateModel with _$IdDuplicateModel {
     @FormControlAnnotation<AgencyModel>()
     AgencyModel? agencyId,*/
     @JsonKey(
-      toJson: LocationAgencyModel.locationToJson,
+      toJson: LocationModel.locationToJsonNull,
+      fromJson: LocationModel.agencyFromJson,
       includeToJson: true,
       includeFromJson: true,
     )
-        LocationAgencyModel? agency,
-    @Default('')
-        String? provinceId,
+    LocationModel? agency,
+    @JsonKey(
+      toJson: LocationModel.locationToJsonNull,
+      fromJson: LocationModel.provinceFromJson,
+      includeToJson: true,
+      includeFromJson: true,
+    ) LocationModel? provinceId,
     @Default(PaymentMethodType.placeToPay)
     @JsonKey(includeToJson: true)
         PaymentMethodType? paymentType,
