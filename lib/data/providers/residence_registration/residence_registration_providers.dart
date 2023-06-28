@@ -12,8 +12,11 @@ Future<ResidenceRegistration> residenceRegistration(
 ) async {
   final api = ref.watch(apiProvider);
   final user = await ref.watch(meProvider.future);
-  return (await api.resicenceRegistrationByUser(user.id)).data?.first ??
-      const ResidenceRegistration();
+  final result = await api.resicenceRegistrationByUser(user.id);
+  if (result.data != null && result.data!.isNotEmpty) {
+    return result.data!.first;
+  }
+  return const ResidenceRegistration();
 }
 
 @riverpod
@@ -140,7 +143,7 @@ class ResReg extends _$ResReg {
     state = state.copyWith(residentials: newResidentials);
   }
 
-  List<String>dependentsFromResidence(
+  List<String> dependentsFromResidence(
     TranslatableString? residentialAddress, {
     Dependent? actual,
   }) {
@@ -148,7 +151,7 @@ class ResReg extends _$ResReg {
       (element) => element.address == residentialAddress,
     );
     if (residenceIndex == -1) return [];
-    final dependents =List<Dependent>.from(
+    final dependents = List<Dependent>.from(
       state.residentials[residenceIndex].dependents,
     );
     if (actual != null) {
