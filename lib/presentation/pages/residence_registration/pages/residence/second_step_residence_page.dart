@@ -67,7 +67,7 @@ class SecondStepResidencePage extends ConsumerWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                PrimaryReactiveCheckBox(
+                /*PrimaryReactiveCheckBox(
                   label: l10n.cuentaLuzElectrica,
                   formControl: formModel.electricLightMeterControl,
                   readOnly: operation.isRead,
@@ -87,7 +87,7 @@ class SecondStepResidencePage extends ConsumerWidget {
                       ],
                     ),
                   ),
-                ),
+                ),*/
                 PrimaryReactiveDropdown(
                   items: ResidentialHousingType.values,
                   label: l10n.tipoDeVivienda,
