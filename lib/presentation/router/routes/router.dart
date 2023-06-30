@@ -380,6 +380,18 @@ part 'router.gr.dart';
 
           ],
         ),
+        //PERSONAL_DATA_VALIDATION
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: PersonalValidationRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: PersonalValidationMainPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+          ],
+        ),
         CupertinoRoute(
           // guards: [AuthGuard],
           page: DefaultPage,

@@ -368,6 +368,12 @@ class _$AppRouter extends RootStackRouter {
         child: const IdDuplicateRouterPage(),
       );
     },
+    PersonalValidationRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const PersonalValidationRouterPage(),
+      );
+    },
     DefaultRoute.name: (routeData) {
       final args = routeData.argsAs<DefaultRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -844,6 +850,15 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    PersonalValidationMainRoute.name: (routeData) {
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: const PersonalValidationMainPage(),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1283,6 +1298,19 @@ class _$AppRouter extends RootStackRouter {
                     ),
                   ],
                 ),
+              ],
+            ),
+            RouteConfig(
+              PersonalValidationRouterRoute.name,
+              path: 'personal-validation-router-page',
+              parent: RootRouterRoute.name,
+              guards: [authGuard],
+              children: [
+                RouteConfig(
+                  PersonalValidationMainRoute.name,
+                  path: '',
+                  parent: PersonalValidationRouterRoute.name,
+                )
               ],
             ),
             RouteConfig(
@@ -2144,6 +2172,19 @@ class IdDuplicateRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'IdDuplicateRouterRoute';
+}
+
+/// generated route for
+/// [PersonalValidationRouterPage]
+class PersonalValidationRouterRoute extends PageRouteInfo<void> {
+  const PersonalValidationRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          PersonalValidationRouterRoute.name,
+          path: 'personal-validation-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'PersonalValidationRouterRoute';
 }
 
 /// generated route for
@@ -3529,4 +3570,16 @@ class IdDuplicateDetailRouteArgs {
   String toString() {
     return 'IdDuplicateDetailRouteArgs{key: $key, typeServiceModel: $typeServiceModel, me: $me}';
   }
+}
+
+/// generated route for
+/// [PersonalValidationMainPage]
+class PersonalValidationMainRoute extends PageRouteInfo<void> {
+  const PersonalValidationMainRoute()
+      : super(
+          PersonalValidationMainRoute.name,
+          path: '',
+        );
+
+  static const String name = 'PersonalValidationMainRoute';
 }

@@ -298,4 +298,11 @@ abstract class Api {
   Future<ResponseModel<IdDuplicateModel>> duplicateById(
     @Path('id') String id,
   );
+
+  //PERSONAL DATA VALIDATION
+  @GET('/personaldatavalidator/api/personal-data/solicitudes')
+  Future<ResponseModelPagination<List<dynamic>>>
+      personalValidationRequests({
+    @Query('pageNo') int pageNo = 0,
+  });
 }

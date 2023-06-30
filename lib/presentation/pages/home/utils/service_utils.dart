@@ -66,6 +66,9 @@ PageRouteInfo<dynamic> getIdDuplicate(TypeServiceModel typeOfService) =>
       ],
     );
 
+PageRouteInfo<dynamic> getPersonalValidation() =>
+    const PersonalValidationRouterRoute();
+
 PageRouteInfo<dynamic> getDefault(TypeServiceModel typeOfService) =>
     DefaultRoute(typeServiceModel: typeOfService);
 
@@ -91,6 +94,9 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   }
   if (type.isMarriageCelebration) {
     return getMarriageCelebration();
+  }
+  if (type.isPersonalValidation) {
+    return getPersonalValidation();
   }
   return getDefault(typeServiceModel);
 }

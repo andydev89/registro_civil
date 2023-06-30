@@ -42,7 +42,9 @@ enum ServiceType implements Translatable {
   @JsonValue('FORMALITY_DUPLICATE_IDENTITY')
   idDuplicate('FORMALITY_DUPLICATE_IDENTITY'),
   @JsonValue('FORMALITY_MARRIAGE_CELEBRATION')
-  marriageCelebration('FORMALITY_MARRIAGE_CELEBRATION');
+  marriageCelebration('FORMALITY_MARRIAGE_CELEBRATION'),
+  @JsonValue('SERVICE_PERSONAL_VALIDATION')
+  personalValidation('SERVICE_PERSONAL_VALIDATION');
 
   const ServiceType(this.toText);
   final String toText;
@@ -83,6 +85,8 @@ enum ServiceType implements Translatable {
 
   bool get isMarriageCelebration => this == marriageCelebration;
 
+  bool get isPersonalValidation => this == personalValidation;
+
   @override
   String translate(BuildContext context) {
     final l10n = context.l10n;
@@ -121,6 +125,8 @@ enum ServiceType implements Translatable {
         return l10n.cambioNom;
       case ServiceType.idDuplicate:
         return l10n.duplicadoCed;
+      case ServiceType.personalValidation:
+        return l10n.personalValidation;
     }
   }
 }
