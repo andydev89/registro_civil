@@ -368,6 +368,12 @@ class _$AppRouter extends RootStackRouter {
         child: const IdDuplicateRouterPage(),
       );
     },
+    ElectronicSignatureRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const ElectronicSignatureRouterPage(),
+      );
+    },
     DefaultRoute.name: (routeData) {
       final args = routeData.argsAs<DefaultRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -844,6 +850,75 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    ElectronicSignatureMainRoute.name: (routeData) {
+      final args = routeData.argsAs<ElectronicSignatureMainRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ElectronicSignatureMainPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ElectronicSignatureFirstStepRoute.name: (routeData) {
+      final args = routeData.argsAs<ElectronicSignatureFirstStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ElectronicSignatureFirstStepPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          operation: args.operation,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ElectronicSignatureSecondStepRoute.name: (routeData) {
+      final args = routeData.argsAs<ElectronicSignatureSecondStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ElectronicSignatureSecondStepPage(
+          key: args.key,
+          operation: args.operation,
+          citizen: args.citizen,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ElectronicSignaturePersonalRoute.name: (routeData) {
+      final args = routeData.argsAs<ElectronicSignaturePersonalRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ElectronicSignaturePersonalPage(
+          key: args.key,
+          citizen: args.citizen,
+          operation: args.operation,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ElectronicSignatureBillingRoute.name: (routeData) {
+      final args = routeData.argsAs<ElectronicSignatureBillingRouteArgs>(
+          orElse: () => const ElectronicSignatureBillingRouteArgs());
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ElectronicSignatureBillingPage(
+          key: args.key,
+          operation: args.operation,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideLeft,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1280,6 +1355,41 @@ class _$AppRouter extends RootStackRouter {
                       IdDuplicateDetailRoute.name,
                       path: 'id-duplicate-detail-page',
                       parent: IdDuplicateFirstStepRouterRoute.name,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            RouteConfig(
+              ElectronicSignatureRouterRoute.name,
+              path: 'electronic-signature-router-page',
+              parent: RootRouterRoute.name,
+              guards: [authGuard],
+              children: [
+                RouteConfig(
+                  ElectronicSignatureMainRoute.name,
+                  path: '',
+                  parent: ElectronicSignatureRouterRoute.name,
+                ),
+                RouteConfig(
+                  ElectronicSignatureFirstStepRoute.name,
+                  path: 'electronic-signature-first-step-page',
+                  parent: ElectronicSignatureRouterRoute.name,
+                ),
+                RouteConfig(
+                  ElectronicSignatureSecondStepRoute.name,
+                  path: 'electronic-signature-second-step-page',
+                  parent: ElectronicSignatureRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      ElectronicSignaturePersonalRoute.name,
+                      path: '',
+                      parent: ElectronicSignatureSecondStepRoute.name,
+                    ),
+                    RouteConfig(
+                      ElectronicSignatureBillingRoute.name,
+                      path: 'electronic-signature-billing-page',
+                      parent: ElectronicSignatureSecondStepRoute.name,
                     ),
                   ],
                 ),
@@ -2144,6 +2254,19 @@ class IdDuplicateRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'IdDuplicateRouterRoute';
+}
+
+/// generated route for
+/// [ElectronicSignatureRouterPage]
+class ElectronicSignatureRouterRoute extends PageRouteInfo<void> {
+  const ElectronicSignatureRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          ElectronicSignatureRouterRoute.name,
+          path: 'electronic-signature-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'ElectronicSignatureRouterRoute';
 }
 
 /// generated route for
@@ -3528,5 +3651,197 @@ class IdDuplicateDetailRouteArgs {
   @override
   String toString() {
     return 'IdDuplicateDetailRouteArgs{key: $key, typeServiceModel: $typeServiceModel, me: $me}';
+  }
+}
+
+/// generated route for
+/// [ElectronicSignatureMainPage]
+class ElectronicSignatureMainRoute
+    extends PageRouteInfo<ElectronicSignatureMainRouteArgs> {
+  ElectronicSignatureMainRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          ElectronicSignatureMainRoute.name,
+          path: '',
+          args: ElectronicSignatureMainRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'ElectronicSignatureMainRoute';
+}
+
+class ElectronicSignatureMainRouteArgs {
+  const ElectronicSignatureMainRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'ElectronicSignatureMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [ElectronicSignatureFirstStepPage]
+class ElectronicSignatureFirstStepRoute
+    extends PageRouteInfo<ElectronicSignatureFirstStepRouteArgs> {
+  ElectronicSignatureFirstStepRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    Crud operation = Crud.create,
+  }) : super(
+          ElectronicSignatureFirstStepRoute.name,
+          path: 'electronic-signature-first-step-page',
+          args: ElectronicSignatureFirstStepRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            operation: operation,
+          ),
+        );
+
+  static const String name = 'ElectronicSignatureFirstStepRoute';
+}
+
+class ElectronicSignatureFirstStepRouteArgs {
+  const ElectronicSignatureFirstStepRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'ElectronicSignatureFirstStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation}';
+  }
+}
+
+/// generated route for
+/// [ElectronicSignatureSecondStepPage]
+class ElectronicSignatureSecondStepRoute
+    extends PageRouteInfo<ElectronicSignatureSecondStepRouteArgs> {
+  ElectronicSignatureSecondStepRoute({
+    Key? key,
+    Crud operation = Crud.create,
+    required CitizenModel citizen,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ElectronicSignatureSecondStepRoute.name,
+          path: 'electronic-signature-second-step-page',
+          args: ElectronicSignatureSecondStepRouteArgs(
+            key: key,
+            operation: operation,
+            citizen: citizen,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ElectronicSignatureSecondStepRoute';
+}
+
+class ElectronicSignatureSecondStepRouteArgs {
+  const ElectronicSignatureSecondStepRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+    required this.citizen,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  final CitizenModel citizen;
+
+  @override
+  String toString() {
+    return 'ElectronicSignatureSecondStepRouteArgs{key: $key, operation: $operation, citizen: $citizen}';
+  }
+}
+
+/// generated route for
+/// [ElectronicSignaturePersonalPage]
+class ElectronicSignaturePersonalRoute
+    extends PageRouteInfo<ElectronicSignaturePersonalRouteArgs> {
+  ElectronicSignaturePersonalRoute({
+    Key? key,
+    required CitizenModel citizen,
+    Crud operation = Crud.create,
+  }) : super(
+          ElectronicSignaturePersonalRoute.name,
+          path: '',
+          args: ElectronicSignaturePersonalRouteArgs(
+            key: key,
+            citizen: citizen,
+            operation: operation,
+          ),
+        );
+
+  static const String name = 'ElectronicSignaturePersonalRoute';
+}
+
+class ElectronicSignaturePersonalRouteArgs {
+  const ElectronicSignaturePersonalRouteArgs({
+    this.key,
+    required this.citizen,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final CitizenModel citizen;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'ElectronicSignaturePersonalRouteArgs{key: $key, citizen: $citizen, operation: $operation}';
+  }
+}
+
+/// generated route for
+/// [ElectronicSignatureBillingPage]
+class ElectronicSignatureBillingRoute
+    extends PageRouteInfo<ElectronicSignatureBillingRouteArgs> {
+  ElectronicSignatureBillingRoute({
+    Key? key,
+    Crud operation = Crud.create,
+  }) : super(
+          ElectronicSignatureBillingRoute.name,
+          path: 'electronic-signature-billing-page',
+          args: ElectronicSignatureBillingRouteArgs(
+            key: key,
+            operation: operation,
+          ),
+        );
+
+  static const String name = 'ElectronicSignatureBillingRoute';
+}
+
+class ElectronicSignatureBillingRouteArgs {
+  const ElectronicSignatureBillingRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'ElectronicSignatureBillingRouteArgs{key: $key, operation: $operation}';
   }
 }

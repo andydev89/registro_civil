@@ -14,12 +14,14 @@ class PrimaryScaffold extends StatelessWidget {
     this.subtitle,
     this.bottomNavigationBar,
     this.horizontalPadding = 20,
+    this.backgroundColor = Colors.transparent,
   });
   final Widget body;
   final String title;
   final String? subtitle;
   final Widget? bottomNavigationBar;
   final double horizontalPadding;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class PrimaryScaffold extends StatelessWidget {
       ),
       child: KeyboardDismissOnTap(
         child: Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: backgroundColor,
           appBar: AppBar(
             foregroundColor: primaryColor,
             backgroundColor: Colors.transparent,

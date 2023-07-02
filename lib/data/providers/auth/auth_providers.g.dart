@@ -126,6 +126,92 @@ class RefreshTokenProvider extends AutoDisposeFutureProvider<OAuth2Token?> {
   }
 }
 
+String _$registerValidateCitizenHash() =>
+    r'7a45acb53b580b2216d15cf6e2f500afb647f72a';
+typedef RegisterValidateCitizenRef
+    = AutoDisposeFutureProviderRef<Result<CitizenModel, StatusCodeType>>;
+
+/// See also [registerValidateCitizen].
+@ProviderFor(registerValidateCitizen)
+const registerValidateCitizenProvider = RegisterValidateCitizenFamily();
+
+/// See also [registerValidateCitizen].
+class RegisterValidateCitizenFamily
+    extends Family<AsyncValue<Result<CitizenModel, StatusCodeType>>> {
+  /// See also [registerValidateCitizen].
+  const RegisterValidateCitizenFamily();
+
+  /// See also [registerValidateCitizen].
+  RegisterValidateCitizenProvider call(
+    NuiModel model,
+  ) {
+    return RegisterValidateCitizenProvider(
+      model,
+    );
+  }
+
+  @override
+  RegisterValidateCitizenProvider getProviderOverride(
+    covariant RegisterValidateCitizenProvider provider,
+  ) {
+    return call(
+      provider.model,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'registerValidateCitizenProvider';
+}
+
+/// See also [registerValidateCitizen].
+class RegisterValidateCitizenProvider
+    extends AutoDisposeFutureProvider<Result<CitizenModel, StatusCodeType>> {
+  /// See also [registerValidateCitizen].
+  RegisterValidateCitizenProvider(
+    this.model,
+  ) : super.internal(
+          (ref) => registerValidateCitizen(
+            ref,
+            model,
+          ),
+          from: registerValidateCitizenProvider,
+          name: r'registerValidateCitizenProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$registerValidateCitizenHash,
+          dependencies: RegisterValidateCitizenFamily._dependencies,
+          allTransitiveDependencies:
+              RegisterValidateCitizenFamily._allTransitiveDependencies,
+        );
+
+  final NuiModel model;
+
+  @override
+  bool operator ==(Object other) {
+    return other is RegisterValidateCitizenProvider && other.model == model;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, model.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$authenticationStatusHash() =>
     r'edc3d445215bf33e1dce629b06671316396db051';
 
@@ -172,23 +258,6 @@ final loginProvider = AutoDisposeAsyncNotifierProvider<Login, bool>.internal(
 );
 
 typedef _$Login = AutoDisposeAsyncNotifier<bool>;
-String _$registerValidateCitizenHash() =>
-    r'9bc3f4eb0b39249a07efed00b4bd1607c0c70323';
-
-/// See also [RegisterValidateCitizen].
-@ProviderFor(RegisterValidateCitizen)
-final registerValidateCitizenProvider = AutoDisposeNotifierProvider<
-    RegisterValidateCitizen, CitizenModel?>.internal(
-  RegisterValidateCitizen.new,
-  name: r'registerValidateCitizenProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$registerValidateCitizenHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$RegisterValidateCitizen = AutoDisposeNotifier<CitizenModel?>;
 String _$registerDataHash() => r'e2bbf15ab1a32d5be07b48d93ff728a205a95a73';
 
 /// See also [RegisterData].

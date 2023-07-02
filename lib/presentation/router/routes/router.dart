@@ -380,6 +380,37 @@ part 'router.gr.dart';
 
           ],
         ),
+        //DIGITAL_SIGNATURE
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: ElectronicSignatureRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: ElectronicSignatureMainPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+            CustomRoute(
+              page: ElectronicSignatureFirstStepPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+            CustomRoute(
+              page: ElectronicSignatureSecondStepPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+              children: [
+                CustomRoute(
+                  initial: true,
+                  page: ElectronicSignaturePersonalPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                CustomRoute(
+                  page: ElectronicSignatureBillingPage,
+                  transitionsBuilder: TransitionsBuilders.slideLeft,
+                ),
+              ],
+            ),
+          ],
+        ),
         CupertinoRoute(
           // guards: [AuthGuard],
           page: DefaultPage,
