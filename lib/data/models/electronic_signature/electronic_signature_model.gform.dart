@@ -2031,6 +2031,8 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
 
   static const String hasRUCIncludedControlName = "hasRUCIncluded";
 
+  static const String rucControlName = "ruc";
+
   static const String validityTimeControlName = "validityTime";
 
   static const String useCaseControlName = "useCase";
@@ -2042,15 +2044,27 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
   final String? path;
 
   String hasRUCIncludedControlPath() => pathBuilder(hasRUCIncludedControlName);
+  String rucControlPath() => pathBuilder(rucControlName);
   String validityTimeControlPath() => pathBuilder(validityTimeControlName);
   String useCaseControlPath() => pathBuilder(useCaseControlName);
   bool? get _hasRUCIncludedValue => hasRUCIncludedControl?.value;
-  int get _validityTimeValue => validityTimeControl.value as int;
+  String? get _rucValue => rucControl?.value;
+  SignatureValidityTimeType get _validityTimeValue =>
+      validityTimeControl.value as SignatureValidityTimeType;
   SignatureUseCaseType get _useCaseValue =>
       useCaseControl.value as SignatureUseCaseType;
   bool get containsHasRUCIncluded {
     try {
       form.control(hasRUCIncludedControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsRuc {
+    try {
+      form.control(rucControlPath());
       return true;
     } catch (e) {
       return false;
@@ -2076,9 +2090,11 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
   }
 
   Object? get hasRUCIncludedErrors => hasRUCIncludedControl?.errors;
+  Object? get rucErrors => rucControl?.errors;
   Object? get validityTimeErrors => validityTimeControl.errors;
   Object? get useCaseErrors => useCaseControl.errors;
   void get hasRUCIncludedFocus => form.focus(hasRUCIncludedControlPath());
+  void get rucFocus => form.focus(rucControlPath());
   void get validityTimeFocus => form.focus(validityTimeControlPath());
   void get useCaseFocus => form.focus(useCaseControlPath());
   void hasRUCIncludedRemove({
@@ -2107,6 +2123,32 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
     }
   }
 
+  void rucRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsRuc) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          rucControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            rucControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void hasRUCIncludedValueUpdate(
     bool? value, {
     bool updateParent = true,
@@ -2116,8 +2158,17 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void rucValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    rucControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void validityTimeValueUpdate(
-    int value, {
+    SignatureValidityTimeType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2143,8 +2194,17 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void rucValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    rucControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void validityTimeValuePatch(
-    int value, {
+    SignatureValidityTimeType value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2170,8 +2230,17 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
   }) =>
       hasRUCIncludedControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void rucValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      rucControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void validityTimeValueReset(
-    int value, {
+    SignatureValidityTimeType value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -2191,8 +2260,12 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
   FormControl<bool>? get hasRUCIncludedControl => containsHasRUCIncluded
       ? form.control(hasRUCIncludedControlPath()) as FormControl<bool>?
       : null;
-  FormControl<int> get validityTimeControl =>
-      form.control(validityTimeControlPath()) as FormControl<int>;
+  FormControl<String>? get rucControl => containsRuc
+      ? form.control(rucControlPath()) as FormControl<String>?
+      : null;
+  FormControl<SignatureValidityTimeType> get validityTimeControl =>
+      form.control(validityTimeControlPath())
+          as FormControl<SignatureValidityTimeType>;
   FormControl<SignatureUseCaseType> get useCaseControl =>
       form.control(useCaseControlPath()) as FormControl<SignatureUseCaseType>;
   void hasRUCIncludedSetDisabled(
@@ -2207,6 +2280,24 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
       );
     } else {
       hasRUCIncludedControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void rucSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      rucControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      rucControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -2259,7 +2350,7 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
     }
     return ESignatureBillingModel(
         hasRUCIncluded: _hasRUCIncludedValue,
-        ruc: eSignatureBillingModel?.ruc,
+        ruc: _rucValue,
         validityTime: _validityTimeValue,
         useCase: _useCaseValue);
   }
@@ -2298,7 +2389,14 @@ class ESignatureBillingModelForm implements FormModel<ESignatureBillingModel> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        validityTimeControlName: FormControl<int>(
+        rucControlName: FormControl<String>(
+            value: eSignatureBillingModel?.ruc,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        validityTimeControlName: FormControl<SignatureValidityTimeType>(
             value: eSignatureBillingModel?.validityTime,
             validators: [requiredValidator],
             asyncValidators: [],

@@ -142,6 +142,12 @@
   "esRenovacion": "¿Es renovación?",
   "esAuxAduana": "¿Es auxiliar de aduana?",
   "tieneToken": "¿Dispone de Dispositivo Token?",
+  "firmaContacto": "Contacto",
+  "firmaFacturacion": "Facturación",
+  "usoFactElectronica": "Uso de la firma Facturación Electrónica",
+  "firmaIncRuc": "¿Incluir RUC en la firma?",
+  "firmaRuc": "RUC en la firma",
+  "firmaVigencia": "Vigencia de la firma",
   "obtengaSuTurno": "Obtenga su turno",
   "completeInformacionSolicitada": "Complete la información solicitada",
   "completeInformacionSolicitadaCed": "Complete la información solicitada para validar su cédula",
@@ -430,6 +436,15 @@
     "placeholders": {
       "email": {
         "type": "String"
+      }
+    }
+  },
+  "nYears": "{count, plural, =1{1 año} other{{count} años}}",
+  "@nYears": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
       }
     }
   },

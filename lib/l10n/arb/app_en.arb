@@ -137,6 +137,12 @@
   "esRenovacion": "Is it renewal?",
   "esAuxAduana": "Are you a customs assistant?",
   "tieneToken": "Do you have a Token Device?",
+  "firmaContacto": "Contact",
+  "firmaFacturacion": "Billing",
+  "usoFactElectronica": "Use of the Electronic Invoicing signature",
+  "firmaIncRuc": "Include RUC in the signature?",
+  "firmaRuc": "RUC in the signature",
+  "firmaVigencia": "Validity of the signature",
   "obtengaSuTurno": "Get your turn",
   "completeInformacionSolicitada": "Complete the requested information",
   "completeInformacionSolicitadaCed": "Complete the requested information to validate your ID",
@@ -179,6 +185,15 @@
     "placeholders": {
       "email": {
         "type": "String"
+      }
+    }
+  },
+  "nYears": "{count, plural, =1{1 year} other{{count} years}}",
+  "@nYears": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
       }
     }
   },

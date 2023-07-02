@@ -131,8 +131,9 @@ ESignatureBillingModel _$ESignatureBillingModelFromJson(
         Map<String, dynamic> json) =>
     ESignatureBillingModel(
       hasRUCIncluded: json['hasRUCIncluded'] as bool? ?? false,
-      ruc: json['ruc'] as String?,
-      validityTime: json['validityTime'] as int,
+      ruc: json['ruc'] as String? ?? '',
+      validityTime:
+          $enumDecode(_$SignatureValidityTimeTypeEnumMap, json['validityTime']),
       useCase: $enumDecode(_$SignatureUseCaseTypeEnumMap, json['useCase']),
     );
 
@@ -141,6 +142,15 @@ Map<String, dynamic> _$ESignatureBillingModelToJson(
     <String, dynamic>{
       'hasRUCIncluded': instance.hasRUCIncluded,
       'ruc': instance.ruc,
-      'validityTime': instance.validityTime,
+      'validityTime':
+          _$SignatureValidityTimeTypeEnumMap[instance.validityTime]!,
       'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase]!,
     };
+
+const _$SignatureValidityTimeTypeEnumMap = {
+  SignatureValidityTimeType.oneYear: 1,
+  SignatureValidityTimeType.twoYears: 2,
+  SignatureValidityTimeType.threeYears: 3,
+  SignatureValidityTimeType.fourYears: 4,
+  SignatureValidityTimeType.fiveYears: 5,
+};

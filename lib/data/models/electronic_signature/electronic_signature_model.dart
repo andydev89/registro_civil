@@ -137,14 +137,14 @@ class ESignaturePersonalModel {
   factory ESignaturePersonalModel.fromJson(Map<String, dynamic> json) =>
       _$ESignaturePersonalModelFromJson(json);
 
-  final String? fullName;
-  final String? email;
-  final String? phone;
-  final String address;
-  final String postalCode;
-  final LocationModel province;
-  final LocationModel city;
-  final LocationModel parish;
+  String? fullName;
+  String? email;
+  String? phone;
+  String address;
+  String postalCode;
+  LocationModel province;
+  LocationModel city;
+  LocationModel parish;
 
   Map<String, dynamic> toJson() => _$ESignaturePersonalModelToJson(this);
 }
@@ -154,7 +154,8 @@ class ESignaturePersonalModel {
 class ESignatureBillingModel {
   ESignatureBillingModel({
     @FormControlAnnotation<bool>() this.hasRUCIncluded = false,
-    this.ruc,
+    @FormControlAnnotation(validators: [requiredValidator])
+    this.ruc = '',
     @FormControlAnnotation(validators: [requiredValidator])
     required this.validityTime,
     @FormControlAnnotation(validators: [requiredValidator])
@@ -164,10 +165,10 @@ class ESignatureBillingModel {
   factory ESignatureBillingModel.fromJson(Map<String, dynamic> json) =>
       _$ESignatureBillingModelFromJson(json);
 
-  final bool? hasRUCIncluded;
-  final String? ruc;
-  final int validityTime;
-  final SignatureUseCaseType useCase;
+  bool? hasRUCIncluded;
+  String? ruc;
+  SignatureValidityTimeType validityTime;
+  SignatureUseCaseType useCase;
 
   Map<String, dynamic> toJson() => _$ESignatureBillingModelToJson(this);
 }
