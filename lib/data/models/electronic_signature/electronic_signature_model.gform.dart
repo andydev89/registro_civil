@@ -217,9 +217,8 @@ class ESignatureFirstSubModelForm
   String deviceTokenSerialNumberControlPath() =>
       pathBuilder(deviceTokenSerialNumberControlName);
   String get _userNuiValue => userNuiControl.value ?? "";
-  PersonType get _personTypeValue => personTypeControl.value as PersonType;
-  SignatureType get _signatureTypeValue =>
-      signatureTypeControl.value as SignatureType;
+  PersonType? get _personTypeValue => personTypeControl?.value;
+  SignatureType? get _signatureTypeValue => signatureTypeControl?.value;
   bool? get _isTokenRenovationValue => isTokenRenovationControl?.value;
   bool? get _hasDeviceTokenValue => hasDeviceTokenControl?.value;
   bool? get _isACustomsAgentValue => isACustomsAgentControl?.value;
@@ -289,8 +288,8 @@ class ESignatureFirstSubModelForm
   }
 
   Object? get userNuiErrors => userNuiControl.errors;
-  Object? get personTypeErrors => personTypeControl.errors;
-  Object? get signatureTypeErrors => signatureTypeControl.errors;
+  Object? get personTypeErrors => personTypeControl?.errors;
+  Object? get signatureTypeErrors => signatureTypeControl?.errors;
   Object? get isTokenRenovationErrors => isTokenRenovationControl?.errors;
   Object? get hasDeviceTokenErrors => hasDeviceTokenControl?.errors;
   Object? get isACustomsAgentErrors => isACustomsAgentControl?.errors;
@@ -304,6 +303,58 @@ class ESignatureFirstSubModelForm
   void get isACustomsAgentFocus => form.focus(isACustomsAgentControlPath());
   void get deviceTokenSerialNumberFocus =>
       form.focus(deviceTokenSerialNumberControlPath());
+  void personTypeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsPersonType) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          personTypeControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            personTypeControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void signatureTypeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsSignatureType) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          signatureTypeControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            signatureTypeControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void isTokenRenovationRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -418,20 +469,20 @@ class ESignatureFirstSubModelForm
   }
 
   void personTypeValueUpdate(
-    PersonType value, {
+    PersonType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    personTypeControl.updateValue(value,
+    personTypeControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void signatureTypeValueUpdate(
-    SignatureType value, {
+    SignatureType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    signatureTypeControl.updateValue(value,
+    signatureTypeControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -481,20 +532,20 @@ class ESignatureFirstSubModelForm
   }
 
   void personTypeValuePatch(
-    PersonType value, {
+    PersonType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    personTypeControl.patchValue(value,
+    personTypeControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void signatureTypeValuePatch(
-    SignatureType value, {
+    SignatureType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    signatureTypeControl.patchValue(value,
+    signatureTypeControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -544,22 +595,22 @@ class ESignatureFirstSubModelForm
       userNuiControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void personTypeValueReset(
-    PersonType value, {
+    PersonType? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      personTypeControl.reset(
+      personTypeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void signatureTypeValueReset(
-    SignatureType value, {
+    SignatureType? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      signatureTypeControl.reset(
+      signatureTypeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void isTokenRenovationValueReset(
     bool? value, {
@@ -599,10 +650,12 @@ class ESignatureFirstSubModelForm
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String> get userNuiControl =>
       form.control(userNuiControlPath()) as FormControl<String>;
-  FormControl<PersonType> get personTypeControl =>
-      form.control(personTypeControlPath()) as FormControl<PersonType>;
-  FormControl<SignatureType> get signatureTypeControl =>
-      form.control(signatureTypeControlPath()) as FormControl<SignatureType>;
+  FormControl<PersonType>? get personTypeControl => containsPersonType
+      ? form.control(personTypeControlPath()) as FormControl<PersonType>?
+      : null;
+  FormControl<SignatureType>? get signatureTypeControl => containsSignatureType
+      ? form.control(signatureTypeControlPath()) as FormControl<SignatureType>?
+      : null;
   FormControl<bool>? get isTokenRenovationControl => containsIsTokenRenovation
       ? form.control(isTokenRenovationControlPath()) as FormControl<bool>?
       : null;
@@ -641,12 +694,12 @@ class ESignatureFirstSubModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      personTypeControl.markAsDisabled(
+      personTypeControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      personTypeControl.markAsEnabled(
+      personTypeControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -659,12 +712,12 @@ class ESignatureFirstSubModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      signatureTypeControl.markAsDisabled(
+      signatureTypeControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      signatureTypeControl.markAsEnabled(
+      signatureTypeControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1197,17 +1250,16 @@ class ESignaturePersonalBillingModelForm
   String? get _fullNameValue => fullNameControl?.value;
   String? get _emailValue => emailControl?.value;
   String? get _phoneValue => phoneControl?.value;
-  String get _addressValue => addressControl.value as String;
-  String get _postalCodeValue => postalCodeControl.value as String;
-  LocationModel get _provinceValue => provinceControl.value as LocationModel;
-  LocationModel get _cityValue => cityControl.value as LocationModel;
-  LocationModel get _parishValue => parishControl.value as LocationModel;
+  String? get _addressValue => addressControl?.value;
+  String get _postalCodeValue => postalCodeControl.value ?? "";
+  LocationModel? get _provinceValue => provinceControl?.value;
+  LocationModel? get _cityValue => cityControl?.value;
+  LocationModel? get _parishValue => parishControl?.value;
   bool? get _hasRUCIncludedValue => hasRUCIncludedControl?.value;
   String? get _rucValue => rucControl?.value;
-  SignatureValidityTimeType get _validityTimeValue =>
-      validityTimeControl.value as SignatureValidityTimeType;
-  SignatureUseCaseType get _useCaseValue =>
-      useCaseControl.value as SignatureUseCaseType;
+  SignatureValidityTimeType? get _validityTimeValue =>
+      validityTimeControl?.value;
+  SignatureUseCaseType? get _useCaseValue => useCaseControl?.value;
   bool get containsFullName {
     try {
       form.control(fullNameControlPath());
@@ -1319,15 +1371,15 @@ class ESignaturePersonalBillingModelForm
   Object? get fullNameErrors => fullNameControl?.errors;
   Object? get emailErrors => emailControl?.errors;
   Object? get phoneErrors => phoneControl?.errors;
-  Object? get addressErrors => addressControl.errors;
+  Object? get addressErrors => addressControl?.errors;
   Object? get postalCodeErrors => postalCodeControl.errors;
-  Object? get provinceErrors => provinceControl.errors;
-  Object? get cityErrors => cityControl.errors;
-  Object? get parishErrors => parishControl.errors;
+  Object? get provinceErrors => provinceControl?.errors;
+  Object? get cityErrors => cityControl?.errors;
+  Object? get parishErrors => parishControl?.errors;
   Object? get hasRUCIncludedErrors => hasRUCIncludedControl?.errors;
   Object? get rucErrors => rucControl?.errors;
-  Object? get validityTimeErrors => validityTimeControl.errors;
-  Object? get useCaseErrors => useCaseControl.errors;
+  Object? get validityTimeErrors => validityTimeControl?.errors;
+  Object? get useCaseErrors => useCaseControl?.errors;
   void get fullNameFocus => form.focus(fullNameControlPath());
   void get emailFocus => form.focus(emailControlPath());
   void get phoneFocus => form.focus(phoneControlPath());
@@ -1418,6 +1470,110 @@ class ESignaturePersonalBillingModelForm
     }
   }
 
+  void addressRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsAddress) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          addressControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            addressControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void provinceRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsProvince) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          provinceControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            provinceControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void cityRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsCity) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          cityControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            cityControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void parishRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsParish) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          parishControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            parishControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void hasRUCIncludedRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -1470,6 +1626,58 @@ class ESignaturePersonalBillingModelForm
     }
   }
 
+  void validityTimeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsValidityTime) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          validityTimeControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            validityTimeControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void useCaseRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsUseCase) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          useCaseControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            useCaseControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void fullNameValueUpdate(
     String? value, {
     bool updateParent = true,
@@ -1498,11 +1706,11 @@ class ESignaturePersonalBillingModelForm
   }
 
   void addressValueUpdate(
-    String value, {
+    String? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl.updateValue(value,
+    addressControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1516,29 +1724,29 @@ class ESignaturePersonalBillingModelForm
   }
 
   void provinceValueUpdate(
-    LocationModel value, {
+    LocationModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    provinceControl.updateValue(value,
+    provinceControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void cityValueUpdate(
-    LocationModel value, {
+    LocationModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl.updateValue(value,
+    cityControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void parishValueUpdate(
-    LocationModel value, {
+    LocationModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    parishControl.updateValue(value,
+    parishControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1561,20 +1769,20 @@ class ESignaturePersonalBillingModelForm
   }
 
   void validityTimeValueUpdate(
-    SignatureValidityTimeType value, {
+    SignatureValidityTimeType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    validityTimeControl.updateValue(value,
+    validityTimeControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void useCaseValueUpdate(
-    SignatureUseCaseType value, {
+    SignatureUseCaseType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    useCaseControl.updateValue(value,
+    useCaseControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1606,11 +1814,11 @@ class ESignaturePersonalBillingModelForm
   }
 
   void addressValuePatch(
-    String value, {
+    String? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    addressControl.patchValue(value,
+    addressControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1624,29 +1832,29 @@ class ESignaturePersonalBillingModelForm
   }
 
   void provinceValuePatch(
-    LocationModel value, {
+    LocationModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    provinceControl.patchValue(value,
+    provinceControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void cityValuePatch(
-    LocationModel value, {
+    LocationModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    cityControl.patchValue(value,
+    cityControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void parishValuePatch(
-    LocationModel value, {
+    LocationModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    parishControl.patchValue(value,
+    parishControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1669,20 +1877,20 @@ class ESignaturePersonalBillingModelForm
   }
 
   void validityTimeValuePatch(
-    SignatureValidityTimeType value, {
+    SignatureValidityTimeType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    validityTimeControl.patchValue(value,
+    validityTimeControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
   void useCaseValuePatch(
-    SignatureUseCaseType value, {
+    SignatureUseCaseType? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    useCaseControl.patchValue(value,
+    useCaseControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1714,13 +1922,13 @@ class ESignaturePersonalBillingModelForm
       phoneControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void addressValueReset(
-    String value, {
+    String? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      addressControl.reset(
+      addressControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void postalCodeValueReset(
     String value, {
@@ -1732,31 +1940,31 @@ class ESignaturePersonalBillingModelForm
       postalCodeControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void provinceValueReset(
-    LocationModel value, {
+    LocationModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      provinceControl.reset(
+      provinceControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void cityValueReset(
-    LocationModel value, {
+    LocationModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      cityControl.reset(
+      cityControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void parishValueReset(
-    LocationModel value, {
+    LocationModel? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      parishControl.reset(
+      parishControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void hasRUCIncludedValueReset(
     bool? value, {
@@ -1777,22 +1985,22 @@ class ESignaturePersonalBillingModelForm
       rucControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void validityTimeValueReset(
-    SignatureValidityTimeType value, {
+    SignatureValidityTimeType? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      validityTimeControl.reset(
+      validityTimeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void useCaseValueReset(
-    SignatureUseCaseType value, {
+    SignatureUseCaseType? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      useCaseControl.reset(
+      useCaseControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   FormControl<String>? get fullNameControl => containsFullName
       ? form.control(fullNameControlPath()) as FormControl<String>?
@@ -1803,27 +2011,34 @@ class ESignaturePersonalBillingModelForm
   FormControl<String>? get phoneControl => containsPhone
       ? form.control(phoneControlPath()) as FormControl<String>?
       : null;
-  FormControl<String> get addressControl =>
-      form.control(addressControlPath()) as FormControl<String>;
+  FormControl<String>? get addressControl => containsAddress
+      ? form.control(addressControlPath()) as FormControl<String>?
+      : null;
   FormControl<String> get postalCodeControl =>
       form.control(postalCodeControlPath()) as FormControl<String>;
-  FormControl<LocationModel> get provinceControl =>
-      form.control(provinceControlPath()) as FormControl<LocationModel>;
-  FormControl<LocationModel> get cityControl =>
-      form.control(cityControlPath()) as FormControl<LocationModel>;
-  FormControl<LocationModel> get parishControl =>
-      form.control(parishControlPath()) as FormControl<LocationModel>;
+  FormControl<LocationModel>? get provinceControl => containsProvince
+      ? form.control(provinceControlPath()) as FormControl<LocationModel>?
+      : null;
+  FormControl<LocationModel>? get cityControl => containsCity
+      ? form.control(cityControlPath()) as FormControl<LocationModel>?
+      : null;
+  FormControl<LocationModel>? get parishControl => containsParish
+      ? form.control(parishControlPath()) as FormControl<LocationModel>?
+      : null;
   FormControl<bool>? get hasRUCIncludedControl => containsHasRUCIncluded
       ? form.control(hasRUCIncludedControlPath()) as FormControl<bool>?
       : null;
   FormControl<String>? get rucControl => containsRuc
       ? form.control(rucControlPath()) as FormControl<String>?
       : null;
-  FormControl<SignatureValidityTimeType> get validityTimeControl =>
-      form.control(validityTimeControlPath())
-          as FormControl<SignatureValidityTimeType>;
-  FormControl<SignatureUseCaseType> get useCaseControl =>
-      form.control(useCaseControlPath()) as FormControl<SignatureUseCaseType>;
+  FormControl<SignatureValidityTimeType>? get validityTimeControl =>
+      containsValidityTime
+          ? form.control(validityTimeControlPath())
+              as FormControl<SignatureValidityTimeType>?
+          : null;
+  FormControl<SignatureUseCaseType>? get useCaseControl => containsUseCase
+      ? form.control(useCaseControlPath()) as FormControl<SignatureUseCaseType>?
+      : null;
   void fullNameSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1884,12 +2099,12 @@ class ESignaturePersonalBillingModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      addressControl.markAsDisabled(
+      addressControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      addressControl.markAsEnabled(
+      addressControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1920,12 +2135,12 @@ class ESignaturePersonalBillingModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      provinceControl.markAsDisabled(
+      provinceControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      provinceControl.markAsEnabled(
+      provinceControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1938,12 +2153,12 @@ class ESignaturePersonalBillingModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      cityControl.markAsDisabled(
+      cityControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      cityControl.markAsEnabled(
+      cityControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -1956,12 +2171,12 @@ class ESignaturePersonalBillingModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      parishControl.markAsDisabled(
+      parishControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      parishControl.markAsEnabled(
+      parishControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -2010,12 +2225,12 @@ class ESignaturePersonalBillingModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      validityTimeControl.markAsDisabled(
+      validityTimeControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      validityTimeControl.markAsEnabled(
+      validityTimeControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -2028,12 +2243,12 @@ class ESignaturePersonalBillingModelForm
     bool emitEvent = true,
   }) {
     if (disabled) {
-      useCaseControl.markAsDisabled(
+      useCaseControl?.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      useCaseControl.markAsEnabled(
+      useCaseControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );

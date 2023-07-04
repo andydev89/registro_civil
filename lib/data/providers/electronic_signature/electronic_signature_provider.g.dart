@@ -198,7 +198,7 @@ class SignaturesProvider extends AutoDisposeFutureProvider<
 }
 
 String _$electronicSignatureHash() =>
-    r'8975e863157f5c629a230e8dcb772b3a8bc9b32a';
+    r'3780130ec3bd58e58de322b19ee4c9be1880c84f';
 
 /// See also [ElectronicSignature].
 @ProviderFor(ElectronicSignature)

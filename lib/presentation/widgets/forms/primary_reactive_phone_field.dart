@@ -78,6 +78,7 @@ class PrimaryReactivePhoneField<T> extends ConsumerWidget {
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             setSuffixIconConstraints: setSuffixIconConstraints,
+            readOnly: readOnly,
           ),
         ),
       ],

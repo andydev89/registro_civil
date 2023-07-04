@@ -26,15 +26,19 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    return PrimaryScaffold(
-      title: l10n.solFirmaElectronica,
-      subtitle: l10n.ingreseInfSol,
-      body: ESignatureFirstSubModelFormBuilder(
-        builder: (context, formModel, child) {
-          final hasDeviceToken = ValueNotifier(
-            formModel.hasDeviceTokenControl?.value ?? false,
-          );
-          return Expanded(
+    final me = ref.watch(meProvider).value ?? MeModel();
+    return ESignatureFirstSubModelFormBuilder(
+      model: operation.isCreate ? ESignatureFirstSubModel.fromMe(me)
+          //En este caso tengo que hacer un metodo que a partir de la respuesta del get devuelva un ESignatureFirstSubModel
+          : ESignatureFirstSubModel.fromMe(me),
+      builder: (context, formModel, child) {
+        final hasDeviceToken = ValueNotifier(
+          formModel.hasDeviceTokenControl?.value ?? false,
+        );
+        return PrimaryScaffold(
+          title: l10n.solFirmaElectronica,
+          subtitle: l10n.ingreseInfSol,
+          body: Expanded(
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,11 +55,16 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
                     items: SignatureType.values,
                     readOnly: operation.isRead,
                   ),
-                  PrimaryReactiveNuiField(
+                  /*PrimaryReactiveNuiField(
                     label: l10n.numCedula,
                     formControl: formModel.userNuiControl,
                     init: true,
                     readOnly: operation.isRead,
+                  ),*/
+                  PrimaryReactiveTextField(
+                    label: l10n.numCedula,
+                    formControl: formModel.userNuiControl,
+                    readOnly: true,
                   ),
                   const SizedBox(
                     height: 6,
@@ -72,7 +81,7 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
                     formControl: formModel.hasDeviceTokenControl,
                     label: l10n.tieneToken,
                     onChanged: (value) =>
-                        hasDeviceToken.value = value.value ?? false,
+                    hasDeviceToken.value = value.value ?? false,
                   ),
                   ValueListenableBuilder<bool>(
                     valueListenable: hasDeviceToken,
@@ -87,55 +96,48 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
                       );
                     },
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  ReactiveESignatureFirstSubModelFormConsumer(
-                    builder: (_, formModel, __) => PrimaryAsyncButton(
-                      title: l10n.siguiente,
-                      onPressed: formModel.form.valid
-                          ? () async {
-                              ref
-                                  .read(electronicSignatureProvider.notifier)
-                                  .setFirstStep(
-                                    signatureFirstSubModel: formModel.model,
-                                  );
-                              final nuiModel =
-                                  NuiModel(nui: formModel.model.userNui);
-                              await ref
-                                  .read(
-                                    registerValidateCitizenProvider(nuiModel)
-                                        .future,
-                                  )
-                                  .when(
-                                    ok: (citizen) {
-                                      context.navigateTo(
-                                        ElectronicSignatureSecondStepRoute(
-                                          operation: operation,
-                                          citizen: citizen,
-                                          typeServiceModel: typeServiceModel,
-                                        ),
-                                      );
-                                    },
-                                    err: (error) => showAlert(
-                                      error.translate(context),
-                                      TypeAlert.error,
-                                    ),
-                                  );
-                            }
-                          : null,
-                    ),
-                  ),
-                  PrimaryButton(
-                    title: l10n.cancelar,
-                    onPressed: () => context.popRoute(),
-                  ).verticalPadding(10),
                 ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+          bottomNavigationBar: ReactiveESignatureFirstSubModelFormConsumer(
+            builder: (_, formModel, __) => PrimaryAsyncButton(
+              title: l10n.siguiente,
+              onPressed: formModel.form.valid
+                  ? () async {
+                ref
+                    .read(electronicSignatureProvider.notifier)
+                    .setFirstStep(
+                  signatureFirstSubModel: formModel.model,
+                );
+                final nuiModel =
+                NuiModel(nui: formModel.model.userNui);
+                await ref
+                    .read(
+                  registerValidateCitizenProvider(nuiModel)
+                      .future,
+                )
+                    .when(
+                  ok: (citizen) {
+                    context.navigateTo(
+                      ElectronicSignatureSecondStepRoute(
+                        operation: operation,
+                        citizen: citizen,
+                        typeServiceModel: typeServiceModel,
+                      ),
+                    );
+                  },
+                  err: (error) => showAlert(
+                    error.translate(context),
+                    TypeAlert.error,
+                  ),
+                );
+              }
+                  : null,
+            ).symmetricPadding(10, 10),
+          ),
+        );
+      },
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/auth/auth.dart';
 import 'package:registro_civil_apk/data/providers/electronic_signature/electronic_signature.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -51,11 +52,17 @@ class _ElectronicSignatureSecondStepPageState
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final me = ref.watch(meProvider).value ?? MeModel();
+
     return ESignaturePersonalBillingModelFormBuilder(
-      initState: (context, form) {
+      model: widget.operation.isCreate
+          ? ESignaturePersonalBillingModel.fromMe(me)
+          //En este caso tengo que hacer un metodo que a partir de la respuesta del get devuelva un ESignatureFirstSubModel
+          : ESignaturePersonalBillingModel.fromMe(me),
+      /*initState: (context, form) {
         form.fullNameControl?.value =
             '${widget.citizen.nombres} ${widget.citizen.apellidos}';
-      },
+      },*/
       builder: (context, formModel, child) {
         return PrimaryScaffold(
           title: l10n.solFirmaElectronica,

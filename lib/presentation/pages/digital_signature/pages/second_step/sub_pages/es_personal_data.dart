@@ -37,18 +37,18 @@ class _ElectronicSignaturePersonalPage
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           PrimaryReactiveTextField(
-            readOnly: widget.operation.isRead,
+            readOnly: true,
             label: l10n.nombreApe,
             formControl: widget.form.fullNameControl,
             textCapitalization: TextCapitalization.words,
           ),
           PrimaryReactiveEmailField(
-            readOnly: widget.operation.isRead,
+            readOnly: true,
             label: l10n.correoE,
             formControl: widget.form.emailControl,
           ),
           PrimaryReactivePhoneField(
-            readOnly: widget.operation.isRead,
+            readOnly: true,
             label: l10n.telefono,
             formControl: widget.form.phoneControl,
           ),
@@ -72,7 +72,7 @@ class _ElectronicSignaturePersonalPage
                   ),*/
             provider: provincesProvider,
             onChanged: (p0) {
-              widget.form.cityControl.value = null;
+              widget.form.cityControl?.value = null;
               alreadyStarter = true;
             },
           ),
@@ -85,16 +85,16 @@ class _ElectronicSignaturePersonalPage
                     /*initialValue: (data) => data?.firstWhere(
                                 (element) => element.id == model.canton.id,
                           ),*/
-                    readOnly: !widget.form.provinceControl.valid ||
+                    readOnly: !widget.form.provinceControl!.valid ||
                         widget.operation.isRead,
                     formControl: widget.form.cityControl,
                     label: l10n.canton,
                     onChanged: (p0) {
-                      widget.form.parishControl.value = null;
+                      widget.form.parishControl?.value = null;
                       alreadyStarter = true;
                     },
                     provider: LocationByParentProvider(
-                      parentId: widget.form.provinceControl.value?.id ?? '',
+                      parentId: widget.form.provinceControl?.value?.id ?? '',
                     ),
                   ),
                   SelectElementFromApi(
@@ -102,13 +102,13 @@ class _ElectronicSignaturePersonalPage
                     /*initialValue: (data) => data?.firstWhere(
                                 (element) => element.id == model.parroquia.id,
                           ),*/
-                    readOnly: !widget.form.cityControl.valid ||
+                    readOnly: !widget.form.cityControl!.valid ||
                         widget.operation.isRead,
                     onChanged: (p0) => alreadyStarter = true,
                     formControl: widget.form.parishControl,
                     label: l10n.parroquia,
                     provider: LocationByParentProvider(
-                      parentId: widget.form.cityControl.value?.id ?? '',
+                      parentId: widget.form.cityControl?.value?.id ?? '',
                     ),
                   ),
                 ],

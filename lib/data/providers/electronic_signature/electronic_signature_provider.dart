@@ -23,9 +23,10 @@ class ElectronicSignature extends _$ElectronicSignature {
     required ESignatureFirstSubModel signatureFirstSubModel,
   }) {
     state = state.copyWith(
-      type: signatureFirstSubModel.signatureType,
+      type: signatureFirstSubModel.signatureType ?? SignatureType.file,
       userNui: signatureFirstSubModel.userNui,
-      personType: signatureFirstSubModel.personType,
+      personType:
+          signatureFirstSubModel.personType ?? PersonType.legalRepresentative,
       isTokenRenovation: signatureFirstSubModel.isTokenRenovation ?? false,
       hasDeviceToken: signatureFirstSubModel.hasDeviceToken ?? false,
       isACustomsAgent: signatureFirstSubModel.isACustomsAgent ?? false,
@@ -44,16 +45,19 @@ class ElectronicSignature extends _$ElectronicSignature {
       parroquiaId: personalBillingModel.parish,
       hasRUCIncluded: personalBillingModel.hasRUCIncluded ?? false,
       ruc: personalBillingModel.ruc,
-      validityTime: personalBillingModel.validityTime,
-      useCase: personalBillingModel.useCase,
+      validityTime: personalBillingModel.validityTime ??
+          SignatureValidityTimeType.oneYear,
+      useCase: personalBillingModel.useCase ??
+          SignatureUseCaseType.publicProcurementSystem,
     );
   }
-
 }
 
 @riverpod
 Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> signature(
-    SignatureRef ref, {required ElectronicSignatureModel model,}) async {
+  SignatureRef ref, {
+  required ElectronicSignatureModel model,
+}) async {
   final api = ref.watch(apiProvider);
   final result = await api.createSignature(model);
   if (result.success) {
@@ -64,9 +68,9 @@ Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> signature(
 
 @riverpod
 Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures(
-    SignaturesRef ref, {
-      int? pageNo,
-    }) async {
+  SignaturesRef ref, {
+  int? pageNo,
+}) async {
   final api = ref.watch(apiProvider);
   final response = await api.signatures(pageNo: pageNo ?? 0);
   return response;

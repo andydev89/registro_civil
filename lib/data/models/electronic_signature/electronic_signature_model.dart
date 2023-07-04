@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/electronic_signature/electronic_signature.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/models/auth/auth.dart';
 import 'package:registro_civil_apk/data/models/commons/commons.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
@@ -121,9 +122,9 @@ class ESignatureFirstSubModel {
     )
         this.userNui = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        this.personType = PersonType.legalRepresentative,
+        this.personType,
     @FormControlAnnotation(validators: [requiredValidator])
-        this.signatureType = SignatureType.file,
+        this.signatureType,
     @FormControlAnnotation<bool>()
         this.isTokenRenovation = false,
     @FormControlAnnotation<bool>()
@@ -134,12 +135,17 @@ class ESignatureFirstSubModel {
         this.deviceTokenSerialNumber = '',
   });
 
+  factory ESignatureFirstSubModel.fromMe(MeModel model) =>
+      ESignatureFirstSubModel(
+        userNui: model.identification,
+      );
+
   factory ESignatureFirstSubModel.fromJson(Map<String, dynamic> json) =>
       _$ESignatureFirstSubModelFromJson(json);
 
   final String userNui;
-  PersonType personType;
-  SignatureType signatureType;
+  PersonType? personType;
+  SignatureType? signatureType;
   bool? isTokenRenovation;
   bool? hasDeviceToken;
   bool? isACustomsAgent;
@@ -168,25 +174,32 @@ class ESignaturePersonalBillingModel {
     )
         this.phone = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.address,
+        this.address,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.postalCode,
+        this.postalCode = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.province,
+        this.province,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.city,
+        this.city,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.parish,
+        this.parish,
     //Second Tab
     @FormControlAnnotation<bool>()
         this.hasRUCIncluded = false,
     @FormControlAnnotation(validators: [requiredValidator])
         this.ruc = '',
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.validityTime,
+        this.validityTime,
     @FormControlAnnotation(validators: [requiredValidator])
-        required this.useCase,
+        this.useCase,
   });
+
+  factory ESignaturePersonalBillingModel.fromMe(MeModel model) =>
+      ESignaturePersonalBillingModel(
+        fullName: '${model.firstName} ${model.lastName}',
+        phone: model.phone,
+        email: model.email,
+      );
 
   factory ESignaturePersonalBillingModel.fromJson(Map<String, dynamic> json) =>
       _$ESignaturePersonalBillingModelFromJson(json);
@@ -194,17 +207,17 @@ class ESignaturePersonalBillingModel {
   String? fullName;
   String? email;
   String? phone;
-  String address;
+  String? address;
   String postalCode;
-  LocationModel province;
-  LocationModel city;
-  LocationModel parish;
+  LocationModel? province;
+  LocationModel? city;
+  LocationModel? parish;
 
   //Second Tab
   bool? hasRUCIncluded;
   String? ruc;
-  SignatureValidityTimeType validityTime;
-  SignatureUseCaseType useCase;
+  SignatureValidityTimeType? validityTime;
+  SignatureUseCaseType? useCase;
 
   Map<String, dynamic> toJson() => _$ESignaturePersonalBillingModelToJson(this);
 }

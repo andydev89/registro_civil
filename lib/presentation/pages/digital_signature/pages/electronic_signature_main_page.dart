@@ -43,7 +43,7 @@ class ElectronicSignatureMainPage extends ConsumerWidget {
                   ResponseModelPagination<List<ElectronicSignatureModel>>>(
                 async: ref.watch(signaturesProvider()),
                 onRefreshIndicator: () => ref.refresh(
-                  duplicatesProvider().future,
+                  signaturesProvider().future,
                 ),
                 onRefresh: () => ref.refresh(signaturesProvider()),
                 data: (data) => PagedListViewWidget<ElectronicSignatureModel>(

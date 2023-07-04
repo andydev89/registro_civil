@@ -76,6 +76,7 @@ class PrimaryReactiveEmailField extends StatelessWidget {
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             setSuffixIconConstraints: setSuffixIconConstraints,
+            readOnly: readOnly,
           ),
         ),
       ],

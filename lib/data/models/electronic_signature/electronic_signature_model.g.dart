@@ -106,12 +106,9 @@ ESignatureFirstSubModel _$ESignatureFirstSubModelFromJson(
         Map<String, dynamic> json) =>
     ESignatureFirstSubModel(
       userNui: json['userNui'] as String? ?? '',
-      personType:
-          $enumDecodeNullable(_$PersonTypeEnumMap, json['personType']) ??
-              PersonType.legalRepresentative,
+      personType: $enumDecodeNullable(_$PersonTypeEnumMap, json['personType']),
       signatureType:
-          $enumDecodeNullable(_$SignatureTypeEnumMap, json['signatureType']) ??
-              SignatureType.file,
+          $enumDecodeNullable(_$SignatureTypeEnumMap, json['signatureType']),
       isTokenRenovation: json['isTokenRenovation'] as bool? ?? false,
       hasDeviceToken: json['hasDeviceToken'] as bool? ?? false,
       isACustomsAgent: json['isACustomsAgent'] as bool? ?? false,
@@ -122,8 +119,8 @@ Map<String, dynamic> _$ESignatureFirstSubModelToJson(
         ESignatureFirstSubModel instance) =>
     <String, dynamic>{
       'userNui': instance.userNui,
-      'personType': _$PersonTypeEnumMap[instance.personType]!,
-      'signatureType': _$SignatureTypeEnumMap[instance.signatureType]!,
+      'personType': _$PersonTypeEnumMap[instance.personType],
+      'signatureType': _$SignatureTypeEnumMap[instance.signatureType],
       'isTokenRenovation': instance.isTokenRenovation,
       'hasDeviceToken': instance.hasDeviceToken,
       'isACustomsAgent': instance.isACustomsAgent,
@@ -136,17 +133,23 @@ ESignaturePersonalBillingModel _$ESignaturePersonalBillingModelFromJson(
       fullName: json['fullName'] as String? ?? '',
       email: json['email'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
-      address: json['address'] as String,
-      postalCode: json['postalCode'] as String,
-      province:
-          LocationModel.fromJson(json['province'] as Map<String, dynamic>),
-      city: LocationModel.fromJson(json['city'] as Map<String, dynamic>),
-      parish: LocationModel.fromJson(json['parish'] as Map<String, dynamic>),
+      address: json['address'] as String?,
+      postalCode: json['postalCode'] as String? ?? '',
+      province: json['province'] == null
+          ? null
+          : LocationModel.fromJson(json['province'] as Map<String, dynamic>),
+      city: json['city'] == null
+          ? null
+          : LocationModel.fromJson(json['city'] as Map<String, dynamic>),
+      parish: json['parish'] == null
+          ? null
+          : LocationModel.fromJson(json['parish'] as Map<String, dynamic>),
       hasRUCIncluded: json['hasRUCIncluded'] as bool? ?? false,
       ruc: json['ruc'] as String? ?? '',
-      validityTime:
-          $enumDecode(_$SignatureValidityTimeTypeEnumMap, json['validityTime']),
-      useCase: $enumDecode(_$SignatureUseCaseTypeEnumMap, json['useCase']),
+      validityTime: $enumDecodeNullable(
+          _$SignatureValidityTimeTypeEnumMap, json['validityTime']),
+      useCase:
+          $enumDecodeNullable(_$SignatureUseCaseTypeEnumMap, json['useCase']),
     );
 
 Map<String, dynamic> _$ESignaturePersonalBillingModelToJson(
@@ -162,9 +165,8 @@ Map<String, dynamic> _$ESignaturePersonalBillingModelToJson(
       'parish': instance.parish,
       'hasRUCIncluded': instance.hasRUCIncluded,
       'ruc': instance.ruc,
-      'validityTime':
-          _$SignatureValidityTimeTypeEnumMap[instance.validityTime]!,
-      'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase]!,
+      'validityTime': _$SignatureValidityTimeTypeEnumMap[instance.validityTime],
+      'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase],
     };
 
 Map<String, dynamic> _$$_ElectronicSignatureModelToJson(
