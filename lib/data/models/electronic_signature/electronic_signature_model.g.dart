@@ -9,6 +9,7 @@ part of 'electronic_signature_model.dart';
 ElectronicSignatureModel _$ElectronicSignatureModelFromJson(
         Map<String, dynamic> json) =>
     ElectronicSignatureModel(
+      id: json['id'] as String,
       personType: $enumDecode(_$PersonTypeEnumMap, json['personType']),
       type: $enumDecode(_$SignatureTypeEnumMap, json['type']),
       isTokenRenovation: json['isTokenRenovation'] as bool,
@@ -32,11 +33,19 @@ ElectronicSignatureModel _$ElectronicSignatureModelFromJson(
       validityTime:
           $enumDecode(_$SignatureValidityTimeTypeEnumMap, json['validityTime']),
       useCase: $enumDecode(_$SignatureUseCaseTypeEnumMap, json['useCase']),
+      state: $enumDecode(_$StateDocumentEnumMap, json['state']),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$ElectronicSignatureModelToJson(
         ElectronicSignatureModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'personType': _$PersonTypeEnumMap[instance.personType]!,
       'type': _$SignatureTypeEnumMap[instance.type]!,
       'isTokenRenovation': instance.isTokenRenovation,
@@ -54,6 +63,9 @@ Map<String, dynamic> _$ElectronicSignatureModelToJson(
       'validityTime':
           _$SignatureValidityTimeTypeEnumMap[instance.validityTime]!,
       'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase]!,
+      'state': _$StateDocumentEnumMap[instance.state]!,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
     };
 
 const _$PersonTypeEnumMap = {
@@ -82,6 +94,12 @@ const _$SignatureUseCaseTypeEnumMap = {
   SignatureUseCaseType.documentSigning: 'DOCUMENT_SIGNING',
   SignatureUseCaseType.judiciaryCouncil: 'JUDICIARY_COUNCIL',
   SignatureUseCaseType.revitDeath: 'REVIT_DEATHS',
+};
+
+const _$StateDocumentEnumMap = {
+  StateDocument.pending: 'PENDING',
+  StateDocument.approved: 'APPROVED',
+  StateDocument.rejected: 'REJECTED',
 };
 
 ESignatureFirstSubModel _$ESignatureFirstSubModelFromJson(
@@ -147,4 +165,30 @@ Map<String, dynamic> _$ESignaturePersonalBillingModelToJson(
       'validityTime':
           _$SignatureValidityTimeTypeEnumMap[instance.validityTime]!,
       'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase]!,
+    };
+
+Map<String, dynamic> _$$_ElectronicSignatureModelToJson(
+        _$_ElectronicSignatureModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'personType': _$PersonTypeEnumMap[instance.personType]!,
+      'type': _$SignatureTypeEnumMap[instance.type]!,
+      'isTokenRenovation': instance.isTokenRenovation,
+      'hasDeviceToken': instance.hasDeviceToken,
+      'deviceTokenSerialNumber': instance.deviceTokenSerialNumber,
+      'isACustomsAgent': instance.isACustomsAgent,
+      'userNui': instance.userNui,
+      'contactAddress': instance.contactAddress,
+      'contactPostalCode': instance.contactPostalCode,
+      'provinceId': LocationModel.locationToJsonNull(instance.provinceId),
+      'cantonId': LocationModel.locationToJsonNull(instance.cantonId),
+      'parroquiaId': LocationModel.locationToJsonNull(instance.parroquiaId),
+      'hasRUCIncluded': instance.hasRUCIncluded,
+      'ruc': instance.ruc,
+      'validityTime':
+          _$SignatureValidityTimeTypeEnumMap[instance.validityTime]!,
+      'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase]!,
+      'state': _$StateDocumentEnumMap[instance.state]!,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
     };

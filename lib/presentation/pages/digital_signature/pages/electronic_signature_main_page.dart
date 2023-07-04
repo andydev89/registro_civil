@@ -40,25 +40,28 @@ class ElectronicSignatureMainPage extends ConsumerWidget {
             ),
             Expanded(
               child: LoadingProviderWidget<
-                  ResponseModelPagination<List<IdDuplicateResponseModel>>>(
-                async: ref.watch(duplicatesProvider()),
+                  ResponseModelPagination<List<ElectronicSignatureModel>>>(
+                async: ref.watch(signaturesProvider()),
                 onRefreshIndicator: () => ref.refresh(
                   duplicatesProvider().future,
                 ),
-                onRefresh: () => ref.refresh(duplicatesProvider()),
-                data: (data) => PagedListViewWidget<IdDuplicateResponseModel>(
+                onRefresh: () => ref.refresh(signaturesProvider()),
+                data: (data) => PagedListViewWidget<ElectronicSignatureModel>(
                   fetch: (page) => ref.read(
-                    duplicatesProvider(pageNo: page).future,
+                    signaturesProvider(pageNo: page).future,
                   ),
                   firstElements: data.data ?? [],
                   totalPages: data.totalPages,
                   itemBuilder: (_, e, __) =>
-                      CardWidget<IdDuplicateResponseModel>(
+                      CardWidget<ElectronicSignatureModel>(
                     element: e,
                     rows: {
-                      l10n.motivo: e.reasonType.translate(context),
-                      l10n.fechaCreacion: '${e.createAt.onlyDate} -'
-                          ' ${e.createAt.onlyTime}',
+                      l10n.tipoPersona:
+                          e.personType.translate(context),
+                      l10n.usoFactElectronica:
+                          e.useCase.translate(context),
+                      l10n.fechaCreacion: '${e.createdAt?.onlyDate} -'
+                          ' ${e.createdAt?.onlyTime}',
                       l10n.estado: e.state.translate(context),
                     },
                     actions: {

@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ElectronicSignatureModel {
+  String get id => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: true)
   PersonType get personType => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: true)
@@ -39,7 +40,12 @@ mixin _$ElectronicSignatureModel {
       throw _privateConstructorUsedError;
   @JsonKey(includeToJson: true)
   SignatureUseCaseType get useCase => throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: true)
+  StateDocument get state => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ElectronicSignatureModelCopyWith<ElectronicSignatureModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -52,7 +58,8 @@ abstract class $ElectronicSignatureModelCopyWith<$Res> {
       _$ElectronicSignatureModelCopyWithImpl<$Res, ElectronicSignatureModel>;
   @useResult
   $Res call(
-      {@JsonKey(includeToJson: true)
+      {String id,
+      @JsonKey(includeToJson: true)
           PersonType personType,
       @JsonKey(includeToJson: true)
           SignatureType type,
@@ -73,7 +80,11 @@ abstract class $ElectronicSignatureModelCopyWith<$Res> {
       String? ruc,
       SignatureValidityTimeType validityTime,
       @JsonKey(includeToJson: true)
-          SignatureUseCaseType useCase});
+          SignatureUseCaseType useCase,
+      @JsonKey(includeFromJson: true)
+          StateDocument state,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 
   $LocationModelCopyWith<$Res>? get provinceId;
   $LocationModelCopyWith<$Res>? get cantonId;
@@ -94,6 +105,7 @@ class _$ElectronicSignatureModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? personType = null,
     Object? type = null,
     Object? isTokenRenovation = null,
@@ -110,8 +122,15 @@ class _$ElectronicSignatureModelCopyWithImpl<$Res,
     Object? ruc = freezed,
     Object? validityTime = null,
     Object? useCase = null,
+    Object? state = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       personType: null == personType
           ? _value.personType
           : personType // ignore: cast_nullable_to_non_nullable
@@ -176,6 +195,18 @@ class _$ElectronicSignatureModelCopyWithImpl<$Res,
           ? _value.useCase
           : useCase // ignore: cast_nullable_to_non_nullable
               as SignatureUseCaseType,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as StateDocument,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 
@@ -226,7 +257,8 @@ abstract class _$$_ElectronicSignatureModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(includeToJson: true)
+      {String id,
+      @JsonKey(includeToJson: true)
           PersonType personType,
       @JsonKey(includeToJson: true)
           SignatureType type,
@@ -247,7 +279,11 @@ abstract class _$$_ElectronicSignatureModelCopyWith<$Res>
       String? ruc,
       SignatureValidityTimeType validityTime,
       @JsonKey(includeToJson: true)
-          SignatureUseCaseType useCase});
+          SignatureUseCaseType useCase,
+      @JsonKey(includeFromJson: true)
+          StateDocument state,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 
   @override
   $LocationModelCopyWith<$Res>? get provinceId;
@@ -269,6 +305,7 @@ class __$$_ElectronicSignatureModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? personType = null,
     Object? type = null,
     Object? isTokenRenovation = null,
@@ -285,8 +322,15 @@ class __$$_ElectronicSignatureModelCopyWithImpl<$Res>
     Object? ruc = freezed,
     Object? validityTime = null,
     Object? useCase = null,
+    Object? state = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$_ElectronicSignatureModel(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       personType: null == personType
           ? _value.personType
           : personType // ignore: cast_nullable_to_non_nullable
@@ -351,15 +395,28 @@ class __$$_ElectronicSignatureModelCopyWithImpl<$Res>
           ? _value.useCase
           : useCase // ignore: cast_nullable_to_non_nullable
               as SignatureUseCaseType,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as StateDocument,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable(createFactory: false)
 class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
   const _$_ElectronicSignatureModel(
-      {@JsonKey(includeToJson: true)
+      {this.id = '',
+      @JsonKey(includeToJson: true)
           this.personType = PersonType.legalRepresentative,
       @JsonKey(includeToJson: true)
           this.type = SignatureType.file,
@@ -380,9 +437,16 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
       this.ruc,
       this.validityTime = SignatureValidityTimeType.oneYear,
       @JsonKey(includeToJson: true)
-          this.useCase = SignatureUseCaseType.publicProcurementSystem})
+          this.useCase = SignatureUseCaseType.publicProcurementSystem,
+      @JsonKey(includeFromJson: true)
+          this.state = StateDocument.pending,
+      this.createdAt,
+      this.updatedAt})
       : super._();
 
+  @override
+  @JsonKey()
+  final String id;
   @override
   @JsonKey(includeToJson: true)
   final PersonType personType;
@@ -426,10 +490,17 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
   @override
   @JsonKey(includeToJson: true)
   final SignatureUseCaseType useCase;
+  @override
+  @JsonKey(includeFromJson: true)
+  final StateDocument state;
+  @override
+  final DateTime? createdAt;
+  @override
+  final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'ElectronicSignatureModel(personType: $personType, type: $type, isTokenRenovation: $isTokenRenovation, hasDeviceToken: $hasDeviceToken, deviceTokenSerialNumber: $deviceTokenSerialNumber, isACustomsAgent: $isACustomsAgent, userNui: $userNui, contactAddress: $contactAddress, contactPostalCode: $contactPostalCode, provinceId: $provinceId, cantonId: $cantonId, parroquiaId: $parroquiaId, hasRUCIncluded: $hasRUCIncluded, ruc: $ruc, validityTime: $validityTime, useCase: $useCase)';
+    return 'ElectronicSignatureModel(id: $id, personType: $personType, type: $type, isTokenRenovation: $isTokenRenovation, hasDeviceToken: $hasDeviceToken, deviceTokenSerialNumber: $deviceTokenSerialNumber, isACustomsAgent: $isACustomsAgent, userNui: $userNui, contactAddress: $contactAddress, contactPostalCode: $contactPostalCode, provinceId: $provinceId, cantonId: $cantonId, parroquiaId: $parroquiaId, hasRUCIncluded: $hasRUCIncluded, ruc: $ruc, validityTime: $validityTime, useCase: $useCase, state: $state, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -437,6 +508,7 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ElectronicSignatureModel &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.personType, personType) ||
                 other.personType == personType) &&
             (identical(other.type, type) || other.type == type) &&
@@ -465,28 +537,39 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
             (identical(other.ruc, ruc) || other.ruc == ruc) &&
             (identical(other.validityTime, validityTime) ||
                 other.validityTime == validityTime) &&
-            (identical(other.useCase, useCase) || other.useCase == useCase));
+            (identical(other.useCase, useCase) || other.useCase == useCase) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      personType,
-      type,
-      isTokenRenovation,
-      hasDeviceToken,
-      deviceTokenSerialNumber,
-      isACustomsAgent,
-      userNui,
-      contactAddress,
-      contactPostalCode,
-      provinceId,
-      cantonId,
-      parroquiaId,
-      hasRUCIncluded,
-      ruc,
-      validityTime,
-      useCase);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        personType,
+        type,
+        isTokenRenovation,
+        hasDeviceToken,
+        deviceTokenSerialNumber,
+        isACustomsAgent,
+        userNui,
+        contactAddress,
+        contactPostalCode,
+        provinceId,
+        cantonId,
+        parroquiaId,
+        hasRUCIncluded,
+        ruc,
+        validityTime,
+        useCase,
+        state,
+        createdAt,
+        updatedAt
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -494,11 +577,19 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
   _$$_ElectronicSignatureModelCopyWith<_$_ElectronicSignatureModel>
       get copyWith => __$$_ElectronicSignatureModelCopyWithImpl<
           _$_ElectronicSignatureModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ElectronicSignatureModelToJson(
+      this,
+    );
+  }
 }
 
 abstract class _ElectronicSignatureModel extends ElectronicSignatureModel {
   const factory _ElectronicSignatureModel(
-      {@JsonKey(includeToJson: true)
+      {final String id,
+      @JsonKey(includeToJson: true)
           final PersonType personType,
       @JsonKey(includeToJson: true)
           final SignatureType type,
@@ -519,9 +610,15 @@ abstract class _ElectronicSignatureModel extends ElectronicSignatureModel {
       final String? ruc,
       final SignatureValidityTimeType validityTime,
       @JsonKey(includeToJson: true)
-          final SignatureUseCaseType useCase}) = _$_ElectronicSignatureModel;
+          final SignatureUseCaseType useCase,
+      @JsonKey(includeFromJson: true)
+          final StateDocument state,
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$_ElectronicSignatureModel;
   const _ElectronicSignatureModel._() : super._();
 
+  @override
+  String get id;
   @override
   @JsonKey(includeToJson: true)
   PersonType get personType;
@@ -560,6 +657,13 @@ abstract class _ElectronicSignatureModel extends ElectronicSignatureModel {
   @override
   @JsonKey(includeToJson: true)
   SignatureUseCaseType get useCase;
+  @override
+  @JsonKey(includeFromJson: true)
+  StateDocument get state;
+  @override
+  DateTime? get createdAt;
+  @override
+  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_ElectronicSignatureModelCopyWith<_$_ElectronicSignatureModel>

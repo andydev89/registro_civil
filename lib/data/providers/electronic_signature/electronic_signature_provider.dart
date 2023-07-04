@@ -61,3 +61,13 @@ Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> signature(
   }
   return Result.err(result.status);
 }
+
+@riverpod
+Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures(
+    SignaturesRef ref, {
+      int? pageNo,
+    }) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.signatures(pageNo: pageNo ?? 0);
+  return response;
+}

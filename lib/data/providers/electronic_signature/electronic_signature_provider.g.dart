@@ -112,6 +112,91 @@ class SignatureProvider extends AutoDisposeFutureProvider<
   }
 }
 
+String _$signaturesHash() => r'67f7abdb65db49c26b939d787442deb0c5544ce2';
+typedef SignaturesRef = AutoDisposeFutureProviderRef<
+    ResponseModelPagination<List<ElectronicSignatureModel>>>;
+
+/// See also [signatures].
+@ProviderFor(signatures)
+const signaturesProvider = SignaturesFamily();
+
+/// See also [signatures].
+class SignaturesFamily extends Family<
+    AsyncValue<ResponseModelPagination<List<ElectronicSignatureModel>>>> {
+  /// See also [signatures].
+  const SignaturesFamily();
+
+  /// See also [signatures].
+  SignaturesProvider call({
+    int? pageNo,
+  }) {
+    return SignaturesProvider(
+      pageNo: pageNo,
+    );
+  }
+
+  @override
+  SignaturesProvider getProviderOverride(
+    covariant SignaturesProvider provider,
+  ) {
+    return call(
+      pageNo: provider.pageNo,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'signaturesProvider';
+}
+
+/// See also [signatures].
+class SignaturesProvider extends AutoDisposeFutureProvider<
+    ResponseModelPagination<List<ElectronicSignatureModel>>> {
+  /// See also [signatures].
+  SignaturesProvider({
+    this.pageNo,
+  }) : super.internal(
+          (ref) => signatures(
+            ref,
+            pageNo: pageNo,
+          ),
+          from: signaturesProvider,
+          name: r'signaturesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$signaturesHash,
+          dependencies: SignaturesFamily._dependencies,
+          allTransitiveDependencies:
+              SignaturesFamily._allTransitiveDependencies,
+        );
+
+  final int? pageNo;
+
+  @override
+  bool operator ==(Object other) {
+    return other is SignaturesProvider && other.pageNo == pageNo;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, pageNo.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$electronicSignatureHash() =>
     r'8975e863157f5c629a230e8dcb772b3a8bc9b32a';
 

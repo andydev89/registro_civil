@@ -304,4 +304,9 @@ abstract class Api {
   Future<ResponseModel<CommandWithTransactionCodeModel>> createSignature(
       @Body() ElectronicSignatureModel signatureModel,
       );
+
+  @GET('/digitalsignature/api/digitalsignature')
+  Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures({
+    @Query('pageNo') int pageNo = 0,
+  });
 }
