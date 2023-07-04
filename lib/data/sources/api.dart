@@ -298,4 +298,10 @@ abstract class Api {
   Future<ResponseModel<IdDuplicateModel>> duplicateById(
     @Path('id') String id,
   );
+
+  //Signature
+  @POST('/digitalsignature/api/digitalsignature')
+  Future<ResponseModel<CommandWithTransactionCodeModel>> createSignature(
+      @Body() ElectronicSignatureModel signatureModel,
+      );
 }

@@ -78,6 +78,9 @@ class ElectronicSignatureModel with _$ElectronicSignatureModel {
       validityTime: model.validityTime,
     );
   }
+
+  @override
+  Map<String, dynamic> toJson() => _$ElectronicSignatureModelToJson(this);
 }
 
 @FormGroupAnnotation<ESignaturePersonalBillingModel>(

@@ -885,6 +885,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           operation: args.operation,
           citizen: args.citizen,
+          typeServiceModel: args.typeServiceModel,
         ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
@@ -3697,6 +3698,7 @@ class ElectronicSignatureSecondStepRoute
     Key? key,
     Crud operation = Crud.create,
     required CitizenModel citizen,
+    required TypeServiceModel typeServiceModel,
   }) : super(
           ElectronicSignatureSecondStepRoute.name,
           path: 'electronic-signature-second-step-page',
@@ -3704,6 +3706,7 @@ class ElectronicSignatureSecondStepRoute
             key: key,
             operation: operation,
             citizen: citizen,
+            typeServiceModel: typeServiceModel,
           ),
         );
 
@@ -3715,6 +3718,7 @@ class ElectronicSignatureSecondStepRouteArgs {
     this.key,
     this.operation = Crud.create,
     required this.citizen,
+    required this.typeServiceModel,
   });
 
   final Key? key;
@@ -3723,8 +3727,10 @@ class ElectronicSignatureSecondStepRouteArgs {
 
   final CitizenModel citizen;
 
+  final TypeServiceModel typeServiceModel;
+
   @override
   String toString() {
-    return 'ElectronicSignatureSecondStepRouteArgs{key: $key, operation: $operation, citizen: $citizen}';
+    return 'ElectronicSignatureSecondStepRouteArgs{key: $key, operation: $operation, citizen: $citizen, typeServiceModel: $typeServiceModel}';
   }
 }

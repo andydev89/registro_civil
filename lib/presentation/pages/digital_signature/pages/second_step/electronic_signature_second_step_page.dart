@@ -1,13 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/electronic_signature/electronic_signature.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/digital_signature/electronic_signature.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class ElectronicSignatureSecondStepPage extends ConsumerStatefulWidget {
@@ -15,10 +19,12 @@ class ElectronicSignatureSecondStepPage extends ConsumerStatefulWidget {
     super.key,
     this.operation = Crud.create,
     required this.citizen,
+    required this.typeServiceModel,
   });
 
   final Crud operation;
   final CitizenModel citizen;
+  final TypeServiceModel typeServiceModel;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -140,17 +146,44 @@ class _ElectronicSignatureSecondStepPageState
           bottomNavigationBar:
               ReactiveESignaturePersonalBillingModelFormConsumer(
             builder: (_, formModel, __) {
-              return PrimaryButton(
+              return PrimaryAsyncButton(
                 title: l10n.siguiente,
                 onPressed: widget.operation.isRead || formModel.form.valid
-                    ? () {
+                    ? () async {
                         ref
                             .read(electronicSignatureProvider.notifier)
                             .setSecondStep(
                               personalBillingModel: formModel.model,
                             );
                         final value = ref.watch(electronicSignatureProvider);
-                        print('');
+                        await ref
+                            .read(
+                          signatureProvider(
+                            model: value,
+                          ).future,
+                        )
+                            .when(
+                          ok: (data) {
+                            context
+                              ..navigateTo(
+                                ElectronicSignatureMainRoute(
+                                  typeServiceModel: widget.typeServiceModel,
+                                ),
+                              )
+                              ..navigateTo(
+                                ChoosePaymentMethodRoute(
+                                  transactionCode: data.transactionCode,
+                                  service: widget.typeServiceModel,
+                                ),
+                              );
+                          },
+                          err: (err) {
+                            showAlert(
+                              err.translate(context),
+                              TypeAlert.error,
+                            );
+                          },
+                        );
                       }
                     : null,
               ).symmetricPadding(10, 20);

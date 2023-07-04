@@ -113,6 +113,7 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
                                         ElectronicSignatureSecondStepRoute(
                                           operation: operation,
                                           citizen: citizen,
+                                          typeServiceModel: typeServiceModel,
                                         ),
                                       );
                                     },
