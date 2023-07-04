@@ -397,17 +397,6 @@ part 'router.gr.dart';
             CustomRoute(
               page: ElectronicSignatureSecondStepPage,
               transitionsBuilder: TransitionsBuilders.slideRight,
-              children: [
-                CustomRoute(
-                  initial: true,
-                  page: ElectronicSignaturePersonalPage,
-                  transitionsBuilder: TransitionsBuilders.slideRight,
-                ),
-                CustomRoute(
-                  page: ElectronicSignatureBillingPage,
-                  transitionsBuilder: TransitionsBuilders.slideLeft,
-                ),
-              ],
             ),
           ],
         ),

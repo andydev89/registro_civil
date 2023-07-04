@@ -142,6 +142,7 @@
   "esRenovacion": "¿Es renovación?",
   "esAuxAduana": "¿Es auxiliar de aduana?",
   "tieneToken": "¿Dispone de Dispositivo Token?",
+  "noSerieToken": "Número de serie del Dispositivo Token",
   "firmaContacto": "Contacto",
   "firmaFacturacion": "Facturación",
   "usoFactElectronica": "Uso de la firma Facturación Electrónica",

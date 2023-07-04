@@ -891,34 +891,6 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    ElectronicSignaturePersonalRoute.name: (routeData) {
-      final args = routeData.argsAs<ElectronicSignaturePersonalRouteArgs>();
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: ElectronicSignaturePersonalPage(
-          key: args.key,
-          citizen: args.citizen,
-          operation: args.operation,
-        ),
-        transitionsBuilder: TransitionsBuilders.slideRight,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
-    ElectronicSignatureBillingRoute.name: (routeData) {
-      final args = routeData.argsAs<ElectronicSignatureBillingRouteArgs>(
-          orElse: () => const ElectronicSignatureBillingRouteArgs());
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: ElectronicSignatureBillingPage(
-          key: args.key,
-          operation: args.operation,
-        ),
-        transitionsBuilder: TransitionsBuilders.slideLeft,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
   };
 
   @override
@@ -1380,18 +1352,6 @@ class _$AppRouter extends RootStackRouter {
                   ElectronicSignatureSecondStepRoute.name,
                   path: 'electronic-signature-second-step-page',
                   parent: ElectronicSignatureRouterRoute.name,
-                  children: [
-                    RouteConfig(
-                      ElectronicSignaturePersonalRoute.name,
-                      path: '',
-                      parent: ElectronicSignatureSecondStepRoute.name,
-                    ),
-                    RouteConfig(
-                      ElectronicSignatureBillingRoute.name,
-                      path: 'electronic-signature-billing-page',
-                      parent: ElectronicSignatureSecondStepRoute.name,
-                    ),
-                  ],
                 ),
               ],
             ),
@@ -3737,7 +3697,6 @@ class ElectronicSignatureSecondStepRoute
     Key? key,
     Crud operation = Crud.create,
     required CitizenModel citizen,
-    List<PageRouteInfo>? children,
   }) : super(
           ElectronicSignatureSecondStepRoute.name,
           path: 'electronic-signature-second-step-page',
@@ -3746,7 +3705,6 @@ class ElectronicSignatureSecondStepRoute
             operation: operation,
             citizen: citizen,
           ),
-          initialChildren: children,
         );
 
   static const String name = 'ElectronicSignatureSecondStepRoute';
@@ -3768,80 +3726,5 @@ class ElectronicSignatureSecondStepRouteArgs {
   @override
   String toString() {
     return 'ElectronicSignatureSecondStepRouteArgs{key: $key, operation: $operation, citizen: $citizen}';
-  }
-}
-
-/// generated route for
-/// [ElectronicSignaturePersonalPage]
-class ElectronicSignaturePersonalRoute
-    extends PageRouteInfo<ElectronicSignaturePersonalRouteArgs> {
-  ElectronicSignaturePersonalRoute({
-    Key? key,
-    required CitizenModel citizen,
-    Crud operation = Crud.create,
-  }) : super(
-          ElectronicSignaturePersonalRoute.name,
-          path: '',
-          args: ElectronicSignaturePersonalRouteArgs(
-            key: key,
-            citizen: citizen,
-            operation: operation,
-          ),
-        );
-
-  static const String name = 'ElectronicSignaturePersonalRoute';
-}
-
-class ElectronicSignaturePersonalRouteArgs {
-  const ElectronicSignaturePersonalRouteArgs({
-    this.key,
-    required this.citizen,
-    this.operation = Crud.create,
-  });
-
-  final Key? key;
-
-  final CitizenModel citizen;
-
-  final Crud operation;
-
-  @override
-  String toString() {
-    return 'ElectronicSignaturePersonalRouteArgs{key: $key, citizen: $citizen, operation: $operation}';
-  }
-}
-
-/// generated route for
-/// [ElectronicSignatureBillingPage]
-class ElectronicSignatureBillingRoute
-    extends PageRouteInfo<ElectronicSignatureBillingRouteArgs> {
-  ElectronicSignatureBillingRoute({
-    Key? key,
-    Crud operation = Crud.create,
-  }) : super(
-          ElectronicSignatureBillingRoute.name,
-          path: 'electronic-signature-billing-page',
-          args: ElectronicSignatureBillingRouteArgs(
-            key: key,
-            operation: operation,
-          ),
-        );
-
-  static const String name = 'ElectronicSignatureBillingRoute';
-}
-
-class ElectronicSignatureBillingRouteArgs {
-  const ElectronicSignatureBillingRouteArgs({
-    this.key,
-    this.operation = Crud.create,
-  });
-
-  final Key? key;
-
-  final Crud operation;
-
-  @override
-  String toString() {
-    return 'ElectronicSignatureBillingRouteArgs{key: $key, operation: $operation}';
   }
 }

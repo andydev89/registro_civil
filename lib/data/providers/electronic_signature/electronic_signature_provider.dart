@@ -26,15 +26,24 @@ class ElectronicSignature extends _$ElectronicSignature {
       isTokenRenovation: signatureFirstSubModel.isTokenRenovation ?? false,
       hasDeviceToken: signatureFirstSubModel.hasDeviceToken ?? false,
       isACustomsAgent: signatureFirstSubModel.isACustomsAgent ?? false,
+      deviceTokenSerialNumber: signatureFirstSubModel.deviceTokenSerialNumber,
     );
   }
 
-  /*void setSecondStep(ProcedureReasonSubModel reason) {
+  void setSecondStep({
+    required ESignaturePersonalBillingModel personalBillingModel,
+  }) {
     state = state.copyWith(
-      agency: LocationModel(
-          id: reason.agency.id, name: reason.agency.name),
-      provinceId: reason.province,
-      reasonType: reason.reason,
+      contactAddress: personalBillingModel.address,
+      contactPostalCode: personalBillingModel.postalCode,
+      provinceId: personalBillingModel.province,
+      cantonId: personalBillingModel.city,
+      parroquiaId: personalBillingModel.parish,
+      hasRUCIncluded: personalBillingModel.hasRUCIncluded ?? false,
+      ruc: personalBillingModel.ruc,
+      validityTime: personalBillingModel.validityTime,
+      useCase: personalBillingModel.useCase,
     );
-  }*/
+  }
+
 }

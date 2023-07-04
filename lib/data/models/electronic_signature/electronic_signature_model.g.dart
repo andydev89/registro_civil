@@ -29,7 +29,8 @@ ElectronicSignatureModel _$ElectronicSignatureModelFromJson(
           : LocationModel.fromJson(json['parroquiaId'] as Map<String, dynamic>),
       hasRUCIncluded: json['hasRUCIncluded'] as bool,
       ruc: json['ruc'] as String?,
-      validityTime: json['validityTime'] as int?,
+      validityTime:
+          $enumDecode(_$SignatureValidityTimeTypeEnumMap, json['validityTime']),
       useCase: $enumDecode(_$SignatureUseCaseTypeEnumMap, json['useCase']),
     );
 
@@ -50,7 +51,8 @@ Map<String, dynamic> _$ElectronicSignatureModelToJson(
       'parroquiaId': LocationModel.locationToJsonNull(instance.parroquiaId),
       'hasRUCIncluded': instance.hasRUCIncluded,
       'ruc': instance.ruc,
-      'validityTime': instance.validityTime,
+      'validityTime':
+          _$SignatureValidityTimeTypeEnumMap[instance.validityTime]!,
       'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase]!,
     };
 
@@ -63,6 +65,14 @@ const _$PersonTypeEnumMap = {
 const _$SignatureTypeEnumMap = {
   SignatureType.file: 'FILE',
   SignatureType.token: 'TOKEN',
+};
+
+const _$SignatureValidityTimeTypeEnumMap = {
+  SignatureValidityTimeType.oneYear: 1,
+  SignatureValidityTimeType.twoYears: 2,
+  SignatureValidityTimeType.threeYears: 3,
+  SignatureValidityTimeType.fourYears: 4,
+  SignatureValidityTimeType.fiveYears: 5,
 };
 
 const _$SignatureUseCaseTypeEnumMap = {
@@ -87,6 +97,7 @@ ESignatureFirstSubModel _$ESignatureFirstSubModelFromJson(
       isTokenRenovation: json['isTokenRenovation'] as bool? ?? false,
       hasDeviceToken: json['hasDeviceToken'] as bool? ?? false,
       isACustomsAgent: json['isACustomsAgent'] as bool? ?? false,
+      deviceTokenSerialNumber: json['deviceTokenSerialNumber'] as String? ?? '',
     );
 
 Map<String, dynamic> _$ESignatureFirstSubModelToJson(
@@ -98,11 +109,12 @@ Map<String, dynamic> _$ESignatureFirstSubModelToJson(
       'isTokenRenovation': instance.isTokenRenovation,
       'hasDeviceToken': instance.hasDeviceToken,
       'isACustomsAgent': instance.isACustomsAgent,
+      'deviceTokenSerialNumber': instance.deviceTokenSerialNumber,
     };
 
-ESignaturePersonalModel _$ESignaturePersonalModelFromJson(
+ESignaturePersonalBillingModel _$ESignaturePersonalBillingModelFromJson(
         Map<String, dynamic> json) =>
-    ESignaturePersonalModel(
+    ESignaturePersonalBillingModel(
       fullName: json['fullName'] as String? ?? '',
       email: json['email'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
@@ -112,10 +124,15 @@ ESignaturePersonalModel _$ESignaturePersonalModelFromJson(
           LocationModel.fromJson(json['province'] as Map<String, dynamic>),
       city: LocationModel.fromJson(json['city'] as Map<String, dynamic>),
       parish: LocationModel.fromJson(json['parish'] as Map<String, dynamic>),
+      hasRUCIncluded: json['hasRUCIncluded'] as bool? ?? false,
+      ruc: json['ruc'] as String? ?? '',
+      validityTime:
+          $enumDecode(_$SignatureValidityTimeTypeEnumMap, json['validityTime']),
+      useCase: $enumDecode(_$SignatureUseCaseTypeEnumMap, json['useCase']),
     );
 
-Map<String, dynamic> _$ESignaturePersonalModelToJson(
-        ESignaturePersonalModel instance) =>
+Map<String, dynamic> _$ESignaturePersonalBillingModelToJson(
+        ESignaturePersonalBillingModel instance) =>
     <String, dynamic>{
       'fullName': instance.fullName,
       'email': instance.email,
@@ -125,32 +142,9 @@ Map<String, dynamic> _$ESignaturePersonalModelToJson(
       'province': instance.province,
       'city': instance.city,
       'parish': instance.parish,
-    };
-
-ESignatureBillingModel _$ESignatureBillingModelFromJson(
-        Map<String, dynamic> json) =>
-    ESignatureBillingModel(
-      hasRUCIncluded: json['hasRUCIncluded'] as bool? ?? false,
-      ruc: json['ruc'] as String? ?? '',
-      validityTime:
-          $enumDecode(_$SignatureValidityTimeTypeEnumMap, json['validityTime']),
-      useCase: $enumDecode(_$SignatureUseCaseTypeEnumMap, json['useCase']),
-    );
-
-Map<String, dynamic> _$ESignatureBillingModelToJson(
-        ESignatureBillingModel instance) =>
-    <String, dynamic>{
       'hasRUCIncluded': instance.hasRUCIncluded,
       'ruc': instance.ruc,
       'validityTime':
           _$SignatureValidityTimeTypeEnumMap[instance.validityTime]!,
       'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase]!,
     };
-
-const _$SignatureValidityTimeTypeEnumMap = {
-  SignatureValidityTimeType.oneYear: 1,
-  SignatureValidityTimeType.twoYears: 2,
-  SignatureValidityTimeType.threeYears: 3,
-  SignatureValidityTimeType.fourYears: 4,
-  SignatureValidityTimeType.fiveYears: 5,
-};

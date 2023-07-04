@@ -35,7 +35,8 @@ mixin _$ElectronicSignatureModel {
   LocationModel? get parroquiaId => throw _privateConstructorUsedError;
   bool get hasRUCIncluded => throw _privateConstructorUsedError;
   String? get ruc => throw _privateConstructorUsedError;
-  int? get validityTime => throw _privateConstructorUsedError;
+  SignatureValidityTimeType get validityTime =>
+      throw _privateConstructorUsedError;
   @JsonKey(includeToJson: true)
   SignatureUseCaseType get useCase => throw _privateConstructorUsedError;
 
@@ -70,7 +71,7 @@ abstract class $ElectronicSignatureModelCopyWith<$Res> {
           LocationModel? parroquiaId,
       bool hasRUCIncluded,
       String? ruc,
-      int? validityTime,
+      SignatureValidityTimeType validityTime,
       @JsonKey(includeToJson: true)
           SignatureUseCaseType useCase});
 
@@ -107,7 +108,7 @@ class _$ElectronicSignatureModelCopyWithImpl<$Res,
     Object? parroquiaId = freezed,
     Object? hasRUCIncluded = null,
     Object? ruc = freezed,
-    Object? validityTime = freezed,
+    Object? validityTime = null,
     Object? useCase = null,
   }) {
     return _then(_value.copyWith(
@@ -167,10 +168,10 @@ class _$ElectronicSignatureModelCopyWithImpl<$Res,
           ? _value.ruc
           : ruc // ignore: cast_nullable_to_non_nullable
               as String?,
-      validityTime: freezed == validityTime
+      validityTime: null == validityTime
           ? _value.validityTime
           : validityTime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as SignatureValidityTimeType,
       useCase: null == useCase
           ? _value.useCase
           : useCase // ignore: cast_nullable_to_non_nullable
@@ -244,7 +245,7 @@ abstract class _$$_ElectronicSignatureModelCopyWith<$Res>
           LocationModel? parroquiaId,
       bool hasRUCIncluded,
       String? ruc,
-      int? validityTime,
+      SignatureValidityTimeType validityTime,
       @JsonKey(includeToJson: true)
           SignatureUseCaseType useCase});
 
@@ -282,7 +283,7 @@ class __$$_ElectronicSignatureModelCopyWithImpl<$Res>
     Object? parroquiaId = freezed,
     Object? hasRUCIncluded = null,
     Object? ruc = freezed,
-    Object? validityTime = freezed,
+    Object? validityTime = null,
     Object? useCase = null,
   }) {
     return _then(_$_ElectronicSignatureModel(
@@ -342,10 +343,10 @@ class __$$_ElectronicSignatureModelCopyWithImpl<$Res>
           ? _value.ruc
           : ruc // ignore: cast_nullable_to_non_nullable
               as String?,
-      validityTime: freezed == validityTime
+      validityTime: null == validityTime
           ? _value.validityTime
           : validityTime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as SignatureValidityTimeType,
       useCase: null == useCase
           ? _value.useCase
           : useCase // ignore: cast_nullable_to_non_nullable
@@ -377,7 +378,7 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
           this.parroquiaId,
       this.hasRUCIncluded = false,
       this.ruc,
-      this.validityTime,
+      this.validityTime = SignatureValidityTimeType.oneYear,
       @JsonKey(includeToJson: true)
           this.useCase = SignatureUseCaseType.publicProcurementSystem})
       : super._();
@@ -420,7 +421,8 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
   @override
   final String? ruc;
   @override
-  final int? validityTime;
+  @JsonKey()
+  final SignatureValidityTimeType validityTime;
   @override
   @JsonKey(includeToJson: true)
   final SignatureUseCaseType useCase;
@@ -515,7 +517,7 @@ abstract class _ElectronicSignatureModel extends ElectronicSignatureModel {
           final LocationModel? parroquiaId,
       final bool hasRUCIncluded,
       final String? ruc,
-      final int? validityTime,
+      final SignatureValidityTimeType validityTime,
       @JsonKey(includeToJson: true)
           final SignatureUseCaseType useCase}) = _$_ElectronicSignatureModel;
   const _ElectronicSignatureModel._() : super._();
@@ -554,7 +556,7 @@ abstract class _ElectronicSignatureModel extends ElectronicSignatureModel {
   @override
   String? get ruc;
   @override
-  int? get validityTime;
+  SignatureValidityTimeType get validityTime;
   @override
   @JsonKey(includeToJson: true)
   SignatureUseCaseType get useCase;

@@ -137,6 +137,7 @@
   "esRenovacion": "Is it renewal?",
   "esAuxAduana": "Are you a customs assistant?",
   "tieneToken": "Do you have a Token Device?",
+  "noSerieToken": "Token Device Serial Number",
   "firmaContacto": "Contact",
   "firmaFacturacion": "Billing",
   "usoFactElectronica": "Use of the Electronic Invoicing signature",

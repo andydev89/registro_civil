@@ -7,7 +7,7 @@ part of 'electronic_signature_provider.dart';
 // **************************************************************************
 
 String _$electronicSignatureHash() =>
-    r'fcf552c71053f3558b3bc5e478abe13c1bfa851a';
+    r'8975e863157f5c629a230e8dcb772b3a8bc9b32a';
 
 /// See also [ElectronicSignature].
 @ProviderFor(ElectronicSignature)
