@@ -152,19 +152,6 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    Step5Route.name: (routeData) {
-      final args = routeData.argsAs<Step5RouteArgs>();
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: Step5Page(
-          key: args.key,
-          code: args.code,
-        ),
-        transitionsBuilder: TransitionsBuilders.slideLeft,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
     ForgotPasswordFirstRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -934,12 +921,6 @@ class _$AppRouter extends RootStackRouter {
                   parent: RegisterRouterRoute.name,
                   meta: <String, dynamic>{'index': 3},
                 ),
-                RouteConfig(
-                  Step5Route.name,
-                  path: 'step5-page',
-                  parent: RegisterRouterRoute.name,
-                  meta: <String, dynamic>{'index': 4},
-                ),
               ],
             ),
             RouteConfig(
@@ -1616,40 +1597,6 @@ class Step4RouteArgs {
   @override
   String toString() {
     return 'Step4RouteArgs{key: $key, command: $command, email: $email}';
-  }
-}
-
-/// generated route for
-/// [Step5Page]
-class Step5Route extends PageRouteInfo<Step5RouteArgs> {
-  Step5Route({
-    Key? key,
-    required String code,
-  }) : super(
-          Step5Route.name,
-          path: 'step5-page',
-          args: Step5RouteArgs(
-            key: key,
-            code: code,
-          ),
-        );
-
-  static const String name = 'Step5Route';
-}
-
-class Step5RouteArgs {
-  const Step5RouteArgs({
-    this.key,
-    required this.code,
-  });
-
-  final Key? key;
-
-  final String code;
-
-  @override
-  String toString() {
-    return 'Step5RouteArgs{key: $key, code: $code}';
   }
 }
 

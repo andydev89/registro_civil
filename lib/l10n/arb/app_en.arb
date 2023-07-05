@@ -181,7 +181,7 @@
   "intrudcirNumTelVal": "Must enter a valid phone number",
   "introducirNum6Dig": "Must enter a 6-digit number",
   "ingreseCodVer": "Enter the verification code",
-  "terminosCondiciones": "Please enter the verification code sent to your email {email}, remember that this code will be active for 5 minutes, after that time your code will have expired. In case of not receiving your code check in the junk mail or spam folder; In case of not receiving your code write to the email enlinea@registrocivil.gob.ec",
+  "terminosCondiciones": "Please enter the verification code sent to your email {email}, remember that this code will be active for 5 minutes, after that time it will have expired. If you do not receive your code, write to the email enlinea@registrocivil.gob.ec",
   "@terminosCondiciones": {
     "placeholders": {
       "email": {

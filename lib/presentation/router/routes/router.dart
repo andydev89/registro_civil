@@ -52,11 +52,6 @@ part 'router.gr.dart';
               page: Step4Page,
               meta: {'index': 3},
             ),
-            CustomRoute(
-              transitionsBuilder: TransitionsBuilders.slideLeft,
-              page: Step5Page,
-              meta: {'index': 4},
-            ),
           ],
         ),
         //FORGOT PASSWORD

@@ -30,7 +30,7 @@ class RegisterRouterPage extends ConsumerWidget {
                 final index = ref.watch(stepperIndexProvider);
                 return AnotherStepperWidget(
                   activeIndex: index,
-                  totalElement: 5,
+                  totalElement: 4,
                 ).verticalPadding(20);
               },
             ),
