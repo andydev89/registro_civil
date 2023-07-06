@@ -7,11 +7,10 @@ import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/core/const/const.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
-import 'package:registro_civil_apk/data/providers/auth/auth.dart';
-import 'package:registro_civil_apk/data/providers/electronic_signature/electronic_signature.dart';
+import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/digital_signature/electronic_signature.dart';
+import 'package:registro_civil_apk/presentation/pages/electronic_signature/electronic_signature.dart';
 import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 

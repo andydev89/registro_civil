@@ -29,11 +29,15 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
     final me = ref.watch(meProvider).value ?? MeModel();
     final provider = ref.watch(electronicSignatureProvider.notifier);
     return ESignatureFirstSubModelFormBuilder(
-      model: operation.isCreate ? ESignatureFirstSubModel.fromMe(me)
+      model: operation.isCreate
+          ? ESignatureFirstSubModel.fromMe(me)
           : provider.getFirstStep(),
       builder: (context, formModel, child) {
         final hasDeviceToken = ValueNotifier(
           formModel.hasDeviceTokenControl?.value ?? false,
+        );
+        final signatureTypeNotifier = ValueNotifier(
+          formModel.signatureTypeControl?.value,
         );
         return PrimaryScaffold(
           title: l10n.solFirmaElectronica,
@@ -54,13 +58,9 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
                     formControl: formModel.signatureTypeControl,
                     items: SignatureType.values,
                     readOnly: operation.isRead,
+                    onChanged: (value) =>
+                        signatureTypeNotifier.value = value.value,
                   ),
-                  /*PrimaryReactiveNuiField(
-                    label: l10n.numCedula,
-                    formControl: formModel.userNuiControl,
-                    init: true,
-                    readOnly: operation.isRead,
-                  ),*/
                   PrimaryReactiveTextField(
                     label: l10n.numCedula,
                     formControl: formModel.userNuiControl,
@@ -69,32 +69,45 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
                   const SizedBox(
                     height: 6,
                   ),
-                  PrimaryReactiveCheckBox(
-                    formControl: formModel.isTokenRenovationControl,
-                    label: l10n.esRenovacion,
-                    readOnly: operation.isRead,
-                  ),
-                  PrimaryReactiveCheckBox(
-                    formControl: formModel.isACustomsAgentControl,
-                    label: l10n.esAuxAduana,
-                    readOnly: operation.isRead,
-                  ),
-                  PrimaryReactiveCheckBox(
-                    formControl: formModel.hasDeviceTokenControl,
-                    label: l10n.tieneToken,
-                    readOnly: operation.isRead,
-                    onChanged: (value) =>
-                    hasDeviceToken.value = value.value ?? false,
-                  ),
-                  ValueListenableBuilder<bool>(
-                    valueListenable: hasDeviceToken,
+                  ValueListenableBuilder<SignatureType?>(
+                    valueListenable: signatureTypeNotifier,
                     builder: (_, value, __) {
                       return Visibility(
-                        visible: value,
-                        child: PrimaryReactiveTextField(
-                          readOnly: operation.isRead,
-                          label: l10n.noSerieToken,
-                          formControl: formModel.deviceTokenSerialNumberControl,
+                        visible: value == SignatureType.token,
+                        child: Column(
+                          children: [
+                            PrimaryReactiveCheckBox(
+                              formControl: formModel.isTokenRenovationControl,
+                              label: l10n.esRenovacion,
+                              readOnly: operation.isRead,
+                            ),
+                            PrimaryReactiveCheckBox(
+                              formControl: formModel.isACustomsAgentControl,
+                              label: l10n.esAuxAduana,
+                              readOnly: operation.isRead,
+                            ),
+                            PrimaryReactiveCheckBox(
+                              formControl: formModel.hasDeviceTokenControl,
+                              label: l10n.tieneToken,
+                              readOnly: operation.isRead,
+                              onChanged: (value) =>
+                                  hasDeviceToken.value = value.value ?? false,
+                            ),
+                            ValueListenableBuilder<bool>(
+                              valueListenable: hasDeviceToken,
+                              builder: (_, value, __) {
+                                return Visibility(
+                                  visible: value,
+                                  child: PrimaryReactiveTextField(
+                                    readOnly: operation.isRead,
+                                    label: l10n.noSerieToken,
+                                    formControl: formModel
+                                        .deviceTokenSerialNumberControl,
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
                         ),
                       );
                     },
@@ -108,18 +121,18 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
               title: l10n.siguiente,
               onPressed: formModel.form.valid
                   ? () {
-                ref
-                    .read(electronicSignatureProvider.notifier)
-                    .setFirstStep(
-                  signatureFirstSubModel: formModel.model,
-                );
-                context.navigateTo(
-                  ElectronicSignatureSecondStepRoute(
-                    operation: operation,
-                    typeServiceModel: typeServiceModel,
-                  ),
-                );
-              }
+                      ref
+                          .read(electronicSignatureProvider.notifier)
+                          .setFirstStep(
+                            signatureFirstSubModel: formModel.model,
+                          );
+                      context.navigateTo(
+                        ElectronicSignatureSecondStepRoute(
+                          operation: operation,
+                          typeServiceModel: typeServiceModel,
+                        ),
+                      );
+                    }
                   : null,
             ).symmetricPadding(10, 10),
           ),
