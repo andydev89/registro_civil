@@ -45,7 +45,6 @@ mixin _$ElectronicSignatureModel {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ElectronicSignatureModelCopyWith<ElectronicSignatureModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -412,7 +411,7 @@ class __$$_ElectronicSignatureModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable(createFactory: false)
+
 class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
   const _$_ElectronicSignatureModel(
       {this.id = '',
@@ -545,7 +544,6 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -577,13 +575,6 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
   _$$_ElectronicSignatureModelCopyWith<_$_ElectronicSignatureModel>
       get copyWith => __$$_ElectronicSignatureModelCopyWithImpl<
           _$_ElectronicSignatureModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ElectronicSignatureModelToJson(
-      this,
-    );
-  }
 }
 
 abstract class _ElectronicSignatureModel extends ElectronicSignatureModel {

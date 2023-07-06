@@ -168,29 +168,3 @@ Map<String, dynamic> _$ESignaturePersonalBillingModelToJson(
       'validityTime': _$SignatureValidityTimeTypeEnumMap[instance.validityTime],
       'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase],
     };
-
-Map<String, dynamic> _$$_ElectronicSignatureModelToJson(
-        _$_ElectronicSignatureModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'personType': _$PersonTypeEnumMap[instance.personType]!,
-      'type': _$SignatureTypeEnumMap[instance.type]!,
-      'isTokenRenovation': instance.isTokenRenovation,
-      'hasDeviceToken': instance.hasDeviceToken,
-      'deviceTokenSerialNumber': instance.deviceTokenSerialNumber,
-      'isACustomsAgent': instance.isACustomsAgent,
-      'userNui': instance.userNui,
-      'contactAddress': instance.contactAddress,
-      'contactPostalCode': instance.contactPostalCode,
-      'provinceId': LocationModel.locationToJsonNull(instance.provinceId),
-      'cantonId': LocationModel.locationToJsonNull(instance.cantonId),
-      'parroquiaId': LocationModel.locationToJsonNull(instance.parroquiaId),
-      'hasRUCIncluded': instance.hasRUCIncluded,
-      'ruc': instance.ruc,
-      'validityTime':
-          _$SignatureValidityTimeTypeEnumMap[instance.validityTime]!,
-      'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase]!,
-      'state': _$StateDocumentEnumMap[instance.state]!,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
-    };

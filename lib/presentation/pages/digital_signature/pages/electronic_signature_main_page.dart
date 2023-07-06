@@ -33,8 +33,13 @@ class ElectronicSignatureMainPage extends ConsumerWidget {
             PrimaryAddItemRow(
               title: l10n.listadoSol,
               onPressed: () => context.navigateTo(
-                ElectronicSignatureFirstStepRoute(
+                ElectronicSignatureFirstStepRouterRoute(
                   typeServiceModel: typeServiceModel,
+                  children: [
+                    ElectronicSignatureFirstStepRoute(
+                      typeServiceModel: typeServiceModel,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -56,22 +61,20 @@ class ElectronicSignatureMainPage extends ConsumerWidget {
                       CardWidget<ElectronicSignatureModel>(
                     element: e,
                     rows: {
-                      l10n.tipoPersona:
-                          e.personType.translate(context),
-                      l10n.usoFactElectronica:
-                          e.useCase.translate(context),
+                      l10n.tipoPersona: e.personType.translate(context),
+                      l10n.usoFactElectronica: e.useCase.translate(context),
                       l10n.fechaCreacion: '${e.createdAt?.onlyDate} -'
                           ' ${e.createdAt?.onlyTime}',
                       l10n.estado: e.state.translate(context),
                     },
                     actions: {
                       Crud.read: (p0) => context.navigateTo(
-                            IdDuplicateFirstStepRouterRoute(
+                            ElectronicSignatureFirstStepRouterRoute(
                               operation: Crud.read,
                               typeServiceModel: typeServiceModel,
-                              duplicateId: e.id,
+                              signatureId: e.id,
                               children: [
-                                IdDuplicateFirstStepRoute(
+                                ElectronicSignatureFirstStepRoute(
                                   typeServiceModel: typeServiceModel,
                                   operation: Crud.read,
                                 ),

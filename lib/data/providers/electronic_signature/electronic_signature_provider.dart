@@ -34,6 +34,18 @@ class ElectronicSignature extends _$ElectronicSignature {
     );
   }
 
+  ESignatureFirstSubModel getFirstStep() {
+    return ESignatureFirstSubModel(
+      userNui: state.userNui ?? '',
+      personType: state.personType,
+      signatureType: state.type,
+      isTokenRenovation: state.isTokenRenovation,
+      isACustomsAgent: state.isACustomsAgent,
+      hasDeviceToken: state.hasDeviceToken,
+      deviceTokenSerialNumber: state.deviceTokenSerialNumber,
+    );
+  }
+
   void setSecondStep({
     required ESignaturePersonalBillingModel personalBillingModel,
   }) {
@@ -49,6 +61,23 @@ class ElectronicSignature extends _$ElectronicSignature {
           SignatureValidityTimeType.oneYear,
       useCase: personalBillingModel.useCase ??
           SignatureUseCaseType.publicProcurementSystem,
+    );
+  }
+
+  ESignaturePersonalBillingModel getSecondStep(MeModel meModel) {
+    return ESignaturePersonalBillingModel(
+      fullName: '${meModel.firstName} ${meModel.lastName}',
+      phone: meModel.phone,
+      email: meModel.email,
+      address: state.contactAddress,
+      postalCode: state.contactPostalCode ?? '',
+      province: state.provinceId,
+      city: state.cantonId,
+      parish: state.parroquiaId,
+      hasRUCIncluded: state.hasRUCIncluded,
+      ruc: state.ruc,
+      useCase: state.useCase,
+      validityTime: state.validityTime,
     );
   }
 }
@@ -73,5 +102,15 @@ Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures(
 }) async {
   final api = ref.watch(apiProvider);
   final response = await api.signatures(pageNo: pageNo ?? 0);
+  return response;
+}
+
+@riverpod
+Future<ElectronicSignatureModel> signatureById(
+    SignatureByIdRef ref,
+    String id,
+    ) async {
+  final api = ref.watch(apiProvider);
+  final response = (await api.signatureById(id)).data!;
   return response;
 }

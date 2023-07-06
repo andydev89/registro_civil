@@ -27,10 +27,10 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final me = ref.watch(meProvider).value ?? MeModel();
+    final provider = ref.watch(electronicSignatureProvider.notifier);
     return ESignatureFirstSubModelFormBuilder(
       model: operation.isCreate ? ESignatureFirstSubModel.fromMe(me)
-          //En este caso tengo que hacer un metodo que a partir de la respuesta del get devuelva un ESignatureFirstSubModel
-          : ESignatureFirstSubModel.fromMe(me),
+          : provider.getFirstStep(),
       builder: (context, formModel, child) {
         final hasDeviceToken = ValueNotifier(
           formModel.hasDeviceTokenControl?.value ?? false,
@@ -72,14 +72,17 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
                   PrimaryReactiveCheckBox(
                     formControl: formModel.isTokenRenovationControl,
                     label: l10n.esRenovacion,
+                    readOnly: operation.isRead,
                   ),
                   PrimaryReactiveCheckBox(
                     formControl: formModel.isACustomsAgentControl,
                     label: l10n.esAuxAduana,
+                    readOnly: operation.isRead,
                   ),
                   PrimaryReactiveCheckBox(
                     formControl: formModel.hasDeviceTokenControl,
                     label: l10n.tieneToken,
+                    readOnly: operation.isRead,
                     onChanged: (value) =>
                     hasDeviceToken.value = value.value ?? false,
                   ),
@@ -101,35 +104,19 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
             ),
           ),
           bottomNavigationBar: ReactiveESignatureFirstSubModelFormConsumer(
-            builder: (_, formModel, __) => PrimaryAsyncButton(
+            builder: (_, formModel, __) => PrimaryButton(
               title: l10n.siguiente,
               onPressed: formModel.form.valid
-                  ? () async {
+                  ? () {
                 ref
                     .read(electronicSignatureProvider.notifier)
                     .setFirstStep(
                   signatureFirstSubModel: formModel.model,
                 );
-                final nuiModel =
-                NuiModel(nui: formModel.model.userNui);
-                await ref
-                    .read(
-                  registerValidateCitizenProvider(nuiModel)
-                      .future,
-                )
-                    .when(
-                  ok: (citizen) {
-                    context.navigateTo(
-                      ElectronicSignatureSecondStepRoute(
-                        operation: operation,
-                        citizen: citizen,
-                        typeServiceModel: typeServiceModel,
-                      ),
-                    );
-                  },
-                  err: (error) => showAlert(
-                    error.translate(context),
-                    TypeAlert.error,
+                context.navigateTo(
+                  ElectronicSignatureSecondStepRoute(
+                    operation: operation,
+                    typeServiceModel: typeServiceModel,
                   ),
                 );
               }

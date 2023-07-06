@@ -197,8 +197,92 @@ class SignaturesProvider extends AutoDisposeFutureProvider<
   }
 }
 
+String _$signatureByIdHash() => r'227ae2057a216c4b60156c792dc952c6faf4b55c';
+typedef SignatureByIdRef
+    = AutoDisposeFutureProviderRef<ElectronicSignatureModel>;
+
+/// See also [signatureById].
+@ProviderFor(signatureById)
+const signatureByIdProvider = SignatureByIdFamily();
+
+/// See also [signatureById].
+class SignatureByIdFamily extends Family<AsyncValue<ElectronicSignatureModel>> {
+  /// See also [signatureById].
+  const SignatureByIdFamily();
+
+  /// See also [signatureById].
+  SignatureByIdProvider call(
+    String id,
+  ) {
+    return SignatureByIdProvider(
+      id,
+    );
+  }
+
+  @override
+  SignatureByIdProvider getProviderOverride(
+    covariant SignatureByIdProvider provider,
+  ) {
+    return call(
+      provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'signatureByIdProvider';
+}
+
+/// See also [signatureById].
+class SignatureByIdProvider
+    extends AutoDisposeFutureProvider<ElectronicSignatureModel> {
+  /// See also [signatureById].
+  SignatureByIdProvider(
+    this.id,
+  ) : super.internal(
+          (ref) => signatureById(
+            ref,
+            id,
+          ),
+          from: signatureByIdProvider,
+          name: r'signatureByIdProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$signatureByIdHash,
+          dependencies: SignatureByIdFamily._dependencies,
+          allTransitiveDependencies:
+              SignatureByIdFamily._allTransitiveDependencies,
+        );
+
+  final String id;
+
+  @override
+  bool operator ==(Object other) {
+    return other is SignatureByIdProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$electronicSignatureHash() =>
-    r'3780130ec3bd58e58de322b19ee4c9be1880c84f';
+    r'7299e8fb792b1758ba9d509a101f7efb6f5c0a11';
 
 /// See also [ElectronicSignature].
 @ProviderFor(ElectronicSignature)

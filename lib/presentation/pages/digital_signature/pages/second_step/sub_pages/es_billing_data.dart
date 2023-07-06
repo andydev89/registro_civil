@@ -41,6 +41,7 @@ class _ElectronicSignatureBillingPage
           PrimaryReactiveCheckBox(
             formControl: widget.form.hasRUCIncludedControl,
             label: l10n.firmaIncRuc,
+            readOnly: widget.operation.isRead,
             onChanged: (value) => hasRucIncluded.value = value.value ?? false,
           ),
           ValueListenableBuilder<bool>(

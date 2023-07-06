@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/electronic_signature/electronic_signature.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
@@ -6,7 +7,7 @@ import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/widgets/commons_fetchers/commons_fetchers.dart';
 import 'package:registro_civil_apk/presentation/widgets/forms/forms.dart';
 
-class ElectronicSignaturePersonalPage extends StatefulWidget {
+class ElectronicSignaturePersonalPage extends ConsumerStatefulWidget {
   ElectronicSignaturePersonalPage({
     super.key,
     this.operation = Crud.create,
@@ -17,11 +18,12 @@ class ElectronicSignaturePersonalPage extends StatefulWidget {
   ESignaturePersonalBillingModelForm form;
 
   @override
-  State<StatefulWidget> createState() => _ElectronicSignaturePersonalPage();
+  ConsumerState<ElectronicSignaturePersonalPage> createState() =>
+      _ElectronicSignaturePersonalPageState();
 }
 
-class _ElectronicSignaturePersonalPage
-    extends State<ElectronicSignaturePersonalPage>
+class _ElectronicSignaturePersonalPageState
+    extends ConsumerState<ElectronicSignaturePersonalPage>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
@@ -31,7 +33,7 @@ class _ElectronicSignaturePersonalPage
     super.build(context);
     final l10n = context.l10n;
     final init = widget.operation.isRead;
-    var alreadyStarter = false;
+    final provider = ref.watch(electronicSignatureProvider);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,14 +68,16 @@ class _ElectronicSignaturePersonalPage
             readOnly: widget.operation.isRead,
             formControl: widget.form.provinceControl,
             label: l10n.provincia,
-            init: init && !alreadyStarter,
-            /*initialValue: (data) => data?.firstWhere(
-                        (element) => element.id == model.province.id,
-                  ),*/
+            init: init,
+            initialValue: (data) {
+              final r = data?.firstWhere(
+                (element) => element.id == provider.provinceId?.id,
+              );
+              return r;
+            },
             provider: provincesProvider,
             onChanged: (p0) {
               widget.form.cityControl?.value = null;
-              alreadyStarter = true;
             },
           ),
           ReactiveESignaturePersonalBillingModelFormConsumer(
@@ -81,30 +85,31 @@ class _ElectronicSignaturePersonalPage
               return Column(
                 children: [
                   SelectElementFromApi(
-                    init: init && !alreadyStarter,
-                    /*initialValue: (data) => data?.firstWhere(
-                                (element) => element.id == model.canton.id,
-                          ),*/
+                    init: init,
+                    initialValue: (data) {
+                      final r = data?.firstWhere(
+                            (element) => element.id == provider.cantonId?.id,
+                      );
+                      return r;
+                    },
                     readOnly: !widget.form.provinceControl!.valid ||
                         widget.operation.isRead,
                     formControl: widget.form.cityControl,
                     label: l10n.canton,
                     onChanged: (p0) {
                       widget.form.parishControl?.value = null;
-                      alreadyStarter = true;
                     },
                     provider: LocationByParentProvider(
                       parentId: widget.form.provinceControl?.value?.id ?? '',
                     ),
                   ),
                   SelectElementFromApi(
-                    init: init && !alreadyStarter,
-                    /*initialValue: (data) => data?.firstWhere(
-                                (element) => element.id == model.parroquia.id,
-                          ),*/
+                    init: init,
+                    initialValue: (data) => data?.firstWhere(
+                      (element) => element.id == provider.parroquiaId?.id,
+                    ),
                     readOnly: !widget.form.cityControl!.valid ||
                         widget.operation.isRead,
-                    onChanged: (p0) => alreadyStarter = true,
                     formControl: widget.form.parishControl,
                     label: l10n.parroquia,
                     provider: LocationByParentProvider(

@@ -70,8 +70,19 @@ class ElectronicSignatureModel with _$ElectronicSignatureModel {
     DateTime? updatedAt,
   }) = _ElectronicSignatureModel;
 
-  factory ElectronicSignatureModel.fromJson(Map<String, dynamic> json) =>
-      _$ElectronicSignatureModelFromJson(json);
+  factory ElectronicSignatureModel.fromJson(Map<String, dynamic> json) {
+    if (json.containsKey('province')) {
+      json['provinceId'] = json['province'];
+    }
+    if (json.containsKey('canton')) {
+      json['cantonId'] = json['canton'];
+    }
+    if (json.containsKey('parroquia')) {
+      json['parroquiaId'] = json['parroquia'];
+    }
+    return _$ElectronicSignatureModelFromJson(json);
+  }
+
 
   const ElectronicSignatureModel._();
 
@@ -100,8 +111,8 @@ class ElectronicSignatureModel with _$ElectronicSignatureModel {
   Map<String, dynamic> toJson() {
     return _$ElectronicSignatureModelToJson(this)
       ..remove('id')
-      ..remove('status')
-      ..remove('createAt')
+      ..remove('state')
+      ..remove('createdAt')
       ..remove('updatedAt');
   }
 }

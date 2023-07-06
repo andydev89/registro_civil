@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 
-class BodyDuplicateWidget extends HookWidget {
-  const BodyDuplicateWidget({
+class TypeServiceBodyWidget extends HookWidget {
+  const TypeServiceBodyWidget({
     super.key,
     required this.typeServiceModel,
     this.operation = Crud.create,

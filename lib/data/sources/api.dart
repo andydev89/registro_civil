@@ -309,4 +309,9 @@ abstract class Api {
   Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures({
     @Query('pageNo') int pageNo = 0,
   });
+
+  @GET('/digitalsignature/api/digitalsignature/{id}')
+  Future<ResponseModel<ElectronicSignatureModel>> signatureById(
+      @Path('id') String id,
+      );
 }

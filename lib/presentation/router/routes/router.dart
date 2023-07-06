@@ -372,7 +372,6 @@ part 'router.gr.dart';
                 ),
               ],
             ),
-
           ],
         ),
         //DIGITAL_SIGNATURE
@@ -386,12 +385,18 @@ part 'router.gr.dart';
               transitionsBuilder: TransitionsBuilders.slideRight,
             ),
             CustomRoute(
-              page: ElectronicSignatureFirstStepPage,
-              transitionsBuilder: TransitionsBuilders.slideRight,
-            ),
-            CustomRoute(
-              page: ElectronicSignatureSecondStepPage,
-              transitionsBuilder: TransitionsBuilders.slideRight,
+              page: ElectronicSignatureFirstStepRouterPage,
+              children: [
+                CustomRoute(
+                  initial: true,
+                  page: ElectronicSignatureFirstStepPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                CustomRoute(
+                  page: ElectronicSignatureSecondStepPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+              ],
             ),
           ],
         ),

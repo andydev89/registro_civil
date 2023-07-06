@@ -19,12 +19,10 @@ class ElectronicSignatureSecondStepPage extends ConsumerStatefulWidget {
   const ElectronicSignatureSecondStepPage({
     super.key,
     this.operation = Crud.create,
-    required this.citizen,
     required this.typeServiceModel,
   });
 
   final Crud operation;
-  final CitizenModel citizen;
   final TypeServiceModel typeServiceModel;
 
   @override
@@ -53,16 +51,11 @@ class _ElectronicSignatureSecondStepPageState
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final me = ref.watch(meProvider).value ?? MeModel();
-
+    final provider = ref.watch(electronicSignatureProvider.notifier);
     return ESignaturePersonalBillingModelFormBuilder(
       model: widget.operation.isCreate
           ? ESignaturePersonalBillingModel.fromMe(me)
-          //En este caso tengo que hacer un metodo que a partir de la respuesta del get devuelva un ESignatureFirstSubModel
-          : ESignaturePersonalBillingModel.fromMe(me),
-      /*initState: (context, form) {
-        form.fullNameControl?.value =
-            '${widget.citizen.nombres} ${widget.citizen.apellidos}';
-      },*/
+          : provider.getSecondStep(me),
       builder: (context, formModel, child) {
         return PrimaryScaffold(
           title: l10n.solFirmaElectronica,
@@ -123,7 +116,6 @@ class _ElectronicSignatureSecondStepPageState
                   Expanded(
                     child: LayoutBuilder(
                       builder: (context, constraints) {
-                        // final maxHeight = max(0, constraints.maxHeight);
                         return Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -134,9 +126,11 @@ class _ElectronicSignatureSecondStepPageState
                                 children: [
                                   ElectronicSignaturePersonalPage(
                                     form: formModel,
+                                    operation: widget.operation,
                                   ),
                                   ElectronicSignatureBillingPage(
                                     form: formModel,
+                                    operation: widget.operation,
                                   ),
                                 ],
                               ),
@@ -153,46 +147,55 @@ class _ElectronicSignatureSecondStepPageState
           bottomNavigationBar:
               ReactiveESignaturePersonalBillingModelFormConsumer(
             builder: (_, formModel, __) {
-              return PrimaryAsyncButton(
-                title: l10n.siguiente,
-                onPressed: widget.operation.isRead || formModel.form.valid
-                    ? () async {
-                        ref
-                            .read(electronicSignatureProvider.notifier)
-                            .setSecondStep(
-                              personalBillingModel: formModel.model,
-                            );
-                        final value = ref.watch(electronicSignatureProvider);
-                        await ref
-                            .read(
-                          signatureProvider(
-                            model: value,
-                          ).future,
-                        )
-                            .when(
-                          ok: (data) {
-                            context
-                              ..navigateTo(
-                                ElectronicSignatureMainRoute(
-                                  typeServiceModel: widget.typeServiceModel,
-                                ),
-                              )
-                              ..navigateTo(
-                                ChoosePaymentMethodRoute(
-                                  transactionCode: data.transactionCode,
-                                  service: widget.typeServiceModel,
-                                ),
+              return Container(
+                child: widget.operation.isCreate ? PrimaryAsyncButton(
+                  title: l10n.siguiente,
+                  onPressed: widget.operation.isRead || formModel.form.valid
+                      ? () async {
+                          ref
+                              .read(electronicSignatureProvider.notifier)
+                              .setSecondStep(
+                                personalBillingModel: formModel.model,
                               );
-                          },
-                          err: (err) {
-                            showAlert(
-                              err.translate(context),
-                              TypeAlert.error,
-                            );
-                          },
-                        );
-                      }
-                    : null,
+                          final value = ref.watch(electronicSignatureProvider);
+                          await ref
+                              .read(
+                            signatureProvider(
+                              model: value,
+                            ).future,
+                          )
+                              .when(
+                            ok: (data) {
+                              context
+                                ..navigateTo(
+                                  ElectronicSignatureMainRoute(
+                                    typeServiceModel: widget.typeServiceModel,
+                                  ),
+                                )
+                                ..navigateTo(
+                                  ChoosePaymentMethodRoute(
+                                    transactionCode: data.transactionCode,
+                                    service: widget.typeServiceModel,
+                                  ),
+                                );
+                            },
+                            err: (err) {
+                              showAlert(
+                                err.translate(context),
+                                TypeAlert.error,
+                              );
+                            },
+                          );
+                        }
+                      : null,
+                ): PrimaryButton(
+                  title: l10n.aceptar,
+                  onPressed: () => context.navigateTo(
+                    ElectronicSignatureMainRoute(
+                      typeServiceModel: widget.typeServiceModel,
+                    ),
+                  ),
+                ),
               ).symmetricPadding(10, 20);
             },
           ),
