@@ -126,6 +126,30 @@
   "registroNacExt": "Registro de nacimiento en el exterior",
   "personal": "Personal",
   "familiar": "Familiar",
+  "solFirmaElectronica": "Solicitud de firma electrónica",
+  "repreLegalDesc": "Representante legal",
+  "personaNaturalDesc": "Personal natural",
+  "miembroEmpresaDesc": "Miembro de empresa",
+  "tipoFirmaArchivo": "Archivo",
+  "tipoFirmaToken": "Token",
+  "tipoCasoContratPublica": "Sistema oficial de contratación pública",
+  "tipoCasoQuipux": "Quipux-sitra",
+  "tipoCasoEmpresaSIntendencia": "Superintendencias de compañías",
+  "tipoCasoDocumentos": "Firma de documentos - firma ec",
+  "tipoCasoConsejoJudicatura": "Consejo de la judicatura",
+  "tipoCasoRevitDefunciones": "Revit defunciones",
+  "tipoPersona": "Tipo de persona",
+  "tipoFirmaElectronica": "Tipo de firma electrónica",
+  "esRenovacion": "¿Es renovación?",
+  "esAuxAduana": "¿Es auxiliar de aduana?",
+  "tieneToken": "¿Dispone de Dispositivo Token?",
+  "noSerieToken": "Número de serie del Dispositivo Token",
+  "firmaContacto": "Contacto",
+  "firmaFacturacion": "Facturación",
+  "usoFactElectronica": "Uso de la firma Facturación Electrónica",
+  "firmaIncRuc": "¿Incluir RUC en la firma?",
+  "firmaRuc": "RUC en la firma",
+  "firmaVigencia": "Vigencia de la firma",
   "obtengaSuTurno": "Obtenga su turno",
   "completeInformacionSolicitada": "Complete la información solicitada",
   "completeInformacionSolicitadaCed": "Complete la información solicitada para validar su cédula",
@@ -409,11 +433,20 @@
   "intrudcirNumTelVal": "Debe introducir un número de teléfono válido",
   "introducirNum6Dig": "Debe introducir un número de 6 dígitos",
   "ingreseCodVer": "Ingrese el código de verificación",
-  "terminosCondiciones": "Por favor ingrese el código de verificación enviado a su correo electrónico {email}, recuerde que este código estará activo por 5 minutos, luego de ese tiempo su código habrá caducado. En caso de no recibir su código verifique en la carpeta de correo basura o spam; En caso de no recibir su código escriba al correo electrónico enlinea@registrocivil.gob.ec",
+  "terminosCondiciones": "Por favor ingrese el código de verificación enviado a su correo electrónico {email}, recuerde que este código estará activo por 5 minutos, luego de ese tiempo habrá caducado. En caso de no recibir su código escriba al correo electrónico enlinea@registrocivil.gob.ec",
   "@terminosCondiciones": {
     "placeholders": {
       "email": {
         "type": "String"
+      }
+    }
+  },
+  "nYears": "{count, plural, =1{1 año} other{{count} años}}",
+  "@nYears": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
       }
     }
   },

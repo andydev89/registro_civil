@@ -4,7 +4,9 @@ import 'package:registro_civil_apk/data/enum/services/service_status_type.dart';
 import 'package:registro_civil_apk/data/models/auth/auth_model.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
+
 part 'register_model.g.dart';
+
 part 'register_model.gform.dart';
 
 @JsonSerializable()
@@ -92,9 +94,11 @@ class EnterDataModel {
 @ReactiveFormAnnotation()
 class OtpModel {
   OtpModel({
-    @FormControlAnnotation(validators: [requiredValidator]) this.code = '',
+    @FormControlAnnotation(validators: [requiredValidator, length6Validator])
+        this.code = '',
     @FormControlAnnotation(validators: [requiredTrueValidator])
         this.isVerified = false,
+    this.confirmPassword,
   });
 
   factory OtpModel.fromJson(Map<String, dynamic> json) =>
@@ -102,6 +106,7 @@ class OtpModel {
 
   final bool isVerified;
   final String code;
+  final ConfirmPasswordModel? confirmPassword;
 
   Map<String, dynamic> toJson() => _$OtpModelToJson(this);
 }

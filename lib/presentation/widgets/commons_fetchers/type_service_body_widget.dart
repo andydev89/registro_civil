@@ -4,12 +4,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
-import 'package:registro_civil_apk/data/providers/marriage_celebration/marriage_celebration_provider.dart';
-import 'package:registro_civil_apk/presentation/router/routes/router.dart';
-import 'package:registro_civil_apk/presentation/widgets/buttons/primary_radio_list_tile.dart';
 
-class BodyDuplicateWidget extends HookWidget {
-  const BodyDuplicateWidget({
+class TypeServiceBodyWidget extends HookWidget {
+  const TypeServiceBodyWidget({
     super.key,
     required this.typeServiceModel,
     this.operation = Crud.create,

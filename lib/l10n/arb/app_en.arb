@@ -121,6 +121,30 @@
   "registroNacExt": "Birth registration abroad",
   "personal": "Personal",
   "familiar": "Familiar",
+  "solFirmaElectronica": "Electronic signature request",
+  "repreLegalDesc": "Legal representative",
+  "personaNaturalDesc": "Natural person",
+  "miembroEmpresaDesc": "Company member",
+  "tipoFirmaArchivo": "File",
+  "tipoFirmaToken": "Token",
+  "tipoCasoContratPublica": "Official public procurement system",
+  "tipoCasoQuipux": "Quipux-sitra",
+  "tipoCasoEmpresaSIntendencia": "Superintendencies of companies",
+  "tipoCasoDocumentos": "Document signature - ec signature",
+  "tipoCasoConsejoJudicatura": "Judiciary council",
+  "tipoCasoRevitDefunciones": "Revit defunciones",
+  "tipoPersona": "Kind of person",
+  "tipoFirmaElectronica": "Electronic signature type",
+  "esRenovacion": "Is it renewal?",
+  "esAuxAduana": "Are you a customs assistant?",
+  "tieneToken": "Do you have a Token Device?",
+  "noSerieToken": "Token Device Serial Number",
+  "firmaContacto": "Contact",
+  "firmaFacturacion": "Billing",
+  "usoFactElectronica": "Use of the Electronic Invoicing signature",
+  "firmaIncRuc": "Include RUC in the signature?",
+  "firmaRuc": "RUC in the signature",
+  "firmaVigencia": "Validity of the signature",
   "obtengaSuTurno": "Get your turn",
   "completeInformacionSolicitada": "Complete the requested information",
   "completeInformacionSolicitadaCed": "Complete the requested information to validate your ID",
@@ -158,11 +182,20 @@
   "intrudcirNumTelVal": "Must enter a valid phone number",
   "introducirNum6Dig": "Must enter a 6-digit number",
   "ingreseCodVer": "Enter the verification code",
-  "terminosCondiciones": "Please enter the verification code sent to your email {email}, remember that this code will be active for 5 minutes, after that time your code will have expired. In case of not receiving your code check in the junk mail or spam folder; In case of not receiving your code write to the email enlinea@registrocivil.gob.ec",
+  "terminosCondiciones": "Please enter the verification code sent to your email {email}, remember that this code will be active for 5 minutes, after that time it will have expired. If you do not receive your code, write to the email enlinea@registrocivil.gob.ec",
   "@terminosCondiciones": {
     "placeholders": {
       "email": {
         "type": "String"
+      }
+    }
+  },
+  "nYears": "{count, plural, =1{1 year} other{{count} years}}",
+  "@nYears": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
       }
     }
   },

@@ -46,8 +46,8 @@ class Step1Page extends ConsumerWidget {
                 title: l10n.validar,
                 onPressed: form.nuiControl.valid
                     ? () => ref
-                        .read(registerValidateCitizenProvider.notifier)
-                        .registerValidateCitizen(form.model)
+                        .read(
+                            registerValidateCitizenProvider(form.model).future,)
                         .when(
                           ok: (citizen) {
                             ref.read(stepperIndexProvider.notifier).increment();

@@ -1,11 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:otp_text_field/otp_text_field.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/core/const/const.dart';
-import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/data/models/auth/register_model.dart';
+import 'package:registro_civil_apk/data/providers/auth/auth.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/providers/auth_provider.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -23,7 +27,6 @@ class Step4Page extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final otp = command.split(':').last.trim();
     return WillPopScope(
       onWillPop: () {
         ref.read(stepperIndexProvider.notifier).decrement();
@@ -37,14 +40,14 @@ class Step4Page extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Padding(
+                  /*Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: PrimaryText(
                       l10n.ingreseCodVer,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
+                  ),*/
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: PrimaryText(
@@ -52,46 +55,54 @@ class Step4Page extends ConsumerWidget {
                       color: Colors.white,
                     ),
                   ),
+                  const SizedBox(height: 16),
                   ReactiveOtpModelFormConsumer(
                     builder: (_, newForm, __) {
-                      return OTPTextField(
-                        length: 6,
-                        width: MediaQuery.of(context).size.width * .7,
-                        otpFieldStyle: OtpFieldStyle(
-                          borderColor: Colors.white,
-                          disabledBorderColor: Colors.white,
-                          enabledBorderColor: Colors.white,
-                          focusBorderColor: Colors.white,
-                        ),
-                        hasError: otp != newForm.codeControl.value,
-                        style: const TextStyle(
-                          fontSize: fontSizeDefault + 5,
-                          color: Colors.white,
-                        ),
-                        inputFormatter: [
-                          FilteringTextInputFormatter.digitsOnly
+                      return Column(
+                        children: [
+                          OTPTextField(
+                            length: 6,
+                            width: MediaQuery.of(context).size.width * .7,
+                            otpFieldStyle: OtpFieldStyle(
+                              borderColor: Colors.white,
+                              disabledBorderColor: Colors.white,
+                              enabledBorderColor: Colors.white,
+                              focusBorderColor: Colors.white,
+                            ),
+                            style: const TextStyle(
+                              fontSize: fontSizeDefault + 5,
+                              color: Colors.white,
+                            ),
+                            inputFormatter: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            outlineBorderRadius: 15,
+                            spaceBetween: 8,
+                            textFieldAlignment: MainAxisAlignment.spaceAround,
+                            onChanged: (value) {
+                              form.codeControl.value = value;
+                            },
+                            onCompleted: (pin) => form.codeControl.value = pin,
+                          ),
+                          const SizedBox(height: 16),
+                          PrimaryReactivePasswordField(
+                            ligth: true,
+                            formControl: form.confirmPasswordForm.newPasswordControl,
+                            hintText: l10n.password,
+                            prefixIcon: Assets.svg.key.svg(),
+                          ),
+                          PrimaryReactivePasswordField(
+                            ligth: true,
+                            formControl:
+                            form.confirmPasswordForm.confirmPasswordControl,
+                            hintText: l10n.confirmarContrasena,
+                            prefixIcon: Assets.svg.key.svg(),
+                          ),
                         ],
-                        outlineBorderRadius: 15,
-                        spaceBetween: 8,
-                        textFieldAlignment: MainAxisAlignment.spaceAround,
-                        onChanged: (value) {
-                          //  update the value in the form
-                          form.codeControl.value = value;
-                          if (value != otp) {
-                            form.codeControl.setErrors(
-                              {ValidationsMessageType.invalidCode.toText: true},
-                            );
-                            return;
-                          }
-                          form.codeControl.removeError(
-                            ValidationsMessageType.invalidCode.toText,
-                          );
-                        },
-                        onCompleted: (pin) => form.codeControl.value = pin,
                       );
                     },
                   ),
-                  const SizedBox(height: 15),
+                  // const SizedBox(height: 15),
                   PrimaryReactiveCheckBox(
                     formControl: form.isVerifiedControl,
                     label: l10n.aceptarTer,
@@ -105,10 +116,25 @@ class Step4Page extends ConsumerWidget {
             ),
             bottomNavigationBar: ReactiveOtpModelFormConsumer(
               builder: (_, form, __) {
-                return PrimaryButton(
+                return PrimaryAsyncButton(
                   title: l10n.siguiente,
                   onPressed: form.form.valid
-                      ? () => context.navigateTo(Step5Route(code: otp))
+                      ? () => ref
+                      .read(registerCodeProvider.notifier)
+                      .registerCode(
+                    RegisterModel(
+                      code: form.model.code,
+                      password:
+                      form.model.confirmPassword!.newPassword,
+                    ),
+                  ).when(
+                    ok: (_) =>
+                        context.replaceRoute( SuccessRoute()),
+                    err: (error) => showAlert(
+                      error.translate(context),
+                      TypeAlert.error,
+                    ),
+                  )
                       : null,
                 );
               },

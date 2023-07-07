@@ -10,6 +10,7 @@ export 'primary_reactive_map.dart';
 export 'primary_reactive_nui_field.dart';
 export 'primary_reactive_password_field.dart';
 export 'primary_reactive_phone_field.dart';
+export 'primary_reactive_postal_code_field.dart';
 export 'primary_reactive_radio_group.dart';
 export 'primary_reactive_radio_tile.dart';
 export 'primary_reactive_text_area_field.dart';

@@ -152,19 +152,6 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    Step5Route.name: (routeData) {
-      final args = routeData.argsAs<Step5RouteArgs>();
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: Step5Page(
-          key: args.key,
-          code: args.code,
-        ),
-        transitionsBuilder: TransitionsBuilders.slideLeft,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
     ForgotPasswordFirstRoute.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -368,10 +355,10 @@ class _$AppRouter extends RootStackRouter {
         child: const IdDuplicateRouterPage(),
       );
     },
-    PersonalValidationRouterRoute.name: (routeData) {
+    ElectronicSignatureRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
-        child: const PersonalValidationRouterPage(),
+        child: const ElectronicSignatureRouterPage(),
       );
     },
     DefaultRoute.name: (routeData) {
@@ -850,10 +837,57 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    PersonalValidationMainRoute.name: (routeData) {
+    ElectronicSignatureMainRoute.name: (routeData) {
+      final args = routeData.argsAs<ElectronicSignatureMainRouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const PersonalValidationMainPage(),
+        child: ElectronicSignatureMainPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ElectronicSignatureFirstStepRouterRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<ElectronicSignatureFirstStepRouterRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ElectronicSignatureFirstStepRouterPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          operation: args.operation,
+          signatureId: args.signatureId,
+        ),
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ElectronicSignatureFirstStepRoute.name: (routeData) {
+      final args = routeData.argsAs<ElectronicSignatureFirstStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ElectronicSignatureFirstStepPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          operation: args.operation,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ElectronicSignatureSecondStepRoute.name: (routeData) {
+      final args = routeData.argsAs<ElectronicSignatureSecondStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: ElectronicSignatureSecondStepPage(
+          key: args.key,
+          operation: args.operation,
+          typeServiceModel: args.typeServiceModel,
+        ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
@@ -900,12 +934,6 @@ class _$AppRouter extends RootStackRouter {
                   path: 'step4-page',
                   parent: RegisterRouterRoute.name,
                   meta: <String, dynamic>{'index': 3},
-                ),
-                RouteConfig(
-                  Step5Route.name,
-                  path: 'step5-page',
-                  parent: RegisterRouterRoute.name,
-                  meta: <String, dynamic>{'index': 4},
                 ),
               ],
             ),
@@ -1301,16 +1329,33 @@ class _$AppRouter extends RootStackRouter {
               ],
             ),
             RouteConfig(
-              PersonalValidationRouterRoute.name,
-              path: 'personal-validation-router-page',
+              ElectronicSignatureRouterRoute.name,
+              path: 'electronic-signature-router-page',
               parent: RootRouterRoute.name,
               guards: [authGuard],
               children: [
                 RouteConfig(
-                  PersonalValidationMainRoute.name,
+                  ElectronicSignatureMainRoute.name,
                   path: '',
-                  parent: PersonalValidationRouterRoute.name,
-                )
+                  parent: ElectronicSignatureRouterRoute.name,
+                ),
+                RouteConfig(
+                  ElectronicSignatureFirstStepRouterRoute.name,
+                  path: 'electronic-signature-first-step-router-page',
+                  parent: ElectronicSignatureRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      ElectronicSignatureFirstStepRoute.name,
+                      path: '',
+                      parent: ElectronicSignatureFirstStepRouterRoute.name,
+                    ),
+                    RouteConfig(
+                      ElectronicSignatureSecondStepRoute.name,
+                      path: 'electronic-signature-second-step-page',
+                      parent: ElectronicSignatureFirstStepRouterRoute.name,
+                    ),
+                  ],
+                ),
               ],
             ),
             RouteConfig(
@@ -1573,40 +1618,6 @@ class Step4RouteArgs {
   @override
   String toString() {
     return 'Step4RouteArgs{key: $key, command: $command, email: $email}';
-  }
-}
-
-/// generated route for
-/// [Step5Page]
-class Step5Route extends PageRouteInfo<Step5RouteArgs> {
-  Step5Route({
-    Key? key,
-    required String code,
-  }) : super(
-          Step5Route.name,
-          path: 'step5-page',
-          args: Step5RouteArgs(
-            key: key,
-            code: code,
-          ),
-        );
-
-  static const String name = 'Step5Route';
-}
-
-class Step5RouteArgs {
-  const Step5RouteArgs({
-    this.key,
-    required this.code,
-  });
-
-  final Key? key;
-
-  final String code;
-
-  @override
-  String toString() {
-    return 'Step5RouteArgs{key: $key, code: $code}';
   }
 }
 
@@ -2175,16 +2186,16 @@ class IdDuplicateRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [PersonalValidationRouterPage]
-class PersonalValidationRouterRoute extends PageRouteInfo<void> {
-  const PersonalValidationRouterRoute({List<PageRouteInfo>? children})
+/// [ElectronicSignatureRouterPage]
+class ElectronicSignatureRouterRoute extends PageRouteInfo<void> {
+  const ElectronicSignatureRouterRoute({List<PageRouteInfo>? children})
       : super(
-          PersonalValidationRouterRoute.name,
-          path: 'personal-validation-router-page',
+          ElectronicSignatureRouterRoute.name,
+          path: 'electronic-signature-router-page',
           initialChildren: children,
         );
 
-  static const String name = 'PersonalValidationRouterRoute';
+  static const String name = 'ElectronicSignatureRouterRoute';
 }
 
 /// generated route for
@@ -3573,13 +3584,163 @@ class IdDuplicateDetailRouteArgs {
 }
 
 /// generated route for
-/// [PersonalValidationMainPage]
-class PersonalValidationMainRoute extends PageRouteInfo<void> {
-  const PersonalValidationMainRoute()
-      : super(
-          PersonalValidationMainRoute.name,
+/// [ElectronicSignatureMainPage]
+class ElectronicSignatureMainRoute
+    extends PageRouteInfo<ElectronicSignatureMainRouteArgs> {
+  ElectronicSignatureMainRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          ElectronicSignatureMainRoute.name,
           path: '',
+          args: ElectronicSignatureMainRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
         );
 
-  static const String name = 'PersonalValidationMainRoute';
+  static const String name = 'ElectronicSignatureMainRoute';
+}
+
+class ElectronicSignatureMainRouteArgs {
+  const ElectronicSignatureMainRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'ElectronicSignatureMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [ElectronicSignatureFirstStepRouterPage]
+class ElectronicSignatureFirstStepRouterRoute
+    extends PageRouteInfo<ElectronicSignatureFirstStepRouterRouteArgs> {
+  ElectronicSignatureFirstStepRouterRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    Crud operation = Crud.create,
+    String? signatureId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ElectronicSignatureFirstStepRouterRoute.name,
+          path: 'electronic-signature-first-step-router-page',
+          args: ElectronicSignatureFirstStepRouterRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            operation: operation,
+            signatureId: signatureId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ElectronicSignatureFirstStepRouterRoute';
+}
+
+class ElectronicSignatureFirstStepRouterRouteArgs {
+  const ElectronicSignatureFirstStepRouterRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    this.operation = Crud.create,
+    this.signatureId,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final Crud operation;
+
+  final String? signatureId;
+
+  @override
+  String toString() {
+    return 'ElectronicSignatureFirstStepRouterRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation, signatureId: $signatureId}';
+  }
+}
+
+/// generated route for
+/// [ElectronicSignatureFirstStepPage]
+class ElectronicSignatureFirstStepRoute
+    extends PageRouteInfo<ElectronicSignatureFirstStepRouteArgs> {
+  ElectronicSignatureFirstStepRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    Crud operation = Crud.create,
+  }) : super(
+          ElectronicSignatureFirstStepRoute.name,
+          path: '',
+          args: ElectronicSignatureFirstStepRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            operation: operation,
+          ),
+        );
+
+  static const String name = 'ElectronicSignatureFirstStepRoute';
+}
+
+class ElectronicSignatureFirstStepRouteArgs {
+  const ElectronicSignatureFirstStepRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'ElectronicSignatureFirstStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation}';
+  }
+}
+
+/// generated route for
+/// [ElectronicSignatureSecondStepPage]
+class ElectronicSignatureSecondStepRoute
+    extends PageRouteInfo<ElectronicSignatureSecondStepRouteArgs> {
+  ElectronicSignatureSecondStepRoute({
+    Key? key,
+    Crud operation = Crud.create,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          ElectronicSignatureSecondStepRoute.name,
+          path: 'electronic-signature-second-step-page',
+          args: ElectronicSignatureSecondStepRouteArgs(
+            key: key,
+            operation: operation,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'ElectronicSignatureSecondStepRoute';
+}
+
+class ElectronicSignatureSecondStepRouteArgs {
+  const ElectronicSignatureSecondStepRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'ElectronicSignatureSecondStepRouteArgs{key: $key, operation: $operation, typeServiceModel: $typeServiceModel}';
+  }
 }

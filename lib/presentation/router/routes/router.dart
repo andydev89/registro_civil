@@ -52,11 +52,6 @@ part 'router.gr.dart';
               page: Step4Page,
               meta: {'index': 3},
             ),
-            CustomRoute(
-              transitionsBuilder: TransitionsBuilders.slideLeft,
-              page: Step5Page,
-              meta: {'index': 4},
-            ),
           ],
         ),
         //FORGOT PASSWORD
@@ -377,7 +372,32 @@ part 'router.gr.dart';
                 ),
               ],
             ),
-
+          ],
+        ),
+        //DIGITAL_SIGNATURE
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: ElectronicSignatureRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: ElectronicSignatureMainPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+            CustomRoute(
+              page: ElectronicSignatureFirstStepRouterPage,
+              children: [
+                CustomRoute(
+                  initial: true,
+                  page: ElectronicSignatureFirstStepPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                CustomRoute(
+                  page: ElectronicSignatureSecondStepPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+              ],
+            ),
           ],
         ),
         //PERSONAL_DATA_VALIDATION

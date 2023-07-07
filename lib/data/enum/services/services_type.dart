@@ -43,6 +43,8 @@ enum ServiceType implements Translatable {
   idDuplicate('FORMALITY_DUPLICATE_IDENTITY'),
   @JsonValue('FORMALITY_MARRIAGE_CELEBRATION')
   marriageCelebration('FORMALITY_MARRIAGE_CELEBRATION'),
+  @JsonValue('SERVICE_ELECTRONIC_SIGNATURE')
+  electronicSignature('SERVICE_ELECTRONIC_SIGNATURE'),
   @JsonValue('SERVICE_PERSONAL_VALIDATION')
   personalValidation('SERVICE_PERSONAL_VALIDATION');
 
@@ -85,6 +87,8 @@ enum ServiceType implements Translatable {
 
   bool get isMarriageCelebration => this == marriageCelebration;
 
+  bool get isElectronicSignature => this == electronicSignature;
+
   bool get isPersonalValidation => this == personalValidation;
 
   @override
@@ -125,6 +129,8 @@ enum ServiceType implements Translatable {
         return l10n.cambioNom;
       case ServiceType.idDuplicate:
         return l10n.duplicadoCed;
+      case ServiceType.electronicSignature:
+        return '';
       case ServiceType.personalValidation:
         return l10n.personalValidation;
     }

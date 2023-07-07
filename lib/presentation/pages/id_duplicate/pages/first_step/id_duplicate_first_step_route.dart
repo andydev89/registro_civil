@@ -5,7 +5,6 @@ import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/id_duplicate/id_duplicate.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/id_duplicate/widgets/body_widget.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class IdDuplicateFirstStepRouterPage extends HookWidget {
@@ -22,7 +21,6 @@ class IdDuplicateFirstStepRouterPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Consumer(
       builder: (context, ref, _) {
         return operation.isRead
@@ -40,13 +38,13 @@ class IdDuplicateFirstStepRouterPage extends HookWidget {
                         .read(idDuplicateProvider.notifier)
                         .updateModel(data),
                   );
-                  return BodyDuplicateWidget(
+                  return TypeServiceBodyWidget(
                     operation: operation,
                     typeServiceModel: typeServiceModel,
                   );
                 },
               )
-            : BodyDuplicateWidget(typeServiceModel: typeServiceModel);
+            : TypeServiceBodyWidget(typeServiceModel: typeServiceModel);
       },
     );
   }

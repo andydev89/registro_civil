@@ -66,6 +66,13 @@ PageRouteInfo<dynamic> getIdDuplicate(TypeServiceModel typeOfService) =>
       ],
     );
 
+PageRouteInfo<dynamic> getElectronicSignature(TypeServiceModel typeOfService) =>
+    ElectronicSignatureRouterRoute(
+      children: [
+        ElectronicSignatureMainRoute(typeServiceModel: typeOfService),
+      ],
+    );
+
 PageRouteInfo<dynamic> getPersonalValidation() =>
     const PersonalValidationRouterRoute();
 
@@ -94,6 +101,9 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   }
   if (type.isMarriageCelebration) {
     return getMarriageCelebration();
+  }
+  if (type.isElectronicSignature) {
+    return getElectronicSignature(typeServiceModel);
   }
   if (type.isPersonalValidation) {
     return getPersonalValidation();

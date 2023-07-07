@@ -64,7 +64,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
           maxLength: maxLength,
           formControl: formControl,
           formControlName: formControlName,
-          // readOnly: readOnly,
+          readOnly: readOnly,
           obscureText: obscureText,
           controller: controller,
           onTap: onTap,

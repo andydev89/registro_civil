@@ -5,6 +5,7 @@ import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'auth_providers.g.dart';
 
 @riverpod
@@ -44,26 +45,6 @@ class Login extends _$Login {
     } else {
       return false;
     }
-  }
-}
-
-@riverpod
-class RegisterValidateCitizen extends _$RegisterValidateCitizen {
-  @override
-  CitizenModel? build() {
-    return null;
-  }
-
-  Future<Result<CitizenModel, StatusCodeType>> registerValidateCitizen(
-    NuiModel model,
-  ) async {
-    final api = ref.watch(apiProvider);
-    final response = await api.registerValidateNui(model);
-    if (response.status == StatusCodeType.s200) {
-      state = response.data!.citizen.copyWith(nui: model.nui);
-      return Result.ok(state!);
-    }
-    return Result.err(response.status);
   }
 }
 
@@ -150,6 +131,20 @@ Future<OAuth2Token?> refreshToken(
 }
 
 @riverpod
+Future<Result<CitizenModel, StatusCodeType>> registerValidateCitizen(
+    RegisterValidateCitizenRef ref,
+    NuiModel model,
+    ) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.registerValidateNui(model);
+  if (response.status == StatusCodeType.s200) {
+    final result = response.data!.citizen.copyWith(nui: model.nui);
+    return Result.ok(result);
+  }
+  return Result.err(response.status);
+}
+
+@riverpod
 Stream<AuthenticationStatus> authenticationStatus(AuthenticationStatusRef ref) {
   return ref.watch(freshProvider).authenticationStatus;
 }
@@ -179,8 +174,8 @@ class ForgotPassword extends _$ForgotPassword {
   }
 
   Future<Result<ValidOtpModel, StatusCodeType>> forgotPasswordStep2(
-      ForgotOtpModel otpModel,
-      ) async {
+    ForgotOtpModel otpModel,
+  ) async {
     final api = ref.watch(apiProvider);
     final response = await api.forgotPasswordVerifyOtp(otpModel);
     if (response.success) return Result.ok(response.data!);
@@ -188,8 +183,8 @@ class ForgotPassword extends _$ForgotPassword {
   }
 
   Future<Result<CommandModel, StatusCodeType>> forgotPasswordStep3(
-      ForgotConfirmPasswordModel confirmPasswordModel,
-      ) async {
+    ForgotConfirmPasswordModel confirmPasswordModel,
+  ) async {
     final api = ref.watch(apiProvider);
     final response = await api.forgotPassword(confirmPasswordModel);
     if (response.success) return Result.ok(response.data!);

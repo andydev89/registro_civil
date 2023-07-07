@@ -299,6 +299,22 @@ abstract class Api {
     @Path('id') String id,
   );
 
+  //Signature
+  @POST('/digitalsignature/api/digitalsignature')
+  Future<ResponseModel<CommandWithTransactionCodeModel>> createSignature(
+      @Body() ElectronicSignatureModel signatureModel,
+      );
+
+  @GET('/digitalsignature/api/digitalsignature')
+  Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures({
+    @Query('pageNo') int pageNo = 0,
+  });
+
+  @GET('/digitalsignature/api/digitalsignature/{id}')
+  Future<ResponseModel<ElectronicSignatureModel>> signatureById(
+      @Path('id') String id,
+      );
+
   //PERSONAL DATA VALIDATION
   @GET('/personaldatavalidator/api/personal-data/solicitudes')
   Future<ResponseModelPagination<List<dynamic>>>

@@ -1,6 +1,7 @@
 export 'auth/auth.dart';
 export 'change_of_name/change_of_name.dart';
 export 'commons/commons.dart';
+export 'electronic_signature/electronic_signature.dart';
 export 'id_duplicate/id_duplicate.dart';
 export 'marriage_celebration/marriage_celebration.dart';
 export 'offers/offers.dart';

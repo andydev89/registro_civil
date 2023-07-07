@@ -15,21 +15,42 @@ import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 class Step3Page extends ConsumerWidget {
   const Step3Page({super.key});
 
+  Map<String, String> _findNames(String fullName) {
+    final regex = RegExp(r'(.+?\s.+?)\s(.+)$');
+    final matches = regex.allMatches(fullName.trim());
+
+    var firstName = '';
+    var lastName = '';
+
+    for (final match in matches) {
+      lastName = match.group(1) ?? '';
+      firstName = match.group(2) ?? '';
+    }
+    return {'firstName': firstName, 'lastName': lastName};
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final citizen = ref.watch(citizenProvider);
+    final names = _findNames(citizen.nombre);
     return WillPopScope(
       onWillPop: () {
         ref.read(stepperIndexProvider.notifier).decrement();
         return Future(() => true);
       },
       child: EnterDataModelFormBuilder(
-        model: EnterDataModel(
-          nui: citizen.nui,
-          firstName: citizen.nombres,
-          lastName: citizen.apellidos,
-        ),
+        model: citizen.nombres.isEmpty || citizen.apellidos.isEmpty
+            ? EnterDataModel(
+                nui: citizen.nui,
+                firstName: names['firstName'] ?? '',
+                lastName: names['lastName'] ?? '',
+              )
+            : EnterDataModel(
+                nui: citizen.nui,
+                firstName: citizen.nombres,
+                lastName: citizen.apellidos,
+              ),
         builder: (_, form, __) {
           return Scaffold(
             backgroundColor: Colors.transparent,
@@ -52,7 +73,6 @@ class Step3Page extends ConsumerWidget {
                               '${l10n.nombre}: ${form.model.firstName}'
                               ' ${form.model.lastName}',
                               color: Colors.white,
-                              maxLines: null,
                             ),
                           ),
                         ],

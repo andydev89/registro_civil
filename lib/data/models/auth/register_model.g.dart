@@ -39,11 +39,16 @@ Map<String, dynamic> _$EnterDataModelToJson(EnterDataModel instance) =>
 OtpModel _$OtpModelFromJson(Map<String, dynamic> json) => OtpModel(
       code: json['code'] as String? ?? '',
       isVerified: json['isVerified'] as bool? ?? false,
+      confirmPassword: json['confirmPassword'] == null
+          ? null
+          : ConfirmPasswordModel.fromJson(
+              json['confirmPassword'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$OtpModelToJson(OtpModel instance) => <String, dynamic>{
       'isVerified': instance.isVerified,
       'code': instance.code,
+      'confirmPassword': instance.confirmPassword,
     };
 
 RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) =>
