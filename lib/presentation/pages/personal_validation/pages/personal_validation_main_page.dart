@@ -9,7 +9,9 @@ import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class PersonalValidationMainPage extends ConsumerWidget {
-  const PersonalValidationMainPage({super.key});
+  const PersonalValidationMainPage({super.key, required this.typeServiceModel});
+
+  final TypeServiceModel typeServiceModel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,12 +28,19 @@ class PersonalValidationMainPage extends ConsumerWidget {
             PrimaryAddItemRow(
               title: l10n.listadoSol,
               onPressed: () => context.navigateTo(
-                const MarriageCelebrationStepperRoute(),
+                PersonalValidationFirstStepRouterRoute(
+                  typeServiceModel: typeServiceModel,
+                  children: [
+                    PersonalValidationFirstStepRoute(
+                      typeServiceModel: typeServiceModel,
+                    ),
+                  ],
+                ),
               ),
             ),
             Expanded(
-              child: LoadingProviderWidget<
-                  ResponseModelPagination<List<dynamic>>>(
+              child:
+                  LoadingProviderWidget<ResponseModelPagination<List<dynamic>>>(
                 async: ref.watch(personalValidationsProvider()),
                 onRefreshIndicator: () => ref.refresh(
                   marriagesProvider().future,

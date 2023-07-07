@@ -410,6 +410,16 @@ part 'router.gr.dart';
               page: PersonalValidationMainPage,
               transitionsBuilder: TransitionsBuilders.slideRight,
             ),
+            CustomRoute(
+              page: PersonalValidationFirstStepRouterPage,
+              children: [
+                CustomRoute(
+                  initial: true,
+                  page: PersonalValidationFirstStepPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+              ],
+            )
           ],
         ),
         CupertinoRoute(

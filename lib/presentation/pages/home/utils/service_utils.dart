@@ -73,8 +73,12 @@ PageRouteInfo<dynamic> getElectronicSignature(TypeServiceModel typeOfService) =>
       ],
     );
 
-PageRouteInfo<dynamic> getPersonalValidation() =>
-    const PersonalValidationRouterRoute();
+PageRouteInfo<dynamic> getPersonalValidation(TypeServiceModel typeOfService) =>
+    PersonalValidationRouterRoute(
+        children: [
+          PersonalValidationMainRoute(typeServiceModel: typeOfService),
+        ],
+    );
 
 PageRouteInfo<dynamic> getDefault(TypeServiceModel typeOfService) =>
     DefaultRoute(typeServiceModel: typeOfService);
@@ -106,7 +110,7 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
     return getElectronicSignature(typeServiceModel);
   }
   if (type.isPersonalValidation) {
-    return getPersonalValidation();
+    return getPersonalValidation(typeServiceModel);
   }
   return getDefault(typeServiceModel);
 }

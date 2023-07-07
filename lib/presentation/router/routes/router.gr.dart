@@ -900,9 +900,42 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     PersonalValidationMainRoute.name: (routeData) {
+      final args = routeData.argsAs<PersonalValidationMainRouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
-        child: const PersonalValidationMainPage(),
+        child: PersonalValidationMainPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    PersonalValidationFirstStepRouterRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<PersonalValidationFirstStepRouterRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: PersonalValidationFirstStepRouterPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          operation: args.operation,
+          requestId: args.requestId,
+        ),
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    PersonalValidationFirstStepRoute.name: (routeData) {
+      final args = routeData.argsAs<PersonalValidationFirstStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: PersonalValidationFirstStepPage(
+          key: args.key,
+          operation: args.operation,
+          typeServiceModel: args.typeServiceModel,
+        ),
         transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
@@ -1383,7 +1416,19 @@ class _$AppRouter extends RootStackRouter {
                   PersonalValidationMainRoute.name,
                   path: '',
                   parent: PersonalValidationRouterRoute.name,
-                )
+                ),
+                RouteConfig(
+                  PersonalValidationFirstStepRouterRoute.name,
+                  path: 'personal-validation-first-step-router-page',
+                  parent: PersonalValidationRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      PersonalValidationFirstStepRoute.name,
+                      path: '',
+                      parent: PersonalValidationFirstStepRouterRoute.name,
+                    )
+                  ],
+                ),
               ],
             ),
             RouteConfig(
@@ -3788,12 +3833,122 @@ class ElectronicSignatureSecondStepRouteArgs {
 
 /// generated route for
 /// [PersonalValidationMainPage]
-class PersonalValidationMainRoute extends PageRouteInfo<void> {
-  const PersonalValidationMainRoute()
-      : super(
+class PersonalValidationMainRoute
+    extends PageRouteInfo<PersonalValidationMainRouteArgs> {
+  PersonalValidationMainRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
           PersonalValidationMainRoute.name,
           path: '',
+          args: PersonalValidationMainRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
         );
 
   static const String name = 'PersonalValidationMainRoute';
+}
+
+class PersonalValidationMainRouteArgs {
+  const PersonalValidationMainRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'PersonalValidationMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [PersonalValidationFirstStepRouterPage]
+class PersonalValidationFirstStepRouterRoute
+    extends PageRouteInfo<PersonalValidationFirstStepRouterRouteArgs> {
+  PersonalValidationFirstStepRouterRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    Crud operation = Crud.create,
+    String? requestId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          PersonalValidationFirstStepRouterRoute.name,
+          path: 'personal-validation-first-step-router-page',
+          args: PersonalValidationFirstStepRouterRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            operation: operation,
+            requestId: requestId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'PersonalValidationFirstStepRouterRoute';
+}
+
+class PersonalValidationFirstStepRouterRouteArgs {
+  const PersonalValidationFirstStepRouterRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    this.operation = Crud.create,
+    this.requestId,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final Crud operation;
+
+  final String? requestId;
+
+  @override
+  String toString() {
+    return 'PersonalValidationFirstStepRouterRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation, requestId: $requestId}';
+  }
+}
+
+/// generated route for
+/// [PersonalValidationFirstStepPage]
+class PersonalValidationFirstStepRoute
+    extends PageRouteInfo<PersonalValidationFirstStepRouteArgs> {
+  PersonalValidationFirstStepRoute({
+    Key? key,
+    Crud operation = Crud.create,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          PersonalValidationFirstStepRoute.name,
+          path: '',
+          args: PersonalValidationFirstStepRouteArgs(
+            key: key,
+            operation: operation,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'PersonalValidationFirstStepRoute';
+}
+
+class PersonalValidationFirstStepRouteArgs {
+  const PersonalValidationFirstStepRouteArgs({
+    this.key,
+    this.operation = Crud.create,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final Crud operation;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'PersonalValidationFirstStepRouteArgs{key: $key, operation: $operation, typeServiceModel: $typeServiceModel}';
+  }
 }
