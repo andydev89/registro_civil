@@ -55,6 +55,7 @@ const _$ServiceTypeEnumMap = {
   ServiceType.idDuplicate: 'FORMALITY_DUPLICATE_IDENTITY',
   ServiceType.marriageCelebration: 'FORMALITY_MARRIAGE_CELEBRATION',
   ServiceType.electronicSignature: 'SERVICE_ELECTRONIC_SIGNATURE',
+  ServiceType.personalValidation: 'SERVICE_PERSONAL_VALIDATION',
 };
 
 const _$RelationshipSimpleCertificateTypeEnumMap = {
