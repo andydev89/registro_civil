@@ -1,14 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
-import 'package:registro_civil_apk/data/providers/auth/auth.dart';
 import 'package:registro_civil_apk/data/providers/electronic_signature/electronic_signature.dart';
-import 'package:registro_civil_apk/data/utils/utils.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
@@ -26,11 +22,10 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final me = ref.watch(meProvider).value ?? MeModel();
     final provider = ref.watch(electronicSignatureProvider.notifier);
     return ESignatureFirstSubModelFormBuilder(
       model: operation.isCreate
-          ? ESignatureFirstSubModel.fromMe(me)
+          ? null
           : provider.getFirstStep(),
       builder: (context, formModel, child) {
         final hasDeviceToken = ValueNotifier(
@@ -61,10 +56,16 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
                     onChanged: (value) =>
                         signatureTypeNotifier.value = value.value,
                   ),
-                  PrimaryReactiveTextField(
+                  /*PrimaryReactiveTextField(
                     label: l10n.numCedula,
                     formControl: formModel.userNuiControl,
                     readOnly: true,
+                  ),*/
+                  PrimaryReactiveNuiField(
+                    label: l10n.numCedula,
+                    formControl: formModel.userNuiControl,
+                    init: true,
+                    readOnly: operation.isRead,
                   ),
                   const SizedBox(
                     height: 6,
