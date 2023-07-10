@@ -29,13 +29,12 @@ Future<ResponseModelPagination<List<TypeServiceModel>>> typeServices(
   final query = ref.watch(typeServicesFilterProvider(type));
   final api = ref.watch(apiProvider);
   return api.typeServices(
-    pageNo: query.pageNo,
-    pageSize: query.pageSize,
-    filter: query.filter,
-    sortBy: query.sortBy,
-    sortType: query.sortType.toJson,
-    type: type.toText
-  );
+      pageNo: query.pageNo,
+      pageSize: query.pageSize,
+      filter: query.filter,
+      sortBy: query.sortBy,
+      sortType: query.sortType.toJson,
+      type: type.toText);
 }
 
 @riverpod

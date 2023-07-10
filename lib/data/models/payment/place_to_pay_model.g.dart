@@ -157,6 +157,7 @@ const _PlaceToPayReferenceModelserviceTypeEnumValueMap = {
   r'idDuplicate': r'idDuplicate',
   r'marriageCelebration': r'marriageCelebration',
   r'electronicSignature': r'electronicSignature',
+  r'cedulacionExtPriVez': r'cedulacionExtPriVez',
 };
 const _PlaceToPayReferenceModelserviceTypeValueEnumMap = {
   r'birth': ServiceType.birth,
@@ -181,6 +182,7 @@ const _PlaceToPayReferenceModelserviceTypeValueEnumMap = {
   r'idDuplicate': ServiceType.idDuplicate,
   r'marriageCelebration': ServiceType.marriageCelebration,
   r'electronicSignature': ServiceType.electronicSignature,
+  r'cedulacionExtPriVez': ServiceType.cedulacionExtPriVez,
 };
 
 Id _placeToPayReferenceModelGetId(PlaceToPayReferenceModel object) {

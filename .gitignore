@@ -127,3 +127,6 @@ app.*.map.json
 !.idea/dictionaries/
 !.idea/runConfigurations/
 .safurai/config.yml
+
+# fvm
+.fvm/flutter_sdk

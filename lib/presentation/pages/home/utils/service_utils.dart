@@ -47,7 +47,7 @@ PageRouteInfo<dynamic> getSchedule(TypeServiceModel typeOfService) =>
     );
 
 PageRouteInfo<dynamic> getMarriageCelebration() =>
-     MarriageCelebrationRouterRoute();
+    MarriageCelebrationRouterRoute();
 
 PageRouteInfo<dynamic> getResidencyRegistration() =>
     ResidenceRegistrationRouterRoute();
@@ -72,9 +72,18 @@ PageRouteInfo<dynamic> getElectronicSignature(TypeServiceModel typeOfService) =>
         ElectronicSignatureMainRoute(typeServiceModel: typeOfService),
       ],
     );
+PageRouteInfo<dynamic> getCedulacionExtPrimeraVez(
+        TypeServiceModel typeOfService) =>
+    ElectronicSignatureRouterRoute(
+      children: [
+        ElectronicSignatureMainRoute(typeServiceModel: typeOfService),
+      ],
+    );
 
 PageRouteInfo<dynamic> getDefault(TypeServiceModel typeOfService) =>
     DefaultRoute(typeServiceModel: typeOfService);
+
+//adicionar getcedulacionextranjeroprimeravez
 
 PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   final type = typeServiceModel.type;
@@ -102,5 +111,9 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   if (type.isElectronicSignature) {
     return getElectronicSignature(typeServiceModel);
   }
+  if (type.isCedulacionExtPriVez) {
+    return getElectronicSignature(typeServiceModel);
+  }
+  //agregar condicional para cedulacion extranjero primera vez
   return getDefault(typeServiceModel);
 }
