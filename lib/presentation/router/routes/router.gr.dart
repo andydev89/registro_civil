@@ -361,6 +361,12 @@ class _$AppRouter extends RootStackRouter {
         child: const ElectronicSignatureRouterPage(),
       );
     },
+    CedulacionExtPvezRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const CedulacionExtPvezRouterPage(),
+      );
+    },
     DefaultRoute.name: (routeData) {
       final args = routeData.argsAs<DefaultRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -893,6 +899,19 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    CedulacionExtPvezMainRoute.name: (routeData) {
+      final args = routeData.argsAs<CedulacionExtPvezMainRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: CedulacionExtPvezMainPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1356,6 +1375,18 @@ class _$AppRouter extends RootStackRouter {
                     ),
                   ],
                 ),
+              ],
+            ),
+            RouteConfig(
+              CedulacionExtPvezRouterRoute.name,
+              path: 'cedulacion-ext-pvez-router-page',
+              parent: RootRouterRoute.name,
+              children: [
+                RouteConfig(
+                  CedulacionExtPvezMainRoute.name,
+                  path: '',
+                  parent: CedulacionExtPvezRouterRoute.name,
+                )
               ],
             ),
             RouteConfig(
@@ -2196,6 +2227,19 @@ class ElectronicSignatureRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ElectronicSignatureRouterRoute';
+}
+
+/// generated route for
+/// [CedulacionExtPvezRouterPage]
+class CedulacionExtPvezRouterRoute extends PageRouteInfo<void> {
+  const CedulacionExtPvezRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          CedulacionExtPvezRouterRoute.name,
+          path: 'cedulacion-ext-pvez-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'CedulacionExtPvezRouterRoute';
 }
 
 /// generated route for
@@ -3742,5 +3786,40 @@ class ElectronicSignatureSecondStepRouteArgs {
   @override
   String toString() {
     return 'ElectronicSignatureSecondStepRouteArgs{key: $key, operation: $operation, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [CedulacionExtPvezMainPage]
+class CedulacionExtPvezMainRoute
+    extends PageRouteInfo<CedulacionExtPvezMainRouteArgs> {
+  CedulacionExtPvezMainRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          CedulacionExtPvezMainRoute.name,
+          path: '',
+          args: CedulacionExtPvezMainRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'CedulacionExtPvezMainRoute';
+}
+
+class CedulacionExtPvezMainRouteArgs {
+  const CedulacionExtPvezMainRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'CedulacionExtPvezMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
   }
 }

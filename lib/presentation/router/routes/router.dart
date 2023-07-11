@@ -400,6 +400,17 @@ part 'router.gr.dart';
             ),
           ],
         ),
+        //CEDULACION EXTRANJERO PRIMERA VEZ
+        CupertinoRoute(
+          page: CedulacionExtPvezRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: CedulacionExtPvezMainPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+          ],
+        ),
         CupertinoRoute(
           // guards: [AuthGuard],
           page: DefaultPage,

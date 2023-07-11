@@ -74,9 +74,9 @@ PageRouteInfo<dynamic> getElectronicSignature(TypeServiceModel typeOfService) =>
     );
 PageRouteInfo<dynamic> getCedulacionExtPrimeraVez(
         TypeServiceModel typeOfService) =>
-    ElectronicSignatureRouterRoute(
+    CedulacionExtPvezRouterRoute(
       children: [
-        ElectronicSignatureMainRoute(typeServiceModel: typeOfService),
+        CedulacionExtPvezMainRoute(typeServiceModel: typeOfService),
       ],
     );
 
@@ -112,7 +112,7 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
     return getElectronicSignature(typeServiceModel);
   }
   if (type.isCedulacionExtPriVez) {
-    return getElectronicSignature(typeServiceModel);
+    return getCedulacionExtPrimeraVez(typeServiceModel);
   }
   //agregar condicional para cedulacion extranjero primera vez
   return getDefault(typeServiceModel);

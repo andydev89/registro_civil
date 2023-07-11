@@ -14,3 +14,4 @@ export 'residence_registration/residence_registration.dart';
 export 'root/root.dart';
 export 'schedule_turn/schedule_turn.dart';
 export 'simple_certificate/simple_certificate.dart';
+export 'cedulacion_ext_primera_vez/cedulacion_ext_primera_vez.dart';
