@@ -77,17 +77,52 @@ class _PersonalValidationPersonalTabPage
               widget.form.lastNameControl?.updateValue(prev);
             },
           ),
-          PrimaryReactiveDropdown(
+          EditableReactiveDropdown<PersonalValidationGenderType>(
             label: 'Género',
+            isEdited: widget.provider.containsKey('sexo'),
             formControl: widget.form.genderControl,
             items: PersonalValidationGenderType.values,
             readOnly: widget.operation.isRead,
+            onSavePressed: (val) {
+              final type = val as PersonalValidationGenderType?;
+              final original = type != null ? type.text : '';
+              final modified = widget.form.genderControl?.value?.text ?? '';
+              widget.provider.addRequest(
+                key: 'sexo',
+                model: ModifiedDataModel(
+                  original: original,
+                  modified: modified,
+                ),
+              );
+            },
+            onCancelPressed: () {
+              final prev = widget.provider.removeRequest(key: 'sexo');
+              widget.form.genderControl?.updateValue(
+                PersonalValidationGenderType.values
+                    .firstWhere((element) => element.text == prev),
+              );
+            },
           ),
-          PrimaryReactiveDropdown(
+          EditableReactiveDropdown(
             label: l10n.estadoCiv,
+            isEdited: widget.provider.containsKey('estadoCivil'),
             formControl: widget.form.maritalStatusTypeControl,
             items: PersonalValidationMaritalStatusType.values,
             readOnly: widget.operation.isRead,
+            onSavePressed: (val) {
+              final type = val as PersonalValidationMaritalStatusType?;
+              final original = type != null ? type.toText : '';
+              final modified =
+                  widget.form.maritalStatusTypeControl?.value?.toText ?? '';
+              widget.provider.addRequest(
+                key: 'estadoCivil',
+                model: ModifiedDataModel(
+                  original: original,
+                  modified: modified,
+                ),
+              );
+            },
+            onCancelPressed: () {},
           ),
         ],
       ),

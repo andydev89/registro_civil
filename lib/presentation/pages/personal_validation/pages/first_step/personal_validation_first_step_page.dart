@@ -59,7 +59,6 @@ class _PersonalValidationFirstStepPageState
     ];
     final provider = ref.watch(personalDataByIdProvider);
     final reqProvider = ref.watch(personalValidationRequestsProvider.notifier);
-    ref.watch(personalValidationRequestsProvider);
 
     return PersonalValidationModelFormBuilder(
       model: widget.operation.isCreate ? provider.value?.response : null,
