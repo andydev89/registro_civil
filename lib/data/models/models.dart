@@ -7,6 +7,7 @@ export 'marriage_celebration/marriage_celebration.dart';
 export 'offers/offers.dart';
 export 'payment/payment.dart';
 export 'payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts.dart';
+export 'personal_validation/personal_validation.dart';
 export 'residence_registration/residence_registration.dart';
 export 'responses/response.dart';
 export 'schedule_turn/schedule_turn.dart';

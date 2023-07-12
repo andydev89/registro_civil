@@ -1625,6 +1625,62 @@ class _Api implements Api {
     return value;
   }
 
+  @override
+  Future<ResponseModel<PersonalValidationResponseModel>> personalDataById(
+      String nui) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<PersonalValidationResponseModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/personaldatavalidator/api/personal-data/${nui}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<PersonalValidationResponseModel>.fromJson(
+      _result.data!,
+      (json) => PersonalValidationResponseModel.fromJson(
+          json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandNuiModel>> createPersonalDataRequest(
+      PersonalValidationRequestModel model) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(model.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandNuiModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/personaldatavalidator/api/personal-data',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandNuiModel>.fromJson(
+      _result.data!,
+      (json) => CommandNuiModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

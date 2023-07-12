@@ -7,6 +7,7 @@ export 'id_duplicate/id_duplicate.dart';
 export 'marriage_celebration/marriage_celebration.dart';
 export 'notification/notification.dart';
 export 'payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts.dart';
+export 'personal_validation/personal_validation.dart';
 export 'residence_registration/resident_registration.dart';
 export 'services/services.dart';
 export 'simple_certificate/simple_certificate.dart';

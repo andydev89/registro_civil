@@ -11,14 +11,15 @@ InputDecoration primaryInputDecoration({
   String? hintText,
   bool readOnly = false,
   String? errorText,
-
+  double prefixHorizontalPadding = 15,
+  double suffixHorizontalPadding = 10,
   ///Esto es para establecer el tamano del suffix icon
   bool setSuffixIconConstraints = false,
 }) {
   return InputDecoration(
     suffix: suffix,
-    suffixIcon: suffixIcon?.horizontalPadding(10),
-    prefixIcon: prefixIcon?.horizontalPadding(15),
+    suffixIcon: suffixIcon?.horizontalPadding(suffixHorizontalPadding),
+    prefixIcon: prefixIcon?.horizontalPadding(prefixHorizontalPadding),
     // prefixIconConstraints: const BoxConstraints(maxHeight: 20),
     suffixIconConstraints: setSuffixIconConstraints
         ? const BoxConstraints(
@@ -58,3 +59,62 @@ InputDecoration primaryInputDecoration({
     ),
   );
 }
+
+InputDecoration editableInputDecoration({
+  bool light = false,
+  required Widget suffixIcon,
+  Widget? prefixIcon,
+  double? fontSize,
+  FontWeight? fontWeight,
+  String? hintText,
+  bool readOnly = false,
+  String? errorText,
+  bool setSuffixIconConstraints = false,
+  bool filled = false,
+}) {
+  return InputDecoration(
+    suffixIcon: Padding(
+      padding: const EdgeInsets.only(left: 10),
+      child: suffixIcon,
+    ),
+    suffixIconConstraints: setSuffixIconConstraints
+        ? const BoxConstraints(
+      // maxWidth: 40,
+      maxHeight: 40,
+    )
+        : null,
+    filled: filled,
+    fillColor: Colors.red.withOpacity(.2),
+    hintText: hintText,
+    hintStyle: TextStyle(
+      color: light ? Colors.white : Colors.grey,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+    ),
+    errorMaxLines: 2,
+    errorText: errorText,
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 0.5,
+        color: readOnly
+            ? Colors.grey
+            : light
+            ? Colors.white
+            : Colors.black,
+      ),
+      borderRadius: BorderRadius.circular(10),
+    ),
+    border: OutlineInputBorder(
+      borderSide: BorderSide(
+        width: 0.5,
+        color: light ? Colors.white : Colors.black,
+      ),
+      borderRadius: BorderRadius.circular(10),
+    ),
+    contentPadding: const EdgeInsets.symmetric(
+      vertical: 15,
+      horizontal: 20,
+    ),
+  );
+}
+

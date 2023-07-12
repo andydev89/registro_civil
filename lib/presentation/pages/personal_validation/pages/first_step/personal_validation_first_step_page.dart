@@ -10,7 +10,7 @@ import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/electronic_signature/electronic_signature.dart';
+import 'package:registro_civil_apk/presentation/pages/personal_validation/personal_validation.dart';
 import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
@@ -57,16 +57,16 @@ class _PersonalValidationFirstStepPageState
       'Union de Hecho',
       'Registro de género'
     ];
-    final me = ref.watch(meProvider).value ?? MeModel();
-    final provider = ref.watch(electronicSignatureProvider.notifier);
-    return ESignaturePersonalBillingModelFormBuilder(
-      model: widget.operation.isCreate
-          ? ESignaturePersonalBillingModel.fromMe(me)
-          : provider.getSecondStep(me),
+    final provider = ref.watch(personalDataByIdProvider);
+    final reqProvider = ref.watch(personalValidationRequestsProvider.notifier);
+    ref.watch(personalValidationRequestsProvider);
+
+    return PersonalValidationModelFormBuilder(
+      model: widget.operation.isCreate ? provider.value?.response : null,
       builder: (context, formModel, child) {
         return PrimaryScaffold(
-          title: l10n.solFirmaElectronica,
-          subtitle: l10n.ingreseInfSol,
+          title: 'Validación de datos personales',
+          subtitle: l10n.completeInformacionSolicitadaCed,
           body: DefaultTabController(
             length: 6,
             child: Expanded(
@@ -124,7 +124,11 @@ class _PersonalValidationFirstStepPageState
                               child: TabBarView(
                                 controller: _tabController,
                                 children: [
-                                  Container(),
+                                  PersonalValidationPersonalTabPage(
+                                    form: formModel,
+                                    operation: widget.operation,
+                                    provider: reqProvider,
+                                  ),
                                   Container(),
                                   Container(),
                                   Container(),
@@ -142,66 +146,66 @@ class _PersonalValidationFirstStepPageState
               ),
             ),
           ),
-          bottomNavigationBar:
-              ReactiveESignaturePersonalBillingModelFormConsumer(
-            builder: (_, formModel, __) {
-              return Container(
-                child: widget.operation.isCreate
-                    ? PrimaryAsyncButton(
-                        title: l10n.siguiente,
-                        onPressed: widget.operation.isRead ||
-                                formModel.form.valid
-                            ? () async {
-                                ref
-                                    .read(electronicSignatureProvider.notifier)
-                                    .setSecondStep(
-                                      personalBillingModel: formModel.model,
-                                    );
-                                final value =
-                                    ref.watch(electronicSignatureProvider);
-                                await ref
-                                    .read(
-                                  signatureProvider(
-                                    model: value,
-                                  ).future,
-                                )
-                                    .when(
-                                  ok: (data) {
-                                    context
-                                      ..navigateTo(
-                                        ElectronicSignatureMainRoute(
-                                          typeServiceModel:
-                                              widget.typeServiceModel,
-                                        ),
-                                      )
-                                      ..navigateTo(
-                                        ChoosePaymentMethodRoute(
-                                          transactionCode: data.transactionCode,
-                                          service: widget.typeServiceModel,
-                                        ),
-                                      );
-                                  },
-                                  err: (err) {
-                                    showAlert(
-                                      err.translate(context),
-                                      TypeAlert.error,
-                                    );
-                                  },
-                                );
-                              }
-                            : null,
-                      )
-                    : PrimaryButton(
-                        title: l10n.aceptar,
-                        onPressed: () => context.navigateTo(
-                          ElectronicSignatureMainRoute(
-                            typeServiceModel: widget.typeServiceModel,
+          bottomNavigationBar: Container(
+            child: widget.operation.isCreate
+                ? ReactivePersonalValidationModelFormConsumer(
+                    builder: (_, formModel, __) {
+                      final pr = ref.watch(personalValidationRequestsProvider);
+                      return Wrap(
+                        children: [
+                          PrimaryReactiveCheckBox(
+                            formControl: formModel.acceptTermsControl,
+                            label: l10n.aceptoTermCondiciones,
                           ),
-                        ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          PrimaryAsyncButton(
+                            title: l10n.aceptar,
+                            onPressed: formModel.form.valid && pr.isNotEmpty
+                                ? () async {
+                                    final me =
+                                        ref.read(meProvider).value ?? MeModel();
+                                    final request =
+                                        PersonalValidationRequestModel(
+                                      me.identification,
+                                      pr,
+                                    );
+                                    await ref
+                                        .read(
+                                      personalDataProvider(model: request)
+                                          .future,
+                                    )
+                                        .when(
+                                      ok: (data) {
+                                        showAlert(
+                                          'Solicitud Enviada Satisfactoriamente',
+                                          TypeAlert.success,
+                                        );
+                                      },
+                                      err: (err) {
+                                        showAlert(
+                                          err.translate(context),
+                                          TypeAlert.error,
+                                        );
+                                      },
+                                    );
+                                  }
+                                : null,
+                          ),
+                        ],
+                      );
+                    },
+                  )
+                : PrimaryButton(
+                    title: l10n.aceptar,
+                    onPressed: () => context.navigateTo(
+                      ElectronicSignatureMainRoute(
+                        typeServiceModel: widget.typeServiceModel,
                       ),
-              ).symmetricPadding(10, 20);
-            },
-          ),
+                    ),
+                  ),
+          ).symmetricPadding(10, 20),
         );
       },
     );

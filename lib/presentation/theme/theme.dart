@@ -19,6 +19,16 @@ const gradienteApp = [
   Color.fromRGBO(0, 78, 146, 0.8),
 ];
 
+const greenGradient = [
+  Color(0xff1B5E20),
+  Color(0xff43A047),
+];
+
+const greyGradient = [
+  Color(0xff212121),
+  Color(0xff757575),
+];
+
 final lightTheme = ThemeData(
   primaryColor: primaryColor,
   cardColor: const Color.fromRGBO(255, 255, 255, 0.43),

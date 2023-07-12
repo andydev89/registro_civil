@@ -28,6 +28,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
     this.setSuffixIconConstraints = false,
     this.textCapitalization = TextCapitalization.none,
     this.maxLength,
+    this.suffixHorizontalPadding = 10,
     super.key,
   });
   final FormControl<T>? formControl;
@@ -48,6 +49,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
   final void Function(FormControl<T>)? onTap;
   final TextCapitalization textCapitalization;
   final int? maxLength;
+  final double suffixHorizontalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +87,7 @@ class PrimaryReactiveTextField<T> extends StatelessWidget {
             suffixIcon: suffixIcon,
             setSuffixIconConstraints: setSuffixIconConstraints,
             readOnly: readOnly,
+            suffixHorizontalPadding: suffixHorizontalPadding,
           ),
         ),
       ],
