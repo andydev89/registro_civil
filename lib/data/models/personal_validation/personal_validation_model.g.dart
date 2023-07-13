@@ -62,6 +62,12 @@ _$_PersonalValidationModel _$$_PersonalValidationModelFromJson(
       birth: json['birth'] == null
           ? null
           : BirthModel.fromJson(json['birth'] as Map<String, dynamic>),
+      fatherNui: json['nuiPadre'] as String?,
+      fatherName: json['nombrePadre'] as String?,
+      fatherNationality: json['nacionalidadPadre'] as String?,
+      motherNui: json['nuiMadre'] as String?,
+      motherName: json['nombreMadre'] as String?,
+      motherNationality: json['nacionalidadMadre'] as String?,
       acceptTerms: json['acceptTerms'] as bool? ?? false,
     );
 
@@ -76,6 +82,12 @@ Map<String, dynamic> _$$_PersonalValidationModelToJson(
       'fechaNacimiento': instance.birthDate,
       'nacionalidad': instance.nationality,
       'birth': instance.birth?.toJson(),
+      'nuiPadre': instance.fatherNui,
+      'nombrePadre': instance.fatherName,
+      'nacionalidadPadre': instance.fatherNationality,
+      'nuiMadre': instance.motherNui,
+      'nombreMadre': instance.motherName,
+      'nacionalidadMadre': instance.motherNationality,
       'acceptTerms': instance.acceptTerms,
     };
 

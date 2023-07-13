@@ -199,6 +199,18 @@ class PersonalValidationModelForm
 
   static const String birthControlName = "birth";
 
+  static const String fatherNuiControlName = "fatherNui";
+
+  static const String fatherNameControlName = "fatherName";
+
+  static const String fatherNationalityControlName = "fatherNationality";
+
+  static const String motherNuiControlName = "motherNui";
+
+  static const String motherNameControlName = "motherName";
+
+  static const String motherNationalityControlName = "motherNationality";
+
   static const String acceptTermsControlName = "acceptTerms";
 
   final PersonalValidationModel? personalValidationModel;
@@ -215,6 +227,14 @@ class PersonalValidationModelForm
   String birthDateControlPath() => pathBuilder(birthDateControlName);
   String nationalityControlPath() => pathBuilder(nationalityControlName);
   String birthControlPath() => pathBuilder(birthControlName);
+  String fatherNuiControlPath() => pathBuilder(fatherNuiControlName);
+  String fatherNameControlPath() => pathBuilder(fatherNameControlName);
+  String fatherNationalityControlPath() =>
+      pathBuilder(fatherNationalityControlName);
+  String motherNuiControlPath() => pathBuilder(motherNuiControlName);
+  String motherNameControlPath() => pathBuilder(motherNameControlName);
+  String motherNationalityControlPath() =>
+      pathBuilder(motherNationalityControlName);
   String acceptTermsControlPath() => pathBuilder(acceptTermsControlName);
   String? get _firstNameValue => firstNameControl?.value;
   String? get _lastNameValue => lastNameControl?.value;
@@ -224,6 +244,12 @@ class PersonalValidationModelForm
   String? get _birthDateValue => birthDateControl?.value;
   String? get _nationalityValue => nationalityControl?.value;
   BirthModel? get _birthValue => birthControl?.value;
+  String? get _fatherNuiValue => fatherNuiControl?.value;
+  String? get _fatherNameValue => fatherNameControl?.value;
+  String? get _fatherNationalityValue => fatherNationalityControl?.value;
+  String? get _motherNuiValue => motherNuiControl?.value;
+  String? get _motherNameValue => motherNameControl?.value;
+  String? get _motherNationalityValue => motherNationalityControl?.value;
   bool? get _acceptTermsValue => acceptTermsControl?.value;
   bool get containsFirstName {
     try {
@@ -288,6 +314,60 @@ class PersonalValidationModelForm
     }
   }
 
+  bool get containsFatherNui {
+    try {
+      form.control(fatherNuiControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsFatherName {
+    try {
+      form.control(fatherNameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsFatherNationality {
+    try {
+      form.control(fatherNationalityControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsMotherNui {
+    try {
+      form.control(motherNuiControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsMotherName {
+    try {
+      form.control(motherNameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsMotherNationality {
+    try {
+      form.control(motherNationalityControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsAcceptTerms {
     try {
       form.control(acceptTermsControlPath());
@@ -304,6 +384,12 @@ class PersonalValidationModelForm
   Object? get birthDateErrors => birthDateControl?.errors;
   Object? get nationalityErrors => nationalityControl?.errors;
   Object? get birthErrors => birthControl?.errors;
+  Object? get fatherNuiErrors => fatherNuiControl?.errors;
+  Object? get fatherNameErrors => fatherNameControl?.errors;
+  Object? get fatherNationalityErrors => fatherNationalityControl?.errors;
+  Object? get motherNuiErrors => motherNuiControl?.errors;
+  Object? get motherNameErrors => motherNameControl?.errors;
+  Object? get motherNationalityErrors => motherNationalityControl?.errors;
   Object? get acceptTermsErrors => acceptTermsControl?.errors;
   void get firstNameFocus => form.focus(firstNameControlPath());
   void get lastNameFocus => form.focus(lastNameControlPath());
@@ -312,6 +398,12 @@ class PersonalValidationModelForm
   void get birthDateFocus => form.focus(birthDateControlPath());
   void get nationalityFocus => form.focus(nationalityControlPath());
   void get birthFocus => form.focus(birthControlPath());
+  void get fatherNuiFocus => form.focus(fatherNuiControlPath());
+  void get fatherNameFocus => form.focus(fatherNameControlPath());
+  void get fatherNationalityFocus => form.focus(fatherNationalityControlPath());
+  void get motherNuiFocus => form.focus(motherNuiControlPath());
+  void get motherNameFocus => form.focus(motherNameControlPath());
+  void get motherNationalityFocus => form.focus(motherNationalityControlPath());
   void get acceptTermsFocus => form.focus(acceptTermsControlPath());
   void firstNameRemove({
     bool updateParent = true,
@@ -495,6 +587,162 @@ class PersonalValidationModelForm
     }
   }
 
+  void fatherNuiRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsFatherNui) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          fatherNuiControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            fatherNuiControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void fatherNameRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsFatherName) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          fatherNameControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            fatherNameControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void fatherNationalityRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsFatherNationality) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          fatherNationalityControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            fatherNationalityControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void motherNuiRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMotherNui) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          motherNuiControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            motherNuiControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void motherNameRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMotherName) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          motherNameControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            motherNameControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void motherNationalityRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMotherNationality) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          motherNationalityControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            motherNationalityControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void acceptTermsRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -584,6 +832,60 @@ class PersonalValidationModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void fatherNuiValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    fatherNuiControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void fatherNameValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    fatherNameControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void fatherNationalityValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    fatherNationalityControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void motherNuiValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    motherNuiControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void motherNameValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    motherNameControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void motherNationalityValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    motherNationalityControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void acceptTermsValueUpdate(
     bool? value, {
     bool updateParent = true,
@@ -653,6 +955,60 @@ class PersonalValidationModelForm
     bool emitEvent = true,
   }) {
     birthControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void fatherNuiValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    fatherNuiControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void fatherNameValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    fatherNameControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void fatherNationalityValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    fatherNationalityControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void motherNuiValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    motherNuiControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void motherNameValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    motherNameControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void motherNationalityValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    motherNationalityControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -728,6 +1084,60 @@ class PersonalValidationModelForm
   }) =>
       birthControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void fatherNuiValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      fatherNuiControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void fatherNameValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      fatherNameControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void fatherNationalityValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      fatherNationalityControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void motherNuiValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      motherNuiControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void motherNameValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      motherNameControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void motherNationalityValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      motherNationalityControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void acceptTermsValueReset(
     bool? value, {
     bool updateParent = true,
@@ -760,6 +1170,24 @@ class PersonalValidationModelForm
       : null;
   FormControl<BirthModel>? get birthControl => containsBirth
       ? form.control(birthControlPath()) as FormControl<BirthModel>?
+      : null;
+  FormControl<String>? get fatherNuiControl => containsFatherNui
+      ? form.control(fatherNuiControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get fatherNameControl => containsFatherName
+      ? form.control(fatherNameControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get fatherNationalityControl => containsFatherNationality
+      ? form.control(fatherNationalityControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get motherNuiControl => containsMotherNui
+      ? form.control(motherNuiControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get motherNameControl => containsMotherName
+      ? form.control(motherNameControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get motherNationalityControl => containsMotherNationality
+      ? form.control(motherNationalityControlPath()) as FormControl<String>?
       : null;
   FormControl<bool>? get acceptTermsControl => containsAcceptTerms
       ? form.control(acceptTermsControlPath()) as FormControl<bool>?
@@ -890,6 +1318,114 @@ class PersonalValidationModelForm
     }
   }
 
+  void fatherNuiSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      fatherNuiControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      fatherNuiControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void fatherNameSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      fatherNameControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      fatherNameControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void fatherNationalitySetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      fatherNationalityControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      fatherNationalityControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void motherNuiSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      motherNuiControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      motherNuiControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void motherNameSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      motherNameControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      motherNameControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void motherNationalitySetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      motherNationalityControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      motherNationalityControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void acceptTermsSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -924,6 +1460,12 @@ class PersonalValidationModelForm
         birthDate: _birthDateValue,
         nationality: _nationalityValue,
         birth: _birthValue,
+        fatherNui: _fatherNuiValue,
+        fatherName: _fatherNameValue,
+        fatherNationality: _fatherNationalityValue,
+        motherNui: _motherNuiValue,
+        motherName: _motherNameValue,
+        motherNationality: _motherNationalityValue,
         acceptTerms: _acceptTermsValue);
   }
 
@@ -999,6 +1541,48 @@ class PersonalValidationModelForm
             touched: false),
         birthControlName: FormControl<BirthModel>(
             value: personalValidationModel?.birth,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        fatherNuiControlName: FormControl<String>(
+            value: personalValidationModel?.fatherNui,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        fatherNameControlName: FormControl<String>(
+            value: personalValidationModel?.fatherName,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        fatherNationalityControlName: FormControl<String>(
+            value: personalValidationModel?.fatherNationality,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        motherNuiControlName: FormControl<String>(
+            value: personalValidationModel?.motherNui,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        motherNameControlName: FormControl<String>(
+            value: personalValidationModel?.motherName,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        motherNationalityControlName: FormControl<String>(
+            value: personalValidationModel?.motherNationality,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,

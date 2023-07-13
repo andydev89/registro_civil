@@ -43,6 +43,24 @@ mixin _$PersonalValidationModel {
   String? get nationality => throw _privateConstructorUsedError;
   @FormControlAnnotation<BirthModel>()
   BirthModel? get birth => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nuiPadre')
+  String? get fatherNui => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nombrePadre')
+  String? get fatherName => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nacionalidadPadre')
+  String? get fatherNationality => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nuiMadre')
+  String? get motherNui => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nombreMadre')
+  String? get motherName => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nacionalidadMadre')
+  String? get motherNationality => throw _privateConstructorUsedError;
   @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
   bool? get acceptTerms => throw _privateConstructorUsedError;
 
@@ -79,6 +97,24 @@ abstract class $PersonalValidationModelCopyWith<$Res> {
           String? nationality,
       @FormControlAnnotation<BirthModel>()
           BirthModel? birth,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nuiPadre')
+          String? fatherNui,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nombrePadre')
+          String? fatherName,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidadPadre')
+          String? fatherNationality,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nuiMadre')
+          String? motherNui,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nombreMadre')
+          String? motherName,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidadMadre')
+          String? motherNationality,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           bool? acceptTerms});
 
@@ -106,6 +142,12 @@ class _$PersonalValidationModelCopyWithImpl<$Res,
     Object? birthDate = freezed,
     Object? nationality = freezed,
     Object? birth = freezed,
+    Object? fatherNui = freezed,
+    Object? fatherName = freezed,
+    Object? fatherNationality = freezed,
+    Object? motherNui = freezed,
+    Object? motherName = freezed,
+    Object? motherNationality = freezed,
     Object? acceptTerms = freezed,
   }) {
     return _then(_value.copyWith(
@@ -137,6 +179,30 @@ class _$PersonalValidationModelCopyWithImpl<$Res,
           ? _value.birth
           : birth // ignore: cast_nullable_to_non_nullable
               as BirthModel?,
+      fatherNui: freezed == fatherNui
+          ? _value.fatherNui
+          : fatherNui // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fatherName: freezed == fatherName
+          ? _value.fatherName
+          : fatherName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fatherNationality: freezed == fatherNationality
+          ? _value.fatherNationality
+          : fatherNationality // ignore: cast_nullable_to_non_nullable
+              as String?,
+      motherNui: freezed == motherNui
+          ? _value.motherNui
+          : motherNui // ignore: cast_nullable_to_non_nullable
+              as String?,
+      motherName: freezed == motherName
+          ? _value.motherName
+          : motherName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      motherNationality: freezed == motherNationality
+          ? _value.motherNationality
+          : motherNationality // ignore: cast_nullable_to_non_nullable
+              as String?,
       acceptTerms: freezed == acceptTerms
           ? _value.acceptTerms
           : acceptTerms // ignore: cast_nullable_to_non_nullable
@@ -186,6 +252,24 @@ abstract class _$$_PersonalValidationModelCopyWith<$Res>
           String? nationality,
       @FormControlAnnotation<BirthModel>()
           BirthModel? birth,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nuiPadre')
+          String? fatherNui,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nombrePadre')
+          String? fatherName,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidadPadre')
+          String? fatherNationality,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nuiMadre')
+          String? motherNui,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nombreMadre')
+          String? motherName,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidadMadre')
+          String? motherNationality,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           bool? acceptTerms});
 
@@ -212,6 +296,12 @@ class __$$_PersonalValidationModelCopyWithImpl<$Res>
     Object? birthDate = freezed,
     Object? nationality = freezed,
     Object? birth = freezed,
+    Object? fatherNui = freezed,
+    Object? fatherName = freezed,
+    Object? fatherNationality = freezed,
+    Object? motherNui = freezed,
+    Object? motherName = freezed,
+    Object? motherNationality = freezed,
     Object? acceptTerms = freezed,
   }) {
     return _then(_$_PersonalValidationModel(
@@ -243,6 +333,30 @@ class __$$_PersonalValidationModelCopyWithImpl<$Res>
           ? _value.birth
           : birth // ignore: cast_nullable_to_non_nullable
               as BirthModel?,
+      fatherNui: freezed == fatherNui
+          ? _value.fatherNui
+          : fatherNui // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fatherName: freezed == fatherName
+          ? _value.fatherName
+          : fatherName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fatherNationality: freezed == fatherNationality
+          ? _value.fatherNationality
+          : fatherNationality // ignore: cast_nullable_to_non_nullable
+              as String?,
+      motherNui: freezed == motherNui
+          ? _value.motherNui
+          : motherNui // ignore: cast_nullable_to_non_nullable
+              as String?,
+      motherName: freezed == motherName
+          ? _value.motherName
+          : motherName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      motherNationality: freezed == motherNationality
+          ? _value.motherNationality
+          : motherNationality // ignore: cast_nullable_to_non_nullable
+              as String?,
       acceptTerms: freezed == acceptTerms
           ? _value.acceptTerms
           : acceptTerms // ignore: cast_nullable_to_non_nullable
@@ -276,6 +390,24 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
           this.nationality,
       @FormControlAnnotation<BirthModel>()
           this.birth,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nuiPadre')
+          this.fatherNui,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nombrePadre')
+          this.fatherName,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidadPadre')
+          this.fatherNationality,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nuiMadre')
+          this.motherNui,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nombreMadre')
+          this.motherName,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidadMadre')
+          this.motherNationality,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           this.acceptTerms = false})
       : super._();
@@ -311,13 +443,37 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
   @FormControlAnnotation<BirthModel>()
   final BirthModel? birth;
   @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nuiPadre')
+  final String? fatherNui;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nombrePadre')
+  final String? fatherName;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nacionalidadPadre')
+  final String? fatherNationality;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nuiMadre')
+  final String? motherNui;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nombreMadre')
+  final String? motherName;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nacionalidadMadre')
+  final String? motherNationality;
+  @override
   @JsonKey()
   @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
   final bool? acceptTerms;
 
   @override
   String toString() {
-    return 'PersonalValidationModel(firstName: $firstName, lastName: $lastName, gender: $gender, maritalStatusType: $maritalStatusType, birthDate: $birthDate, nationality: $nationality, birth: $birth, acceptTerms: $acceptTerms)';
+    return 'PersonalValidationModel(firstName: $firstName, lastName: $lastName, gender: $gender, maritalStatusType: $maritalStatusType, birthDate: $birthDate, nationality: $nationality, birth: $birth, fatherNui: $fatherNui, fatherName: $fatherName, fatherNationality: $fatherNationality, motherNui: $motherNui, motherName: $motherName, motherNationality: $motherNationality, acceptTerms: $acceptTerms)';
   }
 
   @override
@@ -337,14 +493,40 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
             (identical(other.nationality, nationality) ||
                 other.nationality == nationality) &&
             (identical(other.birth, birth) || other.birth == birth) &&
+            (identical(other.fatherNui, fatherNui) ||
+                other.fatherNui == fatherNui) &&
+            (identical(other.fatherName, fatherName) ||
+                other.fatherName == fatherName) &&
+            (identical(other.fatherNationality, fatherNationality) ||
+                other.fatherNationality == fatherNationality) &&
+            (identical(other.motherNui, motherNui) ||
+                other.motherNui == motherNui) &&
+            (identical(other.motherName, motherName) ||
+                other.motherName == motherName) &&
+            (identical(other.motherNationality, motherNationality) ||
+                other.motherNationality == motherNationality) &&
             (identical(other.acceptTerms, acceptTerms) ||
                 other.acceptTerms == acceptTerms));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, firstName, lastName, gender,
-      maritalStatusType, birthDate, nationality, birth, acceptTerms);
+  int get hashCode => Object.hash(
+      runtimeType,
+      firstName,
+      lastName,
+      gender,
+      maritalStatusType,
+      birthDate,
+      nationality,
+      birth,
+      fatherNui,
+      fatherName,
+      fatherNationality,
+      motherNui,
+      motherName,
+      motherNationality,
+      acceptTerms);
 
   @JsonKey(ignore: true)
   @override
@@ -384,6 +566,24 @@ abstract class _PersonalValidationModel extends PersonalValidationModel {
           final String? nationality,
       @FormControlAnnotation<BirthModel>()
           final BirthModel? birth,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nuiPadre')
+          final String? fatherNui,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nombrePadre')
+          final String? fatherName,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidadPadre')
+          final String? fatherNationality,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nuiMadre')
+          final String? motherNui,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nombreMadre')
+          final String? motherName,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidadMadre')
+          final String? motherNationality,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           final bool? acceptTerms}) = _$_PersonalValidationModel;
   const _PersonalValidationModel._() : super._();
@@ -418,6 +618,30 @@ abstract class _PersonalValidationModel extends PersonalValidationModel {
   @override
   @FormControlAnnotation<BirthModel>()
   BirthModel? get birth;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nuiPadre')
+  String? get fatherNui;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nombrePadre')
+  String? get fatherName;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nacionalidadPadre')
+  String? get fatherNationality;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nuiMadre')
+  String? get motherNui;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nombreMadre')
+  String? get motherName;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nacionalidadMadre')
+  String? get motherNationality;
   @override
   @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
   bool? get acceptTerms;

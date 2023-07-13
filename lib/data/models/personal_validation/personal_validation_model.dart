@@ -52,6 +52,24 @@ class PersonalValidationModel with _$PersonalValidationModel {
     @JsonKey(name: 'nacionalidad')
     String? nationality,
     @FormControlAnnotation<BirthModel>() BirthModel? birth,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'nuiPadre')
+    String? fatherNui,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'nombrePadre')
+    String? fatherName,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'nacionalidadPadre')
+    String? fatherNationality,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'nuiMadre')
+    String? motherNui,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'nombreMadre')
+    String? motherName,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'nacionalidadMadre')
+    String? motherNationality,
     @Default(false)
     @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
     bool? acceptTerms,

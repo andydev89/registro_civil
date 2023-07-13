@@ -133,7 +133,11 @@ class _PersonalValidationFirstStepPageState
                                     operation: widget.operation,
                                     provider: reqProvider,
                                   ),
-                                  Container(),
+                                  ParentsValidationPersonalTabPage(
+                                    form: formModel,
+                                    operation: widget.operation,
+                                    provider: reqProvider,
+                                  ),
                                   Container(),
                                   Container(),
                                   Container(),
