@@ -71,6 +71,9 @@ _$_PersonalValidationModel _$$_PersonalValidationModelFromJson(
       marriage: json['marriage'] == null
           ? null
           : MarriageModel.fromJson(json['marriage'] as Map<String, dynamic>),
+      genderInfo: json['genderInfo'] == null
+          ? null
+          : GenderModel.fromJson(json['genderInfo'] as Map<String, dynamic>),
       acceptTerms: json['acceptTerms'] as bool? ?? false,
     );
 
@@ -92,6 +95,7 @@ Map<String, dynamic> _$$_PersonalValidationModelToJson(
       'nombreMadre': instance.motherName,
       'nacionalidadMadre': instance.motherNationality,
       'marriage': instance.marriage?.toJson(),
+      'genderInfo': instance.genderInfo?.toJson(),
       'acceptTerms': instance.acceptTerms,
     };
 
@@ -155,4 +159,18 @@ Map<String, dynamic> _$$_MarriageModelToJson(_$_MarriageModel instance) =>
       'claseMatrimonio': instance.marriageClass,
       'nuiConyuge': instance.spouseNui,
       'conyuge': instance.spouseName,
+    };
+
+_$_GenderModel _$$_GenderModelFromJson(Map<String, dynamic> json) =>
+    _$_GenderModel(
+      gender: json['genero'] as String?,
+      inscriptionDate: json['fechaInscripcionGenero'] as String?,
+      inscriptionPlace: json['lugarInscripcionGenero'] as String?,
+    );
+
+Map<String, dynamic> _$$_GenderModelToJson(_$_GenderModel instance) =>
+    <String, dynamic>{
+      'genero': instance.gender,
+      'fechaInscripcionGenero': instance.inscriptionDate,
+      'lugarInscripcionGenero': instance.inscriptionPlace,
     };

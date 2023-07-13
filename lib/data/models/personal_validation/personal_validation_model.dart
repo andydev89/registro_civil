@@ -73,6 +73,8 @@ class PersonalValidationModel with _$PersonalValidationModel {
         String? motherNationality,
     @FormControlAnnotation<MarriageModel>()
         MarriageModel? marriage,
+    @FormControlAnnotation<GenderModel>()
+        GenderModel? genderInfo,
     @Default(false)
     @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
         bool? acceptTerms,
@@ -156,6 +158,28 @@ class MarriageModel with _$MarriageModel {
 
   factory MarriageModel.fromJson(Map<String, dynamic> json) =>
       _$MarriageModelFromJson(json);
+}
+
+@ReactiveFormAnnotation()
+@freezed
+class GenderModel with _$GenderModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory GenderModel({
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'genero')
+        String? gender,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'fechaInscripcionGenero')
+        String? inscriptionDate,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'lugarInscripcionGenero')
+        String? inscriptionPlace,
+  }) = _GenderModel;
+
+  const GenderModel._();
+
+  factory GenderModel.fromJson(Map<String, dynamic> json) =>
+      _$GenderModelFromJson(json);
 }
 
 @JsonSerializable()

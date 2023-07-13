@@ -63,6 +63,8 @@ mixin _$PersonalValidationModel {
   String? get motherNationality => throw _privateConstructorUsedError;
   @FormControlAnnotation<MarriageModel>()
   MarriageModel? get marriage => throw _privateConstructorUsedError;
+  @FormControlAnnotation<GenderModel>()
+  GenderModel? get genderInfo => throw _privateConstructorUsedError;
   @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
   bool? get acceptTerms => throw _privateConstructorUsedError;
 
@@ -119,11 +121,14 @@ abstract class $PersonalValidationModelCopyWith<$Res> {
           String? motherNationality,
       @FormControlAnnotation<MarriageModel>()
           MarriageModel? marriage,
+      @FormControlAnnotation<GenderModel>()
+          GenderModel? genderInfo,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           bool? acceptTerms});
 
   $BirthModelCopyWith<$Res>? get birth;
   $MarriageModelCopyWith<$Res>? get marriage;
+  $GenderModelCopyWith<$Res>? get genderInfo;
 }
 
 /// @nodoc
@@ -154,6 +159,7 @@ class _$PersonalValidationModelCopyWithImpl<$Res,
     Object? motherName = freezed,
     Object? motherNationality = freezed,
     Object? marriage = freezed,
+    Object? genderInfo = freezed,
     Object? acceptTerms = freezed,
   }) {
     return _then(_value.copyWith(
@@ -213,6 +219,10 @@ class _$PersonalValidationModelCopyWithImpl<$Res,
           ? _value.marriage
           : marriage // ignore: cast_nullable_to_non_nullable
               as MarriageModel?,
+      genderInfo: freezed == genderInfo
+          ? _value.genderInfo
+          : genderInfo // ignore: cast_nullable_to_non_nullable
+              as GenderModel?,
       acceptTerms: freezed == acceptTerms
           ? _value.acceptTerms
           : acceptTerms // ignore: cast_nullable_to_non_nullable
@@ -241,6 +251,18 @@ class _$PersonalValidationModelCopyWithImpl<$Res,
 
     return $MarriageModelCopyWith<$Res>(_value.marriage!, (value) {
       return _then(_value.copyWith(marriage: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $GenderModelCopyWith<$Res>? get genderInfo {
+    if (_value.genderInfo == null) {
+      return null;
+    }
+
+    return $GenderModelCopyWith<$Res>(_value.genderInfo!, (value) {
+      return _then(_value.copyWith(genderInfo: value) as $Val);
     });
   }
 }
@@ -294,6 +316,8 @@ abstract class _$$_PersonalValidationModelCopyWith<$Res>
           String? motherNationality,
       @FormControlAnnotation<MarriageModel>()
           MarriageModel? marriage,
+      @FormControlAnnotation<GenderModel>()
+          GenderModel? genderInfo,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           bool? acceptTerms});
 
@@ -301,6 +325,8 @@ abstract class _$$_PersonalValidationModelCopyWith<$Res>
   $BirthModelCopyWith<$Res>? get birth;
   @override
   $MarriageModelCopyWith<$Res>? get marriage;
+  @override
+  $GenderModelCopyWith<$Res>? get genderInfo;
 }
 
 /// @nodoc
@@ -329,6 +355,7 @@ class __$$_PersonalValidationModelCopyWithImpl<$Res>
     Object? motherName = freezed,
     Object? motherNationality = freezed,
     Object? marriage = freezed,
+    Object? genderInfo = freezed,
     Object? acceptTerms = freezed,
   }) {
     return _then(_$_PersonalValidationModel(
@@ -388,6 +415,10 @@ class __$$_PersonalValidationModelCopyWithImpl<$Res>
           ? _value.marriage
           : marriage // ignore: cast_nullable_to_non_nullable
               as MarriageModel?,
+      genderInfo: freezed == genderInfo
+          ? _value.genderInfo
+          : genderInfo // ignore: cast_nullable_to_non_nullable
+              as GenderModel?,
       acceptTerms: freezed == acceptTerms
           ? _value.acceptTerms
           : acceptTerms // ignore: cast_nullable_to_non_nullable
@@ -441,6 +472,8 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
           this.motherNationality,
       @FormControlAnnotation<MarriageModel>()
           this.marriage,
+      @FormControlAnnotation<GenderModel>()
+          this.genderInfo,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           this.acceptTerms = false})
       : super._();
@@ -503,13 +536,16 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
   @FormControlAnnotation<MarriageModel>()
   final MarriageModel? marriage;
   @override
+  @FormControlAnnotation<GenderModel>()
+  final GenderModel? genderInfo;
+  @override
   @JsonKey()
   @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
   final bool? acceptTerms;
 
   @override
   String toString() {
-    return 'PersonalValidationModel(firstName: $firstName, lastName: $lastName, gender: $gender, maritalStatusType: $maritalStatusType, birthDate: $birthDate, nationality: $nationality, birth: $birth, fatherNui: $fatherNui, fatherName: $fatherName, fatherNationality: $fatherNationality, motherNui: $motherNui, motherName: $motherName, motherNationality: $motherNationality, marriage: $marriage, acceptTerms: $acceptTerms)';
+    return 'PersonalValidationModel(firstName: $firstName, lastName: $lastName, gender: $gender, maritalStatusType: $maritalStatusType, birthDate: $birthDate, nationality: $nationality, birth: $birth, fatherNui: $fatherNui, fatherName: $fatherName, fatherNationality: $fatherNationality, motherNui: $motherNui, motherName: $motherName, motherNationality: $motherNationality, marriage: $marriage, genderInfo: $genderInfo, acceptTerms: $acceptTerms)';
   }
 
   @override
@@ -543,6 +579,8 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
                 other.motherNationality == motherNationality) &&
             (identical(other.marriage, marriage) ||
                 other.marriage == marriage) &&
+            (identical(other.genderInfo, genderInfo) ||
+                other.genderInfo == genderInfo) &&
             (identical(other.acceptTerms, acceptTerms) ||
                 other.acceptTerms == acceptTerms));
   }
@@ -565,6 +603,7 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
       motherName,
       motherNationality,
       marriage,
+      genderInfo,
       acceptTerms);
 
   @JsonKey(ignore: true)
@@ -625,6 +664,8 @@ abstract class _PersonalValidationModel extends PersonalValidationModel {
           final String? motherNationality,
       @FormControlAnnotation<MarriageModel>()
           final MarriageModel? marriage,
+      @FormControlAnnotation<GenderModel>()
+          final GenderModel? genderInfo,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           final bool? acceptTerms}) = _$_PersonalValidationModel;
   const _PersonalValidationModel._() : super._();
@@ -686,6 +727,9 @@ abstract class _PersonalValidationModel extends PersonalValidationModel {
   @override
   @FormControlAnnotation<MarriageModel>()
   MarriageModel? get marriage;
+  @override
+  @FormControlAnnotation<GenderModel>()
+  GenderModel? get genderInfo;
   @override
   @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
   bool? get acceptTerms;
@@ -1505,5 +1549,233 @@ abstract class _MarriageModel extends MarriageModel {
   @override
   @JsonKey(ignore: true)
   _$$_MarriageModelCopyWith<_$_MarriageModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+GenderModel _$GenderModelFromJson(Map<String, dynamic> json) {
+  return _GenderModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$GenderModel {
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'genero')
+  String? get gender => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'fechaInscripcionGenero')
+  String? get inscriptionDate => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'lugarInscripcionGenero')
+  String? get inscriptionPlace => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GenderModelCopyWith<GenderModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GenderModelCopyWith<$Res> {
+  factory $GenderModelCopyWith(
+          GenderModel value, $Res Function(GenderModel) then) =
+      _$GenderModelCopyWithImpl<$Res, GenderModel>;
+  @useResult
+  $Res call(
+      {@FormControlAnnotation<String>()
+      @JsonKey(name: 'genero')
+          String? gender,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaInscripcionGenero')
+          String? inscriptionDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarInscripcionGenero')
+          String? inscriptionPlace});
+}
+
+/// @nodoc
+class _$GenderModelCopyWithImpl<$Res, $Val extends GenderModel>
+    implements $GenderModelCopyWith<$Res> {
+  _$GenderModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gender = freezed,
+    Object? inscriptionDate = freezed,
+    Object? inscriptionPlace = freezed,
+  }) {
+    return _then(_value.copyWith(
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inscriptionDate: freezed == inscriptionDate
+          ? _value.inscriptionDate
+          : inscriptionDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inscriptionPlace: freezed == inscriptionPlace
+          ? _value.inscriptionPlace
+          : inscriptionPlace // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_GenderModelCopyWith<$Res>
+    implements $GenderModelCopyWith<$Res> {
+  factory _$$_GenderModelCopyWith(
+          _$_GenderModel value, $Res Function(_$_GenderModel) then) =
+      __$$_GenderModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@FormControlAnnotation<String>()
+      @JsonKey(name: 'genero')
+          String? gender,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaInscripcionGenero')
+          String? inscriptionDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarInscripcionGenero')
+          String? inscriptionPlace});
+}
+
+/// @nodoc
+class __$$_GenderModelCopyWithImpl<$Res>
+    extends _$GenderModelCopyWithImpl<$Res, _$_GenderModel>
+    implements _$$_GenderModelCopyWith<$Res> {
+  __$$_GenderModelCopyWithImpl(
+      _$_GenderModel _value, $Res Function(_$_GenderModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gender = freezed,
+    Object? inscriptionDate = freezed,
+    Object? inscriptionPlace = freezed,
+  }) {
+    return _then(_$_GenderModel(
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inscriptionDate: freezed == inscriptionDate
+          ? _value.inscriptionDate
+          : inscriptionDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inscriptionPlace: freezed == inscriptionPlace
+          ? _value.inscriptionPlace
+          : inscriptionPlace // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_GenderModel extends _GenderModel {
+  const _$_GenderModel(
+      {@FormControlAnnotation<String>()
+      @JsonKey(name: 'genero')
+          this.gender,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaInscripcionGenero')
+          this.inscriptionDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarInscripcionGenero')
+          this.inscriptionPlace})
+      : super._();
+
+  factory _$_GenderModel.fromJson(Map<String, dynamic> json) =>
+      _$$_GenderModelFromJson(json);
+
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'genero')
+  final String? gender;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'fechaInscripcionGenero')
+  final String? inscriptionDate;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'lugarInscripcionGenero')
+  final String? inscriptionPlace;
+
+  @override
+  String toString() {
+    return 'GenderModel(gender: $gender, inscriptionDate: $inscriptionDate, inscriptionPlace: $inscriptionPlace)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GenderModel &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.inscriptionDate, inscriptionDate) ||
+                other.inscriptionDate == inscriptionDate) &&
+            (identical(other.inscriptionPlace, inscriptionPlace) ||
+                other.inscriptionPlace == inscriptionPlace));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, gender, inscriptionDate, inscriptionPlace);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GenderModelCopyWith<_$_GenderModel> get copyWith =>
+      __$$_GenderModelCopyWithImpl<_$_GenderModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_GenderModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _GenderModel extends GenderModel {
+  const factory _GenderModel(
+      {@FormControlAnnotation<String>()
+      @JsonKey(name: 'genero')
+          final String? gender,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaInscripcionGenero')
+          final String? inscriptionDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarInscripcionGenero')
+          final String? inscriptionPlace}) = _$_GenderModel;
+  const _GenderModel._() : super._();
+
+  factory _GenderModel.fromJson(Map<String, dynamic> json) =
+      _$_GenderModel.fromJson;
+
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'genero')
+  String? get gender;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'fechaInscripcionGenero')
+  String? get inscriptionDate;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'lugarInscripcionGenero')
+  String? get inscriptionPlace;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GenderModelCopyWith<_$_GenderModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
