@@ -50,7 +50,7 @@ class EditableReactiveTextField<T> extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final int? maxLength;
   bool isEdited;
-  final void Function(String value) onSavePressed;
+  final void Function(String? value) onSavePressed;
   final VoidCallback onCancelPressed;
 
   @override
@@ -60,13 +60,13 @@ class EditableReactiveTextField<T> extends StatefulWidget {
 class _EditableReactiveTextFieldState<T>
     extends State<EditableReactiveTextField> {
   bool isEditing = false;
-  String previousValue = '';
+  String? previousValue;
   FocusNode focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    previousValue = widget.formControl?.value as String;
+    previousValue = widget.formControl?.value as String?;
   }
 
   void _onButtonPressed() {

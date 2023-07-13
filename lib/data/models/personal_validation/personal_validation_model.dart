@@ -44,6 +44,14 @@ class PersonalValidationModel with _$PersonalValidationModel {
     @FormControlAnnotation<PersonalValidationMaritalStatusType>()
     @JsonKey(name: 'estadoCivil')
         PersonalValidationMaritalStatusType? maritalStatusType,
+    @Default('')
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'fechaNacimiento')
+    String? birthDate,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'nacionalidad')
+    String? nationality,
+    @FormControlAnnotation<BirthModel>() BirthModel? birth,
     @Default(false)
     @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
     bool? acceptTerms,
@@ -55,6 +63,45 @@ class PersonalValidationModel with _$PersonalValidationModel {
       _$PersonalValidationModelFromJson(json);
 
 }
+
+@ReactiveFormAnnotation()
+@freezed
+class BirthModel with _$BirthModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory BirthModel({
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'lugarNacimiento')
+    String? birthPlace,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'lugarInscripcion')
+    String? inscriptionPlace,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'anioInscripcionNacimiento')
+    String? inscriptionYear,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'fechaInscripcionNacimiento')
+    String? inscriptionDate,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'tomo')
+    String? volume,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'pagina')
+    String? page,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'acta')
+    String? record,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'clase')
+    String? birthClass,
+  }) = _BirthModel;
+
+  const BirthModel._();
+
+  factory BirthModel.fromJson(Map<String, dynamic> json) =>
+      _$BirthModelFromJson(json);
+
+}
+
 
 @JsonSerializable()
 class PersonalValidationRequestModel {
@@ -80,7 +127,7 @@ class ModifiedDataModel {
   factory ModifiedDataModel.fromJson(Map<String, dynamic> json) =>
       _$ModifiedDataModelFromJson(json);
 
-  final String original;
+  final String? original;
   final String modified;
 
   Map<String, dynamic> toJson() =>

@@ -122,7 +122,13 @@ class _PersonalValidationPersonalTabPage
                 ),
               );
             },
-            onCancelPressed: () {},
+            onCancelPressed: () {
+              final prev = widget.provider.removeRequest(key: 'estadoCivil');
+              widget.form.maritalStatusTypeControl?.updateValue(
+                PersonalValidationMaritalStatusType.values
+                    .firstWhere((element) => element.toText == prev),
+              );
+            },
           ),
         ],
       ),

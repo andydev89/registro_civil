@@ -35,6 +35,14 @@ mixin _$PersonalValidationModel {
   @JsonKey(name: 'estadoCivil')
   PersonalValidationMaritalStatusType? get maritalStatusType =>
       throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'fechaNacimiento')
+  String? get birthDate => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nacionalidad')
+  String? get nationality => throw _privateConstructorUsedError;
+  @FormControlAnnotation<BirthModel>()
+  BirthModel? get birth => throw _privateConstructorUsedError;
   @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
   bool? get acceptTerms => throw _privateConstructorUsedError;
 
@@ -63,8 +71,18 @@ abstract class $PersonalValidationModelCopyWith<$Res> {
       @FormControlAnnotation<PersonalValidationMaritalStatusType>()
       @JsonKey(name: 'estadoCivil')
           PersonalValidationMaritalStatusType? maritalStatusType,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaNacimiento')
+          String? birthDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidad')
+          String? nationality,
+      @FormControlAnnotation<BirthModel>()
+          BirthModel? birth,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           bool? acceptTerms});
+
+  $BirthModelCopyWith<$Res>? get birth;
 }
 
 /// @nodoc
@@ -85,6 +103,9 @@ class _$PersonalValidationModelCopyWithImpl<$Res,
     Object? lastName = freezed,
     Object? gender = freezed,
     Object? maritalStatusType = freezed,
+    Object? birthDate = freezed,
+    Object? nationality = freezed,
+    Object? birth = freezed,
     Object? acceptTerms = freezed,
   }) {
     return _then(_value.copyWith(
@@ -104,11 +125,35 @@ class _$PersonalValidationModelCopyWithImpl<$Res,
           ? _value.maritalStatusType
           : maritalStatusType // ignore: cast_nullable_to_non_nullable
               as PersonalValidationMaritalStatusType?,
+      birthDate: freezed == birthDate
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nationality: freezed == nationality
+          ? _value.nationality
+          : nationality // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birth: freezed == birth
+          ? _value.birth
+          : birth // ignore: cast_nullable_to_non_nullable
+              as BirthModel?,
       acceptTerms: freezed == acceptTerms
           ? _value.acceptTerms
           : acceptTerms // ignore: cast_nullable_to_non_nullable
               as bool?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BirthModelCopyWith<$Res>? get birth {
+    if (_value.birth == null) {
+      return null;
+    }
+
+    return $BirthModelCopyWith<$Res>(_value.birth!, (value) {
+      return _then(_value.copyWith(birth: value) as $Val);
+    });
   }
 }
 
@@ -133,8 +178,19 @@ abstract class _$$_PersonalValidationModelCopyWith<$Res>
       @FormControlAnnotation<PersonalValidationMaritalStatusType>()
       @JsonKey(name: 'estadoCivil')
           PersonalValidationMaritalStatusType? maritalStatusType,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaNacimiento')
+          String? birthDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidad')
+          String? nationality,
+      @FormControlAnnotation<BirthModel>()
+          BirthModel? birth,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           bool? acceptTerms});
+
+  @override
+  $BirthModelCopyWith<$Res>? get birth;
 }
 
 /// @nodoc
@@ -153,6 +209,9 @@ class __$$_PersonalValidationModelCopyWithImpl<$Res>
     Object? lastName = freezed,
     Object? gender = freezed,
     Object? maritalStatusType = freezed,
+    Object? birthDate = freezed,
+    Object? nationality = freezed,
+    Object? birth = freezed,
     Object? acceptTerms = freezed,
   }) {
     return _then(_$_PersonalValidationModel(
@@ -172,6 +231,18 @@ class __$$_PersonalValidationModelCopyWithImpl<$Res>
           ? _value.maritalStatusType
           : maritalStatusType // ignore: cast_nullable_to_non_nullable
               as PersonalValidationMaritalStatusType?,
+      birthDate: freezed == birthDate
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nationality: freezed == nationality
+          ? _value.nationality
+          : nationality // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birth: freezed == birth
+          ? _value.birth
+          : birth // ignore: cast_nullable_to_non_nullable
+              as BirthModel?,
       acceptTerms: freezed == acceptTerms
           ? _value.acceptTerms
           : acceptTerms // ignore: cast_nullable_to_non_nullable
@@ -197,6 +268,14 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
       @FormControlAnnotation<PersonalValidationMaritalStatusType>()
       @JsonKey(name: 'estadoCivil')
           this.maritalStatusType,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaNacimiento')
+          this.birthDate = '',
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidad')
+          this.nationality,
+      @FormControlAnnotation<BirthModel>()
+          this.birth,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           this.acceptTerms = false})
       : super._();
@@ -221,13 +300,24 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
   @JsonKey(name: 'estadoCivil')
   final PersonalValidationMaritalStatusType? maritalStatusType;
   @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'fechaNacimiento')
+  final String? birthDate;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nacionalidad')
+  final String? nationality;
+  @override
+  @FormControlAnnotation<BirthModel>()
+  final BirthModel? birth;
+  @override
   @JsonKey()
   @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
   final bool? acceptTerms;
 
   @override
   String toString() {
-    return 'PersonalValidationModel(firstName: $firstName, lastName: $lastName, gender: $gender, maritalStatusType: $maritalStatusType, acceptTerms: $acceptTerms)';
+    return 'PersonalValidationModel(firstName: $firstName, lastName: $lastName, gender: $gender, maritalStatusType: $maritalStatusType, birthDate: $birthDate, nationality: $nationality, birth: $birth, acceptTerms: $acceptTerms)';
   }
 
   @override
@@ -242,14 +332,19 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.maritalStatusType, maritalStatusType) ||
                 other.maritalStatusType == maritalStatusType) &&
+            (identical(other.birthDate, birthDate) ||
+                other.birthDate == birthDate) &&
+            (identical(other.nationality, nationality) ||
+                other.nationality == nationality) &&
+            (identical(other.birth, birth) || other.birth == birth) &&
             (identical(other.acceptTerms, acceptTerms) ||
                 other.acceptTerms == acceptTerms));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, firstName, lastName, gender, maritalStatusType, acceptTerms);
+  int get hashCode => Object.hash(runtimeType, firstName, lastName, gender,
+      maritalStatusType, birthDate, nationality, birth, acceptTerms);
 
   @JsonKey(ignore: true)
   @override
@@ -281,6 +376,14 @@ abstract class _PersonalValidationModel extends PersonalValidationModel {
       @FormControlAnnotation<PersonalValidationMaritalStatusType>()
       @JsonKey(name: 'estadoCivil')
           final PersonalValidationMaritalStatusType? maritalStatusType,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaNacimiento')
+          final String? birthDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'nacionalidad')
+          final String? nationality,
+      @FormControlAnnotation<BirthModel>()
+          final BirthModel? birth,
       @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
           final bool? acceptTerms}) = _$_PersonalValidationModel;
   const _PersonalValidationModel._() : super._();
@@ -305,10 +408,422 @@ abstract class _PersonalValidationModel extends PersonalValidationModel {
   @JsonKey(name: 'estadoCivil')
   PersonalValidationMaritalStatusType? get maritalStatusType;
   @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'fechaNacimiento')
+  String? get birthDate;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'nacionalidad')
+  String? get nationality;
+  @override
+  @FormControlAnnotation<BirthModel>()
+  BirthModel? get birth;
+  @override
   @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
   bool? get acceptTerms;
   @override
   @JsonKey(ignore: true)
   _$$_PersonalValidationModelCopyWith<_$_PersonalValidationModel>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+BirthModel _$BirthModelFromJson(Map<String, dynamic> json) {
+  return _BirthModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BirthModel {
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'lugarNacimiento')
+  String? get birthPlace => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'lugarInscripcion')
+  String? get inscriptionPlace => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'anioInscripcionNacimiento')
+  String? get inscriptionYear => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'fechaInscripcionNacimiento')
+  String? get inscriptionDate => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'tomo')
+  String? get volume => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'pagina')
+  String? get page => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'acta')
+  String? get record => throw _privateConstructorUsedError;
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'clase')
+  String? get birthClass => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BirthModelCopyWith<BirthModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BirthModelCopyWith<$Res> {
+  factory $BirthModelCopyWith(
+          BirthModel value, $Res Function(BirthModel) then) =
+      _$BirthModelCopyWithImpl<$Res, BirthModel>;
+  @useResult
+  $Res call(
+      {@FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarNacimiento')
+          String? birthPlace,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarInscripcion')
+          String? inscriptionPlace,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'anioInscripcionNacimiento')
+          String? inscriptionYear,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaInscripcionNacimiento')
+          String? inscriptionDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'tomo')
+          String? volume,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'pagina')
+          String? page,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'acta')
+          String? record,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'clase')
+          String? birthClass});
+}
+
+/// @nodoc
+class _$BirthModelCopyWithImpl<$Res, $Val extends BirthModel>
+    implements $BirthModelCopyWith<$Res> {
+  _$BirthModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? birthPlace = freezed,
+    Object? inscriptionPlace = freezed,
+    Object? inscriptionYear = freezed,
+    Object? inscriptionDate = freezed,
+    Object? volume = freezed,
+    Object? page = freezed,
+    Object? record = freezed,
+    Object? birthClass = freezed,
+  }) {
+    return _then(_value.copyWith(
+      birthPlace: freezed == birthPlace
+          ? _value.birthPlace
+          : birthPlace // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inscriptionPlace: freezed == inscriptionPlace
+          ? _value.inscriptionPlace
+          : inscriptionPlace // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inscriptionYear: freezed == inscriptionYear
+          ? _value.inscriptionYear
+          : inscriptionYear // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inscriptionDate: freezed == inscriptionDate
+          ? _value.inscriptionDate
+          : inscriptionDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      volume: freezed == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as String?,
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as String?,
+      record: freezed == record
+          ? _value.record
+          : record // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birthClass: freezed == birthClass
+          ? _value.birthClass
+          : birthClass // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_BirthModelCopyWith<$Res>
+    implements $BirthModelCopyWith<$Res> {
+  factory _$$_BirthModelCopyWith(
+          _$_BirthModel value, $Res Function(_$_BirthModel) then) =
+      __$$_BirthModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarNacimiento')
+          String? birthPlace,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarInscripcion')
+          String? inscriptionPlace,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'anioInscripcionNacimiento')
+          String? inscriptionYear,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaInscripcionNacimiento')
+          String? inscriptionDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'tomo')
+          String? volume,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'pagina')
+          String? page,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'acta')
+          String? record,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'clase')
+          String? birthClass});
+}
+
+/// @nodoc
+class __$$_BirthModelCopyWithImpl<$Res>
+    extends _$BirthModelCopyWithImpl<$Res, _$_BirthModel>
+    implements _$$_BirthModelCopyWith<$Res> {
+  __$$_BirthModelCopyWithImpl(
+      _$_BirthModel _value, $Res Function(_$_BirthModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? birthPlace = freezed,
+    Object? inscriptionPlace = freezed,
+    Object? inscriptionYear = freezed,
+    Object? inscriptionDate = freezed,
+    Object? volume = freezed,
+    Object? page = freezed,
+    Object? record = freezed,
+    Object? birthClass = freezed,
+  }) {
+    return _then(_$_BirthModel(
+      birthPlace: freezed == birthPlace
+          ? _value.birthPlace
+          : birthPlace // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inscriptionPlace: freezed == inscriptionPlace
+          ? _value.inscriptionPlace
+          : inscriptionPlace // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inscriptionYear: freezed == inscriptionYear
+          ? _value.inscriptionYear
+          : inscriptionYear // ignore: cast_nullable_to_non_nullable
+              as String?,
+      inscriptionDate: freezed == inscriptionDate
+          ? _value.inscriptionDate
+          : inscriptionDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      volume: freezed == volume
+          ? _value.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as String?,
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as String?,
+      record: freezed == record
+          ? _value.record
+          : record // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birthClass: freezed == birthClass
+          ? _value.birthClass
+          : birthClass // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+@JsonSerializable(explicitToJson: true)
+class _$_BirthModel extends _BirthModel {
+  const _$_BirthModel(
+      {@FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarNacimiento')
+          this.birthPlace,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarInscripcion')
+          this.inscriptionPlace,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'anioInscripcionNacimiento')
+          this.inscriptionYear,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaInscripcionNacimiento')
+          this.inscriptionDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'tomo')
+          this.volume,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'pagina')
+          this.page,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'acta')
+          this.record,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'clase')
+          this.birthClass})
+      : super._();
+
+  factory _$_BirthModel.fromJson(Map<String, dynamic> json) =>
+      _$$_BirthModelFromJson(json);
+
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'lugarNacimiento')
+  final String? birthPlace;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'lugarInscripcion')
+  final String? inscriptionPlace;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'anioInscripcionNacimiento')
+  final String? inscriptionYear;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'fechaInscripcionNacimiento')
+  final String? inscriptionDate;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'tomo')
+  final String? volume;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'pagina')
+  final String? page;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'acta')
+  final String? record;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'clase')
+  final String? birthClass;
+
+  @override
+  String toString() {
+    return 'BirthModel(birthPlace: $birthPlace, inscriptionPlace: $inscriptionPlace, inscriptionYear: $inscriptionYear, inscriptionDate: $inscriptionDate, volume: $volume, page: $page, record: $record, birthClass: $birthClass)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_BirthModel &&
+            (identical(other.birthPlace, birthPlace) ||
+                other.birthPlace == birthPlace) &&
+            (identical(other.inscriptionPlace, inscriptionPlace) ||
+                other.inscriptionPlace == inscriptionPlace) &&
+            (identical(other.inscriptionYear, inscriptionYear) ||
+                other.inscriptionYear == inscriptionYear) &&
+            (identical(other.inscriptionDate, inscriptionDate) ||
+                other.inscriptionDate == inscriptionDate) &&
+            (identical(other.volume, volume) || other.volume == volume) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.record, record) || other.record == record) &&
+            (identical(other.birthClass, birthClass) ||
+                other.birthClass == birthClass));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, birthPlace, inscriptionPlace,
+      inscriptionYear, inscriptionDate, volume, page, record, birthClass);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_BirthModelCopyWith<_$_BirthModel> get copyWith =>
+      __$$_BirthModelCopyWithImpl<_$_BirthModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BirthModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BirthModel extends BirthModel {
+  const factory _BirthModel(
+      {@FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarNacimiento')
+          final String? birthPlace,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'lugarInscripcion')
+          final String? inscriptionPlace,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'anioInscripcionNacimiento')
+          final String? inscriptionYear,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'fechaInscripcionNacimiento')
+          final String? inscriptionDate,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'tomo')
+          final String? volume,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'pagina')
+          final String? page,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'acta')
+          final String? record,
+      @FormControlAnnotation<String>()
+      @JsonKey(name: 'clase')
+          final String? birthClass}) = _$_BirthModel;
+  const _BirthModel._() : super._();
+
+  factory _BirthModel.fromJson(Map<String, dynamic> json) =
+      _$_BirthModel.fromJson;
+
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'lugarNacimiento')
+  String? get birthPlace;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'lugarInscripcion')
+  String? get inscriptionPlace;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'anioInscripcionNacimiento')
+  String? get inscriptionYear;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'fechaInscripcionNacimiento')
+  String? get inscriptionDate;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'tomo')
+  String? get volume;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'pagina')
+  String? get page;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'acta')
+  String? get record;
+  @override
+  @FormControlAnnotation<String>()
+  @JsonKey(name: 'clase')
+  String? get birthClass;
+  @override
+  @JsonKey(ignore: true)
+  _$$_BirthModelCopyWith<_$_BirthModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }

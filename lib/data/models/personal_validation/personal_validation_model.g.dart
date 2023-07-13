@@ -38,7 +38,7 @@ Map<String, dynamic> _$PersonalValidationRequestModelToJson(
 
 ModifiedDataModel _$ModifiedDataModelFromJson(Map<String, dynamic> json) =>
     ModifiedDataModel(
-      original: json['original'] as String,
+      original: json['original'] as String?,
       modified: json['modified'] as String,
     );
 
@@ -57,6 +57,11 @@ _$_PersonalValidationModel _$$_PersonalValidationModelFromJson(
           _$PersonalValidationGenderTypeEnumMap, json['sexo']),
       maritalStatusType: $enumDecodeNullable(
           _$PersonalValidationMaritalStatusTypeEnumMap, json['estadoCivil']),
+      birthDate: json['fechaNacimiento'] as String? ?? '',
+      nationality: json['nacionalidad'] as String?,
+      birth: json['birth'] == null
+          ? null
+          : BirthModel.fromJson(json['birth'] as Map<String, dynamic>),
       acceptTerms: json['acceptTerms'] as bool? ?? false,
     );
 
@@ -68,6 +73,9 @@ Map<String, dynamic> _$$_PersonalValidationModelToJson(
       'sexo': _$PersonalValidationGenderTypeEnumMap[instance.gender],
       'estadoCivil': _$PersonalValidationMaritalStatusTypeEnumMap[
           instance.maritalStatusType],
+      'fechaNacimiento': instance.birthDate,
+      'nacionalidad': instance.nationality,
+      'birth': instance.birth?.toJson(),
       'acceptTerms': instance.acceptTerms,
     };
 
@@ -84,3 +92,27 @@ const _$PersonalValidationMaritalStatusTypeEnumMap = {
   PersonalValidationMaritalStatusType.widower: 'VIUDO',
   PersonalValidationMaritalStatusType.commonLawMarriage: 'UNION DE HECHO',
 };
+
+_$_BirthModel _$$_BirthModelFromJson(Map<String, dynamic> json) =>
+    _$_BirthModel(
+      birthPlace: json['lugarNacimiento'] as String?,
+      inscriptionPlace: json['lugarInscripcion'] as String?,
+      inscriptionYear: json['anioInscripcionNacimiento'] as String?,
+      inscriptionDate: json['fechaInscripcionNacimiento'] as String?,
+      volume: json['tomo'] as String?,
+      page: json['pagina'] as String?,
+      record: json['acta'] as String?,
+      birthClass: json['clase'] as String?,
+    );
+
+Map<String, dynamic> _$$_BirthModelToJson(_$_BirthModel instance) =>
+    <String, dynamic>{
+      'lugarNacimiento': instance.birthPlace,
+      'lugarInscripcion': instance.inscriptionPlace,
+      'anioInscripcionNacimiento': instance.inscriptionYear,
+      'fechaInscripcionNacimiento': instance.inscriptionDate,
+      'tomo': instance.volume,
+      'pagina': instance.page,
+      'acta': instance.record,
+      'clase': instance.birthClass,
+    };
