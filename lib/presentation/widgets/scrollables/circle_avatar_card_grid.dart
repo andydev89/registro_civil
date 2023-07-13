@@ -39,7 +39,7 @@ class CircleAvatarCardGrid extends ConsumerWidget {
       totalPages: totalPages,
       itemBuilder: (_, item, __) => CircleAvatarCardWidget(
         image: FutureBuilder(
-          future: createImageFileFromBase64(item.iconoMovil),
+          future: createImageFileFromBase64(item.idIconoMovil),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return AspectRatio(

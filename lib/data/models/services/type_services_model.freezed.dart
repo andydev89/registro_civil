@@ -31,8 +31,8 @@ mixin _$TypeServiceModel {
   bool get publishMovil => throw _privateConstructorUsedError;
   String? get path => throw _privateConstructorUsedError;
   TypeEnumType get typeEnum => throw _privateConstructorUsedError;
-  String get iconoWeb => throw _privateConstructorUsedError;
-  String get iconoMovil =>
+  String get idIconoWeb => throw _privateConstructorUsedError;
+  String get idIconoMovil =>
       throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(unknownEnumValue: ServiceType.none)
   ServiceType get type => throw _privateConstructorUsedError;
@@ -62,8 +62,8 @@ abstract class $TypeServiceModelCopyWith<$Res> {
       bool publishMovil,
       String? path,
       TypeEnumType typeEnum,
-      String iconoWeb,
-      String iconoMovil,
+      String idIconoWeb,
+      String idIconoMovil,
       @JsonKey(unknownEnumValue: ServiceType.none) ServiceType type,
       bool schedule});
 }
@@ -92,8 +92,8 @@ class _$TypeServiceModelCopyWithImpl<$Res, $Val extends TypeServiceModel>
     Object? publishMovil = null,
     Object? path = freezed,
     Object? typeEnum = null,
-    Object? iconoWeb = null,
-    Object? iconoMovil = null,
+    Object? idIconoWeb = null,
+    Object? idIconoMovil = null,
     Object? type = null,
     Object? schedule = null,
   }) {
@@ -142,13 +142,13 @@ class _$TypeServiceModelCopyWithImpl<$Res, $Val extends TypeServiceModel>
           ? _value.typeEnum
           : typeEnum // ignore: cast_nullable_to_non_nullable
               as TypeEnumType,
-      iconoWeb: null == iconoWeb
-          ? _value.iconoWeb
-          : iconoWeb // ignore: cast_nullable_to_non_nullable
+      idIconoWeb: null == idIconoWeb
+          ? _value.idIconoWeb
+          : idIconoWeb // ignore: cast_nullable_to_non_nullable
               as String,
-      iconoMovil: null == iconoMovil
-          ? _value.iconoMovil
-          : iconoMovil // ignore: cast_nullable_to_non_nullable
+      idIconoMovil: null == idIconoMovil
+          ? _value.idIconoMovil
+          : idIconoMovil // ignore: cast_nullable_to_non_nullable
               as String,
       type: null == type
           ? _value.type
@@ -182,8 +182,8 @@ abstract class _$$_TypeServiceModelCopyWith<$Res>
       bool publishMovil,
       String? path,
       TypeEnumType typeEnum,
-      String iconoWeb,
-      String iconoMovil,
+      String idIconoWeb,
+      String idIconoMovil,
       @JsonKey(unknownEnumValue: ServiceType.none) ServiceType type,
       bool schedule});
 }
@@ -210,8 +210,8 @@ class __$$_TypeServiceModelCopyWithImpl<$Res>
     Object? publishMovil = null,
     Object? path = freezed,
     Object? typeEnum = null,
-    Object? iconoWeb = null,
-    Object? iconoMovil = null,
+    Object? idIconoWeb = null,
+    Object? idIconoMovil = null,
     Object? type = null,
     Object? schedule = null,
   }) {
@@ -260,13 +260,13 @@ class __$$_TypeServiceModelCopyWithImpl<$Res>
           ? _value.typeEnum
           : typeEnum // ignore: cast_nullable_to_non_nullable
               as TypeEnumType,
-      iconoWeb: null == iconoWeb
-          ? _value.iconoWeb
-          : iconoWeb // ignore: cast_nullable_to_non_nullable
+      idIconoWeb: null == idIconoWeb
+          ? _value.idIconoWeb
+          : idIconoWeb // ignore: cast_nullable_to_non_nullable
               as String,
-      iconoMovil: null == iconoMovil
-          ? _value.iconoMovil
-          : iconoMovil // ignore: cast_nullable_to_non_nullable
+      idIconoMovil: null == idIconoMovil
+          ? _value.idIconoMovil
+          : idIconoMovil // ignore: cast_nullable_to_non_nullable
               as String,
       type: null == type
           ? _value.type
@@ -295,8 +295,8 @@ class _$_TypeServiceModel extends _TypeServiceModel {
       required this.publishMovil,
       this.path,
       required this.typeEnum,
-      required this.iconoWeb,
-      required this.iconoMovil,
+      required this.idIconoWeb,
+      required this.idIconoMovil,
       @JsonKey(unknownEnumValue: ServiceType.none) required this.type,
       required this.schedule})
       : super._();
@@ -327,9 +327,9 @@ class _$_TypeServiceModel extends _TypeServiceModel {
   @override
   final TypeEnumType typeEnum;
   @override
-  final String iconoWeb;
+  final String idIconoWeb;
   @override
-  final String iconoMovil;
+  final String idIconoMovil;
 // ignore: invalid_annotation_target
   @override
   @JsonKey(unknownEnumValue: ServiceType.none)
@@ -339,7 +339,7 @@ class _$_TypeServiceModel extends _TypeServiceModel {
 
   @override
   String toString() {
-    return 'TypeServiceModel(id: $id, name: $name, description: $description, price: $price, iva: $iva, discount: $discount, state: $state, publishWeb: $publishWeb, publishMovil: $publishMovil, path: $path, typeEnum: $typeEnum, iconoWeb: $iconoWeb, iconoMovil: $iconoMovil, type: $type, schedule: $schedule)';
+    return 'TypeServiceModel(id: $id, name: $name, description: $description, price: $price, iva: $iva, discount: $discount, state: $state, publishWeb: $publishWeb, publishMovil: $publishMovil, path: $path, typeEnum: $typeEnum, idIconoWeb: $idIconoWeb, idIconoMovil: $idIconoMovil, type: $type, schedule: $schedule)';
   }
 
   @override
@@ -363,10 +363,10 @@ class _$_TypeServiceModel extends _TypeServiceModel {
             (identical(other.path, path) || other.path == path) &&
             (identical(other.typeEnum, typeEnum) ||
                 other.typeEnum == typeEnum) &&
-            (identical(other.iconoWeb, iconoWeb) ||
-                other.iconoWeb == iconoWeb) &&
-            (identical(other.iconoMovil, iconoMovil) ||
-                other.iconoMovil == iconoMovil) &&
+            (identical(other.idIconoWeb, idIconoWeb) ||
+                other.idIconoWeb == idIconoWeb) &&
+            (identical(other.idIconoMovil, idIconoMovil) ||
+                other.idIconoMovil == idIconoMovil) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.schedule, schedule) ||
                 other.schedule == schedule));
@@ -387,8 +387,8 @@ class _$_TypeServiceModel extends _TypeServiceModel {
       publishMovil,
       path,
       typeEnum,
-      iconoWeb,
-      iconoMovil,
+      idIconoWeb,
+      idIconoMovil,
       type,
       schedule);
 
@@ -419,8 +419,8 @@ abstract class _TypeServiceModel extends TypeServiceModel {
       required final bool publishMovil,
       final String? path,
       required final TypeEnumType typeEnum,
-      required final String iconoWeb,
-      required final String iconoMovil,
+      required final String idIconoWeb,
+      required final String idIconoMovil,
       @JsonKey(unknownEnumValue: ServiceType.none)
           required final ServiceType type,
       required final bool schedule}) = _$_TypeServiceModel;
@@ -452,9 +452,9 @@ abstract class _TypeServiceModel extends TypeServiceModel {
   @override
   TypeEnumType get typeEnum;
   @override
-  String get iconoWeb;
+  String get idIconoWeb;
   @override
-  String get iconoMovil;
+  String get idIconoMovil;
   @override // ignore: invalid_annotation_target
   @JsonKey(unknownEnumValue: ServiceType.none)
   ServiceType get type;

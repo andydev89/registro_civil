@@ -18,8 +18,8 @@ class TypeServiceModel with _$TypeServiceModel {
     required bool publishMovil,
     String? path,
     required TypeEnumType typeEnum,
-    required String iconoWeb,
-    required String iconoMovil,
+    required String idIconoWeb,
+    required String idIconoMovil,
     // ignore: invalid_annotation_target
     @JsonKey(unknownEnumValue: ServiceType.none) required ServiceType type,
     required bool schedule,

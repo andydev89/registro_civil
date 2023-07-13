@@ -28,7 +28,7 @@ class CertificateDetail extends ConsumerWidget {
         Flexible(
           child: FutureBuilder(
             future:
-                createImageFileFromBase64(offer.simpleCertificate.iconoMovil),
+                createImageFileFromBase64(offer.simpleCertificate.idIconoMovil),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Image.file(snapshot.data!);
