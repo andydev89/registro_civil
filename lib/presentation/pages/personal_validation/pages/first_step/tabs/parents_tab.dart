@@ -102,6 +102,7 @@ class _ParentsValidationPersonalTabPage
               widget.form.fatherNationalityControl?.updateValue(prev);
             },
           ),
+          const SizedBox(height: 12,),
           const PrimaryTitle(
             title: 'Progenitora',
           ),

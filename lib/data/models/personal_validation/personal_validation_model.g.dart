@@ -68,6 +68,9 @@ _$_PersonalValidationModel _$$_PersonalValidationModelFromJson(
       motherNui: json['nuiMadre'] as String?,
       motherName: json['nombreMadre'] as String?,
       motherNationality: json['nacionalidadMadre'] as String?,
+      marriage: json['marriage'] == null
+          ? null
+          : MarriageModel.fromJson(json['marriage'] as Map<String, dynamic>),
       acceptTerms: json['acceptTerms'] as bool? ?? false,
     );
 
@@ -88,6 +91,7 @@ Map<String, dynamic> _$$_PersonalValidationModelToJson(
       'nuiMadre': instance.motherNui,
       'nombreMadre': instance.motherName,
       'nacionalidadMadre': instance.motherNationality,
+      'marriage': instance.marriage?.toJson(),
       'acceptTerms': instance.acceptTerms,
     };
 
@@ -127,4 +131,28 @@ Map<String, dynamic> _$$_BirthModelToJson(_$_BirthModel instance) =>
       'pagina': instance.page,
       'acta': instance.record,
       'clase': instance.birthClass,
+    };
+
+_$_MarriageModel _$$_MarriageModelFromJson(Map<String, dynamic> json) =>
+    _$_MarriageModel(
+      marriagePlace: json['lugarMatrimonio'] as String?,
+      marriageDate: json['fechaMatrimonio'] as String?,
+      marriageVolume: json['tomoMatrimonio'] as String?,
+      marriagePage: json['paginaMatrimonio'] as String?,
+      marriageRecord: json['actaMatrimonio'] as String?,
+      marriageClass: json['claseMatrimonio'] as String?,
+      spouseNui: json['nuiConyuge'] as String?,
+      spouseName: json['conyuge'] as String?,
+    );
+
+Map<String, dynamic> _$$_MarriageModelToJson(_$_MarriageModel instance) =>
+    <String, dynamic>{
+      'lugarMatrimonio': instance.marriagePlace,
+      'fechaMatrimonio': instance.marriageDate,
+      'tomoMatrimonio': instance.marriageVolume,
+      'paginaMatrimonio': instance.marriagePage,
+      'actaMatrimonio': instance.marriageRecord,
+      'claseMatrimonio': instance.marriageClass,
+      'nuiConyuge': instance.spouseNui,
+      'conyuge': instance.spouseName,
     };

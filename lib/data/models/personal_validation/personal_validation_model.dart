@@ -47,39 +47,41 @@ class PersonalValidationModel with _$PersonalValidationModel {
     @Default('')
     @FormControlAnnotation<String>()
     @JsonKey(name: 'fechaNacimiento')
-    String? birthDate,
+        String? birthDate,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'nacionalidad')
-    String? nationality,
-    @FormControlAnnotation<BirthModel>() BirthModel? birth,
+        String? nationality,
+    @FormControlAnnotation<BirthModel>()
+        BirthModel? birth,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'nuiPadre')
-    String? fatherNui,
+        String? fatherNui,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'nombrePadre')
-    String? fatherName,
+        String? fatherName,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'nacionalidadPadre')
-    String? fatherNationality,
+        String? fatherNationality,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'nuiMadre')
-    String? motherNui,
+        String? motherNui,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'nombreMadre')
-    String? motherName,
+        String? motherName,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'nacionalidadMadre')
-    String? motherNationality,
+        String? motherNationality,
+    @FormControlAnnotation<MarriageModel>()
+        MarriageModel? marriage,
     @Default(false)
     @FormControlAnnotation<bool>(validators: [requiredTrueValidator])
-    bool? acceptTerms,
+        bool? acceptTerms,
   }) = _PersonalValidationModel;
 
   const PersonalValidationModel._();
 
   factory PersonalValidationModel.fromJson(Map<String, dynamic> json) =>
       _$PersonalValidationModelFromJson(json);
-
 }
 
 @ReactiveFormAnnotation()
@@ -89,57 +91,88 @@ class BirthModel with _$BirthModel {
   const factory BirthModel({
     @FormControlAnnotation<String>()
     @JsonKey(name: 'lugarNacimiento')
-    String? birthPlace,
+        String? birthPlace,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'lugarInscripcion')
-    String? inscriptionPlace,
+        String? inscriptionPlace,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'anioInscripcionNacimiento')
-    String? inscriptionYear,
+        String? inscriptionYear,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'fechaInscripcionNacimiento')
-    String? inscriptionDate,
+        String? inscriptionDate,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'tomo')
-    String? volume,
+        String? volume,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'pagina')
-    String? page,
+        String? page,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'acta')
-    String? record,
+        String? record,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'clase')
-    String? birthClass,
+        String? birthClass,
   }) = _BirthModel;
 
   const BirthModel._();
 
   factory BirthModel.fromJson(Map<String, dynamic> json) =>
       _$BirthModelFromJson(json);
-
 }
 
+@ReactiveFormAnnotation()
+@freezed
+class MarriageModel with _$MarriageModel {
+  @JsonSerializable(explicitToJson: true)
+  const factory MarriageModel({
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'lugarMatrimonio')
+        String? marriagePlace,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'fechaMatrimonio')
+        String? marriageDate,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'tomoMatrimonio')
+        String? marriageVolume,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'paginaMatrimonio')
+        String? marriagePage,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'actaMatrimonio')
+        String? marriageRecord,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'claseMatrimonio')
+        String? marriageClass,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'nuiConyuge')
+        String? spouseNui,
+    @FormControlAnnotation<String>()
+    @JsonKey(name: 'conyuge')
+        String? spouseName,
+  }) = _MarriageModel;
+
+  const MarriageModel._();
+
+  factory MarriageModel.fromJson(Map<String, dynamic> json) =>
+      _$MarriageModelFromJson(json);
+}
 
 @JsonSerializable()
 class PersonalValidationRequestModel {
-
   PersonalValidationRequestModel(this.nui, this.modifiedData);
 
   factory PersonalValidationRequestModel.fromJson(Map<String, dynamic> json) =>
       _$PersonalValidationRequestModelFromJson(json);
 
-
   String nui;
   Map<String, ModifiedDataModel> modifiedData;
 
-  Map<String, dynamic> toJson() =>
-      _$PersonalValidationRequestModelToJson(this);
+  Map<String, dynamic> toJson() => _$PersonalValidationRequestModelToJson(this);
 }
 
 @JsonSerializable()
 class ModifiedDataModel {
-
   ModifiedDataModel({required this.original, required this.modified});
 
   factory ModifiedDataModel.fromJson(Map<String, dynamic> json) =>
@@ -148,6 +181,5 @@ class ModifiedDataModel {
   final String? original;
   final String modified;
 
-  Map<String, dynamic> toJson() =>
-      _$ModifiedDataModelToJson(this);
+  Map<String, dynamic> toJson() => _$ModifiedDataModelToJson(this);
 }

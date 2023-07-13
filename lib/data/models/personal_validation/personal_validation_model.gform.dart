@@ -211,6 +211,8 @@ class PersonalValidationModelForm
 
   static const String motherNationalityControlName = "motherNationality";
 
+  static const String marriageControlName = "marriage";
+
   static const String acceptTermsControlName = "acceptTerms";
 
   final PersonalValidationModel? personalValidationModel;
@@ -235,6 +237,7 @@ class PersonalValidationModelForm
   String motherNameControlPath() => pathBuilder(motherNameControlName);
   String motherNationalityControlPath() =>
       pathBuilder(motherNationalityControlName);
+  String marriageControlPath() => pathBuilder(marriageControlName);
   String acceptTermsControlPath() => pathBuilder(acceptTermsControlName);
   String? get _firstNameValue => firstNameControl?.value;
   String? get _lastNameValue => lastNameControl?.value;
@@ -250,6 +253,7 @@ class PersonalValidationModelForm
   String? get _motherNuiValue => motherNuiControl?.value;
   String? get _motherNameValue => motherNameControl?.value;
   String? get _motherNationalityValue => motherNationalityControl?.value;
+  MarriageModel? get _marriageValue => marriageControl?.value;
   bool? get _acceptTermsValue => acceptTermsControl?.value;
   bool get containsFirstName {
     try {
@@ -368,6 +372,15 @@ class PersonalValidationModelForm
     }
   }
 
+  bool get containsMarriage {
+    try {
+      form.control(marriageControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsAcceptTerms {
     try {
       form.control(acceptTermsControlPath());
@@ -390,6 +403,7 @@ class PersonalValidationModelForm
   Object? get motherNuiErrors => motherNuiControl?.errors;
   Object? get motherNameErrors => motherNameControl?.errors;
   Object? get motherNationalityErrors => motherNationalityControl?.errors;
+  Object? get marriageErrors => marriageControl?.errors;
   Object? get acceptTermsErrors => acceptTermsControl?.errors;
   void get firstNameFocus => form.focus(firstNameControlPath());
   void get lastNameFocus => form.focus(lastNameControlPath());
@@ -404,6 +418,7 @@ class PersonalValidationModelForm
   void get motherNuiFocus => form.focus(motherNuiControlPath());
   void get motherNameFocus => form.focus(motherNameControlPath());
   void get motherNationalityFocus => form.focus(motherNationalityControlPath());
+  void get marriageFocus => form.focus(marriageControlPath());
   void get acceptTermsFocus => form.focus(acceptTermsControlPath());
   void firstNameRemove({
     bool updateParent = true,
@@ -743,6 +758,32 @@ class PersonalValidationModelForm
     }
   }
 
+  void marriageRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMarriage) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          marriageControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            marriageControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void acceptTermsRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -886,6 +927,15 @@ class PersonalValidationModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void marriageValueUpdate(
+    MarriageModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriageControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void acceptTermsValueUpdate(
     bool? value, {
     bool updateParent = true,
@@ -1009,6 +1059,15 @@ class PersonalValidationModelForm
     bool emitEvent = true,
   }) {
     motherNationalityControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriageValuePatch(
+    MarriageModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriageControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -1138,6 +1197,15 @@ class PersonalValidationModelForm
   }) =>
       motherNationalityControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void marriageValueReset(
+    MarriageModel? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      marriageControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void acceptTermsValueReset(
     bool? value, {
     bool updateParent = true,
@@ -1188,6 +1256,9 @@ class PersonalValidationModelForm
       : null;
   FormControl<String>? get motherNationalityControl => containsMotherNationality
       ? form.control(motherNationalityControlPath()) as FormControl<String>?
+      : null;
+  FormControl<MarriageModel>? get marriageControl => containsMarriage
+      ? form.control(marriageControlPath()) as FormControl<MarriageModel>?
       : null;
   FormControl<bool>? get acceptTermsControl => containsAcceptTerms
       ? form.control(acceptTermsControlPath()) as FormControl<bool>?
@@ -1426,6 +1497,24 @@ class PersonalValidationModelForm
     }
   }
 
+  void marriageSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      marriageControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      marriageControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void acceptTermsSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -1466,6 +1555,7 @@ class PersonalValidationModelForm
         motherNui: _motherNuiValue,
         motherName: _motherNameValue,
         motherNationality: _motherNationalityValue,
+        marriage: _marriageValue,
         acceptTerms: _acceptTermsValue);
   }
 
@@ -1583,6 +1673,13 @@ class PersonalValidationModelForm
             touched: false),
         motherNationalityControlName: FormControl<String>(
             value: personalValidationModel?.motherNationality,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        marriageControlName: FormControl<MarriageModel>(
+            value: personalValidationModel?.marriage,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
@@ -2810,6 +2907,1126 @@ class ReactiveBirthModelFormFormGroupArrayBuilder<V> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formModel = ReactiveBirthModelForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final value = (extended ?? getExtended?.call(formModel))!;
+
+    return StreamBuilder<List<Map<String, Object?>?>?>(
+      stream: value.control.valueChanges,
+      builder: (context, snapshot) {
+        final itemList = (value.value() ?? <V>[])
+            .asMap()
+            .map((i, item) => MapEntry(
+                  i,
+                  itemBuilder(
+                    context,
+                    i,
+                    item,
+                    formModel,
+                  ),
+                ))
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveMarriageModelFormConsumer extends StatelessWidget {
+  const ReactiveMarriageModelFormConsumer({
+    Key? key,
+    required this.builder,
+    this.child,
+  }) : super(key: key);
+
+  final Widget? child;
+
+  final Widget Function(
+      BuildContext context, MarriageModelForm formModel, Widget? child) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveMarriageModelForm.of(context);
+
+    if (formModel is! MarriageModelForm) {
+      throw FormControlParentNotFoundException(this);
+    }
+    return builder(context, formModel, child);
+  }
+}
+
+class MarriageModelFormInheritedStreamer extends InheritedStreamer<dynamic> {
+  const MarriageModelFormInheritedStreamer({
+    Key? key,
+    required this.form,
+    required Stream<dynamic> stream,
+    required Widget child,
+  }) : super(
+          stream,
+          child,
+          key: key,
+        );
+
+  final MarriageModelForm form;
+}
+
+class ReactiveMarriageModelForm extends StatelessWidget {
+  const ReactiveMarriageModelForm({
+    Key? key,
+    required this.form,
+    required this.child,
+    this.onWillPop,
+  }) : super(key: key);
+
+  final Widget child;
+
+  final MarriageModelForm form;
+
+  final WillPopCallback? onWillPop;
+
+  static MarriageModelForm? of(
+    BuildContext context, {
+    bool listen = true,
+  }) {
+    if (listen) {
+      return context
+          .dependOnInheritedWidgetOfExactType<
+              MarriageModelFormInheritedStreamer>()
+          ?.form;
+    }
+
+    final element = context.getElementForInheritedWidgetOfExactType<
+        MarriageModelFormInheritedStreamer>();
+    return element == null
+        ? null
+        : (element.widget as MarriageModelFormInheritedStreamer).form;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MarriageModelFormInheritedStreamer(
+      form: form,
+      stream: form.form.statusChanged,
+      child: WillPopScope(
+        onWillPop: onWillPop,
+        child: child,
+      ),
+    );
+  }
+}
+
+class MarriageModelFormBuilder extends StatefulWidget {
+  const MarriageModelFormBuilder({
+    Key? key,
+    this.model,
+    this.child,
+    this.onWillPop,
+    required this.builder,
+    this.initState,
+  }) : super(key: key);
+
+  final MarriageModel? model;
+
+  final Widget? child;
+
+  final WillPopCallback? onWillPop;
+
+  final Widget Function(
+      BuildContext context, MarriageModelForm formModel, Widget? child) builder;
+
+  final void Function(BuildContext context, MarriageModelForm formModel)?
+      initState;
+
+  @override
+  _MarriageModelFormBuilderState createState() =>
+      _MarriageModelFormBuilderState();
+}
+
+class _MarriageModelFormBuilderState extends State<MarriageModelFormBuilder> {
+  late MarriageModelForm _formModel;
+
+  @override
+  void initState() {
+    _formModel = MarriageModelForm(
+        widget.model, MarriageModelForm.formElements(widget.model), null);
+
+    if (_formModel.form.disabled) {
+      _formModel.form.markAsDisabled();
+    }
+
+    widget.initState?.call(context, _formModel);
+
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant MarriageModelFormBuilder oldWidget) {
+    if (widget.model != oldWidget.model) {
+      _formModel = MarriageModelForm(
+          widget.model, MarriageModelForm.formElements(widget.model), null);
+
+      if (_formModel.form.disabled) {
+        _formModel.form.markAsDisabled();
+      }
+
+      widget.initState?.call(context, _formModel);
+    }
+
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _formModel.form.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveMarriageModelForm(
+      key: ObjectKey(_formModel),
+      form: _formModel,
+      onWillPop: widget.onWillPop,
+      child: ReactiveFormBuilder(
+        form: () => _formModel.form,
+        onWillPop: widget.onWillPop,
+        builder: (context, formGroup, child) =>
+            widget.builder(context, _formModel, widget.child),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class MarriageModelForm implements FormModel<MarriageModel> {
+  MarriageModelForm(
+    this.marriageModel,
+    this.form,
+    this.path,
+  ) {}
+
+  static const String marriagePlaceControlName = "marriagePlace";
+
+  static const String marriageDateControlName = "marriageDate";
+
+  static const String marriageVolumeControlName = "marriageVolume";
+
+  static const String marriagePageControlName = "marriagePage";
+
+  static const String marriageRecordControlName = "marriageRecord";
+
+  static const String marriageClassControlName = "marriageClass";
+
+  static const String spouseNuiControlName = "spouseNui";
+
+  static const String spouseNameControlName = "spouseName";
+
+  final MarriageModel? marriageModel;
+
+  final FormGroup form;
+
+  final String? path;
+
+  String marriagePlaceControlPath() => pathBuilder(marriagePlaceControlName);
+  String marriageDateControlPath() => pathBuilder(marriageDateControlName);
+  String marriageVolumeControlPath() => pathBuilder(marriageVolumeControlName);
+  String marriagePageControlPath() => pathBuilder(marriagePageControlName);
+  String marriageRecordControlPath() => pathBuilder(marriageRecordControlName);
+  String marriageClassControlPath() => pathBuilder(marriageClassControlName);
+  String spouseNuiControlPath() => pathBuilder(spouseNuiControlName);
+  String spouseNameControlPath() => pathBuilder(spouseNameControlName);
+  String? get _marriagePlaceValue => marriagePlaceControl?.value;
+  String? get _marriageDateValue => marriageDateControl?.value;
+  String? get _marriageVolumeValue => marriageVolumeControl?.value;
+  String? get _marriagePageValue => marriagePageControl?.value;
+  String? get _marriageRecordValue => marriageRecordControl?.value;
+  String? get _marriageClassValue => marriageClassControl?.value;
+  String? get _spouseNuiValue => spouseNuiControl?.value;
+  String? get _spouseNameValue => spouseNameControl?.value;
+  bool get containsMarriagePlace {
+    try {
+      form.control(marriagePlaceControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsMarriageDate {
+    try {
+      form.control(marriageDateControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsMarriageVolume {
+    try {
+      form.control(marriageVolumeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsMarriagePage {
+    try {
+      form.control(marriagePageControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsMarriageRecord {
+    try {
+      form.control(marriageRecordControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsMarriageClass {
+    try {
+      form.control(marriageClassControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsSpouseNui {
+    try {
+      form.control(spouseNuiControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsSpouseName {
+    try {
+      form.control(spouseNameControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Object? get marriagePlaceErrors => marriagePlaceControl?.errors;
+  Object? get marriageDateErrors => marriageDateControl?.errors;
+  Object? get marriageVolumeErrors => marriageVolumeControl?.errors;
+  Object? get marriagePageErrors => marriagePageControl?.errors;
+  Object? get marriageRecordErrors => marriageRecordControl?.errors;
+  Object? get marriageClassErrors => marriageClassControl?.errors;
+  Object? get spouseNuiErrors => spouseNuiControl?.errors;
+  Object? get spouseNameErrors => spouseNameControl?.errors;
+  void get marriagePlaceFocus => form.focus(marriagePlaceControlPath());
+  void get marriageDateFocus => form.focus(marriageDateControlPath());
+  void get marriageVolumeFocus => form.focus(marriageVolumeControlPath());
+  void get marriagePageFocus => form.focus(marriagePageControlPath());
+  void get marriageRecordFocus => form.focus(marriageRecordControlPath());
+  void get marriageClassFocus => form.focus(marriageClassControlPath());
+  void get spouseNuiFocus => form.focus(spouseNuiControlPath());
+  void get spouseNameFocus => form.focus(spouseNameControlPath());
+  void marriagePlaceRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMarriagePlace) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          marriagePlaceControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            marriagePlaceControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void marriageDateRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMarriageDate) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          marriageDateControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            marriageDateControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void marriageVolumeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMarriageVolume) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          marriageVolumeControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            marriageVolumeControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void marriagePageRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMarriagePage) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          marriagePageControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            marriagePageControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void marriageRecordRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMarriageRecord) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          marriageRecordControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            marriageRecordControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void marriageClassRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsMarriageClass) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          marriageClassControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            marriageClassControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void spouseNuiRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsSpouseNui) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          spouseNuiControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            spouseNuiControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void spouseNameRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsSpouseName) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          spouseNameControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            spouseNameControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void marriagePlaceValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriagePlaceControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriageDateValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriageDateControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriageVolumeValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriageVolumeControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriagePageValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriagePageControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriageRecordValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriageRecordControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriageClassValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriageClassControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void spouseNuiValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    spouseNuiControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void spouseNameValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    spouseNameControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriagePlaceValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriagePlaceControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriageDateValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriageDateControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriageVolumeValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriageVolumeControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriagePageValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriagePageControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriageRecordValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriageRecordControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriageClassValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    marriageClassControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void spouseNuiValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    spouseNuiControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void spouseNameValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    spouseNameControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void marriagePlaceValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      marriagePlaceControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void marriageDateValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      marriageDateControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void marriageVolumeValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      marriageVolumeControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void marriagePageValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      marriagePageControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void marriageRecordValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      marriageRecordControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void marriageClassValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      marriageClassControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void spouseNuiValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      spouseNuiControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void spouseNameValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      spouseNameControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<String>? get marriagePlaceControl => containsMarriagePlace
+      ? form.control(marriagePlaceControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get marriageDateControl => containsMarriageDate
+      ? form.control(marriageDateControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get marriageVolumeControl => containsMarriageVolume
+      ? form.control(marriageVolumeControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get marriagePageControl => containsMarriagePage
+      ? form.control(marriagePageControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get marriageRecordControl => containsMarriageRecord
+      ? form.control(marriageRecordControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get marriageClassControl => containsMarriageClass
+      ? form.control(marriageClassControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get spouseNuiControl => containsSpouseNui
+      ? form.control(spouseNuiControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get spouseNameControl => containsSpouseName
+      ? form.control(spouseNameControlPath()) as FormControl<String>?
+      : null;
+  void marriagePlaceSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      marriagePlaceControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      marriagePlaceControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void marriageDateSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      marriageDateControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      marriageDateControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void marriageVolumeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      marriageVolumeControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      marriageVolumeControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void marriagePageSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      marriagePageControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      marriagePageControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void marriageRecordSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      marriageRecordControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      marriageRecordControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void marriageClassSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      marriageClassControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      marriageClassControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void spouseNuiSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      spouseNuiControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      spouseNuiControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void spouseNameSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      spouseNameControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      spouseNameControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  @override
+  MarriageModel get model {
+    final currentForm = path == null ? form : form.control(path!);
+
+    if (!currentForm.valid) {
+      debugPrint(
+          '[${path ?? 'MarriageModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+    }
+    return MarriageModel(
+        marriagePlace: _marriagePlaceValue,
+        marriageDate: _marriageDateValue,
+        marriageVolume: _marriageVolumeValue,
+        marriagePage: _marriagePageValue,
+        marriageRecord: _marriageRecordValue,
+        marriageClass: _marriageClassValue,
+        spouseNui: _spouseNuiValue,
+        spouseName: _spouseNameValue);
+  }
+
+  MarriageModelForm copyWithPath(String? path) {
+    return MarriageModelForm(marriageModel, form, path);
+  }
+
+  @override
+  void updateValue(
+    MarriageModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.updateValue(MarriageModelForm.formElements(value).rawValue,
+          updateParent: updateParent, emitEvent: emitEvent);
+  @override
+  void reset({
+    MarriageModel? value,
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) =>
+      form.reset(
+          value: value != null ? formElements(value).rawValue : null,
+          updateParent: updateParent,
+          emitEvent: emitEvent);
+  String pathBuilder(String? pathItem) =>
+      [path, pathItem].whereType<String>().join(".");
+  static FormGroup formElements(MarriageModel? marriageModel) => FormGroup({
+        marriagePlaceControlName: FormControl<String>(
+            value: marriageModel?.marriagePlace,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        marriageDateControlName: FormControl<String>(
+            value: marriageModel?.marriageDate,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        marriageVolumeControlName: FormControl<String>(
+            value: marriageModel?.marriageVolume,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        marriagePageControlName: FormControl<String>(
+            value: marriageModel?.marriagePage,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        marriageRecordControlName: FormControl<String>(
+            value: marriageModel?.marriageRecord,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        marriageClassControlName: FormControl<String>(
+            value: marriageModel?.marriageClass,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        spouseNuiControlName: FormControl<String>(
+            value: marriageModel?.spouseNui,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        spouseNameControlName: FormControl<String>(
+            value: marriageModel?.spouseName,
+            validators: [],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false)
+      },
+          validators: [],
+          asyncValidators: [],
+          asyncValidatorsDebounceTime: 250,
+          disabled: false);
+}
+
+class ReactiveMarriageModelFormArrayBuilder<T> extends StatelessWidget {
+  const ReactiveMarriageModelFormArrayBuilder({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<T>? formControl;
+
+  final FormArray<T>? Function(MarriageModelForm formModel)? control;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      MarriageModelForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, T? item, MarriageModelForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveMarriageModelForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    return ReactiveFormArray<T>(
+      formArray: formControl ?? control?.call(formModel),
+      builder: (context, formArray, child) {
+        final itemList = (formArray.value ?? [])
+            .asMap()
+            .map((i, item) {
+              return MapEntry(
+                i,
+                itemBuilder(
+                  context,
+                  i,
+                  item,
+                  formModel,
+                ),
+              );
+            })
+            .values
+            .toList();
+
+        return builder?.call(
+              context,
+              itemList,
+              formModel,
+            ) ??
+            Column(children: itemList);
+      },
+    );
+  }
+}
+
+class ReactiveMarriageModelFormFormGroupArrayBuilder<V>
+    extends StatelessWidget {
+  const ReactiveMarriageModelFormFormGroupArrayBuilder({
+    Key? key,
+    this.extended,
+    this.getExtended,
+    this.builder,
+    required this.itemBuilder,
+  })  : assert(extended != null || getExtended != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>>? extended;
+
+  final ExtendedControl<List<Map<String, Object?>?>, List<V>> Function(
+      MarriageModelForm formModel)? getExtended;
+
+  final Widget Function(BuildContext context, List<Widget> itemList,
+      MarriageModelForm formModel)? builder;
+
+  final Widget Function(
+          BuildContext context, int i, V? item, MarriageModelForm formModel)
+      itemBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveMarriageModelForm.of(context);
 
     if (formModel == null) {
       throw FormControlParentNotFoundException(this);
