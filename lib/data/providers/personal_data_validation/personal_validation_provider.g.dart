@@ -7,7 +7,7 @@ part of 'personal_validation_provider.dart';
 // **************************************************************************
 
 String _$personalValidationsHash() =>
-    r'2e69b7ed69f9941c64848c58fab81b2cbb4221b4';
+    r'cef51038108cd3204ebd6b32c8ba4ddfc3144ca1';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,16 +30,16 @@ class _SystemHash {
   }
 }
 
-typedef PersonalValidationsRef
-    = AutoDisposeFutureProviderRef<ResponseModelPagination<List<dynamic>>>;
+typedef PersonalValidationsRef = AutoDisposeFutureProviderRef<
+    ResponseModelPagination<List<PersonalValidationListModel>>>;
 
 /// See also [personalValidations].
 @ProviderFor(personalValidations)
 const personalValidationsProvider = PersonalValidationsFamily();
 
 /// See also [personalValidations].
-class PersonalValidationsFamily
-    extends Family<AsyncValue<ResponseModelPagination<List<dynamic>>>> {
+class PersonalValidationsFamily extends Family<
+    AsyncValue<ResponseModelPagination<List<PersonalValidationListModel>>>> {
   /// See also [personalValidations].
   const PersonalValidationsFamily();
 
@@ -77,8 +77,8 @@ class PersonalValidationsFamily
 }
 
 /// See also [personalValidations].
-class PersonalValidationsProvider
-    extends AutoDisposeFutureProvider<ResponseModelPagination<List<dynamic>>> {
+class PersonalValidationsProvider extends AutoDisposeFutureProvider<
+    ResponseModelPagination<List<PersonalValidationListModel>>> {
   /// See also [personalValidations].
   PersonalValidationsProvider({
     this.pageNo,

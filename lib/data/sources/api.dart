@@ -317,8 +317,10 @@ abstract class Api {
 
   //PERSONAL DATA VALIDATION
   @GET('/personaldatavalidator/api/personal-data/solicitudes')
-  Future<ResponseModelPagination<List<dynamic>>> personalValidationRequests({
+  Future<ResponseModelPagination<List<PersonalValidationListModel>>>
+      personalValidationRequests({
     @Query('pageNo') int pageNo = 0,
+    @Query('userId') String userId = '',
   });
 
   @GET('/personaldatavalidator/api/personal-data/{nui}')
@@ -327,8 +329,7 @@ abstract class Api {
   );
 
   @POST('/personaldatavalidator/api/personal-data')
-  Future<ResponseModel<CommandNuiModel>>
-      createPersonalDataRequest(
+  Future<ResponseModel<CommandNuiModel>> createPersonalDataRequest(
     @Body() PersonalValidationRequestModel model,
   );
 }

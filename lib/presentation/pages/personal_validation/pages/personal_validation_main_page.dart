@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/data/enum/commons/commons.dart';
+import 'package:registro_civil_apk/data/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -21,10 +23,6 @@ class PersonalValidationMainPage extends ConsumerWidget {
       body: Expanded(
         child: Column(
           children: [
-            /*PrimarySearch(
-              filter: (p0) =>
-                  ref.read(marriagesFilterProvider.notifier).setFilter(p0),
-            ).verticalPadding(10),*/
             PrimaryAddItemRow(
               title: l10n.listadoSol,
               onPressed: () => context.navigateTo(
@@ -39,20 +37,31 @@ class PersonalValidationMainPage extends ConsumerWidget {
               ),
             ),
             Expanded(
-              child:
-                  LoadingProviderWidget<ResponseModelPagination<List<dynamic>>>(
+              child: LoadingProviderWidget<
+                  ResponseModelPagination<List<PersonalValidationListModel>>>(
                 async: ref.watch(personalValidationsProvider()),
                 onRefreshIndicator: () => ref.refresh(
-                  marriagesProvider().future,
+                  personalValidationsProvider().future,
                 ),
-                onRefresh: () => ref.refresh(marriagesProvider()),
-                data: (data) => PagedListViewWidget<dynamic>(
+                onRefresh: () => ref.refresh(personalValidationsProvider()),
+                data: (data) => PagedListViewWidget<PersonalValidationListModel>(
                   fetch: (page) => ref.read(
-                    marriagesProvider(pageNo: page).future,
+                    personalValidationsProvider(pageNo: page).future,
                   ),
                   firstElements: data.data ?? [],
                   totalPages: data.totalPages,
-                  itemBuilder: (_, e, __) => Container(),
+                  itemBuilder: (_, e, __) =>
+                      CardWidget<PersonalValidationListModel>(
+                    element: e,
+                    rows: {
+                      l10n.fechaCreacion: '${e.createdAt?.onlyDate} -'
+                          ' ${e.createdAt?.onlyTime}',
+                      l10n.estado: e.state.translate(context),
+                    },
+                    actions: {
+                      Crud.read: (p0) => {},
+                    },
+                  ),
                 ),
               ).verticalPadding(10),
             ),

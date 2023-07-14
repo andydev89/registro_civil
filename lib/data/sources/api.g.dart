@@ -1597,29 +1597,40 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModelPagination<List<dynamic>>> personalValidationRequests(
-      {int pageNo = 0}) async {
+  Future<ResponseModelPagination<List<PersonalValidationListModel>>>
+      personalValidationRequests({
+    int pageNo = 0,
+    String userId = '',
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'pageNo': pageNo};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'userId': userId,
+    };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResponseModelPagination<List<dynamic>>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        ResponseModelPagination<List<PersonalValidationListModel>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/personaldatavalidator/api/personal-data/solicitudes',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseModelPagination<List<dynamic>>.fromJson(
+        .compose(
+          _dio.options,
+          '/personaldatavalidator/api/personal-data/solicitudes',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value =
+        ResponseModelPagination<List<PersonalValidationListModel>>.fromJson(
       _result.data!,
       (json) => json is List<dynamic>
-          ? json.map<dynamic>((i) => i as Map<String, dynamic>).toList()
+          ? json
+              .map<PersonalValidationListModel>((i) =>
+                  PersonalValidationListModel.fromJson(
+                      i as Map<String, dynamic>))
+              .toList()
           : List.empty(),
     );
     return value;

@@ -5,6 +5,7 @@ import 'package:registro_civil_apk/data/providers/auth/auth.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'dart:convert';
+
 part 'personal_validation_provider.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -40,20 +41,23 @@ class PersonalValidationRequests extends _$PersonalValidationRequests {
 }
 
 @riverpod
-Future<ResponseModelPagination<List<dynamic>>> personalValidations(
-    PersonalValidationsRef ref, {
-      int? pageNo,
-    }) async {
+Future<ResponseModelPagination<List<PersonalValidationListModel>>>
+    personalValidations(
+  PersonalValidationsRef ref, {
+  int? pageNo,
+}) async {
   final api = ref.watch(apiProvider);
-  final response = await api.personalValidationRequests(pageNo: pageNo ?? 0);
+  final me = await ref.watch(meProvider.future);
+  final response =
+      await api.personalValidationRequests(pageNo: pageNo ?? 0, userId: me.id);
   return response;
 }
 
 @riverpod
 Future<Result<CommandNuiModel, StatusCodeType>> personalData(
-    PersonalDataRef ref, {
-      required PersonalValidationRequestModel model,
-    }) async {
+  PersonalDataRef ref, {
+  required PersonalValidationRequestModel model,
+}) async {
   final api = ref.watch(apiProvider);
   final result = await api.createPersonalDataRequest(model);
   if (result.success) {
@@ -64,8 +68,8 @@ Future<Result<CommandNuiModel, StatusCodeType>> personalData(
 
 @riverpod
 Future<PersonalValidationResponseModel?> personalDataById(
-    PersonalDataByIdRef ref,
-    ) async {
+  PersonalDataByIdRef ref,
+) async {
   final api = ref.watch(apiProvider);
   final me = await ref.watch(meProvider.future);
   final response = (await api.personalDataById(me.identification)).data;
