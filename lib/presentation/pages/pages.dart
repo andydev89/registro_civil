@@ -10,6 +10,7 @@ export 'my_turns/my_turns.dart';
 export 'notification/notification.dart';
 export 'payment/payment.dart';
 export 'payment_service_judgments_notarial_acts/payment_service_judgments_notarial_acts.dart';
+export 'personal_validation/personal_validation.dart';
 export 'residence_registration/residence_registration.dart';
 export 'root/root.dart';
 export 'schedule_turn/schedule_turn.dart';

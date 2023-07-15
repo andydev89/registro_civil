@@ -120,6 +120,7 @@
   "registroRes": "Registro de residencia",
   "cambioNom": "Cambio de nombre",
   "duplicadoCed": "Duplicado de cédula",
+  "personalValidation": "Validación de datos personales",
   "cedulacionExtPriVez": "Cedulación extranjeros por primera vez",
   "celebracionMat": "Celebración de matrimonio",
   "registroNacExt": "Registro de nacimiento en el exterior",

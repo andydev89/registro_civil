@@ -495,6 +495,160 @@ abstract class _CommandModelNui implements CommandModelNui {
       throw _privateConstructorUsedError;
 }
 
+CommandNuiModel _$CommandNuiModelFromJson(Map<String, dynamic> json) {
+  return _CommandNuiModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CommandNuiModel {
+  String get nui => throw _privateConstructorUsedError;
+  String get command => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CommandNuiModelCopyWith<CommandNuiModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CommandNuiModelCopyWith<$Res> {
+  factory $CommandNuiModelCopyWith(
+          CommandNuiModel value, $Res Function(CommandNuiModel) then) =
+      _$CommandNuiModelCopyWithImpl<$Res, CommandNuiModel>;
+  @useResult
+  $Res call({String nui, String command});
+}
+
+/// @nodoc
+class _$CommandNuiModelCopyWithImpl<$Res, $Val extends CommandNuiModel>
+    implements $CommandNuiModelCopyWith<$Res> {
+  _$CommandNuiModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nui = null,
+    Object? command = null,
+  }) {
+    return _then(_value.copyWith(
+      nui: null == nui
+          ? _value.nui
+          : nui // ignore: cast_nullable_to_non_nullable
+              as String,
+      command: null == command
+          ? _value.command
+          : command // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_CommandNuiModelCopyWith<$Res>
+    implements $CommandNuiModelCopyWith<$Res> {
+  factory _$$_CommandNuiModelCopyWith(
+          _$_CommandNuiModel value, $Res Function(_$_CommandNuiModel) then) =
+      __$$_CommandNuiModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String nui, String command});
+}
+
+/// @nodoc
+class __$$_CommandNuiModelCopyWithImpl<$Res>
+    extends _$CommandNuiModelCopyWithImpl<$Res, _$_CommandNuiModel>
+    implements _$$_CommandNuiModelCopyWith<$Res> {
+  __$$_CommandNuiModelCopyWithImpl(
+      _$_CommandNuiModel _value, $Res Function(_$_CommandNuiModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? nui = null,
+    Object? command = null,
+  }) {
+    return _then(_$_CommandNuiModel(
+      nui: null == nui
+          ? _value.nui
+          : nui // ignore: cast_nullable_to_non_nullable
+              as String,
+      command: null == command
+          ? _value.command
+          : command // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_CommandNuiModel implements _CommandNuiModel {
+  const _$_CommandNuiModel({required this.nui, required this.command});
+
+  factory _$_CommandNuiModel.fromJson(Map<String, dynamic> json) =>
+      _$$_CommandNuiModelFromJson(json);
+
+  @override
+  final String nui;
+  @override
+  final String command;
+
+  @override
+  String toString() {
+    return 'CommandNuiModel(nui: $nui, command: $command)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CommandNuiModel &&
+            (identical(other.nui, nui) || other.nui == nui) &&
+            (identical(other.command, command) || other.command == command));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, nui, command);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CommandNuiModelCopyWith<_$_CommandNuiModel> get copyWith =>
+      __$$_CommandNuiModelCopyWithImpl<_$_CommandNuiModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CommandNuiModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CommandNuiModel implements CommandNuiModel {
+  const factory _CommandNuiModel(
+      {required final String nui,
+      required final String command}) = _$_CommandNuiModel;
+
+  factory _CommandNuiModel.fromJson(Map<String, dynamic> json) =
+      _$_CommandNuiModel.fromJson;
+
+  @override
+  String get nui;
+  @override
+  String get command;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CommandNuiModelCopyWith<_$_CommandNuiModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 CommandWithTransactionCodeModel _$CommandWithTransactionCodeModelFromJson(
     Map<String, dynamic> json) {
   return _CommandWithTransactionCodeModel.fromJson(json);

@@ -80,6 +80,13 @@ PageRouteInfo<dynamic> getCedulacionExtPrimeraVez(
       ],
     );
 
+PageRouteInfo<dynamic> getPersonalValidation(TypeServiceModel typeOfService) =>
+    PersonalValidationRouterRoute(
+      children: [
+        PersonalValidationMainRoute(typeServiceModel: typeOfService),
+      ],
+    );
+
 PageRouteInfo<dynamic> getDefault(TypeServiceModel typeOfService) =>
     DefaultRoute(typeServiceModel: typeOfService);
 
@@ -111,9 +118,15 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   if (type.isElectronicSignature) {
     return getElectronicSignature(typeServiceModel);
   }
+
   if (type.isCedulacionExtPriVez) {
     return getCedulacionExtPrimeraVez(typeServiceModel);
   }
   //agregar condicional para cedulacion extranjero primera vez
+
+  if (type.isPersonalValidation) {
+    return getPersonalValidation(typeServiceModel);
+  }
+
   return getDefault(typeServiceModel);
 }

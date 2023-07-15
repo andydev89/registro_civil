@@ -7,6 +7,7 @@ export 'electronic_signature/electronic_signature.dart';
 export 'id_duplicate/id_duplicate.dart';
 export 'marriage_celebration/marriage_celebration.dart';
 export 'payment/payment.dart';
+export 'personal_data_validation/personal_validation.dart';
 export 'residence_registration/residence_registration.dart';
 export 'schedule_turn/schedule_turn.dart';
 export 'simple_certificate/simple_certificate.dart';

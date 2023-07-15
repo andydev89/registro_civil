@@ -302,8 +302,8 @@ abstract class Api {
   //Signature
   @POST('/digitalsignature/api/digitalsignature')
   Future<ResponseModel<CommandWithTransactionCodeModel>> createSignature(
-      @Body() ElectronicSignatureModel signatureModel,
-      );
+    @Body() ElectronicSignatureModel signatureModel,
+  );
 
   @GET('/digitalsignature/api/digitalsignature')
   Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures({
@@ -312,6 +312,24 @@ abstract class Api {
 
   @GET('/digitalsignature/api/digitalsignature/{id}')
   Future<ResponseModel<ElectronicSignatureModel>> signatureById(
-      @Path('id') String id,
-      );
+    @Path('id') String id,
+  );
+
+  //PERSONAL DATA VALIDATION
+  @GET('/personaldatavalidator/api/personal-data/solicitudes')
+  Future<ResponseModelPagination<List<PersonalValidationListModel>>>
+      personalValidationRequests({
+    @Query('pageNo') int pageNo = 0,
+    @Query('userId') String userId = '',
+  });
+
+  @GET('/personaldatavalidator/api/personal-data/{nui}')
+  Future<ResponseModel<PersonalValidationResponseModel>> personalDataById(
+    @Path('nui') String nui,
+  );
+
+  @POST('/personaldatavalidator/api/personal-data')
+  Future<ResponseModel<CommandNuiModel>> createPersonalDataRequest(
+    @Body() PersonalValidationRequestModel model,
+  );
 }

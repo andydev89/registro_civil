@@ -25,9 +25,11 @@ class LoadingProviderWidget<T> extends ConsumerWidget {
       child: async.when(
         skipLoadingOnRefresh: false,
         data: data,
-        error: (error, _) => ErrorStatus(
-          messagge: error.toString(),
-          onPressed: onRefresh,
+        error: (error, _) => Center(
+          child: ErrorStatus(
+            messagge: error.toString(),
+            onPressed: onRefresh,
+          ),
         ),
         loading: () => loadingWidget ?? const LoadingStatus(),
       ),
