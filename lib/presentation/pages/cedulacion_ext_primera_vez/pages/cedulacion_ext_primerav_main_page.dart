@@ -30,14 +30,24 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
           padding: EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [CedExtFirstStepForm()],
+            children: [
+              CedExtFirstStepForm().verticalPadding(10).horizontalPadding(20),
+              PrimaryButton(
+                title: l10n.ageTurno,
+                onPressed: () => context.popRoute(),
+              ).verticalPadding(10).horizontalPadding(20),
+              PrimaryButton(
+                title: l10n.cancelar,
+                onPressed: () => context.popRoute(),
+              ).verticalPadding(10).horizontalPadding(20),
+            ],
           ),
         ),
       ),
-      bottomNavigationBar: PrimaryButton(
+      /* bottomNavigationBar: PrimaryButton(
         title: l10n.cancelar,
         onPressed: () => context.popRoute(),
-      ).verticalPadding(10).horizontalPadding(20),
+      ).verticalPadding(10).horizontalPadding(20),*/
     );
   }
 }

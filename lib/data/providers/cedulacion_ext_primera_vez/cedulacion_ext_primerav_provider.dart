@@ -10,13 +10,7 @@ part 'cedulacion_ext_primerav_provider.g.dart';
 class CedulacionExtPrimeraVez extends _$CedulacionExtPrimeraVez {
   @override
   Future<bool> build() async {
-    const storage = FlutterSecureStorage();
-    final value = await storage.read(key: 'token');
-    if (value != null) {
-      return true;
-    } else {
-      return false;
-    }
+    return true;
   }
 }
   /*void updateModel(ElectronicSignatureModel model) {
