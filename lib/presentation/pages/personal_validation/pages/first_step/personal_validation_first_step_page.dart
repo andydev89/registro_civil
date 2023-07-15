@@ -143,12 +143,12 @@ class _PersonalValidationFirstStepPageState
                                     operation: widget.operation,
                                     provider: reqProvider,
                                   ),
+                                  Container(),
                                   GenderValidationPersonalTabPage(
                                     form: formModel,
                                     operation: widget.operation,
                                     provider: reqProvider,
                                   ),
-                                  Container(),
                                 ],
                               ),
                             ),
@@ -193,10 +193,10 @@ class _PersonalValidationFirstStepPageState
                                     )
                                         .when(
                                       ok: (data) {
-                                        showAlert(
-                                          'Solicitud Enviada Satisfactoriamente',
-                                          TypeAlert.success,
-                                        );
+                                        context.replaceRoute(SuccessRoute(
+                                          title: 'Su solicitud de trámite se ha realizado satisfactoriamente',
+                                          subtitle: 'Le hemos enviado una notificación a su correo con los detalles de su turno'
+                                        ));
                                       },
                                       err: (err) {
                                         showAlert(
