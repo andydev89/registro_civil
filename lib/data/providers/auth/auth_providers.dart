@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fresh_dio/fresh_dio.dart';
 import 'package:oxidized/oxidized.dart';
@@ -39,10 +40,16 @@ class Login extends _$Login {
   @override
   Future<bool> build() async {
     const storage = FlutterSecureStorage();
-    final value = await storage.read(key: 'token');
-    if (value != null) {
-      return true;
-    } else {
+    //https://github.com/mogol/flutter_secure_storage/issues/354
+    try {
+      final value = await storage.read(key: 'token');
+      if (value != null) {
+        return true;
+      } else {
+        return false;
+      }
+    } on PlatformException catch (e) {
+      await storage.deleteAll();
       return false;
     }
   }
