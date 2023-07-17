@@ -15,8 +15,8 @@ class PersonalValidationRequests extends _$PersonalValidationRequests {
     return {};
   }
 
-  bool containsKey(String key) {
-    return state.containsKey(key);
+  void clearData() {
+    state.clear();
   }
 
   ModifiedDataModel? getByKey(String key) {

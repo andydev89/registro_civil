@@ -202,6 +202,10 @@ class _PersonalValidationFirstStepPageState
                                           'Su solicitud de trámite se ha realizado satisfactoriamente',
                                           TypeAlert.success,
                                         );
+                                        //Refrescar provider que contiene las solicitudes.
+                                        ref.refresh(
+                                          personalValidationsProvider(),
+                                        );
                                       },
                                       err: (err) {
                                         showAlert(

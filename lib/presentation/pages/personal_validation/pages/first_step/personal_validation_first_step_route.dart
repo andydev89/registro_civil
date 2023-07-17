@@ -23,6 +23,7 @@ class PersonalValidationFirstStepRouterPage extends HookWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
+        ref.watch(personalValidationRequestsProvider.notifier).clearData();
         return operation.isRead
             ? LoadingProviderWidget(
                 async: ref.watch(personalValidationsProvider()),
