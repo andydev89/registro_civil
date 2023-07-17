@@ -259,14 +259,14 @@ abstract class Api {
 
   //PLACE TO PAY PAYMENT
   @POST(
-    'https://payment.sourcecodesas.com/placetopay/833f470c-97d2-4145-ab9a-79b9d79ed11c/transactions',
+    'https://payment.sourcecodesas.com/placetopay/c5746359-56ba-46a4-8ab0-51bc80776a60/transactions',
   )
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
     @Body() PlaceToPayModel placeToPayModel,
   );
 
   @GET(
-    'https://payment.sourcecodesas.com/placetopay/833f470c-97d2-4145-ab9a-79b9d79ed11c/transactions/{reference}',
+    'https://payment.sourcecodesas.com/placetopay/c5746359-56ba-46a4-8ab0-51bc80776a60/transactions/{reference}',
   )
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
     @Path('reference') String reference,
