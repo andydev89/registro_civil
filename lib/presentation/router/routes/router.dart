@@ -420,10 +420,6 @@ part 'router.gr.dart';
                 ),
               ],
             ),
-            /*CustomRoute(
-              transitionsBuilder: TransitionsBuilders.slideLeft,
-              page: SuccessPage,
-            ),*/
           ],
         ),
         CupertinoRoute(

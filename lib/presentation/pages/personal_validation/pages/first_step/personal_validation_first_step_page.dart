@@ -193,15 +193,38 @@ class _PersonalValidationFirstStepPageState
                                     )
                                         .when(
                                       ok: (data) {
-                                        /*context.replaceRoute(SuccessRoute(
-                                            title:
-                                                'Su solicitud de trámite se ha realizado satisfactoriamente',
-                                            subtitle:
-                                                'Le hemos enviado una notificación a su correo con los detalles de su turno'));*/
-                                        showAlert(
+                                        context
+                                          ..navigateTo(
+                                            PersonalValidationMainRoute(
+                                              typeServiceModel:
+                                                  widget.typeServiceModel,
+                                            ),
+                                          )
+                                          ..navigateTo(
+                                            NotificationRoute(
+                                              title:
+                                                  'Confirmación de solicitud',
+                                              message:
+                                                  'Su solicitud de trámite se ha realizado satisfactoriamente',
+                                              notificationType:
+                                                  NotificationType.success,
+                                              buttonText: l10n.continuar,
+                                              onTap: (ctx) => ctx.navigateTo(
+                                                PersonalValidationRouterRoute(
+                                                  children: [
+                                                    PersonalValidationMainRoute(
+                                                      typeServiceModel: widget
+                                                          .typeServiceModel,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        /*showAlert(
                                           'Su solicitud de trámite se ha realizado satisfactoriamente',
                                           TypeAlert.success,
-                                        );
+                                        );*/
                                         //Refrescar provider que contiene las solicitudes.
                                         ref.refresh(
                                           personalValidationsProvider(),
