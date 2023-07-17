@@ -80,7 +80,7 @@ class _PersonalValidationPersonalTabPage
             },
           ),
           EditableReactiveDropdown<PersonalValidationGenderType>(
-            label: 'Género',
+            label: l10n.genero,
             showButton: widget.operation.isCreate,
             formControl: widget.form.genderControl,
             items: PersonalValidationGenderType.values,

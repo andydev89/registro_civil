@@ -50,12 +50,12 @@ class _PersonalValidationFirstStepPageState
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final tabs = [
-      'Personal',
-      'Nacimiento',
-      'Progenitores',
-      'Matrimonio',
-      'Union de Hecho',
-      'Registro de género'
+      l10n.personal,
+      l10n.nacimiento,
+      l10n.progenitores,
+      l10n.matrimonio,
+      l10n.unionHecho,
+      l10n.registroGenero
     ];
     final provider = ref.watch(personalDataByIdProvider);
     final reqProvider = ref.watch(personalValidationRequestsProvider.notifier);
@@ -203,9 +203,9 @@ class _PersonalValidationFirstStepPageState
                                           ..navigateTo(
                                             NotificationRoute(
                                               title:
-                                                  'Confirmación de solicitud',
+                                                  l10n.solicConfirm,
                                               message:
-                                                  'Su solicitud de trámite se ha realizado satisfactoriamente',
+                                                  l10n.solicOK,
                                               notificationType:
                                                   NotificationType.success,
                                               buttonText: l10n.continuar,
@@ -221,10 +221,6 @@ class _PersonalValidationFirstStepPageState
                                               ),
                                             ),
                                           );
-                                        /*showAlert(
-                                          'Su solicitud de trámite se ha realizado satisfactoriamente',
-                                          TypeAlert.success,
-                                        );*/
                                         //Refrescar provider que contiene las solicitudes.
                                         ref.refresh(
                                           personalValidationsProvider(),

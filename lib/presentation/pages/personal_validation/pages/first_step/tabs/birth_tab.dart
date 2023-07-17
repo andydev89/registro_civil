@@ -41,7 +41,7 @@ class _BirthValidationPersonalTabPage
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               EditableReactiveTextField(
-                label: 'Lugar de Nacimiento',
+                label: l10n.lugarNacimiento,
                 modifiedData: widget.provider.getByKey('lugarNacimiento'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.birthPlaceControl,
@@ -61,7 +61,7 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Fecha de Nacimiento',
+                label: l10n.fechaNac,
                 modifiedData: widget.provider.getByKey('fechaNacimiento'),
                 showButton: widget.operation.isCreate,
                 formControl: widget.form.birthDateControl,
@@ -81,7 +81,7 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Lugar de inscripción de nacimiento',
+                label: l10n.lugarInscNac,
                 modifiedData: widget.provider.getByKey('lugarInscripcion'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionPlaceControl,
@@ -101,7 +101,7 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Año de inscripción',
+                label: l10n.annoInscripcion,
                 modifiedData: widget.provider.getByKey('anioInscripcionNacimiento'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionYearControl,
@@ -121,7 +121,7 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Fecha de inscripción',
+                label: l10n.fechaInscripcion,
                 modifiedData: widget.provider.getByKey('fechaInscripcionNacimiento'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionDateControl,
@@ -141,7 +141,7 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Tomo',
+                label: l10n.tomo,
                 modifiedData: widget.provider.getByKey('tomo'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.volumeControl,
@@ -161,7 +161,7 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Página',
+                label: l10n.pagina,
                 modifiedData: widget.provider.getByKey('pagina'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.pageControl,
@@ -181,7 +181,7 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Acta',
+                label: l10n.acta,
                 modifiedData: widget.provider.getByKey('acta'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.recordControl,
@@ -201,7 +201,7 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Clase',
+                label: l10n.clase,
                 modifiedData: widget.provider.getByKey('clase'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.birthClassControl,
@@ -221,7 +221,7 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Nacionalidad',
+                label: l10n.nacionalidad,
                 modifiedData: widget.provider.getByKey('nacionalidad'),
                 showButton: widget.operation.isCreate,
                 formControl: widget.form.nationalityControl,

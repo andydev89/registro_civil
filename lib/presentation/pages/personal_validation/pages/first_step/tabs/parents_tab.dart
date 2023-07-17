@@ -41,11 +41,11 @@ class _ParentsValidationPersonalTabPage
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const PrimaryTitle(
-            title: 'Progenitor',
+          PrimaryTitle(
+            title: l10n.padre,
           ),
           EditableReactiveTextField(
-            label: 'NUI',
+            label: l10n.nui,
             modifiedData: widget.provider.getByKey('nuiPadre'),
             showButton: widget.operation.isCreate,
             formControl: widget.form.fatherNuiControl,
@@ -65,7 +65,7 @@ class _ParentsValidationPersonalTabPage
             },
           ),
           EditableReactiveTextField(
-            label: 'Nombre progenitor',
+            label: l10n.nombrePadre,
             modifiedData: widget.provider.getByKey('nombrePadre'),
             showButton: widget.operation.isCreate,
             formControl: widget.form.fatherNameControl,
@@ -85,7 +85,7 @@ class _ParentsValidationPersonalTabPage
             },
           ),
           EditableReactiveTextField(
-            label: 'Nacionalidad',
+            label: l10n.nacionalidad,
             modifiedData: widget.provider.getByKey('nacionalidadPadre'),
             showButton: widget.operation.isCreate,
             formControl: widget.form.fatherNationalityControl,
@@ -106,8 +106,8 @@ class _ParentsValidationPersonalTabPage
             },
           ),
           const SizedBox(height: 12,),
-          const PrimaryTitle(
-            title: 'Progenitora',
+          PrimaryTitle(
+            title: l10n.madre,
           ),
           EditableReactiveTextField(
             label: 'NUI',
@@ -130,7 +130,7 @@ class _ParentsValidationPersonalTabPage
             },
           ),
           EditableReactiveTextField(
-            label: 'Nombre progenitor',
+            label: l10n.nombreMadre,
             modifiedData: widget.provider.getByKey('nombreMadre'),
             showButton: widget.operation.isCreate,
             formControl: widget.form.motherNameControl,
@@ -150,7 +150,7 @@ class _ParentsValidationPersonalTabPage
             },
           ),
           EditableReactiveTextField(
-            label: 'Nacionalidad',
+            label: l10n.nacionalidad,
             modifiedData: widget.provider.getByKey('nacionalidadMadre'),
             showButton: widget.operation.isCreate,
             formControl: widget.form.motherNationalityControl,
