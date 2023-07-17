@@ -61,7 +61,7 @@ class _PersonalValidationFirstStepPageState
     final reqProvider = ref.watch(personalValidationRequestsProvider.notifier);
 
     return PersonalValidationModelFormBuilder(
-      model: widget.operation.isCreate ? provider.value?.response : null,
+      model: provider.value?.response,
       builder: (context, formModel, child) {
         return PrimaryScaffold(
           title: 'Validación de datos personales',
@@ -193,10 +193,15 @@ class _PersonalValidationFirstStepPageState
                                     )
                                         .when(
                                       ok: (data) {
-                                        context.replaceRoute(SuccessRoute(
-                                          title: 'Su solicitud de trámite se ha realizado satisfactoriamente',
-                                          subtitle: 'Le hemos enviado una notificación a su correo con los detalles de su turno'
-                                        ));
+                                        /*context.replaceRoute(SuccessRoute(
+                                            title:
+                                                'Su solicitud de trámite se ha realizado satisfactoriamente',
+                                            subtitle:
+                                                'Le hemos enviado una notificación a su correo con los detalles de su turno'));*/
+                                        showAlert(
+                                          'Su solicitud de trámite se ha realizado satisfactoriamente',
+                                          TypeAlert.success,
+                                        );
                                       },
                                       err: (err) {
                                         showAlert(
@@ -215,7 +220,7 @@ class _PersonalValidationFirstStepPageState
                 : PrimaryButton(
                     title: l10n.aceptar,
                     onPressed: () => context.navigateTo(
-                      ElectronicSignatureMainRoute(
+                      PersonalValidationMainRoute(
                         typeServiceModel: widget.typeServiceModel,
                       ),
                     ),

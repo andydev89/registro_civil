@@ -25,43 +25,27 @@ class PersonalValidationFirstStepRouterPage extends HookWidget {
       builder: (context, ref, _) {
         return operation.isRead
             ? LoadingProviderWidget(
-                async: ref.watch(personalDataByIdProvider),
+                async: ref.watch(personalValidationsProvider()),
                 onRefresh: () => ref.refresh(
-                  personalDataByIdProvider,
+                  personalValidationsProvider(),
                 ),
                 onRefreshIndicator: () => ref.watch(
-                  personalDataByIdProvider.future,
+                  personalValidationsProvider().future,
                 ),
                 data: (data) {
-                  /*WidgetsBinding.instance.addPostFrameCallback(
-                  (_) => ref
-                  .read(electronicSignatureProvider.notifier)
-                  .updateModel(data),
-            );*/
+                  WidgetsBinding.instance.addPostFrameCallback(
+                    (_) => ref
+                        .read(personalValidationRequestsProvider.notifier)
+                        .init(data.data!.first),
+                  );
                   return TypeServiceBodyWidget(
                     operation: operation,
                     typeServiceModel: typeServiceModel,
                   );
                 },
               )
-            : LoadingProviderWidget(
-                async: ref.watch(personalDataByIdProvider),
-                onRefresh: () => ref.refresh(
-                  personalDataByIdProvider,
-                ),
-                onRefreshIndicator: () => ref.watch(
-                  personalDataByIdProvider.future,
-                ),
-                data: (data) {
-                  /*WidgetsBinding.instance.addPostFrameCallback(
-                  (_) => ref
-                  .read(electronicSignatureProvider.notifier)
-                  .updateModel(data),
-            );*/
-                  return TypeServiceBodyWidget(
-                    typeServiceModel: typeServiceModel,
-                  );
-                },
+            : TypeServiceBodyWidget(
+                typeServiceModel: typeServiceModel,
               );
       },
     );

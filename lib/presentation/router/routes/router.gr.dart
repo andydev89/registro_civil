@@ -1429,6 +1429,11 @@ class _$AppRouter extends RootStackRouter {
                     )
                   ],
                 ),
+                RouteConfig(
+                  SuccessRoute.name,
+                  path: 'success-page',
+                  parent: PersonalValidationRouterRoute.name,
+                ),
               ],
             ),
             RouteConfig(

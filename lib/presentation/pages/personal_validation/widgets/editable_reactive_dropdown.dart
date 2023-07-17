@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/const/const.dart';
-import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
+import 'package:registro_civil_apk/data/interfaces/enum_translatable.dart';
+import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/pages.dart';
@@ -24,9 +25,10 @@ class EditableReactiveDropdown<T> extends StatefulWidget {
     this.onChanged,
     this.items = const [],
     this.isExpanded = true,
-    required this.isEdited,
     required this.onSavePressed,
     required this.onCancelPressed,
+    this.modifiedData,
+    this.showButton = true,
     super.key,
   });
 
@@ -37,11 +39,12 @@ class EditableReactiveDropdown<T> extends StatefulWidget {
   final bool light;
   final String? hintText;
   final void Function(FormControl<T?>)? onChanged;
-  final List<Translatable> items;
+  final List<EnumTranslatable> items;
   final bool isExpanded;
-  bool isEdited;
   final void Function(dynamic value) onSavePressed;
   final VoidCallback onCancelPressed;
+  ModifiedDataModel? modifiedData;
+  bool showButton;
 
   @override
   State<StatefulWidget> createState() => _EditableReactiveDropdownState();
@@ -50,23 +53,35 @@ class EditableReactiveDropdown<T> extends StatefulWidget {
 class _EditableReactiveDropdownState<T>
     extends State<EditableReactiveDropdown> {
   bool isEditing = false;
-  dynamic previousValue;
+  EnumTranslatable? previousValue;
   FocusNode focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    previousValue = widget.formControl?.value;
+    previousValue = widget.formControl?.value as EnumTranslatable?;
+    if (widget.modifiedData != null) {
+      /*widget.formControl?.updateValue(
+        widget.items.firstWhere(
+          (element) => element.toText() == widget.modifiedData!.modified,
+        ),
+      );*/
+      for (final item in widget.items) {
+        if (item.toText() == widget.modifiedData!.modified) {
+          widget.formControl?.updateValue(item);
+        }
+      }
+    }
   }
+
+  bool get isEdited => widget.modifiedData != null;
 
   void _onButtonPressed() {
     if (isEditing) {
       widget.onSavePressed(previousValue);
-      widget.isEdited = true;
       isEditing = false;
-    } else if (widget.isEdited) {
+    } else if (isEdited) {
       widget.onCancelPressed();
-      widget.isEdited = false;
     } else {
       isEditing = true;
       focusNode.requestFocus();
@@ -94,16 +109,17 @@ class _EditableReactiveDropdownState<T>
           decoration: editableInputDecoration(
             light: widget.light,
             hintText: widget.hintText ?? '${l10n.escriba}...',
-            suffixIcon: EditableIconButton(
-              isEdited: widget.isEdited,
+            suffixIcon: widget.showButton ? EditableIconButton(
+              isEdited: isEdited,
               isEditing: isEditing,
               onPressed: _onButtonPressed,
-            ),
-            filled: widget.isEdited,
+            ) : null,
+            filled: isEdited,
             readOnly: widget.readOnly,
           ),
           isExpanded: widget.isExpanded,
-          hint: Text('${l10n.seleccione}...',
+          hint: Text(
+            '${l10n.seleccione}...',
             style: TextStyle(
               color: widget.readOnly
                   ? Colors.grey
@@ -138,6 +154,14 @@ class _EditableReactiveDropdownState<T>
               .toList(),
           validationMessages: validationMessage(context),
         ),
+        if (widget.modifiedData != null)
+          ...[
+            const SizedBox(height: 5,),
+            PrimaryText(
+              'Anterior: ${previousValue?.translate(context)}',
+              color: greyText,
+            )
+          ],
       ],
     ).verticalPadding(10);
   }

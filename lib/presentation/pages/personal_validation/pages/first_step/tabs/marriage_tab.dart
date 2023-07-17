@@ -43,7 +43,8 @@ class _MarriageValidationPersonalTabPage
             children: [
               EditableReactiveTextField(
                 label: 'Lugar de ceremonia de matrimonio',
-                isEdited: widget.provider.containsKey('lugarMatrimonio'),
+                modifiedData: widget.provider.getByKey('lugarMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriagePlaceControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -62,7 +63,8 @@ class _MarriageValidationPersonalTabPage
               ),
               EditableReactiveTextField(
                 label: 'Fecha de ceremonia',
-                isEdited: widget.provider.containsKey('fechaMatrimonio'),
+                modifiedData: widget.provider.getByKey('fechaMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriageDateControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -81,7 +83,8 @@ class _MarriageValidationPersonalTabPage
               ),
               EditableReactiveTextField(
                 label: 'Tomo',
-                isEdited: widget.provider.containsKey('tomoMatrimonio'),
+                modifiedData: widget.provider.getByKey('tomoMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriageVolumeControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -100,8 +103,8 @@ class _MarriageValidationPersonalTabPage
               ),
               EditableReactiveTextField(
                 label: 'Página',
-                isEdited:
-                widget.provider.containsKey('paginaMatrimonio'),
+                modifiedData: widget.provider.getByKey('paginaMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriagePageControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -120,8 +123,8 @@ class _MarriageValidationPersonalTabPage
               ),
               EditableReactiveTextField(
                 label: 'Acta',
-                isEdited:
-                widget.provider.containsKey('actaMatrimonio'),
+                modifiedData: widget.provider.getByKey('actaMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriageRecordControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -140,8 +143,8 @@ class _MarriageValidationPersonalTabPage
               ),
               EditableReactiveTextField(
                 label: 'Clase',
-                isEdited:
-                widget.provider.containsKey('claseMatrimonio'),
+                modifiedData: widget.provider.getByKey('claseMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriageClassControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -164,8 +167,8 @@ class _MarriageValidationPersonalTabPage
               ),
               EditableReactiveTextField(
                 label: 'NUI',
-                isEdited:
-                widget.provider.containsKey('nuiConyuge'),
+                modifiedData: widget.provider.getByKey('nuiConyuge'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.spouseNuiControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -184,8 +187,8 @@ class _MarriageValidationPersonalTabPage
               ),
               EditableReactiveTextField(
                 label: 'Nombres cónyuge',
-                isEdited:
-                widget.provider.containsKey('conyuge'),
+                modifiedData: widget.provider.getByKey('conyuge'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.spouseNameControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(

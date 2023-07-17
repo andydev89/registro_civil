@@ -59,7 +59,18 @@ class PersonalValidationMainPage extends ConsumerWidget {
                       l10n.estado: e.state.translate(context),
                     },
                     actions: {
-                      Crud.read: (p0) => {},
+                      Crud.read: (p0) => context.navigateTo(
+                        PersonalValidationFirstStepRouterRoute(
+                          typeServiceModel: typeServiceModel,
+                          operation: Crud.read,
+                          children: [
+                            PersonalValidationFirstStepRoute(
+                              typeServiceModel: typeServiceModel,
+                              operation: Crud.read,
+                            ),
+                          ],
+                        ),
+                      ),
                     },
                   ),
                 ),

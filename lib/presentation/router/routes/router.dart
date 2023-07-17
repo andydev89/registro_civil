@@ -419,7 +419,11 @@ part 'router.gr.dart';
                   transitionsBuilder: TransitionsBuilders.slideRight,
                 ),
               ],
-            )
+            ),
+            /*CustomRoute(
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              page: SuccessPage,
+            ),*/
           ],
         ),
         CupertinoRoute(

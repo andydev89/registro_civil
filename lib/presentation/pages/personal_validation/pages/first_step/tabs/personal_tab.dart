@@ -41,7 +41,8 @@ class _PersonalValidationPersonalTabPage
         children: [
           EditableReactiveTextField(
             label: l10n.nombre,
-            isEdited: widget.provider.containsKey('nombres'),
+            modifiedData: widget.provider.getByKey('nombres'),
+            showButton: widget.operation.isCreate,
             formControl: widget.form.firstNameControl,
             textCapitalization: TextCapitalization.words,
             onSavePressed: (prev) {
@@ -60,7 +61,8 @@ class _PersonalValidationPersonalTabPage
           ),
           EditableReactiveTextField(
             label: l10n.apellidos,
-            isEdited: widget.provider.containsKey('apellidos'),
+            modifiedData: widget.provider.getByKey('apellidos'),
+            showButton: widget.operation.isCreate,
             formControl: widget.form.lastNameControl,
             textCapitalization: TextCapitalization.words,
             onSavePressed: (prev) {
@@ -79,14 +81,15 @@ class _PersonalValidationPersonalTabPage
           ),
           EditableReactiveDropdown<PersonalValidationGenderType>(
             label: 'Género',
-            isEdited: widget.provider.containsKey('sexo'),
+            showButton: widget.operation.isCreate,
             formControl: widget.form.genderControl,
             items: PersonalValidationGenderType.values,
-            readOnly: widget.operation.isRead,
+            // readOnly: widget.operation.isRead,
+            modifiedData: widget.provider.getByKey('sexo'),
             onSavePressed: (val) {
               final type = val as PersonalValidationGenderType?;
-              final original = type != null ? type.text : '';
-              final modified = widget.form.genderControl?.value?.text ?? '';
+              final original = type != null ? type.name : '';
+              final modified = widget.form.genderControl?.value?.name ?? '';
               widget.provider.addRequest(
                 key: 'sexo',
                 model: ModifiedDataModel(
@@ -99,21 +102,22 @@ class _PersonalValidationPersonalTabPage
               final prev = widget.provider.removeRequest(key: 'sexo');
               widget.form.genderControl?.updateValue(
                 PersonalValidationGenderType.values
-                    .firstWhere((element) => element.text == prev),
+                    .firstWhere((element) => element.name == prev),
               );
             },
           ),
           EditableReactiveDropdown(
             label: l10n.estadoCiv,
-            isEdited: widget.provider.containsKey('estadoCivil'),
+            showButton: widget.operation.isCreate,
             formControl: widget.form.maritalStatusTypeControl,
             items: PersonalValidationMaritalStatusType.values,
-            readOnly: widget.operation.isRead,
+            // readOnly: widget.operation.isRead,
+            modifiedData: widget.provider.getByKey('estadoCivil'),
             onSavePressed: (val) {
               final type = val as PersonalValidationMaritalStatusType?;
-              final original = type != null ? type.toText : '';
+              final original = type != null ? type.name : '';
               final modified =
-                  widget.form.maritalStatusTypeControl?.value?.toText ?? '';
+                  widget.form.maritalStatusTypeControl?.value?.name ?? '';
               widget.provider.addRequest(
                 key: 'estadoCivil',
                 model: ModifiedDataModel(
@@ -126,7 +130,7 @@ class _PersonalValidationPersonalTabPage
               final prev = widget.provider.removeRequest(key: 'estadoCivil');
               widget.form.maritalStatusTypeControl?.updateValue(
                 PersonalValidationMaritalStatusType.values
-                    .firstWhere((element) => element.toText == prev),
+                    .firstWhere((element) => element.name == prev),
               );
             },
           ),

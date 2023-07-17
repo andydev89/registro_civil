@@ -19,6 +19,10 @@ class PersonalValidationRequests extends _$PersonalValidationRequests {
     return state.containsKey(key);
   }
 
+  ModifiedDataModel? getByKey(String key) {
+    return state[key];
+  }
+
   bool hasData() {
     return state.entries.isNotEmpty;
   }
@@ -37,6 +41,22 @@ class PersonalValidationRequests extends _$PersonalValidationRequests {
       );
     }
     return previous;
+  }
+
+  void init(PersonalValidationListModel modifications) {
+    final data = modifications.modifiedData
+        .map(
+          (e) => {
+            '${e.attribute}': ModifiedDataModel(
+              original: e.original,
+              modified: e.modified ?? '',
+            )
+          },
+        );
+    final combinedMap = Map<String, ModifiedDataModel>.fromEntries(
+      data.expand((map) => map.entries),
+    );
+    state = {...combinedMap};
   }
 }
 

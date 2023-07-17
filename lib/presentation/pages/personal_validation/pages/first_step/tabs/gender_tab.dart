@@ -43,7 +43,8 @@ class _GenderValidationPersonalTabPage
             children: [
               EditableReactiveTextField(
                 label: 'Lugar de inscripción',
-                isEdited: widget.provider.containsKey('lugarInscripcionGenero'),
+                modifiedData: widget.provider.getByKey('lugarInscripcionGenero'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionPlaceControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -62,7 +63,8 @@ class _GenderValidationPersonalTabPage
               ),
               EditableReactiveTextField(
                 label: 'Fecha de inscripción',
-                isEdited: widget.provider.containsKey('fechaInscripcionGenero'),
+                modifiedData: widget.provider.getByKey('fechaInscripcionGenero'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionDateControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -81,7 +83,8 @@ class _GenderValidationPersonalTabPage
               ),
               EditableReactiveTextField(
                 label: 'Género',
-                isEdited: widget.provider.containsKey('genero'),
+                modifiedData: widget.provider.getByKey('genero'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.genderControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
