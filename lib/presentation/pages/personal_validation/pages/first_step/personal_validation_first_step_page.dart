@@ -54,7 +54,6 @@ class _PersonalValidationFirstStepPageState
       l10n.nacimiento,
       l10n.progenitores,
       l10n.matrimonio,
-      l10n.unionHecho,
       l10n.registroGenero
     ];
     final provider = ref.watch(personalDataByIdProvider);
@@ -143,7 +142,6 @@ class _PersonalValidationFirstStepPageState
                                     operation: widget.operation,
                                     provider: reqProvider,
                                   ),
-                                  Container(),
                                   GenderValidationPersonalTabPage(
                                     form: formModel,
                                     operation: widget.operation,
