@@ -422,6 +422,18 @@ part 'router.gr.dart';
             ),
           ],
         ),
+        //BIRTH_ABROAD
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: BirthAbroadRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: BirthAbroadMainPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+          ],
+        ),
         CupertinoRoute(
           // guards: [AuthGuard],
           page: DefaultPage,

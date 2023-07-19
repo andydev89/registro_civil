@@ -332,4 +332,13 @@ abstract class Api {
   Future<ResponseModel<CommandNuiModel>> createPersonalDataRequest(
     @Body() PersonalValidationRequestModel model,
   );
+
+  //BIRTH ABROAD
+  @GET('/citizenship/api/citizenship')
+  Future<ResponseModelPagination<List<BirthAbroadListModel>>> birthsAbroad({
+    @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+    @Query('filter') String filter = '',
+  });
+
 }

@@ -655,5 +655,13 @@
   "nombresConyuge": "Spouse names",
   "nombrePadre": "Father's name",
   "nombreMadre": "Mother's name",
-  "lugarInscripcion": "Registration place"
+  "lugarInscripcion": "Registration place",
+  "hombre": "Man",
+  "mujer": "Woman",
+  "otro": "Other",
+  "titular": "Titular",
+  "padreOMadreEc": "Ecuadorian father or mother",
+  "abuelosOBisabuelos": "Grandparents or Great Grandparents",
+  "residente": "Resident",
+  "noResidente": "No resident"
 }

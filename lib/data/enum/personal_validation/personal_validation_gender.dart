@@ -23,11 +23,11 @@ enum PersonalValidationGenderType implements EnumTranslatable {
     final l10n = context.l10n;
     switch (this) {
       case PersonalValidationGenderType.man:
-        return 'Hombre';
+        return l10n.hombre;
       case PersonalValidationGenderType.woman:
-        return 'Mujer';
+        return l10n.mujer;
       case PersonalValidationGenderType.other:
-        return 'Otro';
+        return l10n.otro;
     }
   }
 }

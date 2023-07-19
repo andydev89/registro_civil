@@ -46,7 +46,9 @@ enum ServiceType implements Translatable {
   @JsonValue('SERVICE_ELECTRONIC_SIGNATURE')
   electronicSignature('SERVICE_ELECTRONIC_SIGNATURE'),
   @JsonValue('SERVICE_PERSONAL_VALIDATION')
-  personalValidation('SERVICE_PERSONAL_VALIDATION');
+  personalValidation('SERVICE_PERSONAL_VALIDATION'),
+  @JsonValue('FORMALITY_BIRTH_OUTSIDE_REGISTER')
+  birthAbroad('FORMALITY_BIRTH_OUTSIDE_REGISTER');
 
   const ServiceType(this.toText);
   final String toText;
@@ -91,6 +93,8 @@ enum ServiceType implements Translatable {
 
   bool get isPersonalValidation => this == personalValidation;
 
+  bool get isBirthAbroad => this == birthAbroad;
+
   @override
   String translate(BuildContext context) {
     final l10n = context.l10n;
@@ -133,6 +137,8 @@ enum ServiceType implements Translatable {
         return '';
       case ServiceType.personalValidation:
         return l10n.personalValidation;
+      case ServiceType.birthAbroad:
+        return l10n.registroNacExt;
     }
   }
 }

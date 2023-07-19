@@ -79,4 +79,5 @@ const _$ServiceTypeEnumMap = {
   ServiceType.marriageCelebration: 'FORMALITY_MARRIAGE_CELEBRATION',
   ServiceType.electronicSignature: 'SERVICE_ELECTRONIC_SIGNATURE',
   ServiceType.personalValidation: 'SERVICE_PERSONAL_VALIDATION',
+  ServiceType.birthAbroad: 'FORMALITY_BIRTH_OUTSIDE_REGISTER',
 };

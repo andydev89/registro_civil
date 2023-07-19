@@ -655,5 +655,13 @@
   "nombresConyuge": "Nombres cónyuge",
   "nombrePadre": "Nombre del padre",
   "nombreMadre": "Nombre de la madre",
-  "lugarInscripcion": "Lugar de inscripción"
+  "lugarInscripcion": "Lugar de inscripción",
+  "hombre": "Hombre",
+  "mujer": "Mujer",
+  "otro": "Otro",
+  "titular": "Titular",
+  "padreOMadreEc": "Padre o madre ecuatoriano",
+  "abuelosOBisabuelos": "Abuelos/as o Bisabuelos/as",
+  "residente": "Residente",
+  "noResidente": "No residente"
 }

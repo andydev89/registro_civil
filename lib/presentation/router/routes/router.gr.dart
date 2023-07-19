@@ -367,6 +367,12 @@ class _$AppRouter extends RootStackRouter {
         child: const PersonalValidationRouterPage(),
       );
     },
+    BirthAbroadRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const BirthAbroadRouterPage(),
+      );
+    },
     DefaultRoute.name: (routeData) {
       final args = routeData.argsAs<DefaultRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -941,6 +947,19 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    BirthAbroadMainRoute.name: (routeData) {
+      final args = routeData.argsAs<BirthAbroadMainRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: BirthAbroadMainPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1429,6 +1448,19 @@ class _$AppRouter extends RootStackRouter {
                     )
                   ],
                 ),
+              ],
+            ),
+            RouteConfig(
+              BirthAbroadRouterRoute.name,
+              path: 'birth-abroad-router-page',
+              parent: RootRouterRoute.name,
+              guards: [authGuard],
+              children: [
+                RouteConfig(
+                  BirthAbroadMainRoute.name,
+                  path: '',
+                  parent: BirthAbroadRouterRoute.name,
+                )
               ],
             ),
             RouteConfig(
@@ -2282,6 +2314,19 @@ class PersonalValidationRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'PersonalValidationRouterRoute';
+}
+
+/// generated route for
+/// [BirthAbroadRouterPage]
+class BirthAbroadRouterRoute extends PageRouteInfo<void> {
+  const BirthAbroadRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          BirthAbroadRouterRoute.name,
+          path: 'birth-abroad-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'BirthAbroadRouterRoute';
 }
 
 /// generated route for
@@ -3950,5 +3995,39 @@ class PersonalValidationFirstStepRouteArgs {
   @override
   String toString() {
     return 'PersonalValidationFirstStepRouteArgs{key: $key, operation: $operation, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [BirthAbroadMainPage]
+class BirthAbroadMainRoute extends PageRouteInfo<BirthAbroadMainRouteArgs> {
+  BirthAbroadMainRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          BirthAbroadMainRoute.name,
+          path: '',
+          args: BirthAbroadMainRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'BirthAbroadMainRoute';
+}
+
+class BirthAbroadMainRouteArgs {
+  const BirthAbroadMainRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'BirthAbroadMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
   }
 }
