@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:registro_civil_apk/data/models/cedulacion_ext_primerav/cedulacion_ext_primerav.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:retrofit/http.dart' as retrofit_headers;
 import 'package:retrofit/retrofit.dart';
@@ -331,5 +332,10 @@ abstract class Api {
   @POST('/personaldatavalidator/api/personal-data')
   Future<ResponseModel<CommandNuiModel>> createPersonalDataRequest(
     @Body() PersonalValidationRequestModel model,
+  );
+
+  @POST('/firsttimeforeignerid/api/validate')
+  Future<ResponseModel<CedulacionExtpVResModel>> validateVisaDataRequest(
+    @Body() CedulacionExtpVModel model,
   );
 }

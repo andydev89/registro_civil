@@ -27,13 +27,12 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
       title: typeServiceModel.name,
       body: Expanded(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CedExtFirstStepForm().verticalPadding(10).horizontalPadding(20),
               PrimaryButton(
-                title: l10n.ageTurno,
+                title: l10n.validar,
                 onPressed: () => context.popRoute(),
               ).verticalPadding(10).horizontalPadding(20),
               PrimaryButton(

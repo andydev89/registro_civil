@@ -1,6 +1,6 @@
 export 'auth/auth.dart';
 export 'cart/cart.dart';
-export 'cedulacion_ext_primera_vez/cedulacion_ext_primera_vez.dart';
+export 'cedulacion_ext_primera_vez/cedulacion_ext_primerav_provider.dart';
 export 'change_of_name/change_of_name.dart';
 export 'commons/commons.dart';
 export 'electronic_signature/electronic_signature.dart';

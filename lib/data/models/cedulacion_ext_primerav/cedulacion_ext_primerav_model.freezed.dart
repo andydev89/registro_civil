@@ -20,10 +20,20 @@ CedulacionExtpVModel _$CedulacionExtpVModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CedulacionExtpVModel {
-  @FormControlAnnotation(validators: [])
-  String get firstName => throw _privateConstructorUsedError;
-  @FormControlAnnotation(validators: [])
-  String get secondName => throw _privateConstructorUsedError;
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator
+  ])
+  @JsonKey(name: 'visa')
+  String get visa => throw _privateConstructorUsedError;
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator
+  ])
+  @JsonKey(name: 'email')
+  String get email => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,8 +48,20 @@ abstract class $CedulacionExtpVModelCopyWith<$Res> {
       _$CedulacionExtpVModelCopyWithImpl<$Res, CedulacionExtpVModel>;
   @useResult
   $Res call(
-      {@FormControlAnnotation(validators: []) String firstName,
-      @FormControlAnnotation(validators: []) String secondName});
+      {@FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator
+      ])
+      @JsonKey(name: 'visa')
+          String visa,
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator
+      ])
+      @JsonKey(name: 'email')
+          String email});
 }
 
 /// @nodoc
@@ -56,17 +78,17 @@ class _$CedulacionExtpVModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firstName = null,
-    Object? secondName = null,
+    Object? visa = null,
+    Object? email = null,
   }) {
     return _then(_value.copyWith(
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
+      visa: null == visa
+          ? _value.visa
+          : visa // ignore: cast_nullable_to_non_nullable
               as String,
-      secondName: null == secondName
-          ? _value.secondName
-          : secondName // ignore: cast_nullable_to_non_nullable
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -81,8 +103,20 @@ abstract class _$$_CedulacionExtpVModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@FormControlAnnotation(validators: []) String firstName,
-      @FormControlAnnotation(validators: []) String secondName});
+      {@FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator
+      ])
+      @JsonKey(name: 'visa')
+          String visa,
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator
+      ])
+      @JsonKey(name: 'email')
+          String email});
 }
 
 /// @nodoc
@@ -96,17 +130,17 @@ class __$$_CedulacionExtpVModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firstName = null,
-    Object? secondName = null,
+    Object? visa = null,
+    Object? email = null,
   }) {
     return _then(_$_CedulacionExtpVModel(
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
+      visa: null == visa
+          ? _value.visa
+          : visa // ignore: cast_nullable_to_non_nullable
               as String,
-      secondName: null == secondName
-          ? _value.secondName
-          : secondName // ignore: cast_nullable_to_non_nullable
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -116,23 +150,45 @@ class __$$_CedulacionExtpVModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CedulacionExtpVModel extends _CedulacionExtpVModel {
   const _$_CedulacionExtpVModel(
-      {@FormControlAnnotation(validators: []) required this.firstName,
-      @FormControlAnnotation(validators: []) required this.secondName})
+      {@FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator
+      ])
+      @JsonKey(name: 'visa')
+          required this.visa,
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator
+      ])
+      @JsonKey(name: 'email')
+          required this.email})
       : super._();
 
   factory _$_CedulacionExtpVModel.fromJson(Map<String, dynamic> json) =>
       _$$_CedulacionExtpVModelFromJson(json);
 
   @override
-  @FormControlAnnotation(validators: [])
-  final String firstName;
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator
+  ])
+  @JsonKey(name: 'visa')
+  final String visa;
   @override
-  @FormControlAnnotation(validators: [])
-  final String secondName;
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator
+  ])
+  @JsonKey(name: 'email')
+  final String email;
 
   @override
   String toString() {
-    return 'CedulacionExtpVModel(firstName: $firstName, secondName: $secondName)';
+    return 'CedulacionExtpVModel(visa: $visa, email: $email)';
   }
 
   @override
@@ -140,15 +196,13 @@ class _$_CedulacionExtpVModel extends _CedulacionExtpVModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CedulacionExtpVModel &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.secondName, secondName) ||
-                other.secondName == secondName));
+            (identical(other.visa, visa) || other.visa == visa) &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, firstName, secondName);
+  int get hashCode => Object.hash(runtimeType, visa, email);
 
   @JsonKey(ignore: true)
   @override
@@ -167,21 +221,41 @@ class _$_CedulacionExtpVModel extends _CedulacionExtpVModel {
 
 abstract class _CedulacionExtpVModel extends CedulacionExtpVModel {
   const factory _CedulacionExtpVModel(
-      {@FormControlAnnotation(validators: [])
-          required final String firstName,
-      @FormControlAnnotation(validators: [])
-          required final String secondName}) = _$_CedulacionExtpVModel;
+      {@FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator
+      ])
+      @JsonKey(name: 'visa')
+          required final String visa,
+      @FormControlAnnotation(validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator
+      ])
+      @JsonKey(name: 'email')
+          required final String email}) = _$_CedulacionExtpVModel;
   const _CedulacionExtpVModel._() : super._();
 
   factory _CedulacionExtpVModel.fromJson(Map<String, dynamic> json) =
       _$_CedulacionExtpVModel.fromJson;
 
   @override
-  @FormControlAnnotation(validators: [])
-  String get firstName;
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator
+  ])
+  @JsonKey(name: 'visa')
+  String get visa;
   @override
-  @FormControlAnnotation(validators: [])
-  String get secondName;
+  @FormControlAnnotation(validators: [
+    requiredValidator,
+    lengthMax20Validator,
+    lengthMin2Validator
+  ])
+  @JsonKey(name: 'email')
+  String get email;
   @override
   @JsonKey(ignore: true)
   _$$_CedulacionExtpVModelCopyWith<_$_CedulacionExtpVModel> get copyWith =>

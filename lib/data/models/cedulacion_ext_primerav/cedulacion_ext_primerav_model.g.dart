@@ -9,13 +9,13 @@ part of 'cedulacion_ext_primerav_model.dart';
 _$_CedulacionExtpVModel _$$_CedulacionExtpVModelFromJson(
         Map<String, dynamic> json) =>
     _$_CedulacionExtpVModel(
-      firstName: json['firstName'] as String,
-      secondName: json['secondName'] as String,
+      visa: json['visa'] as String,
+      email: json['email'] as String,
     );
 
 Map<String, dynamic> _$$_CedulacionExtpVModelToJson(
         _$_CedulacionExtpVModel instance) =>
     <String, dynamic>{
-      'firstName': instance.firstName,
-      'secondName': instance.secondName,
+      'visa': instance.visa,
+      'email': instance.email,
     };

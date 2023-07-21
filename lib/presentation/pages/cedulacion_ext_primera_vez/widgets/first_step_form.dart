@@ -21,13 +21,13 @@ class CedExtFirstStepForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PrimaryText('numero de Visa'),
+        //PrimaryText('numero de Visa'),
         PrimaryReactiveNuiField(
           label: 'numero de visa', //l10n.numCedula,
           formControl: FormControl<dynamic>(
             validators: [
               Validators.composeOR([
-                Validators.email,
+                Validators.required,
                 // Validators.pattern(phonePattern),
               ])
             ],
@@ -35,12 +35,21 @@ class CedExtFirstStepForm extends StatelessWidget {
           init: true,
           readOnly: false,
         ),
-        PrimaryText(l10n.correoE),
-        /* PrimaryReactiveTextField(
+        // PrimaryText(l10n.correoE),
+        PrimaryReactiveTextField(
+          label: 'correo electronico',
           readOnly: false,
-          //  formControl: formModel.nameControl,
+          // formControl: formModel.,
           textCapitalization: TextCapitalization.words,
-        ),*/
+          /* formControl: FormControl<dynamic>(
+            validators: [
+              Validators.composeOR([
+                Validators.email,
+                // Validators.pattern(phonePattern),
+              ])
+            ],
+          ),*/
+        ),
       ],
     );
   }

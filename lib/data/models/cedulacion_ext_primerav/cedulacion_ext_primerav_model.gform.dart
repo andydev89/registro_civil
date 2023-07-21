@@ -184,9 +184,9 @@ class CedulacionExtpVModelForm implements FormModel<CedulacionExtpVModel> {
     this.path,
   ) {}
 
-  static const String firstNameControlName = "firstName";
+  static const String visaControlName = "visa";
 
-  static const String secondNameControlName = "secondName";
+  static const String emailControlName = "email";
 
   final CedulacionExtpVModel? cedulacionExtpVModel;
 
@@ -194,120 +194,120 @@ class CedulacionExtpVModelForm implements FormModel<CedulacionExtpVModel> {
 
   final String? path;
 
-  String firstNameControlPath() => pathBuilder(firstNameControlName);
-  String secondNameControlPath() => pathBuilder(secondNameControlName);
-  String get _firstNameValue => firstNameControl.value as String;
-  String get _secondNameValue => secondNameControl.value as String;
-  bool get containsFirstName {
+  String visaControlPath() => pathBuilder(visaControlName);
+  String emailControlPath() => pathBuilder(emailControlName);
+  String get _visaValue => visaControl.value as String;
+  String get _emailValue => emailControl.value as String;
+  bool get containsVisa {
     try {
-      form.control(firstNameControlPath());
+      form.control(visaControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  bool get containsSecondName {
+  bool get containsEmail {
     try {
-      form.control(secondNameControlPath());
+      form.control(emailControlPath());
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  Object? get firstNameErrors => firstNameControl.errors;
-  Object? get secondNameErrors => secondNameControl.errors;
-  void get firstNameFocus => form.focus(firstNameControlPath());
-  void get secondNameFocus => form.focus(secondNameControlPath());
-  void firstNameValueUpdate(
+  Object? get visaErrors => visaControl.errors;
+  Object? get emailErrors => emailControl.errors;
+  void get visaFocus => form.focus(visaControlPath());
+  void get emailFocus => form.focus(emailControlPath());
+  void visaValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    firstNameControl.updateValue(value,
+    visaControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void secondNameValueUpdate(
+  void emailValueUpdate(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    secondNameControl.updateValue(value,
+    emailControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void firstNameValuePatch(
+  void visaValuePatch(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    firstNameControl.patchValue(value,
+    visaControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void secondNameValuePatch(
+  void emailValuePatch(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    secondNameControl.patchValue(value,
+    emailControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void firstNameValueReset(
+  void visaValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      firstNameControl.reset(
+      visaControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void secondNameValueReset(
+  void emailValueReset(
     String value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      secondNameControl.reset(
+      emailControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  FormControl<String> get firstNameControl =>
-      form.control(firstNameControlPath()) as FormControl<String>;
-  FormControl<String> get secondNameControl =>
-      form.control(secondNameControlPath()) as FormControl<String>;
-  void firstNameSetDisabled(
+  FormControl<String> get visaControl =>
+      form.control(visaControlPath()) as FormControl<String>;
+  FormControl<String> get emailControl =>
+      form.control(emailControlPath()) as FormControl<String>;
+  void visaSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      firstNameControl.markAsDisabled(
+      visaControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      firstNameControl.markAsEnabled(
+      visaControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     }
   }
 
-  void secondNameSetDisabled(
+  void emailSetDisabled(
     bool disabled, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
     if (disabled) {
-      secondNameControl.markAsDisabled(
+      emailControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      secondNameControl.markAsEnabled(
+      emailControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -322,8 +322,7 @@ class CedulacionExtpVModelForm implements FormModel<CedulacionExtpVModel> {
       debugPrint(
           '[${path ?? 'CedulacionExtpVModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
-    return CedulacionExtpVModel(
-        firstName: _firstNameValue, secondName: _secondNameValue);
+    return CedulacionExtpVModel(visa: _visaValue, email: _emailValue);
   }
 
   CedulacionExtpVModelForm copyWithPath(String? path) {
@@ -352,16 +351,24 @@ class CedulacionExtpVModelForm implements FormModel<CedulacionExtpVModel> {
       [path, pathItem].whereType<String>().join(".");
   static FormGroup formElements(CedulacionExtpVModel? cedulacionExtpVModel) =>
       FormGroup({
-        firstNameControlName: FormControl<String>(
-            value: cedulacionExtpVModel?.firstName,
-            validators: [],
+        visaControlName: FormControl<String>(
+            value: cedulacionExtpVModel?.visa,
+            validators: [
+              requiredValidator,
+              lengthMax20Validator,
+              lengthMin2Validator
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        secondNameControlName: FormControl<String>(
-            value: cedulacionExtpVModel?.secondName,
-            validators: [],
+        emailControlName: FormControl<String>(
+            value: cedulacionExtpVModel?.email,
+            validators: [
+              requiredValidator,
+              lengthMax20Validator,
+              lengthMin2Validator
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

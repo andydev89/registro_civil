@@ -400,19 +400,6 @@ part 'router.gr.dart';
             ),
           ],
         ),
-
-        //CEDULACION EXTRANJERO PRIMERA VEZ
-        CupertinoRoute(
-          page: CedulacionExtPvezRouterPage,
-          children: [
-            CustomRoute(
-              initial: true,
-              page: CedulacionExtPvezMainPage,
-              transitionsBuilder: TransitionsBuilders.slideRight,
-            ),
-            ],
-            ),
-
         //PERSONAL_DATA_VALIDATION
         CupertinoRoute(
           guards: [AuthGuard],
@@ -433,21 +420,28 @@ part 'router.gr.dart';
                 ),
               ],
             )
-
           ],
         ),
+        //CEDULACION EXTRANJERO PRIMERA VEZ
+        CupertinoRoute(
+          page: CedulacionExtPvezRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: CedulacionExtPvezMainPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+          ],
+        ),
+
         CupertinoRoute(
           // guards: [AuthGuard],
           page: DefaultPage,
         )
-      
-  ],),
+      ],
+    ),
   ],
 )
-
-
-
-
 // extend the generated private router
 // class AppRouter extends _$AppRouter {
 //   AppRouter() : super();
@@ -457,5 +451,5 @@ class AppRouter extends _$AppRouter {
   AppRouter({
     required super.authGuard,
     required super.agreementGuard,
-  })
+  });
 }

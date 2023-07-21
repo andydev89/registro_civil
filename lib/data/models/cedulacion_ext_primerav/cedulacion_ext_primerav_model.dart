@@ -1,8 +1,8 @@
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/utils/validators.dart';
 //import 'package:registro_civil_apk/data/enum/change_of_name/change_of_name_type.dart';
 //import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 //import 'package:registro_civil_apk/data/utils/validators.dart';
@@ -14,11 +14,22 @@ part 'cedulacion_ext_primerav_model.freezed.dart';
 @freezed
 class CedulacionExtpVModel with _$CedulacionExtpVModel {
   const factory CedulacionExtpVModel({
-    @FormControlAnnotation(validators: []) required String firstName,
+    @FormControlAnnotation(validators: [
+      requiredValidator,
+      lengthMax20Validator,
+      lengthMin2Validator,
+    ])
+    @JsonKey(name: 'visa')
+    required String visa,
     @FormControlAnnotation(
-      validators: [],
+      validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+      ],
     )
-    required String secondName,
+    @JsonKey(name: 'email')
+    required String email,
   }) = _CedulacionExtpVModel;
 
   const CedulacionExtpVModel._();
@@ -26,14 +37,3 @@ class CedulacionExtpVModel with _$CedulacionExtpVModel {
   factory CedulacionExtpVModel.fromJson(Map<String, dynamic> json) =>
       _$CedulacionExtpVModelFromJson(json);
 }
-
-final visaform = FormGroup({
-  'visa': FormControl<String>(
-    validators: [
-      Validators.composeOR([
-        Validators.email,
-        // Validators.pattern(phonePattern),
-      ])
-    ],
-  ),
-});
