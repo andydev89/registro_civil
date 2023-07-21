@@ -1,14 +1,63 @@
 import 'dart:convert';
 
-import 'package:intl/intl.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
-import 'package:registro_civil_apk/data/providers/auth/auth.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'birth_abroad_provider.g.dart';
+
+@riverpod
+class BirthAbroad extends _$BirthAbroad {
+  @override
+  BirthAbroadModel build() {
+    return const BirthAbroadModel();
+  }
+
+  void updateModel(BirthAbroadModel model) {
+    state = state.copyWithFromModel(model);
+  }
+
+  void setFirstStep({
+    required RegisterOwnerSubModel registerOwner,
+    required ForeignType foreignType,
+    required String requestOwnerId,
+  }) {
+    state = state.copyWith(
+      foreignType: foreignType,
+      requestOwner: requestOwnerId,
+      registerOwnerType:
+          registerOwner.registerOwnerType ?? RegisterOwnerType.attorney,
+      registerOwner: RegisterOwner(
+        name: registerOwner.name,
+        identification: registerOwner.identification,
+        email: registerOwner.email,
+        phone: registerOwner.phone,
+      ),
+    );
+  }
+
+  void setSecondStep({
+    required DocumentsSubModel documents,
+  }) {
+    state = state.copyWith(
+      birthCertificate: documents.birthCertificate,
+      identity: documents.identity,
+      powerOfAttorney: documents.powerOfAttorney,
+    );
+  }
+
+  void setThirdStep({
+    required LocationSubModel locations,
+  }) {
+    state = state.copyWith(
+      provinceId: locations.province,
+      cantonId: locations.canton,
+      agencyId: locations.agency,
+    );
+  }
+}
 
 @riverpod
 class BirthAbroadFilter extends _$BirthAbroadFilter {
@@ -35,4 +84,18 @@ Future<ResponseModelPagination<List<BirthAbroadListModel>>> birthsAbroad(
     filter: query.filter,
   );
   return response;
+}
+
+@riverpod
+Future<Result<CommandWithTransactionCodeModel, StatusCodeType>>
+    createBirthAbroad(
+  CreateBirthAbroadRef ref, {
+  required BirthAbroadModel model,
+}) async {
+  final api = ref.watch(apiProvider);
+  final result = await api.createBirthAbroad(model: model);
+  if (result.success) {
+    return Result.ok(result.data!);
+  }
+  return Result.err(result.status);
 }

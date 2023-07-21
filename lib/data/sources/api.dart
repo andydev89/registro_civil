@@ -259,14 +259,14 @@ abstract class Api {
 
   //PLACE TO PAY PAYMENT
   @POST(
-    'https://payment.sourcecodesas.com/placetopay/c5746359-56ba-46a4-8ab0-51bc80776a60/transactions',
+    'https://payment.sourcecodesas.com/placetopay/798de007-ce14-4ea7-ba02-94877625ce6d/transactions',
   )
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
     @Body() PlaceToPayModel placeToPayModel,
   );
 
   @GET(
-    'https://payment.sourcecodesas.com/placetopay/c5746359-56ba-46a4-8ab0-51bc80776a60/transactions/{reference}',
+    'https://payment.sourcecodesas.com/placetopay/798de007-ce14-4ea7-ba02-94877625ce6d/transactions/{reference}',
   )
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
     @Path('reference') String reference,
@@ -339,6 +339,11 @@ abstract class Api {
     @Query('pageNo') int pageNo = 0,
     @Query('pageSize') int pageSize = 20,
     @Query('filter') String filter = '',
+  });
+
+  @POST('/citizenship/api/citizenship')
+  Future<ResponseModel<CommandWithTransactionCodeModel>> createBirthAbroad({
+    @Body() required BirthAbroadModel model,
   });
 
 }

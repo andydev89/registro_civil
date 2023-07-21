@@ -663,5 +663,9 @@
   "padreOMadreEc": "Padre o madre ecuatoriano",
   "abuelosOBisabuelos": "Abuelos/as o Bisabuelos/as",
   "residente": "Residente",
-  "noResidente": "No residente"
+  "noResidente": "No residente",
+  "tipoRegPropietario": "Tipo de registro del propietario",
+  "certificadoNacimiento": "Certificado de nacimiento del país de origen apostillado o legalizado y traducido de ser el caso",
+  "cedulaNacimiento": "Cédula de identidad o pasaporte de no tener cédula ecuatoriana de los progenitores o del solicitante",
+  "poderEspNac": "Poder especial en caso de ser realizado por un tercero"
 }

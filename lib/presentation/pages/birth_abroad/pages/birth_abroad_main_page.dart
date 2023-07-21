@@ -29,7 +29,16 @@ class BirthAbroadMainPage extends ConsumerWidget {
             ).verticalPadding(10),
             PrimaryAddItemRow(
               title: l10n.listadoSol,
-              onPressed: () => {},
+              onPressed: () => context.navigateTo(
+                BirthAbroadFirstStepRouterRoute(
+                  typeServiceModel: typeServiceModel,
+                  children: [
+                    BirthAbroadFirstStepRoute(
+                      typeServiceModel: typeServiceModel,
+                    ),
+                  ],
+                ),
+              ),
             ),
             Expanded(
               child: LoadingProviderWidget<
@@ -45,21 +54,20 @@ class BirthAbroadMainPage extends ConsumerWidget {
                   ),
                   firstElements: data.data ?? [],
                   totalPages: data.totalPages,
-                  itemBuilder: (_, e, __) =>
-                      CardWidget<BirthAbroadListModel>(
-                        element: e,
-                        rows: {
-                          'Tipo': e.type.translate(context),
-                          'Registro': e.registerOwnerType.translate(context),
-                          l10n.fechaCreacion: '${e.createAt?.onlyDate} -'
-                              ' ${e.createAt?.onlyTime}',
-                          l10n.estado: e.state.translate(context),
-                        },
-                        actions: {
-                          Crud.read: (p0) => {},
-                          Crud.update: (p0) => {},
-                        },
-                      ),
+                  itemBuilder: (_, e, __) => CardWidget<BirthAbroadListModel>(
+                    element: e,
+                    rows: {
+                      'Tipo': e.type.translate(context),
+                      'Registro': e.registerOwnerType.translate(context),
+                      l10n.fechaCreacion: '${e.createAt?.onlyDate} -'
+                          ' ${e.createAt?.onlyTime}',
+                      l10n.estado: e.state.translate(context),
+                    },
+                    actions: {
+                      Crud.read: (p0) => {},
+                      Crud.update: (p0) => {},
+                    },
+                  ),
                 ),
               ).verticalPadding(10),
             ),

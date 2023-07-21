@@ -62,7 +62,7 @@ class UploadDocumentWidget extends StatelessWidget {
                       onRemove: () => formControl.updateValue(
                         formControl.value!.copyWith(file: ''),
                       ),
-                      onFileSelected: (_, p0) => formControl
+                      onFileSelected: (_, p0, __) => formControl
                           .updateValue(formControl.value!.copyWith(file: p0)),
                     ),
                     Row(

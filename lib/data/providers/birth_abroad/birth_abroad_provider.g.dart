@@ -6,7 +6,7 @@ part of 'birth_abroad_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$birthsAbroadHash() => r'6686163cfb93ecc574b0a07f9c9d977228243a8f';
+String _$birthsAbroadHash() => r'dc7a3b7e29d2e71849b04a7a5207bbbccb76ab48';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -113,6 +113,106 @@ class BirthsAbroadProvider extends AutoDisposeFutureProvider<
   }
 }
 
+String _$createBirthAbroadHash() => r'eb029e882a0b8651dbc86c0080d3c1c7eb4a7c9c';
+typedef CreateBirthAbroadRef = AutoDisposeFutureProviderRef<
+    Result<CommandWithTransactionCodeModel, StatusCodeType>>;
+
+/// See also [createBirthAbroad].
+@ProviderFor(createBirthAbroad)
+const createBirthAbroadProvider = CreateBirthAbroadFamily();
+
+/// See also [createBirthAbroad].
+class CreateBirthAbroadFamily extends Family<
+    AsyncValue<Result<CommandWithTransactionCodeModel, StatusCodeType>>> {
+  /// See also [createBirthAbroad].
+  const CreateBirthAbroadFamily();
+
+  /// See also [createBirthAbroad].
+  CreateBirthAbroadProvider call({
+    required BirthAbroadModel model,
+  }) {
+    return CreateBirthAbroadProvider(
+      model: model,
+    );
+  }
+
+  @override
+  CreateBirthAbroadProvider getProviderOverride(
+    covariant CreateBirthAbroadProvider provider,
+  ) {
+    return call(
+      model: provider.model,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'createBirthAbroadProvider';
+}
+
+/// See also [createBirthAbroad].
+class CreateBirthAbroadProvider extends AutoDisposeFutureProvider<
+    Result<CommandWithTransactionCodeModel, StatusCodeType>> {
+  /// See also [createBirthAbroad].
+  CreateBirthAbroadProvider({
+    required this.model,
+  }) : super.internal(
+          (ref) => createBirthAbroad(
+            ref,
+            model: model,
+          ),
+          from: createBirthAbroadProvider,
+          name: r'createBirthAbroadProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$createBirthAbroadHash,
+          dependencies: CreateBirthAbroadFamily._dependencies,
+          allTransitiveDependencies:
+              CreateBirthAbroadFamily._allTransitiveDependencies,
+        );
+
+  final BirthAbroadModel model;
+
+  @override
+  bool operator ==(Object other) {
+    return other is CreateBirthAbroadProvider && other.model == model;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, model.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$birthAbroadHash() => r'859db216f09d77cfd3d84584a0b054f42aaeb273';
+
+/// See also [BirthAbroad].
+@ProviderFor(BirthAbroad)
+final birthAbroadProvider =
+    AutoDisposeNotifierProvider<BirthAbroad, BirthAbroadModel>.internal(
+  BirthAbroad.new,
+  name: r'birthAbroadProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$birthAbroadHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$BirthAbroad = AutoDisposeNotifier<BirthAbroadModel>;
 String _$birthAbroadFilterHash() => r'434ea99898c4ce1e55516bb5e491798811e825fd';
 
 /// See also [BirthAbroadFilter].

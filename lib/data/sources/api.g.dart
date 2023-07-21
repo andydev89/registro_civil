@@ -1327,7 +1327,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'https://payment.sourcecodesas.com/placetopay/c5746359-56ba-46a4-8ab0-51bc80776a60/transactions',
+              'https://payment.sourcecodesas.com/placetopay/798de007-ce14-4ea7-ba02-94877625ce6d/transactions',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1351,7 +1351,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'https://payment.sourcecodesas.com/placetopay/c5746359-56ba-46a4-8ab0-51bc80776a60/transactions/${reference}',
+              'https://payment.sourcecodesas.com/placetopay/798de007-ce14-4ea7-ba02-94877625ce6d/transactions/${reference}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1728,6 +1728,34 @@ class _Api implements Api {
                   BirthAbroadListModel.fromJson(i as Map<String, dynamic>))
               .toList()
           : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandWithTransactionCodeModel>> createBirthAbroad(
+      {required BirthAbroadModel model}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = model;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandWithTransactionCodeModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/citizenship/api/citizenship',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandWithTransactionCodeModel>.fromJson(
+      _result.data!,
+      (json) => CommandWithTransactionCodeModel.fromJson(
+          json as Map<String, dynamic>),
     );
     return value;
   }

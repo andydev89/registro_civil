@@ -78,3 +78,17 @@ bool isValidBase64Image(String base64Image) {
     return false;
   }
 }
+
+Map<String, String> findNames(String fullName) {
+  final regex = RegExp(r'(.+?\s.+?)\s(.+)$');
+  final matches = regex.allMatches(fullName.trim());
+
+  var firstName = '';
+  var lastName = '';
+
+  for (final match in matches) {
+    lastName = match.group(1) ?? '';
+    firstName = match.group(2) ?? '';
+  }
+  return {'firstName': firstName, 'lastName': lastName};
+}

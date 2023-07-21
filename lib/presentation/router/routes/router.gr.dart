@@ -960,6 +960,61 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    BirthAbroadFirstStepRouterRoute.name: (routeData) {
+      final args = routeData.argsAs<BirthAbroadFirstStepRouterRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: BirthAbroadFirstStepRouterPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          operation: args.operation,
+          birthId: args.birthId,
+        ),
+      );
+    },
+    BirthAbroadFirstStepRoute.name: (routeData) {
+      final args = routeData.argsAs<BirthAbroadFirstStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: BirthAbroadFirstStepPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          operation: args.operation,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    BirthAbroadSecondStepRoute.name: (routeData) {
+      final args = routeData.argsAs<BirthAbroadSecondStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: BirthAbroadSecondStepPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          registerOwnerType: args.registerOwnerType,
+          operation: args.operation,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    BirthAbroadThirdStepRoute.name: (routeData) {
+      final args = routeData.argsAs<BirthAbroadThirdStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: BirthAbroadThirdStepPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          operation: args.operation,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1460,7 +1515,29 @@ class _$AppRouter extends RootStackRouter {
                   BirthAbroadMainRoute.name,
                   path: '',
                   parent: BirthAbroadRouterRoute.name,
-                )
+                ),
+                RouteConfig(
+                  BirthAbroadFirstStepRouterRoute.name,
+                  path: 'birth-abroad-first-step-router-page',
+                  parent: BirthAbroadRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      BirthAbroadFirstStepRoute.name,
+                      path: '',
+                      parent: BirthAbroadFirstStepRouterRoute.name,
+                    ),
+                    RouteConfig(
+                      BirthAbroadSecondStepRoute.name,
+                      path: 'birth-abroad-second-step-page',
+                      parent: BirthAbroadFirstStepRouterRoute.name,
+                    ),
+                    RouteConfig(
+                      BirthAbroadThirdStepRoute.name,
+                      path: 'birth-abroad-third-step-page',
+                      parent: BirthAbroadFirstStepRouterRoute.name,
+                    ),
+                  ],
+                ),
               ],
             ),
             RouteConfig(
@@ -4029,5 +4106,177 @@ class BirthAbroadMainRouteArgs {
   @override
   String toString() {
     return 'BirthAbroadMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [BirthAbroadFirstStepRouterPage]
+class BirthAbroadFirstStepRouterRoute
+    extends PageRouteInfo<BirthAbroadFirstStepRouterRouteArgs> {
+  BirthAbroadFirstStepRouterRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    Crud operation = Crud.create,
+    String? birthId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          BirthAbroadFirstStepRouterRoute.name,
+          path: 'birth-abroad-first-step-router-page',
+          args: BirthAbroadFirstStepRouterRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            operation: operation,
+            birthId: birthId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'BirthAbroadFirstStepRouterRoute';
+}
+
+class BirthAbroadFirstStepRouterRouteArgs {
+  const BirthAbroadFirstStepRouterRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    this.operation = Crud.create,
+    this.birthId,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final Crud operation;
+
+  final String? birthId;
+
+  @override
+  String toString() {
+    return 'BirthAbroadFirstStepRouterRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation, birthId: $birthId}';
+  }
+}
+
+/// generated route for
+/// [BirthAbroadFirstStepPage]
+class BirthAbroadFirstStepRoute
+    extends PageRouteInfo<BirthAbroadFirstStepRouteArgs> {
+  BirthAbroadFirstStepRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    Crud operation = Crud.create,
+  }) : super(
+          BirthAbroadFirstStepRoute.name,
+          path: '',
+          args: BirthAbroadFirstStepRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            operation: operation,
+          ),
+        );
+
+  static const String name = 'BirthAbroadFirstStepRoute';
+}
+
+class BirthAbroadFirstStepRouteArgs {
+  const BirthAbroadFirstStepRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'BirthAbroadFirstStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation}';
+  }
+}
+
+/// generated route for
+/// [BirthAbroadSecondStepPage]
+class BirthAbroadSecondStepRoute
+    extends PageRouteInfo<BirthAbroadSecondStepRouteArgs> {
+  BirthAbroadSecondStepRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    required RegisterOwnerType registerOwnerType,
+    Crud operation = Crud.create,
+  }) : super(
+          BirthAbroadSecondStepRoute.name,
+          path: 'birth-abroad-second-step-page',
+          args: BirthAbroadSecondStepRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            registerOwnerType: registerOwnerType,
+            operation: operation,
+          ),
+        );
+
+  static const String name = 'BirthAbroadSecondStepRoute';
+}
+
+class BirthAbroadSecondStepRouteArgs {
+  const BirthAbroadSecondStepRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    required this.registerOwnerType,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final RegisterOwnerType registerOwnerType;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'BirthAbroadSecondStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, registerOwnerType: $registerOwnerType, operation: $operation}';
+  }
+}
+
+/// generated route for
+/// [BirthAbroadThirdStepPage]
+class BirthAbroadThirdStepRoute
+    extends PageRouteInfo<BirthAbroadThirdStepRouteArgs> {
+  BirthAbroadThirdStepRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    Crud operation = Crud.create,
+  }) : super(
+          BirthAbroadThirdStepRoute.name,
+          path: 'birth-abroad-third-step-page',
+          args: BirthAbroadThirdStepRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            operation: operation,
+          ),
+        );
+
+  static const String name = 'BirthAbroadThirdStepRoute';
+}
+
+class BirthAbroadThirdStepRouteArgs {
+  const BirthAbroadThirdStepRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    this.operation = Crud.create,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final Crud operation;
+
+  @override
+  String toString() {
+    return 'BirthAbroadThirdStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation}';
   }
 }

@@ -663,5 +663,9 @@
   "padreOMadreEc": "Ecuadorian father or mother",
   "abuelosOBisabuelos": "Grandparents or Great Grandparents",
   "residente": "Resident",
-  "noResidente": "No resident"
+  "noResidente": "No resident",
+  "tipoRegPropietario": "Owner registration type",
+  "certificadoNacimiento": "Birth certificate from the country of origin apostilled or legalized and translated if applicable",
+  "cedulaNacimiento": "Identity card or passport if you do not have an Ecuadorian ID of the parents or the applicant",
+  "poderEspNac": "Special power of attorney in case of being carried out by a third party"
 }

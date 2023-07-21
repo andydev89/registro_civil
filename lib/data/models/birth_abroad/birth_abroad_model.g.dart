@@ -8,7 +8,7 @@ part of 'birth_abroad_model.dart';
 
 BirthAbroadModel _$BirthAbroadModelFromJson(Map<String, dynamic> json) =>
     BirthAbroadModel(
-      foreignType: $enumDecode(_$ForeignTypeEnumMap, json['foreignType']),
+      foreignType: $enumDecode(_$ForeignTypeEnumMap, json['type']),
       registerOwnerType:
           $enumDecode(_$RegisterOwnerTypeEnumMap, json['registerOwnerType']),
       requestOwner: json['requestOwner'] as String?,
@@ -27,14 +27,20 @@ BirthAbroadModel _$BirthAbroadModelFromJson(Map<String, dynamic> json) =>
           ? null
           : Certificate.fromJson(
               json['powerOfAttorney'] as Map<String, dynamic>),
-      provinceId: json['provinceId'] as String?,
-      cantonId: json['cantonId'] as String?,
-      agencyId: json['agencyId'] as String?,
+      provinceId: json['provinceId'] == null
+          ? null
+          : LocationModel.fromJson(json['provinceId'] as Map<String, dynamic>),
+      cantonId: json['cantonId'] == null
+          ? null
+          : LocationModel.fromJson(json['cantonId'] as Map<String, dynamic>),
+      agencyId: json['agencyId'] == null
+          ? null
+          : AgencyModel.fromJson(json['agencyId'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BirthAbroadModelToJson(BirthAbroadModel instance) =>
     <String, dynamic>{
-      'foreignType': _$ForeignTypeEnumMap[instance.foreignType]!,
+      'type': _$ForeignTypeEnumMap[instance.foreignType]!,
       'registerOwnerType':
           _$RegisterOwnerTypeEnumMap[instance.registerOwnerType]!,
       'requestOwner': instance.requestOwner,
@@ -42,9 +48,9 @@ Map<String, dynamic> _$BirthAbroadModelToJson(BirthAbroadModel instance) =>
       'birthCertificate': instance.birthCertificate?.toJson(),
       'identity': instance.identity?.toJson(),
       'powerOfAttorney': instance.powerOfAttorney?.toJson(),
-      'provinceId': instance.provinceId,
-      'cantonId': instance.cantonId,
-      'agencyId': instance.agencyId,
+      'provinceId': LocationModel.locationToJsonNull(instance.provinceId),
+      'cantonId': LocationModel.locationToJsonNull(instance.cantonId),
+      'agencyId': AgencyModel.agencyToJson(instance.agencyId),
     };
 
 const _$ForeignTypeEnumMap = {
@@ -61,7 +67,7 @@ const _$RegisterOwnerTypeEnumMap = {
 
 Map<String, dynamic> _$$_BirthAbroadModelToJson(_$_BirthAbroadModel instance) =>
     <String, dynamic>{
-      'foreignType': _$ForeignTypeEnumMap[instance.foreignType]!,
+      'type': _$ForeignTypeEnumMap[instance.foreignType]!,
       'registerOwnerType':
           _$RegisterOwnerTypeEnumMap[instance.registerOwnerType]!,
       'requestOwner': instance.requestOwner,
@@ -69,9 +75,30 @@ Map<String, dynamic> _$$_BirthAbroadModelToJson(_$_BirthAbroadModel instance) =>
       'birthCertificate': instance.birthCertificate,
       'identity': instance.identity,
       'powerOfAttorney': instance.powerOfAttorney,
-      'provinceId': instance.provinceId,
-      'cantonId': instance.cantonId,
-      'agencyId': instance.agencyId,
+      'provinceId': LocationModel.locationToJsonNull(instance.provinceId),
+      'cantonId': LocationModel.locationToJsonNull(instance.cantonId),
+      'agencyId': AgencyModel.agencyToJson(instance.agencyId),
+    };
+
+_$_RegisterOwnerForm _$$_RegisterOwnerFormFromJson(Map<String, dynamic> json) =>
+    _$_RegisterOwnerForm(
+      registerOwnerType: $enumDecodeNullable(
+          _$RegisterOwnerTypeEnumMap, json['registerOwnerType']),
+      identification: json['identification'] as String?,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      phone: json['phone'] as String?,
+    );
+
+Map<String, dynamic> _$$_RegisterOwnerFormToJson(
+        _$_RegisterOwnerForm instance) =>
+    <String, dynamic>{
+      'registerOwnerType':
+          _$RegisterOwnerTypeEnumMap[instance.registerOwnerType],
+      'identification': instance.identification,
+      'name': instance.name,
+      'email': instance.email,
+      'phone': instance.phone,
     };
 
 _$_RegisterOwner _$$_RegisterOwnerFromJson(Map<String, dynamic> json) =>
@@ -88,6 +115,53 @@ Map<String, dynamic> _$$_RegisterOwnerToJson(_$_RegisterOwner instance) =>
       'identification': instance.identification,
       'email': instance.email,
       'phone': instance.phone,
+    };
+
+_$_DocumentsForm _$$_DocumentsFormFromJson(Map<String, dynamic> json) =>
+    _$_DocumentsForm(
+      registerOwnerType: $enumDecodeNullable(
+              _$RegisterOwnerTypeEnumMap, json['registerOwnerType']) ??
+          RegisterOwnerType.attorney,
+      birthCertificate: json['birthCertificate'] == null
+          ? null
+          : Certificate.fromJson(
+              json['birthCertificate'] as Map<String, dynamic>),
+      identity: json['identity'] == null
+          ? null
+          : Certificate.fromJson(json['identity'] as Map<String, dynamic>),
+      powerOfAttorney: json['powerOfAttorney'] == null
+          ? null
+          : Certificate.fromJson(
+              json['powerOfAttorney'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$_DocumentsFormToJson(_$_DocumentsForm instance) =>
+    <String, dynamic>{
+      'registerOwnerType':
+          _$RegisterOwnerTypeEnumMap[instance.registerOwnerType]!,
+      'birthCertificate': instance.birthCertificate,
+      'identity': instance.identity,
+      'powerOfAttorney': instance.powerOfAttorney,
+    };
+
+_$_LocationForm _$$_LocationFormFromJson(Map<String, dynamic> json) =>
+    _$_LocationForm(
+      province: json['province'] == null
+          ? null
+          : LocationModel.fromJson(json['province'] as Map<String, dynamic>),
+      canton: json['canton'] == null
+          ? null
+          : LocationModel.fromJson(json['canton'] as Map<String, dynamic>),
+      agency: json['agency'] == null
+          ? null
+          : AgencyModel.fromJson(json['agency'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$_LocationFormToJson(_$_LocationForm instance) =>
+    <String, dynamic>{
+      'province': instance.province,
+      'canton': instance.canton,
+      'agency': instance.agency,
     };
 
 _$_Certificate _$$_CertificateFromJson(Map<String, dynamic> json) =>
