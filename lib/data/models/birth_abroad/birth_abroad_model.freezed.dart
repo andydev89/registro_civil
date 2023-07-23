@@ -1477,6 +1477,7 @@ Certificate _$CertificateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Certificate {
+  String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get file => throw _privateConstructorUsedError;
 
@@ -1492,7 +1493,7 @@ abstract class $CertificateCopyWith<$Res> {
           Certificate value, $Res Function(Certificate) then) =
       _$CertificateCopyWithImpl<$Res, Certificate>;
   @useResult
-  $Res call({String? name, String? file});
+  $Res call({String? id, String? name, String? file});
 }
 
 /// @nodoc
@@ -1508,10 +1509,15 @@ class _$CertificateCopyWithImpl<$Res, $Val extends Certificate>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? file = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1532,7 +1538,7 @@ abstract class _$$_CertificateCopyWith<$Res>
       __$$_CertificateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, String? file});
+  $Res call({String? id, String? name, String? file});
 }
 
 /// @nodoc
@@ -1546,10 +1552,15 @@ class __$$_CertificateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? file = freezed,
   }) {
     return _then(_$_Certificate(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1565,11 +1576,13 @@ class __$$_CertificateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Certificate extends _Certificate {
-  const _$_Certificate({this.name, this.file}) : super._();
+  const _$_Certificate({this.id, this.name, this.file}) : super._();
 
   factory _$_Certificate.fromJson(Map<String, dynamic> json) =>
       _$$_CertificateFromJson(json);
 
+  @override
+  final String? id;
   @override
   final String? name;
   @override
@@ -1577,7 +1590,7 @@ class _$_Certificate extends _Certificate {
 
   @override
   String toString() {
-    return 'Certificate(name: $name, file: $file)';
+    return 'Certificate(id: $id, name: $name, file: $file)';
   }
 
   @override
@@ -1585,13 +1598,14 @@ class _$_Certificate extends _Certificate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Certificate &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.file, file) || other.file == file));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, file);
+  int get hashCode => Object.hash(runtimeType, id, name, file);
 
   @JsonKey(ignore: true)
   @override
@@ -1608,13 +1622,17 @@ class _$_Certificate extends _Certificate {
 }
 
 abstract class _Certificate extends Certificate {
-  const factory _Certificate({final String? name, final String? file}) =
-      _$_Certificate;
+  const factory _Certificate(
+      {final String? id,
+      final String? name,
+      final String? file}) = _$_Certificate;
   const _Certificate._() : super._();
 
   factory _Certificate.fromJson(Map<String, dynamic> json) =
       _$_Certificate.fromJson;
 
+  @override
+  String? get id;
   @override
   String? get name;
   @override

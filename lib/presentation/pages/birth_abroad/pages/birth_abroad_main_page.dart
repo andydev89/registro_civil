@@ -64,7 +64,19 @@ class BirthAbroadMainPage extends ConsumerWidget {
                       l10n.estado: e.state.translate(context),
                     },
                     actions: {
-                      Crud.read: (p0) => {},
+                      Crud.read: (p0) => context.navigateTo(
+                        BirthAbroadFirstStepRouterRoute(
+                          operation: Crud.read,
+                          typeServiceModel: typeServiceModel,
+                          birthId: e.id,
+                          children: [
+                            BirthAbroadFirstStepRoute(
+                              typeServiceModel: typeServiceModel,
+                              operation: Crud.read,
+                            ),
+                          ],
+                        ),
+                      ),
                       Crud.update: (p0) => {},
                     },
                   ),

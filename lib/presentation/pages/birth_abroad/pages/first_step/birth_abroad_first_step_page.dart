@@ -29,9 +29,9 @@ class BirthAbroadFirstStepPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final me = ref.watch(meProvider).value ?? MeModel();
-    // final duplicate = ref.watch(idDuplicateProvider);
+    final provider = ref.watch(birthAbroadProvider.notifier);
     return RegisterOwnerSubModelFormBuilder(
-      // model: operation.isCreate ? RegisterOwnerSubModel.fromMe(me) : null,
+      model: operation.isCreate ? null : provider.getFirstStep(),
       builder: (context, formModel, child) {
         final regOwnerTypeNotifier = ValueNotifier(
           formModel.registerOwnerTypeControl?.value,
@@ -55,18 +55,20 @@ class BirthAbroadFirstStepPage extends ConsumerWidget {
                   ValueListenableBuilder<RegisterOwnerType?>(
                     valueListenable: regOwnerTypeNotifier,
                     builder: (_, value, __) {
-                      if (value == RegisterOwnerType.attorney) {
-                        formModel.identificationControl
-                            ?.updateValue(me.identification);
-                        formModel.nameControl
-                            ?.updateValue('${me.firstName} ${me.lastName}');
-                        formModel.phoneControl?.updateValue(me.phone);
-                        formModel.emailControl?.updateValue(me.email);
-                      } else {
-                        formModel.identificationControl?.reset();
-                        formModel.nameControl?.reset();
-                        formModel.phoneControl?.updateValue(me.phone);
-                        formModel.emailControl?.updateValue(me.email);
+                      if (operation.isCreate) {
+                        if (value == RegisterOwnerType.attorney) {
+                          formModel.identificationControl
+                              ?.updateValue(me.identification);
+                          formModel.nameControl
+                              ?.updateValue('${me.firstName} ${me.lastName}');
+                          formModel.phoneControl?.updateValue(me.phone);
+                          formModel.emailControl?.updateValue(me.email);
+                        } else {
+                          formModel.identificationControl?.reset();
+                          formModel.nameControl?.reset();
+                          formModel.phoneControl?.updateValue(me.phone);
+                          formModel.emailControl?.updateValue(me.email);
+                        }
                       }
                       return Column(
                         children: [

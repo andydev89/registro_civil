@@ -17,3 +17,4 @@ export 'primary_reactive_text_area_field.dart';
 export 'primary_reactive_text_field.dart';
 export 'primary_search.dart';
 export 'primary_text_field.dart';
+export 'secondary_reactive_file_picker.dart';

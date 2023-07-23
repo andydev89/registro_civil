@@ -25,7 +25,9 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final provider = ref.watch(birthAbroadProvider.notifier);
     return DocumentsSubModelFormBuilder(
+      model: operation.isCreate ? null : provider.getSecondStep(),
       initState: (context, formModel) {
         formModel.registerOwnerTypeControl.updateValue(registerOwnerType);
       },
@@ -41,10 +43,11 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  PrimaryReactiveFilePicker<Certificate>(
+                  SecondaryReactiveFilePicker<Certificate>(
                     label: l10n.certificadoNacimiento,
                     formControl: formModel.birthCertificateControl,
                     onRemove: () => formModel.birthCertificateControl?.reset(),
+                    init: operation.isEditOrRead,
                     onFileSelected: (
                       document,
                       p0,
@@ -53,9 +56,17 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                       formModel.birthCertificateControl
                           ?.updateValue(Certificate(name: name, file: p0));
                     },
+                    initialValue: (data) {
+                      return data;
+                    },
+                    readOnly: operation.isRead,
+                    provider: DocumentByIdProvider(
+                      id: formModel.birthCertificateControl?.value?.id ?? '',
+                    ),
                   ),
-                  PrimaryReactiveFilePicker<Certificate>(
+                  SecondaryReactiveFilePicker<Certificate>(
                     label: l10n.cedulaNacimiento,
+                    init: operation.isEditOrRead,
                     formControl: formModel.identityControl,
                     onRemove: () => formModel.identityControl?.reset(),
                     onFileSelected: (
@@ -66,15 +77,22 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                       formModel.identityControl
                           ?.updateValue(Certificate(name: name, file: p0));
                     },
+                    initialValue: (data) {
+                      return data;
+                    },
+                    readOnly: operation.isRead,
+                    provider: DocumentByIdProvider(
+                      id: formModel.identityControl?.value?.id ?? '',
+                    ),
                   ),
                   ValueListenableBuilder<RegisterOwnerType?>(
                     valueListenable: ownerTypeNotifier,
                     builder: (_, value, __) {
                       return Visibility(
-                        visible:
-                            value == RegisterOwnerType.attorney,
-                        child: PrimaryReactiveFilePicker<Certificate>(
+                        visible: value == RegisterOwnerType.attorney,
+                        child: SecondaryReactiveFilePicker<Certificate>(
                           label: l10n.poderEspNac,
+                          init: operation.isEditOrRead,
                           formControl: formModel.powerOfAttorneyControl,
                           onRemove: () =>
                               formModel.powerOfAttorneyControl?.reset(),
@@ -86,6 +104,14 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                             formModel.powerOfAttorneyControl?.updateValue(
                                 Certificate(name: name, file: p0));
                           },
+                          readOnly: operation.isRead,
+                          initialValue: (data) {
+                            return data;
+                          },
+                          provider: DocumentByIdProvider(
+                            id: formModel.powerOfAttorneyControl?.value?.id ??
+                                '',
+                          ),
                         ),
                       );
                     },

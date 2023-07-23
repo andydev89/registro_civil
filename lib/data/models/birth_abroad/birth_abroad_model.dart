@@ -3,7 +3,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
+import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 import 'package:registro_civil_apk/data/models/auth/auth.dart';
+import 'package:registro_civil_apk/data/models/birth_abroad/birth_abroad.dart';
 import 'package:registro_civil_apk/data/models/commons/commons.dart';
 import 'package:registro_civil_apk/data/utils/utils.dart';
 
@@ -53,18 +55,24 @@ class BirthAbroadModel with _$BirthAbroadModel {
 
   const BirthAbroadModel._();
 
-  BirthAbroadModel copyWithFromModel(BirthAbroadModel model) {
+  BirthAbroadModel copyWithFromListModel(BirthAbroadListModel model) {
     return copyWith(
-      foreignType: model.foreignType,
+      foreignType: model.type,
       registerOwnerType: model.registerOwnerType,
-      requestOwner: model.requestOwner,
-      registerOwner: model.registerOwner,
-      birthCertificate: model.birthCertificate,
-      identity: model.identity,
-      powerOfAttorney: model.powerOfAttorney,
-      provinceId: model.provinceId,
-      cantonId: model.cantonId,
-      agencyId: model.agencyId,
+      requestOwner: model.requestOwnerId,
+      registerOwner: RegisterOwner(
+          name: model.name,
+          identification: model.identification,
+          email: model.email,
+          phone: model.phone),
+      birthCertificate: Certificate(id: model.birthCertificateId),
+      identity: Certificate(id: model.identityId),
+      powerOfAttorney: Certificate(id: model.powerOfAttorneyId),
+      provinceId: LocationModel(id: model.provinceId ?? '', name: ''),
+      cantonId: LocationModel(id: model.cantonId ?? '', name: ''),
+      agencyId: AgencyModel.fromLocationModel(
+        LocationModel(id: model.agencyId ?? '', name: ''),
+      ),
     );
   }
 }
@@ -165,8 +173,9 @@ class LocationSubModel with _$LocationSubModel {
 }
 
 @Freezed()
-class Certificate with _$Certificate {
+class Certificate with _$Certificate implements Translatable {
   const factory Certificate({
+    String? id,
     String? name,
     String? file,
   }) = _Certificate;
@@ -175,6 +184,11 @@ class Certificate with _$Certificate {
       _$CertificateFromJson(json);
 
   const Certificate._();
+
+  @override
+  String translate(BuildContext context) {
+    return '';
+  }
 }
 
 Map<String, dynamic>? powerOfAttorneyValidatorGroup(
@@ -182,8 +196,7 @@ Map<String, dynamic>? powerOfAttorneyValidatorGroup(
 ) {
   final birthAbroad = birthAbroadModel.value as Map<String, dynamic>;
   final regOwnerType = birthAbroad['registerOwnerType'] as RegisterOwnerType?;
-  final isAttorney = regOwnerType ==
-      RegisterOwnerType.attorney;
+  final isAttorney = regOwnerType == RegisterOwnerType.attorney;
   // final token = birthAbroad['deviceTokenSerialNumber'] as String? ?? '';
   if (!isAttorney && regOwnerType != null) {
     (birthAbroadModel as FormGroup).controls['powerOfAttorney']!

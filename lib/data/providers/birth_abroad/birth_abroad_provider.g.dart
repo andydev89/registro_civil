@@ -198,7 +198,175 @@ class CreateBirthAbroadProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$birthAbroadHash() => r'859db216f09d77cfd3d84584a0b054f42aaeb273';
+String _$birthAbroadByIdHash() => r'733d98d40dbf496f6ffc50d08c54b6294e8feae5';
+typedef BirthAbroadByIdRef = AutoDisposeFutureProviderRef<BirthAbroadListModel>;
+
+/// See also [birthAbroadById].
+@ProviderFor(birthAbroadById)
+const birthAbroadByIdProvider = BirthAbroadByIdFamily();
+
+/// See also [birthAbroadById].
+class BirthAbroadByIdFamily extends Family<AsyncValue<BirthAbroadListModel>> {
+  /// See also [birthAbroadById].
+  const BirthAbroadByIdFamily();
+
+  /// See also [birthAbroadById].
+  BirthAbroadByIdProvider call(
+    String id,
+  ) {
+    return BirthAbroadByIdProvider(
+      id,
+    );
+  }
+
+  @override
+  BirthAbroadByIdProvider getProviderOverride(
+    covariant BirthAbroadByIdProvider provider,
+  ) {
+    return call(
+      provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'birthAbroadByIdProvider';
+}
+
+/// See also [birthAbroadById].
+class BirthAbroadByIdProvider
+    extends AutoDisposeFutureProvider<BirthAbroadListModel> {
+  /// See also [birthAbroadById].
+  BirthAbroadByIdProvider(
+    this.id,
+  ) : super.internal(
+          (ref) => birthAbroadById(
+            ref,
+            id,
+          ),
+          from: birthAbroadByIdProvider,
+          name: r'birthAbroadByIdProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$birthAbroadByIdHash,
+          dependencies: BirthAbroadByIdFamily._dependencies,
+          allTransitiveDependencies:
+              BirthAbroadByIdFamily._allTransitiveDependencies,
+        );
+
+  final String id;
+
+  @override
+  bool operator ==(Object other) {
+    return other is BirthAbroadByIdProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$documentByIdHash() => r'dff464353fc91eed9684b168262e9eb6b42918d7';
+typedef DocumentByIdRef
+    = AutoDisposeFutureProviderRef<Result<Certificate, StatusCodeType>>;
+
+/// See also [documentById].
+@ProviderFor(documentById)
+const documentByIdProvider = DocumentByIdFamily();
+
+/// See also [documentById].
+class DocumentByIdFamily
+    extends Family<AsyncValue<Result<Certificate, StatusCodeType>>> {
+  /// See also [documentById].
+  const DocumentByIdFamily();
+
+  /// See also [documentById].
+  DocumentByIdProvider call({
+    required String id,
+  }) {
+    return DocumentByIdProvider(
+      id: id,
+    );
+  }
+
+  @override
+  DocumentByIdProvider getProviderOverride(
+    covariant DocumentByIdProvider provider,
+  ) {
+    return call(
+      id: provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'documentByIdProvider';
+}
+
+/// See also [documentById].
+class DocumentByIdProvider
+    extends AutoDisposeFutureProvider<Result<Certificate, StatusCodeType>> {
+  /// See also [documentById].
+  DocumentByIdProvider({
+    required this.id,
+  }) : super.internal(
+          (ref) => documentById(
+            ref,
+            id: id,
+          ),
+          from: documentByIdProvider,
+          name: r'documentByIdProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$documentByIdHash,
+          dependencies: DocumentByIdFamily._dependencies,
+          allTransitiveDependencies:
+              DocumentByIdFamily._allTransitiveDependencies,
+        );
+
+  final String id;
+
+  @override
+  bool operator ==(Object other) {
+    return other is DocumentByIdProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$birthAbroadHash() => r'26ea0f47aec2da939f682488b3b9e42110c1d21e';
 
 /// See also [BirthAbroad].
 @ProviderFor(BirthAbroad)

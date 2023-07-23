@@ -26,6 +26,7 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
     this.ligth = false,
     this.label,
     this.onRemove,
+    this.readOnly = false,
   }) : assert(
           maxFileSizeMB <= 5 && maxFileSizeMB > 0,
           'El tamaño debe ser entre 1 y 5 MB',
@@ -41,6 +42,7 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
   final bool ligth;
   final String? label;
   final void Function()? onRemove;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,7 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
                 textAlign: TextAlign.justify,
               ),
             InkWell(
-              onTap: !select.value
+              onTap: !select.value && !readOnly
                   ? () async {
                       final result = await FilePicker.platform.pickFiles(
                         allowedExtensions:

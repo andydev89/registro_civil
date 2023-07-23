@@ -15,8 +15,8 @@ class BirthAbroad extends _$BirthAbroad {
     return const BirthAbroadModel();
   }
 
-  void updateModel(BirthAbroadModel model) {
-    state = state.copyWithFromModel(model);
+  void updateModel(BirthAbroadListModel model) {
+    state = state.copyWithFromListModel(model);
   }
 
   void setFirstStep({
@@ -38,6 +38,16 @@ class BirthAbroad extends _$BirthAbroad {
     );
   }
 
+  RegisterOwnerSubModel getFirstStep() {
+    return RegisterOwnerSubModel(
+      name: state.registerOwner?.name,
+      identification: state.registerOwner?.identification,
+      email: state.registerOwner?.email,
+      phone: state.registerOwner?.phone,
+      registerOwnerType: state.registerOwnerType,
+    );
+  }
+
   void setSecondStep({
     required DocumentsSubModel documents,
   }) {
@@ -45,6 +55,15 @@ class BirthAbroad extends _$BirthAbroad {
       birthCertificate: documents.birthCertificate,
       identity: documents.identity,
       powerOfAttorney: documents.powerOfAttorney,
+    );
+  }
+
+  DocumentsSubModel getSecondStep() {
+    return DocumentsSubModel(
+      birthCertificate: state.birthCertificate,
+      registerOwnerType: state.registerOwnerType,
+      identity: state.identity,
+      powerOfAttorney: state.powerOfAttorney,
     );
   }
 
@@ -98,4 +117,26 @@ Future<Result<CommandWithTransactionCodeModel, StatusCodeType>>
     return Result.ok(result.data!);
   }
   return Result.err(result.status);
+}
+
+@riverpod
+Future<BirthAbroadListModel> birthAbroadById(
+    BirthAbroadByIdRef ref,
+    String id,
+    ) async {
+  final api = ref.watch(apiProvider);
+  final response = (await api.birthAbroadById(id)).data!;
+  return response;
+}
+
+@riverpod
+Future<Result<Certificate, StatusCodeType>> documentById(
+    DocumentByIdRef ref, {
+      required String id,
+    }) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.documentById(id);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
 }

@@ -3,8 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
-import 'package:registro_civil_apk/data/providers/id_duplicate/id_duplicate.dart';
-import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/data/providers/birth_abroad/birth_abroad.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class BirthAbroadFirstStepRouterPage extends HookWidget {
@@ -25,17 +24,17 @@ class BirthAbroadFirstStepRouterPage extends HookWidget {
       builder: (context, ref, _) {
         return operation.isRead
             ? LoadingProviderWidget(
-          async: ref.watch(duplicateByIdProvider(birthId!)),
+          async: ref.watch(birthAbroadByIdProvider(birthId!)),
           onRefresh: () => ref.refresh(
-            duplicateByIdProvider(birthId!),
+            birthAbroadByIdProvider(birthId!),
           ),
           onRefreshIndicator: () => ref.watch(
-            duplicateByIdProvider(birthId!).future,
+            birthAbroadByIdProvider(birthId!).future,
           ),
           data: (data) {
             WidgetsBinding.instance.addPostFrameCallback(
                   (_) => ref
-                  .read(idDuplicateProvider.notifier)
+                  .read(birthAbroadProvider.notifier)
                   .updateModel(data),
             );
             return TypeServiceBodyWidget(

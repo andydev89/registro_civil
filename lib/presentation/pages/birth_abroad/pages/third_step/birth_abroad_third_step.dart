@@ -104,42 +104,57 @@ class BirthAbroadThirdStepPage extends ConsumerWidget {
             ),
           ),
           bottomNavigationBar: ReactiveLocationSubModelFormConsumer(
-            builder: (_, formModel, __) => PrimaryAsyncButton(
-              title: l10n.siguiente,
-              onPressed: formModel.form.valid ? () async {
-                ref.read(birthAbroadProvider.notifier).setThirdStep(
-                  locations: formModel.model,
-                );
-                final value = ref.watch(birthAbroadProvider);
-                await ref
-                    .read(
-                  createBirthAbroadProvider(
-                    model: value,
-                  ).future,
-                )
-                    .when(
-                  ok: (data) {
-                    context
-                      ..navigateTo(
+            builder: (_, formModel, __) => Container(
+              child: operation.isRead
+                  ? PrimaryButton(
+                      title: l10n.aceptar,
+                      onPressed: () => context.navigateTo(
                         BirthAbroadMainRoute(
                           typeServiceModel: typeServiceModel,
                         ),
-                      )
-                      ..navigateTo(
-                        ChoosePaymentMethodRoute(
-                          transactionCode: data.transactionCode,
-                          service: typeServiceModel,
-                        ),
-                      );
-                  },
-                  err: (err) {
-                    showAlert(
-                      err.translate(context),
-                      TypeAlert.error,
-                    );
-                  },
-                );
-              } : null,
+                      ),
+                    )
+                  : PrimaryAsyncButton(
+                      title: l10n.siguiente,
+                      onPressed: formModel.form.valid
+                          ? () async {
+                              ref
+                                  .read(birthAbroadProvider.notifier)
+                                  .setThirdStep(
+                                    locations: formModel.model,
+                                  );
+                              final value = ref.watch(birthAbroadProvider);
+                              await ref
+                                  .read(
+                                createBirthAbroadProvider(
+                                  model: value,
+                                ).future,
+                              )
+                                  .when(
+                                ok: (data) {
+                                  context
+                                    ..navigateTo(
+                                      BirthAbroadMainRoute(
+                                        typeServiceModel: typeServiceModel,
+                                      ),
+                                    )
+                                    ..navigateTo(
+                                      ChoosePaymentMethodRoute(
+                                        transactionCode: data.transactionCode,
+                                        service: typeServiceModel,
+                                      ),
+                                    );
+                                },
+                                err: (err) {
+                                  showAlert(
+                                    err.translate(context),
+                                    TypeAlert.error,
+                                  );
+                                },
+                              );
+                            }
+                          : null,
+                    ),
             ).symmetricPadding(10, 10),
           ),
         );

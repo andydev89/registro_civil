@@ -346,4 +346,13 @@ abstract class Api {
     @Body() required BirthAbroadModel model,
   });
 
+  @GET('/citizenship/api/citizenship/{id}')
+  Future<ResponseModel<BirthAbroadListModel>> birthAbroadById(
+      @Path('id') String id,
+      );
+
+  @GET('/citizenship/api/citizenship/document/{id}')
+  Future<ResponseModel<Certificate>> documentById(
+      @Path('id') String id,
+      );
 }

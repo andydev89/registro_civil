@@ -166,12 +166,14 @@ Map<String, dynamic> _$$_LocationFormToJson(_$_LocationForm instance) =>
 
 _$_Certificate _$$_CertificateFromJson(Map<String, dynamic> json) =>
     _$_Certificate(
+      id: json['id'] as String?,
       name: json['name'] as String?,
       file: json['file'] as String?,
     );
 
 Map<String, dynamic> _$$_CertificateToJson(_$_Certificate instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'file': instance.file,
     };
