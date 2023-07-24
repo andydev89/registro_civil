@@ -6,7 +6,7 @@ part of 'cedulacion_ext_primera_vez_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$validarvisaHash() => r'7dac080454c953bda3916e5a34cef7033653cf83';
+String _$validarvisaHash() => r'8a97f82b6aab3c575aeddf9edabe2bca73a077c2';
 
 /// See also [Validarvisa].
 @ProviderFor(Validarvisa)
