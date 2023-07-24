@@ -27,11 +27,7 @@ mixin _$CedulacionExtpVModel {
   ])
   @JsonKey(name: 'visa')
   String get visa => throw _privateConstructorUsedError;
-  @FormControlAnnotation(validators: [
-    requiredValidator,
-    lengthMax20Validator,
-    lengthMin2Validator
-  ])
+  @FormControlAnnotation(validators: [requiredValidator, lengthMin2Validator])
   @JsonKey(name: 'email')
   String get email => throw _privateConstructorUsedError;
 
@@ -55,11 +51,8 @@ abstract class $CedulacionExtpVModelCopyWith<$Res> {
       ])
       @JsonKey(name: 'visa')
           String visa,
-      @FormControlAnnotation(validators: [
-        requiredValidator,
-        lengthMax20Validator,
-        lengthMin2Validator
-      ])
+      @FormControlAnnotation(
+          validators: [requiredValidator, lengthMin2Validator])
       @JsonKey(name: 'email')
           String email});
 }
@@ -110,11 +103,8 @@ abstract class _$$_CedulacionExtpVModelCopyWith<$Res>
       ])
       @JsonKey(name: 'visa')
           String visa,
-      @FormControlAnnotation(validators: [
-        requiredValidator,
-        lengthMax20Validator,
-        lengthMin2Validator
-      ])
+      @FormControlAnnotation(
+          validators: [requiredValidator, lengthMin2Validator])
       @JsonKey(name: 'email')
           String email});
 }
@@ -157,11 +147,8 @@ class _$_CedulacionExtpVModel extends _CedulacionExtpVModel {
       ])
       @JsonKey(name: 'visa')
           required this.visa,
-      @FormControlAnnotation(validators: [
-        requiredValidator,
-        lengthMax20Validator,
-        lengthMin2Validator
-      ])
+      @FormControlAnnotation(
+          validators: [requiredValidator, lengthMin2Validator])
       @JsonKey(name: 'email')
           required this.email})
       : super._();
@@ -178,11 +165,7 @@ class _$_CedulacionExtpVModel extends _CedulacionExtpVModel {
   @JsonKey(name: 'visa')
   final String visa;
   @override
-  @FormControlAnnotation(validators: [
-    requiredValidator,
-    lengthMax20Validator,
-    lengthMin2Validator
-  ])
+  @FormControlAnnotation(validators: [requiredValidator, lengthMin2Validator])
   @JsonKey(name: 'email')
   final String email;
 
@@ -228,11 +211,8 @@ abstract class _CedulacionExtpVModel extends CedulacionExtpVModel {
       ])
       @JsonKey(name: 'visa')
           required final String visa,
-      @FormControlAnnotation(validators: [
-        requiredValidator,
-        lengthMax20Validator,
-        lengthMin2Validator
-      ])
+      @FormControlAnnotation(
+          validators: [requiredValidator, lengthMin2Validator])
       @JsonKey(name: 'email')
           required final String email}) = _$_CedulacionExtpVModel;
   const _CedulacionExtpVModel._() : super._();
@@ -249,11 +229,7 @@ abstract class _CedulacionExtpVModel extends CedulacionExtpVModel {
   @JsonKey(name: 'visa')
   String get visa;
   @override
-  @FormControlAnnotation(validators: [
-    requiredValidator,
-    lengthMax20Validator,
-    lengthMin2Validator
-  ])
+  @FormControlAnnotation(validators: [requiredValidator, lengthMin2Validator])
   @JsonKey(name: 'email')
   String get email;
   @override

@@ -364,11 +364,7 @@ class CedulacionExtpVModelForm implements FormModel<CedulacionExtpVModel> {
             touched: false),
         emailControlName: FormControl<String>(
             value: cedulacionExtpVModel?.email,
-            validators: [
-              requiredValidator,
-              lengthMax20Validator,
-              lengthMin2Validator
-            ],
+            validators: [requiredValidator, lengthMin2Validator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

@@ -39,7 +39,7 @@ class CedExtFirstStepForm extends StatelessWidget {
         PrimaryReactiveTextField(
           label: 'correo electronico',
           readOnly: false,
-          // formControl: formModel.,
+          //  formControl: formModel.,
           textCapitalization: TextCapitalization.words,
           /* formControl: FormControl<dynamic>(
             validators: [

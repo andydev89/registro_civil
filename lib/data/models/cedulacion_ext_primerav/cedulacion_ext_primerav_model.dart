@@ -24,7 +24,6 @@ class CedulacionExtpVModel with _$CedulacionExtpVModel {
     @FormControlAnnotation(
       validators: [
         requiredValidator,
-        lengthMax20Validator,
         lengthMin2Validator,
       ],
     )

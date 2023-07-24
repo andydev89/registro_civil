@@ -13,3 +13,4 @@ export 'responses/response.dart';
 export 'schedule_turn/schedule_turn.dart';
 export 'services/services.dart';
 export 'simple_certificate/simple_certificate.dart';
+export 'cedulacion_ext_primerav/cedulacion_ext_primerav.dart';

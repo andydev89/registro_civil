@@ -22,31 +22,61 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // final provider = ref.watch(ValidarvisaProvider.);
     final l10n = context.l10n;
+
     return PrimaryScaffold(
       title: typeServiceModel.name,
-      body: Expanded(
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            children: [
-              CedExtFirstStepForm().verticalPadding(10).horizontalPadding(20),
-              PrimaryButton(
-                title: l10n.validar,
-                onPressed: () => context.popRoute(),
-              ).verticalPadding(10).horizontalPadding(20),
-              PrimaryButton(
-                title: l10n.cancelar,
-                onPressed: () => context.popRoute(),
-              ).verticalPadding(10).horizontalPadding(20),
+      body: CedulacionExtpVModelFormBuilder(
+        builder: (context, formModel, child) => Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: ListView(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //PrimaryText('numero de Visa'),
+                    PrimaryReactiveNuiField(
+                      label: 'numero de visa', //l10n.numCedula,
+                      formControl: formModel.visaControl,
+                      init: true,
+                      readOnly: false,
+                    ),
+                    // PrimaryText(l10n.correoE),
+                    PrimaryReactiveTextField(
+                      label: 'correo electronico',
+                      readOnly: false,
+                      formControl: formModel.emailControl,
+                      textCapitalization: TextCapitalization.words,
+                      /* formControl: FormControl<dynamic>(
+            validators: [
+              Validators.composeOR([
+                Validators.email,
+                // Validators.pattern(phonePattern),
+              ])
             ],
+          ),*/
+                    ),
+                  ],
+                ).verticalPadding(10).horizontalPadding(20),
+                ReactiveCedulacionExtpVModelFormConsumer(
+                  builder: (context, formModel, child) => PrimaryButton(
+                    title: l10n.validar,
+                    onPressed: formModel.form.valid
+                        ? () => ref.read(validarvisaProvider)
+                        : null,
+                  ).verticalPadding(10).horizontalPadding(20),
+                ),
+                PrimaryButton(
+                  title: l10n.cancelar,
+                  onPressed: () => context.popRoute(),
+                ).verticalPadding(10).horizontalPadding(20),
+              ],
+            ),
           ),
         ),
       ),
-      /* bottomNavigationBar: PrimaryButton(
-        title: l10n.cancelar,
-        onPressed: () => context.popRoute(),
-      ).verticalPadding(10).horizontalPadding(20),*/
     );
   }
 }
