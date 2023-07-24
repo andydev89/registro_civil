@@ -68,7 +68,7 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
                     title: l10n.validar,
                     onPressed: formModel.form.valid
                         ? () => ref
-                            .read(validarvisaProvider)
+                            .read(validarVisaProvider)
                             .validarvisa(formModel.model)
                             .when(
                                 ok: (value) => print(value.toJson().toString()),

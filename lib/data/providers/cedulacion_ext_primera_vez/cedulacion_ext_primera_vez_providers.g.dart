@@ -6,19 +6,19 @@ part of 'cedulacion_ext_primera_vez_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$validarvisaHash() => r'8a97f82b6aab3c575aeddf9edabe2bca73a077c2';
+String _$validarVisaHash() => r'9d2be27565c2073ecdb26268fdf427ec14644033';
 
-/// See also [Validarvisa].
-@ProviderFor(Validarvisa)
-final validarvisaProvider =
-    AutoDisposeNotifierProvider<Validarvisa, Validarvisa>.internal(
-  Validarvisa.new,
-  name: r'validarvisaProvider',
+/// See also [ValidarVisa].
+@ProviderFor(ValidarVisa)
+final validarVisaProvider =
+    AutoDisposeNotifierProvider<ValidarVisa, ValidarVisa>.internal(
+  ValidarVisa.new,
+  name: r'validarVisaProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$validarvisaHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$validarVisaHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$Validarvisa = AutoDisposeNotifier<Validarvisa>;
+typedef _$ValidarVisa = AutoDisposeNotifier<ValidarVisa>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
