@@ -25,7 +25,7 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final provider = ref.watch(ValidarvisaProvider.);
+    final provider = ref.watch(validarVisaProvider);
     final l10n = context.l10n;
 
     return PrimaryScaffold(
@@ -39,27 +39,17 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    //PrimaryText('numero de Visa'),
                     PrimaryReactiveNuiField(
-                      label: 'numero de visa', //l10n.numCedula,
+                      label: 'numero de visa',
                       formControl: formModel.visaControl,
                       init: true,
                       readOnly: false,
                     ),
-                    // PrimaryText(l10n.correoE),
                     PrimaryReactiveTextField(
                       label: 'correo electronico',
                       readOnly: false,
                       formControl: formModel.emailControl,
                       textCapitalization: TextCapitalization.words,
-                      /* formControl: FormControl<dynamic>(
-            validators: [
-              Validators.composeOR([
-                Validators.email,
-                // Validators.pattern(phonePattern),
-              ])
-            ],
-          ),*/
                     ),
                   ],
                 ).verticalPadding(10).horizontalPadding(20),
@@ -71,13 +61,14 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
                             .read(validarVisaProvider)
                             .validarvisa(formModel.model)
                             .when(
-                                ok: (value) => print(value.toJson().toString()),
-                                err: (error) {
-                                  showAlert(
-                                    error.code.toString(),
-                                    TypeAlert.error,
-                                  );
-                                })
+                              ok: (value) => print(value.toJson().toString()),
+                              err: (error) {
+                                showAlert(
+                                  error.code.toString(),
+                                  TypeAlert.error,
+                                );
+                              },
+                            )
                         : () => print(formModel.form.valid.toString()),
                   ).verticalPadding(10).horizontalPadding(20),
                 ),

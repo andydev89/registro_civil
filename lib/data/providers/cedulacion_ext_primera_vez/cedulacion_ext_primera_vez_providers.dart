@@ -11,7 +11,7 @@ class ValidarVisa extends _$ValidarVisa {
   Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> validarvisa(
     CedulacionExtpVModel? model,
   ) async {
-    final api = ref.read(apiProvider);
+    final api = ref.watch(apiProvider);
 
     final response = await api.validateVisaDataRequest(model!);
     return response.success
@@ -22,4 +22,17 @@ class ValidarVisa extends _$ValidarVisa {
   ValidarVisa build() {
     return ValidarVisa();
   }
+}
+
+@riverpod
+Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> validandovisa(
+  ValidandovisaRef ref, {
+  CedulacionExtpVModel? model,
+}) async {
+  final api = ref.read(apiProvider);
+
+  final response = await api.validateVisaDataRequest(model!);
+  return response.success
+      ? Result.ok(response.data! as CommandWithTransactionCodeModel)
+      : Result.err(response.status);
 }
