@@ -334,12 +334,11 @@ abstract class Api {
     @Body() PersonalValidationRequestModel model,
   );
 
-<<<<<<< HEAD
   @POST('/firsttimeforeignerid/api/validate')
   Future<ResponseModel<CedulacionExtpVResModel>> validateVisaDataRequest(
     @Body() CedulacionExtpVModel model,
   );
-=======
+
   //BIRTH ABROAD
   @GET('/citizenship/api/citizenship')
   Future<ResponseModelPagination<List<BirthAbroadListModel>>> birthsAbroad({
@@ -355,12 +354,11 @@ abstract class Api {
 
   @GET('/citizenship/api/citizenship/{id}')
   Future<ResponseModel<BirthAbroadListModel>> birthAbroadById(
-      @Path('id') String id,
-      );
+    @Path('id') String id,
+  );
 
   @GET('/citizenship/api/citizenship/document/{id}')
   Future<ResponseModel<Certificate>> documentById(
-      @Path('id') String id,
-      );
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
+    @Path('id') String id,
+  );
 }

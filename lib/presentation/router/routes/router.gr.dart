@@ -367,17 +367,16 @@ class _$AppRouter extends RootStackRouter {
         child: const PersonalValidationRouterPage(),
       );
     },
-<<<<<<< HEAD
-    CedulacionExtPvezRouterRoute.name: (routeData) {
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: const CedulacionExtPvezRouterPage(),
-=======
     BirthAbroadRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
         child: const BirthAbroadRouterPage(),
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
+      );
+    },
+    CedulacionExtPvezRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const CedulacionExtPvezRouterPage(),
       );
     },
     DefaultRoute.name: (routeData) {
@@ -954,19 +953,11 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-<<<<<<< HEAD
-    CedulacionExtPvezMainRoute.name: (routeData) {
-      final args = routeData.argsAs<CedulacionExtPvezMainRouteArgs>();
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: CedulacionExtPvezMainPage(
-=======
     BirthAbroadMainRoute.name: (routeData) {
       final args = routeData.argsAs<BirthAbroadMainRouteArgs>();
       return CustomPage<dynamic>(
         routeData: routeData,
         child: BirthAbroadMainPage(
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
           key: args.key,
           typeServiceModel: args.typeServiceModel,
         ),
@@ -975,8 +966,6 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-<<<<<<< HEAD
-=======
     BirthAbroadFirstStepRouterRoute.name: (routeData) {
       final args = routeData.argsAs<BirthAbroadFirstStepRouterRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -1032,7 +1021,19 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
+    CedulacionExtPvezMainRoute.name: (routeData) {
+      final args = routeData.argsAs<CedulacionExtPvezMainRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: CedulacionExtPvezMainPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1524,17 +1525,6 @@ class _$AppRouter extends RootStackRouter {
               ],
             ),
             RouteConfig(
-<<<<<<< HEAD
-              CedulacionExtPvezRouterRoute.name,
-              path: 'cedulacion-ext-pvez-router-page',
-              parent: RootRouterRoute.name,
-              children: [
-                RouteConfig(
-                  CedulacionExtPvezMainRoute.name,
-                  path: '',
-                  parent: CedulacionExtPvezRouterRoute.name,
-                )
-=======
               BirthAbroadRouterRoute.name,
               path: 'birth-abroad-router-page',
               parent: RootRouterRoute.name,
@@ -1567,7 +1557,18 @@ class _$AppRouter extends RootStackRouter {
                     ),
                   ],
                 ),
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
+              ],
+            ),
+            RouteConfig(
+              CedulacionExtPvezRouterRoute.name,
+              path: 'cedulacion-ext-pvez-router-page',
+              parent: RootRouterRoute.name,
+              children: [
+                RouteConfig(
+                  CedulacionExtPvezMainRoute.name,
+                  path: '',
+                  parent: CedulacionExtPvezRouterRoute.name,
+                )
               ],
             ),
             RouteConfig(
@@ -2424,18 +2425,6 @@ class PersonalValidationRouterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-<<<<<<< HEAD
-/// [CedulacionExtPvezRouterPage]
-class CedulacionExtPvezRouterRoute extends PageRouteInfo<void> {
-  const CedulacionExtPvezRouterRoute({List<PageRouteInfo>? children})
-      : super(
-          CedulacionExtPvezRouterRoute.name,
-          path: 'cedulacion-ext-pvez-router-page',
-          initialChildren: children,
-        );
-
-  static const String name = 'CedulacionExtPvezRouterRoute';
-=======
 /// [BirthAbroadRouterPage]
 class BirthAbroadRouterRoute extends PageRouteInfo<void> {
   const BirthAbroadRouterRoute({List<PageRouteInfo>? children})
@@ -2446,7 +2435,19 @@ class BirthAbroadRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'BirthAbroadRouterRoute';
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
+}
+
+/// generated route for
+/// [CedulacionExtPvezRouterPage]
+class CedulacionExtPvezRouterRoute extends PageRouteInfo<void> {
+  const CedulacionExtPvezRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          CedulacionExtPvezRouterRoute.name,
+          path: 'cedulacion-ext-pvez-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'CedulacionExtPvezRouterRoute';
 }
 
 /// generated route for
@@ -4119,18 +4120,6 @@ class PersonalValidationFirstStepRouteArgs {
 }
 
 /// generated route for
-<<<<<<< HEAD
-/// [CedulacionExtPvezMainPage]
-class CedulacionExtPvezMainRoute
-    extends PageRouteInfo<CedulacionExtPvezMainRouteArgs> {
-  CedulacionExtPvezMainRoute({
-    Key? key,
-    required TypeServiceModel typeServiceModel,
-  }) : super(
-          CedulacionExtPvezMainRoute.name,
-          path: '',
-          args: CedulacionExtPvezMainRouteArgs(
-=======
 /// [BirthAbroadMainPage]
 class BirthAbroadMainRoute extends PageRouteInfo<BirthAbroadMainRouteArgs> {
   BirthAbroadMainRoute({
@@ -4140,25 +4129,16 @@ class BirthAbroadMainRoute extends PageRouteInfo<BirthAbroadMainRouteArgs> {
           BirthAbroadMainRoute.name,
           path: '',
           args: BirthAbroadMainRouteArgs(
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
             key: key,
             typeServiceModel: typeServiceModel,
           ),
         );
 
-<<<<<<< HEAD
-  static const String name = 'CedulacionExtPvezMainRoute';
-}
-
-class CedulacionExtPvezMainRouteArgs {
-  const CedulacionExtPvezMainRouteArgs({
-=======
   static const String name = 'BirthAbroadMainRoute';
 }
 
 class BirthAbroadMainRouteArgs {
   const BirthAbroadMainRouteArgs({
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
     this.key,
     required this.typeServiceModel,
   });
@@ -4169,9 +4149,6 @@ class BirthAbroadMainRouteArgs {
 
   @override
   String toString() {
-<<<<<<< HEAD
-    return 'CedulacionExtPvezMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
-=======
     return 'BirthAbroadMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
   }
 }
@@ -4345,6 +4322,40 @@ class BirthAbroadThirdStepRouteArgs {
   @override
   String toString() {
     return 'BirthAbroadThirdStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation}';
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
+  }
+}
+
+/// generated route for
+/// [CedulacionExtPvezMainPage]
+class CedulacionExtPvezMainRoute
+    extends PageRouteInfo<CedulacionExtPvezMainRouteArgs> {
+  CedulacionExtPvezMainRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          CedulacionExtPvezMainRoute.name,
+          path: '',
+          args: CedulacionExtPvezMainRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'CedulacionExtPvezMainRoute';
+}
+
+class CedulacionExtPvezMainRouteArgs {
+  const CedulacionExtPvezMainRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'CedulacionExtPvezMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
   }
 }

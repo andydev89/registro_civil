@@ -366,7 +366,7 @@ class DocumentByIdProvider
   }
 }
 
-String _$birthAbroadHash() => r'26ea0f47aec2da939f682488b3b9e42110c1d21e';
+String _$birthAbroadHash() => r'a614b707f41181fa4d76563164ea5a09543be2f7';
 
 /// See also [BirthAbroad].
 @ProviderFor(BirthAbroad)

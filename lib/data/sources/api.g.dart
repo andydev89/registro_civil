@@ -1693,10 +1693,33 @@ class _Api implements Api {
   }
 
   @override
-<<<<<<< HEAD
   Future<ResponseModel<CedulacionExtpVResModel>> validateVisaDataRequest(
       CedulacionExtpVModel model) async {
-=======
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = model;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CedulacionExtpVResModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/firsttimeforeignerid/api/validate',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CedulacionExtpVResModel>.fromJson(
+      _result.data!,
+      (json) => CedulacionExtpVResModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModelPagination<List<BirthAbroadListModel>>> birthsAbroad({
     int pageNo = 0,
     int pageSize = 20,
@@ -1739,26 +1762,18 @@ class _Api implements Api {
   @override
   Future<ResponseModel<CommandWithTransactionCodeModel>> createBirthAbroad(
       {required BirthAbroadModel model}) async {
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = model;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-<<<<<<< HEAD
-        _setStreamType<ResponseModel<CedulacionExtpVResModel>>(Options(
-=======
         _setStreamType<ResponseModel<CommandWithTransactionCodeModel>>(Options(
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-<<<<<<< HEAD
-              '/firsttimeforeignerid/api/validate',
-=======
               '/citizenship/api/citizenship',
               queryParameters: queryParameters,
               data: _data,
@@ -1813,20 +1828,13 @@ class _Api implements Api {
             .compose(
               _dio.options,
               '/citizenship/api/citizenship/document/${id}',
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-<<<<<<< HEAD
-    final value = ResponseModel<CedulacionExtpVResModel>.fromJson(
-      _result.data!,
-      (json) => CedulacionExtpVResModel.fromJson(json as Map<String, dynamic>),
-=======
     final value = ResponseModel<Certificate>.fromJson(
       _result.data!,
       (json) => Certificate.fromJson(json as Map<String, dynamic>),
->>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
     );
     return value;
   }
