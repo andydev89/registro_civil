@@ -1,4 +1,5 @@
 export 'auth/auth.dart';
+export 'birth_abroad/birth_abroad.dart';
 export 'change_of_name/change_of_name.dart';
 export 'commons/commons.dart';
 export 'electronic_signature/electronic_signature.dart';

@@ -41,8 +41,9 @@ class _BirthValidationPersonalTabPage
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               EditableReactiveTextField(
-                label: 'Lugar de Nacimiento',
-                isEdited: widget.provider.containsKey('lugarNacimiento'),
+                label: l10n.lugarNacimiento,
+                modifiedData: widget.provider.getByKey('lugarNacimiento'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.birthPlaceControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -60,8 +61,9 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Fecha de Nacimiento',
-                isEdited: widget.provider.containsKey('fechaNacimiento'),
+                label: l10n.fechaNac,
+                modifiedData: widget.provider.getByKey('fechaNacimiento'),
+                showButton: widget.operation.isCreate,
                 formControl: widget.form.birthDateControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -79,8 +81,9 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Lugar de inscripción de nacimiento',
-                isEdited: widget.provider.containsKey('lugarInscripcion'),
+                label: l10n.lugarInscNac,
+                modifiedData: widget.provider.getByKey('lugarInscripcion'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionPlaceControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -98,9 +101,9 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Año de inscripción',
-                isEdited:
-                    widget.provider.containsKey('anioInscripcionNacimiento'),
+                label: l10n.annoInscripcion,
+                modifiedData: widget.provider.getByKey('anioInscripcionNacimiento'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionYearControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -118,9 +121,9 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Fecha de inscripción',
-                isEdited:
-                widget.provider.containsKey('fechaInscripcionNacimiento'),
+                label: l10n.fechaInscripcion,
+                modifiedData: widget.provider.getByKey('fechaInscripcionNacimiento'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionDateControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -138,9 +141,9 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Tomo',
-                isEdited:
-                widget.provider.containsKey('tomo'),
+                label: l10n.tomo,
+                modifiedData: widget.provider.getByKey('tomo'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.volumeControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -158,9 +161,9 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Página',
-                isEdited:
-                widget.provider.containsKey('pagina'),
+                label: l10n.pagina,
+                modifiedData: widget.provider.getByKey('pagina'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.pageControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -178,9 +181,9 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Acta',
-                isEdited:
-                widget.provider.containsKey('acta'),
+                label: l10n.acta,
+                modifiedData: widget.provider.getByKey('acta'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.recordControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -198,9 +201,9 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Clase',
-                isEdited:
-                widget.provider.containsKey('clase'),
+                label: l10n.clase,
+                modifiedData: widget.provider.getByKey('clase'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.birthClassControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -218,8 +221,9 @@ class _BirthValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Nacionalidad',
-                isEdited: widget.provider.containsKey('nacionalidad'),
+                label: l10n.nacionalidad,
+                modifiedData: widget.provider.getByKey('nacionalidad'),
+                showButton: widget.operation.isCreate,
                 formControl: widget.form.nationalityControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(

@@ -42,8 +42,9 @@ class _MarriageValidationPersonalTabPage
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               EditableReactiveTextField(
-                label: 'Lugar de ceremonia de matrimonio',
-                isEdited: widget.provider.containsKey('lugarMatrimonio'),
+                label: l10n.lugarCeremMat,
+                modifiedData: widget.provider.getByKey('lugarMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriagePlaceControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -61,8 +62,9 @@ class _MarriageValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Fecha de ceremonia',
-                isEdited: widget.provider.containsKey('fechaMatrimonio'),
+                label: l10n.fechaCeremonia,
+                modifiedData: widget.provider.getByKey('fechaMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriageDateControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -80,8 +82,9 @@ class _MarriageValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Tomo',
-                isEdited: widget.provider.containsKey('tomoMatrimonio'),
+                label: l10n.tomo,
+                modifiedData: widget.provider.getByKey('tomoMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriageVolumeControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -99,9 +102,9 @@ class _MarriageValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Página',
-                isEdited:
-                widget.provider.containsKey('paginaMatrimonio'),
+                label: l10n.pagina,
+                modifiedData: widget.provider.getByKey('paginaMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriagePageControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -119,9 +122,9 @@ class _MarriageValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Acta',
-                isEdited:
-                widget.provider.containsKey('actaMatrimonio'),
+                label: l10n.acta,
+                modifiedData: widget.provider.getByKey('actaMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriageRecordControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -139,9 +142,9 @@ class _MarriageValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Clase',
-                isEdited:
-                widget.provider.containsKey('claseMatrimonio'),
+                label: l10n.clase,
+                modifiedData: widget.provider.getByKey('claseMatrimonio'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.marriageClassControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -159,13 +162,13 @@ class _MarriageValidationPersonalTabPage
                 },
               ),
               const SizedBox(height: 12,),
-              const PrimaryTitle(
-                title: 'Datos del cónyuge',
+              PrimaryTitle(
+                title: l10n.datosConyuge,
               ),
               EditableReactiveTextField(
-                label: 'NUI',
-                isEdited:
-                widget.provider.containsKey('nuiConyuge'),
+                label: l10n.nui,
+                modifiedData: widget.provider.getByKey('nuiConyuge'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.spouseNuiControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -183,9 +186,9 @@ class _MarriageValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Nombres cónyuge',
-                isEdited:
-                widget.provider.containsKey('conyuge'),
+                label: l10n.nombresConyuge,
+                modifiedData: widget.provider.getByKey('conyuge'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.spouseNameControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(

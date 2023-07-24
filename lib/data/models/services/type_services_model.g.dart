@@ -80,4 +80,5 @@ const _$ServiceTypeEnumMap = {
   ServiceType.electronicSignature: 'SERVICE_ELECTRONIC_SIGNATURE',
   ServiceType.cedulacionExtPriVez: 'FORMALITY_FIRST_FOREIGN_IDENTITY',
   ServiceType.personalValidation: 'SERVICE_PERSONAL_VALIDATION',
+  ServiceType.birthAbroad: 'FORMALITY_BIRTH_OUTSIDE_REGISTER',
 };

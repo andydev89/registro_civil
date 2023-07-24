@@ -419,7 +419,37 @@ part 'router.gr.dart';
                   transitionsBuilder: TransitionsBuilders.slideRight,
                 ),
               ],
-            )
+            ),
+          ],
+        ),
+        //BIRTH_ABROAD
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: BirthAbroadRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: BirthAbroadMainPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+            CupertinoRoute(
+              page: BirthAbroadFirstStepRouterPage,
+              children: [
+                CustomRoute(
+                  initial: true,
+                  page: BirthAbroadFirstStepPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                CustomRoute(
+                  page: BirthAbroadSecondStepPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+                CustomRoute(
+                  page: BirthAbroadThirdStepPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+              ],
+            ),
           ],
         ),
         //CEDULACION EXTRANJERO PRIMERA VEZ

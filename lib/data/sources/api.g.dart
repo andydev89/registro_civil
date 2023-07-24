@@ -1327,7 +1327,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'https://payment.sourcecodesas.com/placetopay/833f470c-97d2-4145-ab9a-79b9d79ed11c/transactions',
+              'https://payment.sourcecodesas.com/placetopay/798de007-ce14-4ea7-ba02-94877625ce6d/transactions',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1351,7 +1351,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              'https://payment.sourcecodesas.com/placetopay/833f470c-97d2-4145-ab9a-79b9d79ed11c/transactions/${reference}',
+              'https://payment.sourcecodesas.com/placetopay/798de007-ce14-4ea7-ba02-94877625ce6d/transactions/${reference}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1693,28 +1693,140 @@ class _Api implements Api {
   }
 
   @override
+<<<<<<< HEAD
   Future<ResponseModel<CedulacionExtpVResModel>> validateVisaDataRequest(
       CedulacionExtpVModel model) async {
+=======
+  Future<ResponseModelPagination<List<BirthAbroadListModel>>> birthsAbroad({
+    int pageNo = 0,
+    int pageSize = 20,
+    String filter = '',
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+      r'filter': filter,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<BirthAbroadListModel>>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/citizenship/api/citizenship',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModelPagination<List<BirthAbroadListModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<BirthAbroadListModel>((i) =>
+                  BirthAbroadListModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandWithTransactionCodeModel>> createBirthAbroad(
+      {required BirthAbroadModel model}) async {
+>>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = model;
     final _result = await _dio.fetch<Map<String, dynamic>>(
+<<<<<<< HEAD
         _setStreamType<ResponseModel<CedulacionExtpVResModel>>(Options(
+=======
+        _setStreamType<ResponseModel<CommandWithTransactionCodeModel>>(Options(
+>>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
+<<<<<<< HEAD
               '/firsttimeforeignerid/api/validate',
+=======
+              '/citizenship/api/citizenship',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandWithTransactionCodeModel>.fromJson(
+      _result.data!,
+      (json) => CommandWithTransactionCodeModel.fromJson(
+          json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<BirthAbroadListModel>> birthAbroadById(String id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<BirthAbroadListModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/citizenship/api/citizenship/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<BirthAbroadListModel>.fromJson(
+      _result.data!,
+      (json) => BirthAbroadListModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<Certificate>> documentById(String id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<Certificate>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/citizenship/api/citizenship/document/${id}',
+>>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+<<<<<<< HEAD
     final value = ResponseModel<CedulacionExtpVResModel>.fromJson(
       _result.data!,
       (json) => CedulacionExtpVResModel.fromJson(json as Map<String, dynamic>),
+=======
+    final value = ResponseModel<Certificate>.fromJson(
+      _result.data!,
+      (json) => Certificate.fromJson(json as Map<String, dynamic>),
+>>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
     );
     return value;
   }

@@ -41,12 +41,13 @@ class _ParentsValidationPersonalTabPage
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const PrimaryTitle(
-            title: 'Progenitor',
+          PrimaryTitle(
+            title: l10n.padre,
           ),
           EditableReactiveTextField(
-            label: 'NUI',
-            isEdited: widget.provider.containsKey('nuiPadre'),
+            label: l10n.nui,
+            modifiedData: widget.provider.getByKey('nuiPadre'),
+            showButton: widget.operation.isCreate,
             formControl: widget.form.fatherNuiControl,
             textCapitalization: TextCapitalization.words,
             onSavePressed: (prev) {
@@ -64,8 +65,9 @@ class _ParentsValidationPersonalTabPage
             },
           ),
           EditableReactiveTextField(
-            label: 'Nombre progenitor',
-            isEdited: widget.provider.containsKey('nombrePadre'),
+            label: l10n.nombrePadre,
+            modifiedData: widget.provider.getByKey('nombrePadre'),
+            showButton: widget.operation.isCreate,
             formControl: widget.form.fatherNameControl,
             textCapitalization: TextCapitalization.words,
             onSavePressed: (prev) {
@@ -83,8 +85,9 @@ class _ParentsValidationPersonalTabPage
             },
           ),
           EditableReactiveTextField(
-            label: 'Nacionalidad',
-            isEdited: widget.provider.containsKey('nacionalidadPadre'),
+            label: l10n.nacionalidad,
+            modifiedData: widget.provider.getByKey('nacionalidadPadre'),
+            showButton: widget.operation.isCreate,
             formControl: widget.form.fatherNationalityControl,
             textCapitalization: TextCapitalization.words,
             onSavePressed: (prev) {
@@ -103,12 +106,13 @@ class _ParentsValidationPersonalTabPage
             },
           ),
           const SizedBox(height: 12,),
-          const PrimaryTitle(
-            title: 'Progenitora',
+          PrimaryTitle(
+            title: l10n.madre,
           ),
           EditableReactiveTextField(
             label: 'NUI',
-            isEdited: widget.provider.containsKey('nuiMadre'),
+            modifiedData: widget.provider.getByKey('nuiMadre'),
+            showButton: widget.operation.isCreate,
             formControl: widget.form.motherNuiControl,
             textCapitalization: TextCapitalization.words,
             onSavePressed: (prev) {
@@ -126,8 +130,9 @@ class _ParentsValidationPersonalTabPage
             },
           ),
           EditableReactiveTextField(
-            label: 'Nombre progenitor',
-            isEdited: widget.provider.containsKey('nombreMadre'),
+            label: l10n.nombreMadre,
+            modifiedData: widget.provider.getByKey('nombreMadre'),
+            showButton: widget.operation.isCreate,
             formControl: widget.form.motherNameControl,
             textCapitalization: TextCapitalization.words,
             onSavePressed: (prev) {
@@ -145,8 +150,9 @@ class _ParentsValidationPersonalTabPage
             },
           ),
           EditableReactiveTextField(
-            label: 'Nacionalidad',
-            isEdited: widget.provider.containsKey('nacionalidadMadre'),
+            label: l10n.nacionalidad,
+            modifiedData: widget.provider.getByKey('nacionalidadMadre'),
+            showButton: widget.operation.isCreate,
             formControl: widget.form.motherNationalityControl,
             textCapitalization: TextCapitalization.words,
             onSavePressed: (prev) {

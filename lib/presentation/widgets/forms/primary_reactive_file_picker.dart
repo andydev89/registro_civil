@@ -26,6 +26,7 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
     this.ligth = false,
     this.label,
     this.onRemove,
+    this.readOnly = false,
   }) : assert(
           maxFileSizeMB <= 5 && maxFileSizeMB > 0,
           'El tamaño debe ser entre 1 y 5 MB',
@@ -37,10 +38,11 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
   final List<FileExtension> allowedExtensions;
   final int maxFileSizeMB;
   final FileExtension fileExtension;
-  final void Function(T?, String)? onFileSelected;
+  final void Function(T?, String, String?)? onFileSelected;
   final bool ligth;
   final String? label;
   final void Function()? onRemove;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +58,10 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
             if (!ligth && label != null)
               PrimaryText(
                 label!,
+                textAlign: TextAlign.justify,
               ),
             InkWell(
-              onTap: !select.value
+              onTap: !select.value && !readOnly
                   ? () async {
                       final result = await FilePicker.platform.pickFiles(
                         allowedExtensions:
@@ -80,15 +83,16 @@ class PrimaryReactiveFilePicker<T> extends StatelessWidget {
                           final pdfBytes = pdfFile.readAsBytesSync();
                           final base64Pdf =
                               'data:application/${fileExtension.value};base64,${base64Encode(pdfBytes)}';
+                          name = result.files.single.name;
                           if (base64Pdf is T) {
                             field.didChange(base64Pdf as T);
                           } else {
                             onFileSelected?.call(
-                              formControl!.value,
+                              formControl?.value,
                               base64Pdf,
+                              name,
                             );
                           }
-                          name = result.files.single.name;
                           select.value = true;
                         } catch (e) {
                           if (onRemove == null) field.didChange(null);

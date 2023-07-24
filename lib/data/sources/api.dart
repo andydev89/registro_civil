@@ -260,14 +260,14 @@ abstract class Api {
 
   //PLACE TO PAY PAYMENT
   @POST(
-    'https://payment.sourcecodesas.com/placetopay/833f470c-97d2-4145-ab9a-79b9d79ed11c/transactions',
+    'https://payment.sourcecodesas.com/placetopay/798de007-ce14-4ea7-ba02-94877625ce6d/transactions',
   )
   Future<PlaceToPayReferenceModel> createPlaceToPayTransaction(
     @Body() PlaceToPayModel placeToPayModel,
   );
 
   @GET(
-    'https://payment.sourcecodesas.com/placetopay/833f470c-97d2-4145-ab9a-79b9d79ed11c/transactions/{reference}',
+    'https://payment.sourcecodesas.com/placetopay/798de007-ce14-4ea7-ba02-94877625ce6d/transactions/{reference}',
   )
   Future<PlaceToPayTransactionDetailsModel?> checkPlaceToPayTransaction(
     @Path('reference') String reference,
@@ -334,8 +334,33 @@ abstract class Api {
     @Body() PersonalValidationRequestModel model,
   );
 
+<<<<<<< HEAD
   @POST('/firsttimeforeignerid/api/validate')
   Future<ResponseModel<CedulacionExtpVResModel>> validateVisaDataRequest(
     @Body() CedulacionExtpVModel model,
   );
+=======
+  //BIRTH ABROAD
+  @GET('/citizenship/api/citizenship')
+  Future<ResponseModelPagination<List<BirthAbroadListModel>>> birthsAbroad({
+    @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+    @Query('filter') String filter = '',
+  });
+
+  @POST('/citizenship/api/citizenship')
+  Future<ResponseModel<CommandWithTransactionCodeModel>> createBirthAbroad({
+    @Body() required BirthAbroadModel model,
+  });
+
+  @GET('/citizenship/api/citizenship/{id}')
+  Future<ResponseModel<BirthAbroadListModel>> birthAbroadById(
+      @Path('id') String id,
+      );
+
+  @GET('/citizenship/api/citizenship/document/{id}')
+  Future<ResponseModel<Certificate>> documentById(
+      @Path('id') String id,
+      );
+>>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
 }

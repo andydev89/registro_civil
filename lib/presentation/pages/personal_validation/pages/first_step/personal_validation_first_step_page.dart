@@ -50,18 +50,17 @@ class _PersonalValidationFirstStepPageState
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final tabs = [
-      'Personal',
-      'Nacimiento',
-      'Progenitores',
-      'Matrimonio',
-      'Union de Hecho',
-      'Registro de género'
+      l10n.personal,
+      l10n.nacimiento,
+      l10n.progenitores,
+      l10n.matrimonio,
+      l10n.registroGenero
     ];
     final provider = ref.watch(personalDataByIdProvider);
     final reqProvider = ref.watch(personalValidationRequestsProvider.notifier);
 
     return PersonalValidationModelFormBuilder(
-      model: widget.operation.isCreate ? provider.value?.response : null,
+      model: provider.value?.response,
       builder: (context, formModel, child) {
         return PrimaryScaffold(
           title: 'Validación de datos personales',
@@ -148,7 +147,6 @@ class _PersonalValidationFirstStepPageState
                                     operation: widget.operation,
                                     provider: reqProvider,
                                   ),
-                                  Container(),
                                 ],
                               ),
                             ),
@@ -193,9 +191,37 @@ class _PersonalValidationFirstStepPageState
                                     )
                                         .when(
                                       ok: (data) {
-                                        showAlert(
-                                          'Solicitud Enviada Satisfactoriamente',
-                                          TypeAlert.success,
+                                        context
+                                          ..navigateTo(
+                                            PersonalValidationMainRoute(
+                                              typeServiceModel:
+                                                  widget.typeServiceModel,
+                                            ),
+                                          )
+                                          ..navigateTo(
+                                            NotificationRoute(
+                                              title:
+                                                  l10n.solicConfirm,
+                                              message:
+                                                  l10n.solicOK,
+                                              notificationType:
+                                                  NotificationType.success,
+                                              buttonText: l10n.continuar,
+                                              onTap: (ctx) => ctx.navigateTo(
+                                                PersonalValidationRouterRoute(
+                                                  children: [
+                                                    PersonalValidationMainRoute(
+                                                      typeServiceModel: widget
+                                                          .typeServiceModel,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        //Refrescar provider que contiene las solicitudes.
+                                        ref.refresh(
+                                          personalValidationsProvider(),
                                         );
                                       },
                                       err: (err) {
@@ -215,7 +241,7 @@ class _PersonalValidationFirstStepPageState
                 : PrimaryButton(
                     title: l10n.aceptar,
                     onPressed: () => context.navigateTo(
-                      ElectronicSignatureMainRoute(
+                      PersonalValidationMainRoute(
                         typeServiceModel: widget.typeServiceModel,
                       ),
                     ),

@@ -87,6 +87,13 @@ PageRouteInfo<dynamic> getPersonalValidation(TypeServiceModel typeOfService) =>
       ],
     );
 
+PageRouteInfo<dynamic> getBirthAbroad(TypeServiceModel typeOfService) =>
+    BirthAbroadRouterRoute(
+      children: [
+        BirthAbroadMainRoute(typeServiceModel: typeOfService),
+      ],
+    );
+
 PageRouteInfo<dynamic> getDefault(TypeServiceModel typeOfService) =>
     DefaultRoute(typeServiceModel: typeOfService);
 
@@ -127,6 +134,12 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
   if (type.isPersonalValidation) {
     return getPersonalValidation(typeServiceModel);
   }
+<<<<<<< HEAD
 
+=======
+  if (type.isBirthAbroad) {
+    return getBirthAbroad(typeServiceModel);
+  }
+>>>>>>> 956f9a1e520fed8d203bcb2f5bc44944da6c87c0
   return getDefault(typeServiceModel);
 }

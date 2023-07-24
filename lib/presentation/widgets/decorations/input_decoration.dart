@@ -62,7 +62,7 @@ InputDecoration primaryInputDecoration({
 
 InputDecoration editableInputDecoration({
   bool light = false,
-  required Widget suffixIcon,
+  Widget? suffixIcon,
   Widget? prefixIcon,
   double? fontSize,
   FontWeight? fontWeight,
@@ -73,16 +73,10 @@ InputDecoration editableInputDecoration({
   bool filled = false,
 }) {
   return InputDecoration(
-    suffixIcon: Padding(
+    suffixIcon: suffixIcon != null ? Padding(
       padding: const EdgeInsets.only(left: 10),
       child: suffixIcon,
-    ),
-    suffixIconConstraints: setSuffixIconConstraints
-        ? const BoxConstraints(
-      // maxWidth: 40,
-      maxHeight: 40,
-    )
-        : null,
+    ) : null,
     filled: filled,
     fillColor: Colors.red.withOpacity(.2),
     hintText: hintText,

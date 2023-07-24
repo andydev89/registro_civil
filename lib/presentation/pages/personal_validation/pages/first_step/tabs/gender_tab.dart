@@ -42,8 +42,9 @@ class _GenderValidationPersonalTabPage
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               EditableReactiveTextField(
-                label: 'Lugar de inscripción',
-                isEdited: widget.provider.containsKey('lugarInscripcionGenero'),
+                label: l10n.lugarInscripcion,
+                modifiedData: widget.provider.getByKey('lugarInscripcionGenero'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionPlaceControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -61,8 +62,9 @@ class _GenderValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Fecha de inscripción',
-                isEdited: widget.provider.containsKey('fechaInscripcionGenero'),
+                label: l10n.fechaInscripcion,
+                modifiedData: widget.provider.getByKey('fechaInscripcionGenero'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionDateControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
@@ -80,8 +82,9 @@ class _GenderValidationPersonalTabPage
                 },
               ),
               EditableReactiveTextField(
-                label: 'Género',
-                isEdited: widget.provider.containsKey('genero'),
+                label: l10n.genero,
+                modifiedData: widget.provider.getByKey('genero'),
+                showButton: widget.operation.isCreate,
                 formControl: formModel.genderControl,
                 onSavePressed: (prev) {
                   widget.provider.addRequest(
