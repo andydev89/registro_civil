@@ -1509,7 +1509,6 @@ class _$AppRouter extends RootStackRouter {
               BirthAbroadRouterRoute.name,
               path: 'birth-abroad-router-page',
               parent: RootRouterRoute.name,
-              guards: [authGuard],
               children: [
                 RouteConfig(
                   BirthAbroadMainRoute.name,

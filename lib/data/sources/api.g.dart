@@ -1733,6 +1733,47 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModelPagination<List<BirthAbroadListModel>>>
+      birthsAbroadNoResident({
+    int pageNo = 0,
+    int pageSize = 20,
+    String filter = '',
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+      r'filter': filter,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<BirthAbroadListModel>>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/citizenship/api/noresident/citizenship',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModelPagination<List<BirthAbroadListModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<BirthAbroadListModel>((i) =>
+                  BirthAbroadListModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModel<CommandWithTransactionCodeModel>> createBirthAbroad(
       {required BirthAbroadModel model}) async {
     const _extra = <String, dynamic>{};
@@ -1748,6 +1789,34 @@ class _Api implements Api {
             .compose(
               _dio.options,
               '/citizenship/api/citizenship',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<CommandWithTransactionCodeModel>.fromJson(
+      _result.data!,
+      (json) => CommandWithTransactionCodeModel.fromJson(
+          json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<CommandWithTransactionCodeModel>>
+      createNoResidentBirthAbroad({required BirthAbroadModel model}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = model;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<CommandWithTransactionCodeModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/citizenship/api/noresident/citizenship',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1787,6 +1856,33 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModel<BirthAbroadListModel>> birthAbroadNoResidentById(
+      String id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<BirthAbroadListModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/citizenship/api/noresident/citizenship/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<BirthAbroadListModel>.fromJson(
+      _result.data!,
+      (json) => BirthAbroadListModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModel<Certificate>> documentById(String id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1801,6 +1897,32 @@ class _Api implements Api {
             .compose(
               _dio.options,
               '/citizenship/api/citizenship/document/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModel<Certificate>.fromJson(
+      _result.data!,
+      (json) => Certificate.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<ResponseModel<Certificate>> documentNoResidentById(String id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModel<Certificate>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/citizenship/api/noresident/citizenship/document/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

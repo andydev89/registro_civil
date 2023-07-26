@@ -341,18 +341,42 @@ abstract class Api {
     @Query('filter') String filter = '',
   });
 
+  @GET('/citizenship/api/noresident/citizenship')
+  Future<ResponseModelPagination<List<BirthAbroadListModel>>>
+      birthsAbroadNoResident({
+    @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+    @Query('filter') String filter = '',
+  });
+
   @POST('/citizenship/api/citizenship')
   Future<ResponseModel<CommandWithTransactionCodeModel>> createBirthAbroad({
     @Body() required BirthAbroadModel model,
   });
 
+  @POST('/citizenship/api/noresident/citizenship')
+  Future<ResponseModel<CommandWithTransactionCodeModel>>
+      createNoResidentBirthAbroad({
+    @Body() required BirthAbroadModel model,
+  });
+
   @GET('/citizenship/api/citizenship/{id}')
   Future<ResponseModel<BirthAbroadListModel>> birthAbroadById(
-      @Path('id') String id,
-      );
+    @Path('id') String id,
+  );
+
+  @GET('/citizenship/api/noresident/citizenship/{id}')
+  Future<ResponseModel<BirthAbroadListModel>> birthAbroadNoResidentById(
+    @Path('id') String id,
+  );
 
   @GET('/citizenship/api/citizenship/document/{id}')
   Future<ResponseModel<Certificate>> documentById(
-      @Path('id') String id,
-      );
+    @Path('id') String id,
+  );
+
+  @GET('/citizenship/api/noresident/citizenship/document/{id}')
+  Future<ResponseModel<Certificate>> documentNoResidentById(
+    @Path('id') String id,
+  );
 }

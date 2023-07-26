@@ -61,10 +61,11 @@ class BirthAbroadModel with _$BirthAbroadModel {
       registerOwnerType: model.registerOwnerType,
       requestOwner: model.requestOwnerId,
       registerOwner: RegisterOwner(
-          name: model.name,
-          identification: model.identification,
-          email: model.email,
-          phone: model.phone),
+        name: model.name,
+        identification: model.identification,
+        email: model.email,
+        phone: model.phone,
+      ),
       birthCertificate: Certificate(id: model.birthCertificateId),
       identity: Certificate(id: model.identityId),
       powerOfAttorney: Certificate(id: model.powerOfAttorneyId),
@@ -83,23 +84,32 @@ class RegisterOwnerSubModel with _$RegisterOwnerSubModel {
   const factory RegisterOwnerSubModel({
     @FormControlAnnotation(validators: [requiredValidator])
         RegisterOwnerType? registerOwnerType,
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [
-        requiredValidator,
         ecuadorDniValidator,
         length10Validator,
       ],
     )
         String? identification,
+    @FormControlAnnotation<String>()
+        String? passport,
     @FormControlAnnotation(
       validators: [
         requiredValidator,
       ],
     )
         String? name,
-    @FormControlAnnotation<String>()
+    @FormControlAnnotation<String>(
+      validators: [
+        requiredValidator,
+      ],
+    )
         String? email,
-    @FormControlAnnotation<String>()
+    @FormControlAnnotation<String>(
+      validators: [
+        requiredValidator,
+      ],
+    )
         String? phone,
   }) = _RegisterOwnerForm;
 
@@ -205,11 +215,5 @@ Map<String, dynamic>? powerOfAttorneyValidatorGroup(
     return null;
   }
 
-  /*if (isAttorney && token.isEmpty) {
-    (birthAbroadModel as FormGroup)
-        .controls['deviceTokenSerialNumber']!
-        .setErrors({ValidationMessage.required: true});
-    return {ValidationMessage.required: true};
-  }*/
   return null; // Devuelve null si la validación es exitosa
 }

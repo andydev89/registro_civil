@@ -27,6 +27,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
     this.prefixIcon,
     this.readOnly = false,
     this.onChanged,
+    this.maxLines,
   });
   final FormControl<T>? formControl;
   final String? formControlName;
@@ -41,6 +42,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
   final Widget? prefixIcon;
   final bool readOnly;
   final void Function(FormControl<T?>)? onChanged;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +106,7 @@ class PrimaryReactiveDropdown<T> extends HookWidget {
                     e.translate(context),
                     textAlign: TextAlign.start,
                     overFlow: TextOverflow.ellipsis,
+                    maxLines: maxLines,
                   ),
                 ),
               )

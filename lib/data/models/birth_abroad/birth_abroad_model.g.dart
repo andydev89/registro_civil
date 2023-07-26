@@ -85,6 +85,7 @@ _$_RegisterOwnerForm _$$_RegisterOwnerFormFromJson(Map<String, dynamic> json) =>
       registerOwnerType: $enumDecodeNullable(
           _$RegisterOwnerTypeEnumMap, json['registerOwnerType']),
       identification: json['identification'] as String?,
+      passport: json['passport'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
       phone: json['phone'] as String?,
@@ -96,6 +97,7 @@ Map<String, dynamic> _$$_RegisterOwnerFormToJson(
       'registerOwnerType':
           _$RegisterOwnerTypeEnumMap[instance.registerOwnerType],
       'identification': instance.identification,
+      'passport': instance.passport,
       'name': instance.name,
       'email': instance.email,
       'phone': instance.phone,

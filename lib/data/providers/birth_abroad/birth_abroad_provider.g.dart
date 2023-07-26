@@ -6,7 +6,7 @@ part of 'birth_abroad_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$birthsAbroadHash() => r'dc7a3b7e29d2e71849b04a7a5207bbbccb76ab48';
+String _$birthsAbroadHash() => r'29f4013ab8a8db59d2e5100c4a2228e0c985feb2';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -113,7 +113,7 @@ class BirthsAbroadProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$createBirthAbroadHash() => r'eb029e882a0b8651dbc86c0080d3c1c7eb4a7c9c';
+String _$createBirthAbroadHash() => r'20043bd3c13ab093956cee8f85962c7837819c37';
 typedef CreateBirthAbroadRef = AutoDisposeFutureProviderRef<
     Result<CommandWithTransactionCodeModel, StatusCodeType>>;
 
@@ -198,7 +198,7 @@ class CreateBirthAbroadProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$birthAbroadByIdHash() => r'733d98d40dbf496f6ffc50d08c54b6294e8feae5';
+String _$birthAbroadByIdHash() => r'c1515318221d7bd779840f5d6d4727ffe0dd169f';
 typedef BirthAbroadByIdRef = AutoDisposeFutureProviderRef<BirthAbroadListModel>;
 
 /// See also [birthAbroadById].
@@ -212,10 +212,12 @@ class BirthAbroadByIdFamily extends Family<AsyncValue<BirthAbroadListModel>> {
 
   /// See also [birthAbroadById].
   BirthAbroadByIdProvider call(
-    String id,
-  ) {
+    String id, {
+    ForeignType type = ForeignType.resident,
+  }) {
     return BirthAbroadByIdProvider(
       id,
+      type: type,
     );
   }
 
@@ -225,6 +227,7 @@ class BirthAbroadByIdFamily extends Family<AsyncValue<BirthAbroadListModel>> {
   ) {
     return call(
       provider.id,
+      type: provider.type,
     );
   }
 
@@ -248,11 +251,13 @@ class BirthAbroadByIdProvider
     extends AutoDisposeFutureProvider<BirthAbroadListModel> {
   /// See also [birthAbroadById].
   BirthAbroadByIdProvider(
-    this.id,
-  ) : super.internal(
+    this.id, {
+    this.type = ForeignType.resident,
+  }) : super.internal(
           (ref) => birthAbroadById(
             ref,
             id,
+            type: type,
           ),
           from: birthAbroadByIdProvider,
           name: r'birthAbroadByIdProvider',
@@ -266,22 +271,26 @@ class BirthAbroadByIdProvider
         );
 
   final String id;
+  final ForeignType type;
 
   @override
   bool operator ==(Object other) {
-    return other is BirthAbroadByIdProvider && other.id == id;
+    return other is BirthAbroadByIdProvider &&
+        other.id == id &&
+        other.type == type;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, type.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-String _$documentByIdHash() => r'dff464353fc91eed9684b168262e9eb6b42918d7';
+String _$documentByIdHash() => r'baf996f9dfb48d9639c09e4f4ca3869f99f6df71';
 typedef DocumentByIdRef
     = AutoDisposeFutureProviderRef<Result<Certificate, StatusCodeType>>;
 
@@ -298,9 +307,11 @@ class DocumentByIdFamily
   /// See also [documentById].
   DocumentByIdProvider call({
     required String id,
+    ForeignType type = ForeignType.resident,
   }) {
     return DocumentByIdProvider(
       id: id,
+      type: type,
     );
   }
 
@@ -310,6 +321,7 @@ class DocumentByIdFamily
   ) {
     return call(
       id: provider.id,
+      type: provider.type,
     );
   }
 
@@ -334,10 +346,12 @@ class DocumentByIdProvider
   /// See also [documentById].
   DocumentByIdProvider({
     required this.id,
+    this.type = ForeignType.resident,
   }) : super.internal(
           (ref) => documentById(
             ref,
             id: id,
+            type: type,
           ),
           from: documentByIdProvider,
           name: r'documentByIdProvider',
@@ -351,22 +365,26 @@ class DocumentByIdProvider
         );
 
   final String id;
+  final ForeignType type;
 
   @override
   bool operator ==(Object other) {
-    return other is DocumentByIdProvider && other.id == id;
+    return other is DocumentByIdProvider &&
+        other.id == id &&
+        other.type == type;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, type.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-String _$birthAbroadHash() => r'26ea0f47aec2da939f682488b3b9e42110c1d21e';
+String _$birthAbroadHash() => r'1cb38fe3c563d831088c9f1ed87a511b90e39a16';
 
 /// See also [BirthAbroad].
 @ProviderFor(BirthAbroad)

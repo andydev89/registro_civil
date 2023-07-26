@@ -424,7 +424,6 @@ part 'router.gr.dart';
         ),
         //BIRTH_ABROAD
         CupertinoRoute(
-          guards: [AuthGuard],
           page: BirthAbroadRouterPage,
           children: [
             CustomRoute(
