@@ -169,17 +169,15 @@ class __$$_CedulacionExtpVResModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
-class _$_CedulacionExtpVResModel extends _CedulacionExtpVResModel {
+@JsonSerializable()
+class _$_CedulacionExtpVResModel implements _CedulacionExtpVResModel {
   const _$_CedulacionExtpVResModel(
       {this.timestamp,
       this.status,
       this.message,
       final List<String>? errors,
       this.data})
-      : _errors = errors,
-        super._();
+      : _errors = errors;
 
   factory _$_CedulacionExtpVResModel.fromJson(Map<String, dynamic> json) =>
       _$$_CedulacionExtpVResModelFromJson(json);
@@ -242,14 +240,13 @@ class _$_CedulacionExtpVResModel extends _CedulacionExtpVResModel {
   }
 }
 
-abstract class _CedulacionExtpVResModel extends CedulacionExtpVResModel {
+abstract class _CedulacionExtpVResModel implements CedulacionExtpVResModel {
   const factory _CedulacionExtpVResModel(
       {final String? timestamp,
       final int? status,
       final String? message,
       final List<String>? errors,
       final Data? data}) = _$_CedulacionExtpVResModel;
-  const _CedulacionExtpVResModel._() : super._();
 
   factory _CedulacionExtpVResModel.fromJson(Map<String, dynamic> json) =
       _$_CedulacionExtpVResModel.fromJson;
@@ -367,10 +364,9 @@ class __$$_DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res, _$_Data>
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
-class _$_Data extends _Data {
-  const _$_Data({this.visa, this.transactionCode, this.command}) : super._();
+@JsonSerializable()
+class _$_Data implements _Data {
+  const _$_Data({this.visa, this.transactionCode, this.command});
 
   factory _$_Data.fromJson(Map<String, dynamic> json) => _$$_DataFromJson(json);
 
@@ -415,12 +411,11 @@ class _$_Data extends _Data {
   }
 }
 
-abstract class _Data extends Data {
+abstract class _Data implements Data {
   const factory _Data(
       {final String? visa,
       final int? transactionCode,
       final String? command}) = _$_Data;
-  const _Data._() : super._();
 
   factory _Data.fromJson(Map<String, dynamic> json) = _$_Data.fromJson;
 

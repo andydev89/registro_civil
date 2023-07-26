@@ -4,16 +4,12 @@ import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:registro_civil_apk/data/enum/enums.dart';
-import 'package:registro_civil_apk/data/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/data/utils/utils.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
-
-import '../widgets/first_step_form.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
 
 class CedulacionExtPvezMainPage extends ConsumerWidget {
   const CedulacionExtPvezMainPage({
@@ -25,7 +21,6 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(validarVisaProvider);
     final l10n = context.l10n;
 
     return PrimaryScaffold(
@@ -45,23 +40,25 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
                       init: true,
                       readOnly: false,
                     ),
-                    PrimaryReactiveTextField(
+                    PrimaryReactiveEmailField(
                       label: 'correo electronico',
                       readOnly: false,
                       formControl: formModel.emailControl,
-                      textCapitalization: TextCapitalization.words,
+                      // textCapitalization: TextCapitalization.words,
                     ),
                   ],
-                ).verticalPadding(10).horizontalPadding(20),
+                ).verticalPadding(30).horizontalPadding(20),
                 ReactiveCedulacionExtpVModelFormConsumer(
-                  builder: (_, formModel, __) => PrimaryButton(
+                  builder: (_, formModel, __) => PrimaryAsyncButton(
                     title: l10n.validar,
                     onPressed: formModel.form.valid
                         ? () => ref
                             .read(validarVisaProvider.notifier)
                             .validarvisa(formModel.model)
                             .when(
-                              ok: (value) => print(value.toJson().toString()),
+                              ok: (value) => context.navigateTo(
+                                CedulacionExtPvezSuccesRoute(),
+                              ),
                               err: (error) {
                                 showAlert(
                                   error.code.toString(),
@@ -69,7 +66,7 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
                                 );
                               },
                             )
-                        : () => print(formModel.form.valid.toString()),
+                        : null,
                   ).verticalPadding(10).horizontalPadding(20),
                 ),
                 PrimaryButton(

@@ -8,14 +8,14 @@ part 'cedulacion_ext_primera_vez_providers.g.dart';
 
 @riverpod
 class ValidarVisa extends _$ValidarVisa {
-  Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> validarvisa(
+  Future<Result<CedulacionExtpVResModel, StatusCodeType>> validarvisa(
     CedulacionExtpVModel? model,
   ) async {
     final api = ref.watch(apiProvider);
 
     final response = await api.validateVisaDataRequest(model!);
     return response.success
-        ? Result.ok(response.data! as CommandWithTransactionCodeModel)
+        ? Result.ok(response.data!)
         : Result.err(response.status);
   }
 
@@ -23,17 +23,4 @@ class ValidarVisa extends _$ValidarVisa {
   ValidarVisa build() {
     return ValidarVisa();
   }
-}
-
-@riverpod
-Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> validandovisa(
-  ValidandovisaRef ref, {
-  CedulacionExtpVModel? model,
-}) async {
-  final api = ref.read(apiProvider);
-
-  final response = await api.validateVisaDataRequest(model!);
-  return response.success
-      ? Result.ok(response.data! as CommandWithTransactionCodeModel)
-      : Result.err(response.status);
 }

@@ -1034,6 +1034,21 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    CedulacionExtPvezSuccesRoute.name: (routeData) {
+      final args = routeData.argsAs<CedulacionExtPvezSuccesRouteArgs>(
+          orElse: () => const CedulacionExtPvezSuccesRouteArgs());
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: CedulacionExtPvezSuccesPage(
+          key: args.key,
+          title: args.title,
+          subtitle: args.subtitle,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1568,7 +1583,12 @@ class _$AppRouter extends RootStackRouter {
                   CedulacionExtPvezMainRoute.name,
                   path: '',
                   parent: CedulacionExtPvezRouterRoute.name,
-                )
+                ),
+                RouteConfig(
+                  CedulacionExtPvezSuccesRoute.name,
+                  path: 'cedulacion-ext-pvez-succes-page',
+                  parent: CedulacionExtPvezRouterRoute.name,
+                ),
               ],
             ),
             RouteConfig(
@@ -4357,5 +4377,45 @@ class CedulacionExtPvezMainRouteArgs {
   @override
   String toString() {
     return 'CedulacionExtPvezMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [CedulacionExtPvezSuccesPage]
+class CedulacionExtPvezSuccesRoute
+    extends PageRouteInfo<CedulacionExtPvezSuccesRouteArgs> {
+  CedulacionExtPvezSuccesRoute({
+    Key? key,
+    String? title,
+    String? subtitle,
+  }) : super(
+          CedulacionExtPvezSuccesRoute.name,
+          path: 'cedulacion-ext-pvez-succes-page',
+          args: CedulacionExtPvezSuccesRouteArgs(
+            key: key,
+            title: title,
+            subtitle: subtitle,
+          ),
+        );
+
+  static const String name = 'CedulacionExtPvezSuccesRoute';
+}
+
+class CedulacionExtPvezSuccesRouteArgs {
+  const CedulacionExtPvezSuccesRouteArgs({
+    this.key,
+    this.title,
+    this.subtitle,
+  });
+
+  final Key? key;
+
+  final String? title;
+
+  final String? subtitle;
+
+  @override
+  String toString() {
+    return 'CedulacionExtPvezSuccesRouteArgs{key: $key, title: $title, subtitle: $subtitle}';
   }
 }

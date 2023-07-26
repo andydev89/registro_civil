@@ -26,7 +26,7 @@ Map<String, dynamic> _$$_CedulacionExtpVResModelToJson(
       'status': instance.status,
       'message': instance.message,
       'errors': instance.errors,
-      'data': instance.data?.toJson(),
+      'data': instance.data,
     };
 
 _$_Data _$$_DataFromJson(Map<String, dynamic> json) => _$_Data(

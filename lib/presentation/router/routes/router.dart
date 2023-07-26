@@ -461,6 +461,10 @@ part 'router.gr.dart';
               page: CedulacionExtPvezMainPage,
               transitionsBuilder: TransitionsBuilders.slideRight,
             ),
+            CustomRoute(
+              page: CedulacionExtPvezSuccesPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
           ],
         ),
 

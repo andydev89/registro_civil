@@ -667,5 +667,7 @@
   "tipoRegPropietario": "Owner registration type",
   "certificadoNacimiento": "Birth certificate from the country of origin apostilled or legalized and translated if applicable",
   "cedulaNacimiento": "Identity card or passport if you do not have an Ecuadorian ID of the parents or the applicant",
-  "poderEspNac": "Special power of attorney in case of being carried out by a third party"
+  "poderEspNac": "Special power of attorney in case of being carried out by a third party",
+  "cedextpvSatisfactorio": "Your validation has been \ncompleted successfully!",
+  "cedextpvInfoSatisfactorio": "We have sent a notification to your \nemail with the details of your request."
 }

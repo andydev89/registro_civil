@@ -667,5 +667,7 @@
   "tipoRegPropietario": "Tipo de registro del propietario",
   "certificadoNacimiento": "Certificado de nacimiento del país de origen apostillado o legalizado y traducido de ser el caso",
   "cedulaNacimiento": "Cédula de identidad o pasaporte de no tener cédula ecuatoriana de los progenitores o del solicitante",
-  "poderEspNac": "Poder especial en caso de ser realizado por un tercero"
+  "poderEspNac": "Poder especial en caso de ser realizado por un tercero",
+  "cedextpvSatisfactorio": "¡Su validación se ha realizado \nsatisfactoriamente!",
+  "cedextpvInfoSatisfactorio": "Le hemos enviado una notificación a su \ncorreo electrónico con los detalles de su solicitud."
 }
