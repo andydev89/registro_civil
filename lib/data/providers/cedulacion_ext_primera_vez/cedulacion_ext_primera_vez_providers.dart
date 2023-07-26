@@ -19,6 +19,7 @@ class ValidarVisa extends _$ValidarVisa {
         : Result.err(response.status);
   }
 
+  @override
   ValidarVisa build() {
     return ValidarVisa();
   }
