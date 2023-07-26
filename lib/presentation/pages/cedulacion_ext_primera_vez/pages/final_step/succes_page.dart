@@ -44,7 +44,7 @@ class CedulacionExtPvezSuccesPage extends StatelessWidget {
                 title: l10n.continuar,
                 onPressed: () {
                   // context.popRoute(const HomeRouterRoute());
-                  context.replaceRoute(const RootRouterRoute());
+                  context.navigateTo(const RootRouterRoute());
                 },
               ).verticalPadding(10).horizontalPadding(20),
             ],

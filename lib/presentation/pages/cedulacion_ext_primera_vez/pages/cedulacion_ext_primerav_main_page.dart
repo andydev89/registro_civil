@@ -56,7 +56,7 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
                             .read(validarVisaProvider.notifier)
                             .validarvisa(formModel.model)
                             .when(
-                              ok: (value) => context.navigateTo(
+                              ok: (value) => context.replaceRoute(
                                 CedulacionExtPvezSuccesRoute(),
                               ),
                               err: (error) {
