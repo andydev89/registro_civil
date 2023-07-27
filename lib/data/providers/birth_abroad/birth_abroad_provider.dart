@@ -20,6 +20,10 @@ class BirthAbroad extends _$BirthAbroad {
     state = state.copyWithFromListModel(model);
   }
 
+  String? getId() {
+    return state.id;
+  }
+
   void setForeignType(ForeignType type) {
     state = state.copyWith(
       foreignType: type,
@@ -29,6 +33,11 @@ class BirthAbroad extends _$BirthAbroad {
   ForeignType getForeignType() {
     return state.foreignType;
   }
+
+  RegisterOwnerType getRegisterOwnerType() {
+    return state.registerOwnerType;
+  }
+
 
   void setFirstStep({
     required RegisterOwnerSubModel registerOwner,
@@ -182,4 +191,24 @@ Future<Result<Certificate, StatusCodeType>> documentById(
   return response.success
       ? Result.ok(response.data!)
       : Result.err(response.status);
+}
+
+@riverpod
+Future<Result<CommandModel, StatusCodeType>>
+editBirthAbroadDocs(
+    EditBirthAbroadDocsRef ref, {
+      required BirthAbroadDocumentModel model,
+      ForeignType type = ForeignType.resident,
+    }) async {
+  final api = ref.watch(apiProvider);
+  ResponseModel<CommandModel> result;
+  if (type == ForeignType.resident) {
+    result = await api.editBirthAbroad(model: model);
+  } else {
+    result = await api.editNoResidentBirthAbroad(model: model);
+  }
+  if (result.success) {
+    return Result.ok(result.data!);
+  }
+  return Result.err(result.status);
 }

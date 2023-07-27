@@ -34,7 +34,7 @@ mixin _$BirthAbroadListModel {
   String? get cantonId => throw _privateConstructorUsedError;
   String? get agencyId => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: true)
-  StateDocument get state => throw _privateConstructorUsedError;
+  ProcessStatus get state => throw _privateConstructorUsedError;
   DateTime? get createAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -66,7 +66,7 @@ abstract class $BirthAbroadListModelCopyWith<$Res> {
       String? provinceId,
       String? cantonId,
       String? agencyId,
-      @JsonKey(includeFromJson: true) StateDocument state,
+      @JsonKey(includeFromJson: true) ProcessStatus state,
       DateTime? createAt,
       DateTime? updatedAt});
 }
@@ -168,7 +168,7 @@ class _$BirthAbroadListModelCopyWithImpl<$Res,
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as StateDocument,
+              as ProcessStatus,
       createAt: freezed == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
@@ -205,7 +205,7 @@ abstract class _$$_BirthAbroadListModelCopyWith<$Res>
       String? provinceId,
       String? cantonId,
       String? agencyId,
-      @JsonKey(includeFromJson: true) StateDocument state,
+      @JsonKey(includeFromJson: true) ProcessStatus state,
       DateTime? createAt,
       DateTime? updatedAt});
 }
@@ -304,7 +304,7 @@ class __$$_BirthAbroadListModelCopyWithImpl<$Res>
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as StateDocument,
+              as ProcessStatus,
       createAt: freezed == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
@@ -339,7 +339,7 @@ class _$_BirthAbroadListModel extends _BirthAbroadListModel {
       this.cantonId,
       this.agencyId,
       @JsonKey(includeFromJson: true)
-          this.state = StateDocument.pending,
+          this.state = ProcessStatus.pending,
       this.createAt,
       this.updatedAt})
       : super._();
@@ -379,7 +379,7 @@ class _$_BirthAbroadListModel extends _BirthAbroadListModel {
   final String? agencyId;
   @override
   @JsonKey(includeFromJson: true)
-  final StateDocument state;
+  final ProcessStatus state;
   @override
   final DateTime? createAt;
   @override
@@ -484,7 +484,7 @@ abstract class _BirthAbroadListModel extends BirthAbroadListModel {
       final String? provinceId,
       final String? cantonId,
       final String? agencyId,
-      @JsonKey(includeFromJson: true) final StateDocument state,
+      @JsonKey(includeFromJson: true) final ProcessStatus state,
       final DateTime? createAt,
       final DateTime? updatedAt}) = _$_BirthAbroadListModel;
   const _BirthAbroadListModel._() : super._();
@@ -523,7 +523,7 @@ abstract class _BirthAbroadListModel extends BirthAbroadListModel {
   String? get agencyId;
   @override
   @JsonKey(includeFromJson: true)
-  StateDocument get state;
+  ProcessStatus get state;
   @override
   DateTime? get createAt;
   @override

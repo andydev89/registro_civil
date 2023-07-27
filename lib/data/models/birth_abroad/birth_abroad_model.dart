@@ -19,6 +19,7 @@ part 'birth_abroad_model.gform.dart';
 @JsonSerializable(explicitToJson: true)
 class BirthAbroadModel with _$BirthAbroadModel {
   const factory BirthAbroadModel({
+    String? id,
     @Default(ForeignType.resident)
     @JsonKey(
       name: 'type',
@@ -57,6 +58,7 @@ class BirthAbroadModel with _$BirthAbroadModel {
 
   BirthAbroadModel copyWithFromListModel(BirthAbroadListModel model) {
     return copyWith(
+      id: model.id,
       foreignType: model.type,
       registerOwnerType: model.registerOwnerType,
       requestOwner: model.requestOwnerId,
@@ -216,4 +218,30 @@ Map<String, dynamic>? powerOfAttorneyValidatorGroup(
   }
 
   return null; // Devuelve null si la validación es exitosa
+}
+
+@Freezed(fromJson: false)
+@JsonSerializable(explicitToJson: true)
+class BirthAbroadDocumentModel with _$BirthAbroadDocumentModel {
+  const factory BirthAbroadDocumentModel({
+    String? id,
+    Certificate? birthCertificate,
+    Certificate? identity,
+    Certificate? powerOfAttorney,
+  }) = _BirthAbroadDocumentModel;
+
+  factory BirthAbroadDocumentModel.fromJson(Map<String, dynamic> json) =>
+      _$BirthAbroadDocumentModelFromJson(json);
+
+  factory BirthAbroadDocumentModel.fromDocumentsSubModel(
+      {required String id, required DocumentsSubModel documentsSubModel}) {
+    return BirthAbroadDocumentModel(
+      id: id,
+      identity: documentsSubModel.identity,
+      powerOfAttorney: documentsSubModel.powerOfAttorney,
+      birthCertificate: documentsSubModel.birthCertificate,
+    );
+  }
+
+  const BirthAbroadDocumentModel._();
 }

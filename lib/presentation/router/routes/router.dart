@@ -449,6 +449,15 @@ part 'router.gr.dart';
                 ),
               ],
             ),
+            CupertinoRoute(
+              page: BirthAbroadSecondStepRouterPage,
+              children: [
+                CustomRoute(
+                  page: BirthAbroadSecondStepPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
+              ],
+            ),
           ],
         ),
         CupertinoRoute(

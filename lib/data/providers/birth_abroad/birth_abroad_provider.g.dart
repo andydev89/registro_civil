@@ -384,7 +384,102 @@ class DocumentByIdProvider
   }
 }
 
-String _$birthAbroadHash() => r'1cb38fe3c563d831088c9f1ed87a511b90e39a16';
+String _$editBirthAbroadDocsHash() =>
+    r'd3aa315c55e4693edf3cb906006d604b2e44467b';
+typedef EditBirthAbroadDocsRef
+    = AutoDisposeFutureProviderRef<Result<CommandModel, StatusCodeType>>;
+
+/// See also [editBirthAbroadDocs].
+@ProviderFor(editBirthAbroadDocs)
+const editBirthAbroadDocsProvider = EditBirthAbroadDocsFamily();
+
+/// See also [editBirthAbroadDocs].
+class EditBirthAbroadDocsFamily
+    extends Family<AsyncValue<Result<CommandModel, StatusCodeType>>> {
+  /// See also [editBirthAbroadDocs].
+  const EditBirthAbroadDocsFamily();
+
+  /// See also [editBirthAbroadDocs].
+  EditBirthAbroadDocsProvider call({
+    required BirthAbroadDocumentModel model,
+    ForeignType type = ForeignType.resident,
+  }) {
+    return EditBirthAbroadDocsProvider(
+      model: model,
+      type: type,
+    );
+  }
+
+  @override
+  EditBirthAbroadDocsProvider getProviderOverride(
+    covariant EditBirthAbroadDocsProvider provider,
+  ) {
+    return call(
+      model: provider.model,
+      type: provider.type,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'editBirthAbroadDocsProvider';
+}
+
+/// See also [editBirthAbroadDocs].
+class EditBirthAbroadDocsProvider
+    extends AutoDisposeFutureProvider<Result<CommandModel, StatusCodeType>> {
+  /// See also [editBirthAbroadDocs].
+  EditBirthAbroadDocsProvider({
+    required this.model,
+    this.type = ForeignType.resident,
+  }) : super.internal(
+          (ref) => editBirthAbroadDocs(
+            ref,
+            model: model,
+            type: type,
+          ),
+          from: editBirthAbroadDocsProvider,
+          name: r'editBirthAbroadDocsProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$editBirthAbroadDocsHash,
+          dependencies: EditBirthAbroadDocsFamily._dependencies,
+          allTransitiveDependencies:
+              EditBirthAbroadDocsFamily._allTransitiveDependencies,
+        );
+
+  final BirthAbroadDocumentModel model;
+  final ForeignType type;
+
+  @override
+  bool operator ==(Object other) {
+    return other is EditBirthAbroadDocsProvider &&
+        other.model == model &&
+        other.type == type;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, model.hashCode);
+    hash = _SystemHash.combine(hash, type.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$birthAbroadHash() => r'7c5e93d19c321c3b588ad6343f060a8586566ef6';
 
 /// See also [BirthAbroad].
 @ProviderFor(BirthAbroad)

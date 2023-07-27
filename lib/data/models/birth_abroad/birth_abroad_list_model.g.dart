@@ -25,7 +25,7 @@ BirthAbroadListModel _$BirthAbroadListModelFromJson(
       provinceId: json['provinceId'] as String?,
       cantonId: json['cantonId'] as String?,
       agencyId: json['agencyId'] as String?,
-      state: $enumDecode(_$StateDocumentEnumMap, json['state']),
+      state: $enumDecode(_$ProcessStatusEnumMap, json['state']),
       createAt: json['createAt'] == null
           ? null
           : DateTime.parse(json['createAt'] as String),
@@ -53,7 +53,7 @@ Map<String, dynamic> _$BirthAbroadListModelToJson(
       'provinceId': instance.provinceId,
       'cantonId': instance.cantonId,
       'agencyId': instance.agencyId,
-      'state': _$StateDocumentEnumMap[instance.state]!,
+      'state': _$ProcessStatusEnumMap[instance.state]!,
       'createAt': instance.createAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };
@@ -70,10 +70,11 @@ const _$RegisterOwnerTypeEnumMap = {
   RegisterOwnerType.grandParents: 'GRANDPARENTS',
 };
 
-const _$StateDocumentEnumMap = {
-  StateDocument.pending: 'PENDING',
-  StateDocument.approved: 'APPROVED',
-  StateDocument.rejected: 'REJECTED',
+const _$ProcessStatusEnumMap = {
+  ProcessStatus.pending: 'PENDING',
+  ProcessStatus.approved: 'APPROVED',
+  ProcessStatus.inProgress: 'IN_PROGRESS',
+  ProcessStatus.rejected: 'REJECTED',
 };
 
 Map<String, dynamic> _$$_BirthAbroadListModelToJson(
@@ -95,7 +96,7 @@ Map<String, dynamic> _$$_BirthAbroadListModelToJson(
       'provinceId': instance.provinceId,
       'cantonId': instance.cantonId,
       'agencyId': instance.agencyId,
-      'state': _$StateDocumentEnumMap[instance.state]!,
+      'state': _$ProcessStatusEnumMap[instance.state]!,
       'createAt': instance.createAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };

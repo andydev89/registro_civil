@@ -57,27 +57,42 @@ class BirthAbroadMainPage extends ConsumerWidget {
                   itemBuilder: (_, e, __) => CardWidget<BirthAbroadListModel>(
                     element: e,
                     rows: {
-                      'Tipo': e.type.translate(context),
-                      'Registro': e.registerOwnerType.translate(context),
+                      l10n.tipoTramite: e.type.translate(context),
+                      l10n.tipoRegPropietario:
+                          e.registerOwnerType.translate(context),
                       l10n.fechaCreacion: '${e.createAt?.onlyDate} -'
                           ' ${e.createAt?.onlyTime}',
                       l10n.estado: e.state.translate(context),
                     },
                     actions: {
                       Crud.read: (p0) => context.navigateTo(
-                        BirthAbroadFirstStepRouterRoute(
-                          operation: Crud.read,
-                          typeServiceModel: typeServiceModel,
-                          birthId: e.id,
-                          children: [
-                            BirthAbroadFirstStepRoute(
-                              typeServiceModel: typeServiceModel,
+                            BirthAbroadFirstStepRouterRoute(
                               operation: Crud.read,
+                              typeServiceModel: typeServiceModel,
+                              birthId: e.id,
+                              children: [
+                                BirthAbroadFirstStepRoute(
+                                  typeServiceModel: typeServiceModel,
+                                  operation: Crud.read,
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                      Crud.update: (p0) => {},
+                          ),
+                      Crud.update: (p0) => (e.state == ProcessStatus.inProgress)
+                          ? context.navigateTo(
+                              BirthAbroadSecondStepRouterRoute(
+                                operation: Crud.update,
+                                typeServiceModel: typeServiceModel,
+                                birthId: e.id,
+                                children: [
+                                  BirthAbroadSecondStepRoute(
+                                    typeServiceModel: typeServiceModel,
+                                    operation: Crud.update,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : null,
                     },
                   ),
                 ),

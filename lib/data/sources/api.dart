@@ -379,4 +379,15 @@ abstract class Api {
   Future<ResponseModel<Certificate>> documentNoResidentById(
     @Path('id') String id,
   );
+
+  @PUT('/citizenship/api/citizenship/documentation/file')
+  Future<ResponseModel<CommandModel>> editBirthAbroad({
+    @Body() required BirthAbroadDocumentModel model,
+  });
+
+  @PUT('/citizenship/api/noresident/citizenship/documentation/file')
+  Future<ResponseModel<CommandModel>>
+      editNoResidentBirthAbroad({
+    @Body() required BirthAbroadDocumentModel model,
+  });
 }

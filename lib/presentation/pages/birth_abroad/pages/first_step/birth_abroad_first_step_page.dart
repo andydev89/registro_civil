@@ -133,8 +133,6 @@ class BirthAbroadFirstStepPage extends ConsumerWidget {
                   title: l10n.siguiente,
                   onPressed: formModel.form.valid
                       ? () {
-                          final ownerType = formModel.model.registerOwnerType ??
-                              RegisterOwnerType.attorney;
                           ref.read(birthAbroadProvider.notifier).setFirstStep(
                                 registerOwner: formModel.model,
                                 requestOwnerId: me.id,
@@ -144,7 +142,6 @@ class BirthAbroadFirstStepPage extends ConsumerWidget {
                             BirthAbroadSecondStepRoute(
                               typeServiceModel: typeServiceModel,
                               operation: operation,
-                              registerOwnerType: ownerType,
                             ),
                           );
                         }

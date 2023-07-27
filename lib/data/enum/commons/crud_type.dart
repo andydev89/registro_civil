@@ -15,6 +15,8 @@ enum Crud {
 
   bool get isCreate => this == Crud.create;
 
+  bool get isEdit => this == Crud.update;
+
   bool get isRead => this == Crud.read;
 
   Widget toIcon(BuildContext context) {
