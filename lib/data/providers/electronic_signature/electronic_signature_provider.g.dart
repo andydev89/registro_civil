@@ -112,7 +112,7 @@ class SignatureProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$signaturesHash() => r'67f7abdb65db49c26b939d787442deb0c5544ce2';
+String _$signaturesHash() => r'8b694301bbb269453b5962090c58368b2878c8ea';
 typedef SignaturesRef = AutoDisposeFutureProviderRef<
     ResponseModelPagination<List<ElectronicSignatureModel>>>;
 
@@ -298,4 +298,20 @@ final electronicSignatureProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$ElectronicSignature = AutoDisposeNotifier<ElectronicSignatureModel>;
+String _$signatureFilterHash() => r'4314c4bb4d9e28a97caa450e5286fa0af351ecda';
+
+/// See also [SignatureFilter].
+@ProviderFor(SignatureFilter)
+final signatureFilterProvider =
+    AutoDisposeNotifierProvider<SignatureFilter, QuerySignature>.internal(
+  SignatureFilter.new,
+  name: r'signatureFilterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$signatureFilterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$SignatureFilter = AutoDisposeNotifier<QuerySignature>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

@@ -1447,10 +1447,17 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModelPagination<List<IdDuplicateResponseModel>>> duplicates(
-      {int pageNo = 0}) async {
+  Future<ResponseModelPagination<List<IdDuplicateResponseModel>>> duplicates({
+    int pageNo = 0,
+    int pageSize = 20,
+    String filter = '',
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'pageNo': pageNo};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+      r'filter': filter,
+    };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -1536,10 +1543,17 @@ class _Api implements Api {
   }
 
   @override
-  Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures(
-      {int pageNo = 0}) async {
+  Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures({
+    int pageNo = 0,
+    int pageSize = 20,
+    String filter = '',
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'pageNo': pageNo};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+      r'filter': filter,
+    };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(

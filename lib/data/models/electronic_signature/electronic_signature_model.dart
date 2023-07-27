@@ -276,3 +276,27 @@ Map<String, dynamic>? signatureRucValidatorGroup(
   }
   return null; // Devuelve null si la validación es exitosa
 }
+
+class QuerySignature {
+  QuerySignature({
+    this.pageNo = 0,
+    this.pageSize = 20,
+    this.filter = '',
+  });
+
+  final int pageNo;
+  final int pageSize;
+  final String filter;
+
+  QuerySignature copyWith({
+    int? pageNo,
+    int? pageSize,
+    String? filter,
+  }) {
+    return QuerySignature(
+      pageNo: pageNo ?? this.pageNo,
+      pageSize: pageSize ?? this.pageSize,
+      filter: filter ?? this.filter,
+    );
+  }
+}

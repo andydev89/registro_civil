@@ -95,13 +95,31 @@ Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> signature(
   return Result.err(result.status);
 }
 
+
+@riverpod
+class SignatureFilter extends _$SignatureFilter {
+  @override
+  QuerySignature build() {
+    return QuerySignature();
+  }
+
+  void setFilter(String filter) {
+    state = state.copyWith(filter: filter);
+  }
+}
+
 @riverpod
 Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures(
   SignaturesRef ref, {
   int? pageNo,
 }) async {
+  final query = ref.watch(signatureFilterProvider);
   final api = ref.watch(apiProvider);
-  final response = await api.signatures(pageNo: pageNo ?? 0);
+  final response = await api.signatures(
+    pageNo: pageNo ?? query.pageNo,
+    pageSize: query.pageSize,
+    filter: query.filter,
+  );
   return response;
 }
 

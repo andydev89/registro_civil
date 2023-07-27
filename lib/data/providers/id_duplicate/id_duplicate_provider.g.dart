@@ -6,7 +6,7 @@ part of 'id_duplicate_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$duplicatesHash() => r'9ee12bcae211206695b1067fb389ee93ba16aad9';
+String _$duplicatesHash() => r'e71c0112637003f26a8b19e6e74c57742a7bd9cd';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -227,4 +227,20 @@ final idDuplicateApiProvider =
 );
 
 typedef _$IdDuplicateApi = AutoDisposeNotifier<void>;
+String _$duplicateFilterHash() => r'4022f5110bdc3a3cba573833b8ccf13019ae6821';
+
+/// See also [DuplicateFilter].
+@ProviderFor(DuplicateFilter)
+final duplicateFilterProvider =
+    AutoDisposeNotifierProvider<DuplicateFilter, QueryDuplicate>.internal(
+  DuplicateFilter.new,
+  name: r'duplicateFilterProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$duplicateFilterHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$DuplicateFilter = AutoDisposeNotifier<QueryDuplicate>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

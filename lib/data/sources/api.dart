@@ -292,6 +292,8 @@ abstract class Api {
   @GET('/duplicateid/api/duplicate')
   Future<ResponseModelPagination<List<IdDuplicateResponseModel>>> duplicates({
     @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+    @Query('filter') String filter = '',
   });
 
   @GET('/duplicateid/api/duplicate/{id}')
@@ -308,6 +310,8 @@ abstract class Api {
   @GET('/digitalsignature/api/digitalsignature')
   Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures({
     @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+    @Query('filter') String filter = '',
   });
 
   @GET('/digitalsignature/api/digitalsignature/{id}')
