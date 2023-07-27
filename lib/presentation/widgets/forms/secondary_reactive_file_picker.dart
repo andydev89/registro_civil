@@ -32,10 +32,10 @@ class SecondaryReactiveFilePicker<T extends Translatable>
     this.ligth = false,
     this.label,
     this.onRemove,
-    this.readOnly = false,
     required this.provider,
     this.initialValue,
     this.init = false,
+    required this.operation,
   })  : assert(
           maxFileSizeMB <= 5 && maxFileSizeMB > 0,
           'El tamaño debe ser entre 1 y 5 MB',
@@ -53,9 +53,9 @@ class SecondaryReactiveFilePicker<T extends Translatable>
   final String? label;
   final T? Function(T?)? initialValue;
   final void Function()? onRemove;
-  final bool readOnly;
   final AutoDisposeFutureProvider<Result<T, StatusCodeType>> provider;
   final bool init;
+  final Crud operation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -90,7 +90,7 @@ class SecondaryReactiveFilePicker<T extends Translatable>
                 textAlign: TextAlign.justify,
               ),
             InkWell(
-              onTap: !select.value && !readOnly
+              onTap: (!select.value && !operation.isRead) || (operation.isEdit)
                   ? () async {
                       final result = await FilePicker.platform.pickFiles(
                         allowedExtensions:
@@ -161,7 +161,7 @@ class SecondaryReactiveFilePicker<T extends Translatable>
                               textAlign: TextAlign.start,
                             ),
                           ),
-                          if (!readOnly)
+                          if (operation.isCreate)
                             PrimaryIconButton(
                               onPressed: () {
                                 if (onRemove == null) field.didChange(null);
@@ -170,10 +170,15 @@ class SecondaryReactiveFilePicker<T extends Translatable>
                               },
                               icon: const Icon(Icons.delete),
                             )
-                          else
+                          else if (operation.isRead)
                             PrimaryIconButton(
                               onPressed: () {},
                               icon: const Icon(Icons.remove_red_eye),
+                            )
+                          else
+                            PrimaryIconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.edit),
                             ),
                         ],
                       ),

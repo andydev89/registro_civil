@@ -24,25 +24,25 @@ class BirthAbroadFirstStepRouterPage extends HookWidget {
       builder: (context, ref, _) {
         return operation.isRead
             ? LoadingProviderWidget(
-          async: ref.watch(birthAbroadByIdProvider(birthId!)),
-          onRefresh: () => ref.refresh(
-            birthAbroadByIdProvider(birthId!),
-          ),
-          onRefreshIndicator: () => ref.watch(
-            birthAbroadByIdProvider(birthId!).future,
-          ),
-          data: (data) {
-            WidgetsBinding.instance.addPostFrameCallback(
-                  (_) => ref
-                  .read(birthAbroadProvider.notifier)
-                  .updateModel(data),
-            );
-            return TypeServiceBodyWidget(
-              operation: operation,
-              typeServiceModel: typeServiceModel,
-            );
-          },
-        )
+                async: ref.watch(birthAbroadByIdProvider(birthId!)),
+                onRefresh: () => ref.refresh(
+                  birthAbroadByIdProvider(birthId!),
+                ),
+                onRefreshIndicator: () => ref.watch(
+                  birthAbroadByIdProvider(birthId!).future,
+                ),
+                data: (data) {
+                  WidgetsBinding.instance.addPostFrameCallback(
+                    (_) => ref
+                        .read(birthAbroadProvider.notifier)
+                        .updateModel(data),
+                  );
+                  return TypeServiceBodyWidget(
+                    operation: operation,
+                    typeServiceModel: typeServiceModel,
+                  );
+                },
+              )
             : TypeServiceBodyWidget(typeServiceModel: typeServiceModel);
       },
     );

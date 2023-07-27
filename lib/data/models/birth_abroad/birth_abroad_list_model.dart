@@ -34,9 +34,9 @@ class BirthAbroadListModel with _$BirthAbroadListModel {
     String? agencyId,
     @JsonKey(includeFromJson: true)
     @Default(
-      StateDocument.pending,
+      ProcessStatus.pending,
     )
-    StateDocument state,
+    ProcessStatus state,
     DateTime? createAt,
     DateTime? updatedAt,
   }) = _BirthAbroadListModel;

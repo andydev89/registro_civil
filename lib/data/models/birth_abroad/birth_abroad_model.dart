@@ -19,6 +19,7 @@ part 'birth_abroad_model.gform.dart';
 @JsonSerializable(explicitToJson: true)
 class BirthAbroadModel with _$BirthAbroadModel {
   const factory BirthAbroadModel({
+    String? id,
     @Default(ForeignType.resident)
     @JsonKey(
       name: 'type',
@@ -57,14 +58,16 @@ class BirthAbroadModel with _$BirthAbroadModel {
 
   BirthAbroadModel copyWithFromListModel(BirthAbroadListModel model) {
     return copyWith(
+      id: model.id,
       foreignType: model.type,
       registerOwnerType: model.registerOwnerType,
       requestOwner: model.requestOwnerId,
       registerOwner: RegisterOwner(
-          name: model.name,
-          identification: model.identification,
-          email: model.email,
-          phone: model.phone),
+        name: model.name,
+        identification: model.identification,
+        email: model.email,
+        phone: model.phone,
+      ),
       birthCertificate: Certificate(id: model.birthCertificateId),
       identity: Certificate(id: model.identityId),
       powerOfAttorney: Certificate(id: model.powerOfAttorneyId),
@@ -83,23 +86,32 @@ class RegisterOwnerSubModel with _$RegisterOwnerSubModel {
   const factory RegisterOwnerSubModel({
     @FormControlAnnotation(validators: [requiredValidator])
         RegisterOwnerType? registerOwnerType,
-    @FormControlAnnotation(
+    @FormControlAnnotation<String>(
       validators: [
-        requiredValidator,
         ecuadorDniValidator,
         length10Validator,
       ],
     )
         String? identification,
+    @FormControlAnnotation<String>()
+        String? passport,
     @FormControlAnnotation(
       validators: [
         requiredValidator,
       ],
     )
         String? name,
-    @FormControlAnnotation<String>()
+    @FormControlAnnotation<String>(
+      validators: [
+        requiredValidator,
+      ],
+    )
         String? email,
-    @FormControlAnnotation<String>()
+    @FormControlAnnotation<String>(
+      validators: [
+        requiredValidator,
+      ],
+    )
         String? phone,
   }) = _RegisterOwnerForm;
 
@@ -205,11 +217,31 @@ Map<String, dynamic>? powerOfAttorneyValidatorGroup(
     return null;
   }
 
-  /*if (isAttorney && token.isEmpty) {
-    (birthAbroadModel as FormGroup)
-        .controls['deviceTokenSerialNumber']!
-        .setErrors({ValidationMessage.required: true});
-    return {ValidationMessage.required: true};
-  }*/
   return null; // Devuelve null si la validación es exitosa
+}
+
+@Freezed(fromJson: false)
+@JsonSerializable(explicitToJson: true)
+class BirthAbroadDocumentModel with _$BirthAbroadDocumentModel {
+  const factory BirthAbroadDocumentModel({
+    String? id,
+    Certificate? birthCertificate,
+    Certificate? identity,
+    Certificate? powerOfAttorney,
+  }) = _BirthAbroadDocumentModel;
+
+  factory BirthAbroadDocumentModel.fromJson(Map<String, dynamic> json) =>
+      _$BirthAbroadDocumentModelFromJson(json);
+
+  factory BirthAbroadDocumentModel.fromDocumentsSubModel(
+      {required String id, required DocumentsSubModel documentsSubModel}) {
+    return BirthAbroadDocumentModel(
+      id: id,
+      identity: documentsSubModel.identity,
+      powerOfAttorney: documentsSubModel.powerOfAttorney,
+      birthCertificate: documentsSubModel.birthCertificate,
+    );
+  }
+
+  const BirthAbroadDocumentModel._();
 }

@@ -6,7 +6,7 @@ part of 'birth_abroad_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$birthsAbroadHash() => r'dc7a3b7e29d2e71849b04a7a5207bbbccb76ab48';
+String _$birthsAbroadHash() => r'29f4013ab8a8db59d2e5100c4a2228e0c985feb2';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -113,7 +113,7 @@ class BirthsAbroadProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$createBirthAbroadHash() => r'eb029e882a0b8651dbc86c0080d3c1c7eb4a7c9c';
+String _$createBirthAbroadHash() => r'20043bd3c13ab093956cee8f85962c7837819c37';
 typedef CreateBirthAbroadRef = AutoDisposeFutureProviderRef<
     Result<CommandWithTransactionCodeModel, StatusCodeType>>;
 
@@ -198,7 +198,7 @@ class CreateBirthAbroadProvider extends AutoDisposeFutureProvider<
   }
 }
 
-String _$birthAbroadByIdHash() => r'733d98d40dbf496f6ffc50d08c54b6294e8feae5';
+String _$birthAbroadByIdHash() => r'c1515318221d7bd779840f5d6d4727ffe0dd169f';
 typedef BirthAbroadByIdRef = AutoDisposeFutureProviderRef<BirthAbroadListModel>;
 
 /// See also [birthAbroadById].
@@ -212,10 +212,12 @@ class BirthAbroadByIdFamily extends Family<AsyncValue<BirthAbroadListModel>> {
 
   /// See also [birthAbroadById].
   BirthAbroadByIdProvider call(
-    String id,
-  ) {
+    String id, {
+    ForeignType type = ForeignType.resident,
+  }) {
     return BirthAbroadByIdProvider(
       id,
+      type: type,
     );
   }
 
@@ -225,6 +227,7 @@ class BirthAbroadByIdFamily extends Family<AsyncValue<BirthAbroadListModel>> {
   ) {
     return call(
       provider.id,
+      type: provider.type,
     );
   }
 
@@ -248,11 +251,13 @@ class BirthAbroadByIdProvider
     extends AutoDisposeFutureProvider<BirthAbroadListModel> {
   /// See also [birthAbroadById].
   BirthAbroadByIdProvider(
-    this.id,
-  ) : super.internal(
+    this.id, {
+    this.type = ForeignType.resident,
+  }) : super.internal(
           (ref) => birthAbroadById(
             ref,
             id,
+            type: type,
           ),
           from: birthAbroadByIdProvider,
           name: r'birthAbroadByIdProvider',
@@ -266,22 +271,26 @@ class BirthAbroadByIdProvider
         );
 
   final String id;
+  final ForeignType type;
 
   @override
   bool operator ==(Object other) {
-    return other is BirthAbroadByIdProvider && other.id == id;
+    return other is BirthAbroadByIdProvider &&
+        other.id == id &&
+        other.type == type;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, type.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-String _$documentByIdHash() => r'dff464353fc91eed9684b168262e9eb6b42918d7';
+String _$documentByIdHash() => r'baf996f9dfb48d9639c09e4f4ca3869f99f6df71';
 typedef DocumentByIdRef
     = AutoDisposeFutureProviderRef<Result<Certificate, StatusCodeType>>;
 
@@ -298,9 +307,11 @@ class DocumentByIdFamily
   /// See also [documentById].
   DocumentByIdProvider call({
     required String id,
+    ForeignType type = ForeignType.resident,
   }) {
     return DocumentByIdProvider(
       id: id,
+      type: type,
     );
   }
 
@@ -310,6 +321,7 @@ class DocumentByIdFamily
   ) {
     return call(
       id: provider.id,
+      type: provider.type,
     );
   }
 
@@ -334,10 +346,12 @@ class DocumentByIdProvider
   /// See also [documentById].
   DocumentByIdProvider({
     required this.id,
+    this.type = ForeignType.resident,
   }) : super.internal(
           (ref) => documentById(
             ref,
             id: id,
+            type: type,
           ),
           from: documentByIdProvider,
           name: r'documentByIdProvider',
@@ -351,22 +365,121 @@ class DocumentByIdProvider
         );
 
   final String id;
+  final ForeignType type;
 
   @override
   bool operator ==(Object other) {
-    return other is DocumentByIdProvider && other.id == id;
+    return other is DocumentByIdProvider &&
+        other.id == id &&
+        other.type == type;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, id.hashCode);
+    hash = _SystemHash.combine(hash, type.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-String _$birthAbroadHash() => r'a614b707f41181fa4d76563164ea5a09543be2f7';
+String _$editBirthAbroadDocsHash() =>
+    r'd3aa315c55e4693edf3cb906006d604b2e44467b';
+typedef EditBirthAbroadDocsRef
+    = AutoDisposeFutureProviderRef<Result<CommandModel, StatusCodeType>>;
+
+/// See also [editBirthAbroadDocs].
+@ProviderFor(editBirthAbroadDocs)
+const editBirthAbroadDocsProvider = EditBirthAbroadDocsFamily();
+
+/// See also [editBirthAbroadDocs].
+class EditBirthAbroadDocsFamily
+    extends Family<AsyncValue<Result<CommandModel, StatusCodeType>>> {
+  /// See also [editBirthAbroadDocs].
+  const EditBirthAbroadDocsFamily();
+
+  /// See also [editBirthAbroadDocs].
+  EditBirthAbroadDocsProvider call({
+    required BirthAbroadDocumentModel model,
+    ForeignType type = ForeignType.resident,
+  }) {
+    return EditBirthAbroadDocsProvider(
+      model: model,
+      type: type,
+    );
+  }
+
+  @override
+  EditBirthAbroadDocsProvider getProviderOverride(
+    covariant EditBirthAbroadDocsProvider provider,
+  ) {
+    return call(
+      model: provider.model,
+      type: provider.type,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'editBirthAbroadDocsProvider';
+}
+
+/// See also [editBirthAbroadDocs].
+class EditBirthAbroadDocsProvider
+    extends AutoDisposeFutureProvider<Result<CommandModel, StatusCodeType>> {
+  /// See also [editBirthAbroadDocs].
+  EditBirthAbroadDocsProvider({
+    required this.model,
+    this.type = ForeignType.resident,
+  }) : super.internal(
+          (ref) => editBirthAbroadDocs(
+            ref,
+            model: model,
+            type: type,
+          ),
+          from: editBirthAbroadDocsProvider,
+          name: r'editBirthAbroadDocsProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$editBirthAbroadDocsHash,
+          dependencies: EditBirthAbroadDocsFamily._dependencies,
+          allTransitiveDependencies:
+              EditBirthAbroadDocsFamily._allTransitiveDependencies,
+        );
+
+  final BirthAbroadDocumentModel model;
+  final ForeignType type;
+
+  @override
+  bool operator ==(Object other) {
+    return other is EditBirthAbroadDocsProvider &&
+        other.model == model &&
+        other.type == type;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, model.hashCode);
+    hash = _SystemHash.combine(hash, type.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$birthAbroadHash() => r'7c5e93d19c321c3b588ad6343f060a8586566ef6';
 
 /// See also [BirthAbroad].
 @ProviderFor(BirthAbroad)

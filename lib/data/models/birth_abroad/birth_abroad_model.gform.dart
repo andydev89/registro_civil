@@ -188,6 +188,8 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
 
   static const String identificationControlName = "identification";
 
+  static const String passportControlName = "passport";
+
   static const String nameControlName = "name";
 
   static const String emailControlName = "email";
@@ -203,12 +205,14 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
   String registerOwnerTypeControlPath() =>
       pathBuilder(registerOwnerTypeControlName);
   String identificationControlPath() => pathBuilder(identificationControlName);
+  String passportControlPath() => pathBuilder(passportControlName);
   String nameControlPath() => pathBuilder(nameControlName);
   String emailControlPath() => pathBuilder(emailControlName);
   String phoneControlPath() => pathBuilder(phoneControlName);
   RegisterOwnerType? get _registerOwnerTypeValue =>
       registerOwnerTypeControl?.value;
   String? get _identificationValue => identificationControl?.value;
+  String? get _passportValue => passportControl?.value;
   String? get _nameValue => nameControl?.value;
   String? get _emailValue => emailControl?.value;
   String? get _phoneValue => phoneControl?.value;
@@ -224,6 +228,15 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
   bool get containsIdentification {
     try {
       form.control(identificationControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  bool get containsPassport {
+    try {
+      form.control(passportControlPath());
       return true;
     } catch (e) {
       return false;
@@ -259,11 +272,13 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
 
   Object? get registerOwnerTypeErrors => registerOwnerTypeControl?.errors;
   Object? get identificationErrors => identificationControl?.errors;
+  Object? get passportErrors => passportControl?.errors;
   Object? get nameErrors => nameControl?.errors;
   Object? get emailErrors => emailControl?.errors;
   Object? get phoneErrors => phoneControl?.errors;
   void get registerOwnerTypeFocus => form.focus(registerOwnerTypeControlPath());
   void get identificationFocus => form.focus(identificationControlPath());
+  void get passportFocus => form.focus(passportControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get emailFocus => form.focus(emailControlPath());
   void get phoneFocus => form.focus(phoneControlPath());
@@ -311,6 +326,32 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
         if (formGroup is FormGroup) {
           formGroup.removeControl(
             identificationControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
+  void passportRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsPassport) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          passportControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            passportControlName,
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -415,6 +456,15 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void passportValueUpdate(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    passportControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void nameValueUpdate(
     String? value, {
     bool updateParent = true,
@@ -457,6 +507,15 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
     bool emitEvent = true,
   }) {
     identificationControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
+  void passportValuePatch(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    passportControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -505,6 +564,15 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
   }) =>
       identificationControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  void passportValueReset(
+    String? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      passportControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void nameValueReset(
     String? value, {
     bool updateParent = true,
@@ -539,6 +607,9 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
           : null;
   FormControl<String>? get identificationControl => containsIdentification
       ? form.control(identificationControlPath()) as FormControl<String>?
+      : null;
+  FormControl<String>? get passportControl => containsPassport
+      ? form.control(passportControlPath()) as FormControl<String>?
       : null;
   FormControl<String>? get nameControl => containsName
       ? form.control(nameControlPath()) as FormControl<String>?
@@ -579,6 +650,24 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
       );
     } else {
       identificationControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
+  void passportSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      passportControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      passportControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -650,6 +739,7 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
     return RegisterOwnerSubModel(
         registerOwnerType: _registerOwnerTypeValue,
         identification: _identificationValue,
+        passport: _passportValue,
         name: _nameValue,
         email: _emailValue,
         phone: _phoneValue);
@@ -691,10 +781,16 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
         identificationControlName: FormControl<String>(
             value: registerOwnerSubModel?.identification,
             validators: [
-              requiredValidator,
-              ecuadorDniValidator,
-              length10Validator
+              (control) => ecuadorDniValidator(control as FormControl<String>),
+              (control) => length10Validator(control as FormControl<String>)
             ],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
+        passportControlName: FormControl<String>(
+            value: registerOwnerSubModel?.passport,
+            validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
@@ -708,14 +804,18 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
             touched: false),
         emailControlName: FormControl<String>(
             value: registerOwnerSubModel?.email,
-            validators: [],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
         phoneControlName: FormControl<String>(
             value: registerOwnerSubModel?.phone,
-            validators: [],
+            validators: [
+              (control) => requiredValidator(control as FormControl<String>)
+            ],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
             disabled: false,

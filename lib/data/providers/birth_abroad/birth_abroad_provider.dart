@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/auth/auth.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -19,11 +20,32 @@ class BirthAbroad extends _$BirthAbroad {
     state = state.copyWithFromListModel(model);
   }
 
+  String? getId() {
+    return state.id;
+  }
+
+  void setForeignType(ForeignType type) {
+    state = state.copyWith(
+      foreignType: type,
+    );
+  }
+
+  ForeignType getForeignType() {
+    return state.foreignType;
+  }
+
+  RegisterOwnerType getRegisterOwnerType() {
+    return state.registerOwnerType;
+  }
+
+
   void setFirstStep({
     required RegisterOwnerSubModel registerOwner,
-    required ForeignType foreignType,
     required String requestOwnerId,
+    required bool isResident,
   }) {
+    final foreignType =
+        isResident ? ForeignType.resident : ForeignType.noResident;
     state = state.copyWith(
       foreignType: foreignType,
       requestOwner: requestOwnerId,
@@ -31,7 +53,8 @@ class BirthAbroad extends _$BirthAbroad {
           registerOwner.registerOwnerType ?? RegisterOwnerType.attorney,
       registerOwner: RegisterOwner(
         name: registerOwner.name,
-        identification: registerOwner.identification,
+        identification:
+            isResident ? registerOwner.identification : registerOwner.passport,
         email: registerOwner.email,
         phone: registerOwner.phone,
       ),
@@ -97,11 +120,23 @@ Future<ResponseModelPagination<List<BirthAbroadListModel>>> birthsAbroad(
 }) async {
   final query = ref.watch(birthAbroadFilterProvider);
   final api = ref.watch(apiProvider);
-  final response = await api.birthsAbroad(
-    pageNo: pageNo ?? query.pageNo,
-    pageSize: query.pageSize,
-    filter: query.filter,
-  );
+  final data = await ref.watch(loginProvider.notifier).future;
+  final type = data ? ForeignType.resident : ForeignType.noResident;
+  ref.watch(birthAbroadProvider.notifier).setForeignType(type);
+  ResponseModelPagination<List<BirthAbroadListModel>> response;
+  if (type == ForeignType.resident) {
+    response = await api.birthsAbroad(
+      pageNo: pageNo ?? query.pageNo,
+      pageSize: query.pageSize,
+      filter: query.filter,
+    );
+  } else {
+    response = await api.birthsAbroadNoResident(
+      pageNo: pageNo ?? query.pageNo,
+      pageSize: query.pageSize,
+      filter: query.filter,
+    );
+  }
   return response;
 }
 
@@ -112,7 +147,12 @@ Future<Result<CommandWithTransactionCodeModel, StatusCodeType>>
   required BirthAbroadModel model,
 }) async {
   final api = ref.watch(apiProvider);
-  final result = await api.createBirthAbroad(model: model);
+  ResponseModel<CommandWithTransactionCodeModel> result;
+  if (model.foreignType == ForeignType.resident) {
+    result = await api.createBirthAbroad(model: model);
+  } else {
+    result = await api.createNoResidentBirthAbroad(model: model);
+  }
   if (result.success) {
     return Result.ok(result.data!);
   }
@@ -121,22 +161,54 @@ Future<Result<CommandWithTransactionCodeModel, StatusCodeType>>
 
 @riverpod
 Future<BirthAbroadListModel> birthAbroadById(
-    BirthAbroadByIdRef ref,
-    String id,
-    ) async {
+  BirthAbroadByIdRef ref,
+  String id, {
+  ForeignType type = ForeignType.resident,
+}) async {
   final api = ref.watch(apiProvider);
-  final response = (await api.birthAbroadById(id)).data!;
+  BirthAbroadListModel response;
+  if (type == ForeignType.resident) {
+    response = (await api.birthAbroadById(id)).data!;
+  } else {
+    response = (await api.birthAbroadNoResidentById(id)).data!;
+  }
   return response;
 }
 
 @riverpod
 Future<Result<Certificate, StatusCodeType>> documentById(
-    DocumentByIdRef ref, {
-      required String id,
-    }) async {
+  DocumentByIdRef ref, {
+  required String id,
+  ForeignType type = ForeignType.resident,
+}) async {
   final api = ref.watch(apiProvider);
-  final response = await api.documentById(id);
+  ResponseModel<Certificate> response;
+  if (type == ForeignType.resident) {
+    response = await api.documentById(id);
+  } else {
+    response = await api.documentNoResidentById(id);
+  }
   return response.success
       ? Result.ok(response.data!)
       : Result.err(response.status);
+}
+
+@riverpod
+Future<Result<CommandModel, StatusCodeType>>
+editBirthAbroadDocs(
+    EditBirthAbroadDocsRef ref, {
+      required BirthAbroadDocumentModel model,
+      ForeignType type = ForeignType.resident,
+    }) async {
+  final api = ref.watch(apiProvider);
+  ResponseModel<CommandModel> result;
+  if (type == ForeignType.resident) {
+    result = await api.editBirthAbroad(model: model);
+  } else {
+    result = await api.editNoResidentBirthAbroad(model: model);
+  }
+  if (result.success) {
+    return Result.ok(result.data!);
+  }
+  return Result.err(result.status);
 }

@@ -978,6 +978,18 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    BirthAbroadSecondStepRouterRoute.name: (routeData) {
+      final args = routeData.argsAs<BirthAbroadSecondStepRouterRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: BirthAbroadSecondStepRouterPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          operation: args.operation,
+          birthId: args.birthId,
+        ),
+      );
+    },
     BirthAbroadFirstStepRoute.name: (routeData) {
       final args = routeData.argsAs<BirthAbroadFirstStepRouteArgs>();
       return CustomPage<dynamic>(
@@ -999,7 +1011,6 @@ class _$AppRouter extends RootStackRouter {
         child: BirthAbroadSecondStepPage(
           key: args.key,
           typeServiceModel: args.typeServiceModel,
-          registerOwnerType: args.registerOwnerType,
           operation: args.operation,
         ),
         transitionsBuilder: TransitionsBuilders.slideRight,
@@ -1543,7 +1554,6 @@ class _$AppRouter extends RootStackRouter {
               BirthAbroadRouterRoute.name,
               path: 'birth-abroad-router-page',
               parent: RootRouterRoute.name,
-              guards: [authGuard],
               children: [
                 RouteConfig(
                   BirthAbroadMainRoute.name,
@@ -1570,6 +1580,18 @@ class _$AppRouter extends RootStackRouter {
                       path: 'birth-abroad-third-step-page',
                       parent: BirthAbroadFirstStepRouterRoute.name,
                     ),
+                  ],
+                ),
+                RouteConfig(
+                  BirthAbroadSecondStepRouterRoute.name,
+                  path: 'birth-abroad-second-step-router-page',
+                  parent: BirthAbroadRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      BirthAbroadSecondStepRoute.name,
+                      path: 'birth-abroad-second-step-page',
+                      parent: BirthAbroadSecondStepRouterRoute.name,
+                    )
                   ],
                 ),
               ],
@@ -4221,6 +4243,53 @@ class BirthAbroadFirstStepRouterRouteArgs {
 }
 
 /// generated route for
+/// [BirthAbroadSecondStepRouterPage]
+class BirthAbroadSecondStepRouterRoute
+    extends PageRouteInfo<BirthAbroadSecondStepRouterRouteArgs> {
+  BirthAbroadSecondStepRouterRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    Crud operation = Crud.create,
+    String? birthId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          BirthAbroadSecondStepRouterRoute.name,
+          path: 'birth-abroad-second-step-router-page',
+          args: BirthAbroadSecondStepRouterRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            operation: operation,
+            birthId: birthId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'BirthAbroadSecondStepRouterRoute';
+}
+
+class BirthAbroadSecondStepRouterRouteArgs {
+  const BirthAbroadSecondStepRouterRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    this.operation = Crud.create,
+    this.birthId,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final Crud operation;
+
+  final String? birthId;
+
+  @override
+  String toString() {
+    return 'BirthAbroadSecondStepRouterRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation, birthId: $birthId}';
+  }
+}
+
+/// generated route for
 /// [BirthAbroadFirstStepPage]
 class BirthAbroadFirstStepRoute
     extends PageRouteInfo<BirthAbroadFirstStepRouteArgs> {
@@ -4267,7 +4336,6 @@ class BirthAbroadSecondStepRoute
   BirthAbroadSecondStepRoute({
     Key? key,
     required TypeServiceModel typeServiceModel,
-    required RegisterOwnerType registerOwnerType,
     Crud operation = Crud.create,
   }) : super(
           BirthAbroadSecondStepRoute.name,
@@ -4275,7 +4343,6 @@ class BirthAbroadSecondStepRoute
           args: BirthAbroadSecondStepRouteArgs(
             key: key,
             typeServiceModel: typeServiceModel,
-            registerOwnerType: registerOwnerType,
             operation: operation,
           ),
         );
@@ -4287,7 +4354,6 @@ class BirthAbroadSecondStepRouteArgs {
   const BirthAbroadSecondStepRouteArgs({
     this.key,
     required this.typeServiceModel,
-    required this.registerOwnerType,
     this.operation = Crud.create,
   });
 
@@ -4295,13 +4361,11 @@ class BirthAbroadSecondStepRouteArgs {
 
   final TypeServiceModel typeServiceModel;
 
-  final RegisterOwnerType registerOwnerType;
-
   final Crud operation;
 
   @override
   String toString() {
-    return 'BirthAbroadSecondStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, registerOwnerType: $registerOwnerType, operation: $operation}';
+    return 'BirthAbroadSecondStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation}';
   }
 }
 
