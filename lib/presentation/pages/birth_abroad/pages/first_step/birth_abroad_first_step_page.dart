@@ -30,29 +30,29 @@ class BirthAbroadFirstStepPage extends ConsumerWidget {
     final provider = ref.watch(birthAbroadProvider.notifier);
     return LoadingProviderWidget(
       async: ref.watch(loginProvider),
-      data: (isResident) {
+      data: (isLoggedIn) {
+        var isResident = isLoggedIn;
         return RegisterOwnerSubModelFormBuilder(
-          initState: (context, formModel) {
-            if (!isResident) {
-              formModel.passportControl?.setValidators([requiredValidator]);
-              formModel.passportControl?.updateValueAndValidity();
-            } else {
-              formModel.identificationControl
-                  ?.setValidators([requiredValidator]);
-              formModel.identificationControl?.updateValueAndValidity();
-            }
-
+          /*initState: (context, formModel) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               final type =
                   isResident ? ForeignType.resident : ForeignType.noResident;
               provider.setForeignType(type);
             });
-          },
+          },*/
           model: operation.isCreate ? null : provider.getFirstStep(),
           builder: (context, formModel, child) {
+            final typeNotifier = ValueNotifier(
+              formModel.typeControl?.value,
+            );
             final regOwnerTypeNotifier = ValueNotifier(
               formModel.registerOwnerTypeControl?.value,
             );
+            if (!isLoggedIn) {
+              formModel.typeControl?.updateValue(ForeignType.noResident);
+              formModel.registerOwnerTypeControl
+                  ?.updateValue(RegisterOwnerType.titular);
+            }
             return PrimaryScaffold(
               title: l10n.registroNacExt,
               subtitle: l10n.completeInformacionSolicitada,
@@ -62,63 +62,125 @@ class BirthAbroadFirstStepPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       PrimaryReactiveDropdown(
-                        label: l10n.tipoRegPropietario,
-                        formControl: formModel.registerOwnerTypeControl,
-                        items: RegisterOwnerType.values,
-                        readOnly: operation.isRead,
-                        onChanged: (value) =>
-                            regOwnerTypeNotifier.value = value.value,
-                      ),
-                      ValueListenableBuilder<RegisterOwnerType?>(
-                        valueListenable: regOwnerTypeNotifier,
-                        builder: (_, value, __) {
-                          if (operation.isCreate &&
-                              value != null &&
-                              isResident) {
-                            if (value == RegisterOwnerType.attorney) {
-                              formModel.identificationControl
-                                  ?.updateValue(me.identification);
-                              formModel.nameControl?.updateValue(
-                                '${me.firstName} ${me.lastName}',
-                              );
-                              formModel.phoneControl?.updateValue(me.phone);
-                              formModel.emailControl?.updateValue(me.email);
-                            } else {
-                              formModel.identificationControl?.reset();
-                              formModel.nameControl?.reset();
-                              formModel.phoneControl?.updateValue(me.phone);
-                              formModel.emailControl?.updateValue(me.email);
-                            }
+                        label: l10n.tipoTramite,
+                        formControl: formModel.typeControl,
+                        items: ForeignType.values,
+                        readOnly: operation.isRead || !isLoggedIn,
+                        maxLines: 5,
+                        onChanged: (value) {
+                          isResident = value.value == ForeignType.resident;
+                          typeNotifier.value = value.value;
+                          regOwnerTypeNotifier.value = null;
+                          if (!isResident) {
+                            formModel.identificationControl?.clearValidators();
+                            formModel.identificationControl
+                                ?.setValidators([requiredValidator]);
+                          } else {
+                            formModel.identificationControl?.clearValidators();
+                            formModel.identificationControl?.setValidators([
+                              requiredValidator,
+                              ecuadorDniValidator,
+                              length10Validator
+                            ]);
                           }
+                          formModel.identificationControl
+                              ?.updateValueAndValidity();
+                          formModel.registerOwnerTypeControl?.reset();
+                          formModel.identificationControl?.reset();
+                          formModel.nameControl?.reset();
+                          formModel.phoneControl?.reset();
+                          formModel.emailControl?.reset();
+                        },
+                      ),
+                      ValueListenableBuilder<ForeignType?>(
+                        valueListenable: typeNotifier,
+                        builder: (_, value, __) {
                           return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              IdentificationWidget(
-                                isResident: isResident,
-                                ref: ref,
-                                value: value,
-                                formModel: formModel,
-                                operation: operation,
+                              PrimaryReactiveDropdown(
+                                label: l10n.tipoRegPropietario,
+                                formControl: formModel.registerOwnerTypeControl,
+                                items: isLoggedIn
+                                    ? RegisterOwnerTypeExtension.listValues(
+                                        isResident: isResident,
+                                      )
+                                    : RegisterOwnerType.values,
+                                readOnly: operation.isRead || !isLoggedIn,
+                                onChanged: (value) =>
+                                    regOwnerTypeNotifier.value = value.value,
                               ),
-                              PrimaryReactiveTextField(
-                                label: l10n.nombreApe,
-                                readOnly: isResident || operation.isRead,
-                                formControl: formModel.nameControl,
-                                textCapitalization: TextCapitalization.words,
+                              const SizedBox(
+                                height: 16,
                               ),
-                              PrimaryReactiveTextField(
-                                label: l10n.telefonoCel,
-                                readOnly: isResident || operation.isRead,
-                                formControl: formModel.phoneControl,
-                                keyboardType: TextInputType.phone,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  LengthLimitingTextInputFormatter(10),
-                                ],
+                              PrimaryTitle(
+                                title: l10n.datosNacido,
+                                textAlign: TextAlign.start,
                               ),
-                              PrimaryReactiveEmailField(
-                                label: l10n.correoE,
-                                readOnly: isResident || operation.isRead,
-                                formControl: formModel.emailControl,
+                              ValueListenableBuilder<RegisterOwnerType?>(
+                                valueListenable: regOwnerTypeNotifier,
+                                builder: (_, value, __) {
+                                  if (operation.isCreate &&
+                                      value != null &&
+                                      isResident) {
+                                    if (value == RegisterOwnerType.titular) {
+                                      formModel.identificationControl
+                                          ?.updateValue(me.identification);
+                                      formModel.nameControl?.updateValue(
+                                        '${me.firstName} ${me.lastName}',
+                                      );
+                                      formModel.phoneControl
+                                          ?.updateValue(me.phone);
+                                      formModel.emailControl
+                                          ?.updateValue(me.email);
+                                    } else {
+                                      formModel.identificationControl?.reset();
+                                      formModel.nameControl?.reset();
+                                      formModel.phoneControl
+                                          ?.updateValue(me.phone);
+                                      formModel.emailControl
+                                          ?.updateValue(me.email);
+                                    }
+                                  }
+                                  return Column(
+                                    children: [
+                                      IdentificationWidget(
+                                        isResident: isResident,
+                                        ref: ref,
+                                        value: value,
+                                        formModel: formModel,
+                                        operation: operation,
+                                      ),
+                                      PrimaryReactiveTextField(
+                                        label: l10n.nombreApe,
+                                        readOnly:
+                                            isResident || operation.isRead,
+                                        formControl: formModel.nameControl,
+                                        textCapitalization:
+                                            TextCapitalization.words,
+                                      ),
+                                      PrimaryReactiveTextField(
+                                        label: l10n.telefonoCel,
+                                        readOnly: operation.isRead,
+                                        formControl: formModel.phoneControl,
+                                        keyboardType: TextInputType.phone,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          LengthLimitingTextInputFormatter(10),
+                                        ],
+                                      ),
+                                      PrimaryReactiveEmailField(
+                                        label: l10n.correoE,
+                                        readOnly: operation.isRead,
+                                        formControl: formModel.emailControl,
+                                      ),
+                                      if (value != null &&
+                                          value != RegisterOwnerType.titular)
+                                        RequestOwnerWidget(me: me),
+                                    ],
+                                  );
+                                },
                               ),
                             ],
                           );
@@ -133,6 +195,7 @@ class BirthAbroadFirstStepPage extends ConsumerWidget {
                   title: l10n.siguiente,
                   onPressed: formModel.form.valid
                       ? () {
+                          // final errors = formModel.form.errors;
                           ref.read(birthAbroadProvider.notifier).setFirstStep(
                                 registerOwner: formModel.model,
                                 requestOwnerId: me.id,

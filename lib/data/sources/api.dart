@@ -371,8 +371,8 @@ abstract class Api {
 
   @GET('/citizenship/api/citizenship/{id}')
   Future<ResponseModel<BirthAbroadListModel>> birthAbroadById(
-      @Path('id') String id,
-      );
+    @Path('id') String id,
+  );
 
   @GET('/citizenship/api/noresident/citizenship/{id}')
   Future<ResponseModel<BirthAbroadListModel>> birthAbroadNoResidentById(
@@ -395,8 +395,25 @@ abstract class Api {
   });
 
   @PUT('/citizenship/api/noresident/citizenship/documentation/file')
-  Future<ResponseModel<CommandModel>>
-      editNoResidentBirthAbroad({
+  Future<ResponseModel<CommandModel>> editNoResidentBirthAbroad({
     @Body() required BirthAbroadDocumentModel model,
   });
+
+  @GET('/api/location/province')
+  Future<ResponseModelPagination<List<LocationModel>?>> provincesNoAuth(
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
+
+  @GET('/api/location/parent/{id}')
+  Future<ResponseModelPagination<List<LocationModel>?>> locationByParentNoAuth(
+      @Path('id') String province,
+      );
+
+  @GET('/api/agency/by/canton?canton={canton}')
+  Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByCantonNoAuth(
+    @Path('canton') String canton,
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
 }

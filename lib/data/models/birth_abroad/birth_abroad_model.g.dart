@@ -111,10 +111,10 @@ Map<String, dynamic> _$$_BirthAbroadModelToJson(_$_BirthAbroadModel instance) =>
 
 _$_RegisterOwnerForm _$$_RegisterOwnerFormFromJson(Map<String, dynamic> json) =>
     _$_RegisterOwnerForm(
+      type: $enumDecodeNullable(_$ForeignTypeEnumMap, json['type']),
       registerOwnerType: $enumDecodeNullable(
           _$RegisterOwnerTypeEnumMap, json['registerOwnerType']),
       identification: json['identification'] as String?,
-      passport: json['passport'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
       phone: json['phone'] as String?,
@@ -123,10 +123,10 @@ _$_RegisterOwnerForm _$$_RegisterOwnerFormFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_RegisterOwnerFormToJson(
         _$_RegisterOwnerForm instance) =>
     <String, dynamic>{
+      'type': _$ForeignTypeEnumMap[instance.type],
       'registerOwnerType':
           _$RegisterOwnerTypeEnumMap[instance.registerOwnerType],
       'identification': instance.identification,
-      'passport': instance.passport,
       'name': instance.name,
       'email': instance.email,
       'phone': instance.phone,

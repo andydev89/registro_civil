@@ -32,68 +32,60 @@ class IdentificationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return Column(
-      children: [
-        if (isResident)
-          PrimaryReactiveTextField(
-            label: l10n.numCedula,
-            readOnly: value == RegisterOwnerType.attorney,
-            formControl: formModel.identificationControl,
-            inputFormatters: [
+    return PrimaryReactiveTextField(
+      label: isResident ? l10n.numCedula : l10n.pasaporte,
+      readOnly: (value == RegisterOwnerType.titular && isResident) ||
+          operation.isRead,
+      formControl: formModel.identificationControl,
+      inputFormatters: isResident
+          ? [
               FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(10),
-            ],
-            keyboardType: TextInputType.number,
-            suffixIcon: value != null && value != RegisterOwnerType.attorney
-                ? PrimaryAsyncIconButton(
-                    icon: Assets.svg.starCheck.svg(
-                      width: 20,
-                      height: 20,
-                    ),
-                    onPressed: () => ref
-                        .read(
-                          registerValidateCitizenProvider(
+            ]
+          : null,
+      keyboardType: isResident ? TextInputType.number : TextInputType.text,
+      suffixIcon:
+              value != RegisterOwnerType.titular &&
+              isResident &&
+              operation.isCreate
+          ? PrimaryAsyncIconButton(
+              icon: Assets.svg.starCheck.svg(
+                width: 20,
+                height: 20,
+              ),
+              onPressed: () => ref
+                  .read(
+                    registerValidateCitizenProvider(
 // ignore: provider_parameters
-                            NuiModel(
-                              nui: formModel.identificationControl!.value!,
-                            ),
-                          ).future,
-                        )
-                        .when(
-                          ok: (citizen) {
-                            var fullName = '';
-                            if (citizen.nombres.isEmpty ||
-                                citizen.apellidos.isEmpty) {
-                              final names = findNames(
-                                citizen.nombre,
-                              );
-                              fullName = '${names['firstName'] ?? ''} '
-                                  '${names['lastName'] ?? ''}';
-                            } else {
-                              fullName = '${citizen.nombres} '
-                                  '${citizen.apellidos}';
-                            }
-                            formModel.nameControl?.updateValue(fullName);
-                          },
-                          err: (error) => showAlert(
-                            error.translate(context),
-                            TypeAlert.error,
-                          ),
-                        ),
+                      NuiModel(
+                        nui: formModel.identificationControl!.value!,
+                      ),
+                    ).future,
                   )
-                : null,
-            suffixHorizontalPadding: 0,
-          )
-        else
-          PrimaryReactiveTextField(
-            label: l10n.pasaporte,
-            readOnly: operation.isRead,
-            formControl: formModel.passportControl,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(10),
-            ],
-          ),
-      ],
+                  .when(
+                    ok: (citizen) {
+                      var fullName = '';
+                      if (citizen.nombres.isEmpty ||
+                          citizen.apellidos.isEmpty) {
+                        final names = findNames(
+                          citizen.nombre,
+                        );
+                        fullName = '${names['firstName'] ?? ''} '
+                            '${names['lastName'] ?? ''}';
+                      } else {
+                        fullName = '${citizen.nombres} '
+                            '${citizen.apellidos}';
+                      }
+                      formModel.nameControl?.updateValue(fullName);
+                    },
+                    err: (error) => showAlert(
+                      error.translate(context),
+                      TypeAlert.error,
+                    ),
+                  ),
+            )
+          : null,
+      suffixHorizontalPadding: isResident ? 0 : 10,
     );
   }
 }

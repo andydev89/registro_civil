@@ -24,20 +24,9 @@ class BirthAbroad extends _$BirthAbroad {
     return state.id;
   }
 
-  void setForeignType(ForeignType type) {
-    state = state.copyWith(
-      foreignType: type,
-    );
-  }
-
-  ForeignType getForeignType() {
-    return state.foreignType;
-  }
-
   RegisterOwnerType getRegisterOwnerType() {
     return state.registerOwnerType;
   }
-
 
   void setFirstStep({
     required RegisterOwnerSubModel registerOwner,
@@ -53,8 +42,7 @@ class BirthAbroad extends _$BirthAbroad {
           registerOwner.registerOwnerType ?? RegisterOwnerType.attorney,
       registerOwner: RegisterOwner(
         name: registerOwner.name,
-        identification:
-            isResident ? registerOwner.identification : registerOwner.passport,
+        identification: registerOwner.identification,
         email: registerOwner.email,
         phone: registerOwner.phone,
       ),
@@ -68,6 +56,7 @@ class BirthAbroad extends _$BirthAbroad {
       email: state.registerOwner?.email,
       phone: state.registerOwner?.phone,
       registerOwnerType: state.registerOwnerType,
+      type: state.foreignType,
     );
   }
 
@@ -121,10 +110,10 @@ Future<ResponseModelPagination<List<BirthAbroadListModel>>> birthsAbroad(
   final query = ref.watch(birthAbroadFilterProvider);
   final api = ref.watch(apiProvider);
   final data = await ref.watch(loginProvider.notifier).future;
-  final type = data ? ForeignType.resident : ForeignType.noResident;
-  ref.watch(birthAbroadProvider.notifier).setForeignType(type);
+  // final type = data ? ForeignType.resident : ForeignType.noResident;
+  // ref.watch(birthAbroadProvider.notifier).setForeignType(type);
   ResponseModelPagination<List<BirthAbroadListModel>> response;
-  if (type == ForeignType.resident) {
+  if (data) {
     response = await api.birthsAbroad(
       pageNo: pageNo ?? query.pageNo,
       pageSize: query.pageSize,
@@ -147,8 +136,9 @@ Future<Result<CommandWithTransactionCodeModel, StatusCodeType>>
   required BirthAbroadModel model,
 }) async {
   final api = ref.watch(apiProvider);
+  final data = await ref.watch(loginProvider.notifier).future;
   ResponseModel<CommandWithTransactionCodeModel> result;
-  if (model.foreignType == ForeignType.resident) {
+  if (data) {
     result = await api.createBirthAbroad(model: model);
   } else {
     result = await api.createNoResidentBirthAbroad(model: model);
@@ -162,12 +152,12 @@ Future<Result<CommandWithTransactionCodeModel, StatusCodeType>>
 @riverpod
 Future<BirthAbroadListModel> birthAbroadById(
   BirthAbroadByIdRef ref,
-  String id, {
-  ForeignType type = ForeignType.resident,
-}) async {
+  String id,
+) async {
   final api = ref.watch(apiProvider);
+  final data = await ref.watch(loginProvider.notifier).future;
   BirthAbroadListModel response;
-  if (type == ForeignType.resident) {
+  if (data) {
     response = (await api.birthAbroadById(id)).data!;
   } else {
     response = (await api.birthAbroadNoResidentById(id)).data!;
@@ -179,11 +169,11 @@ Future<BirthAbroadListModel> birthAbroadById(
 Future<Result<Certificate, StatusCodeType>> documentById(
   DocumentByIdRef ref, {
   required String id,
-  ForeignType type = ForeignType.resident,
 }) async {
   final api = ref.watch(apiProvider);
   ResponseModel<Certificate> response;
-  if (type == ForeignType.resident) {
+  final data = await ref.watch(loginProvider.notifier).future;
+  if (data) {
     response = await api.documentById(id);
   } else {
     response = await api.documentNoResidentById(id);
@@ -194,15 +184,14 @@ Future<Result<Certificate, StatusCodeType>> documentById(
 }
 
 @riverpod
-Future<Result<CommandModel, StatusCodeType>>
-editBirthAbroadDocs(
-    EditBirthAbroadDocsRef ref, {
-      required BirthAbroadDocumentModel model,
-      ForeignType type = ForeignType.resident,
-    }) async {
+Future<Result<CommandModel, StatusCodeType>> editBirthAbroadDocs(
+  EditBirthAbroadDocsRef ref, {
+  required BirthAbroadDocumentModel model,
+}) async {
   final api = ref.watch(apiProvider);
+  final data = await ref.watch(loginProvider.notifier).future;
   ResponseModel<CommandModel> result;
-  if (type == ForeignType.resident) {
+  if (data) {
     result = await api.editBirthAbroad(model: model);
   } else {
     result = await api.editNoResidentBirthAbroad(model: model);

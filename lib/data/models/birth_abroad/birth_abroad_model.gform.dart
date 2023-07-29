@@ -184,11 +184,11 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
     this.path,
   ) {}
 
+  static const String typeControlName = "type";
+
   static const String registerOwnerTypeControlName = "registerOwnerType";
 
   static const String identificationControlName = "identification";
-
-  static const String passportControlName = "passport";
 
   static const String nameControlName = "name";
 
@@ -202,20 +202,29 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
 
   final String? path;
 
+  String typeControlPath() => pathBuilder(typeControlName);
   String registerOwnerTypeControlPath() =>
       pathBuilder(registerOwnerTypeControlName);
   String identificationControlPath() => pathBuilder(identificationControlName);
-  String passportControlPath() => pathBuilder(passportControlName);
   String nameControlPath() => pathBuilder(nameControlName);
   String emailControlPath() => pathBuilder(emailControlName);
   String phoneControlPath() => pathBuilder(phoneControlName);
+  ForeignType? get _typeValue => typeControl?.value;
   RegisterOwnerType? get _registerOwnerTypeValue =>
       registerOwnerTypeControl?.value;
   String? get _identificationValue => identificationControl?.value;
-  String? get _passportValue => passportControl?.value;
   String? get _nameValue => nameControl?.value;
   String? get _emailValue => emailControl?.value;
   String? get _phoneValue => phoneControl?.value;
+  bool get containsType {
+    try {
+      form.control(typeControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsRegisterOwnerType {
     try {
       form.control(registerOwnerTypeControlPath());
@@ -228,15 +237,6 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
   bool get containsIdentification {
     try {
       form.control(identificationControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool get containsPassport {
-    try {
-      form.control(passportControlPath());
       return true;
     } catch (e) {
       return false;
@@ -270,18 +270,44 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
     }
   }
 
+  Object? get typeErrors => typeControl?.errors;
   Object? get registerOwnerTypeErrors => registerOwnerTypeControl?.errors;
   Object? get identificationErrors => identificationControl?.errors;
-  Object? get passportErrors => passportControl?.errors;
   Object? get nameErrors => nameControl?.errors;
   Object? get emailErrors => emailControl?.errors;
   Object? get phoneErrors => phoneControl?.errors;
+  void get typeFocus => form.focus(typeControlPath());
   void get registerOwnerTypeFocus => form.focus(registerOwnerTypeControlPath());
   void get identificationFocus => form.focus(identificationControlPath());
-  void get passportFocus => form.focus(passportControlPath());
   void get nameFocus => form.focus(nameControlPath());
   void get emailFocus => form.focus(emailControlPath());
   void get phoneFocus => form.focus(phoneControlPath());
+  void typeRemove({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (containsType) {
+      final controlPath = path;
+      if (controlPath == null) {
+        form.removeControl(
+          typeControlName,
+          updateParent: updateParent,
+          emitEvent: emitEvent,
+        );
+      } else {
+        final formGroup = form.control(controlPath);
+
+        if (formGroup is FormGroup) {
+          formGroup.removeControl(
+            typeControlName,
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+      }
+    }
+  }
+
   void registerOwnerTypeRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -326,32 +352,6 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
         if (formGroup is FormGroup) {
           formGroup.removeControl(
             identificationControlName,
-            updateParent: updateParent,
-            emitEvent: emitEvent,
-          );
-        }
-      }
-    }
-  }
-
-  void passportRemove({
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (containsPassport) {
-      final controlPath = path;
-      if (controlPath == null) {
-        form.removeControl(
-          passportControlName,
-          updateParent: updateParent,
-          emitEvent: emitEvent,
-        );
-      } else {
-        final formGroup = form.control(controlPath);
-
-        if (formGroup is FormGroup) {
-          formGroup.removeControl(
-            passportControlName,
             updateParent: updateParent,
             emitEvent: emitEvent,
           );
@@ -438,6 +438,15 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
     }
   }
 
+  void typeValueUpdate(
+    ForeignType? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    typeControl?.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void registerOwnerTypeValueUpdate(
     RegisterOwnerType? value, {
     bool updateParent = true,
@@ -453,15 +462,6 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
     bool emitEvent = true,
   }) {
     identificationControl?.updateValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void passportValueUpdate(
-    String? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    passportControl?.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -492,6 +492,15 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void typeValuePatch(
+    ForeignType? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    typeControl?.patchValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void registerOwnerTypeValuePatch(
     RegisterOwnerType? value, {
     bool updateParent = true,
@@ -507,15 +516,6 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
     bool emitEvent = true,
   }) {
     identificationControl?.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
-  void passportValuePatch(
-    String? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    passportControl?.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -546,6 +546,15 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
+  void typeValueReset(
+    ForeignType? value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      typeControl?.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void registerOwnerTypeValueReset(
     RegisterOwnerType? value, {
     bool updateParent = true,
@@ -563,15 +572,6 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
     bool? disabled,
   }) =>
       identificationControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void passportValueReset(
-    String? value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      passportControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void nameValueReset(
     String? value, {
@@ -600,6 +600,9 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
   }) =>
       phoneControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<ForeignType>? get typeControl => containsType
+      ? form.control(typeControlPath()) as FormControl<ForeignType>?
+      : null;
   FormControl<RegisterOwnerType>? get registerOwnerTypeControl =>
       containsRegisterOwnerType
           ? form.control(registerOwnerTypeControlPath())
@@ -607,9 +610,6 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
           : null;
   FormControl<String>? get identificationControl => containsIdentification
       ? form.control(identificationControlPath()) as FormControl<String>?
-      : null;
-  FormControl<String>? get passportControl => containsPassport
-      ? form.control(passportControlPath()) as FormControl<String>?
       : null;
   FormControl<String>? get nameControl => containsName
       ? form.control(nameControlPath()) as FormControl<String>?
@@ -620,6 +620,24 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
   FormControl<String>? get phoneControl => containsPhone
       ? form.control(phoneControlPath()) as FormControl<String>?
       : null;
+  void typeSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      typeControl?.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      typeControl?.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void registerOwnerTypeSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -650,24 +668,6 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
       );
     } else {
       identificationControl?.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void passportSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      passportControl?.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      passportControl?.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -737,9 +737,9 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
           '[${path ?? 'RegisterOwnerSubModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return RegisterOwnerSubModel(
+        type: _typeValue,
         registerOwnerType: _registerOwnerTypeValue,
         identification: _identificationValue,
-        passport: _passportValue,
         name: _nameValue,
         email: _emailValue,
         phone: _phoneValue);
@@ -771,6 +771,13 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
       [path, pathItem].whereType<String>().join(".");
   static FormGroup formElements(RegisterOwnerSubModel? registerOwnerSubModel) =>
       FormGroup({
+        typeControlName: FormControl<ForeignType>(
+            value: registerOwnerSubModel?.type,
+            validators: [requiredValidator],
+            asyncValidators: [],
+            asyncValidatorsDebounceTime: 250,
+            disabled: false,
+            touched: false),
         registerOwnerTypeControlName: FormControl<RegisterOwnerType>(
             value: registerOwnerSubModel?.registerOwnerType,
             validators: [requiredValidator],
@@ -780,16 +787,6 @@ class RegisterOwnerSubModelForm implements FormModel<RegisterOwnerSubModel> {
             touched: false),
         identificationControlName: FormControl<String>(
             value: registerOwnerSubModel?.identification,
-            validators: [
-              (control) => ecuadorDniValidator(control as FormControl<String>),
-              (control) => length10Validator(control as FormControl<String>)
-            ],
-            asyncValidators: [],
-            asyncValidatorsDebounceTime: 250,
-            disabled: false,
-            touched: false),
-        passportControlName: FormControl<String>(
-            value: registerOwnerSubModel?.passport,
             validators: [],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
