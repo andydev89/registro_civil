@@ -6,7 +6,7 @@ part of 'birth_abroad_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$birthsAbroadHash() => r'8fb07a4bac39ee584103c88b71def2ca13277525';
+String _$birthsAbroadHash() => r'bc33f20748979a67fc95227b848802e87d38ccc9';
 
 /// Copied from Dart SDK
 class _SystemHash {

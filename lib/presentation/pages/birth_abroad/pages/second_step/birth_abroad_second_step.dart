@@ -61,6 +61,14 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                     initialValue: (data) {
                       return data;
                     },
+                    onViewDetail: () {
+                      context.navigateTo(
+                        BirthAbroadDocumentDetailRoute(
+                          document:
+                              formModel.birthCertificateControl!.value!.file!.replaceFirst('data:application/pdf;base64,', ''),
+                        ),
+                      );
+                    },
                     operation: operation,
                     provider: DocumentByIdProvider(
                       id: formModel.birthCertificateControl?.value?.id ?? '',
@@ -81,6 +89,14 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                     },
                     initialValue: (data) {
                       return data;
+                    },
+                    onViewDetail: () {
+                      context.navigateTo(
+                        BirthAbroadDocumentDetailRoute(
+                          document:
+                          formModel.identityControl!.value!.file!,
+                        ),
+                      );
                     },
                     operation: operation,
                     provider: DocumentByIdProvider(
@@ -110,6 +126,14 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                           operation: operation,
                           initialValue: (data) {
                             return data;
+                          },
+                          onViewDetail: () {
+                            context.navigateTo(
+                              BirthAbroadDocumentDetailRoute(
+                                document:
+                                formModel.powerOfAttorneyControl!.value!.file!,
+                              ),
+                            );
                           },
                           provider: DocumentByIdProvider(
                             id: formModel.powerOfAttorneyControl?.value?.id ??

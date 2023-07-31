@@ -32,6 +32,7 @@ class SecondaryReactiveFilePicker<T extends Translatable>
     this.ligth = false,
     this.label,
     this.onRemove,
+    this.onViewDetail,
     required this.provider,
     this.initialValue,
     this.init = false,
@@ -53,6 +54,7 @@ class SecondaryReactiveFilePicker<T extends Translatable>
   final String? label;
   final T? Function(T?)? initialValue;
   final void Function()? onRemove;
+  final void Function()? onViewDetail;
   final AutoDisposeFutureProvider<Result<T, StatusCodeType>> provider;
   final bool init;
   final Crud operation;
@@ -110,8 +112,7 @@ class SecondaryReactiveFilePicker<T extends Translatable>
                             );
                           }
                           final pdfBytes = pdfFile.readAsBytesSync();
-                          final base64Pdf =
-                              'data:application/${fileExtension.value};base64,${base64Encode(pdfBytes)}';
+                          final base64Pdf = base64Encode(pdfBytes);
                           name = result.files.single.name;
                           if (base64Pdf is T) {
                             field.didChange(base64Pdf as T);
@@ -172,7 +173,7 @@ class SecondaryReactiveFilePicker<T extends Translatable>
                             )
                           else if (operation.isRead)
                             PrimaryIconButton(
-                              onPressed: () {},
+                              onPressed: () => onViewDetail!.call(),
                               icon: const Icon(Icons.remove_red_eye),
                             )
                           else

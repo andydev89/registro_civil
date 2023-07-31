@@ -447,6 +447,10 @@ part 'router.gr.dart';
                   page: BirthAbroadThirdStepPage,
                   transitionsBuilder: TransitionsBuilders.slideRight,
                 ),
+                CustomRoute(
+                  page: BirthAbroadDocumentDetailPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
               ],
             ),
             CupertinoRoute(

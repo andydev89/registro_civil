@@ -1032,6 +1032,19 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    BirthAbroadDocumentDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<BirthAbroadDocumentDetailRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: BirthAbroadDocumentDetailPage(
+          document: args.document,
+          key: args.key,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     CedulacionExtPvezMainRoute.name: (routeData) {
       final args = routeData.argsAs<CedulacionExtPvezMainRouteArgs>();
       return CustomPage<dynamic>(
@@ -1578,6 +1591,11 @@ class _$AppRouter extends RootStackRouter {
                     RouteConfig(
                       BirthAbroadThirdStepRoute.name,
                       path: 'birth-abroad-third-step-page',
+                      parent: BirthAbroadFirstStepRouterRoute.name,
+                    ),
+                    RouteConfig(
+                      BirthAbroadDocumentDetailRoute.name,
+                      path: 'birth-abroad-document-detail-page',
                       parent: BirthAbroadFirstStepRouterRoute.name,
                     ),
                   ],
@@ -4406,6 +4424,41 @@ class BirthAbroadThirdStepRouteArgs {
   @override
   String toString() {
     return 'BirthAbroadThirdStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation}';
+  }
+}
+
+/// generated route for
+/// [BirthAbroadDocumentDetailPage]
+class BirthAbroadDocumentDetailRoute
+    extends PageRouteInfo<BirthAbroadDocumentDetailRouteArgs> {
+  BirthAbroadDocumentDetailRoute({
+    required String document,
+    Key? key,
+  }) : super(
+          BirthAbroadDocumentDetailRoute.name,
+          path: 'birth-abroad-document-detail-page',
+          args: BirthAbroadDocumentDetailRouteArgs(
+            document: document,
+            key: key,
+          ),
+        );
+
+  static const String name = 'BirthAbroadDocumentDetailRoute';
+}
+
+class BirthAbroadDocumentDetailRouteArgs {
+  const BirthAbroadDocumentDetailRouteArgs({
+    required this.document,
+    this.key,
+  });
+
+  final String document;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'BirthAbroadDocumentDetailRouteArgs{document: $document, key: $key}';
   }
 }
 
