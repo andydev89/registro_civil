@@ -11,7 +11,9 @@ enum ProcessStatus implements Translatable {
   @JsonValue('IN_PROGRESS')
   inProgress('IN_PROGRESS'),
   @JsonValue('REJECTED')
-  rejected('REJECTED');
+  rejected('REJECTED'),
+  @JsonValue('FINALIZED')
+  finalized('FINALIZED');
 
   const ProcessStatus(this.toText);
   final String toText;
@@ -28,6 +30,8 @@ enum ProcessStatus implements Translatable {
         return l10n.rechazado;
       case ProcessStatus.inProgress:
         return l10n.enProceso;
+      case ProcessStatus.finalized:
+        return l10n.finalizado;
     }
   }
 }
