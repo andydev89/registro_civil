@@ -23,10 +23,19 @@ class BirthAbroadMainPage extends ConsumerWidget {
       body: Expanded(
         child: Column(
           children: [
-            PrimarySearch(
-              filter: (p0) =>
-                  ref.read(birthAbroadFilterProvider.notifier).setFilter(p0),
-            ).verticalPadding(10),
+            FutureBuilder(
+              future: ref.watch(loginProvider.notifier).future,
+              builder: (context, snapshot) {
+                return PrimarySearch(
+                  hint: (snapshot.hasData && snapshot.data!)
+                      ? null
+                      : '${l10n.introduzcaPasaporte}...',
+                  filter: (p0) {
+                    ref.read(birthAbroadFilterProvider.notifier).setFilter(p0);
+                  },
+                ).verticalPadding(10);
+              },
+            ),
             PrimaryAddItemRow(
               title: l10n.listadoSol,
               onPressed: () => context.navigateTo(

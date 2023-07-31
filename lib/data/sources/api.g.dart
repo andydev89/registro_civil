@@ -1778,13 +1778,13 @@ class _Api implements Api {
       birthsAbroadNoResident({
     int pageNo = 0,
     int pageSize = 20,
-    String filter = '',
+    String filter = ' ',
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'pageNo': pageNo,
       r'pageSize': pageSize,
-      r'filter': filter,
+      r'identification': filter,
     };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;

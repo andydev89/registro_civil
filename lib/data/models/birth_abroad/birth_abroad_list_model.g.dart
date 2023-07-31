@@ -75,6 +75,7 @@ const _$ProcessStatusEnumMap = {
   ProcessStatus.approved: 'APPROVED',
   ProcessStatus.inProgress: 'IN_PROGRESS',
   ProcessStatus.rejected: 'REJECTED',
+  ProcessStatus.finalized: 'FINALIZED',
 };
 
 Map<String, dynamic> _$$_BirthAbroadListModelToJson(

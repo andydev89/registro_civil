@@ -671,5 +671,6 @@
   "cedextpvSatisfactorio": "¡Su validación se ha realizado \nsatisfactoriamente!",
   "cedextpvInfoSatisfactorio": "Le hemos enviado una notificación a su \ncorreo electrónico con los detalles de su solicitud.",
   "datosNacido": "Datos del nacido",
-  "datosSolicitante": "Datos del solicitante"
+  "datosSolicitante": "Datos del solicitante",
+  "introduzcaPasaporte": "Introduzca su Nro de Pasaporte"
 }

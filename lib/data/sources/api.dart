@@ -355,7 +355,7 @@ abstract class Api {
       birthsAbroadNoResident({
     @Query('pageNo') int pageNo = 0,
     @Query('pageSize') int pageSize = 20,
-    @Query('filter') String filter = '',
+    @Query('identification') String filter = ' ',
   });
 
   @POST('/citizenship/api/citizenship')

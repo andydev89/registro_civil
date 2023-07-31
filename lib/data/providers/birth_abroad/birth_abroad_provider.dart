@@ -120,10 +120,13 @@ Future<ResponseModelPagination<List<BirthAbroadListModel>>> birthsAbroad(
       filter: query.filter,
     );
   } else {
+    //Si no tiene filtro enviar un espacio vacio para que no liste todos los elementos
+    //Solo debe listar los que coincidan con el nro de pasaporte del usuario.
+    final filter = query.filter.isEmpty ? ' ' : query.filter;
     response = await api.birthsAbroadNoResident(
       pageNo: pageNo ?? query.pageNo,
       pageSize: query.pageSize,
-      filter: query.filter,
+      filter: filter,
     );
   }
   return response;

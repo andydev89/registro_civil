@@ -671,5 +671,6 @@
   "cedextpvSatisfactorio": "Your validation has been \ncompleted successfully!",
   "cedextpvInfoSatisfactorio": "We have sent a notification to your \nemail with the details of your request.",
   "datosNacido": "Newborn data",
-  "datosSolicitante": "Applicant details"
+  "datosSolicitante": "Applicant details",
+  "introduzcaPasaporte": "Enter your Passport Number"
 }
