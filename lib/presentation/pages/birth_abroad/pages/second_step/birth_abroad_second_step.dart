@@ -64,7 +64,6 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                     operation: operation,
                     provider: DocumentByIdProvider(
                       id: formModel.birthCertificateControl?.value?.id ?? '',
-                      type: provider.getForeignType(),
                     ),
                   ),
                   SecondaryReactiveFilePicker<Certificate>(
@@ -86,7 +85,6 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                     operation: operation,
                     provider: DocumentByIdProvider(
                       id: formModel.identityControl?.value?.id ?? '',
-                      type: provider.getForeignType(),
                     ),
                   ),
                   ValueListenableBuilder<RegisterOwnerType?>(
@@ -116,7 +114,6 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                           provider: DocumentByIdProvider(
                             id: formModel.powerOfAttorneyControl?.value?.id ??
                                 '',
-                            type: provider.getForeignType(),
                           ),
                         ),
                       );
@@ -136,7 +133,6 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                               await ref
                                   .read(
                                 editBirthAbroadDocsProvider(
-                                  type: provider.getForeignType(),
 // ignore: provider_parameters
                                   model: BirthAbroadDocumentModel
                                       .fromDocumentsSubModel(

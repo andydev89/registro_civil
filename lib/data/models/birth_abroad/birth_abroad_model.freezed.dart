@@ -503,13 +503,12 @@ RegisterOwnerSubModel _$RegisterOwnerSubModelFromJson(
 /// @nodoc
 mixin _$RegisterOwnerSubModel {
   @FormControlAnnotation(validators: [requiredValidator])
+  ForeignType? get type => throw _privateConstructorUsedError;
+  @FormControlAnnotation(validators: [requiredValidator])
   RegisterOwnerType? get registerOwnerType =>
       throw _privateConstructorUsedError;
-  @FormControlAnnotation<String>(
-      validators: [ecuadorDniValidator, length10Validator])
-  String? get identification => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>()
-  String? get passport => throw _privateConstructorUsedError;
+  String? get identification => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   String? get name => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>(validators: [requiredValidator])
@@ -531,14 +530,11 @@ abstract class $RegisterOwnerSubModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@FormControlAnnotation(validators: [requiredValidator])
+          ForeignType? type,
+      @FormControlAnnotation(validators: [requiredValidator])
           RegisterOwnerType? registerOwnerType,
-      @FormControlAnnotation<String>(validators: [
-        ecuadorDniValidator,
-        length10Validator
-      ])
-          String? identification,
       @FormControlAnnotation<String>()
-          String? passport,
+          String? identification,
       @FormControlAnnotation(validators: [requiredValidator])
           String? name,
       @FormControlAnnotation<String>(validators: [requiredValidator])
@@ -561,14 +557,18 @@ class _$RegisterOwnerSubModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? type = freezed,
     Object? registerOwnerType = freezed,
     Object? identification = freezed,
-    Object? passport = freezed,
     Object? name = freezed,
     Object? email = freezed,
     Object? phone = freezed,
   }) {
     return _then(_value.copyWith(
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ForeignType?,
       registerOwnerType: freezed == registerOwnerType
           ? _value.registerOwnerType
           : registerOwnerType // ignore: cast_nullable_to_non_nullable
@@ -576,10 +576,6 @@ class _$RegisterOwnerSubModelCopyWithImpl<$Res,
       identification: freezed == identification
           ? _value.identification
           : identification // ignore: cast_nullable_to_non_nullable
-              as String?,
-      passport: freezed == passport
-          ? _value.passport
-          : passport // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
           ? _value.name
@@ -607,14 +603,11 @@ abstract class _$$_RegisterOwnerFormCopyWith<$Res>
   @useResult
   $Res call(
       {@FormControlAnnotation(validators: [requiredValidator])
+          ForeignType? type,
+      @FormControlAnnotation(validators: [requiredValidator])
           RegisterOwnerType? registerOwnerType,
-      @FormControlAnnotation<String>(validators: [
-        ecuadorDniValidator,
-        length10Validator
-      ])
-          String? identification,
       @FormControlAnnotation<String>()
-          String? passport,
+          String? identification,
       @FormControlAnnotation(validators: [requiredValidator])
           String? name,
       @FormControlAnnotation<String>(validators: [requiredValidator])
@@ -634,14 +627,18 @@ class __$$_RegisterOwnerFormCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? type = freezed,
     Object? registerOwnerType = freezed,
     Object? identification = freezed,
-    Object? passport = freezed,
     Object? name = freezed,
     Object? email = freezed,
     Object? phone = freezed,
   }) {
     return _then(_$_RegisterOwnerForm(
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ForeignType?,
       registerOwnerType: freezed == registerOwnerType
           ? _value.registerOwnerType
           : registerOwnerType // ignore: cast_nullable_to_non_nullable
@@ -649,10 +646,6 @@ class __$$_RegisterOwnerFormCopyWithImpl<$Res>
       identification: freezed == identification
           ? _value.identification
           : identification // ignore: cast_nullable_to_non_nullable
-              as String?,
-      passport: freezed == passport
-          ? _value.passport
-          : passport // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
           ? _value.name
@@ -675,14 +668,11 @@ class __$$_RegisterOwnerFormCopyWithImpl<$Res>
 class _$_RegisterOwnerForm extends _RegisterOwnerForm {
   const _$_RegisterOwnerForm(
       {@FormControlAnnotation(validators: [requiredValidator])
+          this.type,
+      @FormControlAnnotation(validators: [requiredValidator])
           this.registerOwnerType,
-      @FormControlAnnotation<String>(validators: [
-        ecuadorDniValidator,
-        length10Validator
-      ])
-          this.identification,
       @FormControlAnnotation<String>()
-          this.passport,
+          this.identification,
       @FormControlAnnotation(validators: [requiredValidator])
           this.name,
       @FormControlAnnotation<String>(validators: [requiredValidator])
@@ -696,14 +686,13 @@ class _$_RegisterOwnerForm extends _RegisterOwnerForm {
 
   @override
   @FormControlAnnotation(validators: [requiredValidator])
+  final ForeignType? type;
+  @override
+  @FormControlAnnotation(validators: [requiredValidator])
   final RegisterOwnerType? registerOwnerType;
   @override
-  @FormControlAnnotation<String>(
-      validators: [ecuadorDniValidator, length10Validator])
-  final String? identification;
-  @override
   @FormControlAnnotation<String>()
-  final String? passport;
+  final String? identification;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   final String? name;
@@ -716,7 +705,7 @@ class _$_RegisterOwnerForm extends _RegisterOwnerForm {
 
   @override
   String toString() {
-    return 'RegisterOwnerSubModel(registerOwnerType: $registerOwnerType, identification: $identification, passport: $passport, name: $name, email: $email, phone: $phone)';
+    return 'RegisterOwnerSubModel(type: $type, registerOwnerType: $registerOwnerType, identification: $identification, name: $name, email: $email, phone: $phone)';
   }
 
   @override
@@ -724,12 +713,11 @@ class _$_RegisterOwnerForm extends _RegisterOwnerForm {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_RegisterOwnerForm &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.registerOwnerType, registerOwnerType) ||
                 other.registerOwnerType == registerOwnerType) &&
             (identical(other.identification, identification) ||
                 other.identification == identification) &&
-            (identical(other.passport, passport) ||
-                other.passport == passport) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone));
@@ -737,8 +725,8 @@ class _$_RegisterOwnerForm extends _RegisterOwnerForm {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, registerOwnerType,
-      identification, passport, name, email, phone);
+  int get hashCode => Object.hash(
+      runtimeType, type, registerOwnerType, identification, name, email, phone);
 
   @JsonKey(ignore: true)
   @override
@@ -758,14 +746,11 @@ class _$_RegisterOwnerForm extends _RegisterOwnerForm {
 abstract class _RegisterOwnerForm extends RegisterOwnerSubModel {
   const factory _RegisterOwnerForm(
       {@FormControlAnnotation(validators: [requiredValidator])
+          final ForeignType? type,
+      @FormControlAnnotation(validators: [requiredValidator])
           final RegisterOwnerType? registerOwnerType,
-      @FormControlAnnotation<String>(validators: [
-        ecuadorDniValidator,
-        length10Validator
-      ])
-          final String? identification,
       @FormControlAnnotation<String>()
-          final String? passport,
+          final String? identification,
       @FormControlAnnotation(validators: [requiredValidator])
           final String? name,
       @FormControlAnnotation<String>(validators: [requiredValidator])
@@ -779,14 +764,13 @@ abstract class _RegisterOwnerForm extends RegisterOwnerSubModel {
 
   @override
   @FormControlAnnotation(validators: [requiredValidator])
+  ForeignType? get type;
+  @override
+  @FormControlAnnotation(validators: [requiredValidator])
   RegisterOwnerType? get registerOwnerType;
   @override
-  @FormControlAnnotation<String>(
-      validators: [ecuadorDniValidator, length10Validator])
-  String? get identification;
-  @override
   @FormControlAnnotation<String>()
-  String? get passport;
+  String? get identification;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   String? get name;

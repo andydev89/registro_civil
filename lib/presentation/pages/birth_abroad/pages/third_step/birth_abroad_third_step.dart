@@ -48,7 +48,7 @@ class BirthAbroadThirdStepPage extends ConsumerWidget {
                       );
                       return r;
                     },
-                    provider: provincesProvider,
+                    provider: provincesNoAuthProvider,
                     onChanged: (p0) {
                       formModel.cantonControl?.value = null;
                     },
@@ -70,7 +70,7 @@ class BirthAbroadThirdStepPage extends ConsumerWidget {
                                 operation.isRead,
                             formControl: formModel.cantonControl,
                             label: l10n.canton,
-                            provider: LocationByParentProvider(
+                            provider: LocationByParentNoAuthProvider(
                               parentId:
                                   formModel.provinceControl?.value?.id ?? '',
                             ),
@@ -90,7 +90,7 @@ class BirthAbroadThirdStepPage extends ConsumerWidget {
                                 operation.isRead,
                             formControl: formModel.agencyControl,
                             label: l10n.agencia,
-                            provider: AgenciesByCantonProvider(
+                            provider: AgenciesByCantonNoAuthProvider(
                               cantonId:
                                   formModel.cantonControl?.value?.id ?? '',
                             ),

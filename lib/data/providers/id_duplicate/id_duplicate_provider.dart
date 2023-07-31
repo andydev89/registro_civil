@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
-import 'package:registro_civil_apk/data/providers/auth/auth.dart';
 import 'package:registro_civil_apk/data/providers/commons/commons.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -64,12 +63,30 @@ class IdDuplicateApi extends _$IdDuplicateApi {
 }
 
 @riverpod
+class DuplicateFilter extends _$DuplicateFilter {
+  @override
+  QueryDuplicate build() {
+    return QueryDuplicate();
+  }
+
+  void setFilter(String filter) {
+    state = state.copyWith(filter: filter);
+  }
+}
+
+
+@riverpod
 Future<ResponseModelPagination<List<IdDuplicateResponseModel>>> duplicates(
   DuplicatesRef ref, {
   int? pageNo,
 }) async {
+  final query = ref.watch(duplicateFilterProvider);
   final api = ref.watch(apiProvider);
-  final response = await api.duplicates(pageNo: pageNo ?? 0);
+  final response = await api.duplicates(
+    pageNo: pageNo ?? query.pageNo,
+    pageSize: query.pageSize,
+    filter: query.filter,
+  );
   return response;
 }
 

@@ -670,5 +670,8 @@
   "poderEspNac": "Special power of attorney in case of being carried out by a third party",
   "cedextpvSatisfactorio": "Your validation has been \ncompleted successfully!",
   "cedextpvInfoSatisfactorio": "We have sent a notification to your \nemail with the details of your request.",
-  "cedextVisa": "Visa number" 
+  "cedextVisa": "Visa number",
+  "datosNacido": "Newborn data",
+  "datosSolicitante": "Applicant details",
+  "introduzcaPasaporte": "Enter your Passport Number"
 }

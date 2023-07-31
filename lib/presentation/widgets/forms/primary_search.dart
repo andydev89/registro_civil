@@ -9,12 +9,14 @@ class PrimarySearch extends StatefulWidget {
   const PrimarySearch({
     super.key,
     this.showFilter = false,
+    this.hint,
     this.onPressed,
     // this.filter = '',
     required this.filter,
   });
   final bool showFilter;
   // final String filter;
+  final String? hint;
   final void Function()? onPressed;
   final void Function(String) filter;
 
@@ -47,7 +49,7 @@ class _PrimarySearchState extends State<PrimarySearch> {
           child: Consumer(
             builder: (_, ref, __) {
               return PrimaryDebouncedTextField(
-                hintText: l10n.buscar,
+                hintText: widget.hint ?? l10n.buscar,
                 controller: controller,
                 padding: 15,
                 onChanged: (value) {

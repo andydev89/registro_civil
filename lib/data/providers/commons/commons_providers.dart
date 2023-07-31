@@ -88,6 +88,42 @@ Future<Result<List<LocationModel>, StatusCodeType>> locationByParent(
 }
 
 @riverpod
+Future<Result<List<LocationModel>, StatusCodeType>> provincesNoAuth(
+    ProvincesNoAuthRef ref,
+    ) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.provincesNoAuth(0, 100);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+@riverpod
+Future<Result<List<LocationModel>, StatusCodeType>> locationByParentNoAuth(
+    LocationByParentNoAuthRef ref, {
+      required String parentId,
+    }) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.locationByParentNoAuth(parentId);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+@riverpod
+Future<Result<List<AgencyModel>, StatusCodeType>> agenciesByCantonNoAuth(
+    AgenciesByCantonNoAuthRef ref, {
+      required String cantonId,
+    }) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.agenciesByCantonNoAuth(cantonId, 0, 100);
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+
+@riverpod
 Future<Result<List<TypeServiceModel>, StatusCodeType>> services(
   ServicesRef ref, {
   bool? bookable,

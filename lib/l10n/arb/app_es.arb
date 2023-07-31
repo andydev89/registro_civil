@@ -670,5 +670,8 @@
   "poderEspNac": "Poder especial en caso de ser realizado por un tercero",
   "cedextpvSatisfactorio": "¡Su validación se ha realizado \nsatisfactoriamente!",
   "cedextpvInfoSatisfactorio": "Le hemos enviado una notificación a su \ncorreo electrónico con los detalles de su solicitud.",
-  "cedextVisa": "Número de visa" 
+  "cedextVisa": "Número de visa",
+  "datosNacido": "Datos del nacido",
+  "datosSolicitante": "Datos del solicitante",
+  "introduzcaPasaporte": "Introduzca su Nro de Pasaporte"
 }
