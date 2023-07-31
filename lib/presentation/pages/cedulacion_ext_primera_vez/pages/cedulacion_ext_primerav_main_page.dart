@@ -35,13 +35,13 @@ class CedulacionExtPvezMainPage extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     PrimaryReactiveNuiField(
-                      label: 'Número de visa',
+                      label: l10n.cedextVisa,
                       formControl: formModel.visaControl,
                       init: true,
                       readOnly: false,
                     ),
                     PrimaryReactiveEmailField(
-                      label: 'Correo electrónico',
+                      label: l10n.correoE,
                       readOnly: false,
                       formControl: formModel.emailControl,
                       // textCapitalization: TextCapitalization.words,
