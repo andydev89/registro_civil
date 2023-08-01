@@ -379,6 +379,18 @@ class _$AppRouter extends RootStackRouter {
         child: const CedulacionExtPvezRouterPage(),
       );
     },
+    PaymentServiceValDocRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const PaymentServiceValDocRouterPage(),
+      );
+    },
+    PaymentServiceIngActsNotRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const PaymentServiceIngActsNotRouterPage(),
+      );
+    },
     DefaultRoute.name: (routeData) {
       final args = routeData.argsAs<DefaultRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -1060,6 +1072,32 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    PaymentServiceValDocFirstRoute.name: (routeData) {
+      final args = routeData.argsAs<PaymentServiceValDocFirstRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: PaymentServiceValDocFirstPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    PaymentServiceIngActsNotFirstRoute.name: (routeData) {
+      final args = routeData.argsAs<PaymentServiceIngActsNotFirstRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: PaymentServiceIngActsNotFirstPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1611,6 +1649,30 @@ class _$AppRouter extends RootStackRouter {
                   path: 'cedulacion-ext-pvez-succes-page',
                   parent: CedulacionExtPvezRouterRoute.name,
                 ),
+              ],
+            ),
+            RouteConfig(
+              PaymentServiceValDocRouterRoute.name,
+              path: 'payment-service-val-doc-router-page',
+              parent: RootRouterRoute.name,
+              children: [
+                RouteConfig(
+                  PaymentServiceValDocFirstRoute.name,
+                  path: '',
+                  parent: PaymentServiceValDocRouterRoute.name,
+                )
+              ],
+            ),
+            RouteConfig(
+              PaymentServiceIngActsNotRouterRoute.name,
+              path: 'payment-service-ing-acts-not-router-page',
+              parent: RootRouterRoute.name,
+              children: [
+                RouteConfig(
+                  PaymentServiceIngActsNotFirstRoute.name,
+                  path: '',
+                  parent: PaymentServiceIngActsNotRouterRoute.name,
+                )
               ],
             ),
             RouteConfig(
@@ -2490,6 +2552,32 @@ class CedulacionExtPvezRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CedulacionExtPvezRouterRoute';
+}
+
+/// generated route for
+/// [PaymentServiceValDocRouterPage]
+class PaymentServiceValDocRouterRoute extends PageRouteInfo<void> {
+  const PaymentServiceValDocRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          PaymentServiceValDocRouterRoute.name,
+          path: 'payment-service-val-doc-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'PaymentServiceValDocRouterRoute';
+}
+
+/// generated route for
+/// [PaymentServiceIngActsNotRouterPage]
+class PaymentServiceIngActsNotRouterRoute extends PageRouteInfo<void> {
+  const PaymentServiceIngActsNotRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          PaymentServiceIngActsNotRouterRoute.name,
+          path: 'payment-service-ing-acts-not-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'PaymentServiceIngActsNotRouterRoute';
 }
 
 /// generated route for
@@ -4481,5 +4569,75 @@ class CedulacionExtPvezSuccesRouteArgs {
   @override
   String toString() {
     return 'CedulacionExtPvezSuccesRouteArgs{key: $key, title: $title, subtitle: $subtitle}';
+  }
+}
+
+/// generated route for
+/// [PaymentServiceValDocFirstPage]
+class PaymentServiceValDocFirstRoute
+    extends PageRouteInfo<PaymentServiceValDocFirstRouteArgs> {
+  PaymentServiceValDocFirstRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          PaymentServiceValDocFirstRoute.name,
+          path: '',
+          args: PaymentServiceValDocFirstRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'PaymentServiceValDocFirstRoute';
+}
+
+class PaymentServiceValDocFirstRouteArgs {
+  const PaymentServiceValDocFirstRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'PaymentServiceValDocFirstRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [PaymentServiceIngActsNotFirstPage]
+class PaymentServiceIngActsNotFirstRoute
+    extends PageRouteInfo<PaymentServiceIngActsNotFirstRouteArgs> {
+  PaymentServiceIngActsNotFirstRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          PaymentServiceIngActsNotFirstRoute.name,
+          path: '',
+          args: PaymentServiceIngActsNotFirstRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'PaymentServiceIngActsNotFirstRoute';
+}
+
+class PaymentServiceIngActsNotFirstRouteArgs {
+  const PaymentServiceIngActsNotFirstRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'PaymentServiceIngActsNotFirstRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
   }
 }

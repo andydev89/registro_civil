@@ -17,3 +17,5 @@ export 'root/root.dart';
 export 'schedule_turn/schedule_turn.dart';
 export 'simple_certificate/simple_certificate.dart';
 export 'cedulacion_ext_primera_vez/cedulacion_ext_primera_vez.dart';
+export 'payment_service_ing_actas_not/payment_service_ing_acts_not.dart';
+export 'payment_service_val_doc/payment_service_val_doc.dart';

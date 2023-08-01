@@ -94,6 +94,20 @@ PageRouteInfo<dynamic> getBirthAbroad(TypeServiceModel typeOfService) =>
       ],
     );
 
+PageRouteInfo<dynamic> getPaymentServconvdoc(TypeServiceModel typeOfService) =>
+    PaymentServiceValDocRouterRoute(
+      children: [
+        PaymentServiceValDocFirstRoute(typeServiceModel: typeOfService),
+      ],
+    );
+
+PageRouteInfo<dynamic> getPaymentServactnot(TypeServiceModel typeOfService) =>
+    PaymentServiceIngActsNotRouterRoute(
+      children: [
+        PaymentServiceIngActsNotFirstRoute(typeServiceModel: typeOfService),
+      ],
+    );
+
 PageRouteInfo<dynamic> getDefault(TypeServiceModel typeOfService) =>
     DefaultRoute(typeServiceModel: typeOfService);
 
@@ -137,6 +151,14 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
 
   if (type.isBirthAbroad) {
     return getBirthAbroad(typeServiceModel);
+  }
+
+  if (type.isPaymentServactnot) {
+    return getPaymentServactnot(typeServiceModel);
+  }
+
+  if (type.isPaymentServconvdoc) {
+    return getPaymentServconvdoc(typeServiceModel);
   }
 
   return getDefault(typeServiceModel);

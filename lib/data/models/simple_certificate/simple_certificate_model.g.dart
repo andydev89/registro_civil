@@ -58,6 +58,8 @@ const _$ServiceTypeEnumMap = {
   ServiceType.cedulacionExtPriVez: 'FORMALITY_FIRST_FOREIGN_IDENTITY',
   ServiceType.personalValidation: 'SERVICE_PERSONAL_VALIDATION',
   ServiceType.birthAbroad: 'FORMALITY_BIRTH_OUTSIDE_REGISTER',
+  ServiceType.paymentservactnot: 'SERVICE_ACTAS_NOTARIALES',
+  ServiceType.paymentservconvdoc: 'SERVICE_CONVALIDACION_DOCUMENTOS',
 };
 
 const _$RelationshipSimpleCertificateTypeEnumMap = {

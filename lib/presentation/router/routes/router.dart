@@ -476,6 +476,30 @@ part 'router.gr.dart';
           ],
         ),
 
+        //PAYMENT_SERVICE_CONVALIDACION_DOCUMENTOS
+        CupertinoRoute(
+          page: PaymentServiceValDocRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: PaymentServiceValDocFirstPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+          ],
+        ),
+
+        //PAYMENT_SERVICE_ACTAS_NOTARIALES
+        CupertinoRoute(
+          page: PaymentServiceIngActsNotRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: PaymentServiceIngActsNotFirstPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+          ],
+        ),
+
         CupertinoRoute(
           // guards: [AuthGuard],
           page: DefaultPage,
