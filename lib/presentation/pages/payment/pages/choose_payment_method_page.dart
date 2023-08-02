@@ -14,10 +14,13 @@ class ChoosePaymentMethodPage extends ConsumerWidget {
     required this.service,
     required this.transactionCode,
     this.requestNumber,
+    this.isTurn = false,
   });
+
   final TypeServiceModel service;
   final String transactionCode;
   final String? requestNumber;
+  final bool isTurn;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,7 +34,9 @@ class ChoosePaymentMethodPage extends ConsumerWidget {
               PaymentSelector(
                 label: l10n.seleccioneMetodoPago,
                 formControl: formModel.paymentMethodControl,
-                paymentMethods: PaymentMethodType.values,
+                paymentMethods: isTurn
+                    ? PaymentMethodType.values
+                    : [PaymentMethodType.placeToPay],
               ).verticalPadding(20),
             ],
           ),
