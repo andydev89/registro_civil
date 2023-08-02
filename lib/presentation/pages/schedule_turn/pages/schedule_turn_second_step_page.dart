@@ -57,7 +57,7 @@ class ScheduleTurnSecondPage extends ConsumerWidget {
                                 formModel.provinceControl.value?.id ?? '',
                           ),
                         ),
-                        ScheduleDatePicker(
+                        TurnDatePicker(
                           readOnly: !formModel.agencyControl.valid,
                           label: l10n.fechaParaTurno,
                           formControl: formModel.dateControl,
