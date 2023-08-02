@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/extensions/extensions.dart';
@@ -40,6 +41,7 @@ class _ScheduleDatePickerState extends ConsumerState<TurnDatePicker> {
       ValueNotifier<List<DateTime>>([]);
   final ValueNotifier<bool> _loadingDates = ValueNotifier<bool>(false);
   DateTime _focusDate = DateTime.now();
+  List<ScheduleModel> _sheduleList = [];
 
   @override
   void initState() {
@@ -58,26 +60,35 @@ class _ScheduleDatePickerState extends ConsumerState<TurnDatePicker> {
         special: false,
       ),
     );
-    dates = schedules.asData?.value.when(
-          ok: (data) => data.map((e) => e.date).toList(),
-          err: (error) => [],
-        ) ??
-        [];
-    _availableDatesNotifier.value = dates;
-    widget.agency.statusChanged.listen((event) {
-      if (widget.agency.valid) {
-        widget.formControl.reset();
-        return ref.refresh(
-          availableSchedulesProvider(
-            startDate: widget.starDate,
-            endDate: widget.starDate.lastDateOfMonth,
-            agency: widget.agency.value?.id ?? '',
-            typeOfService: widget.typeOfServiceModel.id,
-            special: false,
-          ),
-        );
-      }
+    SchedulerBinding.instance.addPostFrameCallback((Duration _) {
+      dates = schedules.asData?.value.when(
+        ok: (data) {
+          _sheduleList = [...data];
+          return data.map((e) => e.date).toList();
+        },
+        err: (error) {
+          _sheduleList = [];
+          return [];
+        },
+      ) ??
+          [];
+      _availableDatesNotifier.value = dates;
+      widget.agency.statusChanged.listen((event) {
+        if (widget.agency.valid) {
+          widget.formControl.reset();
+          return ref.refresh(
+            availableSchedulesProvider(
+              startDate: widget.starDate,
+              endDate: widget.starDate.lastDateOfMonth,
+              agency: widget.agency.value?.id ?? '',
+              typeOfService: widget.typeOfServiceModel.id,
+              special: false,
+            ),
+          );
+        }
+      });
     });
+
     return ReactiveDateTurnPicker(
       key: widget.key,
       formControl: widget.formControl,
@@ -98,12 +109,7 @@ class _ScheduleDatePickerState extends ConsumerState<TurnDatePicker> {
         ),
       ),
       onDaySelected: (selectedDay) async {
-        final schedulesTemp = schedules.asData?.value.when(
-              ok: (data) => data.map((e) => e).toList(),
-              err: (error) => <ScheduleModel>[],
-            ) ??
-            <ScheduleModel>[];
-        final selectedSchedue = schedulesTemp.firstWhere(
+        final selectedSchedue = _sheduleList.firstWhere(
           (element) => element.date.onlyDate == selectedDay.onlyDate,
         );
         widget.initialTime?.updateValue(selectedSchedue.startTime);
@@ -122,8 +128,14 @@ class _ScheduleDatePickerState extends ConsumerState<TurnDatePicker> {
           ).future,
         );
         final d = result.when(
-          ok: (data) => data.map((e) => e.date).toList(),
-          err: (error) => <DateTime>[],
+          ok: (data) {
+            _sheduleList = [...data];
+            return data.map((e) => e.date).toList();
+          },
+          err: (error) {
+            _sheduleList = [];
+            return <DateTime>[];
+          },
         );
         _focusDate = date;
         _availableDatesNotifier.value = d;
