@@ -273,6 +273,12 @@ abstract class Api {
   );
 
   //CHANGE OF NAME
+  @GET('/changename/api/changename')
+  Future<ResponseModelPagination<List<ChangeOfNameListModel>>> changeNames({
+    @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+  });
+
   @POST('/changename/api/changename')
   Future<ResponseModel<CommandWithTransactionCodeModel>> changeOfName(
     @Body() ChangeOfNameModel changeOfNameModel,

@@ -7,6 +7,18 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'change_of_name_provider.g.dart';
 
 @riverpod
+Future<ResponseModelPagination<List<ChangeOfNameListModel>>> changeNames(
+    ChangeNamesRef ref, {
+      int? pageNo,
+    }) async {
+  final api = ref.watch(apiProvider);
+  final response = await api.changeNames(
+    pageNo: pageNo ?? 0,
+  );
+  return response;
+}
+
+@riverpod
 Future<Result<CommandWithTransactionCodeModel, StatusCodeType>> changeOfName(
   ChangeOfNameRef ref, {
   required ChangeOfNameModel changeOfNameModel,

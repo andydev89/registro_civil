@@ -674,5 +674,6 @@
   "datosNacido": "Newborn data",
   "datosSolicitante": "Applicant details",
   "introduzcaPasaporte": "Enter your Passport Number",
-  "cambioNomInfo": "Information for the change of name"
+  "cambioNomInfo": "Information for the change of name",
+  "nuevoNombre": "New name"
 }

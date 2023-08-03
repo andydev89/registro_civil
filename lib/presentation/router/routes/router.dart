@@ -301,11 +301,20 @@ part 'router.gr.dart';
             //   initial: true,
             // ),
             CupertinoRoute(
-              page: ChangeOfNameFirstStepPage,
+              page: ChangeNameMainPage,
               initial: true,
             ),
             CupertinoRoute(
-              page: VerifyInformationPage,
+              page: ChangeNameFirstStepRouterPage,
+              children: [
+                CupertinoRoute(
+                  page: ChangeOfNameFirstStepPage,
+                  initial: true,
+                ),
+                CupertinoRoute(
+                  page: VerifyInformationPage,
+                ),
+              ],
             ),
           ],
         ),

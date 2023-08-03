@@ -2,6 +2,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
+import 'package:registro_civil_apk/data/enum/birth_abroad/birth_abroad.dart';
 import 'package:registro_civil_apk/data/enum/change_of_name/change_of_name_type.dart';
 import 'package:registro_civil_apk/data/models/commons/agency_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
@@ -67,4 +68,26 @@ class ChangeOfNameModel with _$ChangeOfNameModel {
     includeToJson: true,
   )
   String get agencyId => agency!.id;
+}
+
+@freezed
+class ChangeOfNameListModel with _$ChangeOfNameListModel {
+  const factory ChangeOfNameListModel({
+    required String id,
+    String? nui,
+    @JsonKey(name: 'type')
+    required ChangeOfNameType changeOfNameType,
+    required String firstName,
+    required String secondName,
+    required ProcessStatus state,
+    String? receiptState,
+    String? transactionCode,
+    DateTime? createAt,
+    required String documentId,
+  }) = _ChangeOfNameListModel;
+
+  const ChangeOfNameListModel._();
+
+  factory ChangeOfNameListModel.fromJson(Map<String, dynamic> json) =>
+      _$ChangeOfNameListModelFromJson(json);
 }

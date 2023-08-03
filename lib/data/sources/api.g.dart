@@ -1363,6 +1363,44 @@ class _Api implements Api {
   }
 
   @override
+  Future<ResponseModelPagination<List<ChangeOfNameListModel>>> changeNames({
+    int pageNo = 0,
+    int pageSize = 20,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'pageNo': pageNo,
+      r'pageSize': pageSize,
+    };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResponseModelPagination<List<ChangeOfNameListModel>>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/changename/api/changename',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseModelPagination<List<ChangeOfNameListModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<ChangeOfNameListModel>((i) =>
+                  ChangeOfNameListModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
   Future<ResponseModel<CommandWithTransactionCodeModel>> changeOfName(
       ChangeOfNameModel changeOfNameModel) async {
     const _extra = <String, dynamic>{};

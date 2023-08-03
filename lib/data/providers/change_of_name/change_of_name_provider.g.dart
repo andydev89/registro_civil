@@ -6,7 +6,7 @@ part of 'change_of_name_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$changeOfNameHash() => r'ac27f24955d621a226a842bdd3e7d615775d9a39';
+String _$changeNamesHash() => r'e348e9ff4190ba6f44fc4c2e6d20b2988c41340e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,6 +29,91 @@ class _SystemHash {
   }
 }
 
+typedef ChangeNamesRef = AutoDisposeFutureProviderRef<
+    ResponseModelPagination<List<ChangeOfNameListModel>>>;
+
+/// See also [changeNames].
+@ProviderFor(changeNames)
+const changeNamesProvider = ChangeNamesFamily();
+
+/// See also [changeNames].
+class ChangeNamesFamily extends Family<
+    AsyncValue<ResponseModelPagination<List<ChangeOfNameListModel>>>> {
+  /// See also [changeNames].
+  const ChangeNamesFamily();
+
+  /// See also [changeNames].
+  ChangeNamesProvider call({
+    int? pageNo,
+  }) {
+    return ChangeNamesProvider(
+      pageNo: pageNo,
+    );
+  }
+
+  @override
+  ChangeNamesProvider getProviderOverride(
+    covariant ChangeNamesProvider provider,
+  ) {
+    return call(
+      pageNo: provider.pageNo,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'changeNamesProvider';
+}
+
+/// See also [changeNames].
+class ChangeNamesProvider extends AutoDisposeFutureProvider<
+    ResponseModelPagination<List<ChangeOfNameListModel>>> {
+  /// See also [changeNames].
+  ChangeNamesProvider({
+    this.pageNo,
+  }) : super.internal(
+          (ref) => changeNames(
+            ref,
+            pageNo: pageNo,
+          ),
+          from: changeNamesProvider,
+          name: r'changeNamesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$changeNamesHash,
+          dependencies: ChangeNamesFamily._dependencies,
+          allTransitiveDependencies:
+              ChangeNamesFamily._allTransitiveDependencies,
+        );
+
+  final int? pageNo;
+
+  @override
+  bool operator ==(Object other) {
+    return other is ChangeNamesProvider && other.pageNo == pageNo;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, pageNo.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$changeOfNameHash() => r'ac27f24955d621a226a842bdd3e7d615775d9a39';
 typedef ChangeOfNameRef = AutoDisposeFutureProviderRef<
     Result<CommandWithTransactionCodeModel, StatusCodeType>>;
 

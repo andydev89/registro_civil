@@ -674,5 +674,6 @@
   "datosNacido": "Datos del nacido",
   "datosSolicitante": "Datos del solicitante",
   "introduzcaPasaporte": "Introduzca su Nro de Pasaporte",
-  "cambioNomInfo": "Información para el cambio de nombre"
+  "cambioNomInfo": "Información para el cambio de nombre",
+  "nuevoNombre": "Nuevo nombre"
 }
