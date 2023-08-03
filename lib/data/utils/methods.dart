@@ -92,3 +92,16 @@ Map<String, String> findNames(String fullName) {
   }
   return {'firstName': firstName, 'lastName': lastName};
 }
+
+Map<String, String> splitFirstName(String firstName) {
+  var separatedNames = firstName.split(' ');
+  // Eliminamos los posibles espacios adicionales antes o después de cada nombre.
+  separatedNames = separatedNames.map((nombre) => nombre.trim()).toList();
+
+  final result = {
+    'name1': separatedNames.isNotEmpty ? separatedNames[0] : '',
+    'name2': separatedNames.length > 1 ? separatedNames[1] : '',
+  };
+
+  return result;
+}

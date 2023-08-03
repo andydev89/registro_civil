@@ -673,5 +673,6 @@
   "cedextVisa": "Visa number",
   "datosNacido": "Newborn data",
   "datosSolicitante": "Applicant details",
-  "introduzcaPasaporte": "Enter your Passport Number"
+  "introduzcaPasaporte": "Enter your Passport Number",
+  "cambioNomInfo": "Information for the change of name"
 }
