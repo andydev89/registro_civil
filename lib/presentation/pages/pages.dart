@@ -1,7 +1,9 @@
 export 'auth/auth.dart';
 export 'birth_abroad/birth_abroad.dart';
+export 'cedulacion_ext_primera_vez/cedulacion_ext_primera_vez.dart';
 export 'chage_of_name/change_of_name.dart';
 export 'default/default.dart';
+export 'document_validation/document_validation.dart';
 export 'electronic_signature/electronic_signature.dart';
 export 'home/home.dart';
 export 'id_duplicate/id_duplicate.dart';
@@ -16,4 +18,3 @@ export 'residence_registration/residence_registration.dart';
 export 'root/root.dart';
 export 'schedule_turn/schedule_turn.dart';
 export 'simple_certificate/simple_certificate.dart';
-export 'cedulacion_ext_primera_vez/cedulacion_ext_primera_vez.dart';

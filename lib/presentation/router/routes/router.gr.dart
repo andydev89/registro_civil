@@ -380,6 +380,12 @@ class _$AppRouter extends RootStackRouter {
         child: const CedulacionExtPvezRouterPage(),
       );
     },
+    DocumentValidationFirstStepRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const DocumentValidationFirstStepRouterPage(),
+      );
+    },
     DefaultRoute.name: (routeData) {
       final args = routeData.argsAs<DefaultRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -1098,6 +1104,19 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    DocumentValidationFirstStepRoute.name: (routeData) {
+      final args = routeData.argsAs<DocumentValidationFirstStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: DocumentValidationFirstStepPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1666,6 +1685,18 @@ class _$AppRouter extends RootStackRouter {
                   path: 'cedulacion-ext-pvez-succes-page',
                   parent: CedulacionExtPvezRouterRoute.name,
                 ),
+              ],
+            ),
+            RouteConfig(
+              DocumentValidationFirstStepRouterRoute.name,
+              path: 'document-validation-first-step-router-page',
+              parent: RootRouterRoute.name,
+              children: [
+                RouteConfig(
+                  DocumentValidationFirstStepRoute.name,
+                  path: '',
+                  parent: DocumentValidationFirstStepRouterRoute.name,
+                )
               ],
             ),
             RouteConfig(
@@ -2550,6 +2581,19 @@ class CedulacionExtPvezRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CedulacionExtPvezRouterRoute';
+}
+
+/// generated route for
+/// [DocumentValidationFirstStepRouterPage]
+class DocumentValidationFirstStepRouterRoute extends PageRouteInfo<void> {
+  const DocumentValidationFirstStepRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          DocumentValidationFirstStepRouterRoute.name,
+          path: 'document-validation-first-step-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'DocumentValidationFirstStepRouterRoute';
 }
 
 /// generated route for
@@ -4667,5 +4711,40 @@ class CedulacionExtPvezSuccesRouteArgs {
   @override
   String toString() {
     return 'CedulacionExtPvezSuccesRouteArgs{key: $key, title: $title, subtitle: $subtitle}';
+  }
+}
+
+/// generated route for
+/// [DocumentValidationFirstStepPage]
+class DocumentValidationFirstStepRoute
+    extends PageRouteInfo<DocumentValidationFirstStepRouteArgs> {
+  DocumentValidationFirstStepRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          DocumentValidationFirstStepRoute.name,
+          path: '',
+          args: DocumentValidationFirstStepRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'DocumentValidationFirstStepRoute';
+}
+
+class DocumentValidationFirstStepRouteArgs {
+  const DocumentValidationFirstStepRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'DocumentValidationFirstStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
   }
 }

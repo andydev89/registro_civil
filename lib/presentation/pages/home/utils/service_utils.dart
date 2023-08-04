@@ -94,6 +94,13 @@ PageRouteInfo<dynamic> getBirthAbroad(TypeServiceModel typeOfService) =>
       ],
     );
 
+PageRouteInfo<dynamic> getDocumentValidation(TypeServiceModel typeOfService) =>
+    DocumentValidationFirstStepRouterRoute(
+      children: [
+        DocumentValidationFirstStepRoute(typeServiceModel: typeOfService),
+      ],
+    );
+
 PageRouteInfo<dynamic> getDefault(TypeServiceModel typeOfService) =>
     DefaultRoute(typeServiceModel: typeOfService);
 
@@ -135,8 +142,8 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
     return getPersonalValidation(typeServiceModel);
   }
 
-  if (type.isBirthAbroad) {
-    return getBirthAbroad(typeServiceModel);
+  if (type.isDocumentValidation) {
+    return getDocumentValidation(typeServiceModel);
   }
 
   return getDefault(typeServiceModel);

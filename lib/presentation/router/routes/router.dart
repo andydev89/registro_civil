@@ -488,7 +488,17 @@ part 'router.gr.dart';
             ),
           ],
         ),
-
+        //DOCUMENT_VALIDATION
+        CupertinoRoute(
+          page: DocumentValidationFirstStepRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: DocumentValidationFirstStepPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+          ],
+        ),
         CupertinoRoute(
           // guards: [AuthGuard],
           page: DefaultPage,
