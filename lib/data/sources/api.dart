@@ -427,4 +427,11 @@ abstract class Api {
     @Query('pageNo') int pageNo,
     @Query('pageSize') int pageSize,
   );
+
+  //DOCUMENT VALIDATION
+  @GET('/middleware/api/validate/certificado')
+  Future<DocumentValidationResponseModel> validateDocument({
+    @Query('codigoCert') String documentCode = '',
+    @Query('fecha') String issueDate = '',
+  });
 }

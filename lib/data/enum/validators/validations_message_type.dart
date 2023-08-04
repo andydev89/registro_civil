@@ -9,6 +9,7 @@ enum ValidationsMessageType implements Translatable {
   invalidPassword('invalidPassword'),
   invalidPhoneNumber('invalidPhoneNumber'),
   length6Error('length6Error'),
+  length11Error('length11Error'),
   invalidConadisNumber('invalidConadisNumber'),
   atLeastOneElement('atLeastOneElement'),
   invalidCode('invalidCode'),
@@ -29,7 +30,7 @@ enum ValidationsMessageType implements Translatable {
       case ValidationsMessageType.invalidDni:
         return l10n.intrducirNumIdeVal;
       case ValidationsMessageType.length10Error:
-        return l10n.introducirNum10Dig;
+        return l10n.introducirNumNDig(10);
       case ValidationsMessageType.invalidProvinceCode:
         return l10n.introducirCodProVal;
       case ValidationsMessageType.invalidPassword:
@@ -37,7 +38,9 @@ enum ValidationsMessageType implements Translatable {
       case ValidationsMessageType.invalidPhoneNumber:
         return l10n.intrudcirNumTelVal;
       case ValidationsMessageType.length6Error:
-        return l10n.introducirNum6Dig;
+        return l10n.introducirNumNDig(6);
+      case ValidationsMessageType.length11Error:
+        return l10n.introducirNumNDig(11);
       case ValidationsMessageType.invalidConadisNumber:
         return l10n.conadisNumError;
       case ValidationsMessageType.atLeastOneElement:

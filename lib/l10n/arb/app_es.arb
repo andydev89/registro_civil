@@ -427,11 +427,17 @@
   "intrudcirCorrVal": "Debe introducir un correo válido",
   "passwordCoi": "Las contraseñas no coinciden",
   "intrducirNumIdeVal": "Debe introducir un número de identificación válido",
-  "introducirNum10Dig": "Debe introducir un número de 10 dígitos",
   "introducirCodProVal": "Debe introducir un código de provincia válido",
   "password8Car": "La contraseña debe tener al menos 8 caracteres, mayúsculas, minúsculas, números y un carácter especial",
   "intrudcirNumTelVal": "Debe introducir un número de teléfono válido",
-  "introducirNum6Dig": "Debe introducir un número de 6 dígitos",
+  "introducirNumNDig": "Debe introducir un número de {digits} dígitos",
+  "@introducirNumNDig": {
+    "placeholders": {
+      "digits": {
+        "type": "num"
+      }
+    }
+  },
   "ingreseCodVer": "Ingrese el código de verificación",
   "terminosCondiciones": "Por favor ingrese el código de verificación enviado a su correo electrónico {email}, recuerde que este código estará activo por 5 minutos, luego de ese tiempo habrá caducado. En caso de no recibir su código escriba al correo electrónico enlinea@registrocivil.gob.ec",
   "@terminosCondiciones": {
@@ -675,5 +681,7 @@
   "datosSolicitante": "Datos del solicitante",
   "introduzcaPasaporte": "Introduzca su Nro de Pasaporte",
   "cambioNomInfo": "Información para el cambio de nombre",
-  "nuevoNombre": "Nuevo nombre"
+  "nuevoNombre": "Nuevo nombre",
+  "nroDocumento": "Número de documento",
+  "fechaEmision": "Fecha de emisión"
 }

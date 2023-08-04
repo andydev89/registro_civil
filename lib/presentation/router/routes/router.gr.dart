@@ -1117,6 +1117,20 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    QRScannerRoute.name: (routeData) {
+      final args = routeData.argsAs<QRScannerRouteArgs>(
+          orElse: () => const QRScannerRouteArgs());
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: QRScannerPage(
+          key: args.key,
+          isQRScanner: args.isQRScanner,
+        ),
+        transitionsBuilder: TransitionsBuilders.zoomIn,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1696,7 +1710,12 @@ class _$AppRouter extends RootStackRouter {
                   DocumentValidationFirstStepRoute.name,
                   path: '',
                   parent: DocumentValidationFirstStepRouterRoute.name,
-                )
+                ),
+                RouteConfig(
+                  QRScannerRoute.name,
+                  path: 'q-rscanner-page',
+                  parent: DocumentValidationFirstStepRouterRoute.name,
+                ),
               ],
             ),
             RouteConfig(
@@ -4746,5 +4765,39 @@ class DocumentValidationFirstStepRouteArgs {
   @override
   String toString() {
     return 'DocumentValidationFirstStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [QRScannerPage]
+class QRScannerRoute extends PageRouteInfo<QRScannerRouteArgs> {
+  QRScannerRoute({
+    Key? key,
+    bool isQRScanner = false,
+  }) : super(
+          QRScannerRoute.name,
+          path: 'q-rscanner-page',
+          args: QRScannerRouteArgs(
+            key: key,
+            isQRScanner: isQRScanner,
+          ),
+        );
+
+  static const String name = 'QRScannerRoute';
+}
+
+class QRScannerRouteArgs {
+  const QRScannerRouteArgs({
+    this.key,
+    this.isQRScanner = false,
+  });
+
+  final Key? key;
+
+  final bool isQRScanner;
+
+  @override
+  String toString() {
+    return 'QRScannerRouteArgs{key: $key, isQRScanner: $isQRScanner}';
   }
 }

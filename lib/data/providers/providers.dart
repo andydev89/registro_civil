@@ -4,6 +4,7 @@ export 'cart/cart.dart';
 export 'cedulacion_ext_primera_vez/cedulacion_ext_primera_vez_providers.dart';
 export 'change_of_name/change_of_name.dart';
 export 'commons/commons.dart';
+export 'document_validation/document_validation.dart';
 export 'electronic_signature/electronic_signature.dart';
 export 'id_duplicate/id_duplicate.dart';
 export 'marriage_celebration/marriage_celebration.dart';
