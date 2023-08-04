@@ -9,11 +9,12 @@ part of 'change_of_name_model.dart';
 _$_ChangeOfNameModel _$$_ChangeOfNameModelFromJson(Map<String, dynamic> json) =>
     _$_ChangeOfNameModel(
       nui: json['nui'] as String?,
-      changeOfNameType: $enumDecode(_$ChangeOfNameTypeEnumMap, json['type']),
-      firstName: json['firstName'] as String,
-      secondName: json['secondName'] as String,
+      changeOfNameType:
+          $enumDecodeNullable(_$ChangeOfNameTypeEnumMap, json['type']),
+      firstName: json['firstName'] as String?,
+      secondName: json['secondName'] as String?,
       observations: json['observation'] as String?,
-      document: json['document'] as String,
+      document: json['document'] as String?,
     );
 
 Map<String, dynamic> _$$_ChangeOfNameModelToJson(
@@ -21,7 +22,7 @@ Map<String, dynamic> _$$_ChangeOfNameModelToJson(
     <String, dynamic>{
       'agencyId': instance.agencyId,
       'nui': instance.nui,
-      'type': _$ChangeOfNameTypeEnumMap[instance.changeOfNameType]!,
+      'type': _$ChangeOfNameTypeEnumMap[instance.changeOfNameType],
       'firstName': instance.firstName,
       'secondName': instance.secondName,
       'observation': instance.observations,

@@ -23,7 +23,7 @@ mixin _$ChangeOfNameModel {
   String? get nui => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(name: 'type')
-  ChangeOfNameType get changeOfNameType => throw _privateConstructorUsedError;
+  ChangeOfNameType? get changeOfNameType => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
   AgencyModel? get agency => throw _privateConstructorUsedError;
@@ -33,14 +33,14 @@ mixin _$ChangeOfNameModel {
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  String get firstName => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [
     requiredValidator,
     lengthMax20Validator,
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  String get secondName => throw _privateConstructorUsedError;
+  String? get secondName => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? get resultingName => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ mixin _$ChangeOfNameModel {
   @JsonKey(name: 'observation')
   String? get observations => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>(validators: [requiredValidator])
-  String get document => throw _privateConstructorUsedError;
+  String? get document => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +66,7 @@ abstract class $ChangeOfNameModelCopyWith<$Res> {
       {String? nui,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(name: 'type')
-          ChangeOfNameType changeOfNameType,
+          ChangeOfNameType? changeOfNameType,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           AgencyModel? agency,
@@ -76,14 +76,14 @@ abstract class $ChangeOfNameModelCopyWith<$Res> {
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          String firstName,
+          String? firstName,
       @FormControlAnnotation(validators: [
         requiredValidator,
         lengthMax20Validator,
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          String secondName,
+          String? secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           String? resultingName,
@@ -91,7 +91,7 @@ abstract class $ChangeOfNameModelCopyWith<$Res> {
       @JsonKey(name: 'observation')
           String? observations,
       @FormControlAnnotation<String>(validators: [requiredValidator])
-          String document});
+          String? document});
 }
 
 /// @nodoc
@@ -108,35 +108,35 @@ class _$ChangeOfNameModelCopyWithImpl<$Res, $Val extends ChangeOfNameModel>
   @override
   $Res call({
     Object? nui = freezed,
-    Object? changeOfNameType = null,
+    Object? changeOfNameType = freezed,
     Object? agency = freezed,
-    Object? firstName = null,
-    Object? secondName = null,
+    Object? firstName = freezed,
+    Object? secondName = freezed,
     Object? resultingName = freezed,
     Object? observations = freezed,
-    Object? document = null,
+    Object? document = freezed,
   }) {
     return _then(_value.copyWith(
       nui: freezed == nui
           ? _value.nui
           : nui // ignore: cast_nullable_to_non_nullable
               as String?,
-      changeOfNameType: null == changeOfNameType
+      changeOfNameType: freezed == changeOfNameType
           ? _value.changeOfNameType
           : changeOfNameType // ignore: cast_nullable_to_non_nullable
-              as ChangeOfNameType,
+              as ChangeOfNameType?,
       agency: freezed == agency
           ? _value.agency
           : agency // ignore: cast_nullable_to_non_nullable
               as AgencyModel?,
-      firstName: null == firstName
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      secondName: null == secondName
+              as String?,
+      secondName: freezed == secondName
           ? _value.secondName
           : secondName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       resultingName: freezed == resultingName
           ? _value.resultingName
           : resultingName // ignore: cast_nullable_to_non_nullable
@@ -145,10 +145,10 @@ class _$ChangeOfNameModelCopyWithImpl<$Res, $Val extends ChangeOfNameModel>
           ? _value.observations
           : observations // ignore: cast_nullable_to_non_nullable
               as String?,
-      document: null == document
+      document: freezed == document
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -165,7 +165,7 @@ abstract class _$$_ChangeOfNameModelCopyWith<$Res>
       {String? nui,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(name: 'type')
-          ChangeOfNameType changeOfNameType,
+          ChangeOfNameType? changeOfNameType,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           AgencyModel? agency,
@@ -175,14 +175,14 @@ abstract class _$$_ChangeOfNameModelCopyWith<$Res>
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          String firstName,
+          String? firstName,
       @FormControlAnnotation(validators: [
         requiredValidator,
         lengthMax20Validator,
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          String secondName,
+          String? secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           String? resultingName,
@@ -190,7 +190,7 @@ abstract class _$$_ChangeOfNameModelCopyWith<$Res>
       @JsonKey(name: 'observation')
           String? observations,
       @FormControlAnnotation<String>(validators: [requiredValidator])
-          String document});
+          String? document});
 }
 
 /// @nodoc
@@ -205,35 +205,35 @@ class __$$_ChangeOfNameModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? nui = freezed,
-    Object? changeOfNameType = null,
+    Object? changeOfNameType = freezed,
     Object? agency = freezed,
-    Object? firstName = null,
-    Object? secondName = null,
+    Object? firstName = freezed,
+    Object? secondName = freezed,
     Object? resultingName = freezed,
     Object? observations = freezed,
-    Object? document = null,
+    Object? document = freezed,
   }) {
     return _then(_$_ChangeOfNameModel(
       nui: freezed == nui
           ? _value.nui
           : nui // ignore: cast_nullable_to_non_nullable
               as String?,
-      changeOfNameType: null == changeOfNameType
+      changeOfNameType: freezed == changeOfNameType
           ? _value.changeOfNameType
           : changeOfNameType // ignore: cast_nullable_to_non_nullable
-              as ChangeOfNameType,
+              as ChangeOfNameType?,
       agency: freezed == agency
           ? _value.agency
           : agency // ignore: cast_nullable_to_non_nullable
               as AgencyModel?,
-      firstName: null == firstName
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      secondName: null == secondName
+              as String?,
+      secondName: freezed == secondName
           ? _value.secondName
           : secondName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       resultingName: freezed == resultingName
           ? _value.resultingName
           : resultingName // ignore: cast_nullable_to_non_nullable
@@ -242,10 +242,10 @@ class __$$_ChangeOfNameModelCopyWithImpl<$Res>
           ? _value.observations
           : observations // ignore: cast_nullable_to_non_nullable
               as String?,
-      document: null == document
+      document: freezed == document
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -257,7 +257,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
       {this.nui,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(name: 'type')
-          required this.changeOfNameType,
+          this.changeOfNameType,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           this.agency,
@@ -267,14 +267,14 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          required this.firstName,
+          this.firstName,
       @FormControlAnnotation(validators: [
         requiredValidator,
         lengthMax20Validator,
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          required this.secondName,
+          this.secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           this.resultingName,
@@ -282,7 +282,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
       @JsonKey(name: 'observation')
           this.observations,
       @FormControlAnnotation<String>(validators: [requiredValidator])
-          required this.document})
+          this.document})
       : super._();
 
   factory _$_ChangeOfNameModel.fromJson(Map<String, dynamic> json) =>
@@ -293,7 +293,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(name: 'type')
-  final ChangeOfNameType changeOfNameType;
+  final ChangeOfNameType? changeOfNameType;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -305,7 +305,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  final String firstName;
+  final String? firstName;
   @override
   @FormControlAnnotation(validators: [
     requiredValidator,
@@ -313,7 +313,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  final String secondName;
+  final String? secondName;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -324,7 +324,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
   final String? observations;
   @override
   @FormControlAnnotation<String>(validators: [requiredValidator])
-  final String document;
+  final String? document;
 
   @override
   String toString() {
@@ -377,7 +377,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
       {final String? nui,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(name: 'type')
-          required final ChangeOfNameType changeOfNameType,
+          final ChangeOfNameType? changeOfNameType,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           final AgencyModel? agency,
@@ -387,14 +387,14 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          required final String firstName,
+          final String? firstName,
       @FormControlAnnotation(validators: [
         requiredValidator,
         lengthMax20Validator,
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          required final String secondName,
+          final String? secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           final String? resultingName,
@@ -402,7 +402,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
       @JsonKey(name: 'observation')
           final String? observations,
       @FormControlAnnotation<String>(validators: [requiredValidator])
-          required final String document}) = _$_ChangeOfNameModel;
+          final String? document}) = _$_ChangeOfNameModel;
   const _ChangeOfNameModel._() : super._();
 
   factory _ChangeOfNameModel.fromJson(Map<String, dynamic> json) =
@@ -413,7 +413,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(name: 'type')
-  ChangeOfNameType get changeOfNameType;
+  ChangeOfNameType? get changeOfNameType;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -425,7 +425,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  String get firstName;
+  String? get firstName;
   @override
   @FormControlAnnotation(validators: [
     requiredValidator,
@@ -433,7 +433,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  String get secondName;
+  String? get secondName;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -444,7 +444,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
   String? get observations;
   @override
   @FormControlAnnotation<String>(validators: [requiredValidator])
-  String get document;
+  String? get document;
   @override
   @JsonKey(ignore: true)
   _$$_ChangeOfNameModelCopyWith<_$_ChangeOfNameModel> get copyWith =>

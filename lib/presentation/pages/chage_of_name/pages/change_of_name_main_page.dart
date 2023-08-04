@@ -68,13 +68,13 @@ class ChangeNameMainPage extends ConsumerWidget {
                     },
                     actions: {
                       Crud.read: (p0) => context.navigateTo(
-                            ElectronicSignatureFirstStepRouterRoute(
+                          ChangeNameFirstStepRouterRoute(
                               operation: Crud.read,
                               typeServiceModel: typeServiceModel,
-                              signatureId: e.id,
+                              changeOfNameId: e.id,
                               children: [
-                                ElectronicSignatureFirstStepRoute(
-                                  typeServiceModel: typeServiceModel,
+                                ChangeOfNameFirstStepRoute(
+                                  typeService: typeServiceModel,
                                   operation: Crud.read,
                                 ),
                               ],

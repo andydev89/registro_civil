@@ -786,7 +786,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           typeServiceModel: args.typeServiceModel,
           operation: args.operation,
-          duplicateId: args.duplicateId,
+          changeOfNameId: args.changeOfNameId,
         ),
       );
     },
@@ -797,6 +797,7 @@ class _$AppRouter extends RootStackRouter {
         child: ChangeOfNameFirstStepPage(
           key: args.key,
           typeService: args.typeService,
+          operation: args.operation,
         ),
       );
     },
@@ -3699,7 +3700,7 @@ class ChangeNameFirstStepRouterRoute
     Key? key,
     required TypeServiceModel typeServiceModel,
     Crud operation = Crud.create,
-    String? duplicateId,
+    String? changeOfNameId,
     List<PageRouteInfo>? children,
   }) : super(
           ChangeNameFirstStepRouterRoute.name,
@@ -3708,7 +3709,7 @@ class ChangeNameFirstStepRouterRoute
             key: key,
             typeServiceModel: typeServiceModel,
             operation: operation,
-            duplicateId: duplicateId,
+            changeOfNameId: changeOfNameId,
           ),
           initialChildren: children,
         );
@@ -3721,7 +3722,7 @@ class ChangeNameFirstStepRouterRouteArgs {
     this.key,
     required this.typeServiceModel,
     this.operation = Crud.create,
-    this.duplicateId,
+    this.changeOfNameId,
   });
 
   final Key? key;
@@ -3730,11 +3731,11 @@ class ChangeNameFirstStepRouterRouteArgs {
 
   final Crud operation;
 
-  final String? duplicateId;
+  final String? changeOfNameId;
 
   @override
   String toString() {
-    return 'ChangeNameFirstStepRouterRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation, duplicateId: $duplicateId}';
+    return 'ChangeNameFirstStepRouterRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation, changeOfNameId: $changeOfNameId}';
   }
 }
 
@@ -3745,12 +3746,14 @@ class ChangeOfNameFirstStepRoute
   ChangeOfNameFirstStepRoute({
     Key? key,
     required TypeServiceModel typeService,
+    Crud operation = Crud.create,
   }) : super(
           ChangeOfNameFirstStepRoute.name,
           path: '',
           args: ChangeOfNameFirstStepRouteArgs(
             key: key,
             typeService: typeService,
+            operation: operation,
           ),
         );
 
@@ -3761,15 +3764,18 @@ class ChangeOfNameFirstStepRouteArgs {
   const ChangeOfNameFirstStepRouteArgs({
     this.key,
     required this.typeService,
+    this.operation = Crud.create,
   });
 
   final Key? key;
 
   final TypeServiceModel typeService;
 
+  final Crud operation;
+
   @override
   String toString() {
-    return 'ChangeOfNameFirstStepRouteArgs{key: $key, typeService: $typeService}';
+    return 'ChangeOfNameFirstStepRouteArgs{key: $key, typeService: $typeService, operation: $operation}';
   }
 }
 

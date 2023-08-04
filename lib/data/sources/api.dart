@@ -284,6 +284,11 @@ abstract class Api {
     @Body() ChangeOfNameModel changeOfNameModel,
   );
 
+  @GET('/changename/api/changename/{id}')
+  Future<ResponseModel<ChangeOfNameListModel>> changeOfNameById(
+    @Path('id') String id,
+  );
+
   @POST('/changename/api/changename/payment')
   Future<ResponseModel<CommandModel>> notifyPaymentOfChangeOfName(
     @Body() NotifyServicePaymentDoneModel notifyServicePaymentDoneModel,
@@ -413,8 +418,8 @@ abstract class Api {
 
   @GET('/api/location/parent/{id}')
   Future<ResponseModelPagination<List<LocationModel>?>> locationByParentNoAuth(
-      @Path('id') String province,
-      );
+    @Path('id') String province,
+  );
 
   @GET('/api/agency/by/canton?canton={canton}')
   Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByCantonNoAuth(

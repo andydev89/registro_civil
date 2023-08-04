@@ -59,7 +59,7 @@ class VerifyInformationPage extends ConsumerWidget {
                       textAlign: TextAlign.left,
                     ),
                     PrimaryText(
-                      changeOfNameModel.changeOfNameType.translate(context),
+                      changeOfNameModel.changeOfNameType!.translate(context),
                       fontWeight: FontWeight.bold,
                       textAlign: TextAlign.left,
                     ).verticalPadding(10),
