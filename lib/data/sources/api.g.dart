@@ -2202,7 +2202,7 @@ class _Api implements Api {
   }
 
   @override
-  Future<DocumentValidationResponseModel> validateDocument({
+  Future<ResponseModel<DocumentValidationResponseModel>> validateDocument({
     String documentCode = '',
     String issueDate = '',
   }) async {
@@ -2214,7 +2214,7 @@ class _Api implements Api {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DocumentValidationResponseModel>(Options(
+        _setStreamType<ResponseModel<DocumentValidationResponseModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -2226,7 +2226,11 @@ class _Api implements Api {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = DocumentValidationResponseModel.fromJson(_result.data!);
+    final value = ResponseModel<DocumentValidationResponseModel>.fromJson(
+      _result.data!,
+      (json) => DocumentValidationResponseModel.fromJson(
+          json as Map<String, dynamic>),
+    );
     return value;
   }
 

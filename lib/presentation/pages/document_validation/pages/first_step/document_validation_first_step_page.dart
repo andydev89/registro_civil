@@ -1,10 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
+import 'package:registro_civil_apk/data/providers/document_validation/document_validation_provider.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
 import 'package:registro_civil_apk/presentation/pages/document_validation/document_validation.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
@@ -94,9 +98,39 @@ class DocumentValidationFirstStepPage extends ConsumerWidget {
             ),
           ),
           bottomNavigationBar: ReactiveDocumentValidationModelFormConsumer(
-            builder: (_, formModel, __) => PrimaryButton(
+            builder: (_, formModel, __) => PrimaryAsyncButton(
               title: l10n.validar,
-              onPressed: formModel.form.valid ? () {} : null,
+              onPressed: formModel.form.valid
+                  ? () async {
+                      final date = DateFormat('yyyy-MM-dd').format(
+                        formModel.issueDateControl.value!,
+                      );
+                      await ref
+                          .read(
+                        validateDocumentProvider(
+                          documentCode:
+                              formModel.documentCodeControl.value ?? '',
+                          issueDate: date,
+                        ).future,
+                      )
+                          .when(
+                        ok: (data) {
+                          context.navigateTo(
+                            DocumentValidationSecondStepRoute(
+                              document: data.resultado,
+                              model: typeServiceModel,
+                            ),
+                          );
+                        },
+                        err: (err) {
+                          showAlert(
+                            err.translate(context),
+                            TypeAlert.error,
+                          );
+                        },
+                      );
+                    }
+                  : null,
             ).symmetricPadding(10, 20),
           ),
         );

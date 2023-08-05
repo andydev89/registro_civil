@@ -430,7 +430,7 @@ abstract class Api {
 
   //DOCUMENT VALIDATION
   @GET('/middleware/api/validate/certificado')
-  Future<DocumentValidationResponseModel> validateDocument({
+  Future<ResponseModel<DocumentValidationResponseModel>> validateDocument({
     @Query('codigoCert') String documentCode = '',
     @Query('fecha') String issueDate = '',
   });

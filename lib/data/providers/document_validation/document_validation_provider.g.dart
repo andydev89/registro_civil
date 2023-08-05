@@ -6,7 +6,7 @@ part of 'document_validation_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$validateDocumentHash() => r'7548b1905581891a716b17f7d47c74a410520857';
+String _$validateDocumentHash() => r'69083e1e8e68245d9085b176a48ec1245eb68036';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,16 +29,16 @@ class _SystemHash {
   }
 }
 
-typedef ValidateDocumentRef
-    = AutoDisposeFutureProviderRef<DocumentValidationResponseModel>;
+typedef ValidateDocumentRef = AutoDisposeFutureProviderRef<
+    Result<DocumentValidationResponseModel, StatusCodeType>>;
 
 /// See also [validateDocument].
 @ProviderFor(validateDocument)
 const validateDocumentProvider = ValidateDocumentFamily();
 
 /// See also [validateDocument].
-class ValidateDocumentFamily
-    extends Family<AsyncValue<DocumentValidationResponseModel>> {
+class ValidateDocumentFamily extends Family<
+    AsyncValue<Result<DocumentValidationResponseModel, StatusCodeType>>> {
   /// See also [validateDocument].
   const ValidateDocumentFamily();
 
@@ -79,8 +79,8 @@ class ValidateDocumentFamily
 }
 
 /// See also [validateDocument].
-class ValidateDocumentProvider
-    extends AutoDisposeFutureProvider<DocumentValidationResponseModel> {
+class ValidateDocumentProvider extends AutoDisposeFutureProvider<
+    Result<DocumentValidationResponseModel, StatusCodeType>> {
   /// See also [validateDocument].
   ValidateDocumentProvider({
     required this.documentCode,

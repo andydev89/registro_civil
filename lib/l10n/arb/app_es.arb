@@ -683,5 +683,6 @@
   "cambioNomInfo": "Información para el cambio de nombre",
   "nuevoNombre": "Nuevo nombre",
   "nroDocumento": "Número de documento",
-  "fechaEmision": "Fecha de emisión"
+  "fechaEmision": "Fecha de emisión",
+  "descargar": "Descargar"
 }

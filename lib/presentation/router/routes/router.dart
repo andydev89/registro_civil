@@ -501,6 +501,10 @@ part 'router.gr.dart';
               page: QRScannerPage,
               transitionsBuilder: TransitionsBuilders.zoomIn,
             ),
+            CustomRoute(
+              page: DocumentValidationSecondStepPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
           ],
         ),
         CupertinoRoute(

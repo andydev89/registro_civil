@@ -1131,6 +1131,20 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    DocumentValidationSecondStepRoute.name: (routeData) {
+      final args = routeData.argsAs<DocumentValidationSecondStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: DocumentValidationSecondStepPage(
+          document: args.document,
+          model: args.model,
+          key: args.key,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1714,6 +1728,11 @@ class _$AppRouter extends RootStackRouter {
                 RouteConfig(
                   QRScannerRoute.name,
                   path: 'q-rscanner-page',
+                  parent: DocumentValidationFirstStepRouterRoute.name,
+                ),
+                RouteConfig(
+                  DocumentValidationSecondStepRoute.name,
+                  path: 'document-validation-second-step-page',
                   parent: DocumentValidationFirstStepRouterRoute.name,
                 ),
               ],
@@ -4773,7 +4792,7 @@ class DocumentValidationFirstStepRouteArgs {
 class QRScannerRoute extends PageRouteInfo<QRScannerRouteArgs> {
   QRScannerRoute({
     Key? key,
-    bool isQRScanner = false,
+    bool isQRScanner = true,
   }) : super(
           QRScannerRoute.name,
           path: 'q-rscanner-page',
@@ -4789,7 +4808,7 @@ class QRScannerRoute extends PageRouteInfo<QRScannerRouteArgs> {
 class QRScannerRouteArgs {
   const QRScannerRouteArgs({
     this.key,
-    this.isQRScanner = false,
+    this.isQRScanner = true,
   });
 
   final Key? key;
@@ -4799,5 +4818,45 @@ class QRScannerRouteArgs {
   @override
   String toString() {
     return 'QRScannerRouteArgs{key: $key, isQRScanner: $isQRScanner}';
+  }
+}
+
+/// generated route for
+/// [DocumentValidationSecondStepPage]
+class DocumentValidationSecondStepRoute
+    extends PageRouteInfo<DocumentValidationSecondStepRouteArgs> {
+  DocumentValidationSecondStepRoute({
+    required String document,
+    required TypeServiceModel model,
+    Key? key,
+  }) : super(
+          DocumentValidationSecondStepRoute.name,
+          path: 'document-validation-second-step-page',
+          args: DocumentValidationSecondStepRouteArgs(
+            document: document,
+            model: model,
+            key: key,
+          ),
+        );
+
+  static const String name = 'DocumentValidationSecondStepRoute';
+}
+
+class DocumentValidationSecondStepRouteArgs {
+  const DocumentValidationSecondStepRouteArgs({
+    required this.document,
+    required this.model,
+    this.key,
+  });
+
+  final String document;
+
+  final TypeServiceModel model;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DocumentValidationSecondStepRouteArgs{document: $document, model: $model, key: $key}';
   }
 }
