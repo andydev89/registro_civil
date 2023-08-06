@@ -498,10 +498,6 @@ part 'router.gr.dart';
               transitionsBuilder: TransitionsBuilders.slideRight,
             ),
             CustomRoute(
-              page: QRScannerPage,
-              transitionsBuilder: TransitionsBuilders.zoomIn,
-            ),
-            CustomRoute(
               page: DocumentValidationSecondStepPage,
               transitionsBuilder: TransitionsBuilders.slideRight,
             ),
@@ -512,6 +508,11 @@ part 'router.gr.dart';
           page: DefaultPage,
         )
       ],
+    ),
+    //SCANNER
+    CustomRoute(
+      page: QRScannerPage,
+      transitionsBuilder: TransitionsBuilders.zoomIn,
     ),
   ],
 )

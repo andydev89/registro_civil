@@ -42,6 +42,20 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    QRScannerRoute.name: (routeData) {
+      final args = routeData.argsAs<QRScannerRouteArgs>(
+          orElse: () => const QRScannerRouteArgs());
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: QRScannerPage(
+          key: args.key,
+          isQRScanner: args.isQRScanner,
+        ),
+        transitionsBuilder: TransitionsBuilders.zoomIn,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     LoginRoute.name: (routeData) {
       final args = routeData.argsAs<LoginRouteArgs>();
       return CustomPage<dynamic>(
@@ -1117,20 +1131,6 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
-    QRScannerRoute.name: (routeData) {
-      final args = routeData.argsAs<QRScannerRouteArgs>(
-          orElse: () => const QRScannerRouteArgs());
-      return CustomPage<dynamic>(
-        routeData: routeData,
-        child: QRScannerPage(
-          key: args.key,
-          isQRScanner: args.isQRScanner,
-        ),
-        transitionsBuilder: TransitionsBuilders.zoomIn,
-        opaque: true,
-        barrierDismissible: false,
-      );
-    },
     DocumentValidationSecondStepRoute.name: (routeData) {
       final args = routeData.argsAs<DocumentValidationSecondStepRouteArgs>();
       return CustomPage<dynamic>(
@@ -1728,11 +1728,6 @@ class _$AppRouter extends RootStackRouter {
                   parent: DocumentValidationFirstStepRouterRoute.name,
                 ),
                 RouteConfig(
-                  QRScannerRoute.name,
-                  path: 'q-rscanner-page',
-                  parent: DocumentValidationFirstStepRouterRoute.name,
-                ),
-                RouteConfig(
                   DocumentValidationSecondStepRoute.name,
                   path: 'document-validation-second-step-page',
                   parent: DocumentValidationFirstStepRouterRoute.name,
@@ -1745,6 +1740,10 @@ class _$AppRouter extends RootStackRouter {
               parent: RootRouterRoute.name,
             ),
           ],
+        ),
+        RouteConfig(
+          QRScannerRoute.name,
+          path: '/q-rscanner-page',
         ),
       ];
 }
@@ -1773,6 +1772,40 @@ class RootRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RootRouterRoute';
+}
+
+/// generated route for
+/// [QRScannerPage]
+class QRScannerRoute extends PageRouteInfo<QRScannerRouteArgs> {
+  QRScannerRoute({
+    Key? key,
+    bool isQRScanner = true,
+  }) : super(
+          QRScannerRoute.name,
+          path: '/q-rscanner-page',
+          args: QRScannerRouteArgs(
+            key: key,
+            isQRScanner: isQRScanner,
+          ),
+        );
+
+  static const String name = 'QRScannerRoute';
+}
+
+class QRScannerRouteArgs {
+  const QRScannerRouteArgs({
+    this.key,
+    this.isQRScanner = true,
+  });
+
+  final Key? key;
+
+  final bool isQRScanner;
+
+  @override
+  String toString() {
+    return 'QRScannerRouteArgs{key: $key, isQRScanner: $isQRScanner}';
+  }
 }
 
 /// generated route for
@@ -4786,40 +4819,6 @@ class DocumentValidationFirstStepRouteArgs {
   @override
   String toString() {
     return 'DocumentValidationFirstStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
-  }
-}
-
-/// generated route for
-/// [QRScannerPage]
-class QRScannerRoute extends PageRouteInfo<QRScannerRouteArgs> {
-  QRScannerRoute({
-    Key? key,
-    bool isQRScanner = true,
-  }) : super(
-          QRScannerRoute.name,
-          path: 'q-rscanner-page',
-          args: QRScannerRouteArgs(
-            key: key,
-            isQRScanner: isQRScanner,
-          ),
-        );
-
-  static const String name = 'QRScannerRoute';
-}
-
-class QRScannerRouteArgs {
-  const QRScannerRouteArgs({
-    this.key,
-    this.isQRScanner = true,
-  });
-
-  final Key? key;
-
-  final bool isQRScanner;
-
-  @override
-  String toString() {
-    return 'QRScannerRouteArgs{key: $key, isQRScanner: $isQRScanner}';
   }
 }
 

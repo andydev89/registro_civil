@@ -2221,7 +2221,7 @@ class _Api implements Api {
     )
             .compose(
               _dio.options,
-              '/middleware/api/validate/certificado',
+              '/api/validate/certificado',
               queryParameters: queryParameters,
               data: _data,
             )
