@@ -79,6 +79,23 @@ bool isValidBase64Image(String base64Image) {
   }
 }
 
+Future<String?> getDownloadPath() async {
+  Directory? directory;
+  try {
+    if (Platform.isIOS) {
+      directory = await getApplicationDocumentsDirectory();
+    } else {
+      directory = Directory('/storage/emulated/0/Download');
+      if (!directory.existsSync()) {
+        directory = await getExternalStorageDirectory();
+      }
+    }
+  } catch (err, stack) {
+    print("Cannot get download folder path");
+  }
+  return directory?.path;
+}
+
 Map<String, String> findNames(String fullName) {
   final regex = RegExp(r'(.+?\s.+?)\s(.+)$');
   final matches = regex.allMatches(fullName.trim());

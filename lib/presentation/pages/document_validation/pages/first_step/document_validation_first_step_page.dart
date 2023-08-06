@@ -119,6 +119,8 @@ class DocumentValidationFirstStepPage extends ConsumerWidget {
                             DocumentValidationSecondStepRoute(
                               document: data.resultado,
                               model: typeServiceModel,
+                              code: formModel.documentCodeControl.value ?? '',
+                              date: date,
                             ),
                           );
                         },

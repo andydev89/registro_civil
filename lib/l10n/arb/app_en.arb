@@ -684,5 +684,9 @@
   "nuevoNombre": "New name",
   "nroDocumento": "Document number",
   "fechaEmision": "Date of issue",
-  "descargar": "Download"
+  "descargar": "Download",
+  "ubicacionArchivo": "The file is located in ",
+  "descargaExitosa": "¡Successful download!",
+  "descargaCertErr": "An error occurred while downloading the certificate",
+  "abrirCertificado": "Open Certificate"
 }

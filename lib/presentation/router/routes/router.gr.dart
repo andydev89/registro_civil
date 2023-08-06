@@ -1138,6 +1138,8 @@ class _$AppRouter extends RootStackRouter {
         child: DocumentValidationSecondStepPage(
           document: args.document,
           model: args.model,
+          code: args.code,
+          date: args.date,
           key: args.key,
         ),
         transitionsBuilder: TransitionsBuilders.slideRight,
@@ -4828,6 +4830,8 @@ class DocumentValidationSecondStepRoute
   DocumentValidationSecondStepRoute({
     required String document,
     required TypeServiceModel model,
+    required String code,
+    required String date,
     Key? key,
   }) : super(
           DocumentValidationSecondStepRoute.name,
@@ -4835,6 +4839,8 @@ class DocumentValidationSecondStepRoute
           args: DocumentValidationSecondStepRouteArgs(
             document: document,
             model: model,
+            code: code,
+            date: date,
             key: key,
           ),
         );
@@ -4846,6 +4852,8 @@ class DocumentValidationSecondStepRouteArgs {
   const DocumentValidationSecondStepRouteArgs({
     required this.document,
     required this.model,
+    required this.code,
+    required this.date,
     this.key,
   });
 
@@ -4853,10 +4861,14 @@ class DocumentValidationSecondStepRouteArgs {
 
   final TypeServiceModel model;
 
+  final String code;
+
+  final String date;
+
   final Key? key;
 
   @override
   String toString() {
-    return 'DocumentValidationSecondStepRouteArgs{document: $document, model: $model, key: $key}';
+    return 'DocumentValidationSecondStepRouteArgs{document: $document, model: $model, code: $code, date: $date, key: $key}';
   }
 }

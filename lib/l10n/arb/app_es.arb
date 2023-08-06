@@ -684,5 +684,9 @@
   "nuevoNombre": "Nuevo nombre",
   "nroDocumento": "Número de documento",
   "fechaEmision": "Fecha de emisión",
-  "descargar": "Descargar"
+  "descargar": "Descargar",
+  "ubicacionArchivo": "El archivo se encuentra en la carpeta ",
+  "descargaExitosa": "¡Descarga exitosa!",
+  "descargaCertErr": "Ocurrió un error al descargar el certificado",
+  "abrirCertificado": "Abrir Certificado"
 }
