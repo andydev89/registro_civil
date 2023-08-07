@@ -56,7 +56,7 @@ class DocumentValidationSecondStepPage extends ConsumerWidget {
         final filePath = '$directoryPath/$fileName';
 
         // Guardar el archivo en la carpeta especificada
-        await File(filePath).writeAsBytes(bytes);
+        await File(filePath).writeAsBytes(bytes, flush: true);
         return true;
       }
     } catch (err) {

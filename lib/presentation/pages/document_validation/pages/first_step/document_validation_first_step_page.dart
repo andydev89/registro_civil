@@ -14,6 +14,7 @@ import 'package:registro_civil_apk/presentation/pages/document_validation/docume
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class DocumentValidationFirstStepPage extends ConsumerWidget {
   const DocumentValidationFirstStepPage({
@@ -68,17 +69,24 @@ class DocumentValidationFirstStepPage extends ConsumerWidget {
                         color: blue,
                       ),
                       onPressed: () async {
-                        final result = await context.pushRoute(
-                          QRScannerRoute(),
-                        );
-                        if (result != null && result is String) {
-                          final code = getDocumentCode(result);
-                          final date = getIssueDate(result);
-                          formModel.issueDateControl.updateValue(date);
-                          formModel.documentCodeControl
-                              .updateValue(code.replaceAll('-', ''));
-                          // print(result);
-                        }
+                        await Permission.camera
+                            .request()
+                            .isGranted
+                            .then((value) async {
+                          if (value) {
+                            final result = await context.pushRoute(
+                              QRScannerRoute(),
+                            );
+                            if (result != null && result is String) {
+                              final code = getDocumentCode(result);
+                              final date = getIssueDate(result);
+                              formModel.issueDateControl.updateValue(date);
+                              formModel.documentCodeControl
+                                  .updateValue(code.replaceAll('-', ''));
+                              // print(result);
+                            }
+                          }
+                        });
                       },
                     ),
                   ),
