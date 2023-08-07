@@ -1,20 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:oxidized/oxidized.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:power_ups/extensions/extensions.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/document_validation/document_validation_provider.dart';
 import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
-import 'package:registro_civil_apk/presentation/pages/document_validation/document_validation.dart';
 import 'package:registro_civil_apk/presentation/router/routes/router.dart';
 import 'package:registro_civil_apk/presentation/theme/theme.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class DocumentValidationFirstStepPage extends ConsumerWidget {
   const DocumentValidationFirstStepPage({
@@ -90,13 +89,11 @@ class DocumentValidationFirstStepPage extends ConsumerWidget {
                       },
                     ),
                   ),
-                  PrimaryReactiveDatePicker(
+                  PrimaryReactiveCalendarDatePicker(
                     label: l10n.fechaEmision,
-                    firstDate: DateTime(2023),
-                    initFocusedDay: true,
+                    firstDate: DateTime(DateTime.now().year - 5),
                     lastDate: DateTime.now(),
                     formControl: formModel.issueDateControl,
-                    availablesDate: null,
                   ),
                   const SizedBox(
                     height: 16,

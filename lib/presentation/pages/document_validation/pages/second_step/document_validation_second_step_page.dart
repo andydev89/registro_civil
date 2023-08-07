@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -30,10 +31,11 @@ class DocumentValidationSecondStepPage extends ConsumerWidget {
   final TypeServiceModel model;
 
   String _getFileName() {
-    return '${code}_$date.pdf';
+    final currentDate = DateFormat('ddMMyyyy-HHmmss').format(DateTime.now());
+    return '${code}_$currentDate.pdf';
   }
 
-  Future<bool> _downloadPdf() async {
+  Future<String?> _downloadPdf() async {
     // Decodificar el PDF desde Base64 a bytes
 
     try {
@@ -57,12 +59,12 @@ class DocumentValidationSecondStepPage extends ConsumerWidget {
 
         // Guardar el archivo en la carpeta especificada
         await File(filePath).writeAsBytes(bytes, flush: true);
-        return true;
+        return fileName;
       }
     } catch (err) {
-      return false;
+      return null;
     }
-    return false;
+    return null;
   }
 
   Future<void> _openCertificate() async {
@@ -100,7 +102,7 @@ class DocumentValidationSecondStepPage extends ConsumerWidget {
               title: l10n.descargar,
               onPressed: () async {
                 await _downloadPdf().then((value) {
-                  if (value) {
+                  if (value != null) {
                     showContentDialog(
                       context,
                       title: PrimaryTitle(
@@ -126,7 +128,7 @@ class DocumentValidationSecondStepPage extends ConsumerWidget {
                                     fontSize: fontSizeDefault,
                                     fontWeight: FontWeight.w500,
                                   ),
-                                  text: 'Download/${l10n.registroCivil}',
+                                  text: 'Download/$value',
                                 )
                               ],
                             ),
