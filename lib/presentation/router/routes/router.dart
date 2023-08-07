@@ -339,11 +339,6 @@ part 'router.gr.dart';
         CupertinoRoute(
           page: ChoosePaymentMethodPage,
         ),
-        // PaymentServiceJudgmentsNotarialActsPage
-        CupertinoRoute(
-          guards: [AuthGuard],
-          page: PaymentServiceJudgmentsNotarialActsPage,
-        ),
         //ID_DUPLICATE
         CupertinoRoute(
           guards: [AuthGuard],

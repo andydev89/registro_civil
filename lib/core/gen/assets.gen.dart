@@ -271,6 +271,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/home.svg
   SvgGenImage get home => const SvgGenImage('assets/svg/home.svg');
 
+  /// File path: assets/svg/info.svg
+  SvgGenImage get info => const SvgGenImage('assets/svg/info.svg');
+
   /// File path: assets/svg/key.svg
   SvgGenImage get key => const SvgGenImage('assets/svg/key.svg');
 
@@ -364,6 +367,7 @@ class $AssetsSvgGen {
         fingerprintGrey,
         help,
         home,
+        info,
         key,
         mapMarker,
         menu,

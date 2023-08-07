@@ -367,8 +367,8 @@ abstract class Api {
 
   @GET('/citizenship/api/citizenship/{id}')
   Future<ResponseModel<BirthAbroadListModel>> birthAbroadById(
-      @Path('id') String id,
-      );
+    @Path('id') String id,
+  );
 
   @GET('/citizenship/api/noresident/citizenship/{id}')
   Future<ResponseModel<BirthAbroadListModel>> birthAbroadNoResidentById(
@@ -391,8 +391,12 @@ abstract class Api {
   });
 
   @PUT('/citizenship/api/noresident/citizenship/documentation/file')
-  Future<ResponseModel<CommandModel>>
-      editNoResidentBirthAbroad({
+  Future<ResponseModel<CommandModel>> editNoResidentBirthAbroad({
     @Body() required BirthAbroadDocumentModel model,
   });
+
+  //PAYMENT_SERVICE_ACTAS_NOTARIALES
+  @GET('/paymentofservices/api/service')
+  Future<ResponseModelPagination<List<PaymentofservicesModel>>>
+      getservicesPaymentSjudgments();
 }

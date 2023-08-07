@@ -23,40 +23,44 @@ class PaymentServiceIngActsNotFirstPage extends ConsumerWidget {
 
     return PaymentServiceJudgmentsNotarialActsModelFormBuilder(
       builder: (_, formModel, __) {
-        for (final _ in PaymentServiceJudgmentsNotarialActsType.values) {
-          formModel.typesControl
-              .add(FormControl<bool>(value: false, validators: []));
-        }
         return PrimaryScaffold(
           title: typeServiceModel.name,
+          subtitle: l10n.completeInformacionSolicitada,
           body: Expanded(
             child: Scaffold(
+              backgroundColor: Colors.transparent,
               body: SingleChildScrollView(
                 child: Column(
                   children: [
                     // ignore: lines_longer_than_80_chars
-                    ReactivePaymentServiceJudgmentsNotarialActsModelFormArrayBuilder(
-                      formControl: formModel.typesControl,
-                      itemBuilder: (_, index, value, formModel) {
-                        return PrimaryReactiveCheckBox(
-                          formControl: formModel.typesControl.controls[index]
-                              as FormControl<bool>,
-                          label: PaymentServiceJudgmentsNotarialActsType.values
-                              .elementAt(index)
-                              .translate(context),
-                        );
-                      },
-                    ),
+                    SelectElementFromApi(
+                      formControl: formModel.serviceControl,
+                      label: l10n.servicios,
+                      provider: getservicesProvider,
+                    ).horizontalPadding(20),
                     SelectElementFromApi(
                       formControl: formModel.provinceControl,
                       label: l10n.provincia,
                       provider: provincesProvider,
                     ).horizontalPadding(20),
-                    SelectElementFromApi(
-                      formControl: formModel.agencyControl,
-                      label: l10n.agencia,
-                      provider: agenciesProvider,
-                    ).horizontalPadding(20),
+
+                    ReactivePaymentServiceJudgmentsNotarialActsModelFormConsumer(
+                      builder: (context, formModel, child) {
+                        return Column(
+                          children: [
+                            SelectElementFromApi(
+                              readOnly: !formModel.provinceControl.valid,
+                              formControl: formModel.agencyControl,
+                              label: l10n.agencia,
+                              provider: agenciesByProvinceProvider(
+                                provinceId:
+                                    formModel.provinceControl.value?.id ?? '',
+                              ),
+                            ).horizontalPadding(20),
+                          ],
+                        );
+                      },
+                    ),
                   ],
                 ),
               ).verticalPadding(20),

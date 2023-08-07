@@ -343,12 +343,6 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    PaymentServiceJudgmentsNotarialActsRoute.name: (routeData) {
-      return CupertinoPageX<dynamic>(
-        routeData: routeData,
-        child: const PaymentServiceJudgmentsNotarialActsPage(),
-      );
-    },
     IdDuplicateRouterRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -1493,12 +1487,6 @@ class _$AppRouter extends RootStackRouter {
               parent: RootRouterRoute.name,
             ),
             RouteConfig(
-              PaymentServiceJudgmentsNotarialActsRoute.name,
-              path: 'payment-service-judgments-notarial-acts-page',
-              parent: RootRouterRoute.name,
-              guards: [authGuard],
-            ),
-            RouteConfig(
               IdDuplicateRouterRoute.name,
               path: 'id-duplicate-router-page',
               parent: RootRouterRoute.name,
@@ -2475,18 +2463,6 @@ class ChoosePaymentMethodRouteArgs {
   String toString() {
     return 'ChoosePaymentMethodRouteArgs{key: $key, service: $service, transactionCode: $transactionCode, requestNumber: $requestNumber}';
   }
-}
-
-/// generated route for
-/// [PaymentServiceJudgmentsNotarialActsPage]
-class PaymentServiceJudgmentsNotarialActsRoute extends PageRouteInfo<void> {
-  const PaymentServiceJudgmentsNotarialActsRoute()
-      : super(
-          PaymentServiceJudgmentsNotarialActsRoute.name,
-          path: 'payment-service-judgments-notarial-acts-page',
-        );
-
-  static const String name = 'PaymentServiceJudgmentsNotarialActsRoute';
 }
 
 /// generated route for
