@@ -601,6 +601,8 @@
   "aprobado": "Aprobado",
   "rechazado": "Rechazado",
   "finalizado": "Finalizado",
+  "cancelado": "Cancelado",
+  "solicitando": "Solicitando",
   "listadoSol": "Listado de solicitudes",
   "documentosSubCor": "Documentos subidos correctamente",
   "residenciaGuardadaCor": "Residencia guardada correctamente",

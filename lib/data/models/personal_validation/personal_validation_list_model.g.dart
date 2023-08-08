@@ -18,7 +18,8 @@ _$_PersonalValidationListModel _$$_PersonalValidationListModelFromJson(
       updatedAt: json['updatedAt'] == null
           ? null
           : DateTime.parse(json['updatedAt'] as String),
-      state: $enumDecodeNullable(_$StateDocumentEnumMap, json['state']) ??
+      state: $enumDecodeNullable(
+              _$PersonalValidationStateEnumMap, json['state']) ??
           StateDocument.pending,
       citizen: json['citizen'] as String?,
       user: json['user'] == null
@@ -37,16 +38,17 @@ Map<String, dynamic> _$$_PersonalValidationListModelToJson(
       'description': instance.description,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
-      'state': _$StateDocumentEnumMap[instance.state]!,
+      'state': _$PersonalValidationStateEnumMap[instance.state]!,
       'citizen': instance.citizen,
       'user': instance.user?.toJson(),
       'modifiedData': instance.modifiedData.map((e) => e.toJson()).toList(),
     };
 
-const _$StateDocumentEnumMap = {
-  StateDocument.pending: 'PENDING',
-  StateDocument.approved: 'APPROVED',
-  StateDocument.rejected: 'REJECTED',
+const _$PersonalValidationStateEnumMap = {
+  PersonalValidationState.requesting: 'REQUESTING',
+  PersonalValidationState.approved: 'APPROVED',
+  PersonalValidationState.cancelled: 'CANCELLED',
+  PersonalValidationState.pending: 'PENDING',
 };
 
 _$_UserDataModel _$$_UserDataModelFromJson(Map<String, dynamic> json) =>

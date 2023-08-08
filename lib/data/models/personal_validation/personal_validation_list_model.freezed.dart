@@ -26,7 +26,7 @@ mixin _$PersonalValidationListModel {
   String? get description => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
-  StateDocument get state => throw _privateConstructorUsedError;
+  PersonalValidationState get state => throw _privateConstructorUsedError;
   String? get citizen => throw _privateConstructorUsedError;
   UserDataModel? get user => throw _privateConstructorUsedError;
   List<ModifiedDataListModel> get modifiedData =>
@@ -52,7 +52,7 @@ abstract class $PersonalValidationListModelCopyWith<$Res> {
       String? description,
       DateTime? createdAt,
       DateTime? updatedAt,
-      StateDocument state,
+      PersonalValidationState state,
       String? citizen,
       UserDataModel? user,
       List<ModifiedDataListModel> modifiedData});
@@ -108,7 +108,7 @@ class _$PersonalValidationListModelCopyWithImpl<$Res,
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as StateDocument,
+              as PersonalValidationState,
       citizen: freezed == citizen
           ? _value.citizen
           : citizen // ignore: cast_nullable_to_non_nullable
@@ -152,7 +152,7 @@ abstract class _$$_PersonalValidationListModelCopyWith<$Res>
       String? description,
       DateTime? createdAt,
       DateTime? updatedAt,
-      StateDocument state,
+      PersonalValidationState state,
       String? citizen,
       UserDataModel? user,
       List<ModifiedDataListModel> modifiedData});
@@ -208,7 +208,7 @@ class __$$_PersonalValidationListModelCopyWithImpl<$Res>
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as StateDocument,
+              as PersonalValidationState,
       citizen: freezed == citizen
           ? _value.citizen
           : citizen // ignore: cast_nullable_to_non_nullable
@@ -257,7 +257,7 @@ class _$_PersonalValidationListModel extends _PersonalValidationListModel {
   final DateTime? updatedAt;
   @override
   @JsonKey()
-  final StateDocument state;
+  final PersonalValidationState state;
   @override
   final String? citizen;
   @override
@@ -332,7 +332,7 @@ abstract class _PersonalValidationListModel
           final String? description,
           final DateTime? createdAt,
           final DateTime? updatedAt,
-          final StateDocument state,
+          final PersonalValidationState state,
           final String? citizen,
           final UserDataModel? user,
           required final List<ModifiedDataListModel> modifiedData}) =
@@ -353,7 +353,7 @@ abstract class _PersonalValidationListModel
   @override
   DateTime? get updatedAt;
   @override
-  StateDocument get state;
+  PersonalValidationState get state;
   @override
   String? get citizen;
   @override

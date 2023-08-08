@@ -600,6 +600,8 @@
   "aprobado": "Approved",
   "rechazado": "Rejected",
   "finalizado": "Finished",
+  "cancelado": "Cancelled",
+  "solicitando": "Requesting",
   "listadoSol": "List of requests",
   "documentosSubCor": "Successfully uploaded documents",
   "residenciaGuardadaCor": "Residence saved correctly",

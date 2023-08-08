@@ -16,7 +16,7 @@ class PersonalValidationListModel with _$PersonalValidationListModel {
     @Default(
       StateDocument.pending,
     )
-    StateDocument state,
+    PersonalValidationState state,
     String? citizen,
     UserDataModel? user,
     required List<ModifiedDataListModel> modifiedData,
