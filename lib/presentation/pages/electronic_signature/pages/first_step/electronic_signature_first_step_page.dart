@@ -135,7 +135,7 @@ class ElectronicSignatureFirstStepPage extends ConsumerWidget {
                       );
                     }
                   : null,
-            ).symmetricPadding(10, 10),
+            ).symmetricPadding(10, 20),
           ),
         );
       },

@@ -1,6 +1,7 @@
 // import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
+import 'package:power_ups/extensions/extensions.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/core/gen/assets.gen.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
@@ -40,7 +41,12 @@ class SecondaryReactiveDatePicker extends StatelessWidget {
         label: label,
         readOnly: readOnly,
         hintText: hintText ?? '${l10n.seleccione}...',
-        suffixIcon: Assets.svg.calendar.svg(),
+        suffixIcon: Assets.svg.calendar
+            .svg(
+              width: 20,
+              height: 20,
+            )
+            .horizontalPadding(10),
         onTap: (control) async {
           if (!readOnly) {
             final pickedDate = await picker.showDatePicker(
