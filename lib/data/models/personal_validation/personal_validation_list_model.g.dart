@@ -20,7 +20,7 @@ _$_PersonalValidationListModel _$$_PersonalValidationListModelFromJson(
           : DateTime.parse(json['updatedAt'] as String),
       state: $enumDecodeNullable(
               _$PersonalValidationStateEnumMap, json['state']) ??
-          StateDocument.pending,
+          PersonalValidationState.pending,
       citizen: json['citizen'] as String?,
       user: json['user'] == null
           ? null

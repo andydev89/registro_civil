@@ -40,7 +40,7 @@ class IdDuplicateResponseModel {
   final dynamic printedAt;
   final dynamic deliveredAt;
   final dynamic operatorId;
-  final StateMarriageType state;
+  final IdDuplicateState state;
   @JsonKey(
     fromJson: LocationModel.provinceFromJson,
     includeFromJson: true,

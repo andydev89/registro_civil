@@ -41,7 +41,7 @@ mixin _$ElectronicSignatureModel {
   @JsonKey(includeToJson: true)
   SignatureUseCaseType get useCase => throw _privateConstructorUsedError;
   @JsonKey(includeFromJson: true)
-  StateDocument get state => throw _privateConstructorUsedError;
+  ElectronicSignatureState get state => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -81,7 +81,7 @@ abstract class $ElectronicSignatureModelCopyWith<$Res> {
       @JsonKey(includeToJson: true)
           SignatureUseCaseType useCase,
       @JsonKey(includeFromJson: true)
-          StateDocument state,
+          ElectronicSignatureState state,
       DateTime? createdAt,
       DateTime? updatedAt});
 
@@ -197,7 +197,7 @@ class _$ElectronicSignatureModelCopyWithImpl<$Res,
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as StateDocument,
+              as ElectronicSignatureState,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -280,7 +280,7 @@ abstract class _$$_ElectronicSignatureModelCopyWith<$Res>
       @JsonKey(includeToJson: true)
           SignatureUseCaseType useCase,
       @JsonKey(includeFromJson: true)
-          StateDocument state,
+          ElectronicSignatureState state,
       DateTime? createdAt,
       DateTime? updatedAt});
 
@@ -397,7 +397,7 @@ class __$$_ElectronicSignatureModelCopyWithImpl<$Res>
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as StateDocument,
+              as ElectronicSignatureState,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -438,7 +438,7 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
       @JsonKey(includeToJson: true)
           this.useCase = SignatureUseCaseType.publicProcurementSystem,
       @JsonKey(includeFromJson: true)
-          this.state = StateDocument.pending,
+          this.state = ElectronicSignatureState.pending,
       this.createdAt,
       this.updatedAt})
       : super._();
@@ -491,7 +491,7 @@ class _$_ElectronicSignatureModel extends _ElectronicSignatureModel {
   final SignatureUseCaseType useCase;
   @override
   @JsonKey(includeFromJson: true)
-  final StateDocument state;
+  final ElectronicSignatureState state;
   @override
   final DateTime? createdAt;
   @override
@@ -603,7 +603,7 @@ abstract class _ElectronicSignatureModel extends ElectronicSignatureModel {
       @JsonKey(includeToJson: true)
           final SignatureUseCaseType useCase,
       @JsonKey(includeFromJson: true)
-          final StateDocument state,
+          final ElectronicSignatureState state,
       final DateTime? createdAt,
       final DateTime? updatedAt}) = _$_ElectronicSignatureModel;
   const _ElectronicSignatureModel._() : super._();
@@ -650,7 +650,7 @@ abstract class _ElectronicSignatureModel extends ElectronicSignatureModel {
   SignatureUseCaseType get useCase;
   @override
   @JsonKey(includeFromJson: true)
-  StateDocument get state;
+  ElectronicSignatureState get state;
   @override
   DateTime? get createdAt;
   @override

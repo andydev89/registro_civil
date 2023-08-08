@@ -14,7 +14,7 @@ class PersonalValidationListModel with _$PersonalValidationListModel {
     DateTime? createdAt,
     DateTime? updatedAt,
     @Default(
-      StateDocument.pending,
+      PersonalValidationState.pending,
     )
     PersonalValidationState state,
     String? citizen,

@@ -63,9 +63,9 @@ class ElectronicSignatureModel with _$ElectronicSignatureModel {
         SignatureUseCaseType useCase,
     @JsonKey(includeFromJson: true)
     @Default(
-      StateDocument.pending,
+      ElectronicSignatureState.pending,
     )
-        StateDocument state,
+        ElectronicSignatureState state,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) = _ElectronicSignatureModel;

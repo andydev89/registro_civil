@@ -235,7 +235,7 @@ class _$_PersonalValidationListModel extends _PersonalValidationListModel {
       this.description,
       this.createdAt,
       this.updatedAt,
-      this.state = StateDocument.pending,
+      this.state = PersonalValidationState.pending,
       this.citizen,
       this.user,
       required final List<ModifiedDataListModel> modifiedData})
