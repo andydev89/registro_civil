@@ -203,7 +203,13 @@ enum StatusCodeType implements Translatable {
   s722(722),
   s738(738),
   s739(739),
-  s757(757);
+  s757(757),
+  s808(808),
+  s809(809),
+  s810(810),
+  s811(811),
+  s812(812),
+  s813(813);
 
 
   const StatusCodeType(this.code);
@@ -401,6 +407,12 @@ enum StatusCodeType implements Translatable {
       StatusCodeType.s769: l10n.s769,
       StatusCodeType.s770: l10n.s770,
       StatusCodeType.s780: l10n.s780,
+      StatusCodeType.s808: l10n.s808,
+      StatusCodeType.s809: l10n.s809,
+      StatusCodeType.s810: l10n.s810,
+      StatusCodeType.s811: l10n.s811,
+      StatusCodeType.s812: l10n.s812,
+      StatusCodeType.s813: l10n.s813,
     };
     return translations[this] ?? l10n.s999;
   }

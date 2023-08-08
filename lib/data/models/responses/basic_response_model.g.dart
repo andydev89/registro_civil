@@ -221,6 +221,12 @@ const _$StatusCodeTypeEnumMap = {
   StatusCodeType.s738: 738,
   StatusCodeType.s739: 739,
   StatusCodeType.s757: 757,
+  StatusCodeType.s808: 808,
+  StatusCodeType.s809: 809,
+  StatusCodeType.s810: 810,
+  StatusCodeType.s811: 811,
+  StatusCodeType.s812: 812,
+  StatusCodeType.s813: 813,
 };
 
 T? _$nullableGenericFromJson<T>(
