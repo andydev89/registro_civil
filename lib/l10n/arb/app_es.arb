@@ -700,5 +700,6 @@
   "ubicacionArchivo": "El archivo se encuentra en la carpeta ",
   "descargaExitosa": "¡Descarga exitosa!",
   "descargaCertErr": "Ocurrió un error al descargar el certificado",
-  "abrirCertificado": "Abrir Certificado"
+  "abrirCertificado": "Abrir Certificado",
+  "anterior": "Anterior"
 }

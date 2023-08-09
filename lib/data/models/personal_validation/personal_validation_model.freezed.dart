@@ -35,9 +35,9 @@ mixin _$PersonalValidationModel {
   @JsonKey(name: 'estadoCivil')
   PersonalValidationMaritalStatusType? get maritalStatusType =>
       throw _privateConstructorUsedError;
-  @FormControlAnnotation<String>()
-  @JsonKey(name: 'fechaNacimiento')
-  String? get birthDate => throw _privateConstructorUsedError;
+  @FormControlAnnotation<DateTime>()
+  @JsonKey(name: 'fechaNacimiento', fromJson: dateTimeFromJson)
+  DateTime? get birthDate => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>()
   @JsonKey(name: 'nacionalidad')
   String? get nationality => throw _privateConstructorUsedError;
@@ -93,9 +93,9 @@ abstract class $PersonalValidationModelCopyWith<$Res> {
       @FormControlAnnotation<PersonalValidationMaritalStatusType>()
       @JsonKey(name: 'estadoCivil')
           PersonalValidationMaritalStatusType? maritalStatusType,
-      @FormControlAnnotation<String>()
-      @JsonKey(name: 'fechaNacimiento')
-          String? birthDate,
+      @FormControlAnnotation<DateTime>()
+      @JsonKey(name: 'fechaNacimiento', fromJson: dateTimeFromJson)
+          DateTime? birthDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'nacionalidad')
           String? nationality,
@@ -182,7 +182,7 @@ class _$PersonalValidationModelCopyWithImpl<$Res,
       birthDate: freezed == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       nationality: freezed == nationality
           ? _value.nationality
           : nationality // ignore: cast_nullable_to_non_nullable
@@ -288,9 +288,9 @@ abstract class _$$_PersonalValidationModelCopyWith<$Res>
       @FormControlAnnotation<PersonalValidationMaritalStatusType>()
       @JsonKey(name: 'estadoCivil')
           PersonalValidationMaritalStatusType? maritalStatusType,
-      @FormControlAnnotation<String>()
-      @JsonKey(name: 'fechaNacimiento')
-          String? birthDate,
+      @FormControlAnnotation<DateTime>()
+      @JsonKey(name: 'fechaNacimiento', fromJson: dateTimeFromJson)
+          DateTime? birthDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'nacionalidad')
           String? nationality,
@@ -378,7 +378,7 @@ class __$$_PersonalValidationModelCopyWithImpl<$Res>
       birthDate: freezed == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       nationality: freezed == nationality
           ? _value.nationality
           : nationality // ignore: cast_nullable_to_non_nullable
@@ -444,9 +444,9 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
       @FormControlAnnotation<PersonalValidationMaritalStatusType>()
       @JsonKey(name: 'estadoCivil')
           this.maritalStatusType,
-      @FormControlAnnotation<String>()
-      @JsonKey(name: 'fechaNacimiento')
-          this.birthDate = '',
+      @FormControlAnnotation<DateTime>()
+      @JsonKey(name: 'fechaNacimiento', fromJson: dateTimeFromJson)
+          this.birthDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'nacionalidad')
           this.nationality,
@@ -498,9 +498,9 @@ class _$_PersonalValidationModel extends _PersonalValidationModel {
   @JsonKey(name: 'estadoCivil')
   final PersonalValidationMaritalStatusType? maritalStatusType;
   @override
-  @FormControlAnnotation<String>()
-  @JsonKey(name: 'fechaNacimiento')
-  final String? birthDate;
+  @FormControlAnnotation<DateTime>()
+  @JsonKey(name: 'fechaNacimiento', fromJson: dateTimeFromJson)
+  final DateTime? birthDate;
   @override
   @FormControlAnnotation<String>()
   @JsonKey(name: 'nacionalidad')
@@ -636,9 +636,9 @@ abstract class _PersonalValidationModel extends PersonalValidationModel {
       @FormControlAnnotation<PersonalValidationMaritalStatusType>()
       @JsonKey(name: 'estadoCivil')
           final PersonalValidationMaritalStatusType? maritalStatusType,
-      @FormControlAnnotation<String>()
-      @JsonKey(name: 'fechaNacimiento')
-          final String? birthDate,
+      @FormControlAnnotation<DateTime>()
+      @JsonKey(name: 'fechaNacimiento', fromJson: dateTimeFromJson)
+          final DateTime? birthDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'nacionalidad')
           final String? nationality,
@@ -690,9 +690,9 @@ abstract class _PersonalValidationModel extends PersonalValidationModel {
   @JsonKey(name: 'estadoCivil')
   PersonalValidationMaritalStatusType? get maritalStatusType;
   @override
-  @FormControlAnnotation<String>()
-  @JsonKey(name: 'fechaNacimiento')
-  String? get birthDate;
+  @FormControlAnnotation<DateTime>()
+  @JsonKey(name: 'fechaNacimiento', fromJson: dateTimeFromJson)
+  DateTime? get birthDate;
   @override
   @FormControlAnnotation<String>()
   @JsonKey(name: 'nacionalidad')
@@ -754,9 +754,9 @@ mixin _$BirthModel {
   @FormControlAnnotation<String>()
   @JsonKey(name: 'anioInscripcionNacimiento')
   String? get inscriptionYear => throw _privateConstructorUsedError;
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<DateTime>()
   @JsonKey(name: 'fechaInscripcionNacimiento')
-  String? get inscriptionDate => throw _privateConstructorUsedError;
+  DateTime? get inscriptionDate => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>()
   @JsonKey(name: 'tomo')
   String? get volume => throw _privateConstructorUsedError;
@@ -792,9 +792,9 @@ abstract class $BirthModelCopyWith<$Res> {
       @FormControlAnnotation<String>()
       @JsonKey(name: 'anioInscripcionNacimiento')
           String? inscriptionYear,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaInscripcionNacimiento')
-          String? inscriptionDate,
+          DateTime? inscriptionDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'tomo')
           String? volume,
@@ -847,7 +847,7 @@ class _$BirthModelCopyWithImpl<$Res, $Val extends BirthModel>
       inscriptionDate: freezed == inscriptionDate
           ? _value.inscriptionDate
           : inscriptionDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       volume: freezed == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
@@ -886,9 +886,9 @@ abstract class _$$_BirthModelCopyWith<$Res>
       @FormControlAnnotation<String>()
       @JsonKey(name: 'anioInscripcionNacimiento')
           String? inscriptionYear,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaInscripcionNacimiento')
-          String? inscriptionDate,
+          DateTime? inscriptionDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'tomo')
           String? volume,
@@ -939,7 +939,7 @@ class __$$_BirthModelCopyWithImpl<$Res>
       inscriptionDate: freezed == inscriptionDate
           ? _value.inscriptionDate
           : inscriptionDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       volume: freezed == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
@@ -974,7 +974,7 @@ class _$_BirthModel extends _BirthModel {
       @FormControlAnnotation<String>()
       @JsonKey(name: 'anioInscripcionNacimiento')
           this.inscriptionYear,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaInscripcionNacimiento')
           this.inscriptionDate,
       @FormControlAnnotation<String>()
@@ -1007,9 +1007,9 @@ class _$_BirthModel extends _BirthModel {
   @JsonKey(name: 'anioInscripcionNacimiento')
   final String? inscriptionYear;
   @override
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<DateTime>()
   @JsonKey(name: 'fechaInscripcionNacimiento')
-  final String? inscriptionDate;
+  final DateTime? inscriptionDate;
   @override
   @FormControlAnnotation<String>()
   @JsonKey(name: 'tomo')
@@ -1082,9 +1082,9 @@ abstract class _BirthModel extends BirthModel {
       @FormControlAnnotation<String>()
       @JsonKey(name: 'anioInscripcionNacimiento')
           final String? inscriptionYear,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaInscripcionNacimiento')
-          final String? inscriptionDate,
+          final DateTime? inscriptionDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'tomo')
           final String? volume,
@@ -1115,9 +1115,9 @@ abstract class _BirthModel extends BirthModel {
   @JsonKey(name: 'anioInscripcionNacimiento')
   String? get inscriptionYear;
   @override
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<DateTime>()
   @JsonKey(name: 'fechaInscripcionNacimiento')
-  String? get inscriptionDate;
+  DateTime? get inscriptionDate;
   @override
   @FormControlAnnotation<String>()
   @JsonKey(name: 'tomo')
@@ -1149,9 +1149,9 @@ mixin _$MarriageModel {
   @FormControlAnnotation<String>()
   @JsonKey(name: 'lugarMatrimonio')
   String? get marriagePlace => throw _privateConstructorUsedError;
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<DateTime>()
   @JsonKey(name: 'fechaMatrimonio')
-  String? get marriageDate => throw _privateConstructorUsedError;
+  DateTime? get marriageDate => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>()
   @JsonKey(name: 'tomoMatrimonio')
   String? get marriageVolume => throw _privateConstructorUsedError;
@@ -1187,9 +1187,9 @@ abstract class $MarriageModelCopyWith<$Res> {
       {@FormControlAnnotation<String>()
       @JsonKey(name: 'lugarMatrimonio')
           String? marriagePlace,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaMatrimonio')
-          String? marriageDate,
+          DateTime? marriageDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'tomoMatrimonio')
           String? marriageVolume,
@@ -1240,7 +1240,7 @@ class _$MarriageModelCopyWithImpl<$Res, $Val extends MarriageModel>
       marriageDate: freezed == marriageDate
           ? _value.marriageDate
           : marriageDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       marriageVolume: freezed == marriageVolume
           ? _value.marriageVolume
           : marriageVolume // ignore: cast_nullable_to_non_nullable
@@ -1281,9 +1281,9 @@ abstract class _$$_MarriageModelCopyWith<$Res>
       {@FormControlAnnotation<String>()
       @JsonKey(name: 'lugarMatrimonio')
           String? marriagePlace,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaMatrimonio')
-          String? marriageDate,
+          DateTime? marriageDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'tomoMatrimonio')
           String? marriageVolume,
@@ -1332,7 +1332,7 @@ class __$$_MarriageModelCopyWithImpl<$Res>
       marriageDate: freezed == marriageDate
           ? _value.marriageDate
           : marriageDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       marriageVolume: freezed == marriageVolume
           ? _value.marriageVolume
           : marriageVolume // ignore: cast_nullable_to_non_nullable
@@ -1369,7 +1369,7 @@ class _$_MarriageModel extends _MarriageModel {
       {@FormControlAnnotation<String>()
       @JsonKey(name: 'lugarMatrimonio')
           this.marriagePlace,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaMatrimonio')
           this.marriageDate,
       @FormControlAnnotation<String>()
@@ -1400,9 +1400,9 @@ class _$_MarriageModel extends _MarriageModel {
   @JsonKey(name: 'lugarMatrimonio')
   final String? marriagePlace;
   @override
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<DateTime>()
   @JsonKey(name: 'fechaMatrimonio')
-  final String? marriageDate;
+  final DateTime? marriageDate;
   @override
   @FormControlAnnotation<String>()
   @JsonKey(name: 'tomoMatrimonio')
@@ -1488,9 +1488,9 @@ abstract class _MarriageModel extends MarriageModel {
       {@FormControlAnnotation<String>()
       @JsonKey(name: 'lugarMatrimonio')
           final String? marriagePlace,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaMatrimonio')
-          final String? marriageDate,
+          final DateTime? marriageDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'tomoMatrimonio')
           final String? marriageVolume,
@@ -1519,9 +1519,9 @@ abstract class _MarriageModel extends MarriageModel {
   @JsonKey(name: 'lugarMatrimonio')
   String? get marriagePlace;
   @override
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<DateTime>()
   @JsonKey(name: 'fechaMatrimonio')
-  String? get marriageDate;
+  DateTime? get marriageDate;
   @override
   @FormControlAnnotation<String>()
   @JsonKey(name: 'tomoMatrimonio')
@@ -1561,9 +1561,9 @@ mixin _$GenderModel {
   @FormControlAnnotation<String>()
   @JsonKey(name: 'genero')
   String? get gender => throw _privateConstructorUsedError;
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<DateTime>()
   @JsonKey(name: 'fechaInscripcionGenero')
-  String? get inscriptionDate => throw _privateConstructorUsedError;
+  DateTime? get inscriptionDate => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>()
   @JsonKey(name: 'lugarInscripcionGenero')
   String? get inscriptionPlace => throw _privateConstructorUsedError;
@@ -1584,9 +1584,9 @@ abstract class $GenderModelCopyWith<$Res> {
       {@FormControlAnnotation<String>()
       @JsonKey(name: 'genero')
           String? gender,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaInscripcionGenero')
-          String? inscriptionDate,
+          DateTime? inscriptionDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'lugarInscripcionGenero')
           String? inscriptionPlace});
@@ -1617,7 +1617,7 @@ class _$GenderModelCopyWithImpl<$Res, $Val extends GenderModel>
       inscriptionDate: freezed == inscriptionDate
           ? _value.inscriptionDate
           : inscriptionDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       inscriptionPlace: freezed == inscriptionPlace
           ? _value.inscriptionPlace
           : inscriptionPlace // ignore: cast_nullable_to_non_nullable
@@ -1638,9 +1638,9 @@ abstract class _$$_GenderModelCopyWith<$Res>
       {@FormControlAnnotation<String>()
       @JsonKey(name: 'genero')
           String? gender,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaInscripcionGenero')
-          String? inscriptionDate,
+          DateTime? inscriptionDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'lugarInscripcionGenero')
           String? inscriptionPlace});
@@ -1669,7 +1669,7 @@ class __$$_GenderModelCopyWithImpl<$Res>
       inscriptionDate: freezed == inscriptionDate
           ? _value.inscriptionDate
           : inscriptionDate // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
       inscriptionPlace: freezed == inscriptionPlace
           ? _value.inscriptionPlace
           : inscriptionPlace // ignore: cast_nullable_to_non_nullable
@@ -1686,7 +1686,7 @@ class _$_GenderModel extends _GenderModel {
       {@FormControlAnnotation<String>()
       @JsonKey(name: 'genero')
           this.gender,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaInscripcionGenero')
           this.inscriptionDate,
       @FormControlAnnotation<String>()
@@ -1702,9 +1702,9 @@ class _$_GenderModel extends _GenderModel {
   @JsonKey(name: 'genero')
   final String? gender;
   @override
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<DateTime>()
   @JsonKey(name: 'fechaInscripcionGenero')
-  final String? inscriptionDate;
+  final DateTime? inscriptionDate;
   @override
   @FormControlAnnotation<String>()
   @JsonKey(name: 'lugarInscripcionGenero')
@@ -1751,9 +1751,9 @@ abstract class _GenderModel extends GenderModel {
       {@FormControlAnnotation<String>()
       @JsonKey(name: 'genero')
           final String? gender,
-      @FormControlAnnotation<String>()
+      @FormControlAnnotation<DateTime>()
       @JsonKey(name: 'fechaInscripcionGenero')
-          final String? inscriptionDate,
+          final DateTime? inscriptionDate,
       @FormControlAnnotation<String>()
       @JsonKey(name: 'lugarInscripcionGenero')
           final String? inscriptionPlace}) = _$_GenderModel;
@@ -1767,9 +1767,9 @@ abstract class _GenderModel extends GenderModel {
   @JsonKey(name: 'genero')
   String? get gender;
   @override
-  @FormControlAnnotation<String>()
+  @FormControlAnnotation<DateTime>()
   @JsonKey(name: 'fechaInscripcionGenero')
-  String? get inscriptionDate;
+  DateTime? get inscriptionDate;
   @override
   @FormControlAnnotation<String>()
   @JsonKey(name: 'lugarInscripcionGenero')

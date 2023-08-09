@@ -57,7 +57,7 @@ _$_PersonalValidationModel _$$_PersonalValidationModelFromJson(
           _$PersonalValidationGenderTypeEnumMap, json['sexo']),
       maritalStatusType: $enumDecodeNullable(
           _$PersonalValidationMaritalStatusTypeEnumMap, json['estadoCivil']),
-      birthDate: json['fechaNacimiento'] as String? ?? '',
+      birthDate: dateTimeFromJson(json['fechaNacimiento'] as String?),
       nationality: json['nacionalidad'] as String?,
       birth: json['birth'] == null
           ? null
@@ -85,7 +85,7 @@ Map<String, dynamic> _$$_PersonalValidationModelToJson(
       'sexo': _$PersonalValidationGenderTypeEnumMap[instance.gender],
       'estadoCivil': _$PersonalValidationMaritalStatusTypeEnumMap[
           instance.maritalStatusType],
-      'fechaNacimiento': instance.birthDate,
+      'fechaNacimiento': instance.birthDate?.toIso8601String(),
       'nacionalidad': instance.nationality,
       'birth': instance.birth?.toJson(),
       'nuiPadre': instance.fatherNui,
@@ -118,7 +118,9 @@ _$_BirthModel _$$_BirthModelFromJson(Map<String, dynamic> json) =>
       birthPlace: json['lugarNacimiento'] as String?,
       inscriptionPlace: json['lugarInscripcion'] as String?,
       inscriptionYear: json['anioInscripcionNacimiento'] as String?,
-      inscriptionDate: json['fechaInscripcionNacimiento'] as String?,
+      inscriptionDate: json['fechaInscripcionNacimiento'] == null
+          ? null
+          : DateTime.parse(json['fechaInscripcionNacimiento'] as String),
       volume: json['tomo'] as String?,
       page: json['pagina'] as String?,
       record: json['acta'] as String?,
@@ -130,7 +132,7 @@ Map<String, dynamic> _$$_BirthModelToJson(_$_BirthModel instance) =>
       'lugarNacimiento': instance.birthPlace,
       'lugarInscripcion': instance.inscriptionPlace,
       'anioInscripcionNacimiento': instance.inscriptionYear,
-      'fechaInscripcionNacimiento': instance.inscriptionDate,
+      'fechaInscripcionNacimiento': instance.inscriptionDate?.toIso8601String(),
       'tomo': instance.volume,
       'pagina': instance.page,
       'acta': instance.record,
@@ -140,7 +142,9 @@ Map<String, dynamic> _$$_BirthModelToJson(_$_BirthModel instance) =>
 _$_MarriageModel _$$_MarriageModelFromJson(Map<String, dynamic> json) =>
     _$_MarriageModel(
       marriagePlace: json['lugarMatrimonio'] as String?,
-      marriageDate: json['fechaMatrimonio'] as String?,
+      marriageDate: json['fechaMatrimonio'] == null
+          ? null
+          : DateTime.parse(json['fechaMatrimonio'] as String),
       marriageVolume: json['tomoMatrimonio'] as String?,
       marriagePage: json['paginaMatrimonio'] as String?,
       marriageRecord: json['actaMatrimonio'] as String?,
@@ -152,7 +156,7 @@ _$_MarriageModel _$$_MarriageModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_MarriageModelToJson(_$_MarriageModel instance) =>
     <String, dynamic>{
       'lugarMatrimonio': instance.marriagePlace,
-      'fechaMatrimonio': instance.marriageDate,
+      'fechaMatrimonio': instance.marriageDate?.toIso8601String(),
       'tomoMatrimonio': instance.marriageVolume,
       'paginaMatrimonio': instance.marriagePage,
       'actaMatrimonio': instance.marriageRecord,
@@ -164,13 +168,15 @@ Map<String, dynamic> _$$_MarriageModelToJson(_$_MarriageModel instance) =>
 _$_GenderModel _$$_GenderModelFromJson(Map<String, dynamic> json) =>
     _$_GenderModel(
       gender: json['genero'] as String?,
-      inscriptionDate: json['fechaInscripcionGenero'] as String?,
+      inscriptionDate: json['fechaInscripcionGenero'] == null
+          ? null
+          : DateTime.parse(json['fechaInscripcionGenero'] as String),
       inscriptionPlace: json['lugarInscripcionGenero'] as String?,
     );
 
 Map<String, dynamic> _$$_GenderModelToJson(_$_GenderModel instance) =>
     <String, dynamic>{
       'genero': instance.gender,
-      'fechaInscripcionGenero': instance.inscriptionDate,
+      'fechaInscripcionGenero': instance.inscriptionDate?.toIso8601String(),
       'lugarInscripcionGenero': instance.inscriptionPlace,
     };

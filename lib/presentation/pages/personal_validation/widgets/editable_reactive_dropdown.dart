@@ -158,7 +158,7 @@ class _EditableReactiveDropdownState<T>
           ...[
             const SizedBox(height: 5,),
             PrimaryText(
-              'Anterior: ${previousValue?.translate(context)}',
+              '${l10n.anterior}: ${previousValue?.translate(context)}',
               color: greyText,
             )
           ],

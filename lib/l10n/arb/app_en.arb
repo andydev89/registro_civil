@@ -700,5 +700,6 @@
   "ubicacionArchivo": "The file is located in ",
   "descargaExitosa": "¡Successful download!",
   "descargaCertErr": "An error occurred while downloading the certificate",
-  "abrirCertificado": "Open Certificate"
+  "abrirCertificado": "Open Certificate",
+  "anterior": "Previous"
 }

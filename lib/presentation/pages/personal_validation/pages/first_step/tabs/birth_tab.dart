@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/personal_validation/personal_validation_model.dart';
 import 'package:registro_civil_apk/data/providers/personal_data_validation/personal_validation_provider.dart';
@@ -60,24 +61,36 @@ class _BirthValidationPersonalTabPage
                   formModel.birthPlaceControl?.updateValue(prev);
                 },
               ),
-              EditableReactiveTextField(
+              EditableReactiveDatePicker(
                 label: l10n.fechaNac,
                 modifiedData: widget.provider.getByKey('fechaNacimiento'),
                 showButton: widget.operation.isCreate,
                 formControl: widget.form.birthDateControl,
+                firstDate: DateTime(DateTime.now().year - 150),
+                lastDate: DateTime.now(),
                 onSavePressed: (prev) {
-                  widget.provider.addRequest(
-                    key: 'fechaNacimiento',
-                    model: ModifiedDataModel(
-                      original: prev,
-                      modified: widget.form.birthDateControl?.value ?? '',
-                    ),
-                  );
+                  if (prev != widget.form.birthDateControl!.value) {
+                    final prevValue = prev == null
+                        ? ''
+                        : DateFormat('dd/MM/yyyy').format(prev);
+                    final value = widget.form.birthDateControl!.value == null
+                        ? ''
+                        : DateFormat('dd/MM/yyyy')
+                            .format(widget.form.birthDateControl!.value!);
+                    widget.provider.addRequest(
+                      key: 'fechaNacimiento',
+                      model: ModifiedDataModel(
+                        original: prevValue,
+                        modified: value,
+                      ),
+                    );
+                  }
                 },
                 onCancelPressed: () {
                   final prev =
                       widget.provider.removeRequest(key: 'fechaNacimiento');
-                  widget.form.birthDateControl?.updateValue(prev);
+                  final value = DateFormat('dd/MM/yyyy').parse(prev);
+                  widget.form.birthDateControl?.updateValue(value);
                 },
               ),
               EditableReactiveTextField(
@@ -102,7 +115,8 @@ class _BirthValidationPersonalTabPage
               ),
               EditableReactiveTextField(
                 label: l10n.annoInscripcion,
-                modifiedData: widget.provider.getByKey('anioInscripcionNacimiento'),
+                modifiedData:
+                    widget.provider.getByKey('anioInscripcionNacimiento'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionYearControl,
                 onSavePressed: (prev) {
@@ -120,24 +134,37 @@ class _BirthValidationPersonalTabPage
                   formModel.inscriptionYearControl?.updateValue(prev);
                 },
               ),
-              EditableReactiveTextField(
+              EditableReactiveDatePicker(
                 label: l10n.fechaInscripcion,
-                modifiedData: widget.provider.getByKey('fechaInscripcionNacimiento'),
+                modifiedData:
+                    widget.provider.getByKey('fechaInscripcionNacimiento'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionDateControl,
+                lastDate: DateTime.now(),
                 onSavePressed: (prev) {
-                  widget.provider.addRequest(
-                    key: 'fechaInscripcionNacimiento',
-                    model: ModifiedDataModel(
-                      original: prev,
-                      modified: formModel.inscriptionDateControl?.value ?? '',
-                    ),
-                  );
+                  if (prev != formModel.inscriptionDateControl!.value) {
+                    final prevValue = prev == null
+                        ? ''
+                        : DateFormat('dd/MM/yyyy').format(prev);
+                    final value = formModel.inscriptionDateControl!.value ==
+                            null
+                        ? ''
+                        : DateFormat('dd/MM/yyyy')
+                            .format(formModel.inscriptionDateControl!.value!);
+                    widget.provider.addRequest(
+                      key: 'fechaInscripcionNacimiento',
+                      model: ModifiedDataModel(
+                        original: prevValue,
+                        modified: value,
+                      ),
+                    );
+                  }
                 },
                 onCancelPressed: () {
                   final prev = widget.provider
                       .removeRequest(key: 'fechaInscripcionNacimiento');
-                  formModel.inscriptionDateControl?.updateValue(prev);
+                  final value = DateFormat('dd/MM/yyyy').parse(prev);
+                  formModel.inscriptionDateControl?.updateValue(value);
                 },
               ),
               EditableReactiveTextField(
@@ -155,8 +182,7 @@ class _BirthValidationPersonalTabPage
                   );
                 },
                 onCancelPressed: () {
-                  final prev = widget.provider
-                      .removeRequest(key: 'tomo');
+                  final prev = widget.provider.removeRequest(key: 'tomo');
                   formModel.volumeControl?.updateValue(prev);
                 },
               ),
@@ -175,8 +201,7 @@ class _BirthValidationPersonalTabPage
                   );
                 },
                 onCancelPressed: () {
-                  final prev = widget.provider
-                      .removeRequest(key: 'pagina');
+                  final prev = widget.provider.removeRequest(key: 'pagina');
                   formModel.pageControl?.updateValue(prev);
                 },
               ),
@@ -195,8 +220,7 @@ class _BirthValidationPersonalTabPage
                   );
                 },
                 onCancelPressed: () {
-                  final prev = widget.provider
-                      .removeRequest(key: 'acta');
+                  final prev = widget.provider.removeRequest(key: 'acta');
                   formModel.recordControl?.updateValue(prev);
                 },
               ),
@@ -215,8 +239,7 @@ class _BirthValidationPersonalTabPage
                   );
                 },
                 onCancelPressed: () {
-                  final prev = widget.provider
-                      .removeRequest(key: 'clase');
+                  final prev = widget.provider.removeRequest(key: 'clase');
                   formModel.birthClassControl?.updateValue(prev);
                 },
               ),

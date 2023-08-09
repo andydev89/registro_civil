@@ -247,7 +247,7 @@ class PersonalValidationModelForm
   PersonalValidationGenderType? get _genderValue => genderControl?.value;
   PersonalValidationMaritalStatusType? get _maritalStatusTypeValue =>
       maritalStatusTypeControl?.value;
-  String? get _birthDateValue => birthDateControl?.value;
+  DateTime? get _birthDateValue => birthDateControl?.value;
   String? get _nationalityValue => nationalityControl?.value;
   BirthModel? get _birthValue => birthControl?.value;
   String? get _fatherNuiValue => fatherNuiControl?.value;
@@ -888,7 +888,7 @@ class PersonalValidationModelForm
   }
 
   void birthDateValueUpdate(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1032,7 +1032,7 @@ class PersonalValidationModelForm
   }
 
   void birthDateValuePatch(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -1176,7 +1176,7 @@ class PersonalValidationModelForm
       maritalStatusTypeControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void birthDateValueReset(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -1298,8 +1298,8 @@ class PersonalValidationModelForm
           ? form.control(maritalStatusTypeControlPath())
               as FormControl<PersonalValidationMaritalStatusType>?
           : null;
-  FormControl<String>? get birthDateControl => containsBirthDate
-      ? form.control(birthDateControlPath()) as FormControl<String>?
+  FormControl<DateTime>? get birthDateControl => containsBirthDate
+      ? form.control(birthDateControlPath()) as FormControl<DateTime>?
       : null;
   FormControl<String>? get nationalityControl => containsNationality
       ? form.control(nationalityControlPath()) as FormControl<String>?
@@ -1705,7 +1705,7 @@ class PersonalValidationModelForm
                 asyncValidatorsDebounceTime: 250,
                 disabled: false,
                 touched: false),
-        birthDateControlName: FormControl<String>(
+        birthDateControlName: FormControl<DateTime>(
             value: personalValidationModel?.birthDate,
             validators: [],
             asyncValidators: [],
@@ -2126,7 +2126,7 @@ class BirthModelForm implements FormModel<BirthModel> {
   String? get _birthPlaceValue => birthPlaceControl?.value;
   String? get _inscriptionPlaceValue => inscriptionPlaceControl?.value;
   String? get _inscriptionYearValue => inscriptionYearControl?.value;
-  String? get _inscriptionDateValue => inscriptionDateControl?.value;
+  DateTime? get _inscriptionDateValue => inscriptionDateControl?.value;
   String? get _volumeValue => volumeControl?.value;
   String? get _pageValue => pageControl?.value;
   String? get _recordValue => recordControl?.value;
@@ -2455,7 +2455,7 @@ class BirthModelForm implements FormModel<BirthModel> {
   }
 
   void inscriptionDateValueUpdate(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2527,7 +2527,7 @@ class BirthModelForm implements FormModel<BirthModel> {
   }
 
   void inscriptionDateValuePatch(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -2599,7 +2599,7 @@ class BirthModelForm implements FormModel<BirthModel> {
       inscriptionYearControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void inscriptionDateValueReset(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -2652,8 +2652,8 @@ class BirthModelForm implements FormModel<BirthModel> {
   FormControl<String>? get inscriptionYearControl => containsInscriptionYear
       ? form.control(inscriptionYearControlPath()) as FormControl<String>?
       : null;
-  FormControl<String>? get inscriptionDateControl => containsInscriptionDate
-      ? form.control(inscriptionDateControlPath()) as FormControl<String>?
+  FormControl<DateTime>? get inscriptionDateControl => containsInscriptionDate
+      ? form.control(inscriptionDateControlPath()) as FormControl<DateTime>?
       : null;
   FormControl<String>? get volumeControl => containsVolume
       ? form.control(volumeControlPath()) as FormControl<String>?
@@ -2876,7 +2876,7 @@ class BirthModelForm implements FormModel<BirthModel> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        inscriptionDateControlName: FormControl<String>(
+        inscriptionDateControlName: FormControl<DateTime>(
             value: birthModel?.inscriptionDate,
             validators: [],
             asyncValidators: [],
@@ -3243,7 +3243,7 @@ class MarriageModelForm implements FormModel<MarriageModel> {
   String spouseNuiControlPath() => pathBuilder(spouseNuiControlName);
   String spouseNameControlPath() => pathBuilder(spouseNameControlName);
   String? get _marriagePlaceValue => marriagePlaceControl?.value;
-  String? get _marriageDateValue => marriageDateControl?.value;
+  DateTime? get _marriageDateValue => marriageDateControl?.value;
   String? get _marriageVolumeValue => marriageVolumeControl?.value;
   String? get _marriagePageValue => marriagePageControl?.value;
   String? get _marriageRecordValue => marriageRecordControl?.value;
@@ -3556,7 +3556,7 @@ class MarriageModelForm implements FormModel<MarriageModel> {
   }
 
   void marriageDateValueUpdate(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -3628,7 +3628,7 @@ class MarriageModelForm implements FormModel<MarriageModel> {
   }
 
   void marriageDateValuePatch(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -3700,7 +3700,7 @@ class MarriageModelForm implements FormModel<MarriageModel> {
       marriagePlaceControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void marriageDateValueReset(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -3765,8 +3765,8 @@ class MarriageModelForm implements FormModel<MarriageModel> {
   FormControl<String>? get marriagePlaceControl => containsMarriagePlace
       ? form.control(marriagePlaceControlPath()) as FormControl<String>?
       : null;
-  FormControl<String>? get marriageDateControl => containsMarriageDate
-      ? form.control(marriageDateControlPath()) as FormControl<String>?
+  FormControl<DateTime>? get marriageDateControl => containsMarriageDate
+      ? form.control(marriageDateControlPath()) as FormControl<DateTime>?
       : null;
   FormControl<String>? get marriageVolumeControl => containsMarriageVolume
       ? form.control(marriageVolumeControlPath()) as FormControl<String>?
@@ -3981,7 +3981,7 @@ class MarriageModelForm implements FormModel<MarriageModel> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        marriageDateControlName: FormControl<String>(
+        marriageDateControlName: FormControl<DateTime>(
             value: marriageModel?.marriageDate,
             validators: [],
             asyncValidators: [],
@@ -4349,7 +4349,7 @@ class GenderModelForm implements FormModel<GenderModel> {
   String inscriptionPlaceControlPath() =>
       pathBuilder(inscriptionPlaceControlName);
   String? get _genderValue => genderControl?.value;
-  String? get _inscriptionDateValue => inscriptionDateControl?.value;
+  DateTime? get _inscriptionDateValue => inscriptionDateControl?.value;
   String? get _inscriptionPlaceValue => inscriptionPlaceControl?.value;
   bool get containsGender {
     try {
@@ -4472,7 +4472,7 @@ class GenderModelForm implements FormModel<GenderModel> {
   }
 
   void inscriptionDateValueUpdate(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -4499,7 +4499,7 @@ class GenderModelForm implements FormModel<GenderModel> {
   }
 
   void inscriptionDateValuePatch(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -4526,7 +4526,7 @@ class GenderModelForm implements FormModel<GenderModel> {
       genderControl?.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
   void inscriptionDateValueReset(
-    String? value, {
+    DateTime? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -4546,8 +4546,8 @@ class GenderModelForm implements FormModel<GenderModel> {
   FormControl<String>? get genderControl => containsGender
       ? form.control(genderControlPath()) as FormControl<String>?
       : null;
-  FormControl<String>? get inscriptionDateControl => containsInscriptionDate
-      ? form.control(inscriptionDateControlPath()) as FormControl<String>?
+  FormControl<DateTime>? get inscriptionDateControl => containsInscriptionDate
+      ? form.control(inscriptionDateControlPath()) as FormControl<DateTime>?
       : null;
   FormControl<String>? get inscriptionPlaceControl => containsInscriptionPlace
       ? form.control(inscriptionPlaceControlPath()) as FormControl<String>?
@@ -4652,7 +4652,7 @@ class GenderModelForm implements FormModel<GenderModel> {
             asyncValidatorsDebounceTime: 250,
             disabled: false,
             touched: false),
-        inscriptionDateControlName: FormControl<String>(
+        inscriptionDateControlName: FormControl<DateTime>(
             value: genderModel?.inscriptionDate,
             validators: [],
             asyncValidators: [],

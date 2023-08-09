@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/personal_validation/personal_validation_model.dart';
 import 'package:registro_civil_apk/data/providers/personal_data_validation/personal_validation_provider.dart';
@@ -43,7 +44,8 @@ class _GenderValidationPersonalTabPage
             children: [
               EditableReactiveTextField(
                 label: l10n.lugarInscripcion,
-                modifiedData: widget.provider.getByKey('lugarInscripcionGenero'),
+                modifiedData:
+                    widget.provider.getByKey('lugarInscripcionGenero'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionPlaceControl,
                 onSavePressed: (prev) {
@@ -56,29 +58,42 @@ class _GenderValidationPersonalTabPage
                   );
                 },
                 onCancelPressed: () {
-                  final prev =
-                  widget.provider.removeRequest(key: 'lugarInscripcionGenero');
+                  final prev = widget.provider
+                      .removeRequest(key: 'lugarInscripcionGenero');
                   formModel.inscriptionPlaceControl?.updateValue(prev);
                 },
               ),
-              EditableReactiveTextField(
+              EditableReactiveDatePicker(
                 label: l10n.fechaInscripcion,
-                modifiedData: widget.provider.getByKey('fechaInscripcionGenero'),
+                modifiedData:
+                    widget.provider.getByKey('fechaInscripcionGenero'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.inscriptionDateControl,
+                lastDate: DateTime.now(),
                 onSavePressed: (prev) {
-                  widget.provider.addRequest(
-                    key: 'fechaInscripcionGenero',
-                    model: ModifiedDataModel(
-                      original: prev,
-                      modified: formModel.inscriptionDateControl?.value ?? '',
-                    ),
-                  );
+                  if (prev != formModel.inscriptionDateControl!.value) {
+                    final prevValue = prev == null
+                        ? ''
+                        : DateFormat('dd/MM/yyyy').format(prev);
+                    final value = formModel.inscriptionDateControl!.value ==
+                            null
+                        ? ''
+                        : DateFormat('dd/MM/yyyy')
+                            .format(formModel.inscriptionDateControl!.value!);
+                    widget.provider.addRequest(
+                      key: 'fechaInscripcionGenero',
+                      model: ModifiedDataModel(
+                        original: prevValue,
+                        modified: value,
+                      ),
+                    );
+                  }
                 },
                 onCancelPressed: () {
-                  final prev =
-                  widget.provider.removeRequest(key: 'fechaInscripcionGenero');
-                  formModel.inscriptionDateControl?.updateValue(prev);
+                  final prev = widget.provider
+                      .removeRequest(key: 'fechaInscripcionGenero');
+                  final value = DateFormat('dd/MM/yyyy').parse(prev);
+                  formModel.inscriptionDateControl?.updateValue(value);
                 },
               ),
               EditableReactiveTextField(
@@ -96,8 +111,7 @@ class _GenderValidationPersonalTabPage
                   );
                 },
                 onCancelPressed: () {
-                  final prev =
-                  widget.provider.removeRequest(key: 'genero');
+                  final prev = widget.provider.removeRequest(key: 'genero');
                   formModel.genderControl?.updateValue(prev);
                 },
               ),

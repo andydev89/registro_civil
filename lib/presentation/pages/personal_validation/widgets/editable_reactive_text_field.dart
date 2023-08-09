@@ -137,7 +137,7 @@ class _EditableReactiveTextFieldState<T>
           ...[
             const SizedBox(height: 5,),
             PrimaryText(
-              'Anterior: ${widget.modifiedData!.original}',
+              '${l10n.anterior}: ${widget.modifiedData!.original}',
               color: greyText,
             )
           ],

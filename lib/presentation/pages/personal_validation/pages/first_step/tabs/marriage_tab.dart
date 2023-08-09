@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/personal_validation/personal_validation_model.dart';
 import 'package:registro_civil_apk/data/providers/personal_data_validation/personal_validation_provider.dart';
@@ -61,24 +62,36 @@ class _MarriageValidationPersonalTabPage
                   formModel.marriagePlaceControl?.updateValue(prev);
                 },
               ),
-              EditableReactiveTextField(
+              EditableReactiveDatePicker(
                 label: l10n.fechaCeremonia,
                 modifiedData: widget.provider.getByKey('fechaMatrimonio'),
                 showButton: widget.operation.isCreate,
                 formControl: formModel.marriageDateControl,
+                lastDate: DateTime.now(),
                 onSavePressed: (prev) {
-                  widget.provider.addRequest(
-                    key: 'fechaMatrimonio',
-                    model: ModifiedDataModel(
-                      original: prev,
-                      modified: formModel.marriageDateControl?.value ?? '',
-                    ),
-                  );
+                  if (prev != formModel.marriageDateControl!.value) {
+                    final prevValue = prev == null
+                        ? ''
+                        : DateFormat('dd/MM/yyyy').format(prev);
+                    final value = formModel.marriageDateControl!.value ==
+                        null
+                        ? ''
+                        : DateFormat('dd/MM/yyyy')
+                        .format(formModel.marriageDateControl!.value!);
+                    widget.provider.addRequest(
+                      key: 'fechaMatrimonio',
+                      model: ModifiedDataModel(
+                        original: prevValue,
+                        modified: value,
+                      ),
+                    );
+                  }
                 },
                 onCancelPressed: () {
                   final prev =
                   widget.provider.removeRequest(key: 'fechaMatrimonio');
-                  formModel.marriageDateControl?.updateValue(prev);
+                  final value = DateFormat('dd/MM/yyyy').parse(prev);
+                  formModel.marriageDateControl?.updateValue(value);
                 },
               ),
               EditableReactiveTextField(

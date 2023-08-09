@@ -3,7 +3,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/enum/enums.dart';
-import 'package:registro_civil_apk/data/models/auth/auth.dart';
+import 'package:registro_civil_apk/data/utils/methods.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
 part 'personal_validation_model.g.dart';
@@ -44,10 +44,9 @@ class PersonalValidationModel with _$PersonalValidationModel {
     @FormControlAnnotation<PersonalValidationMaritalStatusType>()
     @JsonKey(name: 'estadoCivil')
         PersonalValidationMaritalStatusType? maritalStatusType,
-    @Default('')
-    @FormControlAnnotation<String>()
-    @JsonKey(name: 'fechaNacimiento')
-        String? birthDate,
+    @FormControlAnnotation<DateTime>()
+    @JsonKey(name: 'fechaNacimiento', fromJson: dateTimeFromJson)
+        DateTime? birthDate,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'nacionalidad')
         String? nationality,
@@ -100,9 +99,9 @@ class BirthModel with _$BirthModel {
     @FormControlAnnotation<String>()
     @JsonKey(name: 'anioInscripcionNacimiento')
         String? inscriptionYear,
-    @FormControlAnnotation<String>()
+    @FormControlAnnotation<DateTime>()
     @JsonKey(name: 'fechaInscripcionNacimiento')
-        String? inscriptionDate,
+        DateTime? inscriptionDate,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'tomo')
         String? volume,
@@ -131,9 +130,9 @@ class MarriageModel with _$MarriageModel {
     @FormControlAnnotation<String>()
     @JsonKey(name: 'lugarMatrimonio')
         String? marriagePlace,
-    @FormControlAnnotation<String>()
+    @FormControlAnnotation<DateTime>()
     @JsonKey(name: 'fechaMatrimonio')
-        String? marriageDate,
+        DateTime? marriageDate,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'tomoMatrimonio')
         String? marriageVolume,
@@ -168,9 +167,9 @@ class GenderModel with _$GenderModel {
     @FormControlAnnotation<String>()
     @JsonKey(name: 'genero')
         String? gender,
-    @FormControlAnnotation<String>()
+    @FormControlAnnotation<DateTime>()
     @JsonKey(name: 'fechaInscripcionGenero')
-        String? inscriptionDate,
+        DateTime? inscriptionDate,
     @FormControlAnnotation<String>()
     @JsonKey(name: 'lugarInscripcionGenero')
         String? inscriptionPlace,
