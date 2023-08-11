@@ -52,10 +52,13 @@ enum ServiceType implements Translatable {
   personalValidation('SERVICE_PERSONAL_VALIDATION'),
   @JsonValue('FORMALITY_BIRTH_OUTSIDE_REGISTER')
   birthAbroad('FORMALITY_BIRTH_OUTSIDE_REGISTER'),
+
   @JsonValue('SERVICE_ACTAS_NOTARIALES')
   paymentservactnot('SERVICE_ACTAS_NOTARIALES'),
   @JsonValue('SERVICE_CONVALIDACION_DOCUMENTOS')
-  paymentservconvdoc('SERVICE_CONVALIDACION_DOCUMENTOS');
+  paymentservconvdoc('SERVICE_CONVALIDACION_DOCUMENTOS'),
+  @JsonValue('SERVICE_DOCUMENT_VALIDATION')
+  documentValidation('SERVICE_DOCUMENT_VALIDATION');
 
   const ServiceType(this.toText);
   final String toText;
@@ -108,6 +111,8 @@ enum ServiceType implements Translatable {
 
   bool get isPaymentServconvdoc => this == paymentservconvdoc;
 
+  bool get isDocumentValidation => this == documentValidation;
+
   @override
   String translate(BuildContext context) {
     final l10n = context.l10n;
@@ -158,6 +163,8 @@ enum ServiceType implements Translatable {
         return '';
       case ServiceType.paymentservconvdoc:
         return '';
+      case ServiceType.documentValidation:
+        return l10n.validacionDocumentos;
     }
   }
 }

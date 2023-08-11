@@ -301,11 +301,20 @@ part 'router.gr.dart';
             //   initial: true,
             // ),
             CupertinoRoute(
-              page: ChangeOfNameFirstStepPage,
+              page: ChangeNameMainPage,
               initial: true,
             ),
             CupertinoRoute(
-              page: VerifyInformationPage,
+              page: ChangeNameFirstStepRouterPage,
+              children: [
+                CupertinoRoute(
+                  page: ChangeOfNameFirstStepPage,
+                  initial: true,
+                ),
+                CupertinoRoute(
+                  page: VerifyInformationPage,
+                ),
+              ],
             ),
           ],
         ),
@@ -442,6 +451,10 @@ part 'router.gr.dart';
                   page: BirthAbroadThirdStepPage,
                   transitionsBuilder: TransitionsBuilders.slideRight,
                 ),
+                CustomRoute(
+                  page: BirthAbroadDocumentDetailPage,
+                  transitionsBuilder: TransitionsBuilders.slideRight,
+                ),
               ],
             ),
             CupertinoRoute(
@@ -492,17 +505,35 @@ part 'router.gr.dart';
             CustomRoute(
               initial: true,
               page: PaymentServiceIngActsNotFirstPage,
-              transitionsBuilder: TransitionsBuilders.slideRight,
+              //DOCUMENT_VALIDATION
+              CupertinoRoute(
+                page: DocumentValidationFirstStepRouterPage,
+                children: [
+                  CustomRoute(
+                    initial: true,
+                    page: DocumentValidationFirstStepPage,
+                    transitionsBuilder: TransitionsBuilders.slideRight,
+                  ),
+                  CustomRoute(
+                    page: DocumentValidationSecondStepPage,
+                    transitionsBuilder: TransitionsBuilders.slideRight,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
-
         CupertinoRoute(
           // guards: [AuthGuard],
           page: DefaultPage,
-        )
+        ),
+        //SCANNER
+        CustomRoute(
+          page: QRScannerPage,
+          transitionsBuilder: TransitionsBuilders.zoomIn,
+        ),
       ],
-    ),
+    )
   ],
 )
 // extend the generated private router

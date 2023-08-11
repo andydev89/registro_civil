@@ -176,11 +176,17 @@
   "intrudcirCorrVal": "Must enter a valid email",
   "passwordCoi": "Passwords do not match",
   "intrducirNumIdeVal": "Must enter a valid ID number",
-  "introducirNum10Dig": "Must enter a 10-digit number",
   "introducirCodProVal": "Must enter a valid province code",
   "password8Car": "Password must be at least 8 characters, uppercase, lowercase, number, and one special character",
   "intrudcirNumTelVal": "Must enter a valid phone number",
-  "introducirNum6Dig": "Must enter a 6-digit number",
+  "introducirNumNDig": "Must enter a {digits}-digit number",
+  "@introducirNumNDig": {
+    "placeholders": {
+      "digits": {
+        "type": "num"
+      }
+    }
+  },
   "ingreseCodVer": "Enter the verification code",
   "terminosCondiciones": "Please enter the verification code sent to your email {email}, remember that this code will be active for 5 minutes, after that time it will have expired. If you do not receive your code, write to the email enlinea@registrocivil.gob.ec",
   "@terminosCondiciones": {
@@ -594,6 +600,12 @@
   "aprobado": "Approved",
   "rechazado": "Rejected",
   "finalizado": "Finished",
+  "cancelado": "Cancelled",
+  "solicitando": "Requesting",
+  "suriError": "SURI Error",
+  "impreso": "Printed",
+  "entregado": "Delivered",
+  "eliminado": "Destroyed",
   "listadoSol": "List of requests",
   "documentosSubCor": "Successfully uploaded documents",
   "residenciaGuardadaCor": "Residence saved correctly",
@@ -671,5 +683,17 @@
   "cedextpvSatisfactorio": "Your validation has been \ncompleted successfully!",
   "cedextpvInfoSatisfactorio": "We have sent a notification to your \nemail with the details of your request.",
   "cedextVisa": "Visa number",
-  "confirmacionPaymentServiceValidarDoc": "Dear user, remember that a\nonce the agency is selected \nYou can receive the service there."
+  "confirmacionPaymentServiceValidarDoc": "Dear user, remember that a\nonce the agency is selected \nYou can receive the service there.",
+  "datosNacido": "Newborn data",
+  "datosSolicitante": "Applicant details",
+  "introduzcaPasaporte": "Enter your Passport Number",
+  "cambioNomInfo": "Information for the change of name",
+  "nuevoNombre": "New name",
+  "nroDocumento": "Document number",
+  "fechaEmision": "Date of issue",
+  "descargar": "Download",
+  "ubicacionArchivo": "The file is located in ",
+  "descargaExitosa": "¡Successful download!",
+  "descargaCertErr": "An error occurred while downloading the certificate",
+  "abrirCertificado": "Open Certificate"
 }

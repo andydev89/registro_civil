@@ -33,7 +33,7 @@ ElectronicSignatureModel _$ElectronicSignatureModelFromJson(
       validityTime:
           $enumDecode(_$SignatureValidityTimeTypeEnumMap, json['validityTime']),
       useCase: $enumDecode(_$SignatureUseCaseTypeEnumMap, json['useCase']),
-      state: $enumDecode(_$StateDocumentEnumMap, json['state']),
+      state: $enumDecode(_$ElectronicSignatureStateEnumMap, json['state']),
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -63,7 +63,7 @@ Map<String, dynamic> _$ElectronicSignatureModelToJson(
       'validityTime':
           _$SignatureValidityTimeTypeEnumMap[instance.validityTime]!,
       'useCase': _$SignatureUseCaseTypeEnumMap[instance.useCase]!,
-      'state': _$StateDocumentEnumMap[instance.state]!,
+      'state': _$ElectronicSignatureStateEnumMap[instance.state]!,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };
@@ -96,10 +96,10 @@ const _$SignatureUseCaseTypeEnumMap = {
   SignatureUseCaseType.revitDeath: 'REVIT_DEATHS',
 };
 
-const _$StateDocumentEnumMap = {
-  StateDocument.pending: 'PENDING',
-  StateDocument.approved: 'APPROVED',
-  StateDocument.rejected: 'REJECTED',
+const _$ElectronicSignatureStateEnumMap = {
+  ElectronicSignatureState.approved: 'APPROVED',
+  ElectronicSignatureState.rejected: 'REJECTED',
+  ElectronicSignatureState.pending: 'PENDING',
 };
 
 ESignatureFirstSubModel _$ESignatureFirstSubModelFromJson(

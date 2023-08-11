@@ -40,7 +40,7 @@ class IdDuplicateResponseModel {
   final dynamic printedAt;
   final dynamic deliveredAt;
   final dynamic operatorId;
-  final StateMarriageType state;
+  final IdDuplicateState state;
   @JsonKey(
     fromJson: LocationModel.provinceFromJson,
     includeFromJson: true,
@@ -53,4 +53,28 @@ class IdDuplicateResponseModel {
   final LocationModel? agency;
 
   Map<String, dynamic> toJson() => _$IdDuplicateResponseModelToJson(this);
+}
+
+class QueryDuplicate {
+  QueryDuplicate({
+    this.pageNo = 0,
+    this.pageSize = 20,
+    this.filter = '',
+  });
+
+  final int pageNo;
+  final int pageSize;
+  final String filter;
+
+  QueryDuplicate copyWith({
+    int? pageNo,
+    int? pageSize,
+    String? filter,
+  }) {
+    return QueryDuplicate(
+      pageNo: pageNo ?? this.pageNo,
+      pageSize: pageSize ?? this.pageSize,
+      filter: filter ?? this.filter,
+    );
+  }
 }

@@ -103,6 +103,7 @@ class DescriptionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         PrimaryText(label),
@@ -112,9 +113,11 @@ class DescriptionRow extends StatelessWidget {
             title: text,
             color: coloredUpperCaseColor,
           ),
-          child: PrimaryCaption(
-            text,
-            textAlign: TextAlign.right,
+          child: Expanded(
+            child: PrimaryCaption(
+              text,
+              textAlign: TextAlign.right,
+            ),
           ),
         ),
       ],

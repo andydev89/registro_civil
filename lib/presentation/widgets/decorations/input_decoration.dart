@@ -20,6 +20,7 @@ InputDecoration primaryInputDecoration({
     suffix: suffix,
     suffixIcon: suffixIcon?.horizontalPadding(suffixHorizontalPadding),
     prefixIcon: prefixIcon?.horizontalPadding(prefixHorizontalPadding),
+    counterText: '',
     // prefixIconConstraints: const BoxConstraints(maxHeight: 20),
     suffixIconConstraints: setSuffixIconConstraints
         ? const BoxConstraints(

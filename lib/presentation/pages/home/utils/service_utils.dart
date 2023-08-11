@@ -55,7 +55,7 @@ PageRouteInfo<dynamic> getResidencyRegistration() =>
 PageRouteInfo<dynamic> getChangeOfName(TypeServiceModel typeOfService) =>
     ChangeOfNameRouterRoute(
       children: [
-        ChangeOfNameFirstStepRoute(typeService: typeOfService),
+        ChangeNameMainRoute(typeServiceModel: typeOfService),
       ],
     );
 
@@ -108,6 +108,13 @@ PageRouteInfo<dynamic> getPaymentServactnot(TypeServiceModel typeOfService) =>
       ],
     );
 
+PageRouteInfo<dynamic> getDocumentValidation(TypeServiceModel typeOfService) =>
+    DocumentValidationFirstStepRouterRoute(
+      children: [
+        DocumentValidationFirstStepRoute(typeServiceModel: typeOfService),
+      ],
+    );
+
 PageRouteInfo<dynamic> getDefault(TypeServiceModel typeOfService) =>
     DefaultRoute(typeServiceModel: typeOfService);
 
@@ -149,8 +156,8 @@ PageRouteInfo<dynamic> getRoute(TypeServiceModel typeServiceModel) {
     return getPersonalValidation(typeServiceModel);
   }
 
-  if (type.isBirthAbroad) {
-    return getBirthAbroad(typeServiceModel);
+  if (type.isDocumentValidation) {
+    return getDocumentValidation(typeServiceModel);
   }
 
   if (type.isPaymentServactnot) {

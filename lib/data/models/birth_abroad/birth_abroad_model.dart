@@ -85,16 +85,11 @@ class BirthAbroadModel with _$BirthAbroadModel {
 class RegisterOwnerSubModel with _$RegisterOwnerSubModel {
   const factory RegisterOwnerSubModel({
     @FormControlAnnotation(validators: [requiredValidator])
+        ForeignType? type,
+    @FormControlAnnotation(validators: [requiredValidator])
         RegisterOwnerType? registerOwnerType,
-    @FormControlAnnotation<String>(
-      validators: [
-        ecuadorDniValidator,
-        length10Validator,
-      ],
-    )
-        String? identification,
     @FormControlAnnotation<String>()
-        String? passport,
+        String? identification,
     @FormControlAnnotation(
       validators: [
         requiredValidator,

@@ -273,9 +273,20 @@ abstract class Api {
   );
 
   //CHANGE OF NAME
+  @GET('/changename/api/changename')
+  Future<ResponseModelPagination<List<ChangeOfNameListModel>>> changeNames({
+    @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+  });
+
   @POST('/changename/api/changename')
   Future<ResponseModel<CommandWithTransactionCodeModel>> changeOfName(
     @Body() ChangeOfNameModel changeOfNameModel,
+  );
+
+  @GET('/changename/api/changename/{id}')
+  Future<ResponseModel<ChangeOfNameListModel>> changeOfNameById(
+    @Path('id') String id,
   );
 
   @POST('/changename/api/changename/payment')
@@ -292,6 +303,8 @@ abstract class Api {
   @GET('/duplicateid/api/duplicate')
   Future<ResponseModelPagination<List<IdDuplicateResponseModel>>> duplicates({
     @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+    @Query('filter') String filter = '',
   });
 
   @GET('/duplicateid/api/duplicate/{id}')
@@ -308,6 +321,8 @@ abstract class Api {
   @GET('/digitalsignature/api/digitalsignature')
   Future<ResponseModelPagination<List<ElectronicSignatureModel>>> signatures({
     @Query('pageNo') int pageNo = 0,
+    @Query('pageSize') int pageSize = 20,
+    @Query('filter') String filter = '',
   });
 
   @GET('/digitalsignature/api/digitalsignature/{id}')
@@ -351,7 +366,7 @@ abstract class Api {
       birthsAbroadNoResident({
     @Query('pageNo') int pageNo = 0,
     @Query('pageSize') int pageSize = 20,
-    @Query('filter') String filter = '',
+    @Query('identification') String filter = ' ',
   });
 
   @POST('/citizenship/api/citizenship')
@@ -409,5 +424,30 @@ abstract class Api {
   @POST('/paymentofservices/api/document-validation')
   Future<ResponseModel<CommandWithTransactionCodeModel>> documentValidation({
     @Body() required PaymentValidationDocModel model,
+  });
+
+  @GET('/api/location/province')
+  Future<ResponseModelPagination<List<LocationModel>?>> provincesNoAuth(
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
+
+  @GET('/api/location/parent/{id}')
+  Future<ResponseModelPagination<List<LocationModel>?>> locationByParentNoAuth(
+    @Path('id') String province,
+  );
+
+  @GET('/api/agency/by/canton?canton={canton}')
+  Future<ResponseModelPagination<List<AgencyModel>?>> agenciesByCantonNoAuth(
+    @Path('canton') String canton,
+    @Query('pageNo') int pageNo,
+    @Query('pageSize') int pageSize,
+  );
+
+  //DOCUMENT VALIDATION
+  @GET('/api/validate/certificado')
+  Future<ResponseModel<DocumentValidationResponseModel>> validateDocument({
+    @Query('codigoCert') String documentCode = '',
+    @Query('fecha') String issueDate = '',
   });
 }

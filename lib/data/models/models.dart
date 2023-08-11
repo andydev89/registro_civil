@@ -1,7 +1,9 @@
 export 'auth/auth.dart';
 export 'birth_abroad/birth_abroad.dart';
+export 'cedulacion_ext_primerav/cedulacion_ext_primerav.dart';
 export 'change_of_name/change_of_name.dart';
 export 'commons/commons.dart';
+export 'document_validation/document_validation.dart';
 export 'electronic_signature/electronic_signature.dart';
 export 'id_duplicate/id_duplicate.dart';
 export 'marriage_celebration/marriage_celebration.dart';

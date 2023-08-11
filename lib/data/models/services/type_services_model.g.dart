@@ -83,4 +83,5 @@ const _$ServiceTypeEnumMap = {
   ServiceType.birthAbroad: 'FORMALITY_BIRTH_OUTSIDE_REGISTER',
   ServiceType.paymentservactnot: 'SERVICE_ACTAS_NOTARIALES',
   ServiceType.paymentservconvdoc: 'SERVICE_CONVALIDACION_DOCUMENTOS',
+  ServiceType.documentValidation: 'SERVICE_DOCUMENT_VALIDATION',
 };

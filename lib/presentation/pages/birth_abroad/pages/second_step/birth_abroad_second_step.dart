@@ -61,10 +61,17 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                     initialValue: (data) {
                       return data;
                     },
+                    onViewDetail: () {
+                      context.navigateTo(
+                        BirthAbroadDocumentDetailRoute(
+                          document:
+                              formModel.birthCertificateControl!.value!.file!.replaceFirst('data:application/pdf;base64,', ''),
+                        ),
+                      );
+                    },
                     operation: operation,
                     provider: DocumentByIdProvider(
                       id: formModel.birthCertificateControl?.value?.id ?? '',
-                      type: provider.getForeignType(),
                     ),
                   ),
                   SecondaryReactiveFilePicker<Certificate>(
@@ -83,10 +90,17 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                     initialValue: (data) {
                       return data;
                     },
+                    onViewDetail: () {
+                      context.navigateTo(
+                        BirthAbroadDocumentDetailRoute(
+                          document:
+                          formModel.identityControl!.value!.file!,
+                        ),
+                      );
+                    },
                     operation: operation,
                     provider: DocumentByIdProvider(
                       id: formModel.identityControl?.value?.id ?? '',
-                      type: provider.getForeignType(),
                     ),
                   ),
                   ValueListenableBuilder<RegisterOwnerType?>(
@@ -113,10 +127,17 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                           initialValue: (data) {
                             return data;
                           },
+                          onViewDetail: () {
+                            context.navigateTo(
+                              BirthAbroadDocumentDetailRoute(
+                                document:
+                                formModel.powerOfAttorneyControl!.value!.file!,
+                              ),
+                            );
+                          },
                           provider: DocumentByIdProvider(
                             id: formModel.powerOfAttorneyControl?.value?.id ??
                                 '',
-                            type: provider.getForeignType(),
                           ),
                         ),
                       );
@@ -136,7 +157,6 @@ class BirthAbroadSecondStepPage extends ConsumerWidget {
                               await ref
                                   .read(
                                 editBirthAbroadDocsProvider(
-                                  type: provider.getForeignType(),
 // ignore: provider_parameters
                                   model: BirthAbroadDocumentModel
                                       .fromDocumentsSubModel(

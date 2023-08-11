@@ -26,10 +26,10 @@ class ElectronicSignatureMainPage extends ConsumerWidget {
       body: Expanded(
         child: Column(
           children: [
-            /*PrimarySearch(
+            PrimarySearch(
               filter: (p0) =>
-                  ref.read(marriagesFilterProvider.notifier).setFilter(p0),
-            ).verticalPadding(10),*/
+                  ref.read(signatureFilterProvider.notifier).setFilter(p0),
+            ).verticalPadding(10),
             PrimaryAddItemRow(
               title: l10n.listadoSol,
               onPressed: () => context.navigateTo(

@@ -259,6 +259,17 @@ Map<String, dynamic>? length6Validator(AbstractControl<dynamic> control) {
   }
 }
 
+// validar que un String tenga lenght ==11
+Map<String, dynamic>? length11Validator(AbstractControl<dynamic> control) {
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) return null;
+  if (value.length != 11) {
+    return {ValidationsMessageType.length11Error.toText: true};
+  } else {
+    return null;
+  }
+}
+
 Map<String, dynamic>? conadisNumberValidatorGroup(
   AbstractControl<dynamic> conadisModel,
 ) {

@@ -162,6 +162,7 @@ const _PlaceToPayReferenceModelserviceTypeEnumValueMap = {
   r'birthAbroad': r'birthAbroad',
   r'paymentservactnot': r'paymentservactnot',
   r'paymentservconvdoc': r'paymentservconvdoc',
+  r'documentValidation': r'documentValidation',
 };
 const _PlaceToPayReferenceModelserviceTypeValueEnumMap = {
   r'birth': ServiceType.birth,
@@ -191,6 +192,7 @@ const _PlaceToPayReferenceModelserviceTypeValueEnumMap = {
   r'birthAbroad': ServiceType.birthAbroad,
   r'paymentservactnot': ServiceType.paymentservactnot,
   r'paymentservconvdoc': ServiceType.paymentservconvdoc,
+  r'documentValidation': ServiceType.documentValidation,
 };
 
 Id _placeToPayReferenceModelGetId(PlaceToPayReferenceModel object) {

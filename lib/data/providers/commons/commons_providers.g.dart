@@ -349,6 +349,197 @@ class LocationByParentProvider extends AutoDisposeFutureProvider<
   }
 }
 
+String _$provincesNoAuthHash() => r'523924b502069d98d27d953b08edc93cc6a2a23a';
+
+/// See also [provincesNoAuth].
+@ProviderFor(provincesNoAuth)
+final provincesNoAuthProvider = AutoDisposeFutureProvider<
+    Result<List<LocationModel>, StatusCodeType>>.internal(
+  provincesNoAuth,
+  name: r'provincesNoAuthProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$provincesNoAuthHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ProvincesNoAuthRef
+    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCodeType>>;
+String _$locationByParentNoAuthHash() =>
+    r'6e73bbddeeaa6a4aa669fe8a6b81e0e623df130d';
+typedef LocationByParentNoAuthRef
+    = AutoDisposeFutureProviderRef<Result<List<LocationModel>, StatusCodeType>>;
+
+/// See also [locationByParentNoAuth].
+@ProviderFor(locationByParentNoAuth)
+const locationByParentNoAuthProvider = LocationByParentNoAuthFamily();
+
+/// See also [locationByParentNoAuth].
+class LocationByParentNoAuthFamily
+    extends Family<AsyncValue<Result<List<LocationModel>, StatusCodeType>>> {
+  /// See also [locationByParentNoAuth].
+  const LocationByParentNoAuthFamily();
+
+  /// See also [locationByParentNoAuth].
+  LocationByParentNoAuthProvider call({
+    required String parentId,
+  }) {
+    return LocationByParentNoAuthProvider(
+      parentId: parentId,
+    );
+  }
+
+  @override
+  LocationByParentNoAuthProvider getProviderOverride(
+    covariant LocationByParentNoAuthProvider provider,
+  ) {
+    return call(
+      parentId: provider.parentId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'locationByParentNoAuthProvider';
+}
+
+/// See also [locationByParentNoAuth].
+class LocationByParentNoAuthProvider extends AutoDisposeFutureProvider<
+    Result<List<LocationModel>, StatusCodeType>> {
+  /// See also [locationByParentNoAuth].
+  LocationByParentNoAuthProvider({
+    required this.parentId,
+  }) : super.internal(
+          (ref) => locationByParentNoAuth(
+            ref,
+            parentId: parentId,
+          ),
+          from: locationByParentNoAuthProvider,
+          name: r'locationByParentNoAuthProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$locationByParentNoAuthHash,
+          dependencies: LocationByParentNoAuthFamily._dependencies,
+          allTransitiveDependencies:
+              LocationByParentNoAuthFamily._allTransitiveDependencies,
+        );
+
+  final String parentId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is LocationByParentNoAuthProvider &&
+        other.parentId == parentId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, parentId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$agenciesByCantonNoAuthHash() =>
+    r'ad2d4d173ef3cf3091e3ac5928f37c06d3be0fbe';
+typedef AgenciesByCantonNoAuthRef
+    = AutoDisposeFutureProviderRef<Result<List<AgencyModel>, StatusCodeType>>;
+
+/// See also [agenciesByCantonNoAuth].
+@ProviderFor(agenciesByCantonNoAuth)
+const agenciesByCantonNoAuthProvider = AgenciesByCantonNoAuthFamily();
+
+/// See also [agenciesByCantonNoAuth].
+class AgenciesByCantonNoAuthFamily
+    extends Family<AsyncValue<Result<List<AgencyModel>, StatusCodeType>>> {
+  /// See also [agenciesByCantonNoAuth].
+  const AgenciesByCantonNoAuthFamily();
+
+  /// See also [agenciesByCantonNoAuth].
+  AgenciesByCantonNoAuthProvider call({
+    required String cantonId,
+  }) {
+    return AgenciesByCantonNoAuthProvider(
+      cantonId: cantonId,
+    );
+  }
+
+  @override
+  AgenciesByCantonNoAuthProvider getProviderOverride(
+    covariant AgenciesByCantonNoAuthProvider provider,
+  ) {
+    return call(
+      cantonId: provider.cantonId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'agenciesByCantonNoAuthProvider';
+}
+
+/// See also [agenciesByCantonNoAuth].
+class AgenciesByCantonNoAuthProvider extends AutoDisposeFutureProvider<
+    Result<List<AgencyModel>, StatusCodeType>> {
+  /// See also [agenciesByCantonNoAuth].
+  AgenciesByCantonNoAuthProvider({
+    required this.cantonId,
+  }) : super.internal(
+          (ref) => agenciesByCantonNoAuth(
+            ref,
+            cantonId: cantonId,
+          ),
+          from: agenciesByCantonNoAuthProvider,
+          name: r'agenciesByCantonNoAuthProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$agenciesByCantonNoAuthHash,
+          dependencies: AgenciesByCantonNoAuthFamily._dependencies,
+          allTransitiveDependencies:
+              AgenciesByCantonNoAuthFamily._allTransitiveDependencies,
+        );
+
+  final String cantonId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is AgenciesByCantonNoAuthProvider &&
+        other.cantonId == cantonId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, cantonId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
 String _$servicesHash() => r'184637a77f15dd0b017de579f1a04117dc764984';
 typedef ServicesRef = AutoDisposeFutureProviderRef<
     Result<List<TypeServiceModel>, StatusCodeType>>;

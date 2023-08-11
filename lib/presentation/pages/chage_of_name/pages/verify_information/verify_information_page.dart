@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:power_ups/extensions/extensions.dart';
+import 'package:registro_civil_apk/data/enum/commons/commons.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
 import 'package:registro_civil_apk/data/utils/utils.dart';
@@ -15,9 +16,11 @@ class VerifyInformationPage extends ConsumerWidget {
     super.key,
     required this.changeOfNameModel,
     required this.typeService,
+    this.operation = Crud.create,
   });
   final ChangeOfNameModel changeOfNameModel;
   final TypeServiceModel typeService;
+  final Crud operation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,7 +59,7 @@ class VerifyInformationPage extends ConsumerWidget {
                       textAlign: TextAlign.left,
                     ),
                     PrimaryText(
-                      changeOfNameModel.changeOfNameType.translate(context),
+                      changeOfNameModel.changeOfNameType!.translate(context),
                       fontWeight: FontWeight.bold,
                       textAlign: TextAlign.left,
                     ).verticalPadding(10),

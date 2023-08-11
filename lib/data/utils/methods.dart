@@ -79,6 +79,23 @@ bool isValidBase64Image(String base64Image) {
   }
 }
 
+Future<String?> getDownloadPath() async {
+  Directory? directory;
+  try {
+    if (Platform.isIOS) {
+      directory = await getApplicationDocumentsDirectory();
+    } else {
+      directory = Directory('/storage/emulated/0/Download');
+      if (!directory.existsSync()) {
+        directory = await getExternalStorageDirectory();
+      }
+    }
+  } catch (err, stack) {
+    print("Cannot get download folder path");
+  }
+  return directory?.path;
+}
+
 Map<String, String> findNames(String fullName) {
   final regex = RegExp(r'(.+?\s.+?)\s(.+)$');
   final matches = regex.allMatches(fullName.trim());
@@ -91,4 +108,17 @@ Map<String, String> findNames(String fullName) {
     firstName = match.group(2) ?? '';
   }
   return {'firstName': firstName, 'lastName': lastName};
+}
+
+Map<String, String> splitFirstName(String firstName) {
+  var separatedNames = firstName.split(' ');
+  // Eliminamos los posibles espacios adicionales antes o después de cada nombre.
+  separatedNames = separatedNames.map((nombre) => nombre.trim()).toList();
+
+  final result = {
+    'name1': separatedNames.isNotEmpty ? separatedNames[0] : '',
+    'name2': separatedNames.length > 1 ? separatedNames[1] : '',
+  };
+
+  return result;
 }

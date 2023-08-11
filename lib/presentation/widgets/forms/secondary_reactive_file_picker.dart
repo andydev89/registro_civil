@@ -32,6 +32,7 @@ class SecondaryReactiveFilePicker<T extends Translatable>
     this.ligth = false,
     this.label,
     this.onRemove,
+    this.onViewDetail,
     required this.provider,
     this.initialValue,
     this.init = false,
@@ -53,9 +54,55 @@ class SecondaryReactiveFilePicker<T extends Translatable>
   final String? label;
   final T? Function(T?)? initialValue;
   final void Function()? onRemove;
+  final void Function()? onViewDetail;
   final AutoDisposeFutureProvider<Result<T, StatusCodeType>> provider;
   final bool init;
   final Crud operation;
+
+  Future<String> _handleFileSelection(
+    BuildContext context,
+    ValueNotifier<bool> select,
+    String name,
+    ReactiveFormFieldState<T, T> field,
+  ) async {
+    final l10n = context.l10n;
+    final result = await FilePicker.platform.pickFiles(
+      allowedExtensions: allowedExtensions.map((e) => e.value).toList(),
+      type: allowedExtensions.isEmpty ? FileType.any : FileType.custom,
+    );
+    var nameResult = name;
+    if (result != null) {
+      try {
+        final pdfFile = File(result.files.single.path!);
+        final maxMB = maxFileSizeMB * 1024 * 1024;
+        // Check file size
+        if (pdfFile.lengthSync() > maxMB) {
+          throw Exception(
+            '${l10n.archivoMayor5MB} ${maxFileSizeMB}MB',
+          );
+        }
+        final pdfBytes = pdfFile.readAsBytesSync();
+        final base64Pdf = base64Encode(pdfBytes);
+        nameResult = result.files.single.name;
+        if (base64Pdf is T) {
+          field.didChange(base64Pdf as T);
+        } else {
+          onFileSelected?.call(
+            formControl?.value,
+            base64Pdf,
+            nameResult,
+          );
+        }
+        select.value = true;
+      } catch (e) {
+        if (onRemove == null) field.didChange(null);
+        if (onRemove != null) onRemove!.call();
+        select.value = false;
+        showAlert(e.toString(), TypeAlert.error);
+      }
+    }
+    return nameResult;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -92,44 +139,13 @@ class SecondaryReactiveFilePicker<T extends Translatable>
             InkWell(
               onTap: (!select.value && !operation.isRead) || (operation.isEdit)
                   ? () async {
-                      final result = await FilePicker.platform.pickFiles(
-                        allowedExtensions:
-                            allowedExtensions.map((e) => e.value).toList(),
-                        type: allowedExtensions.isEmpty
-                            ? FileType.any
-                            : FileType.custom,
+                      final resultName = await _handleFileSelection(
+                        context,
+                        select,
+                        name,
+                        field,
                       );
-                      if (result != null) {
-                        try {
-                          final pdfFile = File(result.files.single.path!);
-                          final maxMB = maxFileSizeMB * 1024 * 1024;
-                          // Check file size
-                          if (pdfFile.lengthSync() > maxMB) {
-                            throw Exception(
-                              '${l10n.archivoMayor5MB} ${maxFileSizeMB}MB',
-                            );
-                          }
-                          final pdfBytes = pdfFile.readAsBytesSync();
-                          final base64Pdf =
-                              'data:application/${fileExtension.value};base64,${base64Encode(pdfBytes)}';
-                          name = result.files.single.name;
-                          if (base64Pdf is T) {
-                            field.didChange(base64Pdf as T);
-                          } else {
-                            onFileSelected?.call(
-                              formControl?.value,
-                              base64Pdf,
-                              name,
-                            );
-                          }
-                          select.value = true;
-                        } catch (e) {
-                          if (onRemove == null) field.didChange(null);
-                          if (onRemove != null) onRemove!.call();
-                          select.value = false;
-                          showAlert(e.toString(), TypeAlert.error);
-                        }
-                      }
+                      name = resultName;
                     }
                   : null,
               child: ValueListenableBuilder<bool>(
@@ -172,12 +188,20 @@ class SecondaryReactiveFilePicker<T extends Translatable>
                             )
                           else if (operation.isRead)
                             PrimaryIconButton(
-                              onPressed: () {},
+                              onPressed: () => onViewDetail!.call(),
                               icon: const Icon(Icons.remove_red_eye),
                             )
                           else
                             PrimaryIconButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                final resultName = await _handleFileSelection(
+                                  context,
+                                  select,
+                                  name,
+                                  field,
+                                );
+                                name = resultName;
+                              },
                               icon: const Icon(Icons.edit),
                             ),
                         ],

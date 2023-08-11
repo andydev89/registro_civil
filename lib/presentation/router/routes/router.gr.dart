@@ -340,6 +340,7 @@ class _$AppRouter extends RootStackRouter {
           service: args.service,
           transactionCode: args.transactionCode,
           requestNumber: args.requestNumber,
+          isTurn: args.isTurn,
         ),
       );
     },
@@ -393,6 +394,20 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           typeServiceModel: args.typeServiceModel,
         ),
+      );
+    },
+    QRScannerRoute.name: (routeData) {
+      final args = routeData.argsAs<QRScannerRouteArgs>(
+          orElse: () => const QRScannerRouteArgs());
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: QRScannerPage(
+          key: args.key,
+          isQRScanner: args.isQRScanner,
+        ),
+        transitionsBuilder: TransitionsBuilders.zoomIn,
+        opaque: true,
+        barrierDismissible: false,
       );
     },
     ServicesRoute.name: (routeData) {
@@ -773,6 +788,28 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ChangeNameMainRoute.name: (routeData) {
+      final args = routeData.argsAs<ChangeNameMainRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: ChangeNameMainPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+      );
+    },
+    ChangeNameFirstStepRouterRoute.name: (routeData) {
+      final args = routeData.argsAs<ChangeNameFirstStepRouterRouteArgs>();
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: ChangeNameFirstStepRouterPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+          operation: args.operation,
+          changeOfNameId: args.changeOfNameId,
+        ),
+      );
+    },
     ChangeOfNameFirstStepRoute.name: (routeData) {
       final args = routeData.argsAs<ChangeOfNameFirstStepRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -780,6 +817,7 @@ class _$AppRouter extends RootStackRouter {
         child: ChangeOfNameFirstStepPage(
           key: args.key,
           typeService: args.typeService,
+          operation: args.operation,
         ),
       );
     },
@@ -791,6 +829,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           changeOfNameModel: args.changeOfNameModel,
           typeService: args.typeService,
+          operation: args.operation,
         ),
       );
     },
@@ -1038,6 +1077,19 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    BirthAbroadDocumentDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<BirthAbroadDocumentDetailRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: BirthAbroadDocumentDetailPage(
+          document: args.document,
+          key: args.key,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     CedulacionExtPvezMainRoute.name: (routeData) {
       final args = routeData.argsAs<CedulacionExtPvezMainRouteArgs>();
       return CustomPage<dynamic>(
@@ -1087,7 +1139,6 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           typeServiceModel: args.typeServiceModel,
         ),
-        transitionsBuilder: TransitionsBuilders.slideRight,
         opaque: true,
         barrierDismissible: false,
       );
@@ -1434,14 +1485,26 @@ class _$AppRouter extends RootStackRouter {
               ],
               children: [
                 RouteConfig(
-                  ChangeOfNameFirstStepRoute.name,
+                  ChangeNameMainRoute.name,
                   path: '',
                   parent: ChangeOfNameRouterRoute.name,
                 ),
                 RouteConfig(
-                  VerifyInformationRoute.name,
-                  path: 'verify-information-page',
+                  ChangeNameFirstStepRouterRoute.name,
+                  path: 'change-name-first-step-router-page',
                   parent: ChangeOfNameRouterRoute.name,
+                  children: [
+                    RouteConfig(
+                      ChangeOfNameFirstStepRoute.name,
+                      path: '',
+                      parent: ChangeNameFirstStepRouterRoute.name,
+                    ),
+                    RouteConfig(
+                      VerifyInformationRoute.name,
+                      path: 'verify-information-page',
+                      parent: ChangeNameFirstStepRouterRoute.name,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -1606,6 +1669,11 @@ class _$AppRouter extends RootStackRouter {
                       path: 'birth-abroad-third-step-page',
                       parent: BirthAbroadFirstStepRouterRoute.name,
                     ),
+                    RouteConfig(
+                      BirthAbroadDocumentDetailRoute.name,
+                      path: 'birth-abroad-document-detail-page',
+                      parent: BirthAbroadFirstStepRouterRoute.name,
+                    ),
                   ],
                 ),
                 RouteConfig(
@@ -1668,6 +1736,11 @@ class _$AppRouter extends RootStackRouter {
             RouteConfig(
               DefaultRoute.name,
               path: 'default-page',
+              parent: RootRouterRoute.name,
+            ),
+            RouteConfig(
+              QRScannerRoute.name,
+              path: 'q-rscanner-page',
               parent: RootRouterRoute.name,
             ),
           ],
@@ -2431,6 +2504,7 @@ class ChoosePaymentMethodRoute
     required TypeServiceModel service,
     required String transactionCode,
     String? requestNumber,
+    bool isTurn = false,
   }) : super(
           ChoosePaymentMethodRoute.name,
           path: 'choose-payment-method-page',
@@ -2439,6 +2513,7 @@ class ChoosePaymentMethodRoute
             service: service,
             transactionCode: transactionCode,
             requestNumber: requestNumber,
+            isTurn: isTurn,
           ),
         );
 
@@ -2451,6 +2526,7 @@ class ChoosePaymentMethodRouteArgs {
     required this.service,
     required this.transactionCode,
     this.requestNumber,
+    this.isTurn = false,
   });
 
   final Key? key;
@@ -2461,9 +2537,11 @@ class ChoosePaymentMethodRouteArgs {
 
   final String? requestNumber;
 
+  final bool isTurn;
+
   @override
   String toString() {
-    return 'ChoosePaymentMethodRouteArgs{key: $key, service: $service, transactionCode: $transactionCode, requestNumber: $requestNumber}';
+    return 'ChoosePaymentMethodRouteArgs{key: $key, service: $service, transactionCode: $transactionCode, requestNumber: $requestNumber, isTurn: $isTurn}';
   }
 }
 
@@ -2589,6 +2667,40 @@ class DefaultRouteArgs {
   @override
   String toString() {
     return 'DefaultRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [QRScannerPage]
+class QRScannerRoute extends PageRouteInfo<QRScannerRouteArgs> {
+  QRScannerRoute({
+    Key? key,
+    bool isQRScanner = true,
+  }) : super(
+          QRScannerRoute.name,
+          path: 'q-rscanner-page',
+          args: QRScannerRouteArgs(
+            key: key,
+            isQRScanner: isQRScanner,
+          ),
+        );
+
+  static const String name = 'QRScannerRoute';
+}
+
+class QRScannerRouteArgs {
+  const QRScannerRouteArgs({
+    this.key,
+    this.isQRScanner = true,
+  });
+
+  final Key? key;
+
+  final bool isQRScanner;
+
+  @override
+  String toString() {
+    return 'QRScannerRouteArgs{key: $key, isQRScanner: $isQRScanner}';
   }
 }
 
@@ -3665,18 +3777,101 @@ class FirstStepDependentRouteArgs {
 }
 
 /// generated route for
+/// [ChangeNameMainPage]
+class ChangeNameMainRoute extends PageRouteInfo<ChangeNameMainRouteArgs> {
+  ChangeNameMainRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          ChangeNameMainRoute.name,
+          path: '',
+          args: ChangeNameMainRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'ChangeNameMainRoute';
+}
+
+class ChangeNameMainRouteArgs {
+  const ChangeNameMainRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'ChangeNameMainRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [ChangeNameFirstStepRouterPage]
+class ChangeNameFirstStepRouterRoute
+    extends PageRouteInfo<ChangeNameFirstStepRouterRouteArgs> {
+  ChangeNameFirstStepRouterRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+    Crud operation = Crud.create,
+    String? changeOfNameId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ChangeNameFirstStepRouterRoute.name,
+          path: 'change-name-first-step-router-page',
+          args: ChangeNameFirstStepRouterRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+            operation: operation,
+            changeOfNameId: changeOfNameId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ChangeNameFirstStepRouterRoute';
+}
+
+class ChangeNameFirstStepRouterRouteArgs {
+  const ChangeNameFirstStepRouterRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+    this.operation = Crud.create,
+    this.changeOfNameId,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  final Crud operation;
+
+  final String? changeOfNameId;
+
+  @override
+  String toString() {
+    return 'ChangeNameFirstStepRouterRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation, changeOfNameId: $changeOfNameId}';
+  }
+}
+
+/// generated route for
 /// [ChangeOfNameFirstStepPage]
 class ChangeOfNameFirstStepRoute
     extends PageRouteInfo<ChangeOfNameFirstStepRouteArgs> {
   ChangeOfNameFirstStepRoute({
     Key? key,
     required TypeServiceModel typeService,
+    Crud operation = Crud.create,
   }) : super(
           ChangeOfNameFirstStepRoute.name,
           path: '',
           args: ChangeOfNameFirstStepRouteArgs(
             key: key,
             typeService: typeService,
+            operation: operation,
           ),
         );
 
@@ -3687,15 +3882,18 @@ class ChangeOfNameFirstStepRouteArgs {
   const ChangeOfNameFirstStepRouteArgs({
     this.key,
     required this.typeService,
+    this.operation = Crud.create,
   });
 
   final Key? key;
 
   final TypeServiceModel typeService;
 
+  final Crud operation;
+
   @override
   String toString() {
-    return 'ChangeOfNameFirstStepRouteArgs{key: $key, typeService: $typeService}';
+    return 'ChangeOfNameFirstStepRouteArgs{key: $key, typeService: $typeService, operation: $operation}';
   }
 }
 
@@ -3706,6 +3904,7 @@ class VerifyInformationRoute extends PageRouteInfo<VerifyInformationRouteArgs> {
     Key? key,
     required ChangeOfNameModel changeOfNameModel,
     required TypeServiceModel typeService,
+    Crud operation = Crud.create,
   }) : super(
           VerifyInformationRoute.name,
           path: 'verify-information-page',
@@ -3713,6 +3912,7 @@ class VerifyInformationRoute extends PageRouteInfo<VerifyInformationRouteArgs> {
             key: key,
             changeOfNameModel: changeOfNameModel,
             typeService: typeService,
+            operation: operation,
           ),
         );
 
@@ -3724,6 +3924,7 @@ class VerifyInformationRouteArgs {
     this.key,
     required this.changeOfNameModel,
     required this.typeService,
+    this.operation = Crud.create,
   });
 
   final Key? key;
@@ -3732,9 +3933,11 @@ class VerifyInformationRouteArgs {
 
   final TypeServiceModel typeService;
 
+  final Crud operation;
+
   @override
   String toString() {
-    return 'VerifyInformationRouteArgs{key: $key, changeOfNameModel: $changeOfNameModel, typeService: $typeService}';
+    return 'VerifyInformationRouteArgs{key: $key, changeOfNameModel: $changeOfNameModel, typeService: $typeService, operation: $operation}';
   }
 }
 
@@ -4472,6 +4675,41 @@ class BirthAbroadThirdStepRouteArgs {
   @override
   String toString() {
     return 'BirthAbroadThirdStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel, operation: $operation}';
+  }
+}
+
+/// generated route for
+/// [BirthAbroadDocumentDetailPage]
+class BirthAbroadDocumentDetailRoute
+    extends PageRouteInfo<BirthAbroadDocumentDetailRouteArgs> {
+  BirthAbroadDocumentDetailRoute({
+    required String document,
+    Key? key,
+  }) : super(
+          BirthAbroadDocumentDetailRoute.name,
+          path: 'birth-abroad-document-detail-page',
+          args: BirthAbroadDocumentDetailRouteArgs(
+            document: document,
+            key: key,
+          ),
+        );
+
+  static const String name = 'BirthAbroadDocumentDetailRoute';
+}
+
+class BirthAbroadDocumentDetailRouteArgs {
+  const BirthAbroadDocumentDetailRouteArgs({
+    required this.document,
+    this.key,
+  });
+
+  final String document;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'BirthAbroadDocumentDetailRouteArgs{document: $document, key: $key}';
   }
 }
 

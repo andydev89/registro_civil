@@ -23,7 +23,7 @@ mixin _$ChangeOfNameModel {
   String? get nui => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(name: 'type')
-  ChangeOfNameType get changeOfNameType => throw _privateConstructorUsedError;
+  ChangeOfNameType? get changeOfNameType => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
   AgencyModel? get agency => throw _privateConstructorUsedError;
@@ -33,14 +33,14 @@ mixin _$ChangeOfNameModel {
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  String get firstName => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [
     requiredValidator,
     lengthMax20Validator,
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  String get secondName => throw _privateConstructorUsedError;
+  String? get secondName => throw _privateConstructorUsedError;
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
   String? get resultingName => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ mixin _$ChangeOfNameModel {
   @JsonKey(name: 'observation')
   String? get observations => throw _privateConstructorUsedError;
   @FormControlAnnotation<String>(validators: [requiredValidator])
-  String get document => throw _privateConstructorUsedError;
+  String? get document => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +66,7 @@ abstract class $ChangeOfNameModelCopyWith<$Res> {
       {String? nui,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(name: 'type')
-          ChangeOfNameType changeOfNameType,
+          ChangeOfNameType? changeOfNameType,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           AgencyModel? agency,
@@ -76,14 +76,14 @@ abstract class $ChangeOfNameModelCopyWith<$Res> {
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          String firstName,
+          String? firstName,
       @FormControlAnnotation(validators: [
         requiredValidator,
         lengthMax20Validator,
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          String secondName,
+          String? secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           String? resultingName,
@@ -91,7 +91,7 @@ abstract class $ChangeOfNameModelCopyWith<$Res> {
       @JsonKey(name: 'observation')
           String? observations,
       @FormControlAnnotation<String>(validators: [requiredValidator])
-          String document});
+          String? document});
 }
 
 /// @nodoc
@@ -108,35 +108,35 @@ class _$ChangeOfNameModelCopyWithImpl<$Res, $Val extends ChangeOfNameModel>
   @override
   $Res call({
     Object? nui = freezed,
-    Object? changeOfNameType = null,
+    Object? changeOfNameType = freezed,
     Object? agency = freezed,
-    Object? firstName = null,
-    Object? secondName = null,
+    Object? firstName = freezed,
+    Object? secondName = freezed,
     Object? resultingName = freezed,
     Object? observations = freezed,
-    Object? document = null,
+    Object? document = freezed,
   }) {
     return _then(_value.copyWith(
       nui: freezed == nui
           ? _value.nui
           : nui // ignore: cast_nullable_to_non_nullable
               as String?,
-      changeOfNameType: null == changeOfNameType
+      changeOfNameType: freezed == changeOfNameType
           ? _value.changeOfNameType
           : changeOfNameType // ignore: cast_nullable_to_non_nullable
-              as ChangeOfNameType,
+              as ChangeOfNameType?,
       agency: freezed == agency
           ? _value.agency
           : agency // ignore: cast_nullable_to_non_nullable
               as AgencyModel?,
-      firstName: null == firstName
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      secondName: null == secondName
+              as String?,
+      secondName: freezed == secondName
           ? _value.secondName
           : secondName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       resultingName: freezed == resultingName
           ? _value.resultingName
           : resultingName // ignore: cast_nullable_to_non_nullable
@@ -145,10 +145,10 @@ class _$ChangeOfNameModelCopyWithImpl<$Res, $Val extends ChangeOfNameModel>
           ? _value.observations
           : observations // ignore: cast_nullable_to_non_nullable
               as String?,
-      document: null == document
+      document: freezed == document
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -165,7 +165,7 @@ abstract class _$$_ChangeOfNameModelCopyWith<$Res>
       {String? nui,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(name: 'type')
-          ChangeOfNameType changeOfNameType,
+          ChangeOfNameType? changeOfNameType,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           AgencyModel? agency,
@@ -175,14 +175,14 @@ abstract class _$$_ChangeOfNameModelCopyWith<$Res>
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          String firstName,
+          String? firstName,
       @FormControlAnnotation(validators: [
         requiredValidator,
         lengthMax20Validator,
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          String secondName,
+          String? secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           String? resultingName,
@@ -190,7 +190,7 @@ abstract class _$$_ChangeOfNameModelCopyWith<$Res>
       @JsonKey(name: 'observation')
           String? observations,
       @FormControlAnnotation<String>(validators: [requiredValidator])
-          String document});
+          String? document});
 }
 
 /// @nodoc
@@ -205,35 +205,35 @@ class __$$_ChangeOfNameModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? nui = freezed,
-    Object? changeOfNameType = null,
+    Object? changeOfNameType = freezed,
     Object? agency = freezed,
-    Object? firstName = null,
-    Object? secondName = null,
+    Object? firstName = freezed,
+    Object? secondName = freezed,
     Object? resultingName = freezed,
     Object? observations = freezed,
-    Object? document = null,
+    Object? document = freezed,
   }) {
     return _then(_$_ChangeOfNameModel(
       nui: freezed == nui
           ? _value.nui
           : nui // ignore: cast_nullable_to_non_nullable
               as String?,
-      changeOfNameType: null == changeOfNameType
+      changeOfNameType: freezed == changeOfNameType
           ? _value.changeOfNameType
           : changeOfNameType // ignore: cast_nullable_to_non_nullable
-              as ChangeOfNameType,
+              as ChangeOfNameType?,
       agency: freezed == agency
           ? _value.agency
           : agency // ignore: cast_nullable_to_non_nullable
               as AgencyModel?,
-      firstName: null == firstName
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      secondName: null == secondName
+              as String?,
+      secondName: freezed == secondName
           ? _value.secondName
           : secondName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       resultingName: freezed == resultingName
           ? _value.resultingName
           : resultingName // ignore: cast_nullable_to_non_nullable
@@ -242,10 +242,10 @@ class __$$_ChangeOfNameModelCopyWithImpl<$Res>
           ? _value.observations
           : observations // ignore: cast_nullable_to_non_nullable
               as String?,
-      document: null == document
+      document: freezed == document
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -257,7 +257,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
       {this.nui,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(name: 'type')
-          required this.changeOfNameType,
+          this.changeOfNameType,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           this.agency,
@@ -267,14 +267,14 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          required this.firstName,
+          this.firstName,
       @FormControlAnnotation(validators: [
         requiredValidator,
         lengthMax20Validator,
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          required this.secondName,
+          this.secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           this.resultingName,
@@ -282,7 +282,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
       @JsonKey(name: 'observation')
           this.observations,
       @FormControlAnnotation<String>(validators: [requiredValidator])
-          required this.document})
+          this.document})
       : super._();
 
   factory _$_ChangeOfNameModel.fromJson(Map<String, dynamic> json) =>
@@ -293,7 +293,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(name: 'type')
-  final ChangeOfNameType changeOfNameType;
+  final ChangeOfNameType? changeOfNameType;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -305,7 +305,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  final String firstName;
+  final String? firstName;
   @override
   @FormControlAnnotation(validators: [
     requiredValidator,
@@ -313,7 +313,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  final String secondName;
+  final String? secondName;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -324,7 +324,7 @@ class _$_ChangeOfNameModel extends _ChangeOfNameModel {
   final String? observations;
   @override
   @FormControlAnnotation<String>(validators: [requiredValidator])
-  final String document;
+  final String? document;
 
   @override
   String toString() {
@@ -377,7 +377,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
       {final String? nui,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(name: 'type')
-          required final ChangeOfNameType changeOfNameType,
+          final ChangeOfNameType? changeOfNameType,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           final AgencyModel? agency,
@@ -387,14 +387,14 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          required final String firstName,
+          final String? firstName,
       @FormControlAnnotation(validators: [
         requiredValidator,
         lengthMax20Validator,
         lengthMin2Validator,
         no3EqualsLettersConsecutives
       ])
-          required final String secondName,
+          final String? secondName,
       @FormControlAnnotation(validators: [requiredValidator])
       @JsonKey(includeFromJson: false, includeToJson: false)
           final String? resultingName,
@@ -402,7 +402,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
       @JsonKey(name: 'observation')
           final String? observations,
       @FormControlAnnotation<String>(validators: [requiredValidator])
-          required final String document}) = _$_ChangeOfNameModel;
+          final String? document}) = _$_ChangeOfNameModel;
   const _ChangeOfNameModel._() : super._();
 
   factory _ChangeOfNameModel.fromJson(Map<String, dynamic> json) =
@@ -413,7 +413,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(name: 'type')
-  ChangeOfNameType get changeOfNameType;
+  ChangeOfNameType? get changeOfNameType;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -425,7 +425,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  String get firstName;
+  String? get firstName;
   @override
   @FormControlAnnotation(validators: [
     requiredValidator,
@@ -433,7 +433,7 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
     lengthMin2Validator,
     no3EqualsLettersConsecutives
   ])
-  String get secondName;
+  String? get secondName;
   @override
   @FormControlAnnotation(validators: [requiredValidator])
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -444,9 +444,355 @@ abstract class _ChangeOfNameModel extends ChangeOfNameModel {
   String? get observations;
   @override
   @FormControlAnnotation<String>(validators: [requiredValidator])
-  String get document;
+  String? get document;
   @override
   @JsonKey(ignore: true)
   _$$_ChangeOfNameModelCopyWith<_$_ChangeOfNameModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ChangeOfNameListModel _$ChangeOfNameListModelFromJson(
+    Map<String, dynamic> json) {
+  return _ChangeOfNameListModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ChangeOfNameListModel {
+  String get id => throw _privateConstructorUsedError;
+  String? get nui => throw _privateConstructorUsedError;
+  @JsonKey(name: 'type')
+  ChangeOfNameType get changeOfNameType => throw _privateConstructorUsedError;
+  String get firstName => throw _privateConstructorUsedError;
+  String get secondName => throw _privateConstructorUsedError;
+  ProcessStatus get state => throw _privateConstructorUsedError;
+  String? get receiptState => throw _privateConstructorUsedError;
+  String? get transactionCode => throw _privateConstructorUsedError;
+  DateTime? get createAt => throw _privateConstructorUsedError;
+  String get documentId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ChangeOfNameListModelCopyWith<ChangeOfNameListModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ChangeOfNameListModelCopyWith<$Res> {
+  factory $ChangeOfNameListModelCopyWith(ChangeOfNameListModel value,
+          $Res Function(ChangeOfNameListModel) then) =
+      _$ChangeOfNameListModelCopyWithImpl<$Res, ChangeOfNameListModel>;
+  @useResult
+  $Res call(
+      {String id,
+      String? nui,
+      @JsonKey(name: 'type') ChangeOfNameType changeOfNameType,
+      String firstName,
+      String secondName,
+      ProcessStatus state,
+      String? receiptState,
+      String? transactionCode,
+      DateTime? createAt,
+      String documentId});
+}
+
+/// @nodoc
+class _$ChangeOfNameListModelCopyWithImpl<$Res,
+        $Val extends ChangeOfNameListModel>
+    implements $ChangeOfNameListModelCopyWith<$Res> {
+  _$ChangeOfNameListModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? nui = freezed,
+    Object? changeOfNameType = null,
+    Object? firstName = null,
+    Object? secondName = null,
+    Object? state = null,
+    Object? receiptState = freezed,
+    Object? transactionCode = freezed,
+    Object? createAt = freezed,
+    Object? documentId = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      nui: freezed == nui
+          ? _value.nui
+          : nui // ignore: cast_nullable_to_non_nullable
+              as String?,
+      changeOfNameType: null == changeOfNameType
+          ? _value.changeOfNameType
+          : changeOfNameType // ignore: cast_nullable_to_non_nullable
+              as ChangeOfNameType,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      secondName: null == secondName
+          ? _value.secondName
+          : secondName // ignore: cast_nullable_to_non_nullable
+              as String,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as ProcessStatus,
+      receiptState: freezed == receiptState
+          ? _value.receiptState
+          : receiptState // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transactionCode: freezed == transactionCode
+          ? _value.transactionCode
+          : transactionCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createAt: freezed == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      documentId: null == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ChangeOfNameListModelCopyWith<$Res>
+    implements $ChangeOfNameListModelCopyWith<$Res> {
+  factory _$$_ChangeOfNameListModelCopyWith(_$_ChangeOfNameListModel value,
+          $Res Function(_$_ChangeOfNameListModel) then) =
+      __$$_ChangeOfNameListModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String? nui,
+      @JsonKey(name: 'type') ChangeOfNameType changeOfNameType,
+      String firstName,
+      String secondName,
+      ProcessStatus state,
+      String? receiptState,
+      String? transactionCode,
+      DateTime? createAt,
+      String documentId});
+}
+
+/// @nodoc
+class __$$_ChangeOfNameListModelCopyWithImpl<$Res>
+    extends _$ChangeOfNameListModelCopyWithImpl<$Res, _$_ChangeOfNameListModel>
+    implements _$$_ChangeOfNameListModelCopyWith<$Res> {
+  __$$_ChangeOfNameListModelCopyWithImpl(_$_ChangeOfNameListModel _value,
+      $Res Function(_$_ChangeOfNameListModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? nui = freezed,
+    Object? changeOfNameType = null,
+    Object? firstName = null,
+    Object? secondName = null,
+    Object? state = null,
+    Object? receiptState = freezed,
+    Object? transactionCode = freezed,
+    Object? createAt = freezed,
+    Object? documentId = null,
+  }) {
+    return _then(_$_ChangeOfNameListModel(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      nui: freezed == nui
+          ? _value.nui
+          : nui // ignore: cast_nullable_to_non_nullable
+              as String?,
+      changeOfNameType: null == changeOfNameType
+          ? _value.changeOfNameType
+          : changeOfNameType // ignore: cast_nullable_to_non_nullable
+              as ChangeOfNameType,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      secondName: null == secondName
+          ? _value.secondName
+          : secondName // ignore: cast_nullable_to_non_nullable
+              as String,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as ProcessStatus,
+      receiptState: freezed == receiptState
+          ? _value.receiptState
+          : receiptState // ignore: cast_nullable_to_non_nullable
+              as String?,
+      transactionCode: freezed == transactionCode
+          ? _value.transactionCode
+          : transactionCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createAt: freezed == createAt
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      documentId: null == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ChangeOfNameListModel extends _ChangeOfNameListModel {
+  const _$_ChangeOfNameListModel(
+      {required this.id,
+      this.nui,
+      @JsonKey(name: 'type') required this.changeOfNameType,
+      required this.firstName,
+      required this.secondName,
+      required this.state,
+      this.receiptState,
+      this.transactionCode,
+      this.createAt,
+      required this.documentId})
+      : super._();
+
+  factory _$_ChangeOfNameListModel.fromJson(Map<String, dynamic> json) =>
+      _$$_ChangeOfNameListModelFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String? nui;
+  @override
+  @JsonKey(name: 'type')
+  final ChangeOfNameType changeOfNameType;
+  @override
+  final String firstName;
+  @override
+  final String secondName;
+  @override
+  final ProcessStatus state;
+  @override
+  final String? receiptState;
+  @override
+  final String? transactionCode;
+  @override
+  final DateTime? createAt;
+  @override
+  final String documentId;
+
+  @override
+  String toString() {
+    return 'ChangeOfNameListModel(id: $id, nui: $nui, changeOfNameType: $changeOfNameType, firstName: $firstName, secondName: $secondName, state: $state, receiptState: $receiptState, transactionCode: $transactionCode, createAt: $createAt, documentId: $documentId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ChangeOfNameListModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.nui, nui) || other.nui == nui) &&
+            (identical(other.changeOfNameType, changeOfNameType) ||
+                other.changeOfNameType == changeOfNameType) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.secondName, secondName) ||
+                other.secondName == secondName) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.receiptState, receiptState) ||
+                other.receiptState == receiptState) &&
+            (identical(other.transactionCode, transactionCode) ||
+                other.transactionCode == transactionCode) &&
+            (identical(other.createAt, createAt) ||
+                other.createAt == createAt) &&
+            (identical(other.documentId, documentId) ||
+                other.documentId == documentId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      nui,
+      changeOfNameType,
+      firstName,
+      secondName,
+      state,
+      receiptState,
+      transactionCode,
+      createAt,
+      documentId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ChangeOfNameListModelCopyWith<_$_ChangeOfNameListModel> get copyWith =>
+      __$$_ChangeOfNameListModelCopyWithImpl<_$_ChangeOfNameListModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ChangeOfNameListModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ChangeOfNameListModel extends ChangeOfNameListModel {
+  const factory _ChangeOfNameListModel(
+      {required final String id,
+      final String? nui,
+      @JsonKey(name: 'type') required final ChangeOfNameType changeOfNameType,
+      required final String firstName,
+      required final String secondName,
+      required final ProcessStatus state,
+      final String? receiptState,
+      final String? transactionCode,
+      final DateTime? createAt,
+      required final String documentId}) = _$_ChangeOfNameListModel;
+  const _ChangeOfNameListModel._() : super._();
+
+  factory _ChangeOfNameListModel.fromJson(Map<String, dynamic> json) =
+      _$_ChangeOfNameListModel.fromJson;
+
+  @override
+  String get id;
+  @override
+  String? get nui;
+  @override
+  @JsonKey(name: 'type')
+  ChangeOfNameType get changeOfNameType;
+  @override
+  String get firstName;
+  @override
+  String get secondName;
+  @override
+  ProcessStatus get state;
+  @override
+  String? get receiptState;
+  @override
+  String? get transactionCode;
+  @override
+  DateTime? get createAt;
+  @override
+  String get documentId;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ChangeOfNameListModelCopyWith<_$_ChangeOfNameListModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

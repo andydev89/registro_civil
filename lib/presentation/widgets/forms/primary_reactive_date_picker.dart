@@ -133,6 +133,14 @@ class _CustomCalendarState extends State<CustomCalendar> {
     super.initState();
   }
 
+  bool isValidDay(DateTime day) {
+    return widget.availablesDate!.any(
+          (element) => DateUtils.isSameDay(element, day),
+        ) &&
+        (day.isAfter(DateTime.now()) ||
+            DateUtils.isSameDay(day, DateTime.now()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
@@ -143,25 +151,19 @@ class _CustomCalendarState extends State<CustomCalendar> {
       selectedDayPredicate: (day) {
         if (widget.availablesDate == null) return true;
 
-        return widget.availablesDate!.any(
-              (element) => DateUtils.isSameDay(element, day),
-            ) &&
-            !day.isBefore(DateTime.now());
+        return isValidDay(day);
       },
       availableCalendarFormats: const {
         CalendarFormat.month: 'Month',
       },
       onDaySelected: (selectedDay, focusedDay) {
-        if (widget.availablesDate == null ||
-            (widget.availablesDate!.any(
-                  (element) => DateUtils.isSameDay(element, selectedDay),
-                ) &&
-                !selectedDay.isBefore(DateTime.now()))) {
+        if (widget.availablesDate == null || isValidDay(selectedDay)) {
           widget.formControl?.updateValue(selectedDay);
           widget.onDaySelected?.call(selectedDay);
           context.popRoute();
         }
       },
+      onPageChanged: widget.onPageChanged,
       calendarStyle: CalendarStyle(
         selectedDecoration: ShapeDecoration(
           color: green,

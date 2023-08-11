@@ -427,11 +427,17 @@
   "intrudcirCorrVal": "Debe introducir un correo válido",
   "passwordCoi": "Las contraseñas no coinciden",
   "intrducirNumIdeVal": "Debe introducir un número de identificación válido",
-  "introducirNum10Dig": "Debe introducir un número de 10 dígitos",
   "introducirCodProVal": "Debe introducir un código de provincia válido",
   "password8Car": "La contraseña debe tener al menos 8 caracteres, mayúsculas, minúsculas, números y un carácter especial",
   "intrudcirNumTelVal": "Debe introducir un número de teléfono válido",
-  "introducirNum6Dig": "Debe introducir un número de 6 dígitos",
+  "introducirNumNDig": "Debe introducir un número de {digits} dígitos",
+  "@introducirNumNDig": {
+    "placeholders": {
+      "digits": {
+        "type": "num"
+      }
+    }
+  },
   "ingreseCodVer": "Ingrese el código de verificación",
   "terminosCondiciones": "Por favor ingrese el código de verificación enviado a su correo electrónico {email}, recuerde que este código estará activo por 5 minutos, luego de ese tiempo habrá caducado. En caso de no recibir su código escriba al correo electrónico enlinea@registrocivil.gob.ec",
   "@terminosCondiciones": {
@@ -595,6 +601,12 @@
   "aprobado": "Aprobado",
   "rechazado": "Rechazado",
   "finalizado": "Finalizado",
+  "cancelado": "Cancelado",
+  "solicitando": "Solicitando",
+  "suriError": "Error SURI",
+  "impreso": "Impreso",
+  "entregado": "Entregado",
+  "eliminado": "Eliminado",
   "listadoSol": "Listado de solicitudes",
   "documentosSubCor": "Documentos subidos correctamente",
   "residenciaGuardadaCor": "Residencia guardada correctamente",
@@ -671,5 +683,17 @@
   "cedextpvSatisfactorio": "¡Su validación se ha realizado \nsatisfactoriamente!",
   "cedextpvInfoSatisfactorio": "Le hemos enviado una notificación a su \ncorreo electrónico con los detalles de su solicitud.",
   "cedextVisa": "Número de visa",
-  "confirmacionPaymentServiceValidarDoc": "Estimado usuario, recuerde que \nuna vez seleccionada la agencia \nPuede recibir el servicio allí."
+  "confirmacionPaymentServiceValidarDoc": "Estimado usuario, recuerde que \nuna vez seleccionada la agencia \nPuede recibir el servicio allí.",
+  "datosNacido": "Datos del nacido",
+  "datosSolicitante": "Datos del solicitante",
+  "introduzcaPasaporte": "Introduzca su Nro de Pasaporte",
+  "cambioNomInfo": "Información para el cambio de nombre",
+  "nuevoNombre": "Nuevo nombre",
+  "nroDocumento": "Número de documento",
+  "fechaEmision": "Fecha de emisión",
+  "descargar": "Descargar",
+  "ubicacionArchivo": "El archivo se encuentra en la carpeta ",
+  "descargaExitosa": "¡Descarga exitosa!",
+  "descargaCertErr": "Ocurrió un error al descargar el certificado",
+  "abrirCertificado": "Abrir Certificado"
 }

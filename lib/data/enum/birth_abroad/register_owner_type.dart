@@ -14,6 +14,7 @@ enum RegisterOwnerType implements Translatable {
   grandParents('GRANDPARENTS');
 
   const RegisterOwnerType(this.text);
+
   final String text;
 
   @override
@@ -28,6 +29,22 @@ enum RegisterOwnerType implements Translatable {
         return l10n.padreOMadreEc;
       case RegisterOwnerType.grandParents:
         return l10n.abuelosOBisabuelos;
+    }
+  }
+}
+
+extension RegisterOwnerTypeExtension on RegisterOwnerType {
+  static List<RegisterOwnerType> listValues({
+    required bool isResident,
+  }) {
+    if (isResident) {
+      return RegisterOwnerType.values.toList();
+    } else {
+      return [
+        RegisterOwnerType.attorney,
+        RegisterOwnerType.parents,
+        RegisterOwnerType.grandParents,
+      ];
     }
   }
 }

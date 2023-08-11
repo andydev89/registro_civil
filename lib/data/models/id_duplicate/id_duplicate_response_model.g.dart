@@ -20,7 +20,7 @@ IdDuplicateResponseModel _$IdDuplicateResponseModelFromJson(
       printedAt: json['printedAt'],
       deliveredAt: json['deliveredAt'],
       operatorId: json['operatorId'],
-      state: $enumDecode(_$StateMarriageTypeEnumMap, json['state']),
+      state: $enumDecode(_$IdDuplicateStateEnumMap, json['state']),
       provinceId: LocationModel.provinceFromJson(
           json['provinceId'] as Map<String, dynamic>),
       agency:
@@ -41,7 +41,7 @@ Map<String, dynamic> _$IdDuplicateResponseModelToJson(
       'printedAt': instance.printedAt,
       'deliveredAt': instance.deliveredAt,
       'operatorId': instance.operatorId,
-      'state': _$StateMarriageTypeEnumMap[instance.state]!,
+      'state': _$IdDuplicateStateEnumMap[instance.state]!,
       'provinceId': instance.provinceId?.toJson(),
       'agency': instance.agency?.toJson(),
     };
@@ -52,10 +52,11 @@ const _$IdDuplicateReasonEnumMap = {
   IdDuplicateReason.spoilage: 'SPOILAGE',
 };
 
-const _$StateMarriageTypeEnumMap = {
-  StateMarriageType.pending: 'PENDING',
-  StateMarriageType.inProgress: 'IN_PROGRESS',
-  StateMarriageType.approved: 'APPROVED',
-  StateMarriageType.rejected: 'REJECTED',
-  StateMarriageType.finalized: 'FINALIZED',
+const _$IdDuplicateStateEnumMap = {
+  IdDuplicateState.pending: 'PENDING',
+  IdDuplicateState.suriError: 'SURIERROR',
+  IdDuplicateState.inProgress: 'IN_PROGRESS',
+  IdDuplicateState.printed: 'PRINTED',
+  IdDuplicateState.delivered: 'DELIVERED',
+  IdDuplicateState.destroyed: 'DESTROYED',
 };
