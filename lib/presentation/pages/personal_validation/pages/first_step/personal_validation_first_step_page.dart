@@ -63,7 +63,7 @@ class _PersonalValidationFirstStepPageState
       model: provider.value?.response,
       builder: (context, formModel, child) {
         return PrimaryScaffold(
-          title: 'Validación de datos personales',
+          title: l10n.personalValidation,
           subtitle: l10n.completeInformacionSolicitadaCed,
           body: DefaultTabController(
             length: 6,
@@ -192,33 +192,18 @@ class _PersonalValidationFirstStepPageState
                                         .when(
                                       ok: (data) {
                                         context
-                                          ..navigateTo(
-                                            PersonalValidationMainRoute(
-                                              typeServiceModel:
-                                                  widget.typeServiceModel,
-                                            ),
-                                          )
-                                          ..navigateTo(
-                                            NotificationRoute(
-                                              title:
-                                                  l10n.solicConfirm,
-                                              message:
-                                                  l10n.solicOK,
-                                              notificationType:
-                                                  NotificationType.success,
-                                              buttonText: l10n.continuar,
-                                              onTap: (ctx) => ctx.navigateTo(
-                                                PersonalValidationRouterRoute(
-                                                  children: [
-                                                    PersonalValidationMainRoute(
-                                                      typeServiceModel: widget
-                                                          .typeServiceModel,
-                                                    )
-                                                  ],
+                                              ..navigateTo(
+                                                PersonalValidationMainRoute(
+                                                  typeServiceModel:
+                                                      widget.typeServiceModel,
                                                 ),
-                                              ),
-                                            ),
-                                          );
+                                              )
+                                              ..pushRoute(
+                                                DefaultSuccessRoute(
+                                                  title:
+                                                      l10n.personalValidation,
+                                                ),
+                                              );
                                         //Refrescar provider que contiene las solicitudes.
                                         ref.refresh(
                                           personalValidationsProvider(),

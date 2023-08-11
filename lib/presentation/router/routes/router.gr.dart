@@ -410,6 +410,20 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    DefaultSuccessRoute.name: (routeData) {
+      final args = routeData.argsAs<DefaultSuccessRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: DefaultSuccessPage(
+          key: args.key,
+          title: args.title,
+          subtitle: args.subtitle,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ServicesRoute.name: (routeData) {
       return CupertinoPageX<dynamic>(
         routeData: routeData,
@@ -1739,6 +1753,11 @@ class _$AppRouter extends RootStackRouter {
               path: 'default-page',
               parent: RootRouterRoute.name,
             ),
+            RouteConfig(
+              DefaultSuccessRoute.name,
+              path: 'default-success-page',
+              parent: RootRouterRoute.name,
+            ),
           ],
         ),
         RouteConfig(
@@ -2700,6 +2719,45 @@ class DefaultRouteArgs {
   @override
   String toString() {
     return 'DefaultRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [DefaultSuccessPage]
+class DefaultSuccessRoute extends PageRouteInfo<DefaultSuccessRouteArgs> {
+  DefaultSuccessRoute({
+    Key? key,
+    required String title,
+    String? subtitle,
+  }) : super(
+          DefaultSuccessRoute.name,
+          path: 'default-success-page',
+          args: DefaultSuccessRouteArgs(
+            key: key,
+            title: title,
+            subtitle: subtitle,
+          ),
+        );
+
+  static const String name = 'DefaultSuccessRoute';
+}
+
+class DefaultSuccessRouteArgs {
+  const DefaultSuccessRouteArgs({
+    this.key,
+    required this.title,
+    this.subtitle,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final String? subtitle;
+
+  @override
+  String toString() {
+    return 'DefaultSuccessRouteArgs{key: $key, title: $title, subtitle: $subtitle}';
   }
 }
 

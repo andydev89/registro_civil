@@ -506,7 +506,12 @@ part 'router.gr.dart';
         CupertinoRoute(
           // guards: [AuthGuard],
           page: DefaultPage,
-        )
+        ),
+        //DEFAULT SUCCESS
+        CustomRoute(
+          page: DefaultSuccessPage,
+          transitionsBuilder: TransitionsBuilders.slideRight,
+        ),
       ],
     ),
     //SCANNER

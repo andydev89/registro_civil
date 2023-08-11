@@ -1612,6 +1612,7 @@ const _$StatusCodeTypeEnumMap = {
   StatusCodeType.s687: 687,
   StatusCodeType.s740: 740,
   StatusCodeType.s762: 762,
+  StatusCodeType.s796: 796,
   StatusCodeType.s722: 722,
   StatusCodeType.s738: 738,
   StatusCodeType.s739: 739,
