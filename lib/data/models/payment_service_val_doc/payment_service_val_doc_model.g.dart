@@ -20,3 +20,19 @@ Map<String, dynamic> _$PaymentServiceValidacionDocModelToJson(
       'province': instance.province,
       'agency': instance.agency,
     };
+
+_$_PaymentValidationDocModel _$$_PaymentValidationDocModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_PaymentValidationDocModel(
+      user: json['user'] as String,
+      agency: json['agency'] as String,
+      province: json['province'] as String,
+    );
+
+Map<String, dynamic> _$$_PaymentValidationDocModelToJson(
+        _$_PaymentValidationDocModel instance) =>
+    <String, dynamic>{
+      'user': instance.user,
+      'agency': instance.agency,
+      'province': instance.province,
+    };

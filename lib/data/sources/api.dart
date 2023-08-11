@@ -399,4 +399,15 @@ abstract class Api {
   @GET('/paymentofservices/api/service')
   Future<ResponseModelPagination<List<PaymentofservicesModel>>>
       getservicesPaymentSjudgments();
+
+  @POST('/paymentofservices/api/pay-services')
+  Future<ResponseModel<CommandWithTransactionCodeModel>>
+      createapaymentservices({
+    @Body() required CreatePaymentofservicesModel model,
+  });
+
+  @POST('/paymentofservices/api/document-validation')
+  Future<ResponseModel<CommandWithTransactionCodeModel>> documentValidation({
+    @Body() required PaymentValidationDocModel model,
+  });
 }

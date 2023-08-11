@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/interfaces/translatable_interface.dart';
 
 part 'payment_of_services_model.g.dart';
-
 part 'payment_of_services_model.freezed.dart';
 
 @freezed

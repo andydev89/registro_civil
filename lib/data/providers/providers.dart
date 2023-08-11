@@ -14,3 +14,4 @@ export 'residence_registration/residence_registration.dart';
 export 'schedule_turn/schedule_turn.dart';
 export 'simple_certificate/simple_certificate.dart';
 export 'type_services/type_service.dart';
+export 'payment_service_val_doc/payment_service_val_doc.dart';

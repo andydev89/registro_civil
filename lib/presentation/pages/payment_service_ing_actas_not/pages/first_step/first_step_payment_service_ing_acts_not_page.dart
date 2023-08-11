@@ -1,12 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/model/data_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:power_ups/extensions/extensions.dart';
-import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-import 'package:registro_civil_apk/data/enum/enums.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
 import 'package:registro_civil_apk/data/providers/providers.dart';
+import 'package:registro_civil_apk/data/utils/alert_methods.dart';
 import 'package:registro_civil_apk/l10n/l10n.dart';
+import 'package:registro_civil_apk/presentation/router/router.dart';
 import 'package:registro_civil_apk/presentation/widgets/widgets.dart';
 
 class PaymentServiceIngActsNotFirstPage extends ConsumerWidget {
@@ -72,7 +74,36 @@ class PaymentServiceIngActsNotFirstPage extends ConsumerWidget {
                   children: [
                     PrimaryButton(
                       title: l10n.pagar,
-                      onPressed: formModel.form.valid ? () {} : null,
+                      onPressed: formModel.form.valid
+                          ? () {
+                              ref
+                                  .read(
+                                    createaPaymentservicesProvider.notifier,
+                                  )
+                                  .createpaymentofservices(formModel.model)
+                                  .when(
+                                    ok: (value) {
+                                      context.replaceRoute(
+                                        MakePaymentRoute(
+                                          transactionCode:
+                                              value.transactionCode,
+                                          requestNumber: value.transactionCode,
+                                          buttonText: l10n.continuar,
+                                          service: typeServiceModel,
+                                          onTapSuccessPayment: (cxt) =>
+                                              cxt.replaceRoute(
+                                            const MyTurnsRoute(),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    err: (error) => showAlert(
+                                      error.code.toString(),
+                                      TypeAlert.error,
+                                    ),
+                                  );
+                            }
+                          : null,
                     ),
                     const SizedBox(height: 10),
                     PrimaryButton(

@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 import 'package:registro_civil_apk/data/models/models.dart';
-import 'package:registro_civil_apk/data/models/commons/location_model.dart';
 import 'package:registro_civil_apk/data/utils/validators.dart';
 
 part 'payment_service_judgments_notarial_acts_model.g.dart';
@@ -31,5 +30,3 @@ class PaymentServiceJudgmentsNotarialActsModel {
   Map<String, dynamic> toJson() =>
       _$PaymentServiceJudgmentsNotarialActsModelToJson(this);
 }
-
-class paymentofservicesModel {}

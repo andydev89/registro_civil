@@ -473,6 +473,7 @@ part 'router.gr.dart';
 
         //PAYMENT_SERVICE_CONVALIDACION_DOCUMENTOS
         CupertinoRoute(
+          guards: [AuthGuard],
           page: PaymentServiceValDocRouterPage,
           children: [
             CustomRoute(
@@ -485,6 +486,7 @@ part 'router.gr.dart';
 
         //PAYMENT_SERVICE_ACTAS_NOTARIALES
         CupertinoRoute(
+          guards: [AuthGuard],
           page: PaymentServiceIngActsNotRouterPage,
           children: [
             CustomRoute(

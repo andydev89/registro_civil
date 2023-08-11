@@ -17,3 +17,59 @@ Future<Result<List<PaymentofservicesModel>, StatusCodeType>> getservices(
       ? Result.ok(response.data!)
       : Result.err(response.status);
 }
+
+@riverpod
+Future<Result<CommandWithTransactionCodeModel, StatusCodeType>>
+    createpaymentofservices(
+  CreatepaymentofservicesRef ref,
+  PaymentServiceJudgmentsNotarialActsModel model,
+) async {
+  final user = await ref.read(meProvider.future);
+
+  final modelc = CreatePaymentofservicesModel(
+    user: user.id,
+    services: [model.service],
+    agency: model.agency.id,
+    province: model.province.id,
+  );
+  // modelc
+  final api = ref.watch(apiProvider);
+
+  final response = await api.createapaymentservices(
+    model: modelc,
+  );
+  return response.success
+      ? Result.ok(response.data!)
+      : Result.err(response.status);
+}
+
+@riverpod
+class CreateaPaymentservices extends _$CreateaPaymentservices {
+  Future<Result<CommandWithTransactionCodeModel, StatusCodeType>>
+      createpaymentofservices(
+    PaymentServiceJudgmentsNotarialActsModel model,
+  ) async {
+    final user = await ref.read(meProvider.future);
+
+    final modelc = CreatePaymentofservicesModel(
+      user: user.id,
+      services: [model.service],
+      agency: model.agency.id,
+      province: model.province.id,
+    );
+    // modelc
+    final api = ref.watch(apiProvider);
+
+    final response = await api.createapaymentservices(
+      model: modelc,
+    );
+    return response.success
+        ? Result.ok(response.data!)
+        : Result.err(response.status);
+  }
+
+  @override
+  CreateaPaymentservices build() {
+    return CreateaPaymentservices();
+  }
+}

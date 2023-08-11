@@ -1643,6 +1643,7 @@ class _$AppRouter extends RootStackRouter {
               PaymentServiceValDocRouterRoute.name,
               path: 'payment-service-val-doc-router-page',
               parent: RootRouterRoute.name,
+              guards: [authGuard],
               children: [
                 RouteConfig(
                   PaymentServiceValDocFirstRoute.name,
@@ -1655,6 +1656,7 @@ class _$AppRouter extends RootStackRouter {
               PaymentServiceIngActsNotRouterRoute.name,
               path: 'payment-service-ing-acts-not-router-page',
               parent: RootRouterRoute.name,
+              guards: [authGuard],
               children: [
                 RouteConfig(
                   PaymentServiceIngActsNotFirstRoute.name,
