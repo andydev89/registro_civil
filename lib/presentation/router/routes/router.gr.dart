@@ -386,6 +386,12 @@ class _$AppRouter extends RootStackRouter {
         child: const PaymentServiceIngActsNotRouterPage(),
       );
     },
+    DocumentValidationFirstStepRouterRoute.name: (routeData) {
+      return CupertinoPageX<dynamic>(
+        routeData: routeData,
+        child: const DocumentValidationFirstStepRouterPage(),
+      );
+    },
     DefaultRoute.name: (routeData) {
       final args = routeData.argsAs<DefaultRouteArgs>();
       return CupertinoPageX<dynamic>(
@@ -1143,6 +1149,35 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    DocumentValidationFirstStepRoute.name: (routeData) {
+      final args = routeData.argsAs<DocumentValidationFirstStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: DocumentValidationFirstStepPage(
+          key: args.key,
+          typeServiceModel: args.typeServiceModel,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    DocumentValidationSecondStepRoute.name: (routeData) {
+      final args = routeData.argsAs<DocumentValidationSecondStepRouteArgs>();
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: DocumentValidationSecondStepPage(
+          document: args.document,
+          model: args.model,
+          code: args.code,
+          date: args.date,
+          key: args.key,
+        ),
+        transitionsBuilder: TransitionsBuilders.slideRight,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
@@ -1731,6 +1766,23 @@ class _$AppRouter extends RootStackRouter {
                   path: '',
                   parent: PaymentServiceIngActsNotRouterRoute.name,
                 )
+              ],
+            ),
+            RouteConfig(
+              DocumentValidationFirstStepRouterRoute.name,
+              path: 'document-validation-first-step-router-page',
+              parent: RootRouterRoute.name,
+              children: [
+                RouteConfig(
+                  DocumentValidationFirstStepRoute.name,
+                  path: '',
+                  parent: DocumentValidationFirstStepRouterRoute.name,
+                ),
+                RouteConfig(
+                  DocumentValidationSecondStepRoute.name,
+                  path: 'document-validation-second-step-page',
+                  parent: DocumentValidationFirstStepRouterRoute.name,
+                ),
               ],
             ),
             RouteConfig(
@@ -2634,6 +2686,19 @@ class PaymentServiceIngActsNotRouterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'PaymentServiceIngActsNotRouterRoute';
+}
+
+/// generated route for
+/// [DocumentValidationFirstStepRouterPage]
+class DocumentValidationFirstStepRouterRoute extends PageRouteInfo<void> {
+  const DocumentValidationFirstStepRouterRoute({List<PageRouteInfo>? children})
+      : super(
+          DocumentValidationFirstStepRouterRoute.name,
+          path: 'document-validation-first-step-router-page',
+          initialChildren: children,
+        );
+
+  static const String name = 'DocumentValidationFirstStepRouterRoute';
 }
 
 /// generated route for
@@ -4855,5 +4920,90 @@ class PaymentServiceIngActsNotFirstRouteArgs {
   @override
   String toString() {
     return 'PaymentServiceIngActsNotFirstRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [DocumentValidationFirstStepPage]
+class DocumentValidationFirstStepRoute
+    extends PageRouteInfo<DocumentValidationFirstStepRouteArgs> {
+  DocumentValidationFirstStepRoute({
+    Key? key,
+    required TypeServiceModel typeServiceModel,
+  }) : super(
+          DocumentValidationFirstStepRoute.name,
+          path: '',
+          args: DocumentValidationFirstStepRouteArgs(
+            key: key,
+            typeServiceModel: typeServiceModel,
+          ),
+        );
+
+  static const String name = 'DocumentValidationFirstStepRoute';
+}
+
+class DocumentValidationFirstStepRouteArgs {
+  const DocumentValidationFirstStepRouteArgs({
+    this.key,
+    required this.typeServiceModel,
+  });
+
+  final Key? key;
+
+  final TypeServiceModel typeServiceModel;
+
+  @override
+  String toString() {
+    return 'DocumentValidationFirstStepRouteArgs{key: $key, typeServiceModel: $typeServiceModel}';
+  }
+}
+
+/// generated route for
+/// [DocumentValidationSecondStepPage]
+class DocumentValidationSecondStepRoute
+    extends PageRouteInfo<DocumentValidationSecondStepRouteArgs> {
+  DocumentValidationSecondStepRoute({
+    required String document,
+    required TypeServiceModel model,
+    required String code,
+    required String date,
+    Key? key,
+  }) : super(
+          DocumentValidationSecondStepRoute.name,
+          path: 'document-validation-second-step-page',
+          args: DocumentValidationSecondStepRouteArgs(
+            document: document,
+            model: model,
+            code: code,
+            date: date,
+            key: key,
+          ),
+        );
+
+  static const String name = 'DocumentValidationSecondStepRoute';
+}
+
+class DocumentValidationSecondStepRouteArgs {
+  const DocumentValidationSecondStepRouteArgs({
+    required this.document,
+    required this.model,
+    required this.code,
+    required this.date,
+    this.key,
+  });
+
+  final String document;
+
+  final TypeServiceModel model;
+
+  final String code;
+
+  final String date;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DocumentValidationSecondStepRouteArgs{document: $document, model: $model, code: $code, date: $date, key: $key}';
   }
 }

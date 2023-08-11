@@ -505,21 +505,21 @@ part 'router.gr.dart';
             CustomRoute(
               initial: true,
               page: PaymentServiceIngActsNotFirstPage,
-              //DOCUMENT_VALIDATION
-              CupertinoRoute(
-                page: DocumentValidationFirstStepRouterPage,
-                children: [
-                  CustomRoute(
-                    initial: true,
-                    page: DocumentValidationFirstStepPage,
-                    transitionsBuilder: TransitionsBuilders.slideRight,
-                  ),
-                  CustomRoute(
-                    page: DocumentValidationSecondStepPage,
-                    transitionsBuilder: TransitionsBuilders.slideRight,
-                  ),
-                ],
-              ),
+            ),
+          ],
+        ),
+        //DOCUMENT_VALIDATION
+        CupertinoRoute(
+          page: DocumentValidationFirstStepRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: DocumentValidationFirstStepPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+            CustomRoute(
+              page: DocumentValidationSecondStepPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
             ),
           ],
         ),
