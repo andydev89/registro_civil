@@ -102,7 +102,7 @@ class PaymentServiceValDocFirstPage extends ConsumerWidget {
                                             );
                                           },
                                           err: (error) => showAlert(
-                                            error.code.toString(),
+                                            error.translate(context),
                                             TypeAlert.error,
                                           ),
                                         );

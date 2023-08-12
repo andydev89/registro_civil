@@ -72,11 +72,11 @@ class PaymentServiceIngActsNotFirstPage extends ConsumerWidget {
                 builder: (context, formModel, child) => Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    PrimaryButton(
+                    PrimaryAsyncButton(
                       title: l10n.pagar,
                       onPressed: formModel.form.valid
-                          ? () {
-                              ref
+                          ? () async {
+                              await ref
                                   .read(
                                     createaPaymentservicesProvider.notifier,
                                   )
@@ -98,7 +98,7 @@ class PaymentServiceIngActsNotFirstPage extends ConsumerWidget {
                                       );
                                     },
                                     err: (error) => showAlert(
-                                      error.code.toString(),
+                                      error.translate(context),
                                       TypeAlert.error,
                                     ),
                                   );
