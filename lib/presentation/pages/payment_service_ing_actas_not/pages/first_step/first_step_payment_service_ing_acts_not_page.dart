@@ -29,92 +29,76 @@ class PaymentServiceIngActsNotFirstPage extends ConsumerWidget {
           title: typeServiceModel.name,
           subtitle: l10n.completeInformacionSolicitada,
           body: Expanded(
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // ignore: lines_longer_than_80_chars
-                    SelectElementFromApi(
-                      formControl: formModel.serviceControl,
-                      label: l10n.servicios,
-                      provider: getservicesProvider,
-                    ).horizontalPadding(20),
-                    SelectElementFromApi(
-                      formControl: formModel.provinceControl,
-                      label: l10n.provincia,
-                      provider: provincesProvider,
-                    ).horizontalPadding(20),
-
-                    ReactivePaymentServiceJudgmentsNotarialActsModelFormConsumer(
-                      builder: (context, formModel, child) {
-                        return Column(
-                          children: [
-                            SelectElementFromApi(
-                              readOnly: !formModel.provinceControl.valid,
-                              formControl: formModel.agencyControl,
-                              label: l10n.agencia,
-                              provider: agenciesByProvinceProvider(
-                                provinceId:
-                                    formModel.provinceControl.value?.id ?? '',
-                              ),
-                            ).horizontalPadding(20),
-                          ],
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ).verticalPadding(20),
-              // ignore: lines_longer_than_80_chars
-              bottomNavigationBar:
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // ignore: lines_longer_than_80_chars
+                  SelectElementFromApi(
+                    formControl: formModel.serviceControl,
+                    label: l10n.servicios,
+                    provider: getservicesProvider,
+                  ),
+                  SelectElementFromApi(
+                    formControl: formModel.provinceControl,
+                    label: l10n.provincia,
+                    provider: provincesProvider,
+                  ),
                   ReactivePaymentServiceJudgmentsNotarialActsModelFormConsumer(
-                builder: (context, formModel, child) => Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    PrimaryAsyncButton(
-                      title: l10n.pagar,
-                      onPressed: formModel.form.valid
-                          ? () async {
-                              await ref
-                                  .read(
-                                    createaPaymentservicesProvider.notifier,
-                                  )
-                                  .createpaymentofservices(formModel.model)
-                                  .when(
-                                    ok: (value) {
-                                      context.replaceRoute(
-                                        MakePaymentRoute(
-                                          transactionCode:
-                                              value.transactionCode,
-                                          requestNumber: value.transactionCode,
-                                          buttonText: l10n.continuar,
-                                          service: typeServiceModel,
-                                          onTapSuccessPayment: (cxt) =>
-                                              cxt.replaceRoute(
-                                            const MyTurnsRoute(),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    err: (error) => showAlert(
-                                      error.translate(context),
-                                      TypeAlert.error,
-                                    ),
-                                  );
-                            }
-                          : null,
-                    ),
-                    const SizedBox(height: 10),
-                    PrimaryButton(
-                      title: l10n.cancelar,
-                      onPressed: () => context.navigateBack(),
-                    ),
-                  ],
-                ),
-              ).symmetricPadding(10, 30),
+                    builder: (context, formModel, child) {
+                      return Column(
+                        children: [
+                          SelectElementFromApi(
+                            readOnly: !formModel.provinceControl.valid,
+                            formControl: formModel.agencyControl,
+                            label: l10n.agencia,
+                            provider: agenciesByProvinceProvider(
+                              provinceId:
+                              formModel.provinceControl.value?.id ?? '',
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
+          bottomNavigationBar: ReactivePaymentServiceJudgmentsNotarialActsModelFormConsumer(
+            builder: (context, formModel, child) => PrimaryAsyncButton(
+              title: l10n.pagar,
+              onPressed: formModel.form.valid
+                  ? () async {
+                await ref
+                    .read(
+                  createaPaymentservicesProvider.notifier,
+                )
+                    .createpaymentofservices(formModel.model)
+                    .when(
+                  ok: (value) {
+                    context.replaceRoute(
+                      MakePaymentRoute(
+                        transactionCode:
+                        value.transactionCode,
+                        requestNumber: value.transactionCode,
+                        buttonText: l10n.continuar,
+                        service: typeServiceModel,
+                        onTapSuccessPayment: (cxt) =>
+                            cxt.replaceRoute(
+                              const MyTurnsRoute(),
+                            ),
+                      ),
+                    );
+                  },
+                  err: (error) => showAlert(
+                    error.translate(context),
+                    TypeAlert.error,
+                  ),
+                );
+              }
+                  : null,
+            ),
+          ).symmetricPadding(10, 20),
         );
       },
     );

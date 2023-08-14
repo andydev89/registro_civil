@@ -30,98 +30,81 @@ class PaymentServiceValDocFirstPage extends ConsumerWidget {
           title: typeServiceModel.name,
           subtitle: l10n.completeInformacionSolicitada,
           body: Expanded(
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // ignore: lines_longer_than_80_chars
-
-                    SelectElementFromApi(
-                      formControl: formModel.provinceControl,
-                      label: l10n.provincia,
-                      provider: provincesProvider,
-                    ).horizontalPadding(20),
-
-                    ReactivePaymentServiceValidacionDocModelFormConsumer(
-                      builder: (context, formModel, child) {
-                        return Column(
-                          children: [
-                            SelectElementFromApi(
-                              readOnly: !formModel.provinceControl.valid,
-                              formControl: formModel.agencyControl,
-                              label: l10n.agencia,
-                              provider: agenciesByProvinceProvider(
-                                provinceId:
-                                    formModel.provinceControl.value?.id ?? '',
-                              ),
-                            ).horizontalPadding(20),
-                          ],
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ).verticalPadding(20),
-              // ignore: lines_longer_than_80_chars
-              bottomNavigationBar:
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // ignore: lines_longer_than_80_chars
+                  SelectElementFromApi(
+                    formControl: formModel.provinceControl,
+                    label: l10n.provincia,
+                    provider: provincesProvider,
+                  ),
                   ReactivePaymentServiceValidacionDocModelFormConsumer(
-                builder: (context, formModel, child) => Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    PrimaryButton(
-                      title: l10n.pagar,
-                      onPressed: formModel.form.valid
-                          ? () {
-                              final ok = ValueNotifier<bool>(false);
-                              showContentDialog(
-                                context,
-                                content: ModalConfirmationPaymentSValidacionDoc(
-                                  ok: ok,
-                                  onConfirm: () async {
-                                    await ref
-                                        .read(
-                                            paymentServiceValidationDocProvider
-                                                .notifier)
-                                        .documentValidation(formModel.model)
-                                        .when(
-                                          ok: (value) {
-                                            context.replaceRoute(
-                                              MakePaymentRoute(
-                                                transactionCode:
-                                                    value.transactionCode,
-                                                requestNumber:
-                                                    value.transactionCode,
-                                                buttonText: l10n.continuar,
-                                                service: typeServiceModel,
-                                                onTapSuccessPayment: (cxt) =>
-                                                    cxt.replaceRoute(
-                                                  const MyTurnsRoute(),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          err: (error) => showAlert(
-                                            error.translate(context),
-                                            TypeAlert.error,
-                                          ),
-                                        );
-                                  },
-                                ),
-                              );
-                            }
-                          : null,
-                    ),
-                    const SizedBox(height: 10),
-                    PrimaryButton(
-                      title: l10n.cancelar,
-                      onPressed: () => context.navigateBack(),
-                    ),
-                  ],
-                ),
-              ).symmetricPadding(10, 30),
+                    builder: (context, formModel, child) {
+                      return Column(
+                        children: [
+                          SelectElementFromApi(
+                            readOnly: !formModel.provinceControl.valid,
+                            formControl: formModel.agencyControl,
+                            label: l10n.agencia,
+                            provider: agenciesByProvinceProvider(
+                              provinceId:
+                              formModel.provinceControl.value?.id ?? '',
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
+          bottomNavigationBar: ReactivePaymentServiceValidacionDocModelFormConsumer(
+            builder: (context, formModel, child) => PrimaryButton(
+              title: l10n.pagar,
+              onPressed: formModel.form.valid
+                  ? () {
+                final ok = ValueNotifier<bool>(false);
+                showContentDialog(
+                  context,
+                  content: ModalConfirmationPaymentSValidacionDoc(
+                    ok: ok,
+                    onConfirm: () async {
+                      await ref
+                          .read(
+                          paymentServiceValidationDocProvider
+                              .notifier)
+                          .documentValidation(formModel.model)
+                          .when(
+                        ok: (value) {
+                          context.replaceRoute(
+                            MakePaymentRoute(
+                              transactionCode:
+                              value.transactionCode,
+                              requestNumber:
+                              value.transactionCode,
+                              buttonText: l10n.continuar,
+                              service: typeServiceModel,
+                              onTapSuccessPayment: (cxt) =>
+                                  cxt.replaceRoute(
+                                    const MyTurnsRoute(),
+                                  ),
+                            ),
+                          );
+                        },
+                        err: (error) => showAlert(
+                          error.translate(context),
+                          TypeAlert.error,
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }
+                  : null,
+            ),
+          ).symmetricPadding(10, 20),
         );
       },
     );
