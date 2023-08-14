@@ -14,11 +14,13 @@ part 'cedulacion_ext_primerav_model.freezed.dart';
 @freezed
 class CedulacionExtpVModel with _$CedulacionExtpVModel {
   const factory CedulacionExtpVModel({
-    @FormControlAnnotation(validators: [
-      requiredValidator,
-      lengthMax20Validator,
-      lengthMin2Validator,
-    ])
+    @FormControlAnnotation(
+      validators: [
+        requiredValidator,
+        lengthMax20Validator,
+        lengthMin2Validator,
+      ],
+    )
     @JsonKey(name: 'visa')
     required String visa,
     @FormControlAnnotation(

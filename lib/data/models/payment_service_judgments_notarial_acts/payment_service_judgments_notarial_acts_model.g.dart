@@ -10,8 +10,8 @@ PaymentServiceJudgmentsNotarialActsModel
     _$PaymentServiceJudgmentsNotarialActsModelFromJson(
             Map<String, dynamic> json) =>
         PaymentServiceJudgmentsNotarialActsModel(
-          types:
-              (json['types'] as List<dynamic>).map((e) => e as bool).toList(),
+          service: PaymentofservicesModel.fromJson(
+              json['service'] as Map<String, dynamic>),
           province:
               LocationModel.fromJson(json['province'] as Map<String, dynamic>),
           agency: AgencyModel.fromJson(json['agency'] as Map<String, dynamic>),
@@ -20,7 +20,7 @@ PaymentServiceJudgmentsNotarialActsModel
 Map<String, dynamic> _$PaymentServiceJudgmentsNotarialActsModelToJson(
         PaymentServiceJudgmentsNotarialActsModel instance) =>
     <String, dynamic>{
-      'types': instance.types,
+      'service': instance.service,
       'province': instance.province,
       'agency': instance.agency,
     };

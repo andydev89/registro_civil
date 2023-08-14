@@ -348,11 +348,6 @@ part 'router.gr.dart';
         CupertinoRoute(
           page: ChoosePaymentMethodPage,
         ),
-        // PaymentServiceJudgmentsNotarialActsPage
-        CupertinoRoute(
-          guards: [AuthGuard],
-          page: PaymentServiceJudgmentsNotarialActsPage,
-        ),
         //ID_DUPLICATE
         CupertinoRoute(
           guards: [AuthGuard],
@@ -485,6 +480,31 @@ part 'router.gr.dart';
             CustomRoute(
               page: CedulacionExtPvezSuccesPage,
               transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+          ],
+        ),
+
+        //PAYMENT_SERVICE_CONVALIDACION_DOCUMENTOS
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: PaymentServiceValDocRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: PaymentServiceValDocFirstPage,
+              transitionsBuilder: TransitionsBuilders.slideRight,
+            ),
+          ],
+        ),
+
+        //PAYMENT_SERVICE_ACTAS_NOTARIALES
+        CupertinoRoute(
+          guards: [AuthGuard],
+          page: PaymentServiceIngActsNotRouterPage,
+          children: [
+            CustomRoute(
+              initial: true,
+              page: PaymentServiceIngActsNotFirstPage,
             ),
           ],
         ),

@@ -201,7 +201,7 @@ class PaymentServiceJudgmentsNotarialActsModelForm
     this.path,
   ) {}
 
-  static const String typesControlName = "types";
+  static const String serviceControlName = "service";
 
   static const String provinceControlName = "province";
 
@@ -214,13 +214,22 @@ class PaymentServiceJudgmentsNotarialActsModelForm
 
   final String? path;
 
+  String serviceControlPath() => pathBuilder(serviceControlName);
   String provinceControlPath() => pathBuilder(provinceControlName);
   String agencyControlPath() => pathBuilder(agencyControlName);
-  String typesControlPath() => pathBuilder(typesControlName);
+  PaymentofservicesModel get _serviceValue =>
+      serviceControl.value as PaymentofservicesModel;
   LocationModel get _provinceValue => provinceControl.value as LocationModel;
   AgencyModel get _agencyValue => agencyControl.value as AgencyModel;
-  List<bool> get _typesValue =>
-      typesControl.value?.whereType<bool>().toList() ?? [];
+  bool get containsService {
+    try {
+      form.control(serviceControlPath());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   bool get containsProvince {
     try {
       form.control(provinceControlPath());
@@ -239,21 +248,21 @@ class PaymentServiceJudgmentsNotarialActsModelForm
     }
   }
 
-  bool get containsTypes {
-    try {
-      form.control(typesControlPath());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
+  Object? get serviceErrors => serviceControl.errors;
   Object? get provinceErrors => provinceControl.errors;
   Object? get agencyErrors => agencyControl.errors;
-  Object? get typesErrors => typesControl.errors;
+  void get serviceFocus => form.focus(serviceControlPath());
   void get provinceFocus => form.focus(provinceControlPath());
   void get agencyFocus => form.focus(agencyControlPath());
-  void get typesFocus => form.focus(typesControlPath());
+  void serviceValueUpdate(
+    PaymentofservicesModel value, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    serviceControl.updateValue(value,
+        updateParent: updateParent, emitEvent: emitEvent);
+  }
+
   void provinceValueUpdate(
     LocationModel value, {
     bool updateParent = true,
@@ -272,12 +281,12 @@ class PaymentServiceJudgmentsNotarialActsModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void typesValueUpdate(
-    List<bool> value, {
+  void serviceValuePatch(
+    PaymentofservicesModel value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    typesControl.updateValue(value,
+    serviceControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -299,15 +308,15 @@ class PaymentServiceJudgmentsNotarialActsModelForm
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
-  void typesValuePatch(
-    List<bool> value, {
+  void serviceValueReset(
+    PaymentofservicesModel value, {
     bool updateParent = true,
     bool emitEvent = true,
-  }) {
-    typesControl.patchValue(value,
-        updateParent: updateParent, emitEvent: emitEvent);
-  }
-
+    bool removeFocus = false,
+    bool? disabled,
+  }) =>
+      serviceControl.reset(
+          value: value, updateParent: updateParent, emitEvent: emitEvent);
   void provinceValueReset(
     LocationModel value, {
     bool updateParent = true,
@@ -326,21 +335,30 @@ class PaymentServiceJudgmentsNotarialActsModelForm
   }) =>
       agencyControl.reset(
           value: value, updateParent: updateParent, emitEvent: emitEvent);
-  void typesValueReset(
-    List<bool> value, {
-    bool updateParent = true,
-    bool emitEvent = true,
-    bool removeFocus = false,
-    bool? disabled,
-  }) =>
-      typesControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+  FormControl<PaymentofservicesModel> get serviceControl =>
+      form.control(serviceControlPath()) as FormControl<PaymentofservicesModel>;
   FormControl<LocationModel> get provinceControl =>
       form.control(provinceControlPath()) as FormControl<LocationModel>;
   FormControl<AgencyModel> get agencyControl =>
       form.control(agencyControlPath()) as FormControl<AgencyModel>;
-  FormArray<bool> get typesControl =>
-      form.control(typesControlPath()) as FormArray<bool>;
+  void serviceSetDisabled(
+    bool disabled, {
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    if (disabled) {
+      serviceControl.markAsDisabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    } else {
+      serviceControl.markAsEnabled(
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+      );
+    }
+  }
+
   void provinceSetDisabled(
     bool disabled, {
     bool updateParent = true,
@@ -377,64 +395,6 @@ class PaymentServiceJudgmentsNotarialActsModelForm
     }
   }
 
-  void typesSetDisabled(
-    bool disabled, {
-    bool updateParent = true,
-    bool emitEvent = true,
-  }) {
-    if (disabled) {
-      typesControl.markAsDisabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    } else {
-      typesControl.markAsEnabled(
-        updateParent: updateParent,
-        emitEvent: emitEvent,
-      );
-    }
-  }
-
-  void addTypesItem(
-    bool value, {
-    List<AsyncValidatorFunction>? asyncValidators,
-    List<ValidatorFunction>? validators,
-    int? asyncValidatorsDebounceTime,
-    bool? disabled,
-    ValidatorsApplyMode validatorsApplyMode = ValidatorsApplyMode.merge,
-  }) {
-    List<ValidatorFunction> resultingValidators = [];
-    List<AsyncValidatorFunction> resultingAsyncValidators = [];
-
-    switch (validatorsApplyMode) {
-      case ValidatorsApplyMode.merge:
-        if (validators != null) {
-          resultingValidators.addAll(validators);
-        }
-        if (asyncValidators != null) {
-          resultingAsyncValidators.addAll(asyncValidators);
-        }
-        break;
-      case ValidatorsApplyMode.override:
-        if (validators != null) {
-          resultingValidators = validators;
-        }
-
-        if (asyncValidators != null) {
-          resultingAsyncValidators = asyncValidators;
-        }
-        break;
-    }
-
-    typesControl.add(FormControl<bool>(
-      value: value,
-      validators: resultingValidators,
-      asyncValidators: resultingAsyncValidators,
-      asyncValidatorsDebounceTime: asyncValidatorsDebounceTime ?? 250,
-      disabled: disabled ?? false,
-    ));
-  }
-
   @override
   PaymentServiceJudgmentsNotarialActsModel get model {
     final currentForm = path == null ? form : form.control(path!);
@@ -444,7 +404,7 @@ class PaymentServiceJudgmentsNotarialActsModelForm
           '[${path ?? 'PaymentServiceJudgmentsNotarialActsModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return PaymentServiceJudgmentsNotarialActsModel(
-        types: _typesValue, province: _provinceValue, agency: _agencyValue);
+        service: _serviceValue, province: _provinceValue, agency: _agencyValue);
   }
 
   PaymentServiceJudgmentsNotarialActsModelForm copyWithPath(String? path) {
@@ -479,23 +439,13 @@ class PaymentServiceJudgmentsNotarialActsModelForm
           PaymentServiceJudgmentsNotarialActsModel?
               paymentServiceJudgmentsNotarialActsModel) =>
       FormGroup({
-        typesControlName: FormArray<bool>(
-            (paymentServiceJudgmentsNotarialActsModel?.types ?? [])
-                .map((e) => FormControl<bool>(
-                      value: e,
-                      validators: [],
-                      asyncValidators: [],
-                      asyncValidatorsDebounceTime: 250,
-                      disabled: false,
-                    ))
-                .toList(),
-            validators: [
-              (control) =>
-                  atLeastOneElementValidator(control as FormArray<bool>)
-            ],
+        serviceControlName: FormControl<PaymentofservicesModel>(
+            value: paymentServiceJudgmentsNotarialActsModel?.service,
+            validators: [requiredValidator],
             asyncValidators: [],
             asyncValidatorsDebounceTime: 250,
-            disabled: false),
+            disabled: false,
+            touched: false),
         provinceControlName: FormControl<LocationModel>(
             value: paymentServiceJudgmentsNotarialActsModel?.province,
             validators: [requiredValidator],

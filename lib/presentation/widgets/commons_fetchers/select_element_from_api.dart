@@ -48,6 +48,12 @@ class SelectElementFromApi<T extends Translatable> extends ConsumerWidget {
       });
     }
     return PrimaryReactiveDropdown(
+      maxLines: elements.asData?.value.when(
+            ok: (data) =>
+                data.any((element) => element.toString().length >= 50) ? 3 : 2,
+            err: (error) => 1,
+          ) ??
+          1,
       readOnly: readOnly ||
           elements.isLoading ||
           (elements.value != null &&

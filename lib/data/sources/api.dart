@@ -410,6 +410,22 @@ abstract class Api {
     @Body() required BirthAbroadDocumentModel model,
   });
 
+  //PAYMENT_SERVICE_ACTAS_NOTARIALES
+  @GET('/paymentofservices/api/service')
+  Future<ResponseModelPagination<List<PaymentofservicesModel>>>
+      getservicesPaymentSjudgments();
+
+  @POST('/paymentofservices/api/pay-services')
+  Future<ResponseModel<CommandWithTransactionCodeModel>>
+      createapaymentservices({
+    @Body() required CreatePaymentofservicesModel model,
+  });
+
+  @POST('/paymentofservices/api/document-validation')
+  Future<ResponseModel<CommandWithTransactionCodeModel>> documentValidation({
+    @Body() required PaymentValidationDocModel model,
+  });
+
   @GET('/api/location/province')
   Future<ResponseModelPagination<List<LocationModel>?>> provincesNoAuth(
     @Query('pageNo') int pageNo,
